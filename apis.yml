@@ -1,12 +1,11 @@
 aid: modern-treasury
-url: >-
+url: >2-
 
   https://raw.githubusercontent.com/api-search/modern-treasury/refs/heads/main/apis.yml
 apis:
   - aid: modern-treasury:modern-treasury
     name: Modern Treasury
-    tags:
-      - API
+    tags: []
     humanURL: https://www.moderntreasury.com/
     properties:
       - url: https://www.moderntreasury.com/
