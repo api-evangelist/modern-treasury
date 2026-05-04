@@ -1,0 +1,37 @@
+specification: API Commons Plans
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
+provider: Modern Treasury
+providerId: modern-treasury
+created: '2026-05-04'
+modified: '2026-05-04'
+reconciled: true
+tags:
+  - Payments
+  - Bank Transfers
+  - Treasury
+description: Modern Treasury usage-based pricing across ACH/wire/RTP/FedNow/push-to-card/stablecoins.
+  Custom only.
+sources:
+  - https://www.moderntreasury.com/pricing
+plans:
+  - id: modern-treasury-usage
+    name: Usage-Based (Custom)
+    type: enterprise
+    description: Per-transaction by payment rail; volume tiers reduce per-unit cost.
+    entries:
+      - label: Annual contract (custom)
+        name: annual
+        type: subscription
+        metric: year
+        limit: -1
+        timeFrame: year
+        geo: global
+        unit: 1
+        price: custom
+        userMultiplied: false
+    elements:
+      - name: ACH, wires, RTP/FedNow, push-to-card, stablecoins
+      - name: Per-unit declines with volume
+      - name: Multi-rail pricing
+      - name: Account structure pricing

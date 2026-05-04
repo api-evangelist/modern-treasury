@@ -1,0 +1,61 @@
+specification: FinOps Framework
+specificationVersion: '1.0'
+schema: https://www.finops.org/framework/
+provider: Modern Treasury
+providerId: modern-treasury
+created: '2026-05-04'
+modified: '2026-05-04'
+reconciled: true
+tags:
+  - FinOps
+  - FOCUS
+  - Bank Payments
+description: FOCUS-aligned FinOps for Modern Treasury.
+sources:
+  - https://www.moderntreasury.com/pricing
+alignedWith:
+  framework: FinOps Foundation Framework
+  frameworkUrl: https://www.finops.org/framework/
+  dataSpec: FOCUS
+  dataSpecVersion: '1.3'
+  dataSpecUrl: https://focus.finops.org/focus-specification/v1-3/
+publisherName: Modern Treasury
+serviceCategory: Bank Payments
+billingModel:
+  pricingCategory: Custom Usage-Based
+  billingFrequency: Monthly
+  billingCurrency: USD
+focusColumns:
+  ServiceName: Modern Treasury
+  ServiceCategory: Bank Payments
+  ProviderName: Modern Treasury
+  PublisherName: Modern Treasury
+  BillingCurrency: USD
+meters:
+  - name: ach_transactions
+    unit: transaction
+    aggregation: sum
+  - name: wire_transactions
+    unit: transaction
+    aggregation: sum
+  - name: rtp_transactions
+    unit: transaction
+    aggregation: sum
+  - name: push_to_card_transactions
+    unit: transaction
+    aggregation: sum
+  - name: stablecoin_transactions
+    unit: transaction
+    aggregation: sum
+  - name: internal_accounts
+    unit: account-month
+    aggregation: max
+principles:
+  - name: Visibility
+    description: Track Modern Treasury consumption monthly.
+  - name: Allocation
+    description: Tag usage to teams/cost centers.
+  - name: Optimization
+    description: Right-size; reclaim unused entitlements.
+  - name: Accountability
+    description: Set spend alerts; quarterly review.
