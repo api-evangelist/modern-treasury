@@ -3,35 +3,39 @@ specificationVersion: '0.1'
 schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
 provider: Modern Treasury
 providerId: modern-treasury
-created: '2026-05-04'
-modified: '2026-05-04'
-reconciled: true
+created: '2026-05-08'
+modified: '2026-05-08'
+reconciled: false
 tags:
-  - Payments
-  - Bank Transfers
-  - Treasury
-description: Modern Treasury usage-based pricing across ACH/wire/RTP/FedNow/push-to-card/stablecoins.
-  Custom only.
+- Fintech
+- Payments
+- ACH
+- Wires
+- Treasury
+- Plans
+description: Placeholder plans/pricing artifact for Modern Treasury. Replace with real published pricing once
+  the pipeline researches the provider's plans page.
+notes: Initial scaffold — plans/pricing have not yet been reconciled against the provider's documentation.
 sources:
-  - https://www.moderntreasury.com/pricing
+- https://www.moderntreasury.com/
 plans:
-  - id: modern-treasury-usage
-    name: Usage-Based (Custom)
-    type: enterprise
-    description: Per-transaction by payment rail; volume tiers reduce per-unit cost.
-    entries:
-      - label: Annual contract (custom)
-        name: annual
-        type: subscription
-        metric: year
-        limit: -1
-        timeFrame: year
-        geo: global
-        unit: 1
-        price: custom
-        userMultiplied: false
-    elements:
-      - name: ACH, wires, RTP/FedNow, push-to-card, stablecoins
-      - name: Per-unit declines with volume
-      - name: Multi-rail pricing
-      - name: Account structure pricing
+- id: modern-treasury-default
+  name: To Be Reconciled
+  type: enterprise
+  description: Initial scaffold; replace with provider plan tiers once pricing is reconciled.
+  entries:
+  - label: API Access
+    name: api_access
+    type: flat
+    metric: varies
+    limit: -1
+    timeFrame: usage
+    geo: global
+    unit: 1
+    price: see https://www.moderntreasury.com/
+    userMultiplied: false
+  elements:
+  - name: Pending Reconciliation
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com
