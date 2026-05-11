@@ -73,6 +73,38 @@ common:
   url: rate-limits/modern-treasury-rate-limits.yml
 - type: FinOps
   url: finops/modern-treasury-finops.yml
+- type: Integrations
+  url: https://www.moderntreasury.com/integrations
+integrations:
+  - name: Axos Bank
+  - name: BMO
+  - name: Bank of America
+  - name: Blue Ridge Bank
+  - name: Celtic Bank
+  - name: Citibank
+  - name: Commerce Bank
+  - name: Cross River
+  - name: Evolve Bank
+  - name: FNBO
+  - name: First Pryority Bank
+  - name: Goldman Sachs
+  - name: HSBC UK
+  - name: Increase
+  - name: JP Morgan Chase
+  - name: M&T Bank
+  - name: Mechanics Bank
+  - name: PNC Bank
+  - name: Pacific Western Bank
+  - name: Pathward
+  - name: RBC Bank
+  - name: Regions Bank
+  - name: Silicon Valley Bank
+  - name: Sutton Bank
+  - name: Texas Capital Bank
+  - name: US Bank
+  - name: Web Bank
+  - name: Wells Fargo
+  - name: Western Alliance Bank
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
