@@ -1,7 +1,7 @@
 aid: modern-treasury
 url: https://raw.githubusercontent.com/api-evangelist/modern-treasury/refs/heads/main/apis.yml
 name: Modern Treasury
-x-type: company
+kind: company
 description: Modern Treasury is a money movement platform unifying ACH, wires, RTP, checks, FX, and reconciliation across
   multiple bank partners. Operates as the financial operations system of record.
 image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
