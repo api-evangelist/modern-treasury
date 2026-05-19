@@ -1,0 +1,264 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Modern Treasury — LegalEntity
+  description: 'Modern Treasury — LegalEntity. 5 operations. Lead operation: list legal_entities. Self-contained Naftiko capability
+    covering one Modern Treasury business surface.'
+  tags:
+  - Modern Treasury
+  - LegalEntity
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    MODERN_TREASURY_API_KEY: MODERN_TREASURY_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: modern-treasury-legalentity
+    baseUri: http://localhost:3000
+    description: Modern Treasury — LegalEntity business capability. Self-contained, no shared references.
+    resources:
+    - name: api-legal_entities
+      path: /api/legal_entities
+      operations:
+      - name: listlegalentities
+        method: GET
+        description: list legal_entities
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: after_cursor
+          in: query
+          type: string
+        - name: per_page
+          in: query
+          type: integer
+        - name: legal_entity_type
+          in: query
+          type: string
+        - name: status
+          in: query
+          type: string
+        - name: show_deleted
+          in: query
+          type: string
+        - name: external_id
+          in: query
+          type: string
+          description: An optional user-defined 180 character unique identifier.
+      - name: createlegalentity
+        method: POST
+        description: create legal_entity
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: Idempotency-Key
+          in: header
+          type: string
+          description: This key should be something unique, preferably something like an UUID.
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    - name: api-legal_entities-id
+      path: /api/legal_entities/{id}
+      operations:
+      - name: getlegalentity
+        method: GET
+        description: get legal_entity
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: Idempotency-Key
+          in: header
+          type: string
+          description: This key should be something unique, preferably something like an UUID.
+      - name: updatelegalentity
+        method: PATCH
+        description: update legal entity
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    - name: api-simulations-legal_entities-id-update_status
+      path: /api/simulations/legal_entities/{id}/update_status
+      operations:
+      - name: updatelegalentitystatus
+        method: PATCH
+        description: update legal entity status
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    authentication:
+      type: basic
+      username: '{{env.MODERN_TREASURY_USER}}'
+      password: '{{env.MODERN_TREASURY_PASS}}'
+  exposes:
+  - type: rest
+    namespace: modern-treasury-legalentity-rest
+    port: 8080
+    description: REST adapter for Modern Treasury — LegalEntity. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/api/legal-entities
+      name: api-legal-entities
+      description: REST surface for api-legal_entities.
+      operations:
+      - method: GET
+        name: listlegalentities
+        description: list legal_entities
+        call: modern-treasury-legalentity.listlegalentities
+        with:
+          after_cursor: rest.after_cursor
+          per_page: rest.per_page
+          legal_entity_type: rest.legal_entity_type
+          status: rest.status
+          show_deleted: rest.show_deleted
+          external_id: rest.external_id
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createlegalentity
+        description: create legal_entity
+        call: modern-treasury-legalentity.createlegalentity
+        with:
+          Idempotency-Key: rest.Idempotency-Key
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/legal-entities/{id}
+      name: api-legal-entities-id
+      description: REST surface for api-legal_entities-id.
+      operations:
+      - method: GET
+        name: getlegalentity
+        description: get legal_entity
+        call: modern-treasury-legalentity.getlegalentity
+        with:
+          Idempotency-Key: rest.Idempotency-Key
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PATCH
+        name: updatelegalentity
+        description: update legal entity
+        call: modern-treasury-legalentity.updatelegalentity
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/simulations/legal-entities/{id}/update-status
+      name: api-simulations-legal-entities-id-update-status
+      description: REST surface for api-simulations-legal_entities-id-update_status.
+      operations:
+      - method: PATCH
+        name: updatelegalentitystatus
+        description: update legal entity status
+        call: modern-treasury-legalentity.updatelegalentitystatus
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: modern-treasury-legalentity-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Modern Treasury — LegalEntity. One tool per consumed operation, routed inline through this
+      capability's consumes block.
+    tools:
+    - name: list-legal-entities
+      description: list legal_entities
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: modern-treasury-legalentity.listlegalentities
+      with:
+        after_cursor: tools.after_cursor
+        per_page: tools.per_page
+        legal_entity_type: tools.legal_entity_type
+        status: tools.status
+        show_deleted: tools.show_deleted
+        external_id: tools.external_id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-legal-entity
+      description: create legal_entity
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: modern-treasury-legalentity.createlegalentity
+      with:
+        Idempotency-Key: tools.Idempotency-Key
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-legal-entity
+      description: get legal_entity
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: modern-treasury-legalentity.getlegalentity
+      with:
+        Idempotency-Key: tools.Idempotency-Key
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-legal-entity
+      description: update legal entity
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: modern-treasury-legalentity.updatelegalentity
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-legal-entity-status
+      description: update legal entity status
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: modern-treasury-legalentity.updatelegalentitystatus
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

@@ -1,0 +1,344 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Modern Treasury — ExternalAccount
+  description: 'Modern Treasury — ExternalAccount. 7 operations. Lead operation: list external accounts. Self-contained Naftiko
+    capability covering one Modern Treasury business surface.'
+  tags:
+  - Modern Treasury
+  - ExternalAccount
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    MODERN_TREASURY_API_KEY: MODERN_TREASURY_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: modern-treasury-externalaccount
+    baseUri: http://localhost:3000
+    description: Modern Treasury — ExternalAccount business capability. Self-contained, no shared references.
+    resources:
+    - name: api-external_accounts
+      path: /api/external_accounts
+      operations:
+      - name: listexternalaccounts
+        method: GET
+        description: list external accounts
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: after_cursor
+          in: query
+          type: string
+        - name: per_page
+          in: query
+          type: integer
+        - name: party_name
+          in: query
+          type: string
+          description: Searches the ExternalAccount's party_name AND the Counterparty's party_name
+        - name: counterparty_id
+          in: query
+          type: string
+        - name: external_id
+          in: query
+          type: string
+          description: An optional user-defined 180 character unique identifier.
+      - name: createexternalaccount
+        method: POST
+        description: create external account
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: Idempotency-Key
+          in: header
+          type: string
+          description: This key should be something unique, preferably something like an UUID.
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    - name: api-external_accounts-id
+      path: /api/external_accounts/{id}
+      operations:
+      - name: getexternalaccount
+        method: GET
+        description: show external account
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: updateexternalaccount
+        method: PATCH
+        description: update external account
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+      - name: deleteexternalaccount
+        method: DELETE
+        description: delete external account
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: api-external_accounts-id-complete_verification
+      path: /api/external_accounts/{id}/complete_verification
+      operations:
+      - name: completeverificationexternalaccount
+        method: POST
+        description: complete verification of external account
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: Idempotency-Key
+          in: header
+          type: string
+          description: This key should be something unique, preferably something like an UUID.
+        - name: id
+          in: path
+          type: string
+          description: external account id
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    - name: api-external_accounts-id-verify
+      path: /api/external_accounts/{id}/verify
+      operations:
+      - name: verifyexternalaccount
+        method: POST
+        description: verify external account
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: Idempotency-Key
+          in: header
+          type: string
+          description: This key should be something unique, preferably something like an UUID.
+        - name: id
+          in: path
+          type: string
+          description: external account id
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    authentication:
+      type: basic
+      username: '{{env.MODERN_TREASURY_USER}}'
+      password: '{{env.MODERN_TREASURY_PASS}}'
+  exposes:
+  - type: rest
+    namespace: modern-treasury-externalaccount-rest
+    port: 8080
+    description: REST adapter for Modern Treasury — ExternalAccount. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/api/external-accounts
+      name: api-external-accounts
+      description: REST surface for api-external_accounts.
+      operations:
+      - method: GET
+        name: listexternalaccounts
+        description: list external accounts
+        call: modern-treasury-externalaccount.listexternalaccounts
+        with:
+          after_cursor: rest.after_cursor
+          per_page: rest.per_page
+          party_name: rest.party_name
+          counterparty_id: rest.counterparty_id
+          external_id: rest.external_id
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createexternalaccount
+        description: create external account
+        call: modern-treasury-externalaccount.createexternalaccount
+        with:
+          Idempotency-Key: rest.Idempotency-Key
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/external-accounts/{id}
+      name: api-external-accounts-id
+      description: REST surface for api-external_accounts-id.
+      operations:
+      - method: GET
+        name: getexternalaccount
+        description: show external account
+        call: modern-treasury-externalaccount.getexternalaccount
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PATCH
+        name: updateexternalaccount
+        description: update external account
+        call: modern-treasury-externalaccount.updateexternalaccount
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deleteexternalaccount
+        description: delete external account
+        call: modern-treasury-externalaccount.deleteexternalaccount
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/external-accounts/{id}/complete-verification
+      name: api-external-accounts-id-complete-verification
+      description: REST surface for api-external_accounts-id-complete_verification.
+      operations:
+      - method: POST
+        name: completeverificationexternalaccount
+        description: complete verification of external account
+        call: modern-treasury-externalaccount.completeverificationexternalaccount
+        with:
+          Idempotency-Key: rest.Idempotency-Key
+          id: rest.id
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/external-accounts/{id}/verify
+      name: api-external-accounts-id-verify
+      description: REST surface for api-external_accounts-id-verify.
+      operations:
+      - method: POST
+        name: verifyexternalaccount
+        description: verify external account
+        call: modern-treasury-externalaccount.verifyexternalaccount
+        with:
+          Idempotency-Key: rest.Idempotency-Key
+          id: rest.id
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: modern-treasury-externalaccount-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Modern Treasury — ExternalAccount. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: list-external-accounts
+      description: list external accounts
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: modern-treasury-externalaccount.listexternalaccounts
+      with:
+        after_cursor: tools.after_cursor
+        per_page: tools.per_page
+        party_name: tools.party_name
+        counterparty_id: tools.counterparty_id
+        external_id: tools.external_id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-external-account
+      description: create external account
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: modern-treasury-externalaccount.createexternalaccount
+      with:
+        Idempotency-Key: tools.Idempotency-Key
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: show-external-account
+      description: show external account
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: modern-treasury-externalaccount.getexternalaccount
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-external-account
+      description: update external account
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: modern-treasury-externalaccount.updateexternalaccount
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-external-account
+      description: delete external account
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: modern-treasury-externalaccount.deleteexternalaccount
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: complete-verification-external-account
+      description: complete verification of external account
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: modern-treasury-externalaccount.completeverificationexternalaccount
+      with:
+        Idempotency-Key: tools.Idempotency-Key
+        id: tools.id
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: verify-external-account
+      description: verify external account
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: modern-treasury-externalaccount.verifyexternalaccount
+      with:
+        Idempotency-Key: tools.Idempotency-Key
+        id: tools.id
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

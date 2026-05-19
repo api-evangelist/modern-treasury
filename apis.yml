@@ -65,6 +65,8 @@ apis:
   - type: OpenAPI
     url: openapi/modern-treasury-openapi.yml
 common:
+  - type: LinkedIn
+    url: https://www.linkedin.com/company/modern-treasury
 - type: Website
   url: https://www.moderntreasury.com/
 - type: Plans

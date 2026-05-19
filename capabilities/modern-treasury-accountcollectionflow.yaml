@@ -1,0 +1,227 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Modern Treasury — AccountCollectionFlow
+  description: 'Modern Treasury — AccountCollectionFlow. 4 operations. Lead operation: list account_collection_flows. Self-contained
+    Naftiko capability covering one Modern Treasury business surface.'
+  tags:
+  - Modern Treasury
+  - AccountCollectionFlow
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    MODERN_TREASURY_API_KEY: MODERN_TREASURY_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: modern-treasury-accountcollectionflow
+    baseUri: http://localhost:3000
+    description: Modern Treasury — AccountCollectionFlow business capability. Self-contained, no shared references.
+    resources:
+    - name: api-account_collection_flows
+      path: /api/account_collection_flows
+      operations:
+      - name: listaccountcollectionflows
+        method: GET
+        description: list account_collection_flows
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: after_cursor
+          in: query
+          type: string
+        - name: per_page
+          in: query
+          type: integer
+        - name: client_token
+          in: query
+          type: string
+        - name: status
+          in: query
+          type: string
+        - name: counterparty_id
+          in: query
+          type: string
+        - name: external_account_id
+          in: query
+          type: string
+      - name: createaccountcollectionflow
+        method: POST
+        description: create account_collection_flow
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: Idempotency-Key
+          in: header
+          type: string
+          description: This key should be something unique, preferably something like an UUID.
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    - name: api-account_collection_flows-id
+      path: /api/account_collection_flows/{id}
+      operations:
+      - name: getaccountcollectionflow
+        method: GET
+        description: get account_collection_flow
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: Idempotency-Key
+          in: header
+          type: string
+          description: This key should be something unique, preferably something like an UUID.
+      - name: updateaccountcollectionflow
+        method: PATCH
+        description: update account_collection_flow
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: Idempotency-Key
+          in: header
+          type: string
+          description: This key should be something unique, preferably something like an UUID.
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    authentication:
+      type: basic
+      username: '{{env.MODERN_TREASURY_USER}}'
+      password: '{{env.MODERN_TREASURY_PASS}}'
+  exposes:
+  - type: rest
+    namespace: modern-treasury-accountcollectionflow-rest
+    port: 8080
+    description: REST adapter for Modern Treasury — AccountCollectionFlow. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/api/account-collection-flows
+      name: api-account-collection-flows
+      description: REST surface for api-account_collection_flows.
+      operations:
+      - method: GET
+        name: listaccountcollectionflows
+        description: list account_collection_flows
+        call: modern-treasury-accountcollectionflow.listaccountcollectionflows
+        with:
+          after_cursor: rest.after_cursor
+          per_page: rest.per_page
+          client_token: rest.client_token
+          status: rest.status
+          counterparty_id: rest.counterparty_id
+          external_account_id: rest.external_account_id
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createaccountcollectionflow
+        description: create account_collection_flow
+        call: modern-treasury-accountcollectionflow.createaccountcollectionflow
+        with:
+          Idempotency-Key: rest.Idempotency-Key
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/account-collection-flows/{id}
+      name: api-account-collection-flows-id
+      description: REST surface for api-account_collection_flows-id.
+      operations:
+      - method: GET
+        name: getaccountcollectionflow
+        description: get account_collection_flow
+        call: modern-treasury-accountcollectionflow.getaccountcollectionflow
+        with:
+          Idempotency-Key: rest.Idempotency-Key
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PATCH
+        name: updateaccountcollectionflow
+        description: update account_collection_flow
+        call: modern-treasury-accountcollectionflow.updateaccountcollectionflow
+        with:
+          Idempotency-Key: rest.Idempotency-Key
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: modern-treasury-accountcollectionflow-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Modern Treasury — AccountCollectionFlow. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: list-account-collection-flows
+      description: list account_collection_flows
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: modern-treasury-accountcollectionflow.listaccountcollectionflows
+      with:
+        after_cursor: tools.after_cursor
+        per_page: tools.per_page
+        client_token: tools.client_token
+        status: tools.status
+        counterparty_id: tools.counterparty_id
+        external_account_id: tools.external_account_id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-account-collection-flow
+      description: create account_collection_flow
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: modern-treasury-accountcollectionflow.createaccountcollectionflow
+      with:
+        Idempotency-Key: tools.Idempotency-Key
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-account-collection-flow
+      description: get account_collection_flow
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: modern-treasury-accountcollectionflow.getaccountcollectionflow
+      with:
+        Idempotency-Key: tools.Idempotency-Key
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-account-collection-flow
+      description: update account_collection_flow
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: modern-treasury-accountcollectionflow.updateaccountcollectionflow
+      with:
+        Idempotency-Key: tools.Idempotency-Key
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

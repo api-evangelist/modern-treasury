@@ -1,0 +1,276 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Modern Treasury — LedgerEntry
+  description: 'Modern Treasury — LedgerEntry. 3 operations. Lead operation: list ledger_entries. Self-contained Naftiko capability
+    covering one Modern Treasury business surface.'
+  tags:
+  - Modern Treasury
+  - LedgerEntry
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    MODERN_TREASURY_API_KEY: MODERN_TREASURY_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: modern-treasury-ledgerentry
+    baseUri: http://localhost:3000
+    description: Modern Treasury — LedgerEntry business capability. Self-contained, no shared references.
+    resources:
+    - name: api-ledger_entries
+      path: /api/ledger_entries
+      operations:
+      - name: listledgerentries
+        method: GET
+        description: list ledger_entries
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: after_cursor
+          in: query
+          type: string
+        - name: per_page
+          in: query
+          type: integer
+        - name: ledger_account_id
+          in: query
+          type: string
+        - name: ledger_transaction_id
+          in: query
+          type: string
+        - name: ledger_account_payout_id
+          in: query
+          type: string
+        - name: ledger_account_settlement_id
+          in: query
+          type: string
+        - name: effective_date
+          in: query
+          type: object
+          description: Use `gt` (>), `gte` (>=), `lt` (<), `lte` (<=), or `eq` (=) to filter by the transaction's effective
+            date. Format YYYY-MM-DD
+        - name: effective_at
+          in: query
+          type: object
+          description: Use `gt` (>), `gte` (>=), `lt` (<), `lte` (<=), or `eq` (=) to filter by the transaction's effective
+            time. Format ISO8601
+        - name: updated_at
+          in: query
+          type: object
+          description: Use `gt` (>), `gte` (>=), `lt` (<), `lte` (<=), or `eq` (=) to filter by the posted at timestamp. For
+            example, for all times after Jan 1 2000 12:00 UTC, use upd
+        - name: as_of_lock_version
+          in: query
+          type: integer
+          description: Shows all ledger entries that were present on a ledger account at a particular `lock_version`. You
+            must also specify `ledger_account_id`.
+        - name: ledger_account_lock_version
+          in: query
+          type: object
+          description: Use `gt` (>), `gte` (>=), `lt` (<), `lte` (<=), or `eq` (=) to filter by the lock_version of a ledger
+            account. For example, for all entries created at or before
+        - name: ledger_account_category_id
+          in: query
+          type: string
+          description: Get all ledger entries that match the direction specified. One of `credit`, `debit`.
+        - name: ledger_account_statement_id
+          in: query
+          type: string
+          description: Get all ledger entries that are included in the ledger account statement.
+        - name: show_deleted
+          in: query
+          type: boolean
+          description: 'If true, response will include ledger entries that were deleted. When you update a ledger transaction
+            to specify a new set of entries, the previous entries are '
+        - name: direction
+          in: query
+          type: string
+          description: 'If true, response will include ledger entries that were deleted. When you update a ledger transaction
+            to specify a new set of entries, the previous entries are '
+        - name: status
+          in: query
+          type: string
+          description: Get all ledger entries that match the status specified. One of `pending`, `posted`, or `archived`.
+            For multiple statuses, use `status[]=pending&status[]=posted`
+        - name: status[]
+          in: query
+          type: array
+          description: Get all ledger entries that match the status specified. One of `pending`, `posted`, or `archived`.
+            For multiple statuses, use `status[]=pending&status[]=posted`
+        - name: order_by
+          in: query
+          type: object
+          description: Order by `created_at` or `effective_at` in `asc` or `desc` order. For example, to order by `effective_at
+            asc`, use `order_by%5Beffective_at%5D=asc`. Ordering by
+        - name: amount
+          in: query
+          type: object
+          description: Use `gt` (>), `gte` (>=), `lt` (<), `lte` (<=), or `eq` (=) to filter by amount.
+        - name: show_balances
+          in: query
+          type: boolean
+          description: If true, response will include the balances attached to the ledger entry. If there is no balance available,
+            null will be returned instead.
+    - name: api-ledger_entries-id
+      path: /api/ledger_entries/{id}
+      operations:
+      - name: updateledgerentry
+        method: PATCH
+        description: update ledger_entry
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+      - name: getledgerentry
+        method: GET
+        description: get ledger_entry
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: show_balances
+          in: query
+          type: boolean
+          description: If true, response will include the balances attached to the ledger entry. If there is no balance available,
+            null will be returned instead.
+    authentication:
+      type: basic
+      username: '{{env.MODERN_TREASURY_USER}}'
+      password: '{{env.MODERN_TREASURY_PASS}}'
+  exposes:
+  - type: rest
+    namespace: modern-treasury-ledgerentry-rest
+    port: 8080
+    description: REST adapter for Modern Treasury — LedgerEntry. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/api/ledger-entries
+      name: api-ledger-entries
+      description: REST surface for api-ledger_entries.
+      operations:
+      - method: GET
+        name: listledgerentries
+        description: list ledger_entries
+        call: modern-treasury-ledgerentry.listledgerentries
+        with:
+          after_cursor: rest.after_cursor
+          per_page: rest.per_page
+          ledger_account_id: rest.ledger_account_id
+          ledger_transaction_id: rest.ledger_transaction_id
+          ledger_account_payout_id: rest.ledger_account_payout_id
+          ledger_account_settlement_id: rest.ledger_account_settlement_id
+          effective_date: rest.effective_date
+          effective_at: rest.effective_at
+          updated_at: rest.updated_at
+          as_of_lock_version: rest.as_of_lock_version
+          ledger_account_lock_version: rest.ledger_account_lock_version
+          ledger_account_category_id: rest.ledger_account_category_id
+          ledger_account_statement_id: rest.ledger_account_statement_id
+          show_deleted: rest.show_deleted
+          direction: rest.direction
+          status: rest.status
+          status[]: rest.status[]
+          order_by: rest.order_by
+          amount: rest.amount
+          show_balances: rest.show_balances
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/ledger-entries/{id}
+      name: api-ledger-entries-id
+      description: REST surface for api-ledger_entries-id.
+      operations:
+      - method: PATCH
+        name: updateledgerentry
+        description: update ledger_entry
+        call: modern-treasury-ledgerentry.updateledgerentry
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: GET
+        name: getledgerentry
+        description: get ledger_entry
+        call: modern-treasury-ledgerentry.getledgerentry
+        with:
+          show_balances: rest.show_balances
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: modern-treasury-ledgerentry-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Modern Treasury — LedgerEntry. One tool per consumed operation, routed inline through this
+      capability's consumes block.
+    tools:
+    - name: list-ledger-entries
+      description: list ledger_entries
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: modern-treasury-ledgerentry.listledgerentries
+      with:
+        after_cursor: tools.after_cursor
+        per_page: tools.per_page
+        ledger_account_id: tools.ledger_account_id
+        ledger_transaction_id: tools.ledger_transaction_id
+        ledger_account_payout_id: tools.ledger_account_payout_id
+        ledger_account_settlement_id: tools.ledger_account_settlement_id
+        effective_date: tools.effective_date
+        effective_at: tools.effective_at
+        updated_at: tools.updated_at
+        as_of_lock_version: tools.as_of_lock_version
+        ledger_account_lock_version: tools.ledger_account_lock_version
+        ledger_account_category_id: tools.ledger_account_category_id
+        ledger_account_statement_id: tools.ledger_account_statement_id
+        show_deleted: tools.show_deleted
+        direction: tools.direction
+        status: tools.status
+        status[]: tools.status[]
+        order_by: tools.order_by
+        amount: tools.amount
+        show_balances: tools.show_balances
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-ledger-entry
+      description: update ledger_entry
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: modern-treasury-ledgerentry.updateledgerentry
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-ledger-entry
+      description: get ledger_entry
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: modern-treasury-ledgerentry.getledgerentry
+      with:
+        show_balances: tools.show_balances
+      outputParameters:
+      - type: object
+        mapping: $.

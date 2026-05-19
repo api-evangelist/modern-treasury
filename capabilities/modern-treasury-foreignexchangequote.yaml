@@ -1,0 +1,193 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Modern Treasury — ForeignExchangeQuote
+  description: 'Modern Treasury — ForeignExchangeQuote. 3 operations. Lead operation: list foreign_exchange_quotes. Self-contained
+    Naftiko capability covering one Modern Treasury business surface.'
+  tags:
+  - Modern Treasury
+  - ForeignExchangeQuote
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    MODERN_TREASURY_API_KEY: MODERN_TREASURY_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: modern-treasury-foreignexchangequote
+    baseUri: http://localhost:3000
+    description: Modern Treasury — ForeignExchangeQuote business capability. Self-contained, no shared references.
+    resources:
+    - name: api-foreign_exchange_quotes
+      path: /api/foreign_exchange_quotes
+      operations:
+      - name: listquotes
+        method: GET
+        description: list foreign_exchange_quotes
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: after_cursor
+          in: query
+          type: string
+        - name: per_page
+          in: query
+          type: integer
+        - name: internal_account_id
+          in: query
+          type: string
+          description: The ID for the `InternalAccount` this quote is associated with.
+        - name: expires_at
+          in: query
+          type: string
+          description: The timestamp until which the quote must be booked by.
+        - name: base_currency
+          in: query
+          type: string
+          description: Currency to convert, often called the "sell" currency.
+        - name: target_currency
+          in: query
+          type: string
+          description: Currency to convert the `base_currency` to, often called the "buy" currency.
+        - name: effective_at_start
+          in: query
+          type: string
+          description: An inclusive lower bound for searching effective_at
+        - name: effective_at_end
+          in: query
+          type: string
+          description: An inclusive upper bound for searching effective_at
+      - name: createquote
+        method: POST
+        description: create foreign_exchange_quote
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: Idempotency-Key
+          in: header
+          type: string
+          description: This key should be something unique, preferably something like an UUID.
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    - name: api-foreign_exchange_quotes-id
+      path: /api/foreign_exchange_quotes/{id}
+      operations:
+      - name: getquote
+        method: GET
+        description: get foreign_exchange_quote
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: basic
+      username: '{{env.MODERN_TREASURY_USER}}'
+      password: '{{env.MODERN_TREASURY_PASS}}'
+  exposes:
+  - type: rest
+    namespace: modern-treasury-foreignexchangequote-rest
+    port: 8080
+    description: REST adapter for Modern Treasury — ForeignExchangeQuote. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/api/foreign-exchange-quotes
+      name: api-foreign-exchange-quotes
+      description: REST surface for api-foreign_exchange_quotes.
+      operations:
+      - method: GET
+        name: listquotes
+        description: list foreign_exchange_quotes
+        call: modern-treasury-foreignexchangequote.listquotes
+        with:
+          after_cursor: rest.after_cursor
+          per_page: rest.per_page
+          internal_account_id: rest.internal_account_id
+          expires_at: rest.expires_at
+          base_currency: rest.base_currency
+          target_currency: rest.target_currency
+          effective_at_start: rest.effective_at_start
+          effective_at_end: rest.effective_at_end
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createquote
+        description: create foreign_exchange_quote
+        call: modern-treasury-foreignexchangequote.createquote
+        with:
+          Idempotency-Key: rest.Idempotency-Key
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/foreign-exchange-quotes/{id}
+      name: api-foreign-exchange-quotes-id
+      description: REST surface for api-foreign_exchange_quotes-id.
+      operations:
+      - method: GET
+        name: getquote
+        description: get foreign_exchange_quote
+        call: modern-treasury-foreignexchangequote.getquote
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: modern-treasury-foreignexchangequote-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Modern Treasury — ForeignExchangeQuote. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: list-foreign-exchange-quotes
+      description: list foreign_exchange_quotes
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: modern-treasury-foreignexchangequote.listquotes
+      with:
+        after_cursor: tools.after_cursor
+        per_page: tools.per_page
+        internal_account_id: tools.internal_account_id
+        expires_at: tools.expires_at
+        base_currency: tools.base_currency
+        target_currency: tools.target_currency
+        effective_at_start: tools.effective_at_start
+        effective_at_end: tools.effective_at_end
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-foreign-exchange-quote
+      description: create foreign_exchange_quote
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: modern-treasury-foreignexchangequote.createquote
+      with:
+        Idempotency-Key: tools.Idempotency-Key
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-foreign-exchange-quote
+      description: get foreign_exchange_quote
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: modern-treasury-foreignexchangequote.getquote
+      outputParameters:
+      - type: object
+        mapping: $.

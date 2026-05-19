@@ -1,0 +1,71 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Modern Treasury — Ping
+  description: 'Modern Treasury — Ping. 1 operations. Lead operation: ping api. Self-contained Naftiko capability covering
+    one Modern Treasury business surface.'
+  tags:
+  - Modern Treasury
+  - Ping
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    MODERN_TREASURY_API_KEY: MODERN_TREASURY_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: modern-treasury-ping
+    baseUri: http://localhost:3000
+    description: Modern Treasury — Ping business capability. Self-contained, no shared references.
+    resources:
+    - name: api-ping
+      path: /api/ping
+      operations:
+      - name: pingapi
+        method: GET
+        description: ping api
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: basic
+      username: '{{env.MODERN_TREASURY_USER}}'
+      password: '{{env.MODERN_TREASURY_PASS}}'
+  exposes:
+  - type: rest
+    namespace: modern-treasury-ping-rest
+    port: 8080
+    description: REST adapter for Modern Treasury — Ping. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/api/ping
+      name: api-ping
+      description: REST surface for api-ping.
+      operations:
+      - method: GET
+        name: pingapi
+        description: ping api
+        call: modern-treasury-ping.pingapi
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: modern-treasury-ping-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Modern Treasury — Ping. One tool per consumed operation, routed inline through this capability's
+      consumes block.
+    tools:
+    - name: ping-api
+      description: ping api
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: modern-treasury-ping.pingapi
+      outputParameters:
+      - type: object
+        mapping: $.

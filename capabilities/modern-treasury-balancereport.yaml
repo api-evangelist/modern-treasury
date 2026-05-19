@@ -1,0 +1,238 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Modern Treasury — BalanceReport
+  description: 'Modern Treasury — BalanceReport. 4 operations. Lead operation: list balance_reports. Self-contained Naftiko
+    capability covering one Modern Treasury business surface.'
+  tags:
+  - Modern Treasury
+  - BalanceReport
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    MODERN_TREASURY_API_KEY: MODERN_TREASURY_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: modern-treasury-balancereport
+    baseUri: http://localhost:3000
+    description: Modern Treasury — BalanceReport business capability. Self-contained, no shared references.
+    resources:
+    - name: api-internal_accounts-internal_account_id-balance_reports
+      path: /api/internal_accounts/{internal_account_id}/balance_reports
+      operations:
+      - name: listbalancereports
+        method: GET
+        description: list balance_reports
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: internal_account_id
+          in: path
+          type: string
+          required: true
+        - name: as_of_date
+          in: query
+          type: string
+          description: The date of the balance report in local time.
+        - name: balance_report_type
+          in: query
+          type: string
+          description: The specific type of balance report. One of `intraday`, `previous_day`, `real_time`, or `other`.
+        - name: after_cursor
+          in: query
+          type: string
+        - name: per_page
+          in: query
+          type: integer
+      - name: createbalancereport
+        method: POST
+        description: create balance reports
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: internal_account_id
+          in: path
+          type: string
+          required: true
+        - name: Idempotency-Key
+          in: header
+          type: string
+          description: This key should be something unique, preferably something like an UUID.
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    - name: api-internal_accounts-internal_account_id-balance_reports-id
+      path: /api/internal_accounts/{internal_account_id}/balance_reports/{id}
+      operations:
+      - name: getbalancereport
+        method: GET
+        description: get balance_report
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: internal_account_id
+          in: path
+          type: string
+          required: true
+        - name: id
+          in: path
+          type: string
+          description: Either the unique identifier of the balance report or 'latest' for the latest balance report.
+          required: true
+      - name: deletebalancereport
+        method: DELETE
+        description: delete balance_report
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: internal_account_id
+          in: path
+          type: string
+          required: true
+        - name: id
+          in: path
+          type: string
+          description: Either the unique identifier of the balance report or 'latest' for the latest balance report.
+          required: true
+    authentication:
+      type: basic
+      username: '{{env.MODERN_TREASURY_USER}}'
+      password: '{{env.MODERN_TREASURY_PASS}}'
+  exposes:
+  - type: rest
+    namespace: modern-treasury-balancereport-rest
+    port: 8080
+    description: REST adapter for Modern Treasury — BalanceReport. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/api/internal-accounts/{internal-account-id}/balance-reports
+      name: api-internal-accounts-internal-account-id-balance-reports
+      description: REST surface for api-internal_accounts-internal_account_id-balance_reports.
+      operations:
+      - method: GET
+        name: listbalancereports
+        description: list balance_reports
+        call: modern-treasury-balancereport.listbalancereports
+        with:
+          internal_account_id: rest.internal_account_id
+          as_of_date: rest.as_of_date
+          balance_report_type: rest.balance_report_type
+          after_cursor: rest.after_cursor
+          per_page: rest.per_page
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createbalancereport
+        description: create balance reports
+        call: modern-treasury-balancereport.createbalancereport
+        with:
+          internal_account_id: rest.internal_account_id
+          Idempotency-Key: rest.Idempotency-Key
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/internal-accounts/{internal-account-id}/balance-reports/{id}
+      name: api-internal-accounts-internal-account-id-balance-reports-id
+      description: REST surface for api-internal_accounts-internal_account_id-balance_reports-id.
+      operations:
+      - method: GET
+        name: getbalancereport
+        description: get balance_report
+        call: modern-treasury-balancereport.getbalancereport
+        with:
+          internal_account_id: rest.internal_account_id
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deletebalancereport
+        description: delete balance_report
+        call: modern-treasury-balancereport.deletebalancereport
+        with:
+          internal_account_id: rest.internal_account_id
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: modern-treasury-balancereport-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Modern Treasury — BalanceReport. One tool per consumed operation, routed inline through this
+      capability's consumes block.
+    tools:
+    - name: list-balance-reports
+      description: list balance_reports
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: modern-treasury-balancereport.listbalancereports
+      with:
+        internal_account_id: tools.internal_account_id
+        as_of_date: tools.as_of_date
+        balance_report_type: tools.balance_report_type
+        after_cursor: tools.after_cursor
+        per_page: tools.per_page
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-balance-reports
+      description: create balance reports
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: modern-treasury-balancereport.createbalancereport
+      with:
+        internal_account_id: tools.internal_account_id
+        Idempotency-Key: tools.Idempotency-Key
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-balance-report
+      description: get balance_report
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: modern-treasury-balancereport.getbalancereport
+      with:
+        internal_account_id: tools.internal_account_id
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-balance-report
+      description: delete balance_report
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: modern-treasury-balancereport.deletebalancereport
+      with:
+        internal_account_id: tools.internal_account_id
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.

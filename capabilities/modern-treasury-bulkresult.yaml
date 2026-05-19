@@ -1,0 +1,147 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Modern Treasury — BulkResult
+  description: 'Modern Treasury — BulkResult. 2 operations. Lead operation: list bulk_results. Self-contained Naftiko capability
+    covering one Modern Treasury business surface.'
+  tags:
+  - Modern Treasury
+  - BulkResult
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    MODERN_TREASURY_API_KEY: MODERN_TREASURY_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: modern-treasury-bulkresult
+    baseUri: http://localhost:3000
+    description: Modern Treasury — BulkResult business capability. Self-contained, no shared references.
+    resources:
+    - name: api-bulk_results
+      path: /api/bulk_results
+      operations:
+      - name: listbulkresults
+        method: GET
+        description: list bulk_results
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: after_cursor
+          in: query
+          type: string
+        - name: per_page
+          in: query
+          type: integer
+        - name: status
+          in: query
+          type: string
+          description: One of successful or failed.
+        - name: request_type
+          in: query
+          type: string
+          description: The type of the request that created this result. bulk_request is the only supported `request_type`
+        - name: request_id
+          in: query
+          type: string
+          description: Unique identifier for the request that created this bulk result. This is the ID of the bulk request
+            when `request_type` is bulk_request
+        - name: entity_type
+          in: query
+          type: string
+          description: The type of the request that created this result. bulk_request is the only supported `request_type`
+        - name: entity_id
+          in: query
+          type: string
+          description: Unique identifier for the result entity object.
+    - name: api-bulk_results-id
+      path: /api/bulk_results/{id}
+      operations:
+      - name: getbulkresult
+        method: GET
+        description: get bulk_result
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: basic
+      username: '{{env.MODERN_TREASURY_USER}}'
+      password: '{{env.MODERN_TREASURY_PASS}}'
+  exposes:
+  - type: rest
+    namespace: modern-treasury-bulkresult-rest
+    port: 8080
+    description: REST adapter for Modern Treasury — BulkResult. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/api/bulk-results
+      name: api-bulk-results
+      description: REST surface for api-bulk_results.
+      operations:
+      - method: GET
+        name: listbulkresults
+        description: list bulk_results
+        call: modern-treasury-bulkresult.listbulkresults
+        with:
+          after_cursor: rest.after_cursor
+          per_page: rest.per_page
+          status: rest.status
+          request_type: rest.request_type
+          request_id: rest.request_id
+          entity_type: rest.entity_type
+          entity_id: rest.entity_id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/bulk-results/{id}
+      name: api-bulk-results-id
+      description: REST surface for api-bulk_results-id.
+      operations:
+      - method: GET
+        name: getbulkresult
+        description: get bulk_result
+        call: modern-treasury-bulkresult.getbulkresult
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: modern-treasury-bulkresult-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Modern Treasury — BulkResult. One tool per consumed operation, routed inline through this
+      capability's consumes block.
+    tools:
+    - name: list-bulk-results
+      description: list bulk_results
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: modern-treasury-bulkresult.listbulkresults
+      with:
+        after_cursor: tools.after_cursor
+        per_page: tools.per_page
+        status: tools.status
+        request_type: tools.request_type
+        request_id: tools.request_id
+        entity_type: tools.entity_type
+        entity_id: tools.entity_id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-bulk-result
+      description: get bulk_result
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: modern-treasury-bulkresult.getbulkresult
+      outputParameters:
+      - type: object
+        mapping: $.

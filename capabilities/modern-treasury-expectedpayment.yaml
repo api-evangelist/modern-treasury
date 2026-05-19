@@ -1,0 +1,276 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Modern Treasury — ExpectedPayment
+  description: 'Modern Treasury — ExpectedPayment. 5 operations. Lead operation: list expected_payments. Self-contained Naftiko
+    capability covering one Modern Treasury business surface.'
+  tags:
+  - Modern Treasury
+  - ExpectedPayment
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    MODERN_TREASURY_API_KEY: MODERN_TREASURY_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: modern-treasury-expectedpayment
+    baseUri: http://localhost:3000
+    description: Modern Treasury — ExpectedPayment business capability. Self-contained, no shared references.
+    resources:
+    - name: api-expected_payments
+      path: /api/expected_payments
+      operations:
+      - name: listexpectedpayments
+        method: GET
+        description: list expected_payments
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: after_cursor
+          in: query
+          type: string
+        - name: per_page
+          in: query
+          type: integer
+        - name: status
+          in: query
+          type: string
+          description: One of unreconciled, reconciled, or archived.
+        - name: internal_account_id
+          in: query
+          type: string
+          description: Specify internal_account_id to see expected_payments for a specific account.
+        - name: external_id
+          in: query
+          type: string
+        - name: direction
+          in: query
+          type: string
+          description: One of credit, debit
+        - name: type
+          in: query
+          type: string
+          description: 'One of: ach, au_becs, bacs, book, check, eft, interac, provxchange, rtp,sen, sepa, signet, wire'
+        - name: counterparty_id
+          in: query
+          type: string
+          description: Specify counterparty_id to see expected_payments for a specific account.
+        - name: created_at_lower_bound
+          in: query
+          type: string
+          description: Used to return expected payments created after some datetime
+        - name: created_at_upper_bound
+          in: query
+          type: string
+          description: Used to return expected payments created before some datetime
+        - name: updated_at_lower_bound
+          in: query
+          type: string
+          description: Used to return expected payments updated after some datetime
+        - name: updated_at_upper_bound
+          in: query
+          type: string
+          description: Used to return expected payments updated before some datetime
+      - name: createexpectedpayment
+        method: POST
+        description: create expected payment
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: Idempotency-Key
+          in: header
+          type: string
+          description: This key should be something unique, preferably something like an UUID.
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    - name: api-expected_payments-id
+      path: /api/expected_payments/{id}
+      operations:
+      - name: getexpectedpayment
+        method: GET
+        description: get expected payment
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: updateexpectedpayment
+        method: PATCH
+        description: update expected payment
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+      - name: deleteexpectedpayment
+        method: DELETE
+        description: delete expected payment
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: basic
+      username: '{{env.MODERN_TREASURY_USER}}'
+      password: '{{env.MODERN_TREASURY_PASS}}'
+  exposes:
+  - type: rest
+    namespace: modern-treasury-expectedpayment-rest
+    port: 8080
+    description: REST adapter for Modern Treasury — ExpectedPayment. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/api/expected-payments
+      name: api-expected-payments
+      description: REST surface for api-expected_payments.
+      operations:
+      - method: GET
+        name: listexpectedpayments
+        description: list expected_payments
+        call: modern-treasury-expectedpayment.listexpectedpayments
+        with:
+          after_cursor: rest.after_cursor
+          per_page: rest.per_page
+          status: rest.status
+          internal_account_id: rest.internal_account_id
+          external_id: rest.external_id
+          direction: rest.direction
+          type: rest.type
+          counterparty_id: rest.counterparty_id
+          created_at_lower_bound: rest.created_at_lower_bound
+          created_at_upper_bound: rest.created_at_upper_bound
+          updated_at_lower_bound: rest.updated_at_lower_bound
+          updated_at_upper_bound: rest.updated_at_upper_bound
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createexpectedpayment
+        description: create expected payment
+        call: modern-treasury-expectedpayment.createexpectedpayment
+        with:
+          Idempotency-Key: rest.Idempotency-Key
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/expected-payments/{id}
+      name: api-expected-payments-id
+      description: REST surface for api-expected_payments-id.
+      operations:
+      - method: GET
+        name: getexpectedpayment
+        description: get expected payment
+        call: modern-treasury-expectedpayment.getexpectedpayment
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PATCH
+        name: updateexpectedpayment
+        description: update expected payment
+        call: modern-treasury-expectedpayment.updateexpectedpayment
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deleteexpectedpayment
+        description: delete expected payment
+        call: modern-treasury-expectedpayment.deleteexpectedpayment
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: modern-treasury-expectedpayment-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Modern Treasury — ExpectedPayment. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: list-expected-payments
+      description: list expected_payments
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: modern-treasury-expectedpayment.listexpectedpayments
+      with:
+        after_cursor: tools.after_cursor
+        per_page: tools.per_page
+        status: tools.status
+        internal_account_id: tools.internal_account_id
+        external_id: tools.external_id
+        direction: tools.direction
+        type: tools.type
+        counterparty_id: tools.counterparty_id
+        created_at_lower_bound: tools.created_at_lower_bound
+        created_at_upper_bound: tools.created_at_upper_bound
+        updated_at_lower_bound: tools.updated_at_lower_bound
+        updated_at_upper_bound: tools.updated_at_upper_bound
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-expected-payment
+      description: create expected payment
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: modern-treasury-expectedpayment.createexpectedpayment
+      with:
+        Idempotency-Key: tools.Idempotency-Key
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-expected-payment
+      description: get expected payment
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: modern-treasury-expectedpayment.getexpectedpayment
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-expected-payment
+      description: update expected payment
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: modern-treasury-expectedpayment.updateexpectedpayment
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-expected-payment
+      description: delete expected payment
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: modern-treasury-expectedpayment.deleteexpectedpayment
+      outputParameters:
+      - type: object
+        mapping: $.

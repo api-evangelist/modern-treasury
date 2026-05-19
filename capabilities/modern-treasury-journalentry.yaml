@@ -1,0 +1,125 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Modern Treasury — JournalEntry
+  description: 'Modern Treasury — JournalEntry. 2 operations. Lead operation: list journal_entries. Self-contained Naftiko
+    capability covering one Modern Treasury business surface.'
+  tags:
+  - Modern Treasury
+  - JournalEntry
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    MODERN_TREASURY_API_KEY: MODERN_TREASURY_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: modern-treasury-journalentry
+    baseUri: http://localhost:3000
+    description: Modern Treasury — JournalEntry business capability. Self-contained, no shared references.
+    resources:
+    - name: api-journal_entries
+      path: /api/journal_entries
+      operations:
+      - name: listjournalentries
+        method: GET
+        description: list journal_entries
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: journal_report_id
+          in: query
+          type: string
+          description: The ID of the journal report
+          required: true
+        - name: page
+          in: query
+          type: integer
+          description: Page number for pagination
+        - name: per_page
+          in: query
+          type: integer
+          description: Number of items per page
+    - name: api-journal_entries-id
+      path: /api/journal_entries/{id}
+      operations:
+      - name: getjournalentry
+        method: GET
+        description: show journal_entry
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: basic
+      username: '{{env.MODERN_TREASURY_USER}}'
+      password: '{{env.MODERN_TREASURY_PASS}}'
+  exposes:
+  - type: rest
+    namespace: modern-treasury-journalentry-rest
+    port: 8080
+    description: REST adapter for Modern Treasury — JournalEntry. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/api/journal-entries
+      name: api-journal-entries
+      description: REST surface for api-journal_entries.
+      operations:
+      - method: GET
+        name: listjournalentries
+        description: list journal_entries
+        call: modern-treasury-journalentry.listjournalentries
+        with:
+          journal_report_id: rest.journal_report_id
+          page: rest.page
+          per_page: rest.per_page
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/journal-entries/{id}
+      name: api-journal-entries-id
+      description: REST surface for api-journal_entries-id.
+      operations:
+      - method: GET
+        name: getjournalentry
+        description: show journal_entry
+        call: modern-treasury-journalentry.getjournalentry
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: modern-treasury-journalentry-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Modern Treasury — JournalEntry. One tool per consumed operation, routed inline through this
+      capability's consumes block.
+    tools:
+    - name: list-journal-entries
+      description: list journal_entries
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: modern-treasury-journalentry.listjournalentries
+      with:
+        journal_report_id: tools.journal_report_id
+        page: tools.page
+        per_page: tools.per_page
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: show-journal-entry
+      description: show journal_entry
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: modern-treasury-journalentry.getjournalentry
+      outputParameters:
+      - type: object
+        mapping: $.

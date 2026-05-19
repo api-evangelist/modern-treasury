@@ -1,0 +1,223 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Modern Treasury — TransactionLineItem
+  description: 'Modern Treasury — TransactionLineItem. 5 operations. Lead operation: list transaction_line_items. Self-contained
+    Naftiko capability covering one Modern Treasury business surface.'
+  tags:
+  - Modern Treasury
+  - TransactionLineItem
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    MODERN_TREASURY_API_KEY: MODERN_TREASURY_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: modern-treasury-transactionlineitem
+    baseUri: http://localhost:3000
+    description: Modern Treasury — TransactionLineItem business capability. Self-contained, no shared references.
+    resources:
+    - name: api-transaction_line_items
+      path: /api/transaction_line_items
+      operations:
+      - name: listtransactionlineitems
+        method: GET
+        description: list transaction_line_items
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: after_cursor
+          in: query
+          type: string
+        - name: id
+          in: query
+          type: object
+        - name: type
+          in: query
+          type: string
+        - name: per_page
+          in: query
+          type: integer
+        - name: transaction_id
+          in: query
+          type: string
+      - name: createtransactionlineitem
+        method: POST
+        description: create transaction line items
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    - name: api-transaction_line_items-id
+      path: /api/transaction_line_items/{id}
+      operations:
+      - name: listtransactionlineitem
+        method: GET
+        description: get transaction line item
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: deletetransactionlineitem
+        method: DELETE
+        description: delete transaction line item
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: api-transactions-transaction_id-line_items
+      path: /api/transactions/{transaction_id}/line_items
+      operations:
+      - name: listtransactionlineitemsnested
+        method: GET
+        description: list transaction_line_items
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: basic
+      username: '{{env.MODERN_TREASURY_USER}}'
+      password: '{{env.MODERN_TREASURY_PASS}}'
+  exposes:
+  - type: rest
+    namespace: modern-treasury-transactionlineitem-rest
+    port: 8080
+    description: REST adapter for Modern Treasury — TransactionLineItem. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/api/transaction-line-items
+      name: api-transaction-line-items
+      description: REST surface for api-transaction_line_items.
+      operations:
+      - method: GET
+        name: listtransactionlineitems
+        description: list transaction_line_items
+        call: modern-treasury-transactionlineitem.listtransactionlineitems
+        with:
+          after_cursor: rest.after_cursor
+          id: rest.id
+          type: rest.type
+          per_page: rest.per_page
+          transaction_id: rest.transaction_id
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createtransactionlineitem
+        description: create transaction line items
+        call: modern-treasury-transactionlineitem.createtransactionlineitem
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/transaction-line-items/{id}
+      name: api-transaction-line-items-id
+      description: REST surface for api-transaction_line_items-id.
+      operations:
+      - method: GET
+        name: listtransactionlineitem
+        description: get transaction line item
+        call: modern-treasury-transactionlineitem.listtransactionlineitem
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deletetransactionlineitem
+        description: delete transaction line item
+        call: modern-treasury-transactionlineitem.deletetransactionlineitem
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/transactions/{transaction-id}/line-items
+      name: api-transactions-transaction-id-line-items
+      description: REST surface for api-transactions-transaction_id-line_items.
+      operations:
+      - method: GET
+        name: listtransactionlineitemsnested
+        description: list transaction_line_items
+        call: modern-treasury-transactionlineitem.listtransactionlineitemsnested
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: modern-treasury-transactionlineitem-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Modern Treasury — TransactionLineItem. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: list-transaction-line-items
+      description: list transaction_line_items
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: modern-treasury-transactionlineitem.listtransactionlineitems
+      with:
+        after_cursor: tools.after_cursor
+        id: tools.id
+        type: tools.type
+        per_page: tools.per_page
+        transaction_id: tools.transaction_id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-transaction-line-items
+      description: create transaction line items
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: modern-treasury-transactionlineitem.createtransactionlineitem
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-transaction-line-item
+      description: get transaction line item
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: modern-treasury-transactionlineitem.listtransactionlineitem
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-transaction-line-item
+      description: delete transaction line item
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: modern-treasury-transactionlineitem.deletetransactionlineitem
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-transaction-line-items-2
+      description: list transaction_line_items
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: modern-treasury-transactionlineitem.listtransactionlineitemsnested
+      outputParameters:
+      - type: object
+        mapping: $.

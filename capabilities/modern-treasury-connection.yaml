@@ -1,0 +1,96 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Modern Treasury — Connection
+  description: 'Modern Treasury — Connection. 1 operations. Lead operation: list connections. Self-contained Naftiko capability
+    covering one Modern Treasury business surface.'
+  tags:
+  - Modern Treasury
+  - Connection
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    MODERN_TREASURY_API_KEY: MODERN_TREASURY_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: modern-treasury-connection
+    baseUri: http://localhost:3000
+    description: Modern Treasury — Connection business capability. Self-contained, no shared references.
+    resources:
+    - name: api-connections
+      path: /api/connections
+      operations:
+      - name: listconnections
+        method: GET
+        description: list connections
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: after_cursor
+          in: query
+          type: string
+        - name: per_page
+          in: query
+          type: integer
+        - name: vendor_customer_id
+          in: query
+          type: string
+          description: An identifier assigned by the vendor to your organization.
+        - name: entity
+          in: query
+          type: string
+          description: A string code representing the vendor (i.e. bank).
+    authentication:
+      type: basic
+      username: '{{env.MODERN_TREASURY_USER}}'
+      password: '{{env.MODERN_TREASURY_PASS}}'
+  exposes:
+  - type: rest
+    namespace: modern-treasury-connection-rest
+    port: 8080
+    description: REST adapter for Modern Treasury — Connection. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/api/connections
+      name: api-connections
+      description: REST surface for api-connections.
+      operations:
+      - method: GET
+        name: listconnections
+        description: list connections
+        call: modern-treasury-connection.listconnections
+        with:
+          after_cursor: rest.after_cursor
+          per_page: rest.per_page
+          vendor_customer_id: rest.vendor_customer_id
+          entity: rest.entity
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: modern-treasury-connection-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Modern Treasury — Connection. One tool per consumed operation, routed inline through this
+      capability's consumes block.
+    tools:
+    - name: list-connections
+      description: list connections
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: modern-treasury-connection.listconnections
+      with:
+        after_cursor: tools.after_cursor
+        per_page: tools.per_page
+        vendor_customer_id: tools.vendor_customer_id
+        entity: tools.entity
+      outputParameters:
+      - type: object
+        mapping: $.

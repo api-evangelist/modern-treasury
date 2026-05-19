@@ -1,0 +1,81 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Modern Treasury — AccountCapability
+  description: 'Modern Treasury — AccountCapability. 1 operations. Lead operation: update account_capability. Self-contained
+    Naftiko capability covering one Modern Treasury business surface.'
+  tags:
+  - Modern Treasury
+  - AccountCapability
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    MODERN_TREASURY_API_KEY: MODERN_TREASURY_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: modern-treasury-accountcapability
+    baseUri: http://localhost:3000
+    description: Modern Treasury — AccountCapability business capability. Self-contained, no shared references.
+    resources:
+    - name: api-internal_accounts-internal_account_id-account_capabilities-id
+      path: /api/internal_accounts/{internal_account_id}/account_capabilities/{id}
+      operations:
+      - name: updateaccountcapability
+        method: PATCH
+        description: update account_capability
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    authentication:
+      type: basic
+      username: '{{env.MODERN_TREASURY_USER}}'
+      password: '{{env.MODERN_TREASURY_PASS}}'
+  exposes:
+  - type: rest
+    namespace: modern-treasury-accountcapability-rest
+    port: 8080
+    description: REST adapter for Modern Treasury — AccountCapability. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/api/internal-accounts/{internal-account-id}/account-capabilities/{id}
+      name: api-internal-accounts-internal-account-id-account-capabilities-id
+      description: REST surface for api-internal_accounts-internal_account_id-account_capabilities-id.
+      operations:
+      - method: PATCH
+        name: updateaccountcapability
+        description: update account_capability
+        call: modern-treasury-accountcapability.updateaccountcapability
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: modern-treasury-accountcapability-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Modern Treasury — AccountCapability. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: update-account-capability
+      description: update account_capability
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: modern-treasury-accountcapability.updateaccountcapability
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

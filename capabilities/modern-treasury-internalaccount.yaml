@@ -1,0 +1,266 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Modern Treasury — InternalAccount
+  description: 'Modern Treasury — InternalAccount. 5 operations. Lead operation: list internal accounts. Self-contained Naftiko
+    capability covering one Modern Treasury business surface.'
+  tags:
+  - Modern Treasury
+  - InternalAccount
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    MODERN_TREASURY_API_KEY: MODERN_TREASURY_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: modern-treasury-internalaccount
+    baseUri: http://localhost:3000
+    description: Modern Treasury — InternalAccount business capability. Self-contained, no shared references.
+    resources:
+    - name: api-internal_accounts
+      path: /api/internal_accounts
+      operations:
+      - name: listinternalaccounts
+        method: GET
+        description: list internal accounts
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: after_cursor
+          in: query
+          type: string
+        - name: per_page
+          in: query
+          type: integer
+        - name: currency
+          in: query
+          type: string
+          description: Only return internal accounts with this currency.
+        - name: counterparty_id
+          in: query
+          type: string
+          description: Only return internal accounts associated with this counterparty.
+        - name: legal_entity_id
+          in: query
+          type: string
+          description: Only return internal accounts associated with this legal entity.
+        - name: payment_type
+          in: query
+          type: string
+          description: Only return internal accounts that can make this type of payment.
+        - name: payment_direction
+          in: query
+          type: string
+          description: Only return internal accounts that can originate payments with this direction.
+        - name: status
+          in: query
+          type: string
+          description: Only return internal accounts with this status.
+        - name: external_id
+          in: query
+          type: string
+          description: An optional user-defined 180 character unique identifier.
+      - name: createinternalaccount
+        method: POST
+        description: create internal account
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: Idempotency-Key
+          in: header
+          type: string
+          description: This key should be something unique, preferably something like an UUID.
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    - name: api-internal_accounts-id
+      path: /api/internal_accounts/{id}
+      operations:
+      - name: getinternalaccount
+        method: GET
+        description: get internal account
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: updateinternalaccount
+        method: PATCH
+        description: update internal account
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    - name: api-internal_accounts-id-request_closure
+      path: /api/internal_accounts/{id}/request_closure
+      operations:
+      - name: requestinternalaccountclosure
+        method: POST
+        description: request closure of internal account
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: basic
+      username: '{{env.MODERN_TREASURY_USER}}'
+      password: '{{env.MODERN_TREASURY_PASS}}'
+  exposes:
+  - type: rest
+    namespace: modern-treasury-internalaccount-rest
+    port: 8080
+    description: REST adapter for Modern Treasury — InternalAccount. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/api/internal-accounts
+      name: api-internal-accounts
+      description: REST surface for api-internal_accounts.
+      operations:
+      - method: GET
+        name: listinternalaccounts
+        description: list internal accounts
+        call: modern-treasury-internalaccount.listinternalaccounts
+        with:
+          after_cursor: rest.after_cursor
+          per_page: rest.per_page
+          currency: rest.currency
+          counterparty_id: rest.counterparty_id
+          legal_entity_id: rest.legal_entity_id
+          payment_type: rest.payment_type
+          payment_direction: rest.payment_direction
+          status: rest.status
+          external_id: rest.external_id
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createinternalaccount
+        description: create internal account
+        call: modern-treasury-internalaccount.createinternalaccount
+        with:
+          Idempotency-Key: rest.Idempotency-Key
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/internal-accounts/{id}
+      name: api-internal-accounts-id
+      description: REST surface for api-internal_accounts-id.
+      operations:
+      - method: GET
+        name: getinternalaccount
+        description: get internal account
+        call: modern-treasury-internalaccount.getinternalaccount
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PATCH
+        name: updateinternalaccount
+        description: update internal account
+        call: modern-treasury-internalaccount.updateinternalaccount
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/internal-accounts/{id}/request-closure
+      name: api-internal-accounts-id-request-closure
+      description: REST surface for api-internal_accounts-id-request_closure.
+      operations:
+      - method: POST
+        name: requestinternalaccountclosure
+        description: request closure of internal account
+        call: modern-treasury-internalaccount.requestinternalaccountclosure
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: modern-treasury-internalaccount-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Modern Treasury — InternalAccount. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: list-internal-accounts
+      description: list internal accounts
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: modern-treasury-internalaccount.listinternalaccounts
+      with:
+        after_cursor: tools.after_cursor
+        per_page: tools.per_page
+        currency: tools.currency
+        counterparty_id: tools.counterparty_id
+        legal_entity_id: tools.legal_entity_id
+        payment_type: tools.payment_type
+        payment_direction: tools.payment_direction
+        status: tools.status
+        external_id: tools.external_id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-internal-account
+      description: create internal account
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: modern-treasury-internalaccount.createinternalaccount
+      with:
+        Idempotency-Key: tools.Idempotency-Key
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-internal-account
+      description: get internal account
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: modern-treasury-internalaccount.getinternalaccount
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-internal-account
+      description: update internal account
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: modern-treasury-internalaccount.updateinternalaccount
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: request-closure-internal-account
+      description: request closure of internal account
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: modern-treasury-internalaccount.requestinternalaccountclosure
+      outputParameters:
+      - type: object
+        mapping: $.

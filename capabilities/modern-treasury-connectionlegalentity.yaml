@@ -1,0 +1,216 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Modern Treasury — ConnectionLegalEntity
+  description: 'Modern Treasury — ConnectionLegalEntity. 4 operations. Lead operation: list connection_legal_entities. Self-contained
+    Naftiko capability covering one Modern Treasury business surface.'
+  tags:
+  - Modern Treasury
+  - ConnectionLegalEntity
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    MODERN_TREASURY_API_KEY: MODERN_TREASURY_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: modern-treasury-connectionlegalentity
+    baseUri: http://localhost:3000
+    description: Modern Treasury — ConnectionLegalEntity business capability. Self-contained, no shared references.
+    resources:
+    - name: api-connection_legal_entities
+      path: /api/connection_legal_entities
+      operations:
+      - name: listconnectionlegalentities
+        method: GET
+        description: list connection_legal_entities
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: after_cursor
+          in: query
+          type: string
+        - name: per_page
+          in: query
+          type: integer
+        - name: connection_id
+          in: query
+          type: string
+        - name: legal_entity_id
+          in: query
+          type: string
+        - name: status
+          in: query
+          type: string
+      - name: createconnectionlegalentity
+        method: POST
+        description: create connection_legal_entity
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: Idempotency-Key
+          in: header
+          type: string
+          description: This key should be something unique, preferably something like an UUID.
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    - name: api-connection_legal_entities-id
+      path: /api/connection_legal_entities/{id}
+      operations:
+      - name: getconnectionlegalentity
+        method: GET
+        description: get connection_legal_entity
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: Idempotency-Key
+          in: header
+          type: string
+          description: This key should be something unique, preferably something like an UUID.
+      - name: updateconnectionlegalentity
+        method: PATCH
+        description: update connection_legal_entity
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    authentication:
+      type: basic
+      username: '{{env.MODERN_TREASURY_USER}}'
+      password: '{{env.MODERN_TREASURY_PASS}}'
+  exposes:
+  - type: rest
+    namespace: modern-treasury-connectionlegalentity-rest
+    port: 8080
+    description: REST adapter for Modern Treasury — ConnectionLegalEntity. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/api/connection-legal-entities
+      name: api-connection-legal-entities
+      description: REST surface for api-connection_legal_entities.
+      operations:
+      - method: GET
+        name: listconnectionlegalentities
+        description: list connection_legal_entities
+        call: modern-treasury-connectionlegalentity.listconnectionlegalentities
+        with:
+          after_cursor: rest.after_cursor
+          per_page: rest.per_page
+          connection_id: rest.connection_id
+          legal_entity_id: rest.legal_entity_id
+          status: rest.status
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createconnectionlegalentity
+        description: create connection_legal_entity
+        call: modern-treasury-connectionlegalentity.createconnectionlegalentity
+        with:
+          Idempotency-Key: rest.Idempotency-Key
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/connection-legal-entities/{id}
+      name: api-connection-legal-entities-id
+      description: REST surface for api-connection_legal_entities-id.
+      operations:
+      - method: GET
+        name: getconnectionlegalentity
+        description: get connection_legal_entity
+        call: modern-treasury-connectionlegalentity.getconnectionlegalentity
+        with:
+          Idempotency-Key: rest.Idempotency-Key
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PATCH
+        name: updateconnectionlegalentity
+        description: update connection_legal_entity
+        call: modern-treasury-connectionlegalentity.updateconnectionlegalentity
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: modern-treasury-connectionlegalentity-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Modern Treasury — ConnectionLegalEntity. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: list-connection-legal-entities
+      description: list connection_legal_entities
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: modern-treasury-connectionlegalentity.listconnectionlegalentities
+      with:
+        after_cursor: tools.after_cursor
+        per_page: tools.per_page
+        connection_id: tools.connection_id
+        legal_entity_id: tools.legal_entity_id
+        status: tools.status
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-connection-legal-entity
+      description: create connection_legal_entity
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: modern-treasury-connectionlegalentity.createconnectionlegalentity
+      with:
+        Idempotency-Key: tools.Idempotency-Key
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-connection-legal-entity
+      description: get connection_legal_entity
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: modern-treasury-connectionlegalentity.getconnectionlegalentity
+      with:
+        Idempotency-Key: tools.Idempotency-Key
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-connection-legal-entity
+      description: update connection_legal_entity
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: modern-treasury-connectionlegalentity.updateconnectionlegalentity
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

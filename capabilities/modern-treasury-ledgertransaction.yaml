@@ -1,0 +1,529 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Modern Treasury — LedgerTransaction
+  description: 'Modern Treasury — LedgerTransaction. 8 operations. Lead operation: list ledger_transaction_versions. Self-contained
+    Naftiko capability covering one Modern Treasury business surface.'
+  tags:
+  - Modern Treasury
+  - LedgerTransaction
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    MODERN_TREASURY_API_KEY: MODERN_TREASURY_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: modern-treasury-ledgertransaction
+    baseUri: http://localhost:3000
+    description: Modern Treasury — LedgerTransaction business capability. Self-contained, no shared references.
+    resources:
+    - name: api-ledger_transaction_versions
+      path: /api/ledger_transaction_versions
+      operations:
+      - name: listledgertransactionversions
+        method: GET
+        description: list ledger_transaction_versions
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: after_cursor
+          in: query
+          type: string
+        - name: per_page
+          in: query
+          type: integer
+        - name: created_at
+          in: query
+          type: object
+          description: Use `gt` (>), `gte` (>=), `lt` (<), `lte` (<=), or `eq` (=) to filter by the created_at timestamp.
+            For example, for all dates after Jan 1 2000 12:00 UTC, use cr
+        - name: version
+          in: query
+          type: object
+          description: Use `gt` (>), `gte` (>=), `lt` (<), `lte` (<=), or `eq` (=) to filter by the version. For example,
+            for all versions after 2, use version%5Bgt%5D=2.
+        - name: ledger_transaction_id
+          in: query
+          type: string
+          description: Get all the ledger transaction versions corresponding to the ID of a ledger transaction.
+        - name: ledger_account_statement_id
+          in: query
+          type: string
+          description: Get all ledger transaction versions that are included in the ledger account statement.
+    - name: api-ledger_transactions
+      path: /api/ledger_transactions
+      operations:
+      - name: listledgertransactions
+        method: GET
+        description: list ledger_transactions
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: after_cursor
+          in: query
+          type: string
+        - name: per_page
+          in: query
+          type: integer
+        - name: ledger_id
+          in: query
+          type: string
+        - name: ledger_account_id
+          in: query
+          type: string
+        - name: effective_at
+          in: query
+          type: object
+          description: Use "gt" (>), "gte" (>=), "lt" (<), "lte" (<=), or "eq" (=) to filter by effective at. For example,
+            for all transactions after Jan 1 2000, use effective_at%5Bgt
+        - name: effective_date
+          in: query
+          type: object
+          description: Use `gt` (>), `gte` (>=), `lt` (<), `lte` (<=), or `eq` (=) to filter by effective date. For example,
+            for all dates after Jan 1 2000, use effective_date%5Bgt%5D
+        - name: posted_at
+          in: query
+          type: object
+          description: Use `gt` (>), `gte` (>=), `lt` (<), `lte` (<=), or `eq` (=) to filter by the posted at timestamp. For
+            example, for all times after Jan 1 2000 12:00 UTC, use pos
+        - name: updated_at
+          in: query
+          type: object
+          description: Use `gt` (>), `gte` (>=), `lt` (<), `lte` (<=), or `eq` (=) to filter by the posted at timestamp. For
+            example, for all times after Jan 1 2000 12:00 UTC, use upd
+        - name: order_by
+          in: query
+          type: object
+          description: Order by `created_at` or `effective_at` in `asc` or `desc` order. For example, to order by `effective_at
+            asc`, use `order_by%5Beffective_at%5D=asc`. Ordering by
+        - name: amount
+          in: query
+          type: object
+          description: Use `gt` (>), `gte` (>=), `lt` (<), `lte` (<=), or `eq` (=) to filter by amount.
+        - name: status
+          in: query
+          type: string
+        - name: external_id
+          in: query
+          type: string
+        - name: ledger_account_category_id
+          in: query
+          type: string
+        - name: ledger_account_settlement_id
+          in: query
+          type: string
+        - name: reverses_ledger_transaction_id
+          in: query
+          type: string
+        - name: partially_posts_ledger_transaction_id
+          in: query
+          type: string
+        - name: ledgerable_id
+          in: query
+          type: string
+        - name: ledgerable_type
+          in: query
+          type: string
+      - name: createledgertransaction
+        method: POST
+        description: create ledger_transaction
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: Idempotency-Key
+          in: header
+          type: string
+          description: This key should be something unique, preferably something like an UUID.
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    - name: api-ledger_transactions-id
+      path: /api/ledger_transactions/{id}
+      operations:
+      - name: getledgertransaction
+        method: GET
+        description: get ledger_transaction
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The ledger transaction id (UUID) or external_id. If using external_id, only non-archived Ledger Transactions
+            will be returned.
+          required: true
+      - name: updateledgertransaction
+        method: PATCH
+        description: update ledger_transaction
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The ledger transaction id (UUID)
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    - name: api-ledger_transactions-id-partial_post
+      path: /api/ledger_transactions/{id}/partial_post
+      operations:
+      - name: createledgertransactionpartialpost
+        method: POST
+        description: create ledger_transaction partial post
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The ID of the ledger transaction to partially post.
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    - name: api-ledger_transactions-id-reversal
+      path: /api/ledger_transactions/{id}/reversal
+      operations:
+      - name: createledgertransactionreversal
+        method: POST
+        description: create ledger_transaction reversal
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The id of ledger transaction to reverse.
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    - name: api-ledger_transactions-id-versions
+      path: /api/ledger_transactions/{id}/versions
+      operations:
+      - name: listledgertransactionversionsnested
+        method: GET
+        description: list ledger_transaction versions
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: after_cursor
+          in: query
+          type: string
+        - name: per_page
+          in: query
+          type: integer
+        - name: created_at
+          in: query
+          type: object
+          description: Use `gt` (>), `gte` (>=), `lt` (<), `lte` (<=), or `eq` (=) to filter by the created_at timestamp.
+            For example, for all dates after Jan 1 2000 12:00 UTC, use cr
+        - name: version
+          in: query
+          type: object
+          description: Use `gt` (>), `gte` (>=), `lt` (<), `lte` (<=), or `eq` (=) to filter by the version. For example,
+            for all versions after 2, use version%5Bgt%5D=2.
+    authentication:
+      type: basic
+      username: '{{env.MODERN_TREASURY_USER}}'
+      password: '{{env.MODERN_TREASURY_PASS}}'
+  exposes:
+  - type: rest
+    namespace: modern-treasury-ledgertransaction-rest
+    port: 8080
+    description: REST adapter for Modern Treasury — LedgerTransaction. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/api/ledger-transaction-versions
+      name: api-ledger-transaction-versions
+      description: REST surface for api-ledger_transaction_versions.
+      operations:
+      - method: GET
+        name: listledgertransactionversions
+        description: list ledger_transaction_versions
+        call: modern-treasury-ledgertransaction.listledgertransactionversions
+        with:
+          after_cursor: rest.after_cursor
+          per_page: rest.per_page
+          created_at: rest.created_at
+          version: rest.version
+          ledger_transaction_id: rest.ledger_transaction_id
+          ledger_account_statement_id: rest.ledger_account_statement_id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/ledger-transactions
+      name: api-ledger-transactions
+      description: REST surface for api-ledger_transactions.
+      operations:
+      - method: GET
+        name: listledgertransactions
+        description: list ledger_transactions
+        call: modern-treasury-ledgertransaction.listledgertransactions
+        with:
+          after_cursor: rest.after_cursor
+          per_page: rest.per_page
+          ledger_id: rest.ledger_id
+          ledger_account_id: rest.ledger_account_id
+          effective_at: rest.effective_at
+          effective_date: rest.effective_date
+          posted_at: rest.posted_at
+          updated_at: rest.updated_at
+          order_by: rest.order_by
+          amount: rest.amount
+          status: rest.status
+          external_id: rest.external_id
+          ledger_account_category_id: rest.ledger_account_category_id
+          ledger_account_settlement_id: rest.ledger_account_settlement_id
+          reverses_ledger_transaction_id: rest.reverses_ledger_transaction_id
+          partially_posts_ledger_transaction_id: rest.partially_posts_ledger_transaction_id
+          ledgerable_id: rest.ledgerable_id
+          ledgerable_type: rest.ledgerable_type
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createledgertransaction
+        description: create ledger_transaction
+        call: modern-treasury-ledgertransaction.createledgertransaction
+        with:
+          Idempotency-Key: rest.Idempotency-Key
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/ledger-transactions/{id}
+      name: api-ledger-transactions-id
+      description: REST surface for api-ledger_transactions-id.
+      operations:
+      - method: GET
+        name: getledgertransaction
+        description: get ledger_transaction
+        call: modern-treasury-ledgertransaction.getledgertransaction
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PATCH
+        name: updateledgertransaction
+        description: update ledger_transaction
+        call: modern-treasury-ledgertransaction.updateledgertransaction
+        with:
+          id: rest.id
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/ledger-transactions/{id}/partial-post
+      name: api-ledger-transactions-id-partial-post
+      description: REST surface for api-ledger_transactions-id-partial_post.
+      operations:
+      - method: POST
+        name: createledgertransactionpartialpost
+        description: create ledger_transaction partial post
+        call: modern-treasury-ledgertransaction.createledgertransactionpartialpost
+        with:
+          id: rest.id
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/ledger-transactions/{id}/reversal
+      name: api-ledger-transactions-id-reversal
+      description: REST surface for api-ledger_transactions-id-reversal.
+      operations:
+      - method: POST
+        name: createledgertransactionreversal
+        description: create ledger_transaction reversal
+        call: modern-treasury-ledgertransaction.createledgertransactionreversal
+        with:
+          id: rest.id
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/ledger-transactions/{id}/versions
+      name: api-ledger-transactions-id-versions
+      description: REST surface for api-ledger_transactions-id-versions.
+      operations:
+      - method: GET
+        name: listledgertransactionversionsnested
+        description: list ledger_transaction versions
+        call: modern-treasury-ledgertransaction.listledgertransactionversionsnested
+        with:
+          after_cursor: rest.after_cursor
+          per_page: rest.per_page
+          created_at: rest.created_at
+          version: rest.version
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: modern-treasury-ledgertransaction-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Modern Treasury — LedgerTransaction. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: list-ledger-transaction-versions
+      description: list ledger_transaction_versions
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: modern-treasury-ledgertransaction.listledgertransactionversions
+      with:
+        after_cursor: tools.after_cursor
+        per_page: tools.per_page
+        created_at: tools.created_at
+        version: tools.version
+        ledger_transaction_id: tools.ledger_transaction_id
+        ledger_account_statement_id: tools.ledger_account_statement_id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-ledger-transactions
+      description: list ledger_transactions
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: modern-treasury-ledgertransaction.listledgertransactions
+      with:
+        after_cursor: tools.after_cursor
+        per_page: tools.per_page
+        ledger_id: tools.ledger_id
+        ledger_account_id: tools.ledger_account_id
+        effective_at: tools.effective_at
+        effective_date: tools.effective_date
+        posted_at: tools.posted_at
+        updated_at: tools.updated_at
+        order_by: tools.order_by
+        amount: tools.amount
+        status: tools.status
+        external_id: tools.external_id
+        ledger_account_category_id: tools.ledger_account_category_id
+        ledger_account_settlement_id: tools.ledger_account_settlement_id
+        reverses_ledger_transaction_id: tools.reverses_ledger_transaction_id
+        partially_posts_ledger_transaction_id: tools.partially_posts_ledger_transaction_id
+        ledgerable_id: tools.ledgerable_id
+        ledgerable_type: tools.ledgerable_type
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-ledger-transaction
+      description: create ledger_transaction
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: modern-treasury-ledgertransaction.createledgertransaction
+      with:
+        Idempotency-Key: tools.Idempotency-Key
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-ledger-transaction
+      description: get ledger_transaction
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: modern-treasury-ledgertransaction.getledgertransaction
+      with:
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-ledger-transaction
+      description: update ledger_transaction
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: modern-treasury-ledgertransaction.updateledgertransaction
+      with:
+        id: tools.id
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-ledger-transaction-partial-post
+      description: create ledger_transaction partial post
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: modern-treasury-ledgertransaction.createledgertransactionpartialpost
+      with:
+        id: tools.id
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-ledger-transaction-reversal
+      description: create ledger_transaction reversal
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: modern-treasury-ledgertransaction.createledgertransactionreversal
+      with:
+        id: tools.id
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-ledger-transaction-versions-2
+      description: list ledger_transaction versions
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: modern-treasury-ledgertransaction.listledgertransactionversionsnested
+      with:
+        after_cursor: tools.after_cursor
+        per_page: tools.per_page
+        created_at: tools.created_at
+        version: tools.version
+      outputParameters:
+      - type: object
+        mapping: $.

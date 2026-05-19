@@ -1,0 +1,210 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Modern Treasury — LineItem
+  description: 'Modern Treasury — LineItem. 3 operations. Lead operation: list line items. Self-contained Naftiko capability
+    covering one Modern Treasury business surface.'
+  tags:
+  - Modern Treasury
+  - LineItem
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    MODERN_TREASURY_API_KEY: MODERN_TREASURY_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: modern-treasury-lineitem
+    baseUri: http://localhost:3000
+    description: Modern Treasury — LineItem business capability. Self-contained, no shared references.
+    resources:
+    - name: api-itemizable_type-itemizable_id-line_items
+      path: /api/{itemizable_type}/{itemizable_id}/line_items
+      operations:
+      - name: listlineitems
+        method: GET
+        description: list line items
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: itemizable_id
+          in: path
+          type: string
+          description: The ID of the payment order or expected payment.
+          required: true
+        - name: itemizable_type
+          in: path
+          type: string
+          description: One of `payment_orders` or `expected_payments`.
+          required: true
+        - name: after_cursor
+          in: query
+          type: string
+        - name: per_page
+          in: query
+          type: integer
+    - name: api-itemizable_type-itemizable_id-line_items-id
+      path: /api/{itemizable_type}/{itemizable_id}/line_items/{id}
+      operations:
+      - name: getlineitem
+        method: GET
+        description: get line item
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: itemizable_id
+          in: path
+          type: string
+          description: The ID of the payment order or expected payment.
+          required: true
+        - name: itemizable_type
+          in: path
+          type: string
+          description: One of `payment_orders` or `expected_payments`.
+          required: true
+        - name: id
+          in: path
+          type: string
+          description: The ID of the line item.
+          required: true
+      - name: updatelineitem
+        method: PATCH
+        description: update line item
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: itemizable_id
+          in: path
+          type: string
+          description: The ID of the payment order or expected payment.
+          required: true
+        - name: itemizable_type
+          in: path
+          type: string
+          description: One of `payment_orders` or `expected_payments`.
+          required: true
+        - name: id
+          in: path
+          type: string
+          description: The ID of the line item.
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    authentication:
+      type: basic
+      username: '{{env.MODERN_TREASURY_USER}}'
+      password: '{{env.MODERN_TREASURY_PASS}}'
+  exposes:
+  - type: rest
+    namespace: modern-treasury-lineitem-rest
+    port: 8080
+    description: REST adapter for Modern Treasury — LineItem. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/api/{itemizable-type}/{itemizable-id}/line-items
+      name: api-itemizable-type-itemizable-id-line-items
+      description: REST surface for api-itemizable_type-itemizable_id-line_items.
+      operations:
+      - method: GET
+        name: listlineitems
+        description: list line items
+        call: modern-treasury-lineitem.listlineitems
+        with:
+          itemizable_id: rest.itemizable_id
+          itemizable_type: rest.itemizable_type
+          after_cursor: rest.after_cursor
+          per_page: rest.per_page
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/{itemizable-type}/{itemizable-id}/line-items/{id}
+      name: api-itemizable-type-itemizable-id-line-items-id
+      description: REST surface for api-itemizable_type-itemizable_id-line_items-id.
+      operations:
+      - method: GET
+        name: getlineitem
+        description: get line item
+        call: modern-treasury-lineitem.getlineitem
+        with:
+          itemizable_id: rest.itemizable_id
+          itemizable_type: rest.itemizable_type
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PATCH
+        name: updatelineitem
+        description: update line item
+        call: modern-treasury-lineitem.updatelineitem
+        with:
+          itemizable_id: rest.itemizable_id
+          itemizable_type: rest.itemizable_type
+          id: rest.id
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: modern-treasury-lineitem-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Modern Treasury — LineItem. One tool per consumed operation, routed inline through this capability's
+      consumes block.
+    tools:
+    - name: list-line-items
+      description: list line items
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: modern-treasury-lineitem.listlineitems
+      with:
+        itemizable_id: tools.itemizable_id
+        itemizable_type: tools.itemizable_type
+        after_cursor: tools.after_cursor
+        per_page: tools.per_page
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-line-item
+      description: get line item
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: modern-treasury-lineitem.getlineitem
+      with:
+        itemizable_id: tools.itemizable_id
+        itemizable_type: tools.itemizable_type
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-line-item
+      description: update line item
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: modern-treasury-lineitem.updatelineitem
+      with:
+        itemizable_id: tools.itemizable_id
+        itemizable_type: tools.itemizable_type
+        id: tools.id
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

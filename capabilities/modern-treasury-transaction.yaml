@@ -1,0 +1,279 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Modern Treasury — Transaction
+  description: 'Modern Treasury — Transaction. 5 operations. Lead operation: list transactions. Self-contained Naftiko capability
+    covering one Modern Treasury business surface.'
+  tags:
+  - Modern Treasury
+  - Transaction
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    MODERN_TREASURY_API_KEY: MODERN_TREASURY_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: modern-treasury-transaction
+    baseUri: http://localhost:3000
+    description: Modern Treasury — Transaction business capability. Self-contained, no shared references.
+    resources:
+    - name: api-transactions
+      path: /api/transactions
+      operations:
+      - name: listtransactions
+        method: GET
+        description: list transactions
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: after_cursor
+          in: query
+          type: string
+        - name: per_page
+          in: query
+          type: integer
+        - name: internal_account_id
+          in: query
+          type: string
+          description: Specify `internal_account_id` if you wish to see transactions to/from a specific account.
+        - name: virtual_account_id
+          in: query
+          type: string
+        - name: posted
+          in: query
+          type: boolean
+          description: Either `true` or `false`.
+        - name: as_of_date_start
+          in: query
+          type: string
+          description: Filters transactions with an `as_of_date` starting on or after the specified date (YYYY-MM-DD).
+        - name: as_of_date_end
+          in: query
+          type: string
+          description: Filters transactions with an `as_of_date` starting on or before the specified date (YYYY-MM-DD).
+        - name: direction
+          in: query
+          type: string
+        - name: counterparty_id
+          in: query
+          type: string
+        - name: payment_type
+          in: query
+          type: string
+        - name: transactable_type
+          in: query
+          type: string
+        - name: description
+          in: query
+          type: string
+          description: Filters for transactions including the queried string in the description.
+        - name: vendor_id
+          in: query
+          type: string
+          description: Filters for transactions including the queried vendor id (an identifier given to transactions by the
+            bank).
+      - name: createtransaction
+        method: POST
+        description: create transaction
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: Idempotency-Key
+          in: header
+          type: string
+          description: This key should be something unique, preferably something like an UUID.
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    - name: api-transactions-id
+      path: /api/transactions/{id}
+      operations:
+      - name: gettransaction
+        method: GET
+        description: get transaction
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: updatetransaction
+        method: PATCH
+        description: update transaction
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+      - name: deletetransaction
+        method: DELETE
+        description: delete transaction
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: basic
+      username: '{{env.MODERN_TREASURY_USER}}'
+      password: '{{env.MODERN_TREASURY_PASS}}'
+  exposes:
+  - type: rest
+    namespace: modern-treasury-transaction-rest
+    port: 8080
+    description: REST adapter for Modern Treasury — Transaction. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/api/transactions
+      name: api-transactions
+      description: REST surface for api-transactions.
+      operations:
+      - method: GET
+        name: listtransactions
+        description: list transactions
+        call: modern-treasury-transaction.listtransactions
+        with:
+          after_cursor: rest.after_cursor
+          per_page: rest.per_page
+          internal_account_id: rest.internal_account_id
+          virtual_account_id: rest.virtual_account_id
+          posted: rest.posted
+          as_of_date_start: rest.as_of_date_start
+          as_of_date_end: rest.as_of_date_end
+          direction: rest.direction
+          counterparty_id: rest.counterparty_id
+          payment_type: rest.payment_type
+          transactable_type: rest.transactable_type
+          description: rest.description
+          vendor_id: rest.vendor_id
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createtransaction
+        description: create transaction
+        call: modern-treasury-transaction.createtransaction
+        with:
+          Idempotency-Key: rest.Idempotency-Key
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/transactions/{id}
+      name: api-transactions-id
+      description: REST surface for api-transactions-id.
+      operations:
+      - method: GET
+        name: gettransaction
+        description: get transaction
+        call: modern-treasury-transaction.gettransaction
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PATCH
+        name: updatetransaction
+        description: update transaction
+        call: modern-treasury-transaction.updatetransaction
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deletetransaction
+        description: delete transaction
+        call: modern-treasury-transaction.deletetransaction
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: modern-treasury-transaction-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Modern Treasury — Transaction. One tool per consumed operation, routed inline through this
+      capability's consumes block.
+    tools:
+    - name: list-transactions
+      description: list transactions
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: modern-treasury-transaction.listtransactions
+      with:
+        after_cursor: tools.after_cursor
+        per_page: tools.per_page
+        internal_account_id: tools.internal_account_id
+        virtual_account_id: tools.virtual_account_id
+        posted: tools.posted
+        as_of_date_start: tools.as_of_date_start
+        as_of_date_end: tools.as_of_date_end
+        direction: tools.direction
+        counterparty_id: tools.counterparty_id
+        payment_type: tools.payment_type
+        transactable_type: tools.transactable_type
+        description: tools.description
+        vendor_id: tools.vendor_id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-transaction
+      description: create transaction
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: modern-treasury-transaction.createtransaction
+      with:
+        Idempotency-Key: tools.Idempotency-Key
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-transaction
+      description: get transaction
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: modern-treasury-transaction.gettransaction
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-transaction
+      description: update transaction
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: modern-treasury-transaction.updatetransaction
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-transaction
+      description: delete transaction
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: modern-treasury-transaction.deletetransaction
+      outputParameters:
+      - type: object
+        mapping: $.
