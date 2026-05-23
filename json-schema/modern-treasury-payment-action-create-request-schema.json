@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/payment_action_create_request",
+  "title": "payment_action_create_request",
+  "type": "object",
+  "properties": {
+    "type": {
+      "type": "string",
+      "description": "Required. The type of the payment action. Determines the action to be taken."
+    },
+    "actionable_id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Optional. The ID of the associated actionable object."
+    },
+    "actionable_type": {
+      "type": "string",
+      "description": "Optional. The type of the associated actionable object. One of `payment_order`, `expected_payment`. Required if `actionable_id` is passed."
+    },
+    "internal_account_id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Optional. The ID of one of your organization's internal accounts. Required if `actionable_id` is not passed."
+    },
+    "details": {
+      "type": "object",
+      "description": "Optional. The specifc details of the payment action based on type."
+    }
+  },
+  "required": [
+    "type"
+  ]
+}

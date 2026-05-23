@@ -1,0 +1,116 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/payment_flow",
+  "title": "payment_flow",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "object": {
+      "type": "string"
+    },
+    "live_mode": {
+      "type": "boolean",
+      "description": "This field will be true if this object exists in the live environment or false if it exists in the test environment."
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "updated_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "client_token": {
+      "type": "string",
+      "description": "The client token of the payment flow. This token can be used to embed a payment workflow in your client-side application."
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "cancelled",
+        "completed",
+        "expired",
+        "pending"
+      ],
+      "description": "The current status of the payment flow. One of `pending`, `completed`, `expired`, or `cancelled`."
+    },
+    "amount": {
+      "type": "integer",
+      "description": "Value in specified currency's smallest unit. e.g. $10 would be represented as 1000. Can be any integer up to 36 digits."
+    },
+    "currency": {
+      "type": "string",
+      "description": "The currency of the payment."
+    },
+    "direction": {
+      "type": "string",
+      "enum": [
+        "credit",
+        "debit"
+      ],
+      "description": "Describes the direction money is flowing in the transaction. Can only be `debit`. A `debit` pulls money from someone else's account to your own."
+    },
+    "counterparty_id": {
+      "type": "string",
+      "format": "uuid",
+      "nullable": true,
+      "description": "The ID of a counterparty associated with the payment. As part of the payment workflow an external account will be associated with this counterparty."
+    },
+    "receiving_account_id": {
+      "type": "string",
+      "format": "uuid",
+      "nullable": true,
+      "description": "If present, the ID of the external account created using this flow."
+    },
+    "originating_account_id": {
+      "type": "string",
+      "format": "uuid",
+      "nullable": true,
+      "description": "The ID of one of your organization's internal accounts."
+    },
+    "payment_order_id": {
+      "type": "string",
+      "format": "uuid",
+      "nullable": true,
+      "description": "If present, the ID of the payment order created using this flow."
+    },
+    "effective_date_selection_enabled": {
+      "type": "boolean",
+      "description": "When `true`, your end-user can schedule the payment `effective_date` while completing the pre-built UI."
+    },
+    "due_date": {
+      "type": "string",
+      "format": "date",
+      "nullable": true,
+      "description": "The due date for the flow. Can only be passed in when `effective_date_selection_enabled` is `true`."
+    },
+    "selected_effective_date": {
+      "type": "string",
+      "format": "date",
+      "nullable": true,
+      "description": "This field is set after your end-user selects a payment date while completing the pre-built UI. This field is always `null` unless `effective_date_selection_enabled` is `true`."
+    },
+    "external_account_collection": {
+      "type": "string",
+      "enum": [
+        "disabled",
+        "enabled"
+      ],
+      "description": "When `enabled`, your end-user can select from an existing external account when completing the flow. When `disabled`, your end-user must add new payment details when completing the flow."
+    },
+    "existing_external_accounts_filter": {
+      "type": "string",
+      "enum": [
+        "verified"
+      ],
+      "nullable": true,
+      "description": "When `verified` and `external_account_collection` is `enabled`, filters the list of external accounts your end-user can select to those with a `verification_status` of `verified`."
+    }
+  },
+  "additionalProperties": false,
+  "minProperties": 17,
+  "maxProperties": 19
+}

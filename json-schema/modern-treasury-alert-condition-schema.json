@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/alert_condition",
+  "title": "alert_condition",
+  "type": "object",
+  "properties": {
+    "field": {
+      "type": "string",
+      "description": "One of `available_balance_amount`, `pending_balance_amount`, `posted_balance_amount`, `ledger_account_lock_version`."
+    },
+    "operator": {
+      "type": "string",
+      "description": "A logical operator to compare the `field` against the `value`. One of `less_than`, `less_than_or_equals`, `equals`, `greater_than_or_equals`, `greater_than`."
+    },
+    "value": {
+      "type": "integer",
+      "description": "The monitor's `current_ledger_account_balance_state.triggered` will be `true` when comparing the `field` to this integer value using the `operator` is logically true."
+    }
+  },
+  "additionalProperties": false,
+  "minProperties": 3,
+  "required": [
+    "field",
+    "operator",
+    "value"
+  ]
+}

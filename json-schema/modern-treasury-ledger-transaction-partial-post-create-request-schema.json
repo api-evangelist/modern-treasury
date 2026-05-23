@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/ledger_transaction_partial_post_create_request",
+  "title": "ledger_transaction_partial_post_create_request",
+  "type": "object",
+  "properties": {
+    "posted_ledger_entries": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/ledger_entry_partial_post_create_request"
+      },
+      "description": "An array of ledger entry objects to be set on the posted ledger transaction. There must be one entry for each of the existing entries with a lesser amount than the existing entry."
+    },
+    "description": {
+      "type": "string",
+      "description": "An optional free-form description for the posted ledger transaction. Maximum of 1000 characters allowed."
+    },
+    "effective_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The timestamp (IS08601 format) at which the posted ledger transaction happened for reporting purposes."
+    },
+    "metadata": {
+      "type": "object",
+      "description": "Additional data represented as key-value pairs. Both the key and value must be strings.",
+      "additionalProperties": {
+        "type": "string"
+      },
+      "example": {
+        "key": "value",
+        "foo": "bar",
+        "modern": "treasury"
+      }
+    }
+  },
+  "required": [
+    "posted_ledger_entries"
+  ]
+}

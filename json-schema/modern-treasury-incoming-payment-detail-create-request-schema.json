@@ -1,0 +1,78 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/incoming_payment_detail_create_request",
+  "title": "incoming_payment_detail_create_request",
+  "type": "object",
+  "properties": {
+    "type": {
+      "type": "string",
+      "enum": [
+        "ach",
+        "au_becs",
+        "bacs",
+        "book",
+        "check",
+        "eft",
+        "interac",
+        "neft",
+        "nz_becs",
+        "rtp",
+        "sepa",
+        "signet",
+        "stablecoin",
+        "wire",
+        "zengin"
+      ],
+      "description": "One of `ach`, `wire`, `check`."
+    },
+    "direction": {
+      "type": "string",
+      "enum": [
+        "credit",
+        "debit"
+      ],
+      "description": "One of `credit`, `debit`."
+    },
+    "amount": {
+      "type": "integer",
+      "description": "Value in specified currency's smallest unit. e.g. $10 would be represented as 1000."
+    },
+    "currency": {
+      "$ref": "#/components/schemas/currency",
+      "nullable": true,
+      "description": "Defaults to the currency of the originating account."
+    },
+    "internal_account_id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "The ID of one of your internal accounts."
+    },
+    "virtual_account_id": {
+      "type": "string",
+      "format": "uuid",
+      "nullable": true,
+      "description": "An optional parameter to associate the incoming payment detail to a virtual account."
+    },
+    "as_of_date": {
+      "type": "string",
+      "format": "date",
+      "nullable": true,
+      "description": "Defaults to today."
+    },
+    "description": {
+      "type": "string",
+      "nullable": true,
+      "description": "Defaults to a random description."
+    },
+    "subtype": {
+      "type": "string",
+      "nullable": true,
+      "description": "An additional layer of classification for the type of incoming payment detail, e.g. `ethereum` for a `stablecoin` type."
+    },
+    "data": {
+      "type": "object",
+      "nullable": true,
+      "description": "An object passed through to the simulated IPD that could reflect what a vendor would pass."
+    }
+  }
+}

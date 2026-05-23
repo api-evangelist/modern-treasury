@@ -1,0 +1,368 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/payment_order",
+  "title": "payment_order",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "object": {
+      "type": "string"
+    },
+    "live_mode": {
+      "type": "boolean",
+      "description": "This field will be true if this object exists in the live environment or false if it exists in the test environment."
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "updated_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "type": {
+      "$ref": "#/components/schemas/payment_order_type"
+    },
+    "subtype": {
+      "$ref": "#/components/schemas/payment_order_subtype"
+    },
+    "amount": {
+      "type": "integer",
+      "description": "Value in specified currency's smallest unit. e.g. $10 would be represented as 1000 (cents). For RTP, the maximum amount allowed by the network is $100,000."
+    },
+    "direction": {
+      "type": "string",
+      "enum": [
+        "credit",
+        "debit"
+      ],
+      "description": "One of `credit`, `debit`. Describes the direction money is flowing in the transaction. A `credit` moves money from your account to someone else's. A `debit` pulls money from someone else's account to your own. Note that wire, rtp, and check payments will always be `credit`."
+    },
+    "priority": {
+      "type": "string",
+      "enum": [
+        "high",
+        "normal"
+      ],
+      "description": "Either `normal` or `high`. For ACH and EFT payments, `high` represents a same-day ACH or EFT transfer, respectively. For check payments, `high` can mean an overnight check rather than standard mail."
+    },
+    "originating_account_id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "The ID of one of your organization's internal accounts."
+    },
+    "receiving_account_id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "The receiving account ID. Can be an `external_account` or `internal_account`."
+    },
+    "currency": {
+      "$ref": "#/components/schemas/currency",
+      "description": "Defaults to the currency of the originating account."
+    },
+    "accounting": {
+      "$ref": "#/components/schemas/accounting"
+    },
+    "accounting_category_id": {
+      "type": "string",
+      "format": "uuid",
+      "nullable": true,
+      "description": "The ID of one of your accounting categories. Note that these will only be accessible if your accounting system has been connected.",
+      "deprecated": true
+    },
+    "accounting_ledger_class_id": {
+      "type": "string",
+      "format": "uuid",
+      "nullable": true,
+      "description": "The ID of one of your accounting ledger classes. Note that these will only be accessible if your accounting system has been connected.",
+      "deprecated": true
+    },
+    "effective_date": {
+      "type": "string",
+      "format": "date",
+      "description": "Date transactions are to be posted to the participants' account. Defaults to the current business day or the next business day if the current day is a bank holiday or weekend. Format: yyyy-mm-dd."
+    },
+    "description": {
+      "type": "string",
+      "nullable": true,
+      "description": "An optional description for internal use."
+    },
+    "statement_descriptor": {
+      "type": "string",
+      "nullable": true,
+      "description": "An optional descriptor which will appear in the receiver's statement. For `check` payments this field will be used as the memo line. For `ach` the maximum length is 10 characters. Note that for ACH payments, the name on your bank account will be included automatically by the bank, so you can use the characters for other useful information. For `eft` the maximum length is 15 characters."
+    },
+    "remittance_information": {
+      "type": "string",
+      "nullable": true,
+      "description": "For `ach`, this field will be passed through on an addenda record. For `wire` payments the field will be passed through as the \"Originator to Beneficiary Information\", also known as OBI or Fedwire tag 6000."
+    },
+    "process_after": {
+      "type": "string",
+      "format": "date-time",
+      "nullable": true,
+      "description": "If present, Modern Treasury will not process the payment until after this time. If `process_after` is past the cutoff for `effective_date`, `process_after` will take precedence and `effective_date` will automatically update to reflect the earliest possible sending date after `process_after`. Format is ISO8601 timestamp."
+    },
+    "purpose": {
+      "type": "string",
+      "nullable": true,
+      "description": "For `wire`, this is usually the purpose which is transmitted via the \"InstrForDbtrAgt\" field in the ISO20022 file. For `eft`, this field is the 3 digit CPA Code that will be attached to the payment."
+    },
+    "metadata": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string"
+      },
+      "example": {
+        "key": "value",
+        "foo": "bar",
+        "modern": "treasury"
+      },
+      "description": "Additional data represented as key-value pairs. Both the key and value must be strings."
+    },
+    "charge_bearer": {
+      "type": "string",
+      "enum": [
+        "shared",
+        "sender",
+        "receiver"
+      ],
+      "nullable": true,
+      "description": "The party that will pay the fees for the payment order. See https://docs.moderntreasury.com/payments/docs/charge-bearer to understand the differences between the options."
+    },
+    "foreign_exchange_indicator": {
+      "type": "string",
+      "enum": [
+        "fixed_to_variable",
+        "variable_to_fixed"
+      ],
+      "nullable": true,
+      "description": "Indicates the type of FX transfer to initiate, can be either `variable_to_fixed`, `fixed_to_variable`, or `null` if the payment order currency matches the originating account currency."
+    },
+    "foreign_exchange_contract": {
+      "type": "string",
+      "nullable": true,
+      "description": "If present, indicates a specific foreign exchange contract number that has been generated by your financial institution."
+    },
+    "nsf_protected": {
+      "type": "boolean",
+      "description": "A boolean to determine if NSF Protection is enabled for this payment order. Note that this setting must also be turned on in your organization settings page."
+    },
+    "originating_party_name": {
+      "type": "string",
+      "nullable": true,
+      "description": "If present, this will replace your default company name on receiver's bank statement. This field can only be used for ACH payments currently. For ACH, only the first 16 characters of this string will be used. Any additional characters will be truncated."
+    },
+    "ultimate_originating_party_name": {
+      "type": "string",
+      "nullable": true,
+      "description": "Name of the ultimate originator of the payment order."
+    },
+    "ultimate_originating_party_identifier": {
+      "type": "string",
+      "nullable": true,
+      "description": "Identifier of the ultimate originator of the payment order."
+    },
+    "ultimate_receiving_party_name": {
+      "type": "string",
+      "nullable": true
+    },
+    "ultimate_receiving_party_identifier": {
+      "type": "string",
+      "nullable": true
+    },
+    "send_remittance_advice": {
+      "type": "boolean",
+      "nullable": true,
+      "description": "Send an email to the counterparty when the payment order is sent to the bank. If `null`, `send_remittance_advice` on the Counterparty is used."
+    },
+    "expires_at": {
+      "type": "string",
+      "format": "date-time",
+      "nullable": true,
+      "description": "RFP payments require an expires_at. This value must be past the effective_date."
+    },
+    "reconciliation_status": {
+      "type": "string",
+      "enum": [
+        "unreconciled",
+        "tentatively_reconciled",
+        "reconciled"
+      ],
+      "description": "One of `unreconciled`, `tentatively_reconciled` or `reconciled`."
+    },
+    "external_id": {
+      "type": "string",
+      "nullable": true,
+      "description": "An optional user-defined 180 character unique identifier."
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "approved",
+        "cancelled",
+        "completed",
+        "denied",
+        "failed",
+        "held",
+        "needs_approval",
+        "pending",
+        "processing",
+        "returned",
+        "reversed",
+        "sent",
+        "stopped"
+      ],
+      "description": "The current status of the payment order."
+    },
+    "receiving_account_type": {
+      "type": "string",
+      "enum": [
+        "internal_account",
+        "external_account"
+      ]
+    },
+    "ultimate_originating_account": {
+      "type": "object",
+      "description": "The account to which the originating of this payment should be attributed to. Can be a `virtual_account` or `internal_account`.",
+      "nullable": true,
+      "anyOf": [
+        {
+          "$ref": "#/components/schemas/virtual_account"
+        },
+        {
+          "$ref": "#/components/schemas/internal_account"
+        }
+      ]
+    },
+    "ultimate_originating_account_id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "The ultimate originating account ID. Can be a `virtual_account` or `internal_account`.",
+      "nullable": true
+    },
+    "ultimate_originating_account_type": {
+      "type": "string",
+      "enum": [
+        "internal_account",
+        "virtual_account"
+      ],
+      "nullable": true
+    },
+    "counterparty_id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "If the payment order is tied to a specific Counterparty, their id will appear, otherwise `null`.",
+      "nullable": true
+    },
+    "transaction_ids": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "format": "uuid"
+      },
+      "description": "The IDs of all the transactions associated to this payment order. Usually, you will only have a single transaction ID. However, if a payment order initially results in a Return, but gets redrafted and is later successfully completed, it can have many transactions."
+    },
+    "ledger_transaction_id": {
+      "type": "string",
+      "format": "uuid",
+      "nullable": true,
+      "description": "The ID of the ledger transaction linked to the payment order."
+    },
+    "current_return": {
+      "$ref": "#/components/schemas/return",
+      "nullable": true,
+      "description": "If the payment order's status is `returned`, this will include the return object's data."
+    },
+    "current_hold": {
+      "$ref": "#/components/schemas/hold",
+      "nullable": true,
+      "description": "If the payment order's status is `held`, this will include the hold object's data."
+    },
+    "reference_numbers": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/payment_reference"
+      }
+    },
+    "vendor_failure_reason": {
+      "type": "string",
+      "description": "This field will be populated if a vendor failure occurs. Logic shouldn't be built on its value as it is free-form.",
+      "nullable": true
+    },
+    "foreign_exchange_rate": {
+      "$ref": "#/components/schemas/foreign_exchange_rate",
+      "nullable": true,
+      "description": "Associated serialized foreign exchange rate information."
+    },
+    "vendor_attributes": {
+      "type": "object",
+      "nullable": true,
+      "description": "Additional vendor specific fields for this payment. Data must be represented as key-value pairs."
+    },
+    "batch_id": {
+      "type": "string",
+      "format": "uuid",
+      "nullable": true,
+      "description": "The ID of the batch in which the payment order is included. Only populated after the payment order begins processing."
+    }
+  },
+  "additionalProperties": false,
+  "minProperties": 52,
+  "required": [
+    "id",
+    "object",
+    "live_mode",
+    "created_at",
+    "updated_at",
+    "type",
+    "subtype",
+    "amount",
+    "direction",
+    "priority",
+    "originating_account_id",
+    "receiving_account_id",
+    "currency",
+    "accounting",
+    "accounting_category_id",
+    "accounting_ledger_class_id",
+    "effective_date",
+    "description",
+    "statement_descriptor",
+    "remittance_information",
+    "process_after",
+    "purpose",
+    "metadata",
+    "charge_bearer",
+    "foreign_exchange_indicator",
+    "foreign_exchange_contract",
+    "nsf_protected",
+    "originating_party_name",
+    "ultimate_originating_party_name",
+    "ultimate_originating_party_identifier",
+    "ultimate_receiving_party_name",
+    "ultimate_receiving_party_identifier",
+    "send_remittance_advice",
+    "expires_at",
+    "reconciliation_status",
+    "external_id",
+    "status",
+    "receiving_account_type",
+    "ultimate_originating_account",
+    "ultimate_originating_account_id",
+    "ultimate_originating_account_type",
+    "counterparty_id",
+    "transaction_ids",
+    "ledger_transaction_id",
+    "current_return",
+    "current_hold",
+    "reference_numbers",
+    "vendor_failure_reason",
+    "foreign_exchange_rate",
+    "vendor_attributes",
+    "batch_id"
+  ]
+}

@@ -1,0 +1,67 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/ledger_transaction_update_request",
+  "title": "ledger_transaction_update_request",
+  "type": "object",
+  "properties": {
+    "description": {
+      "type": "string",
+      "description": "An optional description for internal use.",
+      "nullable": true
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "archived",
+        "pending",
+        "posted"
+      ],
+      "description": "To post a ledger transaction at creation, use `posted`."
+    },
+    "metadata": {
+      "type": "object",
+      "description": "Additional data represented as key-value pairs. Both the key and value must be strings.",
+      "additionalProperties": {
+        "type": "string"
+      },
+      "example": {
+        "key": "value",
+        "foo": "bar",
+        "modern": "treasury"
+      }
+    },
+    "effective_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The timestamp (ISO8601 format) at which the ledger transaction happened for reporting purposes."
+    },
+    "ledger_entries": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/ledger_entry_create_request"
+      },
+      "description": "An array of ledger entry objects."
+    },
+    "ledgerable_type": {
+      "type": "string",
+      "enum": [
+        "expected_payment",
+        "incoming_payment_detail",
+        "payment_order",
+        "return",
+        "reversal"
+      ],
+      "description": "If the ledger transaction can be reconciled to another object in Modern Treasury, the type will be populated here, otherwise null. This can be one of payment_order, incoming_payment_detail, expected_payment, return, or reversal."
+    },
+    "ledgerable_id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "If the ledger transaction can be reconciled to another object in Modern Treasury, the id will be populated here, otherwise null."
+    },
+    "external_id": {
+      "type": "string",
+      "description": "A unique string to represent the ledger transaction. Only one pending or posted ledger transaction may have this ID in the ledger.",
+      "nullable": true
+    }
+  }
+}

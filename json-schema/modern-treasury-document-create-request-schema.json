@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/document_create_request",
+  "title": "document_create_request",
+  "type": "object",
+  "properties": {
+    "documentable_id": {
+      "type": "string",
+      "description": "The unique identifier for the associated object."
+    },
+    "documentable_type": {
+      "type": "string",
+      "enum": [
+        "connections",
+        "counterparties",
+        "expected_payments",
+        "external_accounts",
+        "identifications",
+        "incoming_payment_details",
+        "internal_accounts",
+        "legal_entities",
+        "organizations",
+        "payment_orders",
+        "transactions"
+      ]
+    },
+    "document_type": {
+      "type": "string",
+      "description": "A category given to the document, can be `null`."
+    },
+    "file": {
+      "type": "string",
+      "format": "binary"
+    }
+  },
+  "required": [
+    "file"
+  ]
+}

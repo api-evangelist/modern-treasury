@@ -1,0 +1,67 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/ledger",
+  "title": "ledger",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "object": {
+      "type": "string"
+    },
+    "live_mode": {
+      "type": "boolean",
+      "description": "This field will be true if this object exists in the live environment or false if it exists in the test environment."
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "updated_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "discarded_at": {
+      "type": "string",
+      "format": "date-time",
+      "nullable": true
+    },
+    "name": {
+      "type": "string",
+      "description": "The name of the ledger."
+    },
+    "description": {
+      "type": "string",
+      "description": "An optional free-form description for internal use.",
+      "nullable": true
+    },
+    "metadata": {
+      "type": "object",
+      "description": "Additional data represented as key-value pairs. Both the key and value must be strings.",
+      "additionalProperties": {
+        "type": "string"
+      },
+      "example": {
+        "key": "value",
+        "foo": "bar",
+        "modern": "treasury"
+      }
+    }
+  },
+  "additionalProperties": true,
+  "minProperties": 9,
+  "maxProperties": 11,
+  "required": [
+    "id",
+    "object",
+    "live_mode",
+    "created_at",
+    "updated_at",
+    "discarded_at",
+    "name",
+    "description",
+    "metadata"
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/account_detail_create_request",
+  "title": "account_detail_create_request",
+  "type": "object",
+  "properties": {
+    "account_number": {
+      "type": "string",
+      "description": "The account number for the bank account."
+    },
+    "account_number_type": {
+      "type": "string",
+      "enum": [
+        "au_number",
+        "base_address",
+        "card_token",
+        "clabe",
+        "ethereum_address",
+        "hk_number",
+        "iban",
+        "id_number",
+        "nz_number",
+        "other",
+        "pan",
+        "polygon_address",
+        "sg_number",
+        "solana_address",
+        "wallet_address"
+      ],
+      "description": "One of `iban`, `clabe`, `wallet_address`, or `other`. Use `other` if the bank account number is in a generic format."
+    }
+  },
+  "required": [
+    "account_number"
+  ]
+}

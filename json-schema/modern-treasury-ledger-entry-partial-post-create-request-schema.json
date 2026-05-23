@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/ledger_entry_partial_post_create_request",
+  "title": "ledger_entry_partial_post_create_request",
+  "type": "object",
+  "properties": {
+    "amount": {
+      "type": "integer",
+      "description": "Value in specified currency's smallest unit. e.g. $10 would be represented as 1000. Can be any integer up to 36 digits."
+    },
+    "direction": {
+      "type": "string",
+      "enum": [
+        "credit",
+        "debit"
+      ],
+      "description": "One of `credit`, `debit`. Describes the direction money is flowing in the transaction. A `credit` moves money from your account to someone else's. A `debit` pulls money from someone else's account to your own. Note that wire, rtp, and check payments will always be `credit`."
+    },
+    "ledger_account_id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "The ledger account that this ledger entry is associated with."
+    },
+    "metadata": {
+      "type": "object",
+      "description": "Additional data represented as key-value pairs. Both the key and value must be strings.",
+      "additionalProperties": {
+        "type": "string"
+      },
+      "example": {
+        "key": "value",
+        "foo": "bar",
+        "modern": "treasury"
+      }
+    }
+  },
+  "required": [
+    "amount",
+    "direction",
+    "ledger_account_id"
+  ]
+}

@@ -1,0 +1,117 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/ledger_account",
+  "title": "ledger_account",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "object": {
+      "type": "string"
+    },
+    "live_mode": {
+      "type": "boolean",
+      "description": "This field will be true if this object exists in the live environment or false if it exists in the test environment."
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "updated_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "discarded_at": {
+      "type": "string",
+      "format": "date-time",
+      "nullable": true
+    },
+    "name": {
+      "type": "string",
+      "description": "The name of the ledger account."
+    },
+    "description": {
+      "type": "string",
+      "description": "The description of the ledger account.",
+      "nullable": true
+    },
+    "normal_balance": {
+      "type": "string",
+      "enum": [
+        "credit",
+        "debit"
+      ],
+      "description": "The normal balance of the ledger account.",
+      "_x-stainless-modelDefPath": "$shared.transaction_direction"
+    },
+    "balances": {
+      "$ref": "#/components/schemas/ledger_balances_with_effective_at",
+      "description": "The pending, posted, and available balances for this ledger account. The posted balance is the sum of all posted entries on the account. The pending balance is the sum of all pending and posted entries on the account. The available balance is the posted incoming entries minus the sum of the pending and posted outgoing amounts."
+    },
+    "lock_version": {
+      "type": "integer",
+      "description": "Lock version of the ledger account."
+    },
+    "ledger_id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "The id of the ledger that this account belongs to."
+    },
+    "ledgerable_id": {
+      "type": "string",
+      "format": "uuid",
+      "nullable": true,
+      "description": "If the ledger account links to another object in Modern Treasury, the id will be populated here, otherwise null."
+    },
+    "external_id": {
+      "type": "string",
+      "nullable": true,
+      "description": "An optional user-defined 180 character unique identifier."
+    },
+    "ledgerable_type": {
+      "type": "string",
+      "enum": [
+        "counterparty",
+        "external_account",
+        "internal_account",
+        "virtual_account"
+      ],
+      "nullable": true,
+      "description": "If the ledger account links to another object in Modern Treasury, the type will be populated here, otherwise null. The value is one of internal_account or external_account."
+    },
+    "metadata": {
+      "type": "object",
+      "description": "Additional data represented as key-value pairs. Both the key and value must be strings.",
+      "additionalProperties": {
+        "type": "string"
+      },
+      "example": {
+        "key": "value",
+        "foo": "bar",
+        "modern": "treasury"
+      }
+    }
+  },
+  "additionalProperties": false,
+  "minProperties": 16,
+  "required": [
+    "id",
+    "object",
+    "live_mode",
+    "created_at",
+    "updated_at",
+    "discarded_at",
+    "name",
+    "description",
+    "normal_balance",
+    "balances",
+    "lock_version",
+    "ledger_id",
+    "ledgerable_id",
+    "external_id",
+    "ledgerable_type",
+    "metadata"
+  ]
+}

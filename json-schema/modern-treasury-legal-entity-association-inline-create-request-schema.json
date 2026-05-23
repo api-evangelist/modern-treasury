@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/legal_entity_association_inline_create_request",
+  "title": "legal_entity_association_inline_create_request",
+  "type": "object",
+  "properties": {
+    "relationship_types": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "authorized_signer",
+          "beneficial_owner",
+          "control_person"
+        ],
+        "description": "A list of relationship types for how the child entity relates to parent entity."
+      }
+    },
+    "title": {
+      "type": "string",
+      "nullable": true,
+      "description": "The job title of the child entity at the parent entity."
+    },
+    "ownership_percentage": {
+      "type": "integer",
+      "nullable": true,
+      "description": "The child entity's ownership percentage iff they are a beneficial owner."
+    },
+    "child_legal_entity": {
+      "$ref": "#/components/schemas/child_legal_entity_create",
+      "description": "The child legal entity."
+    },
+    "child_legal_entity_id": {
+      "type": "string",
+      "description": "The ID of the child legal entity."
+    }
+  },
+  "required": [
+    "relationship_types"
+  ]
+}

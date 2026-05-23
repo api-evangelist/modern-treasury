@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/reversal_create_request",
+  "title": "reversal_create_request",
+  "type": "object",
+  "properties": {
+    "reason": {
+      "type": "string",
+      "enum": [
+        "duplicate",
+        "incorrect_amount",
+        "incorrect_receiving_account",
+        "date_earlier_than_intended",
+        "date_later_than_intended"
+      ],
+      "description": "The reason for the reversal. Must be one of `duplicate`, `incorrect_amount`, `incorrect_receiving_account`, `date_earlier_than_intended`, `date_later_than_intended`."
+    },
+    "metadata": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string"
+      },
+      "example": {
+        "key": "value",
+        "foo": "bar",
+        "modern": "treasury"
+      },
+      "description": "Additional data represented as key-value pairs. Both the key and value must be strings."
+    },
+    "ledger_transaction": {
+      "$ref": "#/components/schemas/ledger_transaction_create_request",
+      "description": "Specifies a ledger transaction object that will be created with the reversal. If the ledger transaction cannot be created, then the reversal creation will fail. The resulting ledger transaction will mirror the status of the reversal."
+    }
+  },
+  "required": [
+    "reason"
+  ]
+}

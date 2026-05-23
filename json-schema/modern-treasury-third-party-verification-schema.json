@@ -1,0 +1,65 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/third_party_verification",
+  "title": "third_party_verification",
+  "type": "object",
+  "properties": {
+    "vendor_verification_id": {
+      "type": "string",
+      "description": "The identification of the third party verification in `vendor`'s system."
+    },
+    "vendor": {
+      "type": "string",
+      "enum": [
+        "persona",
+        "middesk",
+        "alloy",
+        "sumsub",
+        "veriff"
+      ],
+      "description": "The vendor that performed the verification, e.g. `persona`."
+    },
+    "verification_category": {
+      "type": "string",
+      "enum": [
+        "legal_name",
+        "date_of_birth",
+        "address",
+        "government_id_number",
+        "adverse_media"
+      ],
+      "description": "The category of verification performed."
+    },
+    "verification_method": {
+      "type": "string",
+      "description": "The method used to perform the verification."
+    },
+    "comment": {
+      "type": "string",
+      "nullable": true,
+      "description": "An optional comment about the verification."
+    },
+    "outcome": {
+      "type": "string",
+      "enum": [
+        "passed",
+        "failed"
+      ],
+      "description": "The outcome of the verification. One of `passed` or `failed`."
+    },
+    "verification_time": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The timestamp when the verification was performed."
+    }
+  },
+  "required": [
+    "vendor_verification_id",
+    "vendor",
+    "verification_category",
+    "verification_method",
+    "outcome",
+    "verification_time"
+  ],
+  "additionalProperties": false
+}

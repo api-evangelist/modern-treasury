@@ -1,0 +1,192 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/internal_account",
+  "title": "internal_account",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "object": {
+      "type": "string"
+    },
+    "live_mode": {
+      "type": "boolean",
+      "description": "This field will be true if this object exists in the live environment or false if it exists in the test environment."
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "updated_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "account_type": {
+      "type": "string",
+      "enum": [
+        "base_wallet",
+        "cash",
+        "checking",
+        "crypto_wallet",
+        "ethereum_wallet",
+        "general_ledger",
+        "loan",
+        "non_resident",
+        "other",
+        "overdraft",
+        "polygon_wallet",
+        "savings",
+        "solana_wallet"
+      ],
+      "nullable": true,
+      "description": "Can be checking, savings or other."
+    },
+    "party_name": {
+      "type": "string",
+      "description": "The legal name of the entity which owns the account."
+    },
+    "party_type": {
+      "type": "string",
+      "enum": [
+        "business",
+        "individual"
+      ],
+      "nullable": true,
+      "description": "Either individual or business."
+    },
+    "party_address": {
+      "$ref": "#/components/schemas/address",
+      "description": "The address associated with the owner or null."
+    },
+    "name": {
+      "type": "string",
+      "nullable": true,
+      "description": "A nickname for the account."
+    },
+    "account_details": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/account_detail"
+      },
+      "description": "An array of account detail objects."
+    },
+    "account_capabilities": {
+      "type": "array",
+      "description": "An array of AccountCapability objects that list the originating abilities of the internal account and any relevant information for them.",
+      "items": {
+        "$ref": "#/components/schemas/account_capability"
+      }
+    },
+    "routing_details": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/routing_detail"
+      },
+      "description": "An array of routing detail objects."
+    },
+    "connection": {
+      "$ref": "#/components/schemas/connection",
+      "description": "Specifies which financial institution the accounts belong to."
+    },
+    "currency": {
+      "$ref": "#/components/schemas/currency",
+      "description": "The currency of the account."
+    },
+    "metadata": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string"
+      },
+      "example": {
+        "key": "value",
+        "foo": "bar",
+        "modern": "treasury"
+      },
+      "description": "Additional data represented as key-value pairs. Both the key and value must be strings."
+    },
+    "parent_account_id": {
+      "type": "string",
+      "format": "uuid",
+      "nullable": true,
+      "description": "The parent InternalAccount of this account."
+    },
+    "counterparty_id": {
+      "type": "string",
+      "format": "uuid",
+      "nullable": true,
+      "description": "The Counterparty associated to this account."
+    },
+    "vendor_id": {
+      "type": "string",
+      "format": "string",
+      "nullable": true,
+      "description": "The vendor ID associated with this account."
+    },
+    "legal_entity_id": {
+      "type": "string",
+      "format": "uuid",
+      "nullable": true,
+      "description": "The Legal Entity associated to this account."
+    },
+    "status": {
+      "type": "string",
+      "format": "string",
+      "nullable": true,
+      "enum": [
+        "active",
+        "closed",
+        "pending_activation",
+        "pending_closure",
+        "suspended"
+      ],
+      "description": "The internal account status."
+    },
+    "ledger_account_id": {
+      "type": "string",
+      "format": "uuid",
+      "nullable": true,
+      "description": "If the internal account links to a ledger account in Modern Treasury, the id of the ledger account will be populated here."
+    },
+    "contra_ledger_account_id": {
+      "type": "string",
+      "format": "uuid",
+      "nullable": true,
+      "description": "If the internal account links to a contra ledger account in Modern Treasury, the id of the contra ledger account will be populated here."
+    },
+    "external_id": {
+      "type": "string",
+      "nullable": true,
+      "description": "An optional user-defined 180 character unique identifier."
+    }
+  },
+  "additionalProperties": false,
+  "minProperties": 24,
+  "required": [
+    "id",
+    "object",
+    "live_mode",
+    "created_at",
+    "updated_at",
+    "account_type",
+    "party_name",
+    "party_type",
+    "party_address",
+    "name",
+    "account_details",
+    "account_capabilities",
+    "routing_details",
+    "connection",
+    "currency",
+    "metadata",
+    "parent_account_id",
+    "counterparty_id",
+    "vendor_id",
+    "legal_entity_id",
+    "status",
+    "ledger_account_id",
+    "contra_ledger_account_id",
+    "external_id"
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/async_response",
+  "title": "async_response",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "object": {
+      "type": "string"
+    }
+  },
+  "additionalProperties": false,
+  "minProperties": 2,
+  "required": [
+    "id",
+    "object"
+  ]
+}

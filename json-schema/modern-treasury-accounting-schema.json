@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/accounting",
+  "title": "accounting",
+  "type": "object",
+  "deprecated": true,
+  "properties": {
+    "account_id": {
+      "type": "string",
+      "format": "uuid",
+      "nullable": true,
+      "deprecated": true,
+      "description": "The ID of one of your accounting categories. Note that these will only be accessible if your accounting system has been connected."
+    },
+    "class_id": {
+      "type": "string",
+      "format": "uuid",
+      "nullable": true,
+      "deprecated": true,
+      "description": "The ID of one of the class objects in your accounting system. Class objects track segments of your business independent of client or project. Note that these will only be accessible if your accounting system has been connected."
+    }
+  }
+}

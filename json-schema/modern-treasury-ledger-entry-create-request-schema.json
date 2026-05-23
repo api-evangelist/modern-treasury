@@ -1,0 +1,82 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/ledger_entry_create_request",
+  "title": "ledger_entry_create_request",
+  "type": "object",
+  "properties": {
+    "amount": {
+      "type": "integer",
+      "description": "Value in specified currency's smallest unit. e.g. $10 would be represented as 1000. Can be any integer up to 36 digits."
+    },
+    "effective_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The timestamp (ISO8601 format) at which the ledger transaction happened for reporting purposes."
+    },
+    "direction": {
+      "type": "string",
+      "enum": [
+        "credit",
+        "debit"
+      ],
+      "description": "One of `credit`, `debit`. Describes the direction money is flowing in the transaction. A `credit` moves money from your account to someone else's. A `debit` pulls money from someone else's account to your own. Note that wire, rtp, and check payments will always be `credit`.",
+      "_x-stainless-modelDefPath": "$shared.transaction_direction"
+    },
+    "ledger_account_id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "The ledger account that this ledger entry is associated with."
+    },
+    "lock_version": {
+      "type": "integer",
+      "description": "Lock version of the ledger account. This can be passed when creating a ledger transaction to only succeed if no ledger transactions have posted since the given version. See our post about Designing the Ledgers API with Optimistic Locking for more details.",
+      "nullable": true
+    },
+    "pending_balance_amount": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "integer"
+      },
+      "description": "Use `gt` (>), `gte` (>=), `lt` (<), `lte` (<=), or `eq` (=) to lock on the account\u2019s pending balance. If any of these conditions would be false after the transaction is created, the entire call will fail with error code 422.",
+      "nullable": true
+    },
+    "posted_balance_amount": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "integer"
+      },
+      "description": "Use `gt` (>), `gte` (>=), `lt` (<), `lte` (<=), or `eq` (=) to lock on the account\u2019s posted balance. If any of these conditions would be false after the transaction is created, the entire call will fail with error code 422.",
+      "nullable": true
+    },
+    "available_balance_amount": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "integer"
+      },
+      "description": "Use `gt` (>), `gte` (>=), `lt` (<), `lte` (<=), or `eq` (=) to lock on the account\u2019s available balance. If any of these conditions would be false after the transaction is created, the entire call will fail with error code 422.",
+      "nullable": true
+    },
+    "show_resulting_ledger_account_balances": {
+      "type": "boolean",
+      "description": "If true, response will include the balance of the associated ledger account for the entry.",
+      "nullable": true
+    },
+    "metadata": {
+      "type": "object",
+      "description": "Additional data represented as key-value pairs. Both the key and value must be strings.",
+      "additionalProperties": {
+        "type": "string"
+      },
+      "example": {
+        "key": "value",
+        "foo": "bar",
+        "modern": "treasury"
+      }
+    }
+  },
+  "required": [
+    "amount",
+    "direction",
+    "ledger_account_id"
+  ]
+}

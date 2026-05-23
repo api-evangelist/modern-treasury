@@ -1,0 +1,44 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/external_account_update_request",
+  "title": "external_account_update_request",
+  "type": "object",
+  "properties": {
+    "party_type": {
+      "type": "string",
+      "enum": [
+        "business",
+        "individual"
+      ],
+      "nullable": true,
+      "description": "Either `individual` or `business`."
+    },
+    "account_type": {
+      "$ref": "#/components/schemas/external_account_type"
+    },
+    "counterparty_id": {
+      "type": "string",
+      "format": "uuid",
+      "nullable": true
+    },
+    "name": {
+      "type": "string",
+      "nullable": true,
+      "description": "A nickname for the external account. This is only for internal usage and won't affect any payments"
+    },
+    "party_name": {
+      "type": "string",
+      "description": "If this value isn't provided, it will be inherited from the counterparty's name."
+    },
+    "party_address": {
+      "$ref": "#/components/schemas/address_request"
+    },
+    "metadata": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string"
+      },
+      "description": "Additional data in the form of key-value pairs. Pairs can be removed by passing an empty string or `null` as the value."
+    }
+  }
+}

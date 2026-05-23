@@ -1,0 +1,44 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/invoice_line_item_update_request",
+  "title": "invoice_line_item_update_request",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "The name of the line item, typically a product or SKU name."
+    },
+    "description": {
+      "type": "string",
+      "description": "An optional free-form description of the line item."
+    },
+    "quantity": {
+      "type": "integer",
+      "description": "The number of units of a product or service that this line item is for.           Must be a whole number. Defaults to 1 if not provided."
+    },
+    "unit_amount": {
+      "type": "integer",
+      "description": "The cost per unit of the product or service that this line item is for,           specified in the invoice currency's smallest unit."
+    },
+    "unit_amount_decimal": {
+      "type": "string",
+      "description": "The cost per unit of the product or service that this line item is for,           specified in the invoice currency's smallest unit. Accepts decimal strings with up to 12 decimals"
+    },
+    "direction": {
+      "type": "string",
+      "description": "Either `debit` or `credit`. `debit` indicates that a client owes the business money           and increases the invoice's `total_amount` due. `credit` has the opposite intention and effect."
+    },
+    "metadata": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string"
+      },
+      "example": {
+        "key": "value",
+        "foo": "bar",
+        "modern": "treasury"
+      },
+      "description": "Additional data represented as key-value pairs. Both the key and value must be strings."
+    }
+  }
+}

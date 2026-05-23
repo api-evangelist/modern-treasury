@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/internal_account_update_request",
+  "title": "internal_account_update_request",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "The nickname for the internal account."
+    },
+    "metadata": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string"
+      },
+      "description": "Additional data in the form of key-value pairs. Pairs can be removed by passing an empty string or `null` as the value."
+    },
+    "parent_account_id": {
+      "type": "string",
+      "description": "The parent internal account for this account."
+    },
+    "counterparty_id": {
+      "type": "string",
+      "description": "The Counterparty associated to this account."
+    },
+    "ledger_account_id": {
+      "type": "string",
+      "description": "The Ledger Account associated to this account."
+    },
+    "contra_ledger_account_id": {
+      "type": "string",
+      "description": "The Contra Ledger Account associated to this account."
+    },
+    "external_id": {
+      "type": "string",
+      "nullable": true,
+      "description": "An optional user-defined 180 character unique identifier."
+    }
+  }
+}

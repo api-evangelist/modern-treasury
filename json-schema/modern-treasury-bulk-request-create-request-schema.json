@@ -1,0 +1,147 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/bulk_request_create_request",
+  "title": "bulk_request_create_request",
+  "type": "object",
+  "properties": {
+    "action_type": {
+      "type": "string",
+      "enum": [
+        "create",
+        "update",
+        "delete"
+      ],
+      "description": "One of create, or update."
+    },
+    "resource_type": {
+      "type": "string",
+      "enum": [
+        "payment_order",
+        "ledger_account",
+        "ledger_transaction",
+        "expected_payment",
+        "transaction",
+        "transaction_line_item",
+        "entity_link"
+      ],
+      "description": "One of payment_order, expected_payment, or ledger_transaction."
+    },
+    "metadata": {
+      "type": "object",
+      "description": "Additional data represented as key-value pairs. Both the key and value must be strings.",
+      "additionalProperties": {
+        "type": "string"
+      },
+      "example": {
+        "key": "value",
+        "foo": "bar",
+        "modern": "treasury"
+      }
+    },
+    "resources": {
+      "type": "array",
+      "description": "An array of objects where each object contains the input params for a single `action_type` request on a `resource_type` resource",
+      "items": {
+        "anyOf": [
+          {
+            "$ref": "#/components/schemas/payment_order_async_create_request"
+          },
+          {
+            "$ref": "#/components/schemas/expected_payment_create_request"
+          },
+          {
+            "$ref": "#/components/schemas/ledger_transaction_create_request"
+          },
+          {
+            "$ref": "#/components/schemas/ledger_account_create_request"
+          },
+          {
+            "$ref": "#/components/schemas/transaction_create_request"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "format": "uuid"
+              }
+            }
+          },
+          {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/payment_order_update_request"
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "format": "uuid"
+                  }
+                }
+              }
+            ],
+            "x-stainless-variantName": "payment_order_update_request_with_id"
+          },
+          {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/expected_payment_update_request"
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "format": "uuid"
+                  }
+                }
+              }
+            ],
+            "x-stainless-variantName": "expected_payment_update_request_with_id"
+          },
+          {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/transaction_update_request"
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "format": "uuid"
+                  }
+                }
+              }
+            ],
+            "x-stainless-variantName": "transaction_update_request_with_id"
+          },
+          {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ledger_transaction_update_request"
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "format": "uuid"
+                  }
+                }
+              }
+            ],
+            "x-stainless-variantName": "ledger_transaction_update_request_with_id"
+          }
+        ]
+      }
+    }
+  },
+  "required": [
+    "action_type",
+    "resource_type",
+    "resources"
+  ]
+}

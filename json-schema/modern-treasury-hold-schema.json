@@ -1,0 +1,85 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/hold",
+  "title": "hold",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "object": {
+      "type": "string",
+      "enum": [
+        "hold"
+      ],
+      "description": "The type of object"
+    },
+    "live_mode": {
+      "type": "boolean",
+      "description": "This field will be true if this object exists in the live environment or false if it exists in the test environment."
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "updated_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "active",
+        "resolved"
+      ],
+      "description": "The status of the hold"
+    },
+    "target_type": {
+      "type": "string",
+      "enum": [
+        "payment_order"
+      ],
+      "description": "The type of target being held"
+    },
+    "target_id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "The ID of the target being held"
+    },
+    "reason": {
+      "type": "string",
+      "nullable": true,
+      "description": "The reason for the hold"
+    },
+    "resolution": {
+      "type": "string",
+      "nullable": true,
+      "description": "The resolution of the hold"
+    },
+    "resolved_at": {
+      "type": "string",
+      "format": "date-time",
+      "nullable": true,
+      "description": "When the hold was resolved"
+    },
+    "metadata": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string"
+      },
+      "description": "Additional metadata for the hold",
+      "nullable": true
+    }
+  },
+  "required": [
+    "id",
+    "object",
+    "status",
+    "target_type",
+    "target_id",
+    "created_at",
+    "updated_at"
+  ],
+  "additionalProperties": false
+}

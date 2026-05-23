@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/ledger_account_settlement_entries_delete_request",
+  "title": "ledger_account_settlement_entries_delete_request",
+  "type": "object",
+  "properties": {
+    "ledger_entry_ids": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "format": "uuid"
+      },
+      "description": "The ids of the ledger entries that are to be added or removed from the ledger account settlement.",
+      "nullable": true
+    }
+  },
+  "required": [
+    "ledger_entry_ids"
+  ]
+}

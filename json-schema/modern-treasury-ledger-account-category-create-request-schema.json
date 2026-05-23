@@ -1,0 +1,71 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/ledger_account_category_create_request",
+  "title": "ledger_account_category_create_request",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "The name of the ledger account category."
+    },
+    "description": {
+      "type": "string",
+      "description": "The description of the ledger account category.",
+      "nullable": true
+    },
+    "metadata": {
+      "type": "object",
+      "description": "Additional data represented as key-value pairs. Both the key and value must be strings.",
+      "additionalProperties": {
+        "type": "string"
+      },
+      "example": {
+        "key": "value",
+        "foo": "bar",
+        "modern": "treasury"
+      }
+    },
+    "currency": {
+      "type": "string",
+      "description": "The currency of the ledger account category."
+    },
+    "currency_exponent": {
+      "type": "integer",
+      "description": "The currency exponent of the ledger account category.",
+      "nullable": true
+    },
+    "ledger_id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "The id of the ledger that this account category belongs to."
+    },
+    "normal_balance": {
+      "type": "string",
+      "enum": [
+        "credit",
+        "debit"
+      ],
+      "description": "The normal balance of the ledger account category.",
+      "_x-stainless-modelDefPath": "$shared.transaction_direction"
+    },
+    "ledger_account_category_ids": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "format": "uuid"
+      },
+      "description": "The array of ledger account category ids that this ledger account category should be a child of."
+    },
+    "external_id": {
+      "type": "string",
+      "nullable": true,
+      "description": "An optional user-defined 180 character unique identifier."
+    }
+  },
+  "required": [
+    "name",
+    "normal_balance",
+    "currency",
+    "ledger_id"
+  ]
+}

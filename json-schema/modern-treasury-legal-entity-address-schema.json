@@ -1,0 +1,92 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/legal_entity_address",
+  "title": "legal_entity_address",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "object": {
+      "type": "string"
+    },
+    "live_mode": {
+      "type": "boolean",
+      "description": "This field will be true if this object exists in the live environment or false if it exists in the test environment."
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "updated_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "discarded_at": {
+      "type": "string",
+      "format": "date-time",
+      "nullable": true
+    },
+    "address_types": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "business",
+          "business_registered",
+          "mailing",
+          "other",
+          "po_box",
+          "residential"
+        ]
+      },
+      "description": "The types of this address."
+    },
+    "line1": {
+      "type": "string",
+      "nullable": true
+    },
+    "line2": {
+      "type": "string",
+      "nullable": true
+    },
+    "locality": {
+      "type": "string",
+      "nullable": true,
+      "description": "Locality or City."
+    },
+    "region": {
+      "type": "string",
+      "nullable": true,
+      "description": "Region or State."
+    },
+    "postal_code": {
+      "type": "string",
+      "description": "The postal code of the address.",
+      "nullable": true
+    },
+    "country": {
+      "type": "string",
+      "description": "Country code conforms to [ISO 3166-1 alpha-2]",
+      "nullable": true
+    }
+  },
+  "additionalProperties": false,
+  "minProperties": 13,
+  "required": [
+    "id",
+    "object",
+    "live_mode",
+    "created_at",
+    "updated_at",
+    "discarded_at",
+    "address_types",
+    "line1",
+    "line2",
+    "locality",
+    "region",
+    "postal_code",
+    "country"
+  ]
+}

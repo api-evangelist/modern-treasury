@@ -1,0 +1,125 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/routing_detail",
+  "title": "routing_detail",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "object": {
+      "type": "string"
+    },
+    "live_mode": {
+      "type": "boolean",
+      "description": "This field will be true if this object exists in the live environment or false if it exists in the test environment."
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "updated_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "discarded_at": {
+      "type": "string",
+      "format": "date-time",
+      "nullable": true
+    },
+    "routing_number": {
+      "type": "string",
+      "description": "The routing number of the bank."
+    },
+    "routing_number_type": {
+      "type": "string",
+      "enum": [
+        "aba",
+        "au_bsb",
+        "br_codigo",
+        "ca_cpa",
+        "chips",
+        "cnaps",
+        "dk_interbank_clearing_code",
+        "gb_sort_code",
+        "hk_interbank_clearing_code",
+        "hu_interbank_clearing_code",
+        "id_sknbi_code",
+        "il_bank_code",
+        "in_ifsc",
+        "jp_zengin_code",
+        "mx_bank_identifier",
+        "my_branch_code",
+        "nz_national_clearing_code",
+        "pl_national_clearing_code",
+        "se_bankgiro_clearing_code",
+        "sg_interbank_clearing_code",
+        "swift",
+        "za_national_clearing_code"
+      ],
+      "description": "The type of routing number. See https://docs.moderntreasury.com/platform/reference/routing-detail-object for more details."
+    },
+    "payment_type": {
+      "type": "string",
+      "enum": [
+        "ach",
+        "au_becs",
+        "bacs",
+        "book",
+        "card",
+        "chats",
+        "check",
+        "cross_border",
+        "dk_nets",
+        "eft",
+        "gb_fps",
+        "hu_ics",
+        "interac",
+        "masav",
+        "mx_ccen",
+        "neft",
+        "nics",
+        "nz_becs",
+        "pl_elixir",
+        "provxchange",
+        "ro_sent",
+        "rtp",
+        "se_bankgirot",
+        "sen",
+        "sepa",
+        "sg_giro",
+        "sic",
+        "signet",
+        "sknbi",
+        "stablecoin",
+        "wire",
+        "zengin"
+      ],
+      "nullable": true,
+      "description": "If the routing detail is to be used for a specific payment type this field will be populated, otherwise null."
+    },
+    "bank_name": {
+      "type": "string",
+      "description": "The name of the bank."
+    },
+    "bank_address": {
+      "$ref": "#/components/schemas/address"
+    }
+  },
+  "additionalProperties": false,
+  "minProperties": 11,
+  "required": [
+    "id",
+    "object",
+    "live_mode",
+    "created_at",
+    "updated_at",
+    "discarded_at",
+    "routing_number",
+    "routing_number_type",
+    "payment_type",
+    "bank_name",
+    "bank_address"
+  ]
+}

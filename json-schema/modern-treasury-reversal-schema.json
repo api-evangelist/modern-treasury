@@ -1,0 +1,116 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/reversal",
+  "title": "reversal",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "object": {
+      "type": "string"
+    },
+    "live_mode": {
+      "type": "boolean",
+      "description": "This field will be true if this object exists in the live environment or false if it exists in the test environment."
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "updated_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "cancelled",
+        "completed",
+        "failed",
+        "pending",
+        "processing",
+        "returned",
+        "sent"
+      ],
+      "description": "The current status of the reversal."
+    },
+    "payment_order_id": {
+      "type": "string",
+      "format": "uuid",
+      "nullable": true,
+      "description": "The ID of the relevant Payment Order."
+    },
+    "transaction_ids": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "format": "uuid",
+        "nullable": true,
+        "description": "The ID of the relevant Transaction or `null`."
+      }
+    },
+    "ledger_transaction_id": {
+      "type": "string",
+      "format": "uuid",
+      "nullable": true,
+      "description": "The ID of the ledger transaction linked to the reversal."
+    },
+    "metadata": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string"
+      },
+      "example": {
+        "key": "value",
+        "foo": "bar",
+        "modern": "treasury"
+      },
+      "description": "Additional data represented as key-value pairs. Both the key and value must be strings."
+    },
+    "reason": {
+      "type": "string",
+      "enum": [
+        "duplicate",
+        "incorrect_amount",
+        "incorrect_receiving_account",
+        "date_earlier_than_intended",
+        "date_later_than_intended"
+      ],
+      "description": "The reason for the reversal."
+    },
+    "internal_account_id": {
+      "type": "string",
+      "format": "uuid",
+      "nullable": true,
+      "description": "The ID of the relevant Internal Account."
+    },
+    "reconciliation_status": {
+      "type": "string",
+      "enum": [
+        "unreconciled",
+        "tentatively_reconciled",
+        "reconciled"
+      ],
+      "description": "One of `unreconciled`, `tentatively_reconciled` or `reconciled`."
+    }
+  },
+  "additionalProperties": false,
+  "minProperties": 13,
+  "required": [
+    "id",
+    "object",
+    "live_mode",
+    "created_at",
+    "updated_at",
+    "status",
+    "payment_order_id",
+    "transaction_ids",
+    "ledger_transaction_id",
+    "metadata",
+    "reason",
+    "internal_account_id",
+    "reconciliation_status"
+  ]
+}

@@ -1,0 +1,382 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/invoice",
+  "title": "invoice",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "object": {
+      "type": "string"
+    },
+    "live_mode": {
+      "type": "boolean",
+      "description": "This field will be true if this object exists in the live environment or false if it exists in the test environment."
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "updated_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "contact_details": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/contact_detail"
+      },
+      "description": "The invoicer's contact details displayed at the top of the invoice."
+    },
+    "recipient_email": {
+      "type": "string",
+      "nullable": true,
+      "description": "The email of the recipient of the invoice. Leaving this value as null will fallback to using the counterparty's name."
+    },
+    "recipient_name": {
+      "type": "string",
+      "nullable": true,
+      "description": "The name of the recipient of the invoice. Leaving this value as null will fallback to using the counterparty's name."
+    },
+    "counterparty_id": {
+      "type": "string",
+      "description": "The ID of the counterparty receiving the invoice."
+    },
+    "counterparty_billing_address": {
+      "type": "object",
+      "nullable": true,
+      "description": "The counterparty's billing address.",
+      "properties": {
+        "line1": {
+          "type": "string"
+        },
+        "line2": {
+          "type": "string"
+        },
+        "locality": {
+          "type": "string",
+          "description": "Locality or City."
+        },
+        "region": {
+          "type": "string",
+          "description": "Region or State."
+        },
+        "postal_code": {
+          "type": "string",
+          "description": "The postal code of the address."
+        },
+        "country": {
+          "type": "string",
+          "description": "Country code conforms to [ISO 3166-1 alpha-2]"
+        }
+      },
+      "required": [
+        "line1",
+        "locality",
+        "region",
+        "postal_code",
+        "country"
+      ]
+    },
+    "counterparty_shipping_address": {
+      "type": "object",
+      "nullable": true,
+      "description": "The counterparty's shipping address where physical goods should be delivered.",
+      "properties": {
+        "line1": {
+          "type": "string"
+        },
+        "line2": {
+          "type": "string"
+        },
+        "locality": {
+          "type": "string",
+          "description": "Locality or City."
+        },
+        "region": {
+          "type": "string",
+          "description": "Region or State."
+        },
+        "postal_code": {
+          "type": "string",
+          "description": "The postal code of the address."
+        },
+        "country": {
+          "type": "string",
+          "description": "Country code conforms to [ISO 3166-1 alpha-2]"
+        }
+      },
+      "required": [
+        "line1",
+        "locality",
+        "region",
+        "postal_code",
+        "country"
+      ]
+    },
+    "currency": {
+      "$ref": "#/components/schemas/currency",
+      "description": "Currency that the invoice is denominated in. Defaults to `USD` if not provided."
+    },
+    "description": {
+      "type": "string",
+      "description": "An optional free-form description of the invoice."
+    },
+    "due_date": {
+      "type": "string",
+      "format": "date-time",
+      "description": "A future date by when the invoice needs to be paid."
+    },
+    "invoicer_name": {
+      "type": "string",
+      "nullable": true,
+      "description": "The name of the issuer for the invoice. Defaults to the name of the Organization."
+    },
+    "invoicer_address": {
+      "type": "object",
+      "nullable": true,
+      "description": "The invoice issuer's business address.",
+      "properties": {
+        "line1": {
+          "type": "string"
+        },
+        "line2": {
+          "type": "string"
+        },
+        "locality": {
+          "type": "string",
+          "description": "Locality or City."
+        },
+        "region": {
+          "type": "string",
+          "description": "Region or State."
+        },
+        "postal_code": {
+          "type": "string",
+          "description": "The postal code of the address."
+        },
+        "country": {
+          "type": "string",
+          "description": "Country code conforms to [ISO 3166-1 alpha-2]"
+        }
+      },
+      "required": [
+        "line1",
+        "locality",
+        "region",
+        "postal_code",
+        "country"
+      ]
+    },
+    "originating_account_id": {
+      "type": "string",
+      "description": "The ID of the internal account the invoice should be paid to."
+    },
+    "receiving_account_id": {
+      "type": "string",
+      "nullable": true,
+      "format": "uuid",
+      "description": "The receiving account ID. Can be an `internal_account`."
+    },
+    "virtual_account_id": {
+      "type": "string",
+      "format": "uuid",
+      "nullable": true,
+      "description": "The ID of the virtual account the invoice should be paid to."
+    },
+    "payment_effective_date": {
+      "type": "string",
+      "nullable": true,
+      "format": "date",
+      "description": "Date transactions are to be posted to the participants' account. Defaults to the current business day or the next business day if the current day is a bank holiday or weekend. Format: yyyy-mm-dd."
+    },
+    "payment_type": {
+      "type": "string",
+      "nullable": true,
+      "enum": [
+        "eft",
+        "ach"
+      ],
+      "description": "One of `ach` or `eft`."
+    },
+    "payment_method": {
+      "type": "string",
+      "nullable": true,
+      "enum": [
+        "ui",
+        "manual",
+        "automatic"
+      ],
+      "description": "When opening an invoice, whether to show the embedded payment UI , automatically debit the recipient, or rely on manual payment from the recipient."
+    },
+    "fallback_payment_method": {
+      "type": "string",
+      "nullable": true,
+      "description": "When payment_method is automatic, the fallback payment method to use when an automatic payment fails. One of `manual` or `ui`."
+    },
+    "notifications_enabled": {
+      "type": "boolean",
+      "description": "If true, the invoice will send email notifications to the invoice recipients about invoice status changes."
+    },
+    "notification_email_addresses": {
+      "type": "array",
+      "nullable": true,
+      "items": {
+        "type": "string"
+      },
+      "description": "Emails in addition to the counterparty email to send invoice status notifications to. At least one email is required if notifications are enabled and the counterparty doesn't have an email."
+    },
+    "remind_after_overdue_days": {
+      "type": "array",
+      "items": {
+        "type": "integer"
+      },
+      "nullable": true,
+      "description": "Number of days after due date when overdue reminder emails will be sent out to invoice recipients."
+    },
+    "metadata": {
+      "type": "object",
+      "description": "Additional data represented as key-value pairs. Both the key and value must be strings.",
+      "additionalProperties": {
+        "type": "string"
+      },
+      "example": {
+        "key": "value",
+        "foo": "bar",
+        "modern": "treasury"
+      },
+      "nullable": true
+    },
+    "hosted_url": {
+      "type": "string",
+      "description": "The URL of the hosted web UI where the invoice can be viewed."
+    },
+    "number": {
+      "type": "string",
+      "description": "A unique record number assigned to each invoice that is issued."
+    },
+    "payment_orders": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/payment_order"
+      },
+      "description": "The payment orders created for paying the invoice through the invoice payment UI."
+    },
+    "expected_payments": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/expected_payment"
+      },
+      "description": "The expected payments created for an unpaid invoice."
+    },
+    "pdf_url": {
+      "type": "string",
+      "nullable": true,
+      "description": "The URL where the invoice PDF can be downloaded."
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "draft",
+        "paid",
+        "partially_paid",
+        "payment_pending",
+        "unpaid",
+        "voided"
+      ],
+      "description": "The status of the invoice."
+    },
+    "total_amount": {
+      "type": "integer",
+      "description": "Total amount due in specified currency's smallest unit, e.g., $10 USD would be represented as 1000."
+    },
+    "amount_remaining": {
+      "type": "integer",
+      "description": "Amount remaining due on the invoice in specified currency's smallest unit, e.g., $10 USD would be represented as 1000."
+    },
+    "amount_paid": {
+      "type": "integer",
+      "description": "Amount paid on the invoice in specified currency's smallest unit, e.g., $10 USD would be represented as 1000."
+    },
+    "transaction_line_item_ids": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "format": "uuid"
+      },
+      "description": "IDs of transaction line items associated with an invoice."
+    },
+    "ledger_account_settlement_id": {
+      "type": "string",
+      "nullable": true,
+      "format": "uuid",
+      "deprecated": true,
+      "description": "The ledger account settlement object linked to the invoice."
+    },
+    "issued_at": {
+      "type": "string",
+      "nullable": true,
+      "format": "date-time",
+      "description": "Translation missing: en.openapi.descriptions.invoice.schema.issued_at"
+    },
+    "paid_at": {
+      "type": "string",
+      "nullable": true,
+      "format": "date-time",
+      "description": "Translation missing: en.openapi.descriptions.invoice.schema.paid_at"
+    },
+    "voided_at": {
+      "type": "string",
+      "nullable": true,
+      "format": "date-time",
+      "description": "Translation missing: en.openapi.descriptions.invoice.schema.voided_at"
+    }
+  },
+  "additionalProperties": false,
+  "minProperties": 41,
+  "required": [
+    "id",
+    "object",
+    "live_mode",
+    "created_at",
+    "updated_at",
+    "contact_details",
+    "recipient_email",
+    "recipient_name",
+    "counterparty_id",
+    "counterparty_billing_address",
+    "counterparty_shipping_address",
+    "currency",
+    "description",
+    "due_date",
+    "invoicer_name",
+    "invoicer_address",
+    "originating_account_id",
+    "receiving_account_id",
+    "virtual_account_id",
+    "payment_effective_date",
+    "payment_type",
+    "payment_method",
+    "fallback_payment_method",
+    "notifications_enabled",
+    "notification_email_addresses",
+    "remind_after_overdue_days",
+    "metadata",
+    "hosted_url",
+    "number",
+    "payment_orders",
+    "expected_payments",
+    "pdf_url",
+    "status",
+    "total_amount",
+    "amount_remaining",
+    "amount_paid",
+    "transaction_line_item_ids",
+    "ledger_account_settlement_id",
+    "issued_at",
+    "paid_at",
+    "voided_at"
+  ]
+}

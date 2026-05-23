@@ -1,0 +1,96 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/identification_create_request",
+  "title": "identification_create_request",
+  "type": "object",
+  "properties": {
+    "id_number": {
+      "type": "string",
+      "description": "The ID number of identification document."
+    },
+    "documents": {
+      "type": "array",
+      "description": "A list of documents to attach to the identification.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "document_type": {
+            "type": "string",
+            "enum": [
+              "articles_of_incorporation",
+              "certificate_of_good_standing",
+              "ein_letter",
+              "generic",
+              "identification_back",
+              "identification_front",
+              "proof_of_address"
+            ],
+            "description": "A category given to the document, can be `null`."
+          },
+          "file_data": {
+            "type": "string",
+            "description": "Base64-encoded file content for the document."
+          },
+          "filename": {
+            "type": "string",
+            "description": "The original filename of the document."
+          }
+        },
+        "required": [
+          "document_type",
+          "file_data"
+        ]
+      }
+    },
+    "id_type": {
+      "type": "string",
+      "enum": [
+        "ar_cuil",
+        "ar_cuit",
+        "br_cnpj",
+        "br_cpf",
+        "ca_sin",
+        "cl_run",
+        "cl_rut",
+        "co_cedulas",
+        "co_nit",
+        "drivers_license",
+        "hn_id",
+        "hn_rtn",
+        "ie_pps",
+        "in_lei",
+        "kr_brn",
+        "kr_crn",
+        "kr_rrn",
+        "passport",
+        "sa_tin",
+        "sa_vat",
+        "us_ein",
+        "us_itin",
+        "us_ssn",
+        "vn_tin"
+      ],
+      "description": "The type of ID number."
+    },
+    "expiration_date": {
+      "type": "string",
+      "format": "date",
+      "nullable": true,
+      "description": "The date when the Identification is no longer considered valid by the issuing authority."
+    },
+    "issuing_country": {
+      "type": "string",
+      "nullable": true,
+      "description": "The ISO 3166-1 alpha-2 country code of the country that issued the identification"
+    },
+    "issuing_region": {
+      "type": "string",
+      "nullable": true,
+      "description": "The region in which the identifcation was issued."
+    }
+  },
+  "required": [
+    "id_number",
+    "id_type"
+  ]
+}

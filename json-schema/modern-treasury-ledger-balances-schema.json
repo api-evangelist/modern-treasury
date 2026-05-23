@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/ledger_balances",
+  "title": "ledger_balances",
+  "type": "object",
+  "properties": {
+    "pending_balance": {
+      "$ref": "#/components/schemas/ledger_balance",
+      "description": "The pending_balance is the sum of all pending and posted entries."
+    },
+    "posted_balance": {
+      "$ref": "#/components/schemas/ledger_balance",
+      "description": "The posted_balance is the sum of all posted entries."
+    },
+    "available_balance": {
+      "$ref": "#/components/schemas/ledger_balance",
+      "description": "The available_balance is the sum of all posted inbound entries and pending outbound entries. For credit normal, available_amount = posted_credits - pending_debits; for debit normal, available_amount = posted_debits - pending_credits."
+    }
+  },
+  "additionalProperties": false,
+  "minProperties": 3,
+  "required": [
+    "pending_balance",
+    "posted_balance",
+    "available_balance"
+  ]
+}

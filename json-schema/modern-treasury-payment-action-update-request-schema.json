@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/payment_action_update_request",
+  "title": "payment_action_update_request",
+  "type": "object",
+  "properties": {
+    "status": {
+      "type": "string",
+      "enum": [
+        "pending",
+        "processable",
+        "processing",
+        "sent",
+        "acknowledged",
+        "failed",
+        "cancelled"
+      ],
+      "description": "Optional. Set the status of the payment action to `cancelled` to cancel the payment action. This will only work if the payment action is in a `pending` state."
+    }
+  },
+  "required": [
+    "status"
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/accounts_type",
+  "title": "accounts_type",
+  "type": "string",
+  "enum": [
+    "external_accounts",
+    "internal_accounts"
+  ]
+}

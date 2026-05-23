@@ -1,0 +1,348 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/legal_entity",
+  "title": "legal_entity",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "object": {
+      "type": "string"
+    },
+    "live_mode": {
+      "type": "boolean",
+      "description": "This field will be true if this object exists in the live environment or false if it exists in the test environment."
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "updated_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "discarded_at": {
+      "type": "string",
+      "format": "date-time",
+      "nullable": true
+    },
+    "legal_entity_type": {
+      "type": "string",
+      "enum": [
+        "business",
+        "individual",
+        "joint"
+      ],
+      "description": "The type of legal entity."
+    },
+    "risk_rating": {
+      "type": "string",
+      "enum": [
+        "low",
+        "medium",
+        "high"
+      ],
+      "nullable": true,
+      "description": "The risk rating of the legal entity. One of low, medium, high."
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "active",
+        "denied",
+        "pending",
+        "suspended"
+      ],
+      "nullable": true,
+      "description": "The activation status of the legal entity. One of pending, active, suspended, or denied."
+    },
+    "prefix": {
+      "type": "string",
+      "nullable": true,
+      "description": "An individual's prefix."
+    },
+    "first_name": {
+      "type": "string",
+      "nullable": true,
+      "description": "An individual's first name."
+    },
+    "middle_name": {
+      "type": "string",
+      "nullable": true,
+      "description": "An individual's middle name."
+    },
+    "last_name": {
+      "type": "string",
+      "nullable": true,
+      "description": "An individual's last name."
+    },
+    "suffix": {
+      "type": "string",
+      "nullable": true,
+      "description": "An individual's suffix."
+    },
+    "preferred_name": {
+      "type": "string",
+      "nullable": true,
+      "description": "An individual's preferred name."
+    },
+    "citizenship_country": {
+      "type": "string",
+      "nullable": true,
+      "description": "The country of citizenship for an individual."
+    },
+    "politically_exposed_person": {
+      "type": "boolean",
+      "nullable": true,
+      "description": "Whether the individual is a politically exposed person."
+    },
+    "date_of_birth": {
+      "type": "string",
+      "format": "date",
+      "nullable": true,
+      "description": "An individual's date of birth (YYYY-MM-DD)."
+    },
+    "date_formed": {
+      "type": "string",
+      "format": "date",
+      "nullable": true,
+      "description": "A business's formation date (YYYY-MM-DD)."
+    },
+    "business_name": {
+      "type": "string",
+      "nullable": true,
+      "description": "The business's legal business name."
+    },
+    "doing_business_as_names": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "description": "A list of \"Doing Business As\" (DBA) / trade names for a business, different than their legal business name."
+      }
+    },
+    "legal_structure": {
+      "type": "string",
+      "enum": [
+        "corporation",
+        "llc",
+        "non_profit",
+        "partnership",
+        "sole_proprietorship",
+        "trust"
+      ],
+      "nullable": true,
+      "description": "The business's legal structure."
+    },
+    "phone_numbers": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "phone_number": {
+            "type": "string"
+          }
+        },
+        "description": "A list of phone numbers in E.164 format."
+      }
+    },
+    "email": {
+      "type": "string",
+      "nullable": true,
+      "description": "The entity's primary email."
+    },
+    "website": {
+      "type": "string",
+      "nullable": true,
+      "description": "The entity's primary website URL."
+    },
+    "business_description": {
+      "type": "string",
+      "nullable": true,
+      "description": "A description of the business."
+    },
+    "intended_use": {
+      "type": "string",
+      "nullable": true,
+      "description": "A description of the intended use of the legal entity."
+    },
+    "expected_activity_volume": {
+      "type": "integer",
+      "nullable": true,
+      "description": "Monthly expected transaction volume in USD."
+    },
+    "country_of_incorporation": {
+      "type": "string",
+      "nullable": true,
+      "description": "The country code where the business is incorporated in the ISO 3166-1 alpha-2 or alpha-3 formats."
+    },
+    "operating_jurisdictions": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "A list of countries where the business operates (ISO 3166-1 alpha-2 or alpha-3 codes)."
+    },
+    "primary_social_media_sites": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "A list of primary social media URLs for the business."
+    },
+    "listed_exchange": {
+      "type": "string",
+      "nullable": true,
+      "description": "ISO 10383 market identifier code."
+    },
+    "ticker_symbol": {
+      "type": "string",
+      "nullable": true,
+      "description": "Stock ticker symbol for publicly traded companies."
+    },
+    "regulators": {
+      "type": "array",
+      "nullable": true,
+      "items": {
+        "$ref": "#/components/schemas/legal_entity_regulator"
+      },
+      "description": "Array of regulatory bodies overseeing this institution."
+    },
+    "third_party_verification": {
+      "$ref": "#/components/schemas/third_party_verification",
+      "nullable": true,
+      "deprecated": true,
+      "description": "Deprecated. Use `third_party_verifications` instead."
+    },
+    "third_party_verifications": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/third_party_verification"
+      },
+      "description": "A list of third-party verifications run by external vendors.",
+      "title": "Third Party Verfications"
+    },
+    "service_provider_legal_entity_id": {
+      "type": "string",
+      "format": "uuid",
+      "nullable": true,
+      "description": "The UUID of the parent legal entity in the service provider tree."
+    },
+    "metadata": {
+      "type": "object",
+      "description": "Additional data represented as key-value pairs. Both the key and value must be strings.",
+      "additionalProperties": {
+        "type": "string"
+      },
+      "example": {
+        "key": "value",
+        "foo": "bar",
+        "modern": "treasury"
+      }
+    },
+    "external_id": {
+      "type": "string",
+      "nullable": true,
+      "description": "An optional user-defined 180 character unique identifier."
+    },
+    "bank_settings": {
+      "$ref": "#/components/schemas/legal_entity_bank_setting",
+      "nullable": true
+    },
+    "compliance_details": {
+      "type": "object",
+      "nullable": true,
+      "deprecated": true
+    },
+    "wealth_and_employment_details": {
+      "$ref": "#/components/schemas/legal_entity_wealth_employment_detail",
+      "nullable": true
+    },
+    "addresses": {
+      "type": "array",
+      "description": "A list of addresses for the entity.",
+      "items": {
+        "$ref": "#/components/schemas/legal_entity_address"
+      }
+    },
+    "identifications": {
+      "type": "array",
+      "description": "A list of identifications for the legal entity.",
+      "items": {
+        "$ref": "#/components/schemas/identification"
+      }
+    },
+    "industry_classifications": {
+      "type": "array",
+      "description": "A list of industry classifications for the legal entity.",
+      "items": {
+        "$ref": "#/components/schemas/legal_entity_industry_classification"
+      }
+    },
+    "documents": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/document"
+      }
+    },
+    "legal_entity_associations": {
+      "type": "array",
+      "description": "The legal entity associations and its child legal entities.",
+      "items": {
+        "$ref": "#/components/schemas/legal_entity_association"
+      },
+      "nullable": true
+    }
+  },
+  "additionalProperties": false,
+  "minProperties": 46,
+  "required": [
+    "id",
+    "object",
+    "live_mode",
+    "created_at",
+    "updated_at",
+    "discarded_at",
+    "legal_entity_type",
+    "risk_rating",
+    "status",
+    "prefix",
+    "first_name",
+    "middle_name",
+    "last_name",
+    "suffix",
+    "preferred_name",
+    "citizenship_country",
+    "politically_exposed_person",
+    "date_of_birth",
+    "date_formed",
+    "business_name",
+    "doing_business_as_names",
+    "legal_structure",
+    "phone_numbers",
+    "email",
+    "website",
+    "business_description",
+    "intended_use",
+    "expected_activity_volume",
+    "country_of_incorporation",
+    "operating_jurisdictions",
+    "primary_social_media_sites",
+    "listed_exchange",
+    "ticker_symbol",
+    "regulators",
+    "third_party_verification",
+    "third_party_verifications",
+    "service_provider_legal_entity_id",
+    "metadata",
+    "external_id",
+    "bank_settings",
+    "compliance_details",
+    "wealth_and_employment_details",
+    "addresses",
+    "identifications",
+    "industry_classifications",
+    "documents"
+  ]
+}

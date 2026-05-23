@@ -1,0 +1,118 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/routing_number_lookup_request",
+  "title": "routing_number_lookup_request",
+  "type": "object",
+  "properties": {
+    "routing_number": {
+      "type": "string",
+      "description": "The routing number of the bank."
+    },
+    "routing_number_type": {
+      "type": "string",
+      "enum": [
+        "aba",
+        "au_bsb",
+        "ca_cpa",
+        "gb_sort_code",
+        "in_ifsc",
+        "nz_national_clearing_code",
+        "se_bankgiro_clearing_code",
+        "swift",
+        "za_national_clearing_code"
+      ],
+      "description": "The type of routing number. See https://docs.moderntreasury.com/platform/reference/routing-detail-object for more details. In sandbox mode we currently only support `aba` and `swift` with routing numbers '123456789' and 'GRINUST0XXX' respectively."
+    },
+    "supported_payment_types": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "ach",
+          "au_becs",
+          "bacs",
+          "book",
+          "card",
+          "chats",
+          "check",
+          "cross_border",
+          "dk_nets",
+          "eft",
+          "gb_fps",
+          "hu_ics",
+          "interac",
+          "masav",
+          "mx_ccen",
+          "neft",
+          "nics",
+          "nz_becs",
+          "pl_elixir",
+          "provxchange",
+          "ro_sent",
+          "rtp",
+          "se_bankgirot",
+          "sen",
+          "sepa",
+          "sg_giro",
+          "sic",
+          "signet",
+          "sknbi",
+          "stablecoin",
+          "wire",
+          "zengin"
+        ]
+      },
+      "maxItems": 32,
+      "example": [
+        "ach",
+        "au_becs",
+        "bacs",
+        "book",
+        "card",
+        "chats",
+        "check",
+        "cross_border",
+        "dk_nets",
+        "eft",
+        "gb_fps",
+        "hu_ics",
+        "interac",
+        "masav",
+        "mx_ccen",
+        "neft",
+        "nics",
+        "nz_becs",
+        "pl_elixir",
+        "provxchange",
+        "ro_sent",
+        "rtp",
+        "se_bankgirot",
+        "sen",
+        "sepa",
+        "sg_giro",
+        "sic",
+        "signet",
+        "sknbi",
+        "stablecoin",
+        "wire",
+        "zengin"
+      ],
+      "description": "An array of payment types that are supported for this routing number. This can include `ach`, `wire`, `rtp`, `sepa`, `bacs`, `au_becs`, and 'fednow' currently."
+    },
+    "bank_name": {
+      "type": "string",
+      "description": "The name of the bank."
+    },
+    "bank_address": {
+      "$ref": "#/components/schemas/address_request",
+      "description": "The address of the bank."
+    },
+    "sanctions": {
+      "type": "object",
+      "description": "An object containing key-value pairs, each with a sanctions list as the key and a boolean value representing whether the bank is on that particular sanctions list. Currently, this includes eu_con, uk_hmt, us_ofac, and un sanctions lists.",
+      "additionalProperties": true
+    }
+  },
+  "additionalProperties": false,
+  "minProperties": 5
+}

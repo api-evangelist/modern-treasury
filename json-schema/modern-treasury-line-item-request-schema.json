@@ -1,0 +1,37 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/line_item_request",
+  "title": "line_item_request",
+  "type": "object",
+  "properties": {
+    "amount": {
+      "type": "integer",
+      "description": "Value in specified currency's smallest unit. e.g. $10 would be represented as 1000."
+    },
+    "metadata": {
+      "type": "object",
+      "description": "Additional data represented as key-value pairs. Both the key and value must be strings.",
+      "additionalProperties": {
+        "type": "string"
+      },
+      "example": {
+        "key": "value",
+        "foo": "bar",
+        "modern": "treasury"
+      }
+    },
+    "description": {
+      "type": "string",
+      "description": "A free-form description of the line item.",
+      "nullable": true
+    },
+    "accounting_category_id": {
+      "type": "string",
+      "description": "The ID of one of your accounting categories. Note that these will only be accessible if your accounting system has been connected.",
+      "nullable": true
+    }
+  },
+  "required": [
+    "amount"
+  ]
+}

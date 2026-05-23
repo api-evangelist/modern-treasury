@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/virtual_account_update_request",
+  "title": "virtual_account_update_request",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "nullable": true
+    },
+    "counterparty_id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "ledger_account_id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "The ledger account that you'd like to link to the virtual account."
+    },
+    "metadata": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string"
+      }
+    }
+  }
+}

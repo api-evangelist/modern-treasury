@@ -1,0 +1,218 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/legal_entity_wealth_employment_detail",
+  "title": "legal_entity_wealth_employment_detail",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "object": {
+      "type": "string"
+    },
+    "live_mode": {
+      "type": "boolean",
+      "description": "This field will be true if this object exists in the live environment or false if it exists in the test environment."
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "updated_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "discarded_at": {
+      "type": "string",
+      "format": "date-time",
+      "nullable": true
+    },
+    "employment_status": {
+      "type": "string",
+      "enum": [
+        "employed",
+        "retired",
+        "self_employed",
+        "student",
+        "unemployed"
+      ],
+      "nullable": true,
+      "description": "The employment status of the individual."
+    },
+    "occupation": {
+      "type": "string",
+      "enum": [
+        "consulting",
+        "executive",
+        "finance_accounting",
+        "food_services",
+        "government",
+        "healthcare",
+        "legal_services",
+        "manufacturing",
+        "other",
+        "sales",
+        "science_engineering",
+        "technology"
+      ],
+      "nullable": true,
+      "description": "The occupation of the individual."
+    },
+    "industry": {
+      "type": "string",
+      "enum": [
+        "accounting",
+        "agriculture",
+        "automotive",
+        "chemical_manufacturing",
+        "construction",
+        "educational_medical",
+        "food_service",
+        "finance",
+        "gasoline",
+        "health_stores",
+        "laundry",
+        "maintenance",
+        "manufacturing",
+        "merchant_wholesale",
+        "mining",
+        "performing_arts",
+        "professional_non_legal",
+        "public_administration",
+        "publishing",
+        "real_estate",
+        "recreation_gambling",
+        "religious_charity",
+        "rental_services",
+        "retail_clothing",
+        "retail_electronics",
+        "retail_food",
+        "retail_furnishing",
+        "retail_home",
+        "retail_non_store",
+        "retail_sporting",
+        "transportation",
+        "travel",
+        "utilities"
+      ],
+      "nullable": true,
+      "description": "The industry of the individual."
+    },
+    "income_source": {
+      "type": "string",
+      "enum": [
+        "family_support",
+        "government_benefits",
+        "inheritance",
+        "investments",
+        "rental_income",
+        "retirement",
+        "salary",
+        "self_employed"
+      ],
+      "nullable": true,
+      "description": "The source of the individual's income."
+    },
+    "income_state": {
+      "type": "string",
+      "nullable": true,
+      "description": "The state in which the individual's income is earned."
+    },
+    "income_country": {
+      "type": "string",
+      "nullable": true,
+      "description": "The country in which the individual's income is earned."
+    },
+    "employer_name": {
+      "type": "string",
+      "nullable": true,
+      "description": "The name of the employer."
+    },
+    "employer_state": {
+      "type": "string",
+      "nullable": true,
+      "description": "The state in which the employer is located."
+    },
+    "employer_country": {
+      "type": "string",
+      "nullable": true,
+      "description": "The country in which the employer is located."
+    },
+    "source_of_funds": {
+      "type": "string",
+      "enum": [
+        "alimony",
+        "annuity",
+        "business_owner",
+        "business_revenue",
+        "debt_financing",
+        "general_employee",
+        "government_benefits",
+        "homemaker",
+        "inheritance_gift",
+        "intercompany_loan",
+        "investment",
+        "investor_funding",
+        "legal_settlement",
+        "lottery",
+        "real_estate",
+        "retained_earnings_or_savings",
+        "retired",
+        "retirement",
+        "salary",
+        "sale_of_business_assets",
+        "sale_of_real_estate",
+        "self_employed",
+        "senior_executive",
+        "trust_income"
+      ],
+      "nullable": true,
+      "description": "The source of the individual's funds."
+    },
+    "wealth_source": {
+      "type": "string",
+      "enum": [
+        "business_sale",
+        "family_support",
+        "government_benefits",
+        "inheritance",
+        "investments",
+        "other",
+        "rental_income",
+        "retirement",
+        "salary",
+        "self_employed"
+      ],
+      "nullable": true,
+      "description": "The source of the individual's wealth."
+    },
+    "annual_income": {
+      "type": "integer",
+      "nullable": true,
+      "description": "The annual income of the individual in USD."
+    }
+  },
+  "additionalProperties": false,
+  "minProperties": 18,
+  "required": [
+    "id",
+    "object",
+    "live_mode",
+    "created_at",
+    "updated_at",
+    "discarded_at",
+    "employment_status",
+    "occupation",
+    "industry",
+    "income_source",
+    "income_state",
+    "income_country",
+    "employer_name",
+    "employer_state",
+    "employer_country",
+    "source_of_funds",
+    "wealth_source",
+    "annual_income"
+  ]
+}

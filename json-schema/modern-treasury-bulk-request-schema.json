@@ -1,0 +1,98 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/bulk_request",
+  "title": "bulk_request",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "object": {
+      "type": "string"
+    },
+    "live_mode": {
+      "type": "boolean",
+      "description": "This field will be true if this object exists in the live environment or false if it exists in the test environment."
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "updated_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "action_type": {
+      "type": "string",
+      "enum": [
+        "create",
+        "update",
+        "delete"
+      ],
+      "description": "One of create, or update."
+    },
+    "resource_type": {
+      "type": "string",
+      "enum": [
+        "payment_order",
+        "ledger_account",
+        "ledger_transaction",
+        "expected_payment",
+        "transaction",
+        "transaction_line_item",
+        "entity_link"
+      ],
+      "description": "One of payment_order, expected_payment, or ledger_transaction."
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "pending",
+        "processing",
+        "completed"
+      ],
+      "description": "One of pending, processing, or completed."
+    },
+    "total_resource_count": {
+      "type": "integer",
+      "description": "Total number of items in the `resources` array. Once a bulk request is completed, `success_result_count` + `failed_result_count` will be equal to `total_result_count`."
+    },
+    "success_result_count": {
+      "type": "integer",
+      "description": "Total number of successful bulk results so far for this request"
+    },
+    "failed_result_count": {
+      "type": "integer",
+      "description": "Total number of failed bulk results so far for this request"
+    },
+    "metadata": {
+      "type": "object",
+      "description": "Additional data represented as key-value pairs. Both the key and value must be strings.",
+      "additionalProperties": {
+        "type": "string"
+      },
+      "example": {
+        "key": "value",
+        "foo": "bar",
+        "modern": "treasury"
+      }
+    }
+  },
+  "additionalProperties": false,
+  "minProperties": 12,
+  "required": [
+    "id",
+    "object",
+    "live_mode",
+    "created_at",
+    "updated_at",
+    "action_type",
+    "resource_type",
+    "status",
+    "total_resource_count",
+    "success_result_count",
+    "failed_result_count",
+    "metadata"
+  ]
+}

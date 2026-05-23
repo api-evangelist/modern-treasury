@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/transaction_update_request",
+  "title": "transaction_update_request",
+  "type": "object",
+  "properties": {
+    "metadata": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string"
+      },
+      "description": "Additional data in the form of key-value pairs. Pairs can be removed by passing an empty string or `null` as the value."
+    }
+  }
+}

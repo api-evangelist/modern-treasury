@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/ledger_account_statement_create_request",
+  "title": "ledger_account_statement_create_request",
+  "type": "object",
+  "properties": {
+    "description": {
+      "type": "string",
+      "description": "The description of the ledger account statement.",
+      "nullable": true
+    },
+    "ledger_account_id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "The id of the ledger account whose ledger entries are queried against, and its balances are computed as a result."
+    },
+    "effective_at_lower_bound": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The inclusive lower bound of the effective_at timestamp of the ledger entries to be included in the ledger account statement."
+    },
+    "effective_at_upper_bound": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The exclusive upper bound of the effective_at timestamp of the ledger entries to be included in the ledger account statement."
+    },
+    "metadata": {
+      "type": "object",
+      "description": "Additional data represented as key-value pairs. Both the key and value must be strings.",
+      "additionalProperties": {
+        "type": "string"
+      },
+      "example": {
+        "key": "value",
+        "foo": "bar",
+        "modern": "treasury"
+      }
+    }
+  },
+  "required": [
+    "ledger_account_id",
+    "effective_at_lower_bound",
+    "effective_at_upper_bound"
+  ]
+}

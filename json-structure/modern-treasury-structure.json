@@ -1,0 +1,3655 @@
+{
+  "provider": "Modern Treasury",
+  "providerId": "modern-treasury",
+  "kind": "json-structure",
+  "description": "Structural overview of the Modern Treasury API surface; extracted from openapi/.",
+  "schemaCount": 154,
+  "operationCount": 177,
+  "schemas": [
+    {
+      "name": "accounting",
+      "type": "object",
+      "propertyCount": 2,
+      "required": []
+    },
+    {
+      "name": "account_capability",
+      "type": "object",
+      "propertyCount": 9,
+      "required": [
+        "id",
+        "object",
+        "live_mode",
+        "created_at",
+        "updated_at",
+        "discarded_at",
+        "direction",
+        "identifier",
+        "payment_type"
+      ]
+    },
+    {
+      "name": "account_capability_update_request",
+      "type": "object",
+      "propertyCount": 1,
+      "required": [
+        "identifier"
+      ]
+    },
+    {
+      "name": "account_collection_flow",
+      "type": "object",
+      "propertyCount": 11,
+      "required": [
+        "payment_types",
+        "counterparty_id"
+      ]
+    },
+    {
+      "name": "account_collection_flow_create_request",
+      "type": "object",
+      "propertyCount": 3,
+      "required": [
+        "payment_types",
+        "counterparty_id"
+      ]
+    },
+    {
+      "name": "account_collection_flow_update_request",
+      "type": "object",
+      "propertyCount": 1,
+      "required": [
+        "status"
+      ]
+    },
+    {
+      "name": "account_detail",
+      "type": "object",
+      "propertyCount": 9,
+      "required": [
+        "id",
+        "object",
+        "live_mode",
+        "created_at",
+        "updated_at",
+        "discarded_at",
+        "account_number_type",
+        "account_number_safe"
+      ]
+    },
+    {
+      "name": "account_detail_create_request",
+      "type": "object",
+      "propertyCount": 2,
+      "required": [
+        "account_number"
+      ]
+    },
+    {
+      "name": "address",
+      "type": "object",
+      "propertyCount": 11,
+      "required": [
+        "id",
+        "object",
+        "live_mode",
+        "created_at",
+        "updated_at",
+        "line1",
+        "line2",
+        "locality",
+        "region",
+        "postal_code",
+        "country"
+      ]
+    },
+    {
+      "name": "address_request",
+      "type": "object",
+      "propertyCount": 6,
+      "required": []
+    },
+    {
+      "name": "async_response",
+      "type": "object",
+      "propertyCount": 2,
+      "required": [
+        "id",
+        "object"
+      ]
+    },
+    {
+      "name": "balance_report",
+      "type": "object",
+      "propertyCount": 10,
+      "required": [
+        "id",
+        "object",
+        "live_mode",
+        "created_at",
+        "updated_at",
+        "balance_report_type",
+        "as_of_date",
+        "as_of_time",
+        "balances",
+        "internal_account_id"
+      ]
+    },
+    {
+      "name": "balance_report_create_request",
+      "type": "object",
+      "propertyCount": 4,
+      "required": [
+        "as_of_date",
+        "as_of_time",
+        "balance_report_type",
+        "balances"
+      ]
+    },
+    {
+      "name": "balance",
+      "type": "object",
+      "propertyCount": 13,
+      "required": [
+        "id",
+        "object",
+        "live_mode",
+        "created_at",
+        "updated_at",
+        "amount",
+        "currency",
+        "balance_type",
+        "vendor_code",
+        "vendor_code_type",
+        "as_of_date",
+        "as_of_time",
+        "value_date"
+      ]
+    },
+    {
+      "name": "balance_create_request",
+      "type": "object",
+      "propertyCount": 4,
+      "required": [
+        "amount",
+        "balance_type",
+        "vendor_code",
+        "vendor_code_type"
+      ]
+    },
+    {
+      "name": "bulk_request",
+      "type": "object",
+      "propertyCount": 12,
+      "required": [
+        "id",
+        "object",
+        "live_mode",
+        "created_at",
+        "updated_at",
+        "action_type",
+        "resource_type",
+        "status",
+        "total_resource_count",
+        "success_result_count",
+        "failed_result_count",
+        "metadata"
+      ]
+    },
+    {
+      "name": "bulk_request_create_request",
+      "type": "object",
+      "propertyCount": 4,
+      "required": [
+        "action_type",
+        "resource_type",
+        "resources"
+      ]
+    },
+    {
+      "name": "bulk_result",
+      "type": "object",
+      "propertyCount": 12,
+      "required": [
+        "id",
+        "object",
+        "live_mode",
+        "created_at",
+        "updated_at",
+        "request_id",
+        "request_type",
+        "status",
+        "request_params",
+        "entity_id",
+        "entity_type",
+        "entity"
+      ]
+    },
+    {
+      "name": "bulk_error",
+      "type": "object",
+      "propertyCount": 6,
+      "required": [
+        "id",
+        "object",
+        "live_mode",
+        "created_at",
+        "updated_at",
+        "request_errors"
+      ]
+    },
+    {
+      "name": "connection",
+      "type": "object",
+      "propertyCount": 9,
+      "required": [
+        "id",
+        "object",
+        "live_mode",
+        "created_at",
+        "updated_at",
+        "discarded_at",
+        "vendor_id",
+        "vendor_customer_id",
+        "vendor_name"
+      ]
+    },
+    {
+      "name": "connection_legal_entity",
+      "type": "object",
+      "propertyCount": 10,
+      "required": [
+        "id",
+        "object",
+        "live_mode",
+        "created_at",
+        "updated_at",
+        "discarded_at",
+        "connection_id",
+        "legal_entity_id",
+        "status",
+        "vendor_id"
+      ]
+    },
+    {
+      "name": "connection_legal_entity_create_request",
+      "type": "object",
+      "propertyCount": 3,
+      "required": [
+        "connection_id"
+      ]
+    },
+    {
+      "name": "connection_legal_entity_update_request",
+      "type": "object",
+      "propertyCount": 1,
+      "required": []
+    },
+    {
+      "name": "contact_detail",
+      "type": "object",
+      "propertyCount": 8,
+      "required": [
+        "id",
+        "object",
+        "live_mode",
+        "created_at",
+        "updated_at",
+        "discarded_at",
+        "contact_identifier",
+        "contact_identifier_type"
+      ]
+    },
+    {
+      "name": "contact_detail_create_request",
+      "type": "object",
+      "propertyCount": 2,
+      "required": []
+    },
+    {
+      "name": "counterparty",
+      "type": "object",
+      "propertyCount": 14,
+      "required": [
+        "id",
+        "object",
+        "live_mode",
+        "created_at",
+        "updated_at",
+        "discarded_at",
+        "name",
+        "accounts",
+        "email",
+        "legal_entity_id",
+        "metadata",
+        "external_id",
+        "send_remittance_advice",
+        "verification_status"
+      ]
+    },
+    {
+      "name": "counterparty_collect_account_request",
+      "type": "object",
+      "propertyCount": 4,
+      "required": [
+        "direction"
+      ]
+    },
+    {
+      "name": "counterparty_collect_account_response",
+      "type": "object",
+      "propertyCount": 3,
+      "required": [
+        "id",
+        "is_resend",
+        "form_link"
+      ]
+    },
+    {
+      "name": "counterparty_create_request",
+      "type": "object",
+      "propertyCount": 12,
+      "required": [
+        "name"
+      ]
+    },
+    {
+      "name": "counterparty_update_request",
+      "type": "object",
+      "propertyCount": 7,
+      "required": []
+    },
+    {
+      "name": "currency",
+      "type": "string",
+      "propertyCount": 0,
+      "required": []
+    },
+    {
+      "name": "document",
+      "type": "object",
+      "propertyCount": 12,
+      "required": [
+        "id",
+        "object",
+        "live_mode",
+        "created_at",
+        "updated_at",
+        "discarded_at",
+        "document_type",
+        "source",
+        "documentable_id",
+        "documentable_type",
+        "document_details",
+        "file"
+      ]
+    },
+    {
+      "name": "document_create_request",
+      "type": "object",
+      "propertyCount": 4,
+      "required": [
+        "file"
+      ]
+    },
+    {
+      "name": "legacy_document_create_request",
+      "type": "object",
+      "propertyCount": 2,
+      "required": [
+        "file"
+      ]
+    },
+    {
+      "name": "document_detail",
+      "type": "object",
+      "propertyCount": 8,
+      "required": [
+        "id",
+        "object",
+        "live_mode",
+        "created_at",
+        "updated_at",
+        "discarded_at",
+        "document_identifier_type",
+        "document_identifier"
+      ]
+    },
+    {
+      "name": "error_message",
+      "type": "object",
+      "propertyCount": 1,
+      "required": [
+        "errors"
+      ]
+    },
+    {
+      "name": "event",
+      "type": "object",
+      "propertyCount": 10,
+      "required": [
+        "id",
+        "object",
+        "live_mode",
+        "created_at",
+        "updated_at",
+        "resource",
+        "event_name",
+        "event_time",
+        "data",
+        "entity_id"
+      ]
+    },
+    {
+      "name": "expected_payment",
+      "type": "object",
+      "propertyCount": 31,
+      "required": [
+        "id",
+        "object",
+        "live_mode",
+        "created_at",
+        "updated_at",
+        "external_id",
+        "amount_upper_bound",
+        "amount_lower_bound",
+        "direction",
+        "internal_account_id",
+        "type",
+        "currency",
+        "date_upper_bound",
+        "date_lower_bound",
+        "description",
+        "statement_descriptor",
+        "metadata",
+        "counterparty_id",
+        "remittance_information",
+        "reconciliation_groups",
+        "reconciliation_filters",
+        "reconciliation_rule_variables",
+        "amount_reconciled",
+        "amount_reconciled_direction",
+        "amount_unreconciled",
+        "amount_unreconciled_direction",
+        "transaction_id",
+        "transaction_line_item_id",
+        "status",
+        "reconciliation_method",
+        "ledger_transaction_id"
+      ]
+    },
+    {
+      "name": "expected_payment_create_request",
+      "type": "object",
+      "propertyCount": 24,
+      "required": []
+    },
+    {
+      "name": "expected_payment_update_request",
+      "type": "object",
+      "propertyCount": 22,
+      "required": []
+    },
+    {
+      "name": "external_account",
+      "type": "object",
+      "propertyCount": 20,
+      "required": [
+        "id",
+        "object",
+        "live_mode",
+        "created_at",
+        "updated_at",
+        "discarded_at",
+        "account_type",
+        "party_type",
+        "party_address",
+        "name",
+        "counterparty_id",
+        "account_details",
+        "routing_details",
+        "external_id",
+        "metadata",
+        "party_name",
+        "contact_details",
+        "ledger_account_id",
+        "verification_status",
+        "verification_source"
+      ]
+    },
+    {
+      "name": "external_account_complete_verification_request",
+      "type": "object",
+      "propertyCount": 1,
+      "required": []
+    },
+    {
+      "name": "external_account_create_request",
+      "type": "object",
+      "propertyCount": 14,
+      "required": [
+        "counterparty_id"
+      ]
+    },
+    {
+      "name": "external_account_update_request",
+      "type": "object",
+      "propertyCount": 7,
+      "required": []
+    },
+    {
+      "name": "external_account_verification_attempt",
+      "type": "object",
+      "propertyCount": 10,
+      "required": [
+        "id",
+        "object",
+        "live_mode",
+        "created_at",
+        "updated_at",
+        "external_account_id",
+        "originating_account_id",
+        "payment_type",
+        "priority",
+        "status"
+      ]
+    },
+    {
+      "name": "external_account_verify_request",
+      "type": "object",
+      "propertyCount": 5,
+      "required": [
+        "originating_account_id",
+        "payment_type"
+      ]
+    },
+    {
+      "name": "foreign_exchange_quote",
+      "type": "object",
+      "propertyCount": 12,
+      "required": [
+        "id",
+        "object",
+        "live_mode",
+        "created_at",
+        "updated_at",
+        "effective_at",
+        "expires_at",
+        "foreign_exchange_indicator",
+        "foreign_exchange_rate",
+        "internal_account_id",
+        "metadata"
+      ]
+    },
+    {
+      "name": "foreign_exchange_rate",
+      "type": "object",
+      "propertyCount": 7,
+      "required": [
+        "base_amount",
+        "base_currency",
+        "exponent",
+        "rate_string",
+        "target_amount",
+        "target_currency",
+        "value"
+      ]
+    },
+    {
+      "name": "foreign_exchange_quote_create_request",
+      "type": "object",
+      "propertyCount": 6,
+      "required": [
+        "internal_account_id",
+        "target_currency"
+      ]
+    },
+    {
+      "name": "identification",
+      "type": "object",
+      "propertyCount": 11,
+      "required": [
+        "id",
+        "object",
+        "live_mode",
+        "created_at",
+        "updated_at",
+        "discarded_at",
+        "id_type",
+        "expiration_date",
+        "issuing_country",
+        "issuing_region",
+        "documents"
+      ]
+    },
+    {
+      "name": "identification_create_request",
+      "type": "object",
+      "propertyCount": 6,
+      "required": [
+        "id_number",
+        "id_type"
+      ]
+    },
+    {
+      "name": "incoming_payment_detail_update_request",
+      "type": "object",
+      "propertyCount": 1,
+      "required": []
+    },
+    {
+      "name": "incoming_payment_detail",
+      "type": "object",
+      "propertyCount": 32,
+      "required": [
+        "id",
+        "object",
+        "live_mode",
+        "created_at",
+        "updated_at",
+        "internal_account_id",
+        "virtual_account_id",
+        "virtual_account",
+        "transaction_line_item_id",
+        "transaction_id",
+        "ledger_transaction_id",
+        "type",
+        "data",
+        "amount",
+        "currency",
+        "direction",
+        "status",
+        "metadata",
+        "as_of_date",
+        "vendor_id",
+        "originating_routing_number",
+        "originating_routing_number_type",
+        "originating_account_number_safe",
+        "originating_account_number_type",
+        "subtype",
+        "reconciliation_status"
+      ]
+    },
+    {
+      "name": "internal_account",
+      "type": "object",
+      "propertyCount": 24,
+      "required": [
+        "id",
+        "object",
+        "live_mode",
+        "created_at",
+        "updated_at",
+        "account_type",
+        "party_name",
+        "party_type",
+        "party_address",
+        "name",
+        "account_details",
+        "account_capabilities",
+        "routing_details",
+        "connection",
+        "currency",
+        "metadata",
+        "parent_account_id",
+        "counterparty_id",
+        "vendor_id",
+        "legal_entity_id",
+        "status",
+        "ledger_account_id",
+        "contra_ledger_account_id",
+        "external_id"
+      ]
+    },
+    {
+      "name": "internal_account_create_request",
+      "type": "object",
+      "propertyCount": 13,
+      "required": [
+        "connection_id",
+        "name",
+        "party_name",
+        "currency"
+      ]
+    },
+    {
+      "name": "internal_account_update_request",
+      "type": "object",
+      "propertyCount": 7,
+      "required": []
+    },
+    {
+      "name": "invoice",
+      "type": "object",
+      "propertyCount": 41,
+      "required": [
+        "id",
+        "object",
+        "live_mode",
+        "created_at",
+        "updated_at",
+        "contact_details",
+        "recipient_email",
+        "recipient_name",
+        "counterparty_id",
+        "counterparty_billing_address",
+        "counterparty_shipping_address",
+        "currency",
+        "description",
+        "due_date",
+        "invoicer_name",
+        "invoicer_address",
+        "originating_account_id",
+        "receiving_account_id",
+        "virtual_account_id",
+        "payment_effective_date",
+        "payment_type",
+        "payment_method",
+        "fallback_payment_method",
+        "notifications_enabled",
+        "notification_email_addresses",
+        "remind_after_overdue_days",
+        "metadata",
+        "hosted_url",
+        "number",
+        "payment_orders",
+        "expected_payments",
+        "pdf_url",
+        "status",
+        "total_amount",
+        "amount_remaining",
+        "amount_paid",
+        "transaction_line_item_ids",
+        "ledger_account_settlement_id",
+        "issued_at",
+        "paid_at",
+        "voided_at"
+      ]
+    },
+    {
+      "name": "invoice_create_request",
+      "type": "object",
+      "propertyCount": 24,
+      "required": [
+        "counterparty_id",
+        "due_date",
+        "originating_account_id"
+      ]
+    },
+    {
+      "name": "invoice_update_request",
+      "type": "object",
+      "propertyCount": 24,
+      "required": []
+    },
+    {
+      "name": "invoice_line_item",
+      "type": "object",
+      "propertyCount": 14,
+      "required": [
+        "id",
+        "object",
+        "live_mode",
+        "created_at",
+        "updated_at",
+        "name",
+        "description",
+        "quantity",
+        "unit_amount",
+        "unit_amount_decimal",
+        "direction",
+        "metadata",
+        "amount",
+        "invoice_id"
+      ]
+    },
+    {
+      "name": "invoice_line_item_create_request",
+      "type": "object",
+      "propertyCount": 7,
+      "required": [
+        "name",
+        "unit_amount"
+      ]
+    },
+    {
+      "name": "invoice_line_item_update_request",
+      "type": "object",
+      "propertyCount": 7,
+      "required": []
+    },
+    {
+      "name": "ledger",
+      "type": "object",
+      "propertyCount": 9,
+      "required": [
+        "id",
+        "object",
+        "live_mode",
+        "created_at",
+        "updated_at",
+        "discarded_at",
+        "name",
+        "description",
+        "metadata"
+      ]
+    },
+    {
+      "name": "ledger_create_request",
+      "type": "object",
+      "propertyCount": 3,
+      "required": [
+        "name"
+      ]
+    },
+    {
+      "name": "ledger_update_request",
+      "type": "object",
+      "propertyCount": 3,
+      "required": []
+    },
+    {
+      "name": "ledger_account",
+      "type": "object",
+      "propertyCount": 16,
+      "required": [
+        "id",
+        "object",
+        "live_mode",
+        "created_at",
+        "updated_at",
+        "discarded_at",
+        "name",
+        "description",
+        "normal_balance",
+        "balances",
+        "lock_version",
+        "ledger_id",
+        "ledgerable_id",
+        "external_id",
+        "ledgerable_type",
+        "metadata"
+      ]
+    },
+    {
+      "name": "ledger_account_create_request",
+      "type": "object",
+      "propertyCount": 11,
+      "required": [
+        "name",
+        "normal_balance",
+        "ledger_id",
+        "currency"
+      ]
+    },
+    {
+      "name": "ledger_account_update_request",
+      "type": "object",
+      "propertyCount": 4,
+      "required": []
+    },
+    {
+      "name": "ledger_account_balance_monitor",
+      "type": "object",
+      "propertyCount": 11,
+      "required": [
+        "id",
+        "object",
+        "live_mode",
+        "created_at",
+        "updated_at",
+        "discarded_at",
+        "ledger_account_id",
+        "description",
+        "alert_condition",
+        "current_ledger_account_balance_state",
+        "metadata"
+      ]
+    },
+    {
+      "name": "ledger_account_balance_monitor_create_request",
+      "type": "object",
+      "propertyCount": 4,
+      "required": [
+        "ledger_account_id",
+        "alert_condition"
+      ]
+    },
+    {
+      "name": "ledger_account_balance_monitor_update_request",
+      "type": "object",
+      "propertyCount": 2,
+      "required": []
+    },
+    {
+      "name": "alert_condition",
+      "type": "object",
+      "propertyCount": 3,
+      "required": [
+        "field",
+        "operator",
+        "value"
+      ]
+    },
+    {
+      "name": "alert_condition_create_request",
+      "type": "object",
+      "propertyCount": 3,
+      "required": [
+        "field",
+        "operator",
+        "value"
+      ]
+    },
+    {
+      "name": "current_ledger_account_balance_state",
+      "type": "object",
+      "propertyCount": 3,
+      "required": [
+        "balances",
+        "ledger_account_lock_version",
+        "triggered"
+      ]
+    },
+    {
+      "name": "ledger_account_category",
+      "type": "object",
+      "propertyCount": 13,
+      "required": [
+        "id",
+        "object",
+        "live_mode",
+        "created_at",
+        "updated_at",
+        "discarded_at",
+        "name",
+        "description",
+        "metadata",
+        "ledger_id",
+        "normal_balance",
+        "external_id",
+        "balances"
+      ]
+    },
+    {
+      "name": "ledger_account_category_create_request",
+      "type": "object",
+      "propertyCount": 9,
+      "required": [
+        "name",
+        "normal_balance",
+        "currency",
+        "ledger_id"
+      ]
+    },
+    {
+      "name": "ledger_account_category_update_request",
+      "type": "object",
+      "propertyCount": 4,
+      "required": []
+    },
+    {
+      "name": "ledger_account_settlement",
+      "type": "object",
+      "propertyCount": 17,
+      "required": [
+        "id",
+        "object",
+        "live_mode",
+        "created_at",
+        "updated_at",
+        "ledger_id",
+        "description",
+        "status",
+        "settled_ledger_account_id",
+        "contra_ledger_account_id",
+        "effective_at_upper_bound",
+        "ledger_transaction_id",
+        "amount",
+        "settlement_entry_direction",
+        "currency",
+        "currency_exponent",
+        "metadata"
+      ]
+    },
+    {
+      "name": "ledger_account_settlement_create_request",
+      "type": "object",
+      "propertyCount": 8,
+      "required": [
+        "settled_ledger_account_id",
+        "contra_ledger_account_id"
+      ]
+    },
+    {
+      "name": "ledger_account_settlement_update_request",
+      "type": "object",
+      "propertyCount": 4,
+      "required": []
+    },
+    {
+      "name": "ledger_account_settlement_entries_patch_request",
+      "type": "object",
+      "propertyCount": 1,
+      "required": [
+        "ledger_entry_ids"
+      ]
+    },
+    {
+      "name": "ledger_account_settlement_entries_delete_request",
+      "type": "object",
+      "propertyCount": 1,
+      "required": [
+        "ledger_entry_ids"
+      ]
+    },
+    {
+      "name": "ledger_account_statement",
+      "type": "object",
+      "propertyCount": 15,
+      "required": [
+        "id",
+        "object",
+        "live_mode",
+        "created_at",
+        "updated_at",
+        "ledger_id",
+        "description",
+        "ledger_account_id",
+        "ledger_account_lock_version",
+        "ledger_account_normal_balance",
+        "effective_at_lower_bound",
+        "effective_at_upper_bound",
+        "starting_balance",
+        "ending_balance",
+        "metadata"
+      ]
+    },
+    {
+      "name": "ledger_account_statement_create_request",
+      "type": "object",
+      "propertyCount": 5,
+      "required": [
+        "ledger_account_id",
+        "effective_at_lower_bound",
+        "effective_at_upper_bound"
+      ]
+    },
+    {
+      "name": "ledger_balance",
+      "type": "object",
+      "propertyCount": 5,
+      "required": [
+        "credits",
+        "debits",
+        "amount",
+        "currency",
+        "currency_exponent"
+      ]
+    },
+    {
+      "name": "ledger_balances",
+      "type": "object",
+      "propertyCount": 3,
+      "required": [
+        "pending_balance",
+        "posted_balance",
+        "available_balance"
+      ]
+    },
+    {
+      "name": "ledger_balances_with_effective_at",
+      "type": "object",
+      "propertyCount": 5,
+      "required": [
+        "effective_at_lower_bound",
+        "effective_at_upper_bound",
+        "pending_balance",
+        "posted_balance",
+        "available_balance"
+      ]
+    },
+    {
+      "name": "ledger_entry",
+      "type": "object",
+      "propertyCount": 17,
+      "required": [
+        "id",
+        "object",
+        "live_mode",
+        "created_at",
+        "updated_at",
+        "discarded_at",
+        "amount",
+        "effective_at",
+        "direction",
+        "status",
+        "ledger_account_id",
+        "ledger_account_lock_version",
+        "ledger_account_currency",
+        "ledger_account_currency_exponent",
+        "ledger_transaction_id",
+        "resulting_ledger_account_balances",
+        "metadata"
+      ]
+    },
+    {
+      "name": "ledger_entry_create_request",
+      "type": "object",
+      "propertyCount": 10,
+      "required": [
+        "amount",
+        "direction",
+        "ledger_account_id"
+      ]
+    },
+    {
+      "name": "ledger_entry_update_request",
+      "type": "object",
+      "propertyCount": 1,
+      "required": []
+    },
+    {
+      "name": "ledger_entry_of_transaction_version",
+      "type": "object",
+      "propertyCount": 15,
+      "required": [
+        "id",
+        "object",
+        "live_mode",
+        "created_at",
+        "amount",
+        "effective_at",
+        "direction",
+        "status",
+        "ledger_account_id",
+        "ledger_account_lock_version",
+        "ledger_account_currency",
+        "ledger_account_currency_exponent",
+        "ledger_transaction_id",
+        "metadata",
+        "resulting_ledger_account_balances"
+      ]
+    },
+    {
+      "name": "ledger_entry_partial_post_create_request",
+      "type": "object",
+      "propertyCount": 4,
+      "required": [
+        "amount",
+        "direction",
+        "ledger_account_id"
+      ]
+    },
+    {
+      "name": "ledger_transaction",
+      "type": "object",
+      "propertyCount": 20,
+      "required": [
+        "id",
+        "object",
+        "live_mode",
+        "created_at",
+        "updated_at",
+        "description",
+        "status",
+        "metadata",
+        "effective_at",
+        "effective_date",
+        "ledger_entries",
+        "posted_at",
+        "ledger_id",
+        "ledgerable_type",
+        "ledgerable_id",
+        "external_id",
+        "reverses_ledger_transaction_id",
+        "reversed_by_ledger_transaction_id",
+        "partially_posts_ledger_transaction_id",
+        "archived_reason"
+      ]
+    },
+    {
+      "name": "ledger_transaction_version",
+      "type": "object",
+      "propertyCount": 21,
+      "required": [
+        "id",
+        "object",
+        "live_mode",
+        "created_at",
+        "ledger_transaction_id",
+        "description",
+        "status",
+        "metadata",
+        "effective_at",
+        "effective_date",
+        "ledger_entries",
+        "posted_at",
+        "ledger_id",
+        "ledgerable_type",
+        "ledgerable_id",
+        "external_id",
+        "version",
+        "reverses_ledger_transaction_id",
+        "reversed_by_ledger_transaction_id",
+        "partially_posts_ledger_transaction_id",
+        "archived_reason"
+      ]
+    },
+    {
+      "name": "ledger_transaction_create_request",
+      "type": "object",
+      "propertyCount": 9,
+      "required": [
+        "ledger_entries"
+      ]
+    },
+    {
+      "name": "ledger_transaction_update_request",
+      "type": "object",
+      "propertyCount": 8,
+      "required": []
+    },
+    {
+      "name": "ledger_transaction_reversal_create_request",
+      "type": "object",
+      "propertyCount": 7,
+      "required": []
+    },
+    {
+      "name": "ledger_transaction_partial_post_create_request",
+      "type": "object",
+      "propertyCount": 4,
+      "required": [
+        "posted_ledger_entries"
+      ]
+    },
+    {
+      "name": "child_legal_entity",
+      "type": "object",
+      "propertyCount": 47,
+      "required": [
+        "id",
+        "object",
+        "live_mode",
+        "created_at",
+        "updated_at",
+        "discarded_at",
+        "legal_entity_type",
+        "risk_rating",
+        "status",
+        "prefix",
+        "first_name",
+        "middle_name",
+        "last_name",
+        "suffix",
+        "preferred_name",
+        "citizenship_country",
+        "politically_exposed_person",
+        "date_of_birth",
+        "date_formed",
+        "business_name",
+        "doing_business_as_names",
+        "legal_structure",
+        "phone_numbers",
+        "email",
+        "website",
+        "business_description",
+        "intended_use",
+        "expected_activity_volume",
+        "country_of_incorporation",
+        "operating_jurisdictions",
+        "primary_social_media_sites",
+        "listed_exchange",
+        "ticker_symbol",
+        "regulators",
+        "third_party_verification",
+        "third_party_verifications",
+        "service_provider_legal_entity_id",
+        "metadata",
+        "external_id",
+        "bank_settings",
+        "compliance_details",
+        "wealth_and_employment_details",
+        "addresses",
+        "identifications",
+        "industry_classifications",
+        "documents",
+        "legal_entity_associations"
+      ]
+    },
+    {
+      "name": "child_legal_entity_create",
+      "type": "object",
+      "propertyCount": 41,
+      "required": []
+    },
+    {
+      "name": "legal_entity",
+      "type": "object",
+      "propertyCount": 47,
+      "required": [
+        "id",
+        "object",
+        "live_mode",
+        "created_at",
+        "updated_at",
+        "discarded_at",
+        "legal_entity_type",
+        "risk_rating",
+        "status",
+        "prefix",
+        "first_name",
+        "middle_name",
+        "last_name",
+        "suffix",
+        "preferred_name",
+        "citizenship_country",
+        "politically_exposed_person",
+        "date_of_birth",
+        "date_formed",
+        "business_name",
+        "doing_business_as_names",
+        "legal_structure",
+        "phone_numbers",
+        "email",
+        "website",
+        "business_description",
+        "intended_use",
+        "expected_activity_volume",
+        "country_of_incorporation",
+        "operating_jurisdictions",
+        "primary_social_media_sites",
+        "listed_exchange",
+        "ticker_symbol",
+        "regulators",
+        "third_party_verification",
+        "third_party_verifications",
+        "service_provider_legal_entity_id",
+        "metadata",
+        "external_id",
+        "bank_settings",
+        "compliance_details",
+        "wealth_and_employment_details",
+        "addresses",
+        "identifications",
+        "industry_classifications",
+        "documents"
+      ]
+    },
+    {
+      "name": "legal_entity_create_request",
+      "type": "object",
+      "propertyCount": 41,
+      "required": [
+        "legal_entity_type"
+      ]
+    },
+    {
+      "name": "legal_entity_update_request",
+      "type": "object",
+      "propertyCount": 36,
+      "required": []
+    },
+    {
+      "name": "legal_entity_address",
+      "type": "object",
+      "propertyCount": 13,
+      "required": [
+        "id",
+        "object",
+        "live_mode",
+        "created_at",
+        "updated_at",
+        "discarded_at",
+        "address_types",
+        "line1",
+        "line2",
+        "locality",
+        "region",
+        "postal_code",
+        "country"
+      ]
+    },
+    {
+      "name": "legal_entity_address_create_request",
+      "type": "object",
+      "propertyCount": 7,
+      "required": [
+        "line1",
+        "locality",
+        "region",
+        "postal_code",
+        "country"
+      ]
+    },
+    {
+      "name": "legal_entity_association",
+      "type": "object",
+      "propertyCount": 11,
+      "required": [
+        "id",
+        "object",
+        "live_mode",
+        "created_at",
+        "updated_at",
+        "discarded_at",
+        "parent_legal_entity_id",
+        "relationship_types",
+        "title",
+        "ownership_percentage",
+        "child_legal_entity"
+      ]
+    },
+    {
+      "name": "legal_entity_association_inline_create_request",
+      "type": "object",
+      "propertyCount": 5,
+      "required": [
+        "relationship_types"
+      ]
+    },
+    {
+      "name": "legal_entity_bank_setting",
+      "type": "object",
+      "propertyCount": 10,
+      "required": [
+        "id",
+        "object",
+        "live_mode",
+        "created_at",
+        "updated_at",
+        "discarded_at",
+        "enable_backup_withholding",
+        "backup_withholding_percentage",
+        "privacy_opt_out",
+        "regulation_o"
+      ]
+    },
+    {
+      "name": "legal_entity_industry_classification",
+      "type": "object",
+      "propertyCount": 8,
+      "required": [
+        "id",
+        "object",
+        "live_mode",
+        "created_at",
+        "updated_at",
+        "discarded_at",
+        "classification_type",
+        "classification_codes"
+      ]
+    },
+    {
+      "name": "legal_entity_wealth_employment_detail",
+      "type": "object",
+      "propertyCount": 18,
+      "required": [
+        "id",
+        "object",
+        "live_mode",
+        "created_at",
+        "updated_at",
+        "discarded_at",
+        "employment_status",
+        "occupation",
+        "industry",
+        "income_source",
+        "income_state",
+        "income_country",
+        "employer_name",
+        "employer_state",
+        "employer_country",
+        "source_of_funds",
+        "wealth_source",
+        "annual_income"
+      ]
+    },
+    {
+      "name": "legal_entity_regulator",
+      "type": "object",
+      "propertyCount": 3,
+      "required": [
+        "name",
+        "jurisdiction",
+        "registration_number"
+      ]
+    },
+    {
+      "name": "third_party_verification",
+      "type": "object",
+      "propertyCount": 7,
+      "required": [
+        "vendor_verification_id",
+        "vendor",
+        "verification_category",
+        "verification_method",
+        "outcome",
+        "verification_time"
+      ]
+    },
+    {
+      "name": "line_item",
+      "type": "object",
+      "propertyCount": 13,
+      "required": [
+        "id",
+        "object",
+        "live_mode",
+        "created_at",
+        "updated_at",
+        "itemizable_id",
+        "itemizable_type",
+        "amount",
+        "description",
+        "metadata",
+        "accounting",
+        "accounting_category_id",
+        "accounting_ledger_class_id"
+      ]
+    },
+    {
+      "name": "line_item_request",
+      "type": "object",
+      "propertyCount": 4,
+      "required": [
+        "amount"
+      ]
+    },
+    {
+      "name": "line_item_update_request",
+      "type": "object",
+      "propertyCount": 1,
+      "required": []
+    },
+    {
+      "name": "payment_action",
+      "type": "object",
+      "propertyCount": 11,
+      "required": [
+        "id",
+        "object",
+        "live_mode",
+        "created_at",
+        "updated_at",
+        "type",
+        "status",
+        "actionable_id",
+        "actionable_type",
+        "internal_account_id",
+        "details"
+      ]
+    },
+    {
+      "name": "payment_action_create_request",
+      "type": "object",
+      "propertyCount": 5,
+      "required": [
+        "type"
+      ]
+    },
+    {
+      "name": "payment_action_update_request",
+      "type": "object",
+      "propertyCount": 1,
+      "required": [
+        "status"
+      ]
+    },
+    {
+      "name": "payment_flow",
+      "type": "object",
+      "propertyCount": 19,
+      "required": []
+    },
+    {
+      "name": "payment_flow_create_request",
+      "type": "object",
+      "propertyCount": 6,
+      "required": [
+        "amount",
+        "currency",
+        "direction",
+        "counterparty_id",
+        "originating_account_id"
+      ]
+    },
+    {
+      "name": "payment_flow_update_request",
+      "type": "object",
+      "propertyCount": 1,
+      "required": [
+        "status"
+      ]
+    },
+    {
+      "name": "payment_order",
+      "type": "object",
+      "propertyCount": 51,
+      "required": [
+        "id",
+        "object",
+        "live_mode",
+        "created_at",
+        "updated_at",
+        "type",
+        "subtype",
+        "amount",
+        "direction",
+        "priority",
+        "originating_account_id",
+        "receiving_account_id",
+        "currency",
+        "accounting",
+        "accounting_category_id",
+        "accounting_ledger_class_id",
+        "effective_date",
+        "description",
+        "statement_descriptor",
+        "remittance_information",
+        "process_after",
+        "purpose",
+        "metadata",
+        "charge_bearer",
+        "foreign_exchange_indicator",
+        "foreign_exchange_contract",
+        "nsf_protected",
+        "originating_party_name",
+        "ultimate_originating_party_name",
+        "ultimate_originating_party_identifier",
+        "ultimate_receiving_party_name",
+        "ultimate_receiving_party_identifier",
+        "send_remittance_advice",
+        "expires_at",
+        "reconciliation_status",
+        "external_id",
+        "status",
+        "receiving_account_type",
+        "ultimate_originating_account",
+        "ultimate_originating_account_id",
+        "ultimate_originating_account_type",
+        "counterparty_id",
+        "transaction_ids",
+        "ledger_transaction_id",
+        "current_return",
+        "current_hold",
+        "reference_numbers",
+        "vendor_failure_reason",
+        "foreign_exchange_rate",
+        "vendor_attributes",
+        "batch_id"
+      ]
+    },
+    {
+      "name": "payment_order_create_request",
+      "type": "object",
+      "propertyCount": 41,
+      "required": [
+        "type",
+        "amount",
+        "direction",
+        "originating_account_id"
+      ]
+    },
+    {
+      "name": "payment_order_async_create_request",
+      "type": "object",
+      "propertyCount": 40,
+      "required": [
+        "type",
+        "amount",
+        "direction",
+        "originating_account_id"
+      ]
+    },
+    {
+      "name": "payment_order_update_request",
+      "type": "object",
+      "propertyCount": 36,
+      "required": []
+    },
+    {
+      "name": "hold",
+      "type": "object",
+      "propertyCount": 12,
+      "required": [
+        "id",
+        "object",
+        "status",
+        "target_type",
+        "target_id",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "payment_reference",
+      "type": "object",
+      "propertyCount": 7,
+      "required": [
+        "id",
+        "object",
+        "live_mode",
+        "created_at",
+        "updated_at",
+        "reference_number",
+        "reference_number_type"
+      ]
+    },
+    {
+      "name": "payment_reference_object",
+      "type": "object",
+      "propertyCount": 9,
+      "required": [
+        "id",
+        "object",
+        "live_mode",
+        "created_at",
+        "updated_at",
+        "referenceable_id",
+        "referenceable_type",
+        "reference_number",
+        "reference_number_type"
+      ]
+    },
+    {
+      "name": "ping_response",
+      "type": "object",
+      "propertyCount": 1,
+      "required": [
+        "ping"
+      ]
+    },
+    {
+      "name": "return",
+      "type": "object",
+      "propertyCount": 27,
+      "required": [
+        "id",
+        "object",
+        "live_mode",
+        "created_at",
+        "updated_at",
+        "discarded_at",
+        "returnable_id",
+        "returnable_type",
+        "code",
+        "reason",
+        "date_of_death",
+        "corrections",
+        "reconciliation_status",
+        "status",
+        "transaction_line_item_id",
+        "transaction_id",
+        "internal_account_id",
+        "type",
+        "amount",
+        "currency",
+        "failure_reason",
+        "role",
+        "current_return",
+        "reference_numbers",
+        "ledger_transaction_id"
+      ]
+    },
+    {
+      "name": "return_create_request",
+      "type": "object",
+      "propertyCount": 10,
+      "required": [
+        "returnable_id",
+        "returnable_type"
+      ]
+    },
+    {
+      "name": "reversal",
+      "type": "object",
+      "propertyCount": 13,
+      "required": [
+        "id",
+        "object",
+        "live_mode",
+        "created_at",
+        "updated_at",
+        "status",
+        "payment_order_id",
+        "transaction_ids",
+        "ledger_transaction_id",
+        "metadata",
+        "reason",
+        "internal_account_id",
+        "reconciliation_status"
+      ]
+    },
+    {
+      "name": "reversal_create_request",
+      "type": "object",
+      "propertyCount": 3,
+      "required": [
+        "reason"
+      ]
+    },
+    {
+      "name": "routing_detail",
+      "type": "object",
+      "propertyCount": 11,
+      "required": [
+        "id",
+        "object",
+        "live_mode",
+        "created_at",
+        "updated_at",
+        "discarded_at",
+        "routing_number",
+        "routing_number_type",
+        "payment_type",
+        "bank_name",
+        "bank_address"
+      ]
+    },
+    {
+      "name": "routing_detail_create_request",
+      "type": "object",
+      "propertyCount": 3,
+      "required": [
+        "routing_number",
+        "routing_number_type"
+      ]
+    },
+    {
+      "name": "routing_number_lookup_request",
+      "type": "object",
+      "propertyCount": 6,
+      "required": []
+    },
+    {
+      "name": "incoming_payment_detail_create_request",
+      "type": "object",
+      "propertyCount": 10,
+      "required": []
+    },
+    {
+      "name": "legal_entity_update_status_request",
+      "type": "object",
+      "propertyCount": 1,
+      "required": [
+        "status"
+      ]
+    },
+    {
+      "name": "transaction",
+      "type": "object",
+      "propertyCount": 25,
+      "required": [
+        "id",
+        "object",
+        "live_mode",
+        "created_at",
+        "updated_at",
+        "discarded_at",
+        "amount",
+        "currency",
+        "direction",
+        "vendor_code",
+        "vendor_code_type",
+        "vendor_id",
+        "as_of_date",
+        "as_of_time",
+        "as_of_timezone",
+        "internal_account_id",
+        "metadata",
+        "posted",
+        "vendor_customer_id",
+        "reconciled",
+        "type",
+        "foreign_exchange_rate",
+        "custom_identifiers"
+      ]
+    },
+    {
+      "name": "transaction_update_request",
+      "type": "object",
+      "propertyCount": 1,
+      "required": []
+    },
+    {
+      "name": "transaction_create_request",
+      "type": "object",
+      "propertyCount": 11,
+      "required": [
+        "amount",
+        "direction",
+        "vendor_code",
+        "vendor_code_type",
+        "as_of_date",
+        "internal_account_id"
+      ]
+    },
+    {
+      "name": "transaction_line_item",
+      "type": "object",
+      "propertyCount": 16,
+      "required": [
+        "id",
+        "object",
+        "live_mode",
+        "created_at",
+        "updated_at",
+        "discarded_at",
+        "type",
+        "transactable_type",
+        "transactable_id",
+        "amount",
+        "description",
+        "counterparty_id",
+        "expected_payment_id",
+        "transaction_id",
+        "reconciliation_group_id",
+        "reconcilable"
+      ]
+    },
+    {
+      "name": "transaction_line_item_create_request",
+      "type": "object",
+      "propertyCount": 3,
+      "required": [
+        "amount",
+        "transaction_id",
+        "expected_payment_id"
+      ]
+    },
+    {
+      "name": "virtual_account",
+      "type": "object",
+      "propertyCount": 16,
+      "required": [
+        "id",
+        "object",
+        "live_mode",
+        "created_at",
+        "updated_at",
+        "discarded_at",
+        "name",
+        "description",
+        "counterparty_id",
+        "internal_account_id",
+        "account_details",
+        "routing_details",
+        "debit_ledger_account_id",
+        "credit_ledger_account_id",
+        "ledger_account_id",
+        "metadata"
+      ]
+    },
+    {
+      "name": "virtual_account_create_request",
+      "type": "object",
+      "propertyCount": 10,
+      "required": [
+        "name",
+        "internal_account_id"
+      ]
+    },
+    {
+      "name": "virtual_account_update_request",
+      "type": "object",
+      "propertyCount": 4,
+      "required": []
+    },
+    {
+      "name": "reconciliation_rule_variable",
+      "type": "object",
+      "propertyCount": 10,
+      "required": [
+        "amount_upper_bound",
+        "amount_lower_bound",
+        "direction",
+        "internal_account_id"
+      ]
+    },
+    {
+      "name": "reconciliation_group",
+      "type": "object",
+      "propertyCount": 5,
+      "required": [
+        "id",
+        "object",
+        "live_mode",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "accounts_type",
+      "type": "string",
+      "propertyCount": 0,
+      "required": []
+    },
+    {
+      "name": "expected_payment_type",
+      "type": "string",
+      "propertyCount": 0,
+      "required": []
+    },
+    {
+      "name": "external_account_type",
+      "type": "string",
+      "propertyCount": 0,
+      "required": []
+    },
+    {
+      "name": "payment_order_type",
+      "type": "string",
+      "propertyCount": 0,
+      "required": []
+    },
+    {
+      "name": "payment_order_subtype",
+      "type": "string",
+      "propertyCount": 0,
+      "required": []
+    },
+    {
+      "name": "transaction_direction",
+      "type": "string",
+      "propertyCount": 0,
+      "required": []
+    }
+  ],
+  "operations": [
+    {
+      "method": "GET",
+      "path": "/api/ledger_account_balance_monitors",
+      "operationId": "listLedgerAccountBalanceMonitors",
+      "summary": "list ledger_account_balance_monitors",
+      "tags": [
+        "LedgerAccountBalanceMonitor"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/ledger_account_balance_monitors",
+      "operationId": "createLedgerAccountBalanceMonitor",
+      "summary": "create ledger_account_balance_monitor",
+      "tags": [
+        "LedgerAccountBalanceMonitor"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/ledger_account_balance_monitors/{id}",
+      "operationId": "getLedgerAccountBalanceMonitor",
+      "summary": "get ledger_account_balance_monitor",
+      "tags": [
+        "LedgerAccountBalanceMonitor"
+      ]
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/ledger_account_balance_monitors/{id}",
+      "operationId": "deleteLedgerAccountBalanceMonitor",
+      "summary": "delete ledger_account_balance_monitor",
+      "tags": [
+        "LedgerAccountBalanceMonitor"
+      ]
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/ledger_account_balance_monitors/{id}",
+      "operationId": "updateLedgerAccountBalanceMonitor",
+      "summary": "update ledger_account_balance_monitor",
+      "tags": [
+        "LedgerAccountBalanceMonitor"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/ledger_account_categories",
+      "operationId": "listLedgerAccountCategories",
+      "summary": "list ledger_account_categories",
+      "tags": [
+        "LedgerAccountCategory"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/ledger_account_categories",
+      "operationId": "createLedgerAccountCategory",
+      "summary": "create ledger_account_category",
+      "tags": [
+        "LedgerAccountCategory"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/ledger_account_categories/{id}",
+      "operationId": "getLedgerAccountCategory",
+      "summary": "get ledger_account_category",
+      "tags": [
+        "LedgerAccountCategory"
+      ]
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/ledger_account_categories/{id}",
+      "operationId": "deleteLedgerAccountCategory",
+      "summary": "delete ledger_account_category",
+      "tags": [
+        "LedgerAccountCategory"
+      ]
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/ledger_account_categories/{id}",
+      "operationId": "updateLedgerAccountCategory",
+      "summary": "update ledger_account_category",
+      "tags": [
+        "LedgerAccountCategory"
+      ]
+    },
+    {
+      "method": "PUT",
+      "path": "/api/ledger_account_categories/{id}/ledger_accounts/{ledger_account_id}",
+      "operationId": "addLedgerAccountToLedgerAccountCategory",
+      "summary": "add ledger_account to ledger_account_category",
+      "tags": [
+        "LedgerAccountCategory"
+      ]
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/ledger_account_categories/{id}/ledger_accounts/{ledger_account_id}",
+      "operationId": "removeLedgerAccountFromLedgerAccountCategory",
+      "summary": "remove ledger_account from ledger_account_category",
+      "tags": [
+        "LedgerAccountCategory"
+      ]
+    },
+    {
+      "method": "PUT",
+      "path": "/api/ledger_account_categories/{id}/ledger_account_categories/{sub_category_id}",
+      "operationId": "addLedgerAccountCategoryToLedgerAccountCategory",
+      "summary": "add ledger_account_category to ledger_account_category",
+      "tags": [
+        "LedgerAccountCategory"
+      ]
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/ledger_account_categories/{id}/ledger_account_categories/{sub_category_id}",
+      "operationId": "deleteLedgerAccountCategoryFromLedgerAccountCategory",
+      "summary": "delete ledger_account_category from ledger_account_category",
+      "tags": [
+        "LedgerAccountCategory"
+      ]
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/ledger_account_settlements/{id}/ledger_entries",
+      "operationId": "deleteLedgerAccountSettlementEntries",
+      "summary": "delete ledger_account_settlement_entries",
+      "tags": [
+        "LedgerAccountSettlement"
+      ]
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/ledger_account_settlements/{id}/ledger_entries",
+      "operationId": "patchLedgerAccountSettlementEntries",
+      "summary": "patch ledger_account_settlement_entries",
+      "tags": [
+        "LedgerAccountSettlement"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/ledger_account_settlements",
+      "operationId": "listLedgerAccountSettlements",
+      "summary": "list ledger_account_settlements",
+      "tags": [
+        "LedgerAccountSettlement"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/ledger_account_settlements",
+      "operationId": "createLedgerAccountSettlement",
+      "summary": "create ledger_account_settlement",
+      "tags": [
+        "LedgerAccountSettlement"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/ledger_account_settlements/{id}",
+      "operationId": "getLedgerAccountSettlement",
+      "summary": "get ledger_account_settlement",
+      "tags": [
+        "LedgerAccountSettlement"
+      ]
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/ledger_account_settlements/{id}",
+      "operationId": "updateLedgerAccountSettlement",
+      "summary": "update ledger_account_settlement",
+      "tags": [
+        "LedgerAccountSettlement"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/ledger_account_statements",
+      "operationId": "createLedgerAccountStatement",
+      "summary": "create ledger_account_statement",
+      "tags": [
+        "LedgerAccountStatement"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/ledger_account_statements/{id}",
+      "operationId": "getLedgerAccountStatement",
+      "summary": "get ledger_account_statement",
+      "tags": [
+        "LedgerAccountStatement"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/ledger_accounts",
+      "operationId": "listLedgerAccounts",
+      "summary": "list ledger_accounts",
+      "tags": [
+        "LedgerAccount"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/ledger_accounts",
+      "operationId": "createLedgerAccount",
+      "summary": "create ledger_account",
+      "tags": [
+        "LedgerAccount"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/ledger_accounts/{id}",
+      "operationId": "getLedgerAccount",
+      "summary": "get ledger_account",
+      "tags": [
+        "LedgerAccount"
+      ]
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/ledger_accounts/{id}",
+      "operationId": "deleteLedgerAccount",
+      "summary": "delete ledger_account",
+      "tags": [
+        "LedgerAccount"
+      ]
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/ledger_accounts/{id}",
+      "operationId": "updateLedgerAccount",
+      "summary": "update ledger_account",
+      "tags": [
+        "LedgerAccount"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/ledger_entries",
+      "operationId": "listLedgerEntries",
+      "summary": "list ledger_entries",
+      "tags": [
+        "LedgerEntry"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/ledger_entries/{id}",
+      "operationId": "getLedgerEntry",
+      "summary": "get ledger_entry",
+      "tags": [
+        "LedgerEntry"
+      ]
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/ledger_entries/{id}",
+      "operationId": "updateLedgerEntry",
+      "summary": "update ledger_entry",
+      "tags": [
+        "LedgerEntry"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/ledger_transactions/{id}/partial_post",
+      "operationId": "CreateLedgerTransactionPartialPost",
+      "summary": "create ledger_transaction partial post",
+      "tags": [
+        "LedgerTransaction"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/ledger_transactions/{id}/reversal",
+      "operationId": "CreateLedgerTransactionReversal",
+      "summary": "create ledger_transaction reversal",
+      "tags": [
+        "LedgerTransaction"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/ledger_transaction_versions",
+      "operationId": "listLedgerTransactionVersions",
+      "summary": "list ledger_transaction_versions",
+      "tags": [
+        "LedgerTransaction"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/ledger_transactions",
+      "operationId": "listLedgerTransactions",
+      "summary": "list ledger_transactions",
+      "tags": [
+        "LedgerTransaction"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/ledger_transactions",
+      "operationId": "createLedgerTransaction",
+      "summary": "create ledger_transaction",
+      "tags": [
+        "LedgerTransaction"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/ledger_transactions/{id}",
+      "operationId": "getLedgerTransaction",
+      "summary": "get ledger_transaction",
+      "tags": [
+        "LedgerTransaction"
+      ]
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/ledger_transactions/{id}",
+      "operationId": "updateLedgerTransaction",
+      "summary": "update ledger_transaction",
+      "tags": [
+        "LedgerTransaction"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/ledger_transactions/{id}/versions",
+      "operationId": "listLedgerTransactionVersionsNested",
+      "summary": "list ledger_transaction versions",
+      "tags": [
+        "LedgerTransaction"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/ledgers",
+      "operationId": "listLedgers",
+      "summary": "list ledgers",
+      "tags": [
+        "Ledger"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/ledgers",
+      "operationId": "createLedger",
+      "summary": "create ledger",
+      "tags": [
+        "Ledger"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/ledgers/{id}",
+      "operationId": "getLedger",
+      "summary": "get ledger",
+      "tags": [
+        "Ledger"
+      ]
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/ledgers/{id}",
+      "operationId": "deleteLedger",
+      "summary": "delete ledger",
+      "tags": [
+        "Ledger"
+      ]
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/ledgers/{id}",
+      "operationId": "updateLedger",
+      "summary": "update ledger",
+      "tags": [
+        "Ledger"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/connection_legal_entities",
+      "operationId": "listConnectionLegalEntities",
+      "summary": "list connection_legal_entities",
+      "tags": [
+        "ConnectionLegalEntity"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/connection_legal_entities",
+      "operationId": "createConnectionLegalEntity",
+      "summary": "create connection_legal_entity",
+      "tags": [
+        "ConnectionLegalEntity"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/connection_legal_entities/{id}",
+      "operationId": "getConnectionLegalEntity",
+      "summary": "get connection_legal_entity",
+      "tags": [
+        "ConnectionLegalEntity"
+      ]
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/connection_legal_entities/{id}",
+      "operationId": "updateConnectionLegalEntity",
+      "summary": "update connection_legal_entity",
+      "tags": [
+        "ConnectionLegalEntity"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/connections",
+      "operationId": "listConnections",
+      "summary": "list connections",
+      "tags": [
+        "Connection"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/legal_entities",
+      "operationId": "listLegalEntities",
+      "summary": "list legal_entities",
+      "tags": [
+        "LegalEntity"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/legal_entities",
+      "operationId": "createLegalEntity",
+      "summary": "create legal_entity",
+      "tags": [
+        "LegalEntity"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/legal_entities/{id}",
+      "operationId": "getLegalEntity",
+      "summary": "get legal_entity",
+      "tags": [
+        "LegalEntity"
+      ]
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/legal_entities/{id}",
+      "operationId": "updateLegalEntity",
+      "summary": "update legal entity",
+      "tags": [
+        "LegalEntity"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/journal_entries",
+      "operationId": "listJournalEntries",
+      "summary": "list journal_entries",
+      "tags": [
+        "JournalEntry"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/journal_entries/{id}",
+      "operationId": "getJournalEntry",
+      "summary": "show journal_entry",
+      "tags": [
+        "JournalEntry"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/journal_reports",
+      "operationId": "listJournalReports",
+      "summary": "list journal_reports",
+      "tags": [
+        "JournalReport"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/journal_reports/{id}",
+      "operationId": "getJournalReport",
+      "summary": "show journal_report",
+      "tags": [
+        "JournalReport"
+      ]
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/journal_reports/{id}",
+      "operationId": "updateJournalReport",
+      "summary": "update journal_report",
+      "tags": [
+        "JournalReport"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/journal_sources",
+      "operationId": "listJournalSources",
+      "summary": "list journal_sources",
+      "tags": [
+        "JournalSource"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/journal_sources/{id}",
+      "operationId": "getJournalSource",
+      "summary": "show journal_source",
+      "tags": [
+        "JournalSource"
+      ]
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/internal_accounts/{internal_account_id}/account_capabilities/{id}",
+      "operationId": "updateAccountCapability",
+      "summary": "update account_capability",
+      "tags": [
+        "AccountCapability"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/{accounts_type}/{account_id}/account_details",
+      "operationId": "listAccountDetails",
+      "summary": "list account_details",
+      "tags": [
+        "AccountDetail"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/{accounts_type}/{account_id}/account_details",
+      "operationId": "createAccountDetail",
+      "summary": "create account_detail",
+      "tags": [
+        "AccountDetail"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/{accounts_type}/{account_id}/account_details/{id}",
+      "operationId": "getAccountDetail",
+      "summary": "get account_detail",
+      "tags": [
+        "AccountDetail"
+      ]
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/{accounts_type}/{account_id}/account_details/{id}",
+      "operationId": "deleteAccountDetail",
+      "summary": "delete account_detail",
+      "tags": [
+        "AccountDetail"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/internal_accounts/{internal_account_id}/balance_reports",
+      "operationId": "listBalanceReports",
+      "summary": "list balance_reports",
+      "tags": [
+        "BalanceReport"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/internal_accounts/{internal_account_id}/balance_reports",
+      "operationId": "createBalanceReport",
+      "summary": "create balance reports",
+      "tags": [
+        "BalanceReport"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/internal_accounts/{internal_account_id}/balance_reports/{id}",
+      "operationId": "getBalanceReport",
+      "summary": "get balance_report",
+      "tags": [
+        "BalanceReport"
+      ]
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/internal_accounts/{internal_account_id}/balance_reports/{id}",
+      "operationId": "deleteBalanceReport",
+      "summary": "delete balance_report",
+      "tags": [
+        "BalanceReport"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/bulk_requests",
+      "operationId": "listBulkRequests",
+      "summary": "list bulk_requests",
+      "tags": [
+        "BulkRequest"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/bulk_requests",
+      "operationId": "createBulkRequest",
+      "summary": "create bulk_request",
+      "tags": [
+        "BulkRequest"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/bulk_requests/{id}",
+      "operationId": "getBulkRequest",
+      "summary": "get bulk_request",
+      "tags": [
+        "BulkRequest"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/bulk_results",
+      "operationId": "listBulkResults",
+      "summary": "list bulk_results",
+      "tags": [
+        "BulkResult"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/bulk_results/{id}",
+      "operationId": "getBulkResult",
+      "summary": "get bulk_result",
+      "tags": [
+        "BulkResult"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/counterparties/{id}/collect_account",
+      "operationId": "collectAccountDetails",
+      "summary": "collect account details",
+      "tags": [
+        "Counterparty"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/counterparties",
+      "operationId": "listCounterparties",
+      "summary": "list counterparties",
+      "tags": [
+        "Counterparty"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/counterparties",
+      "operationId": "createCounterparty",
+      "summary": "create counterparty",
+      "tags": [
+        "Counterparty"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/counterparties/{id}",
+      "operationId": "getCounterparty",
+      "summary": "show counterparty",
+      "tags": [
+        "Counterparty"
+      ]
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/counterparties/{id}",
+      "operationId": "deleteCounterparty",
+      "summary": "delete counterparty",
+      "tags": [
+        "Counterparty"
+      ]
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/counterparties/{id}",
+      "operationId": "updateCounterparty",
+      "summary": "update counterparty",
+      "tags": [
+        "Counterparty"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/documents",
+      "operationId": "listDocuments",
+      "summary": "list documents",
+      "tags": [
+        "Document"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/documents",
+      "operationId": "createDocument",
+      "summary": "create document",
+      "tags": [
+        "Document"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/{documentable_type}/{documentable_id}/documents",
+      "operationId": "listDocumentsNested",
+      "summary": "list documents - nested path (legacy)",
+      "tags": [
+        "Document"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/{documentable_type}/{documentable_id}/documents",
+      "operationId": "createDocumentNested",
+      "summary": "create document - nested path (legacy)",
+      "tags": [
+        "Document"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/{documentable_type}/{documentable_id}/documents/{id}",
+      "operationId": "getDocumentNested",
+      "summary": "get document - nested path (legacy)",
+      "tags": [
+        "Document"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/documents/{id}",
+      "operationId": "getDocument",
+      "summary": "get document",
+      "tags": [
+        "Document"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/{documentable_type}/{documentable_id}/documents/{id}/download",
+      "operationId": "downloadDocumentNested",
+      "summary": "download document - nested path (legacy)",
+      "tags": [
+        "Document"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/documents/{id}/download",
+      "operationId": "downloadDocument",
+      "summary": "download document",
+      "tags": [
+        "Document"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/events",
+      "operationId": "listEvents",
+      "summary": "list events",
+      "tags": [
+        "Event"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/events/{id}",
+      "operationId": "getEvent",
+      "summary": "get event",
+      "tags": [
+        "Event"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/expected_payments",
+      "operationId": "listExpectedPayments",
+      "summary": "list expected_payments",
+      "tags": [
+        "ExpectedPayment"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/expected_payments",
+      "operationId": "createExpectedPayment",
+      "summary": "create expected payment",
+      "tags": [
+        "ExpectedPayment"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/expected_payments/{id}",
+      "operationId": "getExpectedPayment",
+      "summary": "get expected payment",
+      "tags": [
+        "ExpectedPayment"
+      ]
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/expected_payments/{id}",
+      "operationId": "deleteExpectedPayment",
+      "summary": "delete expected payment",
+      "tags": [
+        "ExpectedPayment"
+      ]
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/expected_payments/{id}",
+      "operationId": "updateExpectedPayment",
+      "summary": "update expected payment",
+      "tags": [
+        "ExpectedPayment"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/external_accounts/{id}/verify",
+      "operationId": "verifyExternalAccount",
+      "summary": "verify external account",
+      "tags": [
+        "ExternalAccount"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/external_accounts/{id}/complete_verification",
+      "operationId": "completeVerificationExternalAccount",
+      "summary": "complete verification of external account",
+      "tags": [
+        "ExternalAccount"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/external_accounts",
+      "operationId": "listExternalAccounts",
+      "summary": "list external accounts",
+      "tags": [
+        "ExternalAccount"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/external_accounts",
+      "operationId": "createExternalAccount",
+      "summary": "create external account",
+      "tags": [
+        "ExternalAccount"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/external_accounts/{id}",
+      "operationId": "getExternalAccount",
+      "summary": "show external account",
+      "tags": [
+        "ExternalAccount"
+      ]
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/external_accounts/{id}",
+      "operationId": "deleteExternalAccount",
+      "summary": "delete external account",
+      "tags": [
+        "ExternalAccount"
+      ]
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/external_accounts/{id}",
+      "operationId": "updateExternalAccount",
+      "summary": "update external account",
+      "tags": [
+        "ExternalAccount"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/foreign_exchange_quotes",
+      "operationId": "listQuotes",
+      "summary": "list foreign_exchange_quotes",
+      "tags": [
+        "ForeignExchangeQuote"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/foreign_exchange_quotes",
+      "operationId": "createQuote",
+      "summary": "create foreign_exchange_quote",
+      "tags": [
+        "ForeignExchangeQuote"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/foreign_exchange_quotes/{id}",
+      "operationId": "getQuote",
+      "summary": "get foreign_exchange_quote",
+      "tags": [
+        "ForeignExchangeQuote"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/holds",
+      "operationId": "listHolds",
+      "summary": "list holds",
+      "tags": [
+        "Hold"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/holds",
+      "operationId": "createHold",
+      "summary": "create hold",
+      "tags": [
+        "Hold"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/holds/{id}",
+      "operationId": "showHold",
+      "summary": "show hold",
+      "tags": [
+        "Hold"
+      ]
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/holds/{id}",
+      "operationId": "updateHold",
+      "summary": "update hold",
+      "tags": [
+        "Hold"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/incoming_payment_details",
+      "operationId": "listIncomingPaymentDetails",
+      "summary": "list incoming payment_details",
+      "tags": [
+        "IncomingPaymentDetail"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/incoming_payment_details/{id}",
+      "operationId": "getIncomingPaymentDetail",
+      "summary": "get incoming payment detail",
+      "tags": [
+        "IncomingPaymentDetail"
+      ]
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/incoming_payment_details/{id}",
+      "operationId": "updateIncomingPaymentDetail",
+      "summary": "update incoming payment detail",
+      "tags": [
+        "IncomingPaymentDetail"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/internal_accounts",
+      "operationId": "listInternalAccounts",
+      "summary": "list internal accounts",
+      "tags": [
+        "InternalAccount"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/internal_accounts",
+      "operationId": "createInternalAccount",
+      "summary": "create internal account",
+      "tags": [
+        "InternalAccount"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/internal_accounts/{id}",
+      "operationId": "getInternalAccount",
+      "summary": "get internal account",
+      "tags": [
+        "InternalAccount"
+      ]
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/internal_accounts/{id}",
+      "operationId": "updateInternalAccount",
+      "summary": "update internal account",
+      "tags": [
+        "InternalAccount"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/internal_accounts/{id}/request_closure",
+      "operationId": "requestInternalAccountClosure",
+      "summary": "request closure of internal account",
+      "tags": [
+        "InternalAccount"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/invoices/{invoice_id}/invoice_line_items",
+      "operationId": "listInvoiceLineItems",
+      "summary": "list invoice_line_items",
+      "tags": [
+        "InvoiceLineItem"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/invoices/{invoice_id}/invoice_line_items",
+      "operationId": "createInvoiceLineItem",
+      "summary": "create invoice_line_item",
+      "tags": [
+        "InvoiceLineItem"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/invoices/{invoice_id}/invoice_line_items/{id}",
+      "operationId": "getInvoiceLineItem",
+      "summary": "get invoice_line_item",
+      "tags": [
+        "InvoiceLineItem"
+      ]
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/invoices/{invoice_id}/invoice_line_items/{id}",
+      "operationId": "deleteInvoiceLineItem",
+      "summary": "delete invoice_line_item",
+      "tags": [
+        "InvoiceLineItem"
+      ]
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/invoices/{invoice_id}/invoice_line_items/{id}",
+      "operationId": "updateInvoiceLineItem",
+      "summary": "update invoice_line_item",
+      "tags": [
+        "InvoiceLineItem"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/invoices",
+      "operationId": "listInvoices",
+      "summary": "list invoices",
+      "tags": [
+        "Invoice"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/invoices",
+      "operationId": "createInvoice",
+      "summary": "create invoice",
+      "tags": [
+        "Invoice"
+      ]
+    },
+    {
+      "method": "PUT",
+      "path": "/api/invoices/{id}/payment_orders/{payment_order_id}",
+      "operationId": "addPaymentOrderToInvoice",
+      "summary": "add payment_order_id to invoice",
+      "tags": [
+        "PaymentOrder"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/invoices/{id}",
+      "operationId": "getInvoice",
+      "summary": "get invoice",
+      "tags": [
+        "Invoice"
+      ]
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/invoices/{id}",
+      "operationId": "updateInvoice",
+      "summary": "update invoice",
+      "tags": [
+        "Invoice"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/{itemizable_type}/{itemizable_id}/line_items",
+      "operationId": "listLineItems",
+      "summary": "list line items",
+      "tags": [
+        "LineItem"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/{itemizable_type}/{itemizable_id}/line_items/{id}",
+      "operationId": "getLineItem",
+      "summary": "get line item",
+      "tags": [
+        "LineItem"
+      ]
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/{itemizable_type}/{itemizable_id}/line_items/{id}",
+      "operationId": "updateLineItem",
+      "summary": "update line item",
+      "tags": [
+        "LineItem"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/payment_actions",
+      "operationId": "listPaymentActions",
+      "summary": "list payment_actions",
+      "tags": [
+        "PaymentAction"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/payment_actions",
+      "operationId": "createPaymentAction",
+      "summary": "create payment_action",
+      "tags": [
+        "PaymentAction"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/payment_actions/{id}",
+      "operationId": "getPaymentAction",
+      "summary": "get payment_action",
+      "tags": [
+        "PaymentAction"
+      ]
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/payment_actions/{id}",
+      "operationId": "updatePaymentAction",
+      "summary": "update payment_action",
+      "tags": [
+        "PaymentAction"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/payment_orders/create_async",
+      "operationId": "createAsyncPaymentOrder",
+      "summary": "create async payment order",
+      "tags": [
+        "PaymentOrder"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/payment_orders",
+      "operationId": "listPaymentOrders",
+      "summary": "list payment orders",
+      "tags": [
+        "PaymentOrder"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/payment_orders",
+      "operationId": "createPaymentOrder",
+      "summary": "create payment order",
+      "tags": [
+        "PaymentOrder"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/payment_orders/{id}",
+      "operationId": "getPaymentOrder",
+      "summary": "get payment order",
+      "tags": [
+        "PaymentOrder"
+      ]
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/payment_orders/{id}",
+      "operationId": "updatePaymentOrder",
+      "summary": "update payment order",
+      "tags": [
+        "PaymentOrder"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/payment_references",
+      "operationId": "listPaymentReferences",
+      "summary": "list payment_references",
+      "tags": [
+        "PaymentReference"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/payment_references/{id}",
+      "operationId": "getPaymentReference",
+      "summary": "get payment_reference",
+      "tags": [
+        "PaymentReference"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/ping",
+      "operationId": "pingAPI",
+      "summary": "ping api",
+      "tags": [
+        "Ping"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/returns",
+      "operationId": "listReturns",
+      "summary": "list returns",
+      "tags": [
+        "Return"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/returns",
+      "operationId": "createReturn",
+      "summary": "create return",
+      "tags": [
+        "Return"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/returns/{id}",
+      "operationId": "getReturn",
+      "summary": "show return",
+      "tags": [
+        "Return"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/payment_orders/{payment_order_id}/reversals",
+      "operationId": "listReversals",
+      "summary": "list reversals",
+      "tags": [
+        "Reversal"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/payment_orders/{payment_order_id}/reversals",
+      "operationId": "createReversal",
+      "summary": "create reversal",
+      "tags": [
+        "Reversal"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/payment_orders/{payment_order_id}/reversals/{reversal_id}",
+      "operationId": "getReversal",
+      "summary": "show reversal",
+      "tags": [
+        "Reversal"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/{accounts_type}/{account_id}/routing_details",
+      "operationId": "listRoutingDetails",
+      "summary": "list routing_details",
+      "tags": [
+        "RoutingDetail"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/{accounts_type}/{account_id}/routing_details",
+      "operationId": "createRoutingDetail",
+      "summary": "create routing_detail",
+      "tags": [
+        "RoutingDetail"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/{accounts_type}/{account_id}/routing_details/{id}",
+      "operationId": "getRoutingDetail",
+      "summary": "get routing_detail",
+      "tags": [
+        "RoutingDetail"
+      ]
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/{accounts_type}/{account_id}/routing_details/{id}",
+      "operationId": "deleteRoutingDetail",
+      "summary": "delete routing_detail",
+      "tags": [
+        "RoutingDetail"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/simulations/incoming_payment_details/create_async",
+      "operationId": "createAsyncIncomingPaymentDetail",
+      "summary": "create async incoming payment detail",
+      "tags": [
+        "IncomingPaymentDetail"
+      ]
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/simulations/legal_entities/{id}/update_status",
+      "operationId": "updateLegalEntityStatus",
+      "summary": "update legal entity status",
+      "tags": [
+        "LegalEntity"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/transactions/{transaction_id}/line_items",
+      "operationId": "listTransactionLineItemsNested",
+      "summary": "list transaction_line_items",
+      "tags": [
+        "TransactionLineItem"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/transaction_line_items",
+      "operationId": "listTransactionLineItems",
+      "summary": "list transaction_line_items",
+      "tags": [
+        "TransactionLineItem"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/transaction_line_items",
+      "operationId": "createTransactionLineItem",
+      "summary": "create transaction line items",
+      "tags": [
+        "TransactionLineItem"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/transaction_line_items/{id}",
+      "operationId": "listTransactionLineItem",
+      "summary": "get transaction line item",
+      "tags": [
+        "TransactionLineItem"
+      ]
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/transaction_line_items/{id}",
+      "operationId": "deleteTransactionLineItem",
+      "summary": "delete transaction line item",
+      "tags": [
+        "TransactionLineItem"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/transactions",
+      "operationId": "listTransactions",
+      "summary": "list transactions",
+      "tags": [
+        "Transaction"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/transactions",
+      "operationId": "createTransaction",
+      "summary": "create transaction",
+      "tags": [
+        "Transaction"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/transactions/{id}",
+      "operationId": "getTransaction",
+      "summary": "get transaction",
+      "tags": [
+        "Transaction"
+      ]
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/transactions/{id}",
+      "operationId": "deleteTransaction",
+      "summary": "delete transaction",
+      "tags": [
+        "Transaction"
+      ]
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/transactions/{id}",
+      "operationId": "updateTransaction",
+      "summary": "update transaction",
+      "tags": [
+        "Transaction"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/validations/routing_numbers",
+      "operationId": "validateRoutingNumber",
+      "summary": "validate routing numbers",
+      "tags": [
+        "Validation"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/virtual_accounts",
+      "operationId": "listVirtualAccounts",
+      "summary": "list virtual_accounts",
+      "tags": [
+        "VirtualAccount"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/virtual_accounts",
+      "operationId": "createVirtualAccount",
+      "summary": "create virtual_account",
+      "tags": [
+        "VirtualAccount"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/virtual_accounts/{id}",
+      "operationId": "getVirtualAccount",
+      "summary": "get virtual_account",
+      "tags": [
+        "VirtualAccount"
+      ]
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/virtual_accounts/{id}",
+      "operationId": "deleteVirtualAccount",
+      "summary": "delete virtual_account",
+      "tags": [
+        "VirtualAccount"
+      ]
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/virtual_accounts/{id}",
+      "operationId": "updateVirtualAccount",
+      "summary": "update virtual_account",
+      "tags": [
+        "VirtualAccount"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/account_collection_flows",
+      "operationId": "listAccountCollectionFlows",
+      "summary": "list account_collection_flows",
+      "tags": [
+        "AccountCollectionFlow"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/account_collection_flows",
+      "operationId": "createAccountCollectionFlow",
+      "summary": "create account_collection_flow",
+      "tags": [
+        "AccountCollectionFlow"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/account_collection_flows/{id}",
+      "operationId": "getAccountCollectionFlow",
+      "summary": "get account_collection_flow",
+      "tags": [
+        "AccountCollectionFlow"
+      ]
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/account_collection_flows/{id}",
+      "operationId": "updateAccountCollectionFlow",
+      "summary": "update account_collection_flow",
+      "tags": [
+        "AccountCollectionFlow"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/payment_flows",
+      "operationId": "listPaymentFlows",
+      "summary": "list payment_flows",
+      "tags": [
+        "PaymentFlow"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/payment_flows",
+      "operationId": "createPaymentFlow",
+      "summary": "create payment_flow",
+      "tags": [
+        "PaymentFlow"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/payment_flows/{id}",
+      "operationId": "getPaymentFlow",
+      "summary": "get payment_flow",
+      "tags": [
+        "PaymentFlow"
+      ]
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/payment_flows/{id}",
+      "operationId": "updatePaymentFlow",
+      "summary": "update payment_flow",
+      "tags": [
+        "PaymentFlow"
+      ]
+    }
+  ]
+}

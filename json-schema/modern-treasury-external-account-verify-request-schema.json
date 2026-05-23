@@ -1,0 +1,74 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/external_account_verify_request",
+  "title": "external_account_verify_request",
+  "type": "object",
+  "properties": {
+    "originating_account_id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "The ID of the internal account where the micro-deposits originate from. Both credit and debit capabilities must be enabled."
+    },
+    "payment_type": {
+      "type": "string",
+      "enum": [
+        "ach",
+        "au_becs",
+        "bacs",
+        "book",
+        "card",
+        "chats",
+        "check",
+        "cross_border",
+        "dk_nets",
+        "eft",
+        "gb_fps",
+        "hu_ics",
+        "interac",
+        "masav",
+        "mx_ccen",
+        "neft",
+        "nics",
+        "nz_becs",
+        "pl_elixir",
+        "provxchange",
+        "ro_sent",
+        "rtp",
+        "se_bankgirot",
+        "sen",
+        "sepa",
+        "sg_giro",
+        "sic",
+        "signet",
+        "sknbi",
+        "stablecoin",
+        "wire",
+        "zengin"
+      ],
+      "description": "Can be `ach`, `eft`, or `rtp`."
+    },
+    "currency": {
+      "$ref": "#/components/schemas/currency",
+      "description": "Defaults to the currency of the originating account."
+    },
+    "fallback_type": {
+      "type": "string",
+      "enum": [
+        "ach"
+      ],
+      "description": "A payment type to fallback to if the original type is not valid for the receiving account. Currently, this only supports falling back from RTP to ACH (payment_type=rtp and fallback_type=ach)"
+    },
+    "priority": {
+      "type": "string",
+      "enum": [
+        "high",
+        "normal"
+      ],
+      "description": "Either `normal` or `high`. For ACH payments, `high` represents a same-day ACH transfer. This will apply to both `payment_type` and `fallback_type`."
+    }
+  },
+  "required": [
+    "originating_account_id",
+    "payment_type"
+  ]
+}

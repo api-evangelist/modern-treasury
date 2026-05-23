@@ -1,0 +1,44 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/balance_create_request",
+  "title": "balance_create_request",
+  "type": "object",
+  "properties": {
+    "amount": {
+      "type": "integer",
+      "description": "The balance amount."
+    },
+    "balance_type": {
+      "type": "string",
+      "enum": [
+        "closing_available",
+        "closing_ledger",
+        "current_available",
+        "current_ledger",
+        "opening_available",
+        "opening_available_next_business_day",
+        "opening_ledger",
+        "other",
+        "previously_closed_book"
+      ],
+      "description": "The specific type of balance reported. One of `opening_ledger`, `closing_ledger`, `current_ledger`, `opening_available`, `opening_available_next_business_day`, `closing_available`, `current_available`, 'previously_closed_book', or `other`."
+    },
+    "vendor_code": {
+      "type": "string",
+      "description": "The code used by the bank when reporting this specific balance."
+    },
+    "vendor_code_type": {
+      "type": "string",
+      "nullable": true,
+      "description": "The type of `vendor_code` being reported. Can be one of `bai2`, `bankprov`, `bnk_dev`, `cleartouch`, `currencycloud`, `cross_river`, `dc_bank`, `dwolla`, `evolve`, `goldman_sachs`, `iso20022`, `jpmc`, `mx`, `signet`, `silvergate`, `swift`, or `us_bank`."
+    }
+  },
+  "additionalProperties": false,
+  "minProperties": 4,
+  "required": [
+    "amount",
+    "balance_type",
+    "vendor_code",
+    "vendor_code_type"
+  ]
+}

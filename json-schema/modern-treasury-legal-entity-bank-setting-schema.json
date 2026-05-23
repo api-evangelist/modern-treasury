@@ -1,0 +1,66 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/legal_entity_bank_setting",
+  "title": "legal_entity_bank_setting",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "object": {
+      "type": "string"
+    },
+    "live_mode": {
+      "type": "boolean",
+      "description": "This field will be true if this object exists in the live environment or false if it exists in the test environment."
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "updated_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "discarded_at": {
+      "type": "string",
+      "format": "date-time",
+      "nullable": true
+    },
+    "enable_backup_withholding": {
+      "type": "boolean",
+      "nullable": true,
+      "description": "Whether backup withholding is enabled. See more here - https://www.irs.gov/businesses/small-businesses-self-employed/backup-withholding."
+    },
+    "backup_withholding_percentage": {
+      "type": "integer",
+      "nullable": true,
+      "description": "The percentage of backup withholding to apply to the legal entity."
+    },
+    "privacy_opt_out": {
+      "type": "boolean",
+      "nullable": true,
+      "description": "Cross River Bank specific setting to opt out of privacy policy."
+    },
+    "regulation_o": {
+      "type": "boolean",
+      "nullable": true,
+      "description": "It covers, among other types of insider loans, extensions of credit by a member bank to an executive officer, director, or principal shareholder of the member bank; a bank holding company of which the member bank is a subsidiary; and any other subsidiary of that bank holding company."
+    }
+  },
+  "additionalProperties": false,
+  "minProperties": 10,
+  "required": [
+    "id",
+    "object",
+    "live_mode",
+    "created_at",
+    "updated_at",
+    "discarded_at",
+    "enable_backup_withholding",
+    "backup_withholding_percentage",
+    "privacy_opt_out",
+    "regulation_o"
+  ]
+}

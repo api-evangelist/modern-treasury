@@ -1,0 +1,108 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/transaction_line_item",
+  "title": "transaction_line_item",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "object": {
+      "type": "string"
+    },
+    "live_mode": {
+      "type": "boolean",
+      "description": "This field will be true if this object exists in the live environment, or false if it exists in the test environment."
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "updated_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "discarded_at": {
+      "type": "string",
+      "format": "date-time",
+      "nullable": true
+    },
+    "type": {
+      "type": "string",
+      "enum": [
+        "originating",
+        "receiving"
+      ],
+      "description": "Indicates whether the line item is `originating` or `receiving` (see https://www.moderntreasury.com/journal/beginners-guide-to-ach for more)."
+    },
+    "transactable_type": {
+      "type": "string",
+      "enum": [
+        "incoming_payment_detail",
+        "payment_order",
+        "payment_order_attempt",
+        "return",
+        "reversal"
+      ],
+      "nullable": true,
+      "description": "If a matching object exists in Modern Treasury, the type will be populated here, otherwise `null`."
+    },
+    "transactable_id": {
+      "type": "string",
+      "nullable": true,
+      "description": "If a matching object exists in Modern Treasury, the ID will be populated here, otherwise `null`."
+    },
+    "amount": {
+      "type": "integer",
+      "description": "If a matching object exists in Modern Treasury, `amount` will be populated. Value in specified currency's smallest unit (taken from parent Transaction)."
+    },
+    "description": {
+      "type": "string",
+      "description": "If no matching object is found, `description` will be a free-form text field describing the line item. This field may contain personally identifiable information (PII) and is not included in API responses by default. Learn more about changing your settings at https://docs.moderntreasury.com/reference/personally-identifiable-information."
+    },
+    "counterparty_id": {
+      "type": "string",
+      "nullable": true,
+      "description": "The ID for the counterparty for this transaction line item."
+    },
+    "expected_payment_id": {
+      "type": "string",
+      "nullable": true,
+      "description": "The ID of the reconciled Expected Payment, otherwise `null`."
+    },
+    "transaction_id": {
+      "type": "string",
+      "description": "The ID of the parent transaction."
+    },
+    "reconciliation_group_id": {
+      "type": "string",
+      "nullable": true,
+      "description": "The ID of the reconciliation group this line item belongs to, otherwise `null`."
+    },
+    "reconcilable": {
+      "type": "boolean",
+      "description": "Describes whether this line item should be counted towards the corresponding transaction\u2019s reconciliation."
+    }
+  },
+  "additionalProperties": false,
+  "minProperties": 16,
+  "required": [
+    "id",
+    "object",
+    "live_mode",
+    "created_at",
+    "updated_at",
+    "discarded_at",
+    "type",
+    "transactable_type",
+    "transactable_id",
+    "amount",
+    "description",
+    "counterparty_id",
+    "expected_payment_id",
+    "transaction_id",
+    "reconciliation_group_id",
+    "reconcilable"
+  ]
+}

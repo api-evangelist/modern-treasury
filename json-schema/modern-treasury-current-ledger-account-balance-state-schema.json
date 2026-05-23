@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/current_ledger_account_balance_state",
+  "title": "current_ledger_account_balance_state",
+  "type": "object",
+  "properties": {
+    "balances": {
+      "$ref": "#/components/schemas/ledger_balances"
+    },
+    "ledger_account_lock_version": {
+      "type": "integer",
+      "description": "The current lock version of the ledger account."
+    },
+    "triggered": {
+      "type": "boolean",
+      "description": "If `true`, the ledger account's balances satisfy the `alert_condition` at this lock version."
+    }
+  },
+  "additionalProperties": false,
+  "minProperties": 3,
+  "required": [
+    "balances",
+    "ledger_account_lock_version",
+    "triggered"
+  ]
+}

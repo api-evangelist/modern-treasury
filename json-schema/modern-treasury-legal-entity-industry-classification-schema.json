@@ -1,0 +1,74 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/legal_entity_industry_classification",
+  "title": "legal_entity_industry_classification",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "object": {
+      "type": "string"
+    },
+    "live_mode": {
+      "type": "boolean",
+      "description": "This field will be true if this object exists in the live environment or false if it exists in the test environment."
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "updated_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "discarded_at": {
+      "type": "string",
+      "format": "date-time",
+      "nullable": true
+    },
+    "classification_type": {
+      "type": "string",
+      "enum": [
+        "anzsic",
+        "bics",
+        "gics",
+        "hsics",
+        "icb",
+        "isic",
+        "mgecs",
+        "nace",
+        "naics",
+        "rbics",
+        "sic",
+        "sni",
+        "trbc",
+        "uksic",
+        "unspsc"
+      ],
+      "nullable": false,
+      "description": "The classification system of the classification codes."
+    },
+    "classification_codes": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "nullable": false,
+      "description": "The industry classification codes for the legal entity."
+    }
+  },
+  "additionalProperties": false,
+  "minProperties": 8,
+  "required": [
+    "id",
+    "object",
+    "live_mode",
+    "created_at",
+    "updated_at",
+    "discarded_at",
+    "classification_type",
+    "classification_codes"
+  ]
+}

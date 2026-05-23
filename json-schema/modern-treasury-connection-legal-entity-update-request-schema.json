@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/connection_legal_entity_update_request",
+  "title": "connection_legal_entity_update_request",
+  "type": "object",
+  "properties": {
+    "status": {
+      "type": "string",
+      "enum": [
+        "processing"
+      ],
+      "description": "The status of the connection legal entity."
+    }
+  }
+}

@@ -1,0 +1,51 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/account_collection_flow_create_request",
+  "title": "account_collection_flow_create_request",
+  "type": "object",
+  "properties": {
+    "counterparty_id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Required."
+    },
+    "payment_types": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "description": "Required. At least one of `ach`, `wire` or `check`."
+      }
+    },
+    "receiving_countries": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "USA",
+          "AUS",
+          "BEL",
+          "CAN",
+          "CHL",
+          "CHN",
+          "COL",
+          "FRA",
+          "DEU",
+          "HKG",
+          "IND",
+          "IRL",
+          "ITA",
+          "MEX",
+          "NLD",
+          "PER",
+          "ESP",
+          "GBR"
+        ],
+        "description": "Optional. Array of 3-digit ISO country codes."
+      }
+    }
+  },
+  "required": [
+    "payment_types",
+    "counterparty_id"
+  ]
+}

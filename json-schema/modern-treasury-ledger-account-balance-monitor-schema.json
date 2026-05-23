@@ -1,0 +1,76 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/ledger_account_balance_monitor",
+  "title": "ledger_account_balance_monitor",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "object": {
+      "type": "string"
+    },
+    "live_mode": {
+      "type": "boolean",
+      "description": "This field will be true if this object exists in the live environment or false if it exists in the test environment."
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "updated_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "discarded_at": {
+      "type": "string",
+      "format": "date-time",
+      "nullable": true
+    },
+    "ledger_account_id": {
+      "type": "string",
+      "description": "The ledger account associated with this balance monitor."
+    },
+    "description": {
+      "type": "string",
+      "description": "An optional, free-form description for internal use.",
+      "nullable": true
+    },
+    "alert_condition": {
+      "$ref": "#/components/schemas/alert_condition",
+      "description": "Describes the condition that must be satisfied for the monitor to be triggered."
+    },
+    "current_ledger_account_balance_state": {
+      "$ref": "#/components/schemas/current_ledger_account_balance_state",
+      "description": "The ledger account's balances and the monitor state as of the current ledger account lock version."
+    },
+    "metadata": {
+      "type": "object",
+      "description": "Additional data represented as key-value pairs. Both the key and value must be strings.",
+      "additionalProperties": {
+        "type": "string"
+      },
+      "example": {
+        "key": "value",
+        "foo": "bar",
+        "modern": "treasury"
+      }
+    }
+  },
+  "additionalProperties": false,
+  "minProperties": 11,
+  "required": [
+    "id",
+    "object",
+    "live_mode",
+    "created_at",
+    "updated_at",
+    "discarded_at",
+    "ledger_account_id",
+    "description",
+    "alert_condition",
+    "current_ledger_account_balance_state",
+    "metadata"
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/external_account_complete_verification_request",
+  "title": "external_account_complete_verification_request",
+  "type": "object",
+  "properties": {
+    "amounts": {
+      "type": "array",
+      "items": {
+        "type": "integer"
+      },
+      "maxItems": 2,
+      "example": [
+        2,
+        4
+      ]
+    }
+  }
+}

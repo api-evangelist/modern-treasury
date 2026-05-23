@@ -1,0 +1,123 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/ledger_account_settlement",
+  "title": "ledger_account_settlement",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "object": {
+      "type": "string"
+    },
+    "live_mode": {
+      "type": "boolean",
+      "description": "This field will be true if this object exists in the live environment or false if it exists in the test environment."
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "updated_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "ledger_id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "The id of the ledger that this ledger account settlement belongs to."
+    },
+    "description": {
+      "type": "string",
+      "description": "The description of the ledger account settlement.",
+      "nullable": true
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "archived",
+        "archiving",
+        "drafting",
+        "pending",
+        "posted",
+        "processing"
+      ],
+      "description": "The status of the ledger account settlement. One of `processing`, `pending`, `posted`, `archiving` or `archived`."
+    },
+    "settled_ledger_account_id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "The id of the settled ledger account whose ledger entries are queried against, and its balance is reduced as a result."
+    },
+    "contra_ledger_account_id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "The id of the contra ledger account that sends to or receives funds from the settled ledger account."
+    },
+    "effective_at_upper_bound": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The exclusive upper bound of the effective_at timestamp of the ledger entries to be included in the ledger account settlement. The default value is the created_at timestamp of the ledger account settlement.",
+      "nullable": true
+    },
+    "ledger_transaction_id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "The id of the ledger transaction that this settlement is associated with.",
+      "nullable": true
+    },
+    "amount": {
+      "type": "integer",
+      "description": "The amount of the ledger account settlement.",
+      "nullable": true
+    },
+    "settlement_entry_direction": {
+      "type": "string",
+      "description": "The direction of the ledger entry with the settlement_ledger_account.",
+      "nullable": true
+    },
+    "currency": {
+      "type": "string",
+      "description": "The currency of the ledger account settlement."
+    },
+    "currency_exponent": {
+      "type": "integer",
+      "description": "The currency exponent of the ledger account settlement.",
+      "nullable": true
+    },
+    "metadata": {
+      "type": "object",
+      "description": "Additional data represented as key-value pairs. Both the key and value must be strings.",
+      "additionalProperties": {
+        "type": "string"
+      },
+      "example": {
+        "key": "value",
+        "foo": "bar",
+        "modern": "treasury"
+      }
+    }
+  },
+  "additionalProperties": false,
+  "minProperties": 17,
+  "required": [
+    "id",
+    "object",
+    "live_mode",
+    "created_at",
+    "updated_at",
+    "ledger_id",
+    "description",
+    "status",
+    "settled_ledger_account_id",
+    "contra_ledger_account_id",
+    "effective_at_upper_bound",
+    "ledger_transaction_id",
+    "amount",
+    "settlement_entry_direction",
+    "currency",
+    "currency_exponent",
+    "metadata"
+  ]
+}

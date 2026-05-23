@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/foreign_exchange_rate",
+  "title": "foreign_exchange_rate",
+  "type": "object",
+  "properties": {
+    "base_amount": {
+      "type": "integer",
+      "description": "Amount in the lowest denomination of the `base_currency` to convert, often called the \"sell\" amount."
+    },
+    "base_currency": {
+      "$ref": "#/components/schemas/currency",
+      "description": "Currency to convert, often called the \"sell\" currency."
+    },
+    "exponent": {
+      "type": "integer",
+      "description": "The exponent component of the rate. The decimal is calculated as `value` / (10 ^ `exponent`)."
+    },
+    "rate_string": {
+      "type": "string",
+      "description": "A string representation of the rate."
+    },
+    "target_amount": {
+      "type": "integer",
+      "description": "Amount in the lowest denomination of the `target_currency`, often called the \"buy\" amount."
+    },
+    "target_currency": {
+      "$ref": "#/components/schemas/currency",
+      "description": "Currency to convert the `base_currency` to, often called the \"buy\" currency."
+    },
+    "value": {
+      "type": "integer",
+      "description": "The whole number component of the rate. The decimal is calculated as `value` / (10 ^ `exponent`)."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "base_amount",
+    "base_currency",
+    "exponent",
+    "rate_string",
+    "target_amount",
+    "target_currency",
+    "value"
+  ]
+}

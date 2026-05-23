@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/legal_entity_regulator",
+  "title": "legal_entity_regulator",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Full name of the regulatory body."
+    },
+    "jurisdiction": {
+      "type": "string",
+      "description": "The country code where the regulator operates in the ISO 3166-1 alpha-2 format (e.g., \"US\", \"CA\", \"GB\")."
+    },
+    "registration_number": {
+      "type": "string",
+      "description": "Registration or identification number with the regulator."
+    }
+  },
+  "required": [
+    "name",
+    "jurisdiction",
+    "registration_number"
+  ],
+  "additionalProperties": false
+}

@@ -1,0 +1,65 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/virtual_account_create_request",
+  "title": "virtual_account_create_request",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "The name of the virtual account."
+    },
+    "description": {
+      "type": "string",
+      "description": "An optional description for internal use."
+    },
+    "counterparty_id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "The ID of the counterparty that the virtual account belongs to."
+    },
+    "internal_account_id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "The ID of the internal account that this virtual account is associated with."
+    },
+    "account_details": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/account_detail_create_request"
+      },
+      "description": "An array of account detail objects."
+    },
+    "routing_details": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/routing_detail_create_request"
+      },
+      "description": "An array of routing detail objects."
+    },
+    "debit_ledger_account_id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "The ID of a debit normal ledger account. When money enters the virtual account, this ledger account will be debited. Must be accompanied by a credit_ledger_account_id if present."
+    },
+    "credit_ledger_account_id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "The ID of a credit normal ledger account. When money leaves the virtual account, this ledger account will be credited. Must be accompanied by a debit_ledger_account_id if present."
+    },
+    "ledger_account": {
+      "$ref": "#/components/schemas/ledger_account_create_request",
+      "description": "Specifies a ledger account object that will be created with the virtual account. The resulting ledger account is linked to the virtual account for auto-ledgering IPDs."
+    },
+    "metadata": {
+      "type": "object",
+      "description": "Additional data represented as key-value pairs. Both the key and value must be strings.",
+      "additionalProperties": {
+        "type": "string"
+      }
+    }
+  },
+  "required": [
+    "name",
+    "internal_account_id"
+  ]
+}

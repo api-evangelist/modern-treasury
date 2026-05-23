@@ -1,0 +1,58 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/legal_entity_address_create_request",
+  "title": "legal_entity_address_create_request",
+  "type": "object",
+  "properties": {
+    "address_types": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "business",
+          "business_registered",
+          "mailing",
+          "other",
+          "po_box",
+          "residential"
+        ]
+      },
+      "description": "The types of this address."
+    },
+    "line1": {
+      "type": "string",
+      "nullable": true
+    },
+    "line2": {
+      "type": "string",
+      "nullable": true
+    },
+    "locality": {
+      "type": "string",
+      "nullable": true,
+      "description": "Locality or City."
+    },
+    "region": {
+      "type": "string",
+      "nullable": true,
+      "description": "Region or State."
+    },
+    "postal_code": {
+      "type": "string",
+      "description": "The postal code of the address.",
+      "nullable": true
+    },
+    "country": {
+      "type": "string",
+      "description": "Country code conforms to [ISO 3166-1 alpha-2]",
+      "nullable": true
+    }
+  },
+  "required": [
+    "line1",
+    "locality",
+    "region",
+    "postal_code",
+    "country"
+  ]
+}

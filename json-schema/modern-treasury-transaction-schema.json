@@ -1,0 +1,230 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/transaction",
+  "title": "transaction",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "object": {
+      "type": "string"
+    },
+    "live_mode": {
+      "type": "boolean",
+      "description": "This field will be true if this object exists in the live environment or false if it exists in the test environment."
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "updated_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "discarded_at": {
+      "type": "string",
+      "format": "date-time",
+      "nullable": true
+    },
+    "amount": {
+      "type": "integer",
+      "description": "Value in specified currency's smallest unit. e.g. $10 would be represented as 1000."
+    },
+    "currency": {
+      "$ref": "#/components/schemas/currency",
+      "description": "Currency that this transaction is denominated in."
+    },
+    "direction": {
+      "type": "string",
+      "description": "Either `credit` or `debit`."
+    },
+    "vendor_description": {
+      "type": "string",
+      "nullable": true,
+      "description": "The transaction detail text that often appears in on your bank statement and in your banking portal."
+    },
+    "vendor_code": {
+      "type": "string",
+      "nullable": true,
+      "description": "When applicable, the bank-given code that determines the transaction's category. For most banks this is the BAI2/BTRS transaction code."
+    },
+    "vendor_code_type": {
+      "type": "string",
+      "enum": [
+        "bai2",
+        "banking_circle",
+        "bankprov",
+        "bnk_dev",
+        "cleartouch",
+        "coinbase_prime",
+        "column",
+        "cross_river",
+        "currencycloud",
+        "dc_bank",
+        "dwolla",
+        "evolve",
+        "fake_vendor",
+        "goldman_sachs",
+        "iso20022",
+        "jpmc",
+        "modern_treasury",
+        "mx",
+        "paxos",
+        "paypal",
+        "pnc",
+        "signet",
+        "silvergate",
+        "swift",
+        "us_bank",
+        "user",
+        "western_alliance"
+      ],
+      "nullable": true,
+      "description": "The type of `vendor_code` being reported. Can be one of `bai2`, `bankprov`, `bnk_dev`, `cleartouch`, `currencycloud`, `cross_river`, `dc_bank`, `dwolla`, `evolve`, `goldman_sachs`, `iso20022`, `jpmc`, `mx`, `signet`, `silvergate`, `swift`, `us_bank`, or others."
+    },
+    "vendor_id": {
+      "type": "string",
+      "nullable": true,
+      "description": "An identifier given to this transaction by the bank."
+    },
+    "as_of_date": {
+      "type": "string",
+      "nullable": true,
+      "format": "date",
+      "description": "The date on which the transaction occurred."
+    },
+    "as_of_time": {
+      "type": "string",
+      "nullable": true,
+      "format": "time",
+      "description": "The time on which the transaction occurred. Depending on the granularity of the timestamp information received from the bank, it may be `null`."
+    },
+    "as_of_timezone": {
+      "type": "string",
+      "nullable": true,
+      "description": "The timezone in which the `as_of_time` is represented. Can be `null` if the bank does not provide timezone info."
+    },
+    "internal_account_id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "The ID of the relevant Internal Account."
+    },
+    "metadata": {
+      "type": "object",
+      "description": "Additional data represented as key-value pairs. Both the key and value must be strings.",
+      "additionalProperties": {
+        "type": "string"
+      },
+      "example": {
+        "key": "value",
+        "foo": "bar",
+        "modern": "treasury"
+      }
+    },
+    "posted": {
+      "type": "boolean",
+      "description": "This field will be `true` if the transaction has posted to the account."
+    },
+    "vendor_customer_id": {
+      "type": "string",
+      "nullable": true,
+      "description": "An identifier given to this transaction by the bank, often `null`."
+    },
+    "reconciled": {
+      "type": "boolean",
+      "description": "This field will be `true` if a transaction is reconciled by the Modern Treasury system. This means that it has transaction line items that sum up to the transaction's amount."
+    },
+    "details": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string"
+      },
+      "description": "This field contains additional information that the bank provided about the transaction. This is structured data. Some of the data in here might overlap with what is in the `vendor_description`. For example, the OBI could be a part of the vendor description, and it would also be included in here. The attributes that are passed through the details field will vary based on your banking partner. Currently, the following keys may be in the details object: `originator_name`, `originator_to_beneficiary_information`."
+    },
+    "type": {
+      "type": "string",
+      "enum": [
+        "ach",
+        "au_becs",
+        "bacs",
+        "book",
+        "card",
+        "chats",
+        "check",
+        "cross_border",
+        "dk_nets",
+        "eft",
+        "gb_fps",
+        "hu_ics",
+        "interac",
+        "masav",
+        "mx_ccen",
+        "neft",
+        "nics",
+        "nz_becs",
+        "pl_elixir",
+        "provxchange",
+        "ro_sent",
+        "rtp",
+        "se_bankgirot",
+        "sen",
+        "sepa",
+        "sg_giro",
+        "sic",
+        "signet",
+        "sknbi",
+        "stablecoin",
+        "wire",
+        "zengin",
+        "other"
+      ],
+      "description": "The type of the transaction. Examples could be `card, `ach`, `wire`, `check`, `rtp`, `book`, or `sen`."
+    },
+    "foreign_exchange_rate": {
+      "$ref": "#/components/schemas/foreign_exchange_rate",
+      "nullable": true,
+      "description": "Associated serialized foreign exchange rate information."
+    },
+    "custom_identifiers": {
+      "type": "object",
+      "description": "An object containing key-value pairs, each with a custom identifier as the key and a string value.",
+      "additionalProperties": {
+        "type": "string"
+      },
+      "example": {
+        "key": "value",
+        "foo": "bar",
+        "modern": "treasury"
+      }
+    }
+  },
+  "additionalProperties": false,
+  "minProperties": 23,
+  "required": [
+    "id",
+    "object",
+    "live_mode",
+    "created_at",
+    "updated_at",
+    "discarded_at",
+    "amount",
+    "currency",
+    "direction",
+    "vendor_code",
+    "vendor_code_type",
+    "vendor_id",
+    "as_of_date",
+    "as_of_time",
+    "as_of_timezone",
+    "internal_account_id",
+    "metadata",
+    "posted",
+    "vendor_customer_id",
+    "reconciled",
+    "type",
+    "foreign_exchange_rate",
+    "custom_identifiers"
+  ]
+}

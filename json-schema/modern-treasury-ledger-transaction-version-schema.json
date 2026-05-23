@@ -1,0 +1,154 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/ledger_transaction_version",
+  "title": "ledger_transaction_version",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "object": {
+      "type": "string"
+    },
+    "live_mode": {
+      "type": "boolean",
+      "description": "This field will be true if this object exists in the live environment or false if it exists in the test environment."
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "ledger_transaction_id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "The ID of the ledger transaction"
+    },
+    "description": {
+      "type": "string",
+      "nullable": true,
+      "description": "An optional description for internal use."
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "archived",
+        "pending",
+        "posted"
+      ],
+      "description": "One of `pending`, `posted`, or `archived`."
+    },
+    "metadata": {
+      "type": "object",
+      "description": "Additional data represented as key-value pairs. Both the key and value must be strings.",
+      "additionalProperties": {
+        "type": "string"
+      },
+      "example": {
+        "key": "value",
+        "foo": "bar",
+        "modern": "treasury"
+      }
+    },
+    "effective_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The timestamp (ISO8601 format) at which the ledger transaction happened for reporting purposes."
+    },
+    "effective_date": {
+      "type": "string",
+      "format": "date",
+      "description": "The date (YYYY-MM-DD) on which the ledger transaction happened for reporting purposes."
+    },
+    "ledger_entries": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/ledger_entry_of_transaction_version"
+      },
+      "description": "An array of ledger entry objects."
+    },
+    "posted_at": {
+      "type": "string",
+      "format": "date-time",
+      "nullable": true,
+      "description": "The time on which the ledger transaction posted. This is null if the ledger transaction is pending."
+    },
+    "ledger_id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "The ID of the ledger this ledger transaction belongs to."
+    },
+    "ledgerable_type": {
+      "type": "string",
+      "enum": [
+        "expected_payment",
+        "incoming_payment_detail",
+        "payment_order",
+        "return",
+        "reversal"
+      ],
+      "nullable": true,
+      "description": "If the ledger transaction can be reconciled to another object in Modern Treasury, the type will be populated here, otherwise null. This can be one of payment_order, incoming_payment_detail, expected_payment, return, or reversal."
+    },
+    "ledgerable_id": {
+      "type": "string",
+      "format": "uuid",
+      "nullable": true,
+      "description": "If the ledger transaction can be reconciled to another object in Modern Treasury, the id will be populated here, otherwise null."
+    },
+    "external_id": {
+      "type": "string",
+      "description": "A unique string to represent the ledger transaction. Only one pending or posted ledger transaction may have this ID in the ledger.",
+      "nullable": true
+    },
+    "version": {
+      "type": "integer",
+      "description": "Version number of the ledger transaction."
+    },
+    "reverses_ledger_transaction_id": {
+      "type": "string",
+      "description": "The ID of the original ledger transaction. that this ledger transaction reverses.",
+      "nullable": true
+    },
+    "reversed_by_ledger_transaction_id": {
+      "type": "string",
+      "description": "The ID of the ledger transaction that reversed this ledger transaction.",
+      "nullable": true
+    },
+    "partially_posts_ledger_transaction_id": {
+      "type": "string",
+      "description": "The ID of the ledger transaction that this ledger transaction partially posts.",
+      "nullable": true
+    },
+    "archived_reason": {
+      "type": "string",
+      "description": "System-set reason why the ledger transaction was archived; currently only 'balance_lock_failure' for transactions that violated balance constraints. Only populated when archive_on_balance_lock_failure is true and a balance lock violation occurs, otherwise null.",
+      "nullable": true
+    }
+  },
+  "additionalProperties": false,
+  "minProperties": 21,
+  "required": [
+    "id",
+    "object",
+    "live_mode",
+    "created_at",
+    "ledger_transaction_id",
+    "description",
+    "status",
+    "metadata",
+    "effective_at",
+    "effective_date",
+    "ledger_entries",
+    "posted_at",
+    "ledger_id",
+    "ledgerable_type",
+    "ledgerable_id",
+    "external_id",
+    "version",
+    "reverses_ledger_transaction_id",
+    "reversed_by_ledger_transaction_id",
+    "partially_posts_ledger_transaction_id",
+    "archived_reason"
+  ]
+}

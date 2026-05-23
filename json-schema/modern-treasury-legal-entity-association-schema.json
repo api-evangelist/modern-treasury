@@ -1,0 +1,77 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/legal_entity_association",
+  "title": "legal_entity_association",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "object": {
+      "type": "string"
+    },
+    "live_mode": {
+      "type": "boolean",
+      "description": "This field will be true if this object exists in the live environment or false if it exists in the test environment."
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "updated_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "discarded_at": {
+      "type": "string",
+      "format": "date-time",
+      "nullable": true
+    },
+    "parent_legal_entity_id": {
+      "type": "string",
+      "description": "The ID of the parent legal entity. This must be a business or joint legal entity."
+    },
+    "relationship_types": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "authorized_signer",
+          "beneficial_owner",
+          "control_person"
+        ],
+        "description": "A list of relationship types for how the child entity relates to parent entity."
+      }
+    },
+    "title": {
+      "type": "string",
+      "nullable": true,
+      "description": "The job title of the child entity at the parent entity."
+    },
+    "ownership_percentage": {
+      "type": "integer",
+      "nullable": true,
+      "description": "The child entity's ownership percentage iff they are a beneficial owner."
+    },
+    "child_legal_entity": {
+      "$ref": "#/components/schemas/child_legal_entity",
+      "description": "The child legal entity."
+    }
+  },
+  "additionalProperties": false,
+  "minProperties": 11,
+  "required": [
+    "id",
+    "object",
+    "live_mode",
+    "created_at",
+    "updated_at",
+    "discarded_at",
+    "parent_legal_entity_id",
+    "relationship_types",
+    "title",
+    "ownership_percentage",
+    "child_legal_entity"
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/legal_entity_update_status_request",
+  "title": "legal_entity_update_status_request",
+  "type": "object",
+  "required": [
+    "status"
+  ],
+  "properties": {
+    "status": {
+      "type": "string",
+      "enum": [
+        "active",
+        "suspended",
+        "denied"
+      ],
+      "description": "The target status for the legal entity. One of `active`, `suspended`, or `denied`. Valid transitions depend on the current status."
+    }
+  }
+}

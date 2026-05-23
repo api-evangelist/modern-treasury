@@ -1,0 +1,99 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/identification",
+  "title": "identification",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "object": {
+      "type": "string"
+    },
+    "live_mode": {
+      "type": "boolean",
+      "description": "This field will be true if this object exists in the live environment or false if it exists in the test environment."
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "updated_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "discarded_at": {
+      "type": "string",
+      "format": "date-time",
+      "nullable": true
+    },
+    "id_type": {
+      "type": "string",
+      "enum": [
+        "ar_cuil",
+        "ar_cuit",
+        "br_cnpj",
+        "br_cpf",
+        "ca_sin",
+        "cl_run",
+        "cl_rut",
+        "co_cedulas",
+        "co_nit",
+        "drivers_license",
+        "hn_id",
+        "hn_rtn",
+        "ie_pps",
+        "in_lei",
+        "kr_brn",
+        "kr_crn",
+        "kr_rrn",
+        "passport",
+        "sa_tin",
+        "sa_vat",
+        "us_ein",
+        "us_itin",
+        "us_ssn",
+        "vn_tin"
+      ],
+      "description": "The type of ID number."
+    },
+    "expiration_date": {
+      "type": "string",
+      "format": "date",
+      "nullable": true,
+      "description": "The date when the Identification is no longer considered valid by the issuing authority."
+    },
+    "issuing_country": {
+      "type": "string",
+      "nullable": true,
+      "description": "The ISO 3166-1 alpha-2 country code of the country that issued the identification"
+    },
+    "issuing_region": {
+      "type": "string",
+      "nullable": true,
+      "description": "The region in which the identifcation was issued."
+    },
+    "documents": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/document"
+      }
+    }
+  },
+  "additionalProperties": false,
+  "minProperties": 11,
+  "required": [
+    "id",
+    "object",
+    "live_mode",
+    "created_at",
+    "updated_at",
+    "discarded_at",
+    "id_type",
+    "expiration_date",
+    "issuing_country",
+    "issuing_region",
+    "documents"
+  ]
+}

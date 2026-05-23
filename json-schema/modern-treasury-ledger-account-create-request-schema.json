@@ -1,0 +1,86 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/ledger_account_create_request",
+  "title": "ledger_account_create_request",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "The name of the ledger account."
+    },
+    "description": {
+      "type": "string",
+      "description": "The description of the ledger account.",
+      "nullable": true
+    },
+    "normal_balance": {
+      "type": "string",
+      "enum": [
+        "credit",
+        "debit"
+      ],
+      "description": "The normal balance of the ledger account.",
+      "_x-stainless-modelDefPath": "$shared.transaction_direction"
+    },
+    "ledger_id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "The id of the ledger that this account belongs to."
+    },
+    "currency": {
+      "type": "string",
+      "description": "The currency of the ledger account."
+    },
+    "currency_exponent": {
+      "type": "integer",
+      "description": "The currency exponent of the ledger account.",
+      "nullable": true
+    },
+    "ledger_account_category_ids": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "format": "uuid"
+      },
+      "description": "The array of ledger account category ids that this ledger account should be a child of."
+    },
+    "ledgerable_id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "If the ledger account links to another object in Modern Treasury, the id will be populated here, otherwise null."
+    },
+    "ledgerable_type": {
+      "type": "string",
+      "enum": [
+        "counterparty",
+        "external_account",
+        "internal_account",
+        "virtual_account"
+      ],
+      "description": "If the ledger account links to another object in Modern Treasury, the type will be populated here, otherwise null. The value is one of internal_account or external_account."
+    },
+    "metadata": {
+      "type": "object",
+      "description": "Additional data represented as key-value pairs. Both the key and value must be strings.",
+      "additionalProperties": {
+        "type": "string"
+      },
+      "example": {
+        "key": "value",
+        "foo": "bar",
+        "modern": "treasury"
+      }
+    },
+    "external_id": {
+      "type": "string",
+      "nullable": true,
+      "description": "An optional user-defined 180 character unique identifier."
+    }
+  },
+  "required": [
+    "name",
+    "normal_balance",
+    "ledger_id",
+    "currency"
+  ]
+}

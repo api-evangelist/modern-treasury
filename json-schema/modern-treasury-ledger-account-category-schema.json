@@ -1,0 +1,93 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/ledger_account_category",
+  "title": "ledger_account_category",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "object": {
+      "type": "string"
+    },
+    "live_mode": {
+      "type": "boolean",
+      "description": "This field will be true if this object exists in the live environment or false if it exists in the test environment."
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "updated_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "discarded_at": {
+      "type": "string",
+      "format": "date-time",
+      "nullable": true
+    },
+    "name": {
+      "type": "string",
+      "description": "The name of the ledger account category."
+    },
+    "description": {
+      "type": "string",
+      "description": "The description of the ledger account category.",
+      "nullable": true
+    },
+    "metadata": {
+      "type": "object",
+      "description": "Additional data represented as key-value pairs. Both the key and value must be strings.",
+      "additionalProperties": {
+        "type": "string"
+      },
+      "example": {
+        "key": "value",
+        "foo": "bar",
+        "modern": "treasury"
+      }
+    },
+    "ledger_id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "The id of the ledger that this account category belongs to."
+    },
+    "normal_balance": {
+      "type": "string",
+      "enum": [
+        "credit",
+        "debit"
+      ],
+      "description": "The normal balance of the ledger account category.",
+      "_x-stainless-modelDefPath": "$shared.transaction_direction"
+    },
+    "external_id": {
+      "type": "string",
+      "nullable": true,
+      "description": "An optional user-defined 180 character unique identifier."
+    },
+    "balances": {
+      "$ref": "#/components/schemas/ledger_balances",
+      "description": "The pending, posted, and available balances for this ledger account category. The posted balance is the sum of all posted entries on the account. The pending balance is the sum of all pending and posted entries on the account. The available balance is the posted incoming entries minus the sum of the pending and posted outgoing amounts."
+    }
+  },
+  "additionalProperties": false,
+  "minProperties": 13,
+  "required": [
+    "id",
+    "object",
+    "live_mode",
+    "created_at",
+    "updated_at",
+    "discarded_at",
+    "name",
+    "description",
+    "metadata",
+    "ledger_id",
+    "normal_balance",
+    "external_id",
+    "balances"
+  ]
+}

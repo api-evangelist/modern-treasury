@@ -1,0 +1,34 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/ledger_balance",
+  "title": "ledger_balance",
+  "type": "object",
+  "properties": {
+    "credits": {
+      "type": "integer"
+    },
+    "debits": {
+      "type": "integer"
+    },
+    "amount": {
+      "type": "integer"
+    },
+    "currency": {
+      "type": "string",
+      "description": "The currency of the ledger account."
+    },
+    "currency_exponent": {
+      "type": "integer",
+      "description": "The currency exponent of the ledger account."
+    }
+  },
+  "additionalProperties": false,
+  "minProperties": 5,
+  "required": [
+    "credits",
+    "debits",
+    "amount",
+    "currency",
+    "currency_exponent"
+  ]
+}

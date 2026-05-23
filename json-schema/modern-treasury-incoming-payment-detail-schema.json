@@ -1,0 +1,271 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/incoming_payment_detail",
+  "title": "incoming_payment_detail",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "object": {
+      "type": "string"
+    },
+    "live_mode": {
+      "type": "boolean",
+      "description": "This field will be true if this object exists in the live environment or false if it exists in the test environment."
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "updated_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "internal_account_id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "The ID of the Internal Account for the incoming payment detail. This is always present."
+    },
+    "virtual_account_id": {
+      "type": "string",
+      "format": "uuid",
+      "nullable": true,
+      "description": "If the incoming payment detail is in a virtual account, the ID of the Virtual Account."
+    },
+    "virtual_account": {
+      "$ref": "#/components/schemas/virtual_account",
+      "nullable": true,
+      "description": "If the incoming payment detail is in a virtual account, the serialized virtual account object."
+    },
+    "transaction_line_item_id": {
+      "type": "string",
+      "format": "uuid",
+      "nullable": true,
+      "description": "The ID of the reconciled Transaction Line Item or `null`."
+    },
+    "transaction_id": {
+      "type": "string",
+      "format": "uuid",
+      "nullable": true,
+      "description": "The ID of the reconciled Transaction or `null`."
+    },
+    "ledger_transaction_id": {
+      "type": "string",
+      "format": "uuid",
+      "nullable": true,
+      "description": "The ID of the ledger transaction linked to the incoming payment detail or `null`."
+    },
+    "type": {
+      "type": "string",
+      "enum": [
+        "ach",
+        "au_becs",
+        "bacs",
+        "book",
+        "check",
+        "eft",
+        "interac",
+        "neft",
+        "nz_becs",
+        "rtp",
+        "sepa",
+        "signet",
+        "stablecoin",
+        "wire",
+        "zengin"
+      ],
+      "description": "One of: `ach`, `book`, `check`, `eft`, `interac`, `rtp`, `sepa`, `signet`, or `wire`."
+    },
+    "data": {
+      "type": "object",
+      "description": "The raw data from the payment pre-notification file that we get from the bank.",
+      "additionalProperties": true
+    },
+    "amount": {
+      "type": "integer",
+      "description": "Value in specified currency's smallest unit. e.g. $10 would be represented as 1000."
+    },
+    "currency": {
+      "$ref": "#/components/schemas/currency",
+      "description": "The currency of the incoming payment detail."
+    },
+    "direction": {
+      "type": "string",
+      "enum": [
+        "credit",
+        "debit"
+      ],
+      "description": "One of `credit` or `debit`.",
+      "_x-stainless-modelDefPath": "$shared.transaction_direction"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "completed",
+        "pending",
+        "returned"
+      ],
+      "description": "The current status of the incoming payment order. One of `pending`, `completed`, or `returned`."
+    },
+    "metadata": {
+      "type": "object",
+      "description": "Additional data represented as key-value pairs. Both the key and value must be strings.",
+      "additionalProperties": {
+        "type": "string"
+      },
+      "example": {
+        "key": "value",
+        "foo": "bar",
+        "modern": "treasury"
+      }
+    },
+    "as_of_date": {
+      "type": "string",
+      "format": "date",
+      "description": "The date on which the corresponding transaction will occur."
+    },
+    "vendor_id": {
+      "type": "string",
+      "format": "uuid",
+      "nullable": true,
+      "description": "The identifier of the vendor bank."
+    },
+    "originating_routing_number": {
+      "type": "string",
+      "description": "The routing number of the originating account for the incoming payment detail.",
+      "nullable": true
+    },
+    "originating_routing_number_type": {
+      "type": "string",
+      "enum": [
+        "aba",
+        "au_bsb",
+        "br_codigo",
+        "ca_cpa",
+        "chips",
+        "cnaps",
+        "dk_interbank_clearing_code",
+        "gb_sort_code",
+        "hk_interbank_clearing_code",
+        "hu_interbank_clearing_code",
+        "id_sknbi_code",
+        "il_bank_code",
+        "in_ifsc",
+        "jp_zengin_code",
+        "mx_bank_identifier",
+        "my_branch_code",
+        "nz_national_clearing_code",
+        "pl_national_clearing_code",
+        "se_bankgiro_clearing_code",
+        "sg_interbank_clearing_code",
+        "swift",
+        "za_national_clearing_code"
+      ],
+      "description": "The type of the originating routing number for the incoming payment detail.",
+      "nullable": true
+    },
+    "originating_account_number": {
+      "type": "string",
+      "description": "The account number of the originating account for the incoming payment detail.",
+      "nullable": true
+    },
+    "originating_account_number_safe": {
+      "type": "string",
+      "description": "The last 4 digits of the originating account_number for the incoming payment detail.",
+      "nullable": true
+    },
+    "originating_account_number_type": {
+      "type": "string",
+      "enum": [
+        "au_number",
+        "base_address",
+        "card_token",
+        "clabe",
+        "ethereum_address",
+        "hk_number",
+        "iban",
+        "id_number",
+        "nz_number",
+        "other",
+        "pan",
+        "polygon_address",
+        "sg_number",
+        "solana_address",
+        "wallet_address"
+      ],
+      "description": "The type of the originating account number for the incoming payment detail.",
+      "nullable": true
+    },
+    "originating_party_name": {
+      "type": "string",
+      "description": "The name of the originating party for the incoming payment detail.",
+      "nullable": true
+    },
+    "originating_party_address": {
+      "$ref": "#/components/schemas/address",
+      "nullable": true,
+      "description": "The address of the originating party for the incoming payment detail, or `null`."
+    },
+    "originating_party_vendor_identifier": {
+      "type": "string",
+      "description": "The vendor-assigned identifier for the originating party of the incoming payment detail, or `null`.",
+      "nullable": true
+    },
+    "receiving_account_number": {
+      "type": "string",
+      "description": "The account number of the receiving account for the incoming payment detail, or `null`.",
+      "nullable": true
+    },
+    "receiving_account_number_safe": {
+      "type": "string",
+      "description": "The last 4 digits of the receiving account number for the incoming payment detail, or `null`.",
+      "nullable": true
+    },
+    "subtype": {
+      "type": "string",
+      "nullable": true,
+      "description": "An additional layer of classification for the type of incoming payment detail. For example, a `type` of `stablecoin` may have a `subtype` of `ethereum` or `solana`."
+    },
+    "reconciliation_status": {
+      "type": "string",
+      "enum": [
+        "unreconciled",
+        "tentatively_reconciled",
+        "reconciled"
+      ],
+      "description": "One of `unreconciled`, `tentatively_reconciled` or `reconciled`."
+    }
+  },
+  "additionalProperties": false,
+  "minProperties": 26,
+  "required": [
+    "id",
+    "object",
+    "live_mode",
+    "created_at",
+    "updated_at",
+    "internal_account_id",
+    "virtual_account_id",
+    "virtual_account",
+    "transaction_line_item_id",
+    "transaction_id",
+    "ledger_transaction_id",
+    "type",
+    "data",
+    "amount",
+    "currency",
+    "direction",
+    "status",
+    "metadata",
+    "as_of_date",
+    "vendor_id",
+    "originating_routing_number",
+    "originating_routing_number_type",
+    "originating_account_number_safe",
+    "originating_account_number_type",
+    "subtype",
+    "reconciliation_status"
+  ]
+}

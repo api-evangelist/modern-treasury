@@ -1,0 +1,265 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/counterparty_create_request",
+  "title": "counterparty_create_request",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "A human friendly name for this counterparty.",
+      "nullable": true
+    },
+    "accounts": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "account_type": {
+            "$ref": "#/components/schemas/external_account_type"
+          },
+          "party_type": {
+            "type": "string",
+            "enum": [
+              "business",
+              "individual"
+            ],
+            "nullable": true,
+            "description": "Either `individual` or `business`."
+          },
+          "party_address": {
+            "$ref": "#/components/schemas/address_request",
+            "description": "Required if receiving wire payments."
+          },
+          "name": {
+            "type": "string",
+            "nullable": true,
+            "description": "A nickname for the external account. This is only for internal usage and won't affect any payments"
+          },
+          "account_details": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "account_number": {
+                  "type": "string"
+                },
+                "account_number_type": {
+                  "type": "string",
+                  "enum": [
+                    "au_number",
+                    "base_address",
+                    "card_token",
+                    "clabe",
+                    "ethereum_address",
+                    "hk_number",
+                    "iban",
+                    "id_number",
+                    "nz_number",
+                    "other",
+                    "pan",
+                    "polygon_address",
+                    "sg_number",
+                    "solana_address",
+                    "wallet_address"
+                  ]
+                }
+              },
+              "required": [
+                "account_number"
+              ]
+            }
+          },
+          "routing_details": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "routing_number": {
+                  "type": "string"
+                },
+                "routing_number_type": {
+                  "type": "string",
+                  "enum": [
+                    "aba",
+                    "au_bsb",
+                    "br_codigo",
+                    "ca_cpa",
+                    "chips",
+                    "cnaps",
+                    "dk_interbank_clearing_code",
+                    "gb_sort_code",
+                    "hk_interbank_clearing_code",
+                    "hu_interbank_clearing_code",
+                    "id_sknbi_code",
+                    "il_bank_code",
+                    "in_ifsc",
+                    "jp_zengin_code",
+                    "my_branch_code",
+                    "mx_bank_identifier",
+                    "nz_national_clearing_code",
+                    "pl_national_clearing_code",
+                    "se_bankgiro_clearing_code",
+                    "sg_interbank_clearing_code",
+                    "swift",
+                    "za_national_clearing_code"
+                  ]
+                },
+                "payment_type": {
+                  "type": "string",
+                  "enum": [
+                    "ach",
+                    "au_becs",
+                    "bacs",
+                    "book",
+                    "card",
+                    "chats",
+                    "check",
+                    "cross_border",
+                    "dk_nets",
+                    "eft",
+                    "gb_fps",
+                    "hu_ics",
+                    "interac",
+                    "masav",
+                    "mx_ccen",
+                    "neft",
+                    "nics",
+                    "nz_becs",
+                    "pl_elixir",
+                    "provxchange",
+                    "ro_sent",
+                    "rtp",
+                    "se_bankgirot",
+                    "sen",
+                    "sepa",
+                    "sg_giro",
+                    "sic",
+                    "signet",
+                    "sknbi",
+                    "stablecoin",
+                    "wire",
+                    "zengin"
+                  ]
+                }
+              },
+              "required": [
+                "routing_number",
+                "routing_number_type"
+              ]
+            }
+          },
+          "external_id": {
+            "type": "string",
+            "nullable": true,
+            "description": "An optional user-defined 180 character unique identifier."
+          },
+          "metadata": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            },
+            "example": {
+              "key": "value",
+              "foo": "bar",
+              "modern": "treasury"
+            },
+            "description": "Additional data represented as key-value pairs. Both the key and value must be strings."
+          },
+          "party_name": {
+            "type": "string",
+            "description": "If this value isn't provided, it will be inherited from the counterparty's name."
+          },
+          "party_identifier": {
+            "type": "string"
+          },
+          "ledger_account": {
+            "$ref": "#/components/schemas/ledger_account_create_request",
+            "description": "Specifies a ledger account object that will be created with the external account. The resulting ledger account is linked to the external account for auto-ledgering Payment objects. See https://docs.moderntreasury.com/docs/linking-to-other-modern-treasury-objects for more details."
+          },
+          "plaid_processor_token": {
+            "type": "string",
+            "description": "If you've enabled the Modern Treasury + Plaid integration in your Plaid account, you can pass the processor token in this field."
+          },
+          "contact_details": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/contact_detail_create_request"
+            }
+          }
+        }
+      },
+      "description": "The accounts for this counterparty."
+    },
+    "email": {
+      "type": "string",
+      "format": "email",
+      "description": "The counterparty's email.",
+      "nullable": true
+    },
+    "legal_entity_id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "The id of the legal entity.",
+      "nullable": true
+    },
+    "metadata": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string"
+      },
+      "example": {
+        "key": "value",
+        "foo": "bar",
+        "modern": "treasury"
+      },
+      "description": "Additional data represented as key-value pairs. Both the key and value must be strings."
+    },
+    "external_id": {
+      "type": "string",
+      "nullable": true,
+      "description": "An optional user-defined 180 character unique identifier."
+    },
+    "send_remittance_advice": {
+      "type": "boolean",
+      "description": "Send an email to the counterparty whenever an associated payment order is sent to the bank."
+    },
+    "verification_status": {
+      "type": "string",
+      "deprecated": true,
+      "description": "The verification status of the counterparty."
+    },
+    "accounting": {
+      "type": "object",
+      "deprecated": true,
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "customer",
+            "vendor"
+          ],
+          "description": "An optional type to auto-sync the counterparty to your ledger. Either `customer` or `vendor`."
+        }
+      }
+    },
+    "ledger_type": {
+      "type": "string",
+      "enum": [
+        "customer",
+        "vendor"
+      ],
+      "description": "An optional type to auto-sync the counterparty to your ledger. Either `customer` or `vendor`.",
+      "deprecated": true
+    },
+    "taxpayer_identifier": {
+      "type": "string",
+      "description": "Either a valid SSN or EIN."
+    },
+    "legal_entity": {
+      "$ref": "#/components/schemas/legal_entity_create_request"
+    }
+  },
+  "required": [
+    "name"
+  ]
+}

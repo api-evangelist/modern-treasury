@@ -1,0 +1,60 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/connection",
+  "title": "connection",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "object": {
+      "type": "string"
+    },
+    "live_mode": {
+      "type": "boolean",
+      "description": "This field will be true if this object exists in the live environment or false if it exists in the test environment."
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "updated_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "discarded_at": {
+      "type": "string",
+      "format": "date-time",
+      "nullable": true
+    },
+    "vendor_id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Unique identifier for the bank or vendor."
+    },
+    "vendor_customer_id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "An identifier given to this connection by the bank.",
+      "nullable": true
+    },
+    "vendor_name": {
+      "type": "string",
+      "description": "A human-friendly name for the bank or vendor."
+    }
+  },
+  "additionalProperties": false,
+  "minProperties": 9,
+  "required": [
+    "id",
+    "object",
+    "live_mode",
+    "created_at",
+    "updated_at",
+    "discarded_at",
+    "vendor_id",
+    "vendor_customer_id",
+    "vendor_name"
+  ]
+}

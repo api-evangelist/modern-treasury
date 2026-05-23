@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/ping_response",
+  "title": "ping_response",
+  "type": "object",
+  "properties": {
+    "ping": {
+      "type": "string",
+      "example": "pong"
+    }
+  },
+  "additionalProperties": false,
+  "minProperties": 1,
+  "required": [
+    "ping"
+  ]
+}

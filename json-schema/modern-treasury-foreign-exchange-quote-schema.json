@@ -1,0 +1,80 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/foreign_exchange_quote",
+  "title": "foreign_exchange_quote",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "object": {
+      "type": "string"
+    },
+    "live_mode": {
+      "type": "boolean",
+      "description": "This field will be true if this object exists in the live environment or false if it exists in the test environment."
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "updated_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "effective_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The timestamp until when the quoted rate is valid."
+    },
+    "expires_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The timestamp until which the quote must be booked by."
+    },
+    "foreign_exchange_indicator": {
+      "type": "string",
+      "description": "Either `fixed_to_variable` if the `base_amount` was specified, or `variable_to_fixed` if the `target_amount` was specified when requesting the quote."
+    },
+    "foreign_exchange_rate": {
+      "$ref": "#/components/schemas/foreign_exchange_rate",
+      "description": "The serialized rate information represented by this quote."
+    },
+    "internal_account_id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "The ID for the `InternalAccount` this quote is associated with."
+    },
+    "metadata": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string"
+      },
+      "example": {
+        "key": "value",
+        "foo": "bar",
+        "modern": "treasury"
+      },
+      "description": "Additional data represented as key-value pairs. Both the key and value must be strings."
+    },
+    "vendor_id": {
+      "type": "string",
+      "description": "This vendor assigned ID for this quote."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "object",
+    "live_mode",
+    "created_at",
+    "updated_at",
+    "effective_at",
+    "expires_at",
+    "foreign_exchange_indicator",
+    "foreign_exchange_rate",
+    "internal_account_id",
+    "metadata"
+  ]
+}

@@ -1,0 +1,96 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/account_collection_flow",
+  "title": "account_collection_flow",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "object": {
+      "type": "string"
+    },
+    "live_mode": {
+      "type": "boolean",
+      "description": "This field will be true if this object exists in the live environment or false if it exists in the test environment."
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "updated_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "client_token": {
+      "type": "string",
+      "description": "The client token of the account collection flow.  This token can be used to embed account collection in your client-side application."
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "cancelled",
+        "completed",
+        "expired",
+        "pending"
+      ],
+      "description": "The current status of the account collection flow. One of `pending`, `completed`, `expired`, or `cancelled`."
+    },
+    "counterparty_id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "The ID of a counterparty. An external account created with this flow will be associated with this counterparty."
+    },
+    "external_account_id": {
+      "type": "string",
+      "format": "uuid",
+      "nullable": true,
+      "description": "If present, the ID of the external account created using this flow."
+    },
+    "payment_types": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "ach",
+          "wire"
+        ],
+        "description": "An account created with this flow will support payments of one of these types."
+      }
+    },
+    "receiving_countries": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "USA",
+          "AUS",
+          "BEL",
+          "CAN",
+          "CHL",
+          "CHN",
+          "COL",
+          "FRA",
+          "DEU",
+          "HKG",
+          "IND",
+          "IRL",
+          "ITA",
+          "MEX",
+          "NLD",
+          "PER",
+          "ESP",
+          "GBR"
+        ],
+        "description": "An account created with this flow will support wires from the US to these countries."
+      }
+    }
+  },
+  "additionalProperties": false,
+  "minProperties": 10,
+  "required": [
+    "payment_types",
+    "counterparty_id"
+  ]
+}

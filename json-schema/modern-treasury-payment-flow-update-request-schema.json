@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/payment_flow_update_request",
+  "title": "payment_flow_update_request",
+  "type": "object",
+  "properties": {
+    "status": {
+      "type": "string",
+      "enum": [
+        "cancelled"
+      ],
+      "description": "Required. The updated status of the payment flow. Can only be used to mark a flow as `cancelled`."
+    }
+  },
+  "required": [
+    "status"
+  ]
+}

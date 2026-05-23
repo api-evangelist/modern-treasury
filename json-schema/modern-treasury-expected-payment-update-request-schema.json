@@ -1,0 +1,145 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/expected_payment_update_request",
+  "title": "expected_payment_update_request",
+  "type": "object",
+  "properties": {
+    "external_id": {
+      "type": "string",
+      "nullable": true,
+      "description": "An optional user-defined 180 character unique identifier."
+    },
+    "amount_upper_bound": {
+      "type": "integer",
+      "nullable": true,
+      "description": "The highest amount this expected payment may be equal to. Value in specified currency's smallest unit. e.g. $10 would be represented as 1000."
+    },
+    "amount_lower_bound": {
+      "type": "integer",
+      "nullable": true,
+      "description": "The lowest amount this expected payment may be equal to. Value in specified currency's smallest unit. e.g. $10 would be represented as 1000."
+    },
+    "direction": {
+      "type": "string",
+      "nullable": true,
+      "enum": [
+        "credit",
+        "debit"
+      ],
+      "description": "One of credit or debit. When you are receiving money, use credit. When you are being charged, use debit."
+    },
+    "internal_account_id": {
+      "type": "string",
+      "nullable": true,
+      "format": "uuid",
+      "description": "The ID of the Internal Account for the expected payment."
+    },
+    "type": {
+      "$ref": "#/components/schemas/expected_payment_type"
+    },
+    "currency": {
+      "$ref": "#/components/schemas/currency",
+      "nullable": true,
+      "description": "Must conform to ISO 4217. Defaults to the currency of the internal account."
+    },
+    "date_upper_bound": {
+      "type": "string",
+      "format": "date",
+      "nullable": true,
+      "description": "The latest date the payment may come in. Format: yyyy-mm-dd"
+    },
+    "date_lower_bound": {
+      "type": "string",
+      "format": "date",
+      "nullable": true,
+      "description": "The earliest date the payment may come in. Format: yyyy-mm-dd"
+    },
+    "description": {
+      "type": "string",
+      "nullable": true,
+      "description": "An optional description for internal use."
+    },
+    "statement_descriptor": {
+      "type": "string",
+      "nullable": true,
+      "description": "The statement description you expect to see on the transaction. For ACH payments, this will be the full line item passed from the bank. For wire payments, this will be the OBI field on the wire. For check payments, this will be the memo field."
+    },
+    "metadata": {
+      "type": "object",
+      "description": "Additional data represented as key-value pairs. Both the key and value must be strings.",
+      "additionalProperties": {
+        "type": "string"
+      },
+      "example": {
+        "key": "value",
+        "foo": "bar",
+        "modern": "treasury"
+      }
+    },
+    "counterparty_id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "The ID of the counterparty you expect for this payment.",
+      "nullable": true
+    },
+    "remittance_information": {
+      "type": "string",
+      "nullable": true,
+      "description": "For `ach`, this field will be passed through on an addenda record. For `wire` payments the field will be passed through as the \"Originator to Beneficiary Information\", also known as OBI or Fedwire tag 6000."
+    },
+    "reconciliation_groups": {
+      "type": "object",
+      "nullable": true,
+      "description": "The reconciliation groups you have for this payment."
+    },
+    "reconciliation_filters": {
+      "type": "object",
+      "nullable": true,
+      "description": "The reconciliation filters you have for this payment."
+    },
+    "reconciliation_rule_variables": {
+      "type": "array",
+      "nullable": true,
+      "items": {
+        "$ref": "#/components/schemas/reconciliation_rule_variable"
+      },
+      "description": "An array of reconciliation rule variables for this payment."
+    },
+    "amount_reconciled": {
+      "type": "integer",
+      "nullable": true,
+      "description": "The amount reconciled for this expected payment. Value in specified currency's smallest unit. e.g. $10 would be represented as 1000."
+    },
+    "amount_reconciled_direction": {
+      "type": "string",
+      "nullable": true,
+      "enum": [
+        "credit",
+        "debit"
+      ],
+      "description": "One of credit or debit. Indicates whether amount_reconciled is a credit or debit amount."
+    },
+    "amount_unreconciled": {
+      "type": "integer",
+      "nullable": true,
+      "description": "The amount that remains unreconciled for this expected payment. Value in specified currency's smallest unit. e.g. $10 would be represented as 1000."
+    },
+    "amount_unreconciled_direction": {
+      "type": "string",
+      "nullable": true,
+      "enum": [
+        "credit",
+        "debit"
+      ],
+      "description": "One of credit or debit. Indicates whether amount_unreconciled is a credit or debit amount."
+    },
+    "status": {
+      "type": "string",
+      "nullable": true,
+      "enum": [
+        "reconciled"
+      ],
+      "description": "The Expected Payment's status can be updated from partially_reconciled to reconciled."
+    }
+  }
+}

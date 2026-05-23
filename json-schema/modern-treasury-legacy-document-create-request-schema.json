@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/legacy_document_create_request",
+  "title": "legacy_document_create_request",
+  "type": "object",
+  "properties": {
+    "document_type": {
+      "type": "string",
+      "description": "A category given to the document, can be `null`."
+    },
+    "file": {
+      "type": "string",
+      "format": "binary"
+    }
+  },
+  "required": [
+    "file"
+  ]
+}

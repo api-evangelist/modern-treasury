@@ -1,0 +1,237 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/invoice_update_request",
+  "title": "invoice_update_request",
+  "type": "object",
+  "properties": {
+    "contact_details": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/contact_detail"
+      },
+      "description": "The invoicer's contact details displayed at the top of the invoice."
+    },
+    "recipient_email": {
+      "type": "string",
+      "nullable": true,
+      "description": "The email of the recipient of the invoice. Leaving this value as null will fallback to using the counterparty's name."
+    },
+    "recipient_name": {
+      "type": "string",
+      "nullable": true,
+      "description": "The name of the recipient of the invoice. Leaving this value as null will fallback to using the counterparty's name."
+    },
+    "counterparty_id": {
+      "type": "string",
+      "description": "The ID of the counterparty receiving the invoice."
+    },
+    "counterparty_billing_address": {
+      "type": "object",
+      "nullable": true,
+      "description": "The counterparty's billing address.",
+      "properties": {
+        "line1": {
+          "type": "string"
+        },
+        "line2": {
+          "type": "string"
+        },
+        "locality": {
+          "type": "string",
+          "description": "Locality or City."
+        },
+        "region": {
+          "type": "string",
+          "description": "Region or State."
+        },
+        "postal_code": {
+          "type": "string",
+          "description": "The postal code of the address."
+        },
+        "country": {
+          "type": "string",
+          "description": "Country code conforms to [ISO 3166-1 alpha-2]"
+        }
+      },
+      "required": [
+        "line1",
+        "locality",
+        "region",
+        "postal_code",
+        "country"
+      ]
+    },
+    "counterparty_shipping_address": {
+      "type": "object",
+      "nullable": true,
+      "description": "The counterparty's shipping address where physical goods should be delivered.",
+      "properties": {
+        "line1": {
+          "type": "string"
+        },
+        "line2": {
+          "type": "string"
+        },
+        "locality": {
+          "type": "string",
+          "description": "Locality or City."
+        },
+        "region": {
+          "type": "string",
+          "description": "Region or State."
+        },
+        "postal_code": {
+          "type": "string",
+          "description": "The postal code of the address."
+        },
+        "country": {
+          "type": "string",
+          "description": "Country code conforms to [ISO 3166-1 alpha-2]"
+        }
+      },
+      "required": [
+        "line1",
+        "locality",
+        "region",
+        "postal_code",
+        "country"
+      ]
+    },
+    "currency": {
+      "$ref": "#/components/schemas/currency",
+      "description": "Currency that the invoice is denominated in. Defaults to `USD` if not provided."
+    },
+    "description": {
+      "type": "string",
+      "description": "A free-form description of the invoice."
+    },
+    "due_date": {
+      "type": "string",
+      "format": "date-time",
+      "description": "A future date by when the invoice needs to be paid."
+    },
+    "invoicer_name": {
+      "type": "string",
+      "nullable": true,
+      "description": "The name of the issuer for the invoice. Defaults to the name of the Organization."
+    },
+    "invoicer_address": {
+      "type": "object",
+      "nullable": true,
+      "description": "The invoice issuer's business address.",
+      "properties": {
+        "line1": {
+          "type": "string"
+        },
+        "line2": {
+          "type": "string"
+        },
+        "locality": {
+          "type": "string",
+          "description": "Locality or City."
+        },
+        "region": {
+          "type": "string",
+          "description": "Region or State."
+        },
+        "postal_code": {
+          "type": "string",
+          "description": "The postal code of the address."
+        },
+        "country": {
+          "type": "string",
+          "description": "Country code conforms to [ISO 3166-1 alpha-2]"
+        }
+      },
+      "required": [
+        "line1",
+        "locality",
+        "region",
+        "postal_code",
+        "country"
+      ]
+    },
+    "originating_account_id": {
+      "type": "string",
+      "description": "The ID of the internal account the invoice should be paid to."
+    },
+    "receiving_account_id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "The receiving account ID. Can be an `external_account`."
+    },
+    "virtual_account_id": {
+      "type": "string",
+      "format": "uuid",
+      "nullable": true,
+      "description": "The ID of the virtual account the invoice should be paid to."
+    },
+    "payment_effective_date": {
+      "type": "string",
+      "format": "date",
+      "description": "Date transactions are to be posted to the participants' account. Defaults to the current business day or the next business day if the current day is a bank holiday or weekend. Format: yyyy-mm-dd."
+    },
+    "payment_type": {
+      "$ref": "#/components/schemas/payment_order_type"
+    },
+    "payment_method": {
+      "type": "string",
+      "enum": [
+        "ui",
+        "manual",
+        "automatic"
+      ],
+      "description": "The method by which the invoice can be paid. `ui` will show the embedded payment collection flow. `automatic` will automatically initiate payment based upon the account details of the receiving_account id.\\nIf the invoice amount is positive, the automatically initiated payment order's direction will be debit. If the invoice amount is negative, the automatically initiated payment order's direction will be credit. One of `manual`, `ui`, or `automatic`."
+    },
+    "fallback_payment_method": {
+      "type": "string",
+      "nullable": true,
+      "description": "When payment_method is automatic, the fallback payment method to use when an automatic payment fails. One of `manual` or `ui`."
+    },
+    "notifications_enabled": {
+      "type": "boolean",
+      "description": "If true, the invoice will send email notifications to the invoice recipients about invoice status changes."
+    },
+    "notification_email_addresses": {
+      "type": "array",
+      "nullable": true,
+      "items": {
+        "type": "string"
+      },
+      "description": "Emails in addition to the counterparty email to send invoice status notifications to. At least one email is required if notifications are enabled and the counterparty doesn't have an email."
+    },
+    "remind_after_overdue_days": {
+      "type": "array",
+      "nullable": true,
+      "items": {
+        "type": "integer"
+      },
+      "description": "Number of days after due date when overdue reminder emails will be sent out to invoice recipients."
+    },
+    "invoice_line_items": {
+      "type": "array",
+      "nullable": true,
+      "items": {
+        "$ref": "#/components/schemas/invoice_line_item_create_request"
+      },
+      "description": "An array of invoice line items. The API supports a maximum of 50 invoice line items per invoice. If a greater number of invoice line items is required, please contact support."
+    },
+    "metadata": {
+      "type": "object",
+      "description": "Additional data represented as key-value pairs. Both the key and value must be strings.",
+      "additionalProperties": {
+        "type": "string"
+      },
+      "example": {
+        "key": "value",
+        "foo": "bar",
+        "modern": "treasury"
+      },
+      "nullable": true
+    },
+    "status": {
+      "type": "string",
+      "description": "Invoice status must be updated in a `PATCH` request that does not modify any other invoice attributes.             Valid state transitions are `draft` to `unpaid`, `draft` or `unpaid` to `voided`, and `draft` or `unpaid`             to `paid`."
+    }
+  }
+}
