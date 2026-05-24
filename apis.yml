@@ -79,6 +79,8 @@ common:
     url: finops/modern-treasury-finops.yml
   - type: Integrations
     url: https://www.moderntreasury.com/integrations
+  - type: LLMsTxt
+    url: https://docs.moderntreasury.com/llms.txt
 integrations:
   - name: Axos Bank
   - name: BMO
