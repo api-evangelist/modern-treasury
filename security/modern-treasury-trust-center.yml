@@ -1,0 +1,16 @@
+generated: '2026-07-11'
+method: searched
+probe: true
+source: https://www.moderntreasury.com/security
+url: https://www.moderntreasury.com/security
+certifications:
+- SOC 2
+- PCI DSS
+- GDPR
+evidence:
+- source: https://www.moderntreasury.com/security
+  keywords:
+  - soc 2
+  - pci dss
+  - trust center
+  - gdpr
