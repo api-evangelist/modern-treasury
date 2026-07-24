@@ -1,0 +1,1153 @@
+openapi: 3.0.1
+info:
+  title: Modern Treasury AccountCapability InternalAccount API
+  version: v1
+  contact:
+    name: Modern Treasury Engineering Team
+    url: https://moderntreasury.com
+  description: The Modern Treasury REST API. Please see https://docs.moderntreasury.com for more details.
+servers:
+- url: http://localhost:3000
+- url: https://app.moderntreasury.com
+tags:
+- name: InternalAccount
+paths:
+  /api/internal_accounts:
+    get:
+      summary: list internal accounts
+      tags:
+      - InternalAccount
+      operationId: listInternalAccounts
+      security:
+      - basic_auth: []
+      parameters:
+      - name: after_cursor
+        in: query
+        schema:
+          type: string
+          nullable: true
+        required: false
+      - name: per_page
+        in: query
+        required: false
+        schema:
+          type: integer
+      - name: currency
+        in: query
+        schema:
+          $ref: '#/components/schemas/currency'
+        required: false
+        description: Only return internal accounts with this currency.
+      - name: counterparty_id
+        in: query
+        schema:
+          type: string
+        required: false
+        description: Only return internal accounts associated with this counterparty.
+      - name: legal_entity_id
+        in: query
+        schema:
+          type: string
+        required: false
+        description: Only return internal accounts associated with this legal entity.
+      - name: payment_type
+        in: query
+        schema:
+          type: string
+          enum:
+          - ach
+          - au_becs
+          - bacs
+          - book
+          - card
+          - chats
+          - check
+          - cross_border
+          - dk_nets
+          - eft
+          - gb_fps
+          - hu_ics
+          - interac
+          - masav
+          - mx_ccen
+          - neft
+          - nics
+          - nz_becs
+          - pl_elixir
+          - provxchange
+          - ro_sent
+          - rtp
+          - se_bankgirot
+          - sen
+          - sepa
+          - sg_giro
+          - sic
+          - signet
+          - sknbi
+          - stablecoin
+          - wire
+          - zengin
+        required: false
+        description: Only return internal accounts that can make this type of payment.
+      - name: payment_direction
+        in: query
+        schema:
+          type: string
+          enum:
+          - credit
+          - debit
+          _x-stainless-modelDefPath: $shared.transaction_direction
+        required: false
+        description: Only return internal accounts that can originate payments with this direction.
+      - name: status
+        in: query
+        schema:
+          type: string
+          enum:
+          - active
+          - pending_activation
+          - suspended
+          - pending_closure
+          - closed
+        required: false
+        description: Only return internal accounts with this status.
+      - name: external_id
+        in: query
+        schema:
+          type: string
+        required: false
+        description: An optional user-defined 180 character unique identifier.
+      - $ref: '#/components/parameters/metadata_query'
+      responses:
+        '200':
+          description: successful
+          headers:
+            X-After-Cursor:
+              schema:
+                type: string
+                nullable: true
+              required: false
+              description: The cursor for the next page. Including this in a call as `after_cursor` will return the next page.
+            X-Per-Page:
+              schema:
+                type: integer
+                nullable: true
+              description: The current `per_page`.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/internal_account'
+    post:
+      summary: create internal account
+      tags:
+      - InternalAccount
+      operationId: createInternalAccount
+      security:
+      - basic_auth: []
+      parameters:
+      - name: Idempotency-Key
+        in: header
+        required: false
+        description: This key should be something unique, preferably something like an UUID.
+        schema:
+          type: string
+      responses:
+        '201':
+          description: successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/internal_account'
+        '404':
+          description: not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_message'
+        '422':
+          description: unsuccessful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_message'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/internal_account_create_request'
+  /api/internal_accounts/{id}:
+    parameters:
+    - name: id
+      in: path
+      schema:
+        type: string
+      description: Unique identifier for the account.
+      required: true
+    get:
+      summary: get internal account
+      tags:
+      - InternalAccount
+      operationId: getInternalAccount
+      security:
+      - basic_auth: []
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/internal_account'
+        '404':
+          description: not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_message'
+    patch:
+      summary: update internal account
+      tags:
+      - InternalAccount
+      operationId: updateInternalAccount
+      security:
+      - basic_auth: []
+      parameters: []
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/internal_account'
+        '404':
+          description: unsuccessful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_message'
+        '409':
+          description: conflict
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_message'
+        '422':
+          description: unsuccessful
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/internal_account_update_request'
+  /api/internal_accounts/{id}/request_closure:
+    parameters:
+    - name: id
+      in: path
+      schema:
+        type: string
+      description: Unique identifier for the account.
+      required: true
+    post:
+      summary: request closure of internal account
+      tags:
+      - InternalAccount
+      operationId: requestInternalAccountClosure
+      security:
+      - basic_auth: []
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/internal_account'
+        '404':
+          description: not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_message'
+        '422':
+          description: unprocessable entity
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_message'
+components:
+  schemas:
+    address:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        object:
+          type: string
+        live_mode:
+          type: boolean
+          description: This field will be true if this object exists in the live environment or false if it exists in the test environment.
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        line1:
+          type: string
+          nullable: true
+        line2:
+          type: string
+          nullable: true
+        locality:
+          type: string
+          nullable: true
+          description: Locality or City.
+        region:
+          type: string
+          nullable: true
+          description: Region or State.
+        postal_code:
+          type: string
+          description: The postal code of the address.
+          nullable: true
+        country:
+          type: string
+          description: Country code conforms to [ISO 3166-1 alpha-2]
+          nullable: true
+      nullable: true
+      additionalProperties: false
+      minProperties: 11
+      required:
+      - id
+      - object
+      - live_mode
+      - created_at
+      - updated_at
+      - line1
+      - line2
+      - locality
+      - region
+      - postal_code
+      - country
+    account_detail:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        object:
+          type: string
+        live_mode:
+          type: boolean
+          description: This field will be true if this object exists in the live environment or false if it exists in the test environment.
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        discarded_at:
+          type: string
+          format: date-time
+          nullable: true
+        account_number:
+          type: string
+          description: The account number for the bank account.
+        account_number_type:
+          type: string
+          enum:
+          - au_number
+          - base_address
+          - card_token
+          - clabe
+          - ethereum_address
+          - hk_number
+          - iban
+          - id_number
+          - nz_number
+          - other
+          - pan
+          - polygon_address
+          - sg_number
+          - solana_address
+          - wallet_address
+          description: One of `iban`, `clabe`, `wallet_address`, or `other`. Use `other` if the bank account number is in a generic format.
+        account_number_safe:
+          type: string
+          description: The last 4 digits of the account_number.
+      additionalProperties: false
+      minProperties: 8
+      maxProperties: 9
+      required:
+      - id
+      - object
+      - live_mode
+      - created_at
+      - updated_at
+      - discarded_at
+      - account_number_type
+      - account_number_safe
+    internal_account:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        object:
+          type: string
+        live_mode:
+          type: boolean
+          description: This field will be true if this object exists in the live environment or false if it exists in the test environment.
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        account_type:
+          type: string
+          enum:
+          - base_wallet
+          - cash
+          - checking
+          - crypto_wallet
+          - ethereum_wallet
+          - general_ledger
+          - loan
+          - non_resident
+          - other
+          - overdraft
+          - polygon_wallet
+          - savings
+          - solana_wallet
+          nullable: true
+          description: Can be checking, savings or other.
+        party_name:
+          type: string
+          description: The legal name of the entity which owns the account.
+        party_type:
+          type: string
+          enum:
+          - business
+          - individual
+          nullable: true
+          description: Either individual or business.
+        party_address:
+          $ref: '#/components/schemas/address'
+          description: The address associated with the owner or null.
+        name:
+          type: string
+          nullable: true
+          description: A nickname for the account.
+        account_details:
+          type: array
+          items:
+            $ref: '#/components/schemas/account_detail'
+          description: An array of account detail objects.
+        account_capabilities:
+          type: array
+          description: An array of AccountCapability objects that list the originating abilities of the internal account and any relevant information for them.
+          items:
+            $ref: '#/components/schemas/account_capability'
+        routing_details:
+          type: array
+          items:
+            $ref: '#/components/schemas/routing_detail'
+          description: An array of routing detail objects.
+        connection:
+          $ref: '#/components/schemas/connection'
+          description: Specifies which financial institution the accounts belong to.
+        currency:
+          $ref: '#/components/schemas/currency'
+          description: The currency of the account.
+        metadata:
+          type: object
+          additionalProperties:
+            type: string
+          example:
+            key: value
+            foo: bar
+            modern: treasury
+          description: Additional data represented as key-value pairs. Both the key and value must be strings.
+        parent_account_id:
+          type: string
+          format: uuid
+          nullable: true
+          description: The parent InternalAccount of this account.
+        counterparty_id:
+          type: string
+          format: uuid
+          nullable: true
+          description: The Counterparty associated to this account.
+        vendor_id:
+          type: string
+          format: string
+          nullable: true
+          description: The vendor ID associated with this account.
+        legal_entity_id:
+          type: string
+          format: uuid
+          nullable: true
+          description: The Legal Entity associated to this account.
+        status:
+          type: string
+          format: string
+          nullable: true
+          enum:
+          - active
+          - closed
+          - pending_activation
+          - pending_closure
+          - suspended
+          description: The internal account status.
+        ledger_account_id:
+          type: string
+          format: uuid
+          nullable: true
+          description: If the internal account links to a ledger account in Modern Treasury, the id of the ledger account will be populated here.
+        contra_ledger_account_id:
+          type: string
+          format: uuid
+          nullable: true
+          description: If the internal account links to a contra ledger account in Modern Treasury, the id of the contra ledger account will be populated here.
+        external_id:
+          type: string
+          nullable: true
+          description: An optional user-defined 180 character unique identifier.
+      additionalProperties: false
+      minProperties: 24
+      required:
+      - id
+      - object
+      - live_mode
+      - created_at
+      - updated_at
+      - account_type
+      - party_name
+      - party_type
+      - party_address
+      - name
+      - account_details
+      - account_capabilities
+      - routing_details
+      - connection
+      - currency
+      - metadata
+      - parent_account_id
+      - counterparty_id
+      - vendor_id
+      - legal_entity_id
+      - status
+      - ledger_account_id
+      - contra_ledger_account_id
+      - external_id
+    account_capability:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        object:
+          type: string
+        live_mode:
+          type: boolean
+          description: This field will be true if this object exists in the live environment or false if it exists in the test environment.
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        discarded_at:
+          type: string
+          format: date-time
+          nullable: true
+        direction:
+          type: string
+          enum:
+          - credit
+          - debit
+          description: One of `debit` or `credit`. Indicates the direction of money movement this capability is responsible for.
+          _x-stainless-modelDefPath: $shared.transaction_direction
+        identifier:
+          type: string
+          nullable: true
+          description: A unique reference assigned by your bank for tracking and recognizing payment files. It is important this is formatted exactly how the bank assigned it.
+        payment_type:
+          type: string
+          enum:
+          - ach
+          - au_becs
+          - bacs
+          - book
+          - card
+          - chats
+          - check
+          - cross_border
+          - dk_nets
+          - eft
+          - gb_fps
+          - hu_ics
+          - interac
+          - masav
+          - mx_ccen
+          - neft
+          - nics
+          - nz_becs
+          - pl_elixir
+          - provxchange
+          - ro_sent
+          - rtp
+          - se_bankgirot
+          - sen
+          - sepa
+          - sg_giro
+          - sic
+          - signet
+          - sknbi
+          - stablecoin
+          - wire
+          - zengin
+          description: Indicates the the type of payment this capability is responsible for originating.
+      additionalProperties: true
+      minProperties: 9
+      maxProperties: 9
+      required:
+      - id
+      - object
+      - live_mode
+      - created_at
+      - updated_at
+      - discarded_at
+      - direction
+      - identifier
+      - payment_type
+    internal_account_update_request:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The nickname for the internal account.
+        metadata:
+          type: object
+          additionalProperties:
+            type: string
+          description: Additional data in the form of key-value pairs. Pairs can be removed by passing an empty string or `null` as the value.
+        parent_account_id:
+          type: string
+          description: The parent internal account for this account.
+        counterparty_id:
+          type: string
+          description: The Counterparty associated to this account.
+        ledger_account_id:
+          type: string
+          description: The Ledger Account associated to this account.
+        contra_ledger_account_id:
+          type: string
+          description: The Contra Ledger Account associated to this account.
+        external_id:
+          type: string
+          nullable: true
+          description: An optional user-defined 180 character unique identifier.
+    internal_account_create_request:
+      type: object
+      properties:
+        connection_id:
+          type: string
+          description: The identifier of the financial institution the account belongs to.
+        name:
+          type: string
+          description: The nickname of the account.
+        party_name:
+          type: string
+          description: The legal name of the entity which owns the account.
+        party_address:
+          type: object
+          description: The address associated with the owner or null.
+          properties:
+            line1:
+              type: string
+            line2:
+              type: string
+            locality:
+              type: string
+              description: Locality or City.
+            region:
+              type: string
+              description: Region or State.
+            postal_code:
+              type: string
+              description: The postal code of the address.
+            country:
+              type: string
+              description: Country code conforms to [ISO 3166-1 alpha-2]
+          required:
+          - line1
+          - locality
+          - region
+          - postal_code
+          - country
+        currency:
+          type: string
+          enum:
+          - USD
+          - CAD
+          - USDC
+          - USDG
+          - PYUSD
+          example: USD
+          description: The currency of the internal account. Supports "USD" and "CAD" for fiat, and "USDC", "USDG", and "PYUSD" for stablecoin accounts.
+        account_type:
+          type: string
+          enum:
+          - base_wallet
+          - cash
+          - checking
+          - crypto_wallet
+          - ethereum_wallet
+          - general_ledger
+          - loan
+          - non_resident
+          - other
+          - overdraft
+          - polygon_wallet
+          - savings
+          - solana_wallet
+          example: checking
+          description: The account type, used to provision the appropriate account at the financial institution.
+        account_capabilities:
+          type: array
+          description: An array of AccountCapability objects that list the originating abilities of the internal account and any relevant information for them.
+          items:
+            $ref: '#/components/schemas/account_capability'
+        vendor_attributes:
+          type: object
+          additionalProperties:
+            type: string
+          example:
+            key: value
+            foo: bar
+            modern: treasury
+          description: A hash of vendor specific attributes that will be used when creating the account at the vendor specified by the given connection.
+        parent_account_id:
+          type: string
+          description: The parent internal account of this new account.
+        counterparty_id:
+          type: string
+          description: The Counterparty associated to this account.
+        legal_entity_id:
+          type: string
+          description: The LegalEntity associated to this account.
+        metadata:
+          type: object
+          additionalProperties:
+            type: string
+          description: Additional data represented as key-value pairs. Both the key and value must be strings.
+        external_id:
+          type: string
+          nullable: true
+          description: An optional user-defined 180 character unique identifier.
+      required:
+      - connection_id
+      - name
+      - party_name
+      - currency
+    currency:
+      type: string
+      enum:
+      - AED
+      - AFN
+      - ALL
+      - AMD
+      - ANG
+      - AOA
+      - ARS
+      - AUD
+      - AWG
+      - AZN
+      - BAM
+      - BBD
+      - BCH
+      - BDT
+      - BGN
+      - BHD
+      - BIF
+      - BMD
+      - BND
+      - BOB
+      - BRL
+      - BSD
+      - BTC
+      - BTN
+      - BWP
+      - BYN
+      - BYR
+      - BZD
+      - CAD
+      - CDF
+      - CHF
+      - CLF
+      - CLP
+      - CNH
+      - CNY
+      - COP
+      - CRC
+      - CUC
+      - CUP
+      - CVE
+      - CZK
+      - DJF
+      - DKK
+      - DOP
+      - DZD
+      - EEK
+      - EGP
+      - ERN
+      - ETB
+      - ETH
+      - EUR
+      - EURC
+      - FJD
+      - FKP
+      - GBP
+      - GBX
+      - GEL
+      - GGP
+      - GHS
+      - GIP
+      - GMD
+      - GNF
+      - GTQ
+      - GYD
+      - HKD
+      - HNL
+      - HRK
+      - HTG
+      - HUF
+      - IDR
+      - ILS
+      - IMP
+      - INR
+      - IQD
+      - IRR
+      - ISK
+      - JEP
+      - JMD
+      - JOD
+      - JPY
+      - KES
+      - KGS
+      - KHR
+      - KMF
+      - KPW
+      - KRW
+      - KWD
+      - KYD
+      - KZT
+      - LAK
+      - LBP
+      - LKR
+      - LRD
+      - LSL
+      - LTL
+      - LVL
+      - LYD
+      - MAD
+      - MDL
+      - MGA
+      - MKD
+      - MMK
+      - MNT
+      - MOP
+      - MRO
+      - MRU
+      - MTL
+      - MUR
+      - MVR
+      - MWK
+      - MXN
+      - MYR
+      - MZN
+      - NAD
+      - NGN
+      - NIO
+      - NOK
+      - NPR
+      - NZD
+      - OMR
+      - OP
+      - PAB
+      - PEN
+      - PGK
+      - PHP
+      - PKR
+      - PLN
+      - PYG
+      - PYUSD
+      - QAR
+      - RON
+      - RSD
+      - RUB
+      - RWF
+      - SAR
+      - SBD
+      - SCR
+      - SDG
+      - SEK
+      - SGD
+      - SHP
+      - SKK
+      - SLE
+      - SLL
+      - SOS
+      - SRD
+      - SSP
+      - STD
+      - STN
+      - SVC
+      - SYP
+      - SZL
+      - THB
+      - TJS
+      - TMM
+      - TMT
+      - TND
+      - TOP
+      - TRY
+      - TTD
+      - TWD
+      - TZS
+      - UAH
+      - UGX
+      - USD
+      - USDB
+      - USDC
+      - USDG
+      - USDP
+      - USDT
+      - UYU
+      - UZS
+      - VEF
+      - VES
+      - VND
+      - VUV
+      - WST
+      - XAF
+      - XAG
+      - XAU
+      - XBA
+      - XBB
+      - XBC
+      - XBD
+      - XCD
+      - XCG
+      - XDR
+      - XFU
+      - XOF
+      - XPD
+      - XPF
+      - XPT
+      - XTS
+      - YER
+      - ZAR
+      - ZMK
+      - ZMW
+      - ZWD
+      - ZWG
+      - ZWL
+      - ZWN
+      - ZWR
+      description: Three-letter ISO currency code.
+    error_message:
+      type: object
+      properties:
+        errors:
+          type: object
+          properties:
+            code:
+              type: string
+              enum:
+              - parameter_invalid
+              - parameter_missing
+              - resource_not_found
+              - not_found
+              - forbidden
+              - invalid_ip
+              - invalid_key
+              - header_invalid
+              - expired_key
+              - conflict
+              - too_many_requests
+            message:
+              type: string
+            parameter:
+              type: string
+      required:
+      - errors
+    connection:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        object:
+          type: string
+        live_mode:
+          type: boolean
+          description: This field will be true if this object exists in the live environment or false if it exists in the test environment.
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        discarded_at:
+          type: string
+          format: date-time
+          nullable: true
+        vendor_id:
+          type: string
+          format: uuid
+          description: Unique identifier for the bank or vendor.
+        vendor_customer_id:
+          type: string
+          format: uuid
+          description: An identifier given to this connection by the bank.
+          nullable: true
+        vendor_name:
+          type: string
+          description: A human-friendly name for the bank or vendor.
+      additionalProperties: false
+      minProperties: 9
+      required:
+      - id
+      - object
+      - live_mode
+      - created_at
+      - updated_at
+      - discarded_at
+      - vendor_id
+      - vendor_customer_id
+      - vendor_name
+    routing_detail:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        object:
+          type: string
+        live_mode:
+          type: boolean
+          description: This field will be true if this object exists in the live environment or false if it exists in the test environment.
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        discarded_at:
+          type: string
+          format: date-time
+          nullable: true
+        routing_number:
+          type: string
+          description: The routing number of the bank.
+        routing_number_type:
+          type: string
+          enum:
+          - aba
+          - au_bsb
+          - br_codigo
+          - ca_cpa
+          - chips
+          - cnaps
+          - dk_interbank_clearing_code
+          - gb_sort_code
+          - hk_interbank_clearing_code
+          - hu_interbank_clearing_code
+          - id_sknbi_code
+          - il_bank_code
+          - in_ifsc
+          - jp_zengin_code
+          - mx_bank_identifier
+          - my_branch_code
+          - nz_national_clearing_code
+          - pl_national_clearing_code
+          - se_bankgiro_clearing_code
+          - sg_interbank_clearing_code
+          - swift
+          - za_national_clearing_code
+          description: The type of routing number. See https://docs.moderntreasury.com/platform/reference/routing-detail-object for more details.
+        payment_type:
+          type: string
+          enum:
+          - ach
+          - au_becs
+          - bacs
+          - book
+          - card
+          - chats
+          - check
+          - cross_border
+          - dk_nets
+          - eft
+          - gb_fps
+          - hu_ics
+          - interac
+          - masav
+          - mx_ccen
+          - neft
+          - nics
+          - nz_becs
+          - pl_elixir
+          - provxchange
+          - ro_sent
+          - rtp
+          - se_bankgirot
+          - sen
+          - sepa
+          - sg_giro
+          - sic
+          - signet
+          - sknbi
+          - stablecoin
+          - wire
+          - zengin
+          nullable: true
+          description: If the routing detail is to be used for a specific payment type this field will be populated, otherwise null.
+        bank_name:
+          type: string
+          description: The name of the bank.
+        bank_address:
+          $ref: '#/components/schemas/address'
+      additionalProperties: false
+      minProperties: 11
+      required:
+      - id
+      - object
+      - live_mode
+      - created_at
+      - updated_at
+      - discarded_at
+      - routing_number
+      - routing_number_type
+      - payment_type
+      - bank_name
+      - bank_address
+  parameters:
+    metadata_query:
+      name: metadata
+      in: query
+      schema:
+        type: object
+        additionalProperties:
+          type: string
+      style: deepObject
+      explode: true
+      required: false
+      description: For example, if you want to query for records with metadata key `Type` and value `Loan`, the query would be `metadata%5BType%5D=Loan`. This encodes the query parameters.
+  securitySchemes:
+    basic_auth:
+      type: http
+      scheme: basic

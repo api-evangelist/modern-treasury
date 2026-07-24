@@ -1,0 +1,268 @@
+openapi: 3.0.1
+info:
+  title: Modern Treasury AccountCapability LedgerAccountStatement API
+  version: v1
+  contact:
+    name: Modern Treasury Engineering Team
+    url: https://moderntreasury.com
+  description: The Modern Treasury REST API. Please see https://docs.moderntreasury.com for more details.
+servers:
+- url: http://localhost:3000
+- url: https://app.moderntreasury.com
+tags:
+- name: LedgerAccountStatement
+paths:
+  /api/ledger_account_statements:
+    post:
+      summary: create ledger_account_statement
+      tags:
+      - LedgerAccountStatement
+      operationId: createLedgerAccountStatement
+      description: Create a ledger account statement.
+      security:
+      - basic_auth: []
+      parameters:
+      - name: Idempotency-Key
+        in: header
+        required: false
+        description: This key should be something unique, preferably something like an UUID.
+        schema:
+          type: string
+      responses:
+        '201':
+          description: successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ledger_account_statement'
+        '403':
+          description: forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_message'
+        '422':
+          description: unsuccessful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_message'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ledger_account_statement_create_request'
+  /api/ledger_account_statements/{id}:
+    parameters:
+    - name: id
+      in: path
+      schema:
+        type: string
+      description: id
+      required: true
+    get:
+      summary: get ledger_account_statement
+      tags:
+      - LedgerAccountStatement
+      operationId: getLedgerAccountStatement
+      description: Get details on a single ledger account statement.
+      security:
+      - basic_auth: []
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ledger_account_statement'
+        '404':
+          description: not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_message'
+components:
+  schemas:
+    ledger_account_statement:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        object:
+          type: string
+        live_mode:
+          type: boolean
+          description: This field will be true if this object exists in the live environment or false if it exists in the test environment.
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        ledger_id:
+          type: string
+          format: uuid
+          description: The id of the ledger that this ledger account statement belongs to.
+        description:
+          type: string
+          description: The description of the ledger account statement.
+          nullable: true
+        ledger_account_id:
+          type: string
+          format: uuid
+          description: The id of the ledger account whose ledger entries are queried against, and its balances are computed as a result.
+        ledger_account_lock_version:
+          type: integer
+          description: Lock version of the ledger account at the time of statement generation.
+        ledger_account_normal_balance:
+          type: string
+          enum:
+          - credit
+          - debit
+          description: The normal balance of the ledger account.
+          _x-stainless-modelDefPath: $shared.transaction_direction
+        effective_at_lower_bound:
+          type: string
+          format: date-time
+          description: The inclusive lower bound of the effective_at timestamp of the ledger entries to be included in the ledger account statement.
+        effective_at_upper_bound:
+          type: string
+          format: date-time
+          description: The exclusive upper bound of the effective_at timestamp of the ledger entries to be included in the ledger account statement.
+        starting_balance:
+          $ref: '#/components/schemas/ledger_balances'
+          description: The pending, posted, and available balances for this ledger account at the `effective_at_lower_bound`. The posted balance is the sum of all posted entries on the account. The pending balance is the sum of all pending and posted entries on the account. The available balance is the posted incoming entries minus the sum of the pending and posted outgoing amounts.
+        ending_balance:
+          $ref: '#/components/schemas/ledger_balances'
+          description: The pending, posted, and available balances for this ledger account at the `effective_at_upper_bound`. The posted balance is the sum of all posted entries on the account. The pending balance is the sum of all pending and posted entries on the account. The available balance is the posted incoming entries minus the sum of the pending and posted outgoing amounts.
+        metadata:
+          type: object
+          description: Additional data represented as key-value pairs. Both the key and value must be strings.
+          additionalProperties:
+            type: string
+          example:
+            key: value
+            foo: bar
+            modern: treasury
+      additionalProperties: false
+      minProperties: 15
+      required:
+      - id
+      - object
+      - live_mode
+      - created_at
+      - updated_at
+      - ledger_id
+      - description
+      - ledger_account_id
+      - ledger_account_lock_version
+      - ledger_account_normal_balance
+      - effective_at_lower_bound
+      - effective_at_upper_bound
+      - starting_balance
+      - ending_balance
+      - metadata
+    error_message:
+      type: object
+      properties:
+        errors:
+          type: object
+          properties:
+            code:
+              type: string
+              enum:
+              - parameter_invalid
+              - parameter_missing
+              - resource_not_found
+              - not_found
+              - forbidden
+              - invalid_ip
+              - invalid_key
+              - header_invalid
+              - expired_key
+              - conflict
+              - too_many_requests
+            message:
+              type: string
+            parameter:
+              type: string
+      required:
+      - errors
+    ledger_balance:
+      type: object
+      properties:
+        credits:
+          type: integer
+        debits:
+          type: integer
+        amount:
+          type: integer
+        currency:
+          type: string
+          description: The currency of the ledger account.
+        currency_exponent:
+          type: integer
+          description: The currency exponent of the ledger account.
+      additionalProperties: false
+      minProperties: 5
+      required:
+      - credits
+      - debits
+      - amount
+      - currency
+      - currency_exponent
+    ledger_account_statement_create_request:
+      type: object
+      properties:
+        description:
+          type: string
+          description: The description of the ledger account statement.
+          nullable: true
+        ledger_account_id:
+          type: string
+          format: uuid
+          description: The id of the ledger account whose ledger entries are queried against, and its balances are computed as a result.
+        effective_at_lower_bound:
+          type: string
+          format: date-time
+          description: The inclusive lower bound of the effective_at timestamp of the ledger entries to be included in the ledger account statement.
+        effective_at_upper_bound:
+          type: string
+          format: date-time
+          description: The exclusive upper bound of the effective_at timestamp of the ledger entries to be included in the ledger account statement.
+        metadata:
+          type: object
+          description: Additional data represented as key-value pairs. Both the key and value must be strings.
+          additionalProperties:
+            type: string
+          example:
+            key: value
+            foo: bar
+            modern: treasury
+      required:
+      - ledger_account_id
+      - effective_at_lower_bound
+      - effective_at_upper_bound
+    ledger_balances:
+      type: object
+      properties:
+        pending_balance:
+          $ref: '#/components/schemas/ledger_balance'
+          description: The pending_balance is the sum of all pending and posted entries.
+        posted_balance:
+          $ref: '#/components/schemas/ledger_balance'
+          description: The posted_balance is the sum of all posted entries.
+        available_balance:
+          $ref: '#/components/schemas/ledger_balance'
+          description: The available_balance is the sum of all posted inbound entries and pending outbound entries. For credit normal, available_amount = posted_credits - pending_debits; for debit normal, available_amount = posted_debits - pending_credits.
+      additionalProperties: false
+      minProperties: 3
+      required:
+      - pending_balance
+      - posted_balance
+      - available_balance
+  securitySchemes:
+    basic_auth:
+      type: http
+      scheme: basic

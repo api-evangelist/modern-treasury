@@ -1,0 +1,1244 @@
+openapi: 3.0.1
+info:
+  title: Modern Treasury AccountCapability ConnectionLegalEntity API
+  version: v1
+  contact:
+    name: Modern Treasury Engineering Team
+    url: https://moderntreasury.com
+  description: The Modern Treasury REST API. Please see https://docs.moderntreasury.com for more details.
+servers:
+- url: http://localhost:3000
+- url: https://app.moderntreasury.com
+tags:
+- name: ConnectionLegalEntity
+paths:
+  /api/connection_legal_entities:
+    get:
+      summary: list connection_legal_entities
+      tags:
+      - ConnectionLegalEntity
+      operationId: listConnectionLegalEntities
+      description: Get a list of all connection legal entities.
+      security:
+      - basic_auth: []
+      parameters:
+      - name: after_cursor
+        in: query
+        schema:
+          type: string
+          nullable: true
+        required: false
+      - name: per_page
+        in: query
+        required: false
+        schema:
+          type: integer
+      - name: connection_id
+        in: query
+        schema:
+          type: string
+        required: false
+      - name: legal_entity_id
+        in: query
+        schema:
+          type: string
+        required: false
+      - name: status
+        in: query
+        schema:
+          type: string
+          enum:
+          - completed
+          - denied
+          - failed
+          - processing
+          - suspended
+        required: false
+      responses:
+        '200':
+          description: successful
+          headers:
+            X-After-Cursor:
+              schema:
+                type: string
+                nullable: true
+              required: false
+              description: The cursor for the next page. Including this in a call as `after_cursor` will return the next page.
+            X-Per-Page:
+              schema:
+                type: integer
+                nullable: true
+              description: The current `per_page`.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/connection_legal_entity'
+    post:
+      summary: create connection_legal_entity
+      tags:
+      - ConnectionLegalEntity
+      operationId: createConnectionLegalEntity
+      description: Create a connection legal entity.
+      security:
+      - basic_auth: []
+      parameters:
+      - name: Idempotency-Key
+        in: header
+        required: false
+        description: This key should be something unique, preferably something like an UUID.
+        schema:
+          type: string
+      responses:
+        '201':
+          description: successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connection_legal_entity'
+        '422':
+          description: unsuccessful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_message'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/connection_legal_entity_create_request'
+  /api/connection_legal_entities/{id}:
+    parameters:
+    - name: id
+      in: path
+      description: The id of an existing connection legal entity.
+      required: true
+      schema:
+        type: string
+    get:
+      summary: get connection_legal_entity
+      tags:
+      - ConnectionLegalEntity
+      operationId: getConnectionLegalEntity
+      description: Get details on a single connection legal entity.
+      security:
+      - basic_auth: []
+      parameters:
+      - name: Idempotency-Key
+        in: header
+        required: false
+        description: This key should be something unique, preferably something like an UUID.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connection_legal_entity'
+        '404':
+          description: not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_message'
+    patch:
+      summary: update connection_legal_entity
+      tags:
+      - ConnectionLegalEntity
+      operationId: updateConnectionLegalEntity
+      description: Update a connection legal entity.
+      security:
+      - basic_auth: []
+      parameters: []
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connection_legal_entity'
+        '404':
+          description: not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_message'
+        '422':
+          description: unsuccessful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_message'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/connection_legal_entity_update_request'
+components:
+  schemas:
+    connection_legal_entity_update_request:
+      type: object
+      properties:
+        status:
+          type: string
+          enum:
+          - processing
+          description: The status of the connection legal entity.
+    connection_legal_entity_create_request:
+      type: object
+      properties:
+        connection_id:
+          type: string
+          description: The ID of the connection.
+        legal_entity_id:
+          type: string
+          description: The ID of the legal entity.
+        legal_entity:
+          type: object
+          properties:
+            legal_entity_type:
+              type: string
+              enum:
+              - business
+              - individual
+              description: The type of legal entity.
+            risk_rating:
+              type: string
+              enum:
+              - low
+              - medium
+              - high
+              nullable: true
+              description: The risk rating of the legal entity. One of low, medium, high.
+            prefix:
+              type: string
+              nullable: true
+              description: An individual's prefix.
+            first_name:
+              type: string
+              nullable: true
+              description: An individual's first name.
+            middle_name:
+              type: string
+              nullable: true
+              description: An individual's middle name.
+            last_name:
+              type: string
+              nullable: true
+              description: An individual's last name.
+            suffix:
+              type: string
+              nullable: true
+              description: An individual's suffix.
+            preferred_name:
+              type: string
+              nullable: true
+              description: An individual's preferred name.
+            citizenship_country:
+              type: string
+              nullable: true
+              description: The country of citizenship for an individual.
+            politically_exposed_person:
+              type: boolean
+              nullable: true
+              description: Whether the individual is a politically exposed person.
+            date_of_birth:
+              type: string
+              format: date
+              nullable: true
+              description: An individual's date of birth (YYYY-MM-DD).
+            date_formed:
+              type: string
+              format: date
+              nullable: true
+              description: A business's formation date (YYYY-MM-DD).
+            business_name:
+              type: string
+              nullable: true
+              description: The business's legal business name.
+            doing_business_as_names:
+              type: array
+              items:
+                type: string
+                description: A list of "Doing Business As" (DBA) / trade names for a business, different than their legal business name.
+            legal_structure:
+              type: string
+              enum:
+              - corporation
+              - llc
+              - non_profit
+              - partnership
+              - sole_proprietorship
+              - trust
+              nullable: true
+              description: The business's legal structure.
+            phone_numbers:
+              type: array
+              items:
+                type: object
+                properties:
+                  phone_number:
+                    type: string
+                description: A list of phone numbers in E.164 format.
+            email:
+              type: string
+              nullable: true
+              description: The entity's primary email.
+            website:
+              type: string
+              nullable: true
+              description: The entity's primary website URL.
+            business_description:
+              type: string
+              nullable: true
+              description: A description of the business.
+            intended_use:
+              type: string
+              nullable: true
+              description: A description of the intended use of the legal entity.
+            expected_activity_volume:
+              type: integer
+              nullable: true
+              description: Monthly expected transaction volume in USD.
+            country_of_incorporation:
+              type: string
+              nullable: true
+              description: The country code where the business is incorporated in the ISO 3166-1 alpha-2 or alpha-3 formats.
+            operating_jurisdictions:
+              type: array
+              items:
+                type: string
+              description: A list of countries where the business operates (ISO 3166-1 alpha-2 or alpha-3 codes).
+            primary_social_media_sites:
+              type: array
+              items:
+                type: string
+              description: A list of primary social media URLs for the business.
+            listed_exchange:
+              type: string
+              nullable: true
+              description: ISO 10383 market identifier code.
+            ticker_symbol:
+              type: string
+              nullable: true
+              description: Stock ticker symbol for publicly traded companies.
+            regulators:
+              type: array
+              nullable: true
+              items:
+                $ref: '#/components/schemas/legal_entity_regulator'
+              description: Array of regulatory bodies overseeing this institution.
+            third_party_verification:
+              $ref: '#/components/schemas/third_party_verification'
+              nullable: true
+              deprecated: true
+              description: Deprecated. Use `third_party_verifications` instead.
+            third_party_verifications:
+              type: array
+              items:
+                $ref: '#/components/schemas/third_party_verification'
+              description: A list of third-party verifications run by external vendors.
+              title: Third Party Verfications
+            service_provider_legal_entity_id:
+              type: string
+              format: uuid
+              nullable: true
+              description: The UUID of the parent legal entity in the service provider tree.
+            metadata:
+              type: object
+              description: Additional data represented as key-value pairs. Both the key and value must be strings.
+              additionalProperties:
+                type: string
+              example:
+                key: value
+                foo: bar
+                modern: treasury
+            external_id:
+              type: string
+              nullable: true
+              description: An optional user-defined 180 character unique identifier.
+            bank_settings:
+              $ref: '#/components/schemas/legal_entity_bank_setting'
+              nullable: true
+            wealth_and_employment_details:
+              $ref: '#/components/schemas/legal_entity_wealth_employment_detail'
+              nullable: true
+            compliance_details:
+              type: object
+              nullable: true
+              deprecated: true
+            addresses:
+              type: array
+              description: A list of addresses for the entity.
+              items:
+                $ref: '#/components/schemas/legal_entity_address_create_request'
+            identifications:
+              type: array
+              description: A list of identifications for the legal entity.
+              items:
+                $ref: '#/components/schemas/identification_create_request'
+            documents:
+              type: array
+              description: A list of documents to attach to the legal entity (e.g. articles of incorporation, certificate of good standing, proof of address).
+              items:
+                type: object
+                properties:
+                  document_type:
+                    type: string
+                    enum:
+                    - articles_of_incorporation
+                    - certificate_of_good_standing
+                    - ein_letter
+                    - generic
+                    - identification_back
+                    - identification_front
+                    - proof_of_address
+                    description: A category given to the document, can be `null`.
+                  file_data:
+                    type: string
+                    description: Base64-encoded file content for the document.
+                  filename:
+                    type: string
+                    description: The original filename of the document.
+                required:
+                - document_type
+                - file_data
+            industry_classifications:
+              type: array
+              description: A list of industry classifications for the legal entity.
+              items:
+                $ref: '#/components/schemas/legal_entity_industry_classification'
+            legal_entity_associations:
+              type: array
+              items:
+                $ref: '#/components/schemas/legal_entity_association_inline_create_request'
+              nullable: true
+              description: The legal entity associations and its child legal entities.
+            connection_id:
+              type: string
+              nullable: true
+              description: The connection ID for the connection the legal entity is associated with. Defaults to the id of the connection designated with an is_default value of true or the id of an existing operational connection if only one is available. Pass in a value of null to prevent the connection from being associated with the legal entity.
+          description: The legal entity.
+      required:
+      - connection_id
+    legal_entity_regulator:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Full name of the regulatory body.
+        jurisdiction:
+          type: string
+          description: The country code where the regulator operates in the ISO 3166-1 alpha-2 format (e.g., "US", "CA", "GB").
+        registration_number:
+          type: string
+          description: Registration or identification number with the regulator.
+      required:
+      - name
+      - jurisdiction
+      - registration_number
+      additionalProperties: false
+    third_party_verification:
+      type: object
+      properties:
+        vendor_verification_id:
+          type: string
+          description: The identification of the third party verification in `vendor`'s system.
+        vendor:
+          type: string
+          enum:
+          - persona
+          - middesk
+          - alloy
+          - sumsub
+          - veriff
+          description: The vendor that performed the verification, e.g. `persona`.
+        verification_category:
+          type: string
+          enum:
+          - legal_name
+          - date_of_birth
+          - address
+          - government_id_number
+          - adverse_media
+          description: The category of verification performed.
+        verification_method:
+          type: string
+          description: The method used to perform the verification.
+        comment:
+          type: string
+          nullable: true
+          description: An optional comment about the verification.
+        outcome:
+          type: string
+          enum:
+          - passed
+          - failed
+          description: The outcome of the verification. One of `passed` or `failed`.
+        verification_time:
+          type: string
+          format: date-time
+          description: The timestamp when the verification was performed.
+      required:
+      - vendor_verification_id
+      - vendor
+      - verification_category
+      - verification_method
+      - outcome
+      - verification_time
+      additionalProperties: false
+    legal_entity_industry_classification:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        object:
+          type: string
+        live_mode:
+          type: boolean
+          description: This field will be true if this object exists in the live environment or false if it exists in the test environment.
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        discarded_at:
+          type: string
+          format: date-time
+          nullable: true
+        classification_type:
+          type: string
+          enum:
+          - anzsic
+          - bics
+          - gics
+          - hsics
+          - icb
+          - isic
+          - mgecs
+          - nace
+          - naics
+          - rbics
+          - sic
+          - sni
+          - trbc
+          - uksic
+          - unspsc
+          nullable: false
+          description: The classification system of the classification codes.
+        classification_codes:
+          type: array
+          items:
+            type: string
+          nullable: false
+          description: The industry classification codes for the legal entity.
+      additionalProperties: false
+      minProperties: 8
+      required:
+      - id
+      - object
+      - live_mode
+      - created_at
+      - updated_at
+      - discarded_at
+      - classification_type
+      - classification_codes
+    legal_entity_bank_setting:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        object:
+          type: string
+        live_mode:
+          type: boolean
+          description: This field will be true if this object exists in the live environment or false if it exists in the test environment.
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        discarded_at:
+          type: string
+          format: date-time
+          nullable: true
+        enable_backup_withholding:
+          type: boolean
+          nullable: true
+          description: Whether backup withholding is enabled. See more here - https://www.irs.gov/businesses/small-businesses-self-employed/backup-withholding.
+        backup_withholding_percentage:
+          type: integer
+          nullable: true
+          description: The percentage of backup withholding to apply to the legal entity.
+        privacy_opt_out:
+          type: boolean
+          nullable: true
+          description: Cross River Bank specific setting to opt out of privacy policy.
+        regulation_o:
+          type: boolean
+          nullable: true
+          description: It covers, among other types of insider loans, extensions of credit by a member bank to an executive officer, director, or principal shareholder of the member bank; a bank holding company of which the member bank is a subsidiary; and any other subsidiary of that bank holding company.
+      additionalProperties: false
+      minProperties: 10
+      required:
+      - id
+      - object
+      - live_mode
+      - created_at
+      - updated_at
+      - discarded_at
+      - enable_backup_withholding
+      - backup_withholding_percentage
+      - privacy_opt_out
+      - regulation_o
+    legal_entity_address_create_request:
+      type: object
+      properties:
+        address_types:
+          type: array
+          items:
+            type: string
+            enum:
+            - business
+            - business_registered
+            - mailing
+            - other
+            - po_box
+            - residential
+          description: The types of this address.
+        line1:
+          type: string
+          nullable: true
+        line2:
+          type: string
+          nullable: true
+        locality:
+          type: string
+          nullable: true
+          description: Locality or City.
+        region:
+          type: string
+          nullable: true
+          description: Region or State.
+        postal_code:
+          type: string
+          description: The postal code of the address.
+          nullable: true
+        country:
+          type: string
+          description: Country code conforms to [ISO 3166-1 alpha-2]
+          nullable: true
+      required:
+      - line1
+      - locality
+      - region
+      - postal_code
+      - country
+    error_message:
+      type: object
+      properties:
+        errors:
+          type: object
+          properties:
+            code:
+              type: string
+              enum:
+              - parameter_invalid
+              - parameter_missing
+              - resource_not_found
+              - not_found
+              - forbidden
+              - invalid_ip
+              - invalid_key
+              - header_invalid
+              - expired_key
+              - conflict
+              - too_many_requests
+            message:
+              type: string
+            parameter:
+              type: string
+      required:
+      - errors
+    legal_entity_wealth_employment_detail:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        object:
+          type: string
+        live_mode:
+          type: boolean
+          description: This field will be true if this object exists in the live environment or false if it exists in the test environment.
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        discarded_at:
+          type: string
+          format: date-time
+          nullable: true
+        employment_status:
+          type: string
+          enum:
+          - employed
+          - retired
+          - self_employed
+          - student
+          - unemployed
+          nullable: true
+          description: The employment status of the individual.
+        occupation:
+          type: string
+          enum:
+          - consulting
+          - executive
+          - finance_accounting
+          - food_services
+          - government
+          - healthcare
+          - legal_services
+          - manufacturing
+          - other
+          - sales
+          - science_engineering
+          - technology
+          nullable: true
+          description: The occupation of the individual.
+        industry:
+          type: string
+          enum:
+          - accounting
+          - agriculture
+          - automotive
+          - chemical_manufacturing
+          - construction
+          - educational_medical
+          - food_service
+          - finance
+          - gasoline
+          - health_stores
+          - laundry
+          - maintenance
+          - manufacturing
+          - merchant_wholesale
+          - mining
+          - performing_arts
+          - professional_non_legal
+          - public_administration
+          - publishing
+          - real_estate
+          - recreation_gambling
+          - religious_charity
+          - rental_services
+          - retail_clothing
+          - retail_electronics
+          - retail_food
+          - retail_furnishing
+          - retail_home
+          - retail_non_store
+          - retail_sporting
+          - transportation
+          - travel
+          - utilities
+          nullable: true
+          description: The industry of the individual.
+        income_source:
+          type: string
+          enum:
+          - family_support
+          - government_benefits
+          - inheritance
+          - investments
+          - rental_income
+          - retirement
+          - salary
+          - self_employed
+          nullable: true
+          description: The source of the individual's income.
+        income_state:
+          type: string
+          nullable: true
+          description: The state in which the individual's income is earned.
+        income_country:
+          type: string
+          nullable: true
+          description: The country in which the individual's income is earned.
+        employer_name:
+          type: string
+          nullable: true
+          description: The name of the employer.
+        employer_state:
+          type: string
+          nullable: true
+          description: The state in which the employer is located.
+        employer_country:
+          type: string
+          nullable: true
+          description: The country in which the employer is located.
+        source_of_funds:
+          type: string
+          enum:
+          - alimony
+          - annuity
+          - business_owner
+          - business_revenue
+          - debt_financing
+          - general_employee
+          - government_benefits
+          - homemaker
+          - inheritance_gift
+          - intercompany_loan
+          - investment
+          - investor_funding
+          - legal_settlement
+          - lottery
+          - real_estate
+          - retained_earnings_or_savings
+          - retired
+          - retirement
+          - salary
+          - sale_of_business_assets
+          - sale_of_real_estate
+          - self_employed
+          - senior_executive
+          - trust_income
+          nullable: true
+          description: The source of the individual's funds.
+        wealth_source:
+          type: string
+          enum:
+          - business_sale
+          - family_support
+          - government_benefits
+          - inheritance
+          - investments
+          - other
+          - rental_income
+          - retirement
+          - salary
+          - self_employed
+          nullable: true
+          description: The source of the individual's wealth.
+        annual_income:
+          type: integer
+          nullable: true
+          description: The annual income of the individual in USD.
+      additionalProperties: false
+      minProperties: 18
+      required:
+      - id
+      - object
+      - live_mode
+      - created_at
+      - updated_at
+      - discarded_at
+      - employment_status
+      - occupation
+      - industry
+      - income_source
+      - income_state
+      - income_country
+      - employer_name
+      - employer_state
+      - employer_country
+      - source_of_funds
+      - wealth_source
+      - annual_income
+    connection_legal_entity:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        object:
+          type: string
+        live_mode:
+          type: boolean
+          description: This field will be true if this object exists in the live environment or false if it exists in the test environment.
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        discarded_at:
+          type: string
+          format: date-time
+          nullable: true
+        connection_id:
+          type: string
+          description: The ID of the connection.
+        legal_entity_id:
+          type: string
+          description: The ID of the legal entity.
+        status:
+          type: string
+          enum:
+          - completed
+          - denied
+          - failed
+          - processing
+          - suspended
+          description: The status of the connection legal entity.
+        vendor_id:
+          type: string
+          description: The ID of the legal entity at the vendor.
+      additionalProperties: false
+      minProperties: 10
+      required:
+      - id
+      - object
+      - live_mode
+      - created_at
+      - updated_at
+      - discarded_at
+      - connection_id
+      - legal_entity_id
+      - status
+      - vendor_id
+    identification_create_request:
+      type: object
+      properties:
+        id_number:
+          type: string
+          description: The ID number of identification document.
+        documents:
+          type: array
+          description: A list of documents to attach to the identification.
+          items:
+            type: object
+            properties:
+              document_type:
+                type: string
+                enum:
+                - articles_of_incorporation
+                - certificate_of_good_standing
+                - ein_letter
+                - generic
+                - identification_back
+                - identification_front
+                - proof_of_address
+                description: A category given to the document, can be `null`.
+              file_data:
+                type: string
+                description: Base64-encoded file content for the document.
+              filename:
+                type: string
+                description: The original filename of the document.
+            required:
+            - document_type
+            - file_data
+        id_type:
+          type: string
+          enum:
+          - ar_cuil
+          - ar_cuit
+          - br_cnpj
+          - br_cpf
+          - ca_sin
+          - cl_run
+          - cl_rut
+          - co_cedulas
+          - co_nit
+          - drivers_license
+          - hn_id
+          - hn_rtn
+          - ie_pps
+          - in_lei
+          - kr_brn
+          - kr_crn
+          - kr_rrn
+          - passport
+          - sa_tin
+          - sa_vat
+          - us_ein
+          - us_itin
+          - us_ssn
+          - vn_tin
+          description: The type of ID number.
+        expiration_date:
+          type: string
+          format: date
+          nullable: true
+          description: The date when the Identification is no longer considered valid by the issuing authority.
+        issuing_country:
+          type: string
+          nullable: true
+          description: The ISO 3166-1 alpha-2 country code of the country that issued the identification
+        issuing_region:
+          type: string
+          nullable: true
+          description: The region in which the identifcation was issued.
+      required:
+      - id_number
+      - id_type
+    legal_entity_association_inline_create_request:
+      type: object
+      properties:
+        relationship_types:
+          type: array
+          items:
+            type: string
+            enum:
+            - authorized_signer
+            - beneficial_owner
+            - control_person
+            description: A list of relationship types for how the child entity relates to parent entity.
+        title:
+          type: string
+          nullable: true
+          description: The job title of the child entity at the parent entity.
+        ownership_percentage:
+          type: integer
+          nullable: true
+          description: The child entity's ownership percentage iff they are a beneficial owner.
+        child_legal_entity:
+          $ref: '#/components/schemas/child_legal_entity_create'
+          description: The child legal entity.
+        child_legal_entity_id:
+          type: string
+          description: The ID of the child legal entity.
+      required:
+      - relationship_types
+    child_legal_entity_create:
+      type: object
+      properties:
+        legal_entity_type:
+          type: string
+          enum:
+          - business
+          - individual
+          description: The type of legal entity.
+        risk_rating:
+          type: string
+          enum:
+          - low
+          - medium
+          - high
+          nullable: true
+          description: The risk rating of the legal entity. One of low, medium, high.
+        prefix:
+          type: string
+          nullable: true
+          description: An individual's prefix.
+        first_name:
+          type: string
+          nullable: true
+          description: An individual's first name.
+        middle_name:
+          type: string
+          nullable: true
+          description: An individual's middle name.
+        last_name:
+          type: string
+          nullable: true
+          description: An individual's last name.
+        suffix:
+          type: string
+          nullable: true
+          description: An individual's suffix.
+        preferred_name:
+          type: string
+          nullable: true
+          description: An individual's preferred name.
+        citizenship_country:
+          type: string
+          nullable: true
+          description: The country of citizenship for an individual.
+        politically_exposed_person:
+          type: boolean
+          nullable: true
+          description: Whether the individual is a politically exposed person.
+        date_of_birth:
+          type: string
+          format: date
+          nullable: true
+          description: An individual's date of birth (YYYY-MM-DD).
+        date_formed:
+          type: string
+          format: date
+          nullable: true
+          description: A business's formation date (YYYY-MM-DD).
+        business_name:
+          type: string
+          nullable: true
+          description: The business's legal business name.
+        doing_business_as_names:
+          type: array
+          items:
+            type: string
+            description: A list of "Doing Business As" (DBA) / trade names for a business, different than their legal business name.
+        legal_structure:
+          type: string
+          enum:
+          - corporation
+          - llc
+          - non_profit
+          - partnership
+          - sole_proprietorship
+          - trust
+          nullable: true
+          description: The business's legal structure.
+        phone_numbers:
+          type: array
+          items:
+            type: object
+            properties:
+              phone_number:
+                type: string
+            description: A list of phone numbers in E.164 format.
+        email:
+          type: string
+          nullable: true
+          description: The entity's primary email.
+        website:
+          type: string
+          nullable: true
+          description: The entity's primary website URL.
+        business_description:
+          type: string
+          nullable: true
+          description: A description of the business.
+        intended_use:
+          type: string
+          nullable: true
+          description: A description of the intended use of the legal entity.
+        expected_activity_volume:
+          type: integer
+          nullable: true
+          description: Monthly expected transaction volume in USD.
+        country_of_incorporation:
+          type: string
+          nullable: true
+          description: The country code where the business is incorporated in the ISO 3166-1 alpha-2 or alpha-3 formats.
+        operating_jurisdictions:
+          type: array
+          items:
+            type: string
+          description: A list of countries where the business operates (ISO 3166-1 alpha-2 or alpha-3 codes).
+        primary_social_media_sites:
+          type: array
+          items:
+            type: string
+          description: A list of primary social media URLs for the business.
+        listed_exchange:
+          type: string
+          nullable: true
+          description: ISO 10383 market identifier code.
+        ticker_symbol:
+          type: string
+          nullable: true
+          description: Stock ticker symbol for publicly traded companies.
+        regulators:
+          type: array
+          nullable: true
+          items:
+            $ref: '#/components/schemas/legal_entity_regulator'
+          description: Array of regulatory bodies overseeing this institution.
+        third_party_verification:
+          $ref: '#/components/schemas/third_party_verification'
+          nullable: true
+          deprecated: true
+          description: Deprecated. Use `third_party_verifications` instead.
+        third_party_verifications:
+          type: array
+          items:
+            $ref: '#/components/schemas/third_party_verification'
+          description: A list of third-party verifications run by external vendors.
+          title: Third Party Verfications
+        service_provider_legal_entity_id:
+          type: string
+          format: uuid
+          nullable: true
+          description: The UUID of the parent legal entity in the service provider tree.
+        metadata:
+          type: object
+          description: Additional data represented as key-value pairs. Both the key and value must be strings.
+          additionalProperties:
+            type: string
+          example:
+            key: value
+            foo: bar
+            modern: treasury
+        external_id:
+          type: string
+          nullable: true
+          description: An optional user-defined 180 character unique identifier.
+        bank_settings:
+          $ref: '#/components/schemas/legal_entity_bank_setting'
+          nullable: true
+        wealth_and_employment_details:
+          $ref: '#/components/schemas/legal_entity_wealth_employment_detail'
+          nullable: true
+        compliance_details:
+          type: object
+          nullable: true
+          deprecated: true
+        addresses:
+          type: array
+          description: A list of addresses for the entity.
+          items:
+            $ref: '#/components/schemas/legal_entity_address_create_request'
+        identifications:
+          type: array
+          description: A list of identifications for the legal entity.
+          items:
+            $ref: '#/components/schemas/identification_create_request'
+        documents:
+          type: array
+          description: A list of documents to attach to the legal entity (e.g. articles of incorporation, certificate of good standing, proof of address).
+          items:
+            type: object
+            properties:
+              document_type:
+                type: string
+                enum:
+                - articles_of_incorporation
+                - certificate_of_good_standing
+                - ein_letter
+                - generic
+                - identification_back
+                - identification_front
+                - proof_of_address
+                description: A category given to the document, can be `null`.
+              file_data:
+                type: string
+                description: Base64-encoded file content for the document.
+              filename:
+                type: string
+                description: The original filename of the document.
+            required:
+            - document_type
+            - file_data
+        industry_classifications:
+          type: array
+          description: A list of industry classifications for the legal entity.
+          items:
+            $ref: '#/components/schemas/legal_entity_industry_classification'
+        legal_entity_associations:
+          type: array
+          items:
+            $ref: '#/components/schemas/legal_entity_association_inline_create_request'
+          nullable: true
+          description: The legal entity associations and its child legal entities.
+        connection_id:
+          type: string
+          nullable: true
+          description: The connection ID for the connection the legal entity is associated with. Defaults to the id of the connection designated with an is_default value of true or the id of an existing operational connection if only one is available. Pass in a value of null to prevent the connection from being associated with the legal entity.
+      additionalProperties: false
+      minProperties: 41
+  securitySchemes:
+    basic_auth:
+      type: http
+      scheme: basic

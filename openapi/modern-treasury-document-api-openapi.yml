@@ -1,0 +1,617 @@
+openapi: 3.0.1
+info:
+  title: Modern Treasury AccountCapability Document API
+  version: v1
+  contact:
+    name: Modern Treasury Engineering Team
+    url: https://moderntreasury.com
+  description: The Modern Treasury REST API. Please see https://docs.moderntreasury.com for more details.
+servers:
+- url: http://localhost:3000
+- url: https://app.moderntreasury.com
+tags:
+- name: Document
+paths:
+  /api/documents:
+    get:
+      summary: list documents
+      tags:
+      - Document
+      description: Get a list of documents.
+      operationId: listDocuments
+      security:
+      - basic_auth: []
+      parameters:
+      - name: documentable_id
+        in: query
+        schema:
+          type: string
+        description: The unique identifier for the associated object.
+        required: false
+      - name: documentable_type
+        in: query
+        schema:
+          type: string
+          enum:
+          - connections
+          - counterparties
+          - expected_payments
+          - external_accounts
+          - identifications
+          - incoming_payment_details
+          - internal_accounts
+          - legal_entities
+          - organizations
+          - payment_orders
+          - transactions
+        description: The type of the associated object. Currently can be one of `payment_order`, `transaction`, `expected_payment`, `counterparty`, `organization`, `case`, `internal_account`, `decision`, or `external_account`.
+        required: false
+      - name: after_cursor
+        in: query
+        schema:
+          type: string
+          nullable: true
+        required: false
+      - name: per_page
+        in: query
+        required: false
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: successful
+          headers:
+            X-After-Cursor:
+              schema:
+                type: string
+                nullable: true
+              required: false
+              description: The cursor for the next page. Including this in a call as `after_cursor` will return the next page.
+            X-Per-Page:
+              schema:
+                type: integer
+                nullable: true
+              description: The current `per_page`.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/document'
+        '404':
+          description: not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_message'
+    post:
+      summary: create document
+      tags:
+      - Document
+      description: Create a document.
+      operationId: createDocument
+      security:
+      - basic_auth: []
+      parameters:
+      - name: Idempotency-Key
+        in: header
+        required: false
+        description: This key should be something unique, preferably something like an UUID.
+        schema:
+          type: string
+      responses:
+        '201':
+          description: successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/document'
+        '403':
+          description: forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_message'
+        '404':
+          description: not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_message'
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/document_create_request'
+  /api/{documentable_type}/{documentable_id}/documents:
+    get:
+      summary: list documents - nested path (legacy)
+      tags:
+      - Document
+      description: Get a list of documents.
+      operationId: listDocumentsNested
+      security:
+      - basic_auth: []
+      parameters:
+      - name: documentable_id
+        in: path
+        schema:
+          type: string
+        description: The unique identifier for the associated object.
+        required: true
+      - name: documentable_type
+        in: path
+        schema:
+          type: string
+          enum:
+          - connections
+          - counterparties
+          - expected_payments
+          - external_accounts
+          - identifications
+          - incoming_payment_details
+          - internal_accounts
+          - legal_entities
+          - organizations
+          - payment_orders
+          - transactions
+        description: The type of the associated object. Currently can be one of `payment_order`, `transaction`, `expected_payment`, `counterparty`, `organization`, `case`, `internal_account`, `decision`, or `external_account`.
+        required: true
+      - name: document_type
+        in: query
+        schema:
+          type: string
+        required: false
+        description: A category given to the document, can be `null`.
+      - name: after_cursor
+        in: query
+        schema:
+          type: string
+          nullable: true
+        required: false
+      - name: per_page
+        in: query
+        required: false
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: successful
+          headers:
+            X-After-Cursor:
+              schema:
+                type: string
+                nullable: true
+              required: false
+              description: The cursor for the next page. Including this in a call as `after_cursor` will return the next page.
+            X-Per-Page:
+              schema:
+                type: integer
+                nullable: true
+              description: The current `per_page`.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/document'
+    post:
+      summary: create document - nested path (legacy)
+      tags:
+      - Document
+      description: Create a document.
+      operationId: createDocumentNested
+      security:
+      - basic_auth: []
+      parameters:
+      - name: documentable_id
+        in: path
+        schema:
+          type: string
+        description: The unique identifier for the associated object.
+        required: true
+      - name: documentable_type
+        in: path
+        schema:
+          type: string
+          enum:
+          - connections
+          - counterparties
+          - expected_payments
+          - external_accounts
+          - identifications
+          - incoming_payment_details
+          - internal_accounts
+          - legal_entities
+          - organizations
+          - payment_orders
+          - transactions
+        description: The type of the associated object. Currently can be one of `payment_order`, `transaction`, `expected_payment`, `counterparty`, `organization`, `case`, `internal_account`, `decision`, or `external_account`.
+        required: true
+      - name: Idempotency-Key
+        in: header
+        required: false
+        description: This key should be something unique, preferably something like an UUID.
+        schema:
+          type: string
+      responses:
+        '201':
+          description: successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/document'
+        '403':
+          description: forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_message'
+        '404':
+          description: not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_message'
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/legacy_document_create_request'
+  /api/{documentable_type}/{documentable_id}/documents/{id}:
+    parameters:
+    - name: documentable_id
+      in: path
+      schema:
+        type: string
+      description: The unique identifier for the associated object.
+      required: true
+    - name: documentable_type
+      in: path
+      schema:
+        type: string
+        enum:
+        - connections
+        - counterparties
+        - expected_payments
+        - external_accounts
+        - identifications
+        - incoming_payment_details
+        - internal_accounts
+        - legal_entities
+        - organizations
+        - payment_orders
+        - transactions
+      description: The type of the associated object. Currently can be one of `payment_order`, `transaction`, `expected_payment`, `counterparty`, `organization`, `case`, `internal_account`, `decision`, or `external_account`.
+      required: true
+    - name: id
+      in: path
+      schema:
+        type: string
+      description: The ID of the document.
+      required: true
+    get:
+      summary: get document - nested path (legacy)
+      tags:
+      - Document
+      description: Get an existing document.
+      operationId: getDocumentNested
+      security:
+      - basic_auth: []
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/document'
+        '404':
+          description: not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_message'
+  /api/documents/{id}:
+    parameters:
+    - name: id
+      in: path
+      schema:
+        type: string
+      description: The ID of the document.
+      required: true
+    get:
+      summary: get document
+      tags:
+      - Document
+      description: Get an existing document.
+      operationId: getDocument
+      security:
+      - basic_auth: []
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/document'
+        '404':
+          description: not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_message'
+  /api/{documentable_type}/{documentable_id}/documents/{id}/download:
+    parameters:
+    - name: documentable_id
+      in: path
+      schema:
+        type: string
+      description: The unique identifier for the associated object.
+      required: true
+    - name: documentable_type
+      in: path
+      schema:
+        type: string
+        enum:
+        - connections
+        - counterparties
+        - expected_payments
+        - external_accounts
+        - identifications
+        - incoming_payment_details
+        - internal_accounts
+        - legal_entities
+        - organizations
+        - payment_orders
+        - transactions
+      description: The type of the associated object. Currently can be one of `payment_order`, `transaction`, `expected_payment`, `counterparty`, `organization`, `case`, `internal_account`, `decision`, or `external_account`.
+      required: true
+    - name: id
+      in: path
+      schema:
+        type: string
+      description: The ID of the document.
+      required: true
+    get:
+      summary: download document - nested path (legacy)
+      tags:
+      - Document
+      description: Download an existing document.
+      operationId: downloadDocumentNested
+      security:
+      - basic_auth: []
+      responses:
+        '302':
+          description: redirect
+        '403':
+          description: forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_message'
+        '404':
+          description: not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_message'
+  /api/documents/{id}/download:
+    parameters:
+    - name: id
+      in: path
+      schema:
+        type: string
+      description: The ID of the document.
+      required: true
+    get:
+      summary: download document
+      tags:
+      - Document
+      description: Download an existing document.
+      operationId: downloadDocument
+      security:
+      - basic_auth: []
+      responses:
+        '302':
+          description: redirect
+        '403':
+          description: forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_message'
+        '404':
+          description: not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_message'
+components:
+  schemas:
+    document_detail:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        object:
+          type: string
+        live_mode:
+          type: boolean
+          description: This field will be true if this object exists in the live environment or false if it exists in the test environment.
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        discarded_at:
+          type: string
+          format: date-time
+          nullable: true
+        document_identifier_type:
+          type: string
+        document_identifier:
+          type: string
+      additionalProperties: false
+      minProperties: 8
+      required:
+      - id
+      - object
+      - live_mode
+      - created_at
+      - updated_at
+      - discarded_at
+      - document_identifier_type
+      - document_identifier
+    error_message:
+      type: object
+      properties:
+        errors:
+          type: object
+          properties:
+            code:
+              type: string
+              enum:
+              - parameter_invalid
+              - parameter_missing
+              - resource_not_found
+              - not_found
+              - forbidden
+              - invalid_ip
+              - invalid_key
+              - header_invalid
+              - expired_key
+              - conflict
+              - too_many_requests
+            message:
+              type: string
+            parameter:
+              type: string
+      required:
+      - errors
+    document:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        object:
+          type: string
+        live_mode:
+          type: boolean
+          description: This field will be true if this object exists in the live environment or false if it exists in the test environment.
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        discarded_at:
+          type: string
+          format: date-time
+          nullable: true
+        document_type:
+          type: string
+          description: A category given to the document, can be `null`.
+          nullable: true
+        source:
+          type: string
+          description: The source of the document. Can be `vendor`, `customer`, or `modern_treasury`.
+        documentable_id:
+          type: string
+          format: uuid
+          description: The unique identifier for the associated object.
+          nullable: true
+        documentable_type:
+          type: string
+          enum:
+          - connection
+          - counterparty
+          - expected_payment
+          - external_account
+          - identification
+          - incoming_payment_detail
+          - internal_account
+          - legal_entity
+          - organization
+          - payment_order
+          - transaction
+          description: The type of the associated object. Currently can be one of `payment_order`, `transaction`, `expected_payment`, `counterparty`, `organization`, `case`, `internal_account`, `decision`, or `external_account`.
+          nullable: true
+        document_details:
+          type: array
+          items:
+            $ref: '#/components/schemas/document_detail'
+        file:
+          type: object
+          properties:
+            size:
+              type: integer
+              description: The size of the document in bytes.
+            filename:
+              type: string
+              description: The original filename of the document.
+            content_type:
+              type: string
+              description: The MIME content type of the document.
+          additionalProperties: false
+          minProperties: 3
+      additionalProperties: false
+      minProperties: 12
+      required:
+      - id
+      - object
+      - live_mode
+      - created_at
+      - updated_at
+      - discarded_at
+      - document_type
+      - source
+      - documentable_id
+      - documentable_type
+      - document_details
+      - file
+    legacy_document_create_request:
+      type: object
+      properties:
+        document_type:
+          type: string
+          description: A category given to the document, can be `null`.
+        file:
+          type: string
+          format: binary
+      required:
+      - file
+    document_create_request:
+      type: object
+      properties:
+        documentable_id:
+          type: string
+          description: The unique identifier for the associated object.
+        documentable_type:
+          type: string
+          enum:
+          - connections
+          - counterparties
+          - expected_payments
+          - external_accounts
+          - identifications
+          - incoming_payment_details
+          - internal_accounts
+          - legal_entities
+          - organizations
+          - payment_orders
+          - transactions
+        document_type:
+          type: string
+          description: A category given to the document, can be `null`.
+        file:
+          type: string
+          format: binary
+      required:
+      - file
+  securitySchemes:
+    basic_auth:
+      type: http
+      scheme: basic

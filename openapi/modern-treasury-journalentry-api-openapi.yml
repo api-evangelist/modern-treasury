@@ -1,0 +1,75 @@
+openapi: 3.0.1
+info:
+  title: Modern Treasury AccountCapability JournalEntry API
+  version: v1
+  contact:
+    name: Modern Treasury Engineering Team
+    url: https://moderntreasury.com
+  description: The Modern Treasury REST API. Please see https://docs.moderntreasury.com for more details.
+servers:
+- url: http://localhost:3000
+- url: https://app.moderntreasury.com
+tags:
+- name: JournalEntry
+paths:
+  /api/journal_entries:
+    get:
+      summary: list journal_entries
+      tags:
+      - JournalEntry
+      operationId: listJournalEntries
+      description: Retrieve a list of journal entries
+      security:
+      - basic_auth: []
+      parameters:
+      - name: journal_report_id
+        in: query
+        schema:
+          type: string
+        required: true
+        description: The ID of the journal report
+      - name: page
+        in: query
+        schema:
+          type: integer
+        required: false
+        description: Page number for pagination
+      - name: per_page
+        in: query
+        schema:
+          type: integer
+        required: false
+        description: Number of items per page
+      responses:
+        '200':
+          description: successful - only returns entries for current organization
+        '404':
+          description: page disabled - returns not found
+        '422':
+          description: empty journal_report_id - returns validation error
+  /api/journal_entries/{id}:
+    parameters:
+    - name: id
+      in: path
+      schema:
+        type: string
+      description: The ID of the journal entry
+      required: true
+    get:
+      summary: show journal_entry
+      tags:
+      - JournalEntry
+      operationId: getJournalEntry
+      description: Retrieve a specific journal entry
+      security:
+      - basic_auth: []
+      responses:
+        '200':
+          description: successful - returns entry with all attributes
+        '404':
+          description: page disabled - returns not found
+components:
+  securitySchemes:
+    basic_auth:
+      type: http
+      scheme: basic

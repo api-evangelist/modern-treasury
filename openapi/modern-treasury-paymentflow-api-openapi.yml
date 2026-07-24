@@ -1,0 +1,347 @@
+openapi: 3.0.1
+info:
+  title: Modern Treasury AccountCapability PaymentFlow API
+  version: v1
+  contact:
+    name: Modern Treasury Engineering Team
+    url: https://moderntreasury.com
+  description: The Modern Treasury REST API. Please see https://docs.moderntreasury.com for more details.
+servers:
+- url: http://localhost:3000
+- url: https://app.moderntreasury.com
+tags:
+- name: PaymentFlow
+paths:
+  /api/payment_flows:
+    get:
+      summary: list payment_flows
+      tags:
+      - PaymentFlow
+      operationId: listPaymentFlows
+      security:
+      - basic_auth: []
+      parameters:
+      - name: after_cursor
+        in: query
+        schema:
+          type: string
+          nullable: true
+        required: false
+      - name: per_page
+        in: query
+        required: false
+        schema:
+          type: integer
+      - name: client_token
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: status
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: counterparty_id
+        in: query
+        schema:
+          type: string
+        required: false
+      - name: receiving_account_id
+        in: query
+        schema:
+          type: string
+        required: false
+      - name: originating_account_id
+        in: query
+        schema:
+          type: string
+        required: false
+      - name: payment_order_id
+        in: query
+        schema:
+          type: string
+        required: false
+      responses:
+        '200':
+          description: successful
+          headers:
+            X-After-Cursor:
+              schema:
+                type: string
+                nullable: true
+              required: false
+              description: The cursor for the next page. Including this in a call as `after_cursor` will return the next page.
+            X-Per-Page:
+              schema:
+                type: integer
+                nullable: true
+              description: The current `per_page`.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/payment_flow'
+    post:
+      summary: create payment_flow
+      tags:
+      - PaymentFlow
+      operationId: createPaymentFlow
+      security:
+      - basic_auth: []
+      parameters:
+      - name: Idempotency-Key
+        in: header
+        required: false
+        description: This key should be something unique, preferably something like an UUID.
+        schema:
+          type: string
+      responses:
+        '201':
+          description: successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/payment_flow'
+        '422':
+          description: unsuccessful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_message'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/payment_flow_create_request'
+  /api/payment_flows/{id}:
+    parameters:
+    - name: id
+      in: path
+      schema:
+        type: string
+      description: id
+      required: true
+    get:
+      summary: get payment_flow
+      tags:
+      - PaymentFlow
+      operationId: getPaymentFlow
+      security:
+      - basic_auth: []
+      parameters:
+      - name: Idempotency-Key
+        in: header
+        required: false
+        description: This key should be something unique, preferably something like an UUID.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/payment_flow'
+    patch:
+      summary: update payment_flow
+      tags:
+      - PaymentFlow
+      operationId: updatePaymentFlow
+      security:
+      - basic_auth: []
+      parameters:
+      - name: Idempotency-Key
+        in: header
+        required: false
+        description: This key should be something unique, preferably something like an UUID.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/payment_flow'
+        '404':
+          description: not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_message'
+        '422':
+          description: unsuccessful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_message'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/payment_flow_update_request'
+components:
+  schemas:
+    error_message:
+      type: object
+      properties:
+        errors:
+          type: object
+          properties:
+            code:
+              type: string
+              enum:
+              - parameter_invalid
+              - parameter_missing
+              - resource_not_found
+              - not_found
+              - forbidden
+              - invalid_ip
+              - invalid_key
+              - header_invalid
+              - expired_key
+              - conflict
+              - too_many_requests
+            message:
+              type: string
+            parameter:
+              type: string
+      required:
+      - errors
+    payment_flow_create_request:
+      type: object
+      properties:
+        amount:
+          type: integer
+          description: Required. Value in specified currency's smallest unit. e.g. $10 would be represented as 1000. Can be any integer up to 36 digits.
+        currency:
+          type: string
+          description: Required. The currency of the payment.
+        direction:
+          type: string
+          enum:
+          - credit
+          - debit
+          description: Required. Describes the direction money is flowing in the transaction. Can only be `debit`. A `debit` pulls money from someone else's account to your own.
+        counterparty_id:
+          type: string
+          format: uuid
+          description: Required. The ID of a counterparty associated with the payment. As part of the payment workflow an external account will be associated with this model.
+        originating_account_id:
+          type: string
+          format: uuid
+          description: Required. The ID of one of your organization's internal accounts.
+        due_date:
+          type: string
+          format: date
+          description: Optional. Can only be passed in when `effective_date_selection_enabled` is `true`. When set, the due date is shown to your end-user in the pre-built UI as they are selecting a payment `effective_date`.
+      required:
+      - amount
+      - currency
+      - direction
+      - counterparty_id
+      - originating_account_id
+    payment_flow_update_request:
+      type: object
+      properties:
+        status:
+          type: string
+          enum:
+          - cancelled
+          description: Required. The updated status of the payment flow. Can only be used to mark a flow as `cancelled`.
+      required:
+      - status
+    payment_flow:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        object:
+          type: string
+        live_mode:
+          type: boolean
+          description: This field will be true if this object exists in the live environment or false if it exists in the test environment.
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        client_token:
+          type: string
+          description: The client token of the payment flow. This token can be used to embed a payment workflow in your client-side application.
+        status:
+          type: string
+          enum:
+          - cancelled
+          - completed
+          - expired
+          - pending
+          description: The current status of the payment flow. One of `pending`, `completed`, `expired`, or `cancelled`.
+        amount:
+          type: integer
+          description: Value in specified currency's smallest unit. e.g. $10 would be represented as 1000. Can be any integer up to 36 digits.
+        currency:
+          type: string
+          description: The currency of the payment.
+        direction:
+          type: string
+          enum:
+          - credit
+          - debit
+          description: Describes the direction money is flowing in the transaction. Can only be `debit`. A `debit` pulls money from someone else's account to your own.
+        counterparty_id:
+          type: string
+          format: uuid
+          nullable: true
+          description: The ID of a counterparty associated with the payment. As part of the payment workflow an external account will be associated with this counterparty.
+        receiving_account_id:
+          type: string
+          format: uuid
+          nullable: true
+          description: If present, the ID of the external account created using this flow.
+        originating_account_id:
+          type: string
+          format: uuid
+          nullable: true
+          description: The ID of one of your organization's internal accounts.
+        payment_order_id:
+          type: string
+          format: uuid
+          nullable: true
+          description: If present, the ID of the payment order created using this flow.
+        effective_date_selection_enabled:
+          type: boolean
+          description: When `true`, your end-user can schedule the payment `effective_date` while completing the pre-built UI.
+        due_date:
+          type: string
+          format: date
+          nullable: true
+          description: The due date for the flow. Can only be passed in when `effective_date_selection_enabled` is `true`.
+        selected_effective_date:
+          type: string
+          format: date
+          nullable: true
+          description: This field is set after your end-user selects a payment date while completing the pre-built UI. This field is always `null` unless `effective_date_selection_enabled` is `true`.
+        external_account_collection:
+          type: string
+          enum:
+          - disabled
+          - enabled
+          description: When `enabled`, your end-user can select from an existing external account when completing the flow. When `disabled`, your end-user must add new payment details when completing the flow.
+        existing_external_accounts_filter:
+          type: string
+          enum:
+          - verified
+          nullable: true
+          description: When `verified` and `external_account_collection` is `enabled`, filters the list of external accounts your end-user can select to those with a `verification_status` of `verified`.
+      additionalProperties: false
+      minProperties: 17
+      maxProperties: 19
+  securitySchemes:
+    basic_auth:
+      type: http
+      scheme: basic

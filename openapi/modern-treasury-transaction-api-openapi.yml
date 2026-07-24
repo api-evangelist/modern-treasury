@@ -1,0 +1,798 @@
+openapi: 3.0.1
+info:
+  title: Modern Treasury AccountCapability Transaction API
+  version: v1
+  contact:
+    name: Modern Treasury Engineering Team
+    url: https://moderntreasury.com
+  description: The Modern Treasury REST API. Please see https://docs.moderntreasury.com for more details.
+servers:
+- url: http://localhost:3000
+- url: https://app.moderntreasury.com
+tags:
+- name: Transaction
+paths:
+  /api/transactions:
+    get:
+      summary: list transactions
+      tags:
+      - Transaction
+      operationId: listTransactions
+      description: Get a list of all transactions.
+      security:
+      - basic_auth: []
+      parameters:
+      - name: after_cursor
+        in: query
+        schema:
+          type: string
+          nullable: true
+        required: false
+      - name: per_page
+        in: query
+        required: false
+        schema:
+          type: integer
+      - name: internal_account_id
+        in: query
+        schema:
+          type: string
+        required: false
+        description: Specify `internal_account_id` if you wish to see transactions to/from a specific account.
+      - name: virtual_account_id
+        in: query
+        schema:
+          type: string
+        required: false
+      - name: posted
+        in: query
+        required: false
+        description: Either `true` or `false`.
+        schema:
+          type: boolean
+      - name: as_of_date_start
+        in: query
+        schema:
+          type: string
+          format: date
+        required: false
+        description: Filters transactions with an `as_of_date` starting on or after the specified date (YYYY-MM-DD).
+      - name: as_of_date_end
+        in: query
+        schema:
+          type: string
+          format: date
+        required: false
+        description: Filters transactions with an `as_of_date` starting on or before the specified date (YYYY-MM-DD).
+      - name: direction
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: counterparty_id
+        in: query
+        schema:
+          type: string
+        required: false
+      - name: payment_type
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: transactable_type
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: description
+        in: query
+        required: false
+        description: Filters for transactions including the queried string in the description.
+        schema:
+          type: string
+      - name: vendor_id
+        in: query
+        required: false
+        description: Filters for transactions including the queried vendor id (an identifier given to transactions by the bank).
+        schema:
+          type: string
+      - $ref: '#/components/parameters/metadata_query'
+      responses:
+        '200':
+          description: successful
+          headers:
+            X-After-Cursor:
+              schema:
+                type: string
+                nullable: true
+              required: false
+              description: The cursor for the next page. Including this in a call as `after_cursor` will return the next page.
+            X-Per-Page:
+              schema:
+                type: integer
+                nullable: true
+              description: The current `per_page`.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/transaction'
+    post:
+      summary: create transaction
+      tags:
+      - Transaction
+      operationId: createTransaction
+      security:
+      - basic_auth: []
+      parameters:
+      - name: Idempotency-Key
+        in: header
+        required: false
+        description: This key should be something unique, preferably something like an UUID.
+        schema:
+          type: string
+      responses:
+        '201':
+          description: successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/transaction'
+        '422':
+          description: unsuccessful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_message'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/transaction_create_request'
+  /api/transactions/{id}:
+    parameters:
+    - name: id
+      in: path
+      schema:
+        type: string
+      required: true
+      description: Transaction ID
+    get:
+      summary: get transaction
+      tags:
+      - Transaction
+      operationId: getTransaction
+      description: Get details on a single transaction.
+      security:
+      - basic_auth: []
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/transaction'
+        '404':
+          description: not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_message'
+    patch:
+      summary: update transaction
+      tags:
+      - Transaction
+      operationId: updateTransaction
+      description: Update a single transaction.
+      security:
+      - basic_auth: []
+      parameters: []
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/transaction'
+        '404':
+          description: not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_message'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/transaction_update_request'
+    delete:
+      summary: delete transaction
+      tags:
+      - Transaction
+      operationId: deleteTransaction
+      security:
+      - basic_auth: []
+      responses:
+        '204':
+          description: successful
+        '422':
+          description: unsuccessful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_message'
+components:
+  schemas:
+    transaction:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        object:
+          type: string
+        live_mode:
+          type: boolean
+          description: This field will be true if this object exists in the live environment or false if it exists in the test environment.
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        discarded_at:
+          type: string
+          format: date-time
+          nullable: true
+        amount:
+          type: integer
+          description: Value in specified currency's smallest unit. e.g. $10 would be represented as 1000.
+        currency:
+          $ref: '#/components/schemas/currency'
+          description: Currency that this transaction is denominated in.
+        direction:
+          type: string
+          description: Either `credit` or `debit`.
+        vendor_description:
+          type: string
+          nullable: true
+          description: The transaction detail text that often appears in on your bank statement and in your banking portal.
+        vendor_code:
+          type: string
+          nullable: true
+          description: When applicable, the bank-given code that determines the transaction's category. For most banks this is the BAI2/BTRS transaction code.
+        vendor_code_type:
+          type: string
+          enum:
+          - bai2
+          - banking_circle
+          - bankprov
+          - bnk_dev
+          - cleartouch
+          - coinbase_prime
+          - column
+          - cross_river
+          - currencycloud
+          - dc_bank
+          - dwolla
+          - evolve
+          - fake_vendor
+          - goldman_sachs
+          - iso20022
+          - jpmc
+          - modern_treasury
+          - mx
+          - paxos
+          - paypal
+          - pnc
+          - signet
+          - silvergate
+          - swift
+          - us_bank
+          - user
+          - western_alliance
+          nullable: true
+          description: The type of `vendor_code` being reported. Can be one of `bai2`, `bankprov`, `bnk_dev`, `cleartouch`, `currencycloud`, `cross_river`, `dc_bank`, `dwolla`, `evolve`, `goldman_sachs`, `iso20022`, `jpmc`, `mx`, `signet`, `silvergate`, `swift`, `us_bank`, or others.
+        vendor_id:
+          type: string
+          nullable: true
+          description: An identifier given to this transaction by the bank.
+        as_of_date:
+          type: string
+          nullable: true
+          format: date
+          description: The date on which the transaction occurred.
+        as_of_time:
+          type: string
+          nullable: true
+          format: time
+          description: The time on which the transaction occurred. Depending on the granularity of the timestamp information received from the bank, it may be `null`.
+        as_of_timezone:
+          type: string
+          nullable: true
+          description: The timezone in which the `as_of_time` is represented. Can be `null` if the bank does not provide timezone info.
+        internal_account_id:
+          type: string
+          format: uuid
+          description: The ID of the relevant Internal Account.
+        metadata:
+          type: object
+          description: Additional data represented as key-value pairs. Both the key and value must be strings.
+          additionalProperties:
+            type: string
+          example:
+            key: value
+            foo: bar
+            modern: treasury
+        posted:
+          type: boolean
+          description: This field will be `true` if the transaction has posted to the account.
+        vendor_customer_id:
+          type: string
+          nullable: true
+          description: An identifier given to this transaction by the bank, often `null`.
+        reconciled:
+          type: boolean
+          description: This field will be `true` if a transaction is reconciled by the Modern Treasury system. This means that it has transaction line items that sum up to the transaction's amount.
+        details:
+          type: object
+          additionalProperties:
+            type: string
+          description: 'This field contains additional information that the bank provided about the transaction. This is structured data. Some of the data in here might overlap with what is in the `vendor_description`. For example, the OBI could be a part of the vendor description, and it would also be included in here. The attributes that are passed through the details field will vary based on your banking partner. Currently, the following keys may be in the details object: `originator_name`, `originator_to_beneficiary_information`.'
+        type:
+          type: string
+          enum:
+          - ach
+          - au_becs
+          - bacs
+          - book
+          - card
+          - chats
+          - check
+          - cross_border
+          - dk_nets
+          - eft
+          - gb_fps
+          - hu_ics
+          - interac
+          - masav
+          - mx_ccen
+          - neft
+          - nics
+          - nz_becs
+          - pl_elixir
+          - provxchange
+          - ro_sent
+          - rtp
+          - se_bankgirot
+          - sen
+          - sepa
+          - sg_giro
+          - sic
+          - signet
+          - sknbi
+          - stablecoin
+          - wire
+          - zengin
+          - other
+          description: The type of the transaction. Examples could be `card, `ach`, `wire`, `check`, `rtp`, `book`, or `sen`.
+        foreign_exchange_rate:
+          $ref: '#/components/schemas/foreign_exchange_rate'
+          nullable: true
+          description: Associated serialized foreign exchange rate information.
+        custom_identifiers:
+          type: object
+          description: An object containing key-value pairs, each with a custom identifier as the key and a string value.
+          additionalProperties:
+            type: string
+          example:
+            key: value
+            foo: bar
+            modern: treasury
+      additionalProperties: false
+      minProperties: 23
+      required:
+      - id
+      - object
+      - live_mode
+      - created_at
+      - updated_at
+      - discarded_at
+      - amount
+      - currency
+      - direction
+      - vendor_code
+      - vendor_code_type
+      - vendor_id
+      - as_of_date
+      - as_of_time
+      - as_of_timezone
+      - internal_account_id
+      - metadata
+      - posted
+      - vendor_customer_id
+      - reconciled
+      - type
+      - foreign_exchange_rate
+      - custom_identifiers
+    transaction_create_request:
+      type: object
+      properties:
+        amount:
+          type: integer
+          description: Value in specified currency's smallest unit. e.g. $10 would be represented as 1000.
+        direction:
+          type: string
+          description: Either `credit` or `debit`.
+        vendor_description:
+          type: string
+          nullable: true
+          description: The transaction detail text that often appears in on your bank statement and in your banking portal.
+        vendor_code:
+          type: string
+          description: When applicable, the bank-given code that determines the transaction's category. For most banks this is the BAI2/BTRS transaction code.
+          nullable: true
+        vendor_code_type:
+          type: string
+          description: The type of `vendor_code` being reported. Can be one of `bai2`, `bankprov`, `bnk_dev`, `cleartouch`, `currencycloud`, `cross_river`, `dc_bank`, `dwolla`, `evolve`, `goldman_sachs`, `iso20022`, `jpmc`, `mx`, `signet`, `silvergate`, `swift`, `us_bank`, or others.
+          nullable: true
+        vendor_customer_id:
+          type: string
+          description: An identifier given to this transaction by the bank, often `null`.
+          nullable: true
+        as_of_date:
+          type: string
+          nullable: true
+          format: date
+          description: The date on which the transaction occurred.
+        internal_account_id:
+          type: string
+          format: uuid
+          description: The ID of the relevant Internal Account.
+        metadata:
+          type: object
+          description: Additional data represented as key-value pairs. Both the key and value must be strings.
+          additionalProperties:
+            type: string
+          example:
+            key: value
+            foo: bar
+            modern: treasury
+        posted:
+          type: boolean
+          description: This field will be `true` if the transaction has posted to the account.
+        type:
+          type: string
+          enum:
+          - ach
+          - au_becs
+          - bacs
+          - book
+          - card
+          - chats
+          - check
+          - cross_border
+          - dk_nets
+          - eft
+          - gb_fps
+          - hu_ics
+          - interac
+          - masav
+          - mx_ccen
+          - neft
+          - nics
+          - nz_becs
+          - pl_elixir
+          - provxchange
+          - ro_sent
+          - rtp
+          - se_bankgirot
+          - sen
+          - sepa
+          - sg_giro
+          - sic
+          - signet
+          - sknbi
+          - stablecoin
+          - wire
+          - zengin
+          - other
+          description: The type of the transaction. Examples could be `card, `ach`, `wire`, `check`, `rtp`, `book`, or `sen`.
+          nullable: true
+      required:
+      - amount
+      - direction
+      - vendor_code
+      - vendor_code_type
+      - as_of_date
+      - internal_account_id
+    foreign_exchange_rate:
+      type: object
+      properties:
+        base_amount:
+          type: integer
+          description: Amount in the lowest denomination of the `base_currency` to convert, often called the "sell" amount.
+        base_currency:
+          $ref: '#/components/schemas/currency'
+          description: Currency to convert, often called the "sell" currency.
+        exponent:
+          type: integer
+          description: The exponent component of the rate. The decimal is calculated as `value` / (10 ^ `exponent`).
+        rate_string:
+          type: string
+          description: A string representation of the rate.
+        target_amount:
+          type: integer
+          description: Amount in the lowest denomination of the `target_currency`, often called the "buy" amount.
+        target_currency:
+          $ref: '#/components/schemas/currency'
+          description: Currency to convert the `base_currency` to, often called the "buy" currency.
+        value:
+          type: integer
+          description: The whole number component of the rate. The decimal is calculated as `value` / (10 ^ `exponent`).
+      additionalProperties: false
+      required:
+      - base_amount
+      - base_currency
+      - exponent
+      - rate_string
+      - target_amount
+      - target_currency
+      - value
+    currency:
+      type: string
+      enum:
+      - AED
+      - AFN
+      - ALL
+      - AMD
+      - ANG
+      - AOA
+      - ARS
+      - AUD
+      - AWG
+      - AZN
+      - BAM
+      - BBD
+      - BCH
+      - BDT
+      - BGN
+      - BHD
+      - BIF
+      - BMD
+      - BND
+      - BOB
+      - BRL
+      - BSD
+      - BTC
+      - BTN
+      - BWP
+      - BYN
+      - BYR
+      - BZD
+      - CAD
+      - CDF
+      - CHF
+      - CLF
+      - CLP
+      - CNH
+      - CNY
+      - COP
+      - CRC
+      - CUC
+      - CUP
+      - CVE
+      - CZK
+      - DJF
+      - DKK
+      - DOP
+      - DZD
+      - EEK
+      - EGP
+      - ERN
+      - ETB
+      - ETH
+      - EUR
+      - EURC
+      - FJD
+      - FKP
+      - GBP
+      - GBX
+      - GEL
+      - GGP
+      - GHS
+      - GIP
+      - GMD
+      - GNF
+      - GTQ
+      - GYD
+      - HKD
+      - HNL
+      - HRK
+      - HTG
+      - HUF
+      - IDR
+      - ILS
+      - IMP
+      - INR
+      - IQD
+      - IRR
+      - ISK
+      - JEP
+      - JMD
+      - JOD
+      - JPY
+      - KES
+      - KGS
+      - KHR
+      - KMF
+      - KPW
+      - KRW
+      - KWD
+      - KYD
+      - KZT
+      - LAK
+      - LBP
+      - LKR
+      - LRD
+      - LSL
+      - LTL
+      - LVL
+      - LYD
+      - MAD
+      - MDL
+      - MGA
+      - MKD
+      - MMK
+      - MNT
+      - MOP
+      - MRO
+      - MRU
+      - MTL
+      - MUR
+      - MVR
+      - MWK
+      - MXN
+      - MYR
+      - MZN
+      - NAD
+      - NGN
+      - NIO
+      - NOK
+      - NPR
+      - NZD
+      - OMR
+      - OP
+      - PAB
+      - PEN
+      - PGK
+      - PHP
+      - PKR
+      - PLN
+      - PYG
+      - PYUSD
+      - QAR
+      - RON
+      - RSD
+      - RUB
+      - RWF
+      - SAR
+      - SBD
+      - SCR
+      - SDG
+      - SEK
+      - SGD
+      - SHP
+      - SKK
+      - SLE
+      - SLL
+      - SOS
+      - SRD
+      - SSP
+      - STD
+      - STN
+      - SVC
+      - SYP
+      - SZL
+      - THB
+      - TJS
+      - TMM
+      - TMT
+      - TND
+      - TOP
+      - TRY
+      - TTD
+      - TWD
+      - TZS
+      - UAH
+      - UGX
+      - USD
+      - USDB
+      - USDC
+      - USDG
+      - USDP
+      - USDT
+      - UYU
+      - UZS
+      - VEF
+      - VES
+      - VND
+      - VUV
+      - WST
+      - XAF
+      - XAG
+      - XAU
+      - XBA
+      - XBB
+      - XBC
+      - XBD
+      - XCD
+      - XCG
+      - XDR
+      - XFU
+      - XOF
+      - XPD
+      - XPF
+      - XPT
+      - XTS
+      - YER
+      - ZAR
+      - ZMK
+      - ZMW
+      - ZWD
+      - ZWG
+      - ZWL
+      - ZWN
+      - ZWR
+      description: Three-letter ISO currency code.
+    error_message:
+      type: object
+      properties:
+        errors:
+          type: object
+          properties:
+            code:
+              type: string
+              enum:
+              - parameter_invalid
+              - parameter_missing
+              - resource_not_found
+              - not_found
+              - forbidden
+              - invalid_ip
+              - invalid_key
+              - header_invalid
+              - expired_key
+              - conflict
+              - too_many_requests
+            message:
+              type: string
+            parameter:
+              type: string
+      required:
+      - errors
+    transaction_update_request:
+      type: object
+      properties:
+        metadata:
+          type: object
+          additionalProperties:
+            type: string
+          description: Additional data in the form of key-value pairs. Pairs can be removed by passing an empty string or `null` as the value.
+  parameters:
+    metadata_query:
+      name: metadata
+      in: query
+      schema:
+        type: object
+        additionalProperties:
+          type: string
+      style: deepObject
+      explode: true
+      required: false
+      description: For example, if you want to query for records with metadata key `Type` and value `Loan`, the query would be `metadata%5BType%5D=Loan`. This encodes the query parameters.
+  securitySchemes:
+    basic_auth:
+      type: http
+      scheme: basic

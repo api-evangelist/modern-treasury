@@ -1,0 +1,192 @@
+openapi: 3.0.1
+info:
+  title: Modern Treasury AccountCapability Event API
+  version: v1
+  contact:
+    name: Modern Treasury Engineering Team
+    url: https://moderntreasury.com
+  description: The Modern Treasury REST API. Please see https://docs.moderntreasury.com for more details.
+servers:
+- url: http://localhost:3000
+- url: https://app.moderntreasury.com
+tags:
+- name: Event
+paths:
+  /api/events:
+    get:
+      summary: list events
+      tags:
+      - Event
+      operationId: listEvents
+      security:
+      - basic_auth: []
+      parameters:
+      - name: after_cursor
+        in: query
+        schema:
+          type: string
+          nullable: true
+        required: false
+      - name: per_page
+        in: query
+        required: false
+        schema:
+          type: integer
+      - name: event_time_start
+        in: query
+        schema:
+          type: string
+          format: date-time
+        required: false
+        description: An inclusive lower bound for when the event occurred
+      - name: event_time_end
+        in: query
+        schema:
+          type: string
+          format: date-time
+        required: false
+        description: An inclusive upper bound for when the event occurred
+      - name: resource
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: entity_id
+        in: query
+        schema:
+          type: string
+        required: false
+      - name: event_name
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: successful
+          headers:
+            X-After-Cursor:
+              schema:
+                type: string
+                nullable: true
+              required: false
+              description: The cursor for the next page. Including this in a call as `after_cursor` will return the next page.
+            X-Per-Page:
+              schema:
+                type: integer
+                nullable: true
+              description: The current `per_page`.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/event'
+  /api/events/{id}:
+    parameters:
+    - name: id
+      in: path
+      schema:
+        type: string
+      required: true
+      description: event id
+    get:
+      summary: get event
+      tags:
+      - Event
+      operationId: getEvent
+      security:
+      - basic_auth: []
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/event'
+        '404':
+          description: not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_message'
+components:
+  schemas:
+    error_message:
+      type: object
+      properties:
+        errors:
+          type: object
+          properties:
+            code:
+              type: string
+              enum:
+              - parameter_invalid
+              - parameter_missing
+              - resource_not_found
+              - not_found
+              - forbidden
+              - invalid_ip
+              - invalid_key
+              - header_invalid
+              - expired_key
+              - conflict
+              - too_many_requests
+            message:
+              type: string
+            parameter:
+              type: string
+      required:
+      - errors
+    event:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        object:
+          type: string
+        live_mode:
+          type: boolean
+          description: This field will be true if this object exists in the live environment or false if it exists in the test environment.
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        resource:
+          type: string
+          description: The type of resource for the event.
+        event_name:
+          type: string
+          description: The name of the event.
+        event_time:
+          type: string
+          format: date-time
+          description: The time of the event.
+        data:
+          type: object
+          description: The body of the event.
+          additionalProperties: true
+        entity_id:
+          type: string
+          format: uuid
+          description: The ID of the entity for the event.
+      additionalProperties: false
+      minProperties: 10
+      required:
+      - id
+      - object
+      - live_mode
+      - created_at
+      - updated_at
+      - resource
+      - event_name
+      - event_time
+      - data
+      - entity_id
+  securitySchemes:
+    basic_auth:
+      type: http
+      scheme: basic

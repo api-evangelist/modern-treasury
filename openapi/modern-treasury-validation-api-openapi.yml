@@ -1,0 +1,238 @@
+openapi: 3.0.1
+info:
+  title: Modern Treasury AccountCapability Validation API
+  version: v1
+  contact:
+    name: Modern Treasury Engineering Team
+    url: https://moderntreasury.com
+  description: The Modern Treasury REST API. Please see https://docs.moderntreasury.com for more details.
+servers:
+- url: http://localhost:3000
+- url: https://app.moderntreasury.com
+tags:
+- name: Validation
+paths:
+  /api/validations/routing_numbers:
+    get:
+      summary: validate routing numbers
+      tags:
+      - Validation
+      operationId: validateRoutingNumber
+      description: Validates the routing number information supplied without creating a routing detail
+      security:
+      - basic_auth: []
+      parameters:
+      - name: routing_number
+        in: query
+        required: true
+        description: The routing number that is being validated.
+        schema:
+          type: string
+      - name: routing_number_type
+        in: query
+        schema:
+          type: string
+          enum:
+          - aba
+          - au_bsb
+          - br_codigo
+          - ca_cpa
+          - chips
+          - cnaps
+          - dk_interbank_clearing_code
+          - gb_sort_code
+          - hk_interbank_clearing_code
+          - hu_interbank_clearing_code
+          - id_sknbi_code
+          - il_bank_code
+          - in_ifsc
+          - jp_zengin_code
+          - mx_bank_identifier
+          - my_branch_code
+          - nz_national_clearing_code
+          - pl_national_clearing_code
+          - se_bankgiro_clearing_code
+          - sg_interbank_clearing_code
+          - swift
+          - za_national_clearing_code
+        required: true
+        description: The type of routing number. See https://docs.moderntreasury.com/platform/reference/routing-detail-object for more details. In sandbox mode we currently only support `aba` and `swift` with routing numbers '123456789' and 'GRINUST0XXX' respectively.
+      responses:
+        '200':
+          description: successful valid routing number and type
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/routing_number_lookup_request'
+        '404':
+          description: not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_message'
+        '422':
+          description: unsuccessful with invalid parameter
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_message'
+components:
+  schemas:
+    error_message:
+      type: object
+      properties:
+        errors:
+          type: object
+          properties:
+            code:
+              type: string
+              enum:
+              - parameter_invalid
+              - parameter_missing
+              - resource_not_found
+              - not_found
+              - forbidden
+              - invalid_ip
+              - invalid_key
+              - header_invalid
+              - expired_key
+              - conflict
+              - too_many_requests
+            message:
+              type: string
+            parameter:
+              type: string
+      required:
+      - errors
+    routing_number_lookup_request:
+      type: object
+      properties:
+        routing_number:
+          type: string
+          description: The routing number of the bank.
+        routing_number_type:
+          type: string
+          enum:
+          - aba
+          - au_bsb
+          - ca_cpa
+          - gb_sort_code
+          - in_ifsc
+          - nz_national_clearing_code
+          - se_bankgiro_clearing_code
+          - swift
+          - za_national_clearing_code
+          description: The type of routing number. See https://docs.moderntreasury.com/platform/reference/routing-detail-object for more details. In sandbox mode we currently only support `aba` and `swift` with routing numbers '123456789' and 'GRINUST0XXX' respectively.
+        supported_payment_types:
+          type: array
+          items:
+            type: string
+            enum:
+            - ach
+            - au_becs
+            - bacs
+            - book
+            - card
+            - chats
+            - check
+            - cross_border
+            - dk_nets
+            - eft
+            - gb_fps
+            - hu_ics
+            - interac
+            - masav
+            - mx_ccen
+            - neft
+            - nics
+            - nz_becs
+            - pl_elixir
+            - provxchange
+            - ro_sent
+            - rtp
+            - se_bankgirot
+            - sen
+            - sepa
+            - sg_giro
+            - sic
+            - signet
+            - sknbi
+            - stablecoin
+            - wire
+            - zengin
+          maxItems: 32
+          example:
+          - ach
+          - au_becs
+          - bacs
+          - book
+          - card
+          - chats
+          - check
+          - cross_border
+          - dk_nets
+          - eft
+          - gb_fps
+          - hu_ics
+          - interac
+          - masav
+          - mx_ccen
+          - neft
+          - nics
+          - nz_becs
+          - pl_elixir
+          - provxchange
+          - ro_sent
+          - rtp
+          - se_bankgirot
+          - sen
+          - sepa
+          - sg_giro
+          - sic
+          - signet
+          - sknbi
+          - stablecoin
+          - wire
+          - zengin
+          description: An array of payment types that are supported for this routing number. This can include `ach`, `wire`, `rtp`, `sepa`, `bacs`, `au_becs`, and 'fednow' currently.
+        bank_name:
+          type: string
+          description: The name of the bank.
+        bank_address:
+          $ref: '#/components/schemas/address_request'
+          description: The address of the bank.
+        sanctions:
+          type: object
+          description: An object containing key-value pairs, each with a sanctions list as the key and a boolean value representing whether the bank is on that particular sanctions list. Currently, this includes eu_con, uk_hmt, us_ofac, and un sanctions lists.
+          additionalProperties: true
+      additionalProperties: false
+      minProperties: 5
+    address_request:
+      type: object
+      properties:
+        line1:
+          type: string
+          nullable: true
+        line2:
+          type: string
+          nullable: true
+        locality:
+          type: string
+          nullable: true
+          description: Locality or City.
+        region:
+          type: string
+          nullable: true
+          description: Region or State.
+        postal_code:
+          type: string
+          description: The postal code of the address.
+          nullable: true
+        country:
+          type: string
+          description: Country code conforms to [ISO 3166-1 alpha-2]
+          nullable: true
+  securitySchemes:
+    basic_auth:
+      type: http
+      scheme: basic

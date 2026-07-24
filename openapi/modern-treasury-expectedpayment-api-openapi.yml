@@ -1,0 +1,1202 @@
+openapi: 3.0.1
+info:
+  title: Modern Treasury AccountCapability ExpectedPayment API
+  version: v1
+  contact:
+    name: Modern Treasury Engineering Team
+    url: https://moderntreasury.com
+  description: The Modern Treasury REST API. Please see https://docs.moderntreasury.com for more details.
+servers:
+- url: http://localhost:3000
+- url: https://app.moderntreasury.com
+tags:
+- name: ExpectedPayment
+paths:
+  /api/expected_payments:
+    get:
+      summary: list expected_payments
+      tags:
+      - ExpectedPayment
+      operationId: listExpectedPayments
+      security:
+      - basic_auth: []
+      parameters:
+      - name: after_cursor
+        in: query
+        schema:
+          type: string
+          nullable: true
+        required: false
+      - name: per_page
+        in: query
+        required: false
+        schema:
+          type: integer
+      - name: status
+        in: query
+        schema:
+          type: string
+          enum:
+          - archived
+          - partially_reconciled
+          - reconciled
+          - unreconciled
+        required: false
+        description: One of unreconciled, reconciled, or archived.
+      - name: internal_account_id
+        in: query
+        schema:
+          type: string
+        required: false
+        description: Specify internal_account_id to see expected_payments for a specific account.
+      - name: external_id
+        in: query
+        schema:
+          type: string
+        required: false
+      - name: direction
+        in: query
+        schema:
+          type: string
+          enum:
+          - credit
+          - debit
+          _x-stainless-modelDefPath: $shared.transaction_direction
+        required: false
+        description: One of credit, debit
+      - name: type
+        in: query
+        schema:
+          type: string
+          enum:
+          - ach
+          - au_becs
+          - bacs
+          - book
+          - card
+          - chats
+          - check
+          - cross_border
+          - dk_nets
+          - eft
+          - gb_fps
+          - hu_ics
+          - interac
+          - masav
+          - mx_ccen
+          - neft
+          - nics
+          - nz_becs
+          - pl_elixir
+          - provxchange
+          - ro_sent
+          - rtp
+          - se_bankgirot
+          - sen
+          - sepa
+          - sg_giro
+          - sic
+          - signet
+          - sknbi
+          - stablecoin
+          - wire
+          - zengin
+        required: false
+        description: 'One of: ach, au_becs, bacs, book, check, eft, interac, provxchange, rtp,sen, sepa, signet, wire'
+      - name: counterparty_id
+        in: query
+        schema:
+          type: string
+        required: false
+        description: Specify counterparty_id to see expected_payments for a specific account.
+      - $ref: '#/components/parameters/metadata_query'
+      - name: created_at_lower_bound
+        in: query
+        schema:
+          type: string
+          format: date-time
+        required: false
+        description: Used to return expected payments created after some datetime
+      - name: created_at_upper_bound
+        in: query
+        schema:
+          type: string
+          format: date-time
+        required: false
+        description: Used to return expected payments created before some datetime
+      - name: updated_at_lower_bound
+        in: query
+        schema:
+          type: string
+          format: date-time
+        required: false
+        description: Used to return expected payments updated after some datetime
+      - name: updated_at_upper_bound
+        in: query
+        schema:
+          type: string
+          format: date-time
+        required: false
+        description: Used to return expected payments updated before some datetime
+      responses:
+        '200':
+          description: successful
+          headers:
+            X-After-Cursor:
+              schema:
+                type: string
+                nullable: true
+              required: false
+              description: The cursor for the next page. Including this in a call as `after_cursor` will return the next page.
+            X-Per-Page:
+              schema:
+                type: integer
+                nullable: true
+              description: The current `per_page`.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/expected_payment'
+        '401':
+          description: unsuccessful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_message'
+    post:
+      summary: create expected payment
+      tags:
+      - ExpectedPayment
+      operationId: createExpectedPayment
+      security:
+      - basic_auth: []
+      parameters:
+      - name: Idempotency-Key
+        in: header
+        required: false
+        description: This key should be something unique, preferably something like an UUID.
+        schema:
+          type: string
+      responses:
+        '201':
+          description: successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/expected_payment'
+        '409':
+          description: conflict
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_message'
+        '422':
+          description: unsuccessful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_message'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/expected_payment_create_request'
+  /api/expected_payments/{id}:
+    parameters:
+    - name: id
+      in: path
+      schema:
+        type: string
+      description: id
+      required: true
+    get:
+      summary: get expected payment
+      tags:
+      - ExpectedPayment
+      operationId: getExpectedPayment
+      security:
+      - basic_auth: []
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/expected_payment'
+        '404':
+          description: not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_message'
+    patch:
+      summary: update expected payment
+      tags:
+      - ExpectedPayment
+      operationId: updateExpectedPayment
+      security:
+      - basic_auth: []
+      parameters: []
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/expected_payment'
+        '409':
+          description: conflict
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_message'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/expected_payment_update_request'
+    delete:
+      summary: delete expected payment
+      tags:
+      - ExpectedPayment
+      operationId: deleteExpectedPayment
+      security:
+      - basic_auth: []
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/expected_payment'
+        '422':
+          description: parameter_invalid
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_message'
+components:
+  schemas:
+    expected_payment:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        object:
+          type: string
+        live_mode:
+          type: boolean
+          description: This field will be true if this object exists in the live environment or false if it exists in the test environment.
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        external_id:
+          type: string
+          nullable: true
+          description: An optional user-defined 180 character unique identifier.
+        amount_upper_bound:
+          type: integer
+          nullable: true
+          description: The highest amount this expected payment may be equal to. Value in specified currency's smallest unit. e.g. $10 would be represented as 1000.
+        amount_lower_bound:
+          type: integer
+          nullable: true
+          description: The lowest amount this expected payment may be equal to. Value in specified currency's smallest unit. e.g. $10 would be represented as 1000.
+        direction:
+          type: string
+          nullable: true
+          enum:
+          - credit
+          - debit
+          description: One of credit or debit. When you are receiving money, use credit. When you are being charged, use debit.
+        internal_account_id:
+          type: string
+          nullable: true
+          format: uuid
+          description: The ID of the Internal Account for the expected payment.
+        type:
+          $ref: '#/components/schemas/expected_payment_type'
+        currency:
+          $ref: '#/components/schemas/currency'
+          nullable: true
+          description: Must conform to ISO 4217. Defaults to the currency of the internal account.
+        date_upper_bound:
+          type: string
+          format: date
+          nullable: true
+          description: 'The latest date the payment may come in. Format: yyyy-mm-dd'
+        date_lower_bound:
+          type: string
+          format: date
+          nullable: true
+          description: 'The earliest date the payment may come in. Format: yyyy-mm-dd'
+        description:
+          type: string
+          nullable: true
+          description: An optional description for internal use.
+        statement_descriptor:
+          type: string
+          nullable: true
+          description: The statement description you expect to see on the transaction. For ACH payments, this will be the full line item passed from the bank. For wire payments, this will be the OBI field on the wire. For check payments, this will be the memo field.
+        metadata:
+          type: object
+          description: Additional data represented as key-value pairs. Both the key and value must be strings.
+          additionalProperties:
+            type: string
+          example:
+            key: value
+            foo: bar
+            modern: treasury
+        counterparty_id:
+          type: string
+          format: uuid
+          description: The ID of the counterparty you expect for this payment.
+          nullable: true
+        remittance_information:
+          type: string
+          nullable: true
+          description: For `ach`, this field will be passed through on an addenda record. For `wire` payments the field will be passed through as the "Originator to Beneficiary Information", also known as OBI or Fedwire tag 6000.
+        reconciliation_groups:
+          type: object
+          nullable: true
+          description: The reconciliation groups you have for this payment.
+        reconciliation_filters:
+          type: object
+          nullable: true
+          description: The reconciliation filters you have for this payment.
+        reconciliation_rule_variables:
+          type: array
+          nullable: true
+          items:
+            $ref: '#/components/schemas/reconciliation_rule_variable'
+          description: An array of reconciliation rule variables for this payment.
+        amount_reconciled:
+          type: integer
+          nullable: true
+          description: The amount reconciled for this expected payment. Value in specified currency's smallest unit. e.g. $10 would be represented as 1000.
+        amount_reconciled_direction:
+          type: string
+          nullable: true
+          enum:
+          - credit
+          - debit
+          description: One of credit or debit. Indicates whether amount_reconciled is a credit or debit amount.
+        amount_unreconciled:
+          type: integer
+          nullable: true
+          description: The amount that remains unreconciled for this expected payment. Value in specified currency's smallest unit. e.g. $10 would be represented as 1000.
+        amount_unreconciled_direction:
+          type: string
+          nullable: true
+          enum:
+          - credit
+          - debit
+          description: One of credit or debit. Indicates whether amount_unreconciled is a credit or debit amount.
+        transaction_id:
+          type: string
+          format: uuid
+          nullable: true
+          description: The ID of the Transaction this expected payment object has been matched to.
+        transaction_line_item_id:
+          type: string
+          format: uuid
+          nullable: true
+          description: The ID of the Transaction Line Item this expected payment has been matched to.
+        status:
+          type: string
+          enum:
+          - archived
+          - partially_reconciled
+          - reconciled
+          - unreconciled
+          description: One of unreconciled, partially_reconciled, reconciled, or archived.
+        reconciliation_method:
+          type: string
+          enum:
+          - automatic
+          - manual
+          nullable: true
+          description: One of manual if this expected payment was manually reconciled in the dashboard, automatic if it was automatically reconciled by Modern Treasury, or null if it is unreconciled.
+        ledger_transaction_id:
+          type: string
+          format: uuid
+          nullable: true
+          description: The ID of the ledger transaction linked to the expected payment.
+      additionalProperties: false
+      minProperties: 31
+      required:
+      - id
+      - object
+      - live_mode
+      - created_at
+      - updated_at
+      - external_id
+      - amount_upper_bound
+      - amount_lower_bound
+      - direction
+      - internal_account_id
+      - type
+      - currency
+      - date_upper_bound
+      - date_lower_bound
+      - description
+      - statement_descriptor
+      - metadata
+      - counterparty_id
+      - remittance_information
+      - reconciliation_groups
+      - reconciliation_filters
+      - reconciliation_rule_variables
+      - amount_reconciled
+      - amount_reconciled_direction
+      - amount_unreconciled
+      - amount_unreconciled_direction
+      - transaction_id
+      - transaction_line_item_id
+      - status
+      - reconciliation_method
+      - ledger_transaction_id
+    expected_payment_update_request:
+      type: object
+      properties:
+        external_id:
+          type: string
+          nullable: true
+          description: An optional user-defined 180 character unique identifier.
+        amount_upper_bound:
+          type: integer
+          nullable: true
+          description: The highest amount this expected payment may be equal to. Value in specified currency's smallest unit. e.g. $10 would be represented as 1000.
+        amount_lower_bound:
+          type: integer
+          nullable: true
+          description: The lowest amount this expected payment may be equal to. Value in specified currency's smallest unit. e.g. $10 would be represented as 1000.
+        direction:
+          type: string
+          nullable: true
+          enum:
+          - credit
+          - debit
+          description: One of credit or debit. When you are receiving money, use credit. When you are being charged, use debit.
+        internal_account_id:
+          type: string
+          nullable: true
+          format: uuid
+          description: The ID of the Internal Account for the expected payment.
+        type:
+          $ref: '#/components/schemas/expected_payment_type'
+        currency:
+          $ref: '#/components/schemas/currency'
+          nullable: true
+          description: Must conform to ISO 4217. Defaults to the currency of the internal account.
+        date_upper_bound:
+          type: string
+          format: date
+          nullable: true
+          description: 'The latest date the payment may come in. Format: yyyy-mm-dd'
+        date_lower_bound:
+          type: string
+          format: date
+          nullable: true
+          description: 'The earliest date the payment may come in. Format: yyyy-mm-dd'
+        description:
+          type: string
+          nullable: true
+          description: An optional description for internal use.
+        statement_descriptor:
+          type: string
+          nullable: true
+          description: The statement description you expect to see on the transaction. For ACH payments, this will be the full line item passed from the bank. For wire payments, this will be the OBI field on the wire. For check payments, this will be the memo field.
+        metadata:
+          type: object
+          description: Additional data represented as key-value pairs. Both the key and value must be strings.
+          additionalProperties:
+            type: string
+          example:
+            key: value
+            foo: bar
+            modern: treasury
+        counterparty_id:
+          type: string
+          format: uuid
+          description: The ID of the counterparty you expect for this payment.
+          nullable: true
+        remittance_information:
+          type: string
+          nullable: true
+          description: For `ach`, this field will be passed through on an addenda record. For `wire` payments the field will be passed through as the "Originator to Beneficiary Information", also known as OBI or Fedwire tag 6000.
+        reconciliation_groups:
+          type: object
+          nullable: true
+          description: The reconciliation groups you have for this payment.
+        reconciliation_filters:
+          type: object
+          nullable: true
+          description: The reconciliation filters you have for this payment.
+        reconciliation_rule_variables:
+          type: array
+          nullable: true
+          items:
+            $ref: '#/components/schemas/reconciliation_rule_variable'
+          description: An array of reconciliation rule variables for this payment.
+        amount_reconciled:
+          type: integer
+          nullable: true
+          description: The amount reconciled for this expected payment. Value in specified currency's smallest unit. e.g. $10 would be represented as 1000.
+        amount_reconciled_direction:
+          type: string
+          nullable: true
+          enum:
+          - credit
+          - debit
+          description: One of credit or debit. Indicates whether amount_reconciled is a credit or debit amount.
+        amount_unreconciled:
+          type: integer
+          nullable: true
+          description: The amount that remains unreconciled for this expected payment. Value in specified currency's smallest unit. e.g. $10 would be represented as 1000.
+        amount_unreconciled_direction:
+          type: string
+          nullable: true
+          enum:
+          - credit
+          - debit
+          description: One of credit or debit. Indicates whether amount_unreconciled is a credit or debit amount.
+        status:
+          type: string
+          nullable: true
+          enum:
+          - reconciled
+          description: The Expected Payment's status can be updated from partially_reconciled to reconciled.
+    expected_payment_create_request:
+      type: object
+      properties:
+        external_id:
+          type: string
+          nullable: true
+          description: An optional user-defined 180 character unique identifier.
+        amount_upper_bound:
+          type: integer
+          nullable: true
+          description: The highest amount this expected payment may be equal to. Value in specified currency's smallest unit. e.g. $10 would be represented as 1000.
+        amount_lower_bound:
+          type: integer
+          nullable: true
+          description: The lowest amount this expected payment may be equal to. Value in specified currency's smallest unit. e.g. $10 would be represented as 1000.
+        direction:
+          type: string
+          nullable: true
+          enum:
+          - credit
+          - debit
+          description: One of credit or debit. When you are receiving money, use credit. When you are being charged, use debit.
+        internal_account_id:
+          type: string
+          nullable: true
+          format: uuid
+          description: The ID of the Internal Account for the expected payment.
+        type:
+          $ref: '#/components/schemas/expected_payment_type'
+        currency:
+          $ref: '#/components/schemas/currency'
+          nullable: true
+          description: Must conform to ISO 4217. Defaults to the currency of the internal account.
+        date_upper_bound:
+          type: string
+          format: date
+          nullable: true
+          description: 'The latest date the payment may come in. Format: yyyy-mm-dd'
+        date_lower_bound:
+          type: string
+          format: date
+          nullable: true
+          description: 'The earliest date the payment may come in. Format: yyyy-mm-dd'
+        description:
+          type: string
+          nullable: true
+          description: An optional description for internal use.
+        statement_descriptor:
+          type: string
+          nullable: true
+          description: The statement description you expect to see on the transaction. For ACH payments, this will be the full line item passed from the bank. For wire payments, this will be the OBI field on the wire. For check payments, this will be the memo field.
+        metadata:
+          type: object
+          description: Additional data represented as key-value pairs. Both the key and value must be strings.
+          additionalProperties:
+            type: string
+          example:
+            key: value
+            foo: bar
+            modern: treasury
+        counterparty_id:
+          type: string
+          format: uuid
+          description: The ID of the counterparty you expect for this payment.
+          nullable: true
+        remittance_information:
+          type: string
+          nullable: true
+          description: For `ach`, this field will be passed through on an addenda record. For `wire` payments the field will be passed through as the "Originator to Beneficiary Information", also known as OBI or Fedwire tag 6000.
+        reconciliation_groups:
+          type: object
+          nullable: true
+          description: The reconciliation groups you have for this payment.
+        reconciliation_filters:
+          type: object
+          nullable: true
+          description: The reconciliation filters you have for this payment.
+        reconciliation_rule_variables:
+          type: array
+          nullable: true
+          items:
+            $ref: '#/components/schemas/reconciliation_rule_variable'
+          description: An array of reconciliation rule variables for this payment.
+        amount_reconciled:
+          type: integer
+          nullable: true
+          description: The amount reconciled for this expected payment. Value in specified currency's smallest unit. e.g. $10 would be represented as 1000.
+        amount_reconciled_direction:
+          type: string
+          nullable: true
+          enum:
+          - credit
+          - debit
+          description: One of credit or debit. Indicates whether amount_reconciled is a credit or debit amount.
+        amount_unreconciled:
+          type: integer
+          nullable: true
+          description: The amount that remains unreconciled for this expected payment. Value in specified currency's smallest unit. e.g. $10 would be represented as 1000.
+        amount_unreconciled_direction:
+          type: string
+          nullable: true
+          enum:
+          - credit
+          - debit
+          description: One of credit or debit. Indicates whether amount_unreconciled is a credit or debit amount.
+        line_items:
+          type: array
+          items:
+            $ref: '#/components/schemas/line_item_request'
+        ledger_transaction:
+          $ref: '#/components/schemas/ledger_transaction_create_request'
+          description: Specifies a ledger transaction object that will be created with the expected payment. If the ledger transaction cannot be created, then the expected payment creation will fail. The resulting ledger transaction will mirror the status of the expected payment.
+        ledger_transaction_id:
+          type: string
+          format: uuid
+          description: Either ledger_transaction or ledger_transaction_id can be provided. Only a pending ledger transaction can be attached upon expected payment creation. Once the expected payment is created, the status of the ledger transaction tracks the expected payment automatically.
+    ledger_transaction_create_request:
+      type: object
+      properties:
+        description:
+          type: string
+          description: An optional description for internal use.
+          nullable: true
+        status:
+          type: string
+          enum:
+          - archived
+          - pending
+          - posted
+          description: To post a ledger transaction at creation, use `posted`.
+        metadata:
+          type: object
+          description: Additional data represented as key-value pairs. Both the key and value must be strings.
+          additionalProperties:
+            type: string
+          example:
+            key: value
+            foo: bar
+            modern: treasury
+        effective_at:
+          type: string
+          format: date-time
+          description: The timestamp (ISO8601 format) at which the ledger transaction happened for reporting purposes.
+        effective_date:
+          type: string
+          format: date
+          description: The date (YYYY-MM-DD) on which the ledger transaction happened for reporting purposes.
+        ledger_entries:
+          type: array
+          items:
+            $ref: '#/components/schemas/ledger_entry_create_request'
+          description: An array of ledger entry objects.
+        external_id:
+          type: string
+          description: A unique string to represent the ledger transaction. Only one pending or posted ledger transaction may have this ID in the ledger.
+        ledgerable_type:
+          type: string
+          enum:
+          - expected_payment
+          - incoming_payment_detail
+          - payment_order
+          - return
+          - reversal
+          description: If the ledger transaction can be reconciled to another object in Modern Treasury, the type will be populated here, otherwise null. This can be one of payment_order, incoming_payment_detail, expected_payment, return, or reversal.
+        ledgerable_id:
+          type: string
+          format: uuid
+          description: If the ledger transaction can be reconciled to another object in Modern Treasury, the id will be populated here, otherwise null.
+      required:
+      - ledger_entries
+    reconciliation_rule_variable:
+      type: object
+      properties:
+        amount_upper_bound:
+          type: integer
+          description: The highest amount this expected payment may be equal to. Value in specified currency's smallest unit. e.g. $10 would be represented as 1000.
+        amount_lower_bound:
+          type: integer
+          description: The lowest amount this expected payment may be equal to. Value in specified currency's smallest unit. e.g. $10 would be represented as 1000.
+        direction:
+          type: string
+          enum:
+          - credit
+          - debit
+          description: One of credit or debit. When you are receiving money, use credit. When you are being charged, use debit.
+        internal_account_id:
+          type: string
+          format: uuid
+          description: The ID of the Internal Account for the expected payment
+        type:
+          type: string
+          nullable: true
+          enum:
+          - ach
+          - au_becs
+          - bacs
+          - book
+          - card
+          - chats
+          - check
+          - cross_border
+          - dk_nets
+          - eft
+          - gb_fps
+          - hu_ics
+          - interac
+          - masav
+          - mx_ccen
+          - neft
+          - nics
+          - nz_becs
+          - pl_elixir
+          - provxchange
+          - ro_sent
+          - rtp
+          - se_bankgirot
+          - sen
+          - sepa
+          - sg_giro
+          - sic
+          - signet
+          - sknbi
+          - stablecoin
+          - wire
+          - zengin
+          description: One of ach, au_becs, bacs, book, check, eft, interac, provxchange, rtp, sen, sepa, signet wire
+        currency:
+          $ref: '#/components/schemas/currency'
+          description: Must conform to ISO 4217. Defaults to the currency of the internal account
+        date_upper_bound:
+          type: string
+          format: date
+          nullable: true
+          description: The latest date the payment may come in. Format is yyyy-mm-dd
+        date_lower_bound:
+          type: string
+          format: date
+          nullable: true
+          description: The earliest date the payment may come in. Format is yyyy-mm-dd
+        counterparty_id:
+          type: string
+          format: uuid
+          nullable: true
+          description: The ID of the counterparty you expect for this payment
+        custom_identifiers:
+          type: object
+          description: A hash of custom identifiers for this payment
+          nullable: true
+          additionalProperties:
+            type: string
+      additionalProperties: false
+      minProperties: 10
+      required:
+      - amount_upper_bound
+      - amount_lower_bound
+      - direction
+      - internal_account_id
+    expected_payment_type:
+      type: string
+      enum:
+      - ach
+      - au_becs
+      - bacs
+      - book
+      - card
+      - chats
+      - check
+      - cross_border
+      - dk_nets
+      - eft
+      - gb_fps
+      - hu_ics
+      - interac
+      - masav
+      - mx_ccen
+      - neft
+      - nics
+      - nz_becs
+      - pl_elixir
+      - provxchange
+      - ro_sent
+      - rtp
+      - se_bankgirot
+      - sen
+      - sepa
+      - sg_giro
+      - sic
+      - signet
+      - sknbi
+      - stablecoin
+      - wire
+      - zengin
+      nullable: true
+      description: 'One of: ach, au_becs, bacs, book, check, eft, interac, provxchange, rtp, sen, sepa, signet, wire.'
+    currency:
+      type: string
+      enum:
+      - AED
+      - AFN
+      - ALL
+      - AMD
+      - ANG
+      - AOA
+      - ARS
+      - AUD
+      - AWG
+      - AZN
+      - BAM
+      - BBD
+      - BCH
+      - BDT
+      - BGN
+      - BHD
+      - BIF
+      - BMD
+      - BND
+      - BOB
+      - BRL
+      - BSD
+      - BTC
+      - BTN
+      - BWP
+      - BYN
+      - BYR
+      - BZD
+      - CAD
+      - CDF
+      - CHF
+      - CLF
+      - CLP
+      - CNH
+      - CNY
+      - COP
+      - CRC
+      - CUC
+      - CUP
+      - CVE
+      - CZK
+      - DJF
+      - DKK
+      - DOP
+      - DZD
+      - EEK
+      - EGP
+      - ERN
+      - ETB
+      - ETH
+      - EUR
+      - EURC
+      - FJD
+      - FKP
+      - GBP
+      - GBX
+      - GEL
+      - GGP
+      - GHS
+      - GIP
+      - GMD
+      - GNF
+      - GTQ
+      - GYD
+      - HKD
+      - HNL
+      - HRK
+      - HTG
+      - HUF
+      - IDR
+      - ILS
+      - IMP
+      - INR
+      - IQD
+      - IRR
+      - ISK
+      - JEP
+      - JMD
+      - JOD
+      - JPY
+      - KES
+      - KGS
+      - KHR
+      - KMF
+      - KPW
+      - KRW
+      - KWD
+      - KYD
+      - KZT
+      - LAK
+      - LBP
+      - LKR
+      - LRD
+      - LSL
+      - LTL
+      - LVL
+      - LYD
+      - MAD
+      - MDL
+      - MGA
+      - MKD
+      - MMK
+      - MNT
+      - MOP
+      - MRO
+      - MRU
+      - MTL
+      - MUR
+      - MVR
+      - MWK
+      - MXN
+      - MYR
+      - MZN
+      - NAD
+      - NGN
+      - NIO
+      - NOK
+      - NPR
+      - NZD
+      - OMR
+      - OP
+      - PAB
+      - PEN
+      - PGK
+      - PHP
+      - PKR
+      - PLN
+      - PYG
+      - PYUSD
+      - QAR
+      - RON
+      - RSD
+      - RUB
+      - RWF
+      - SAR
+      - SBD
+      - SCR
+      - SDG
+      - SEK
+      - SGD
+      - SHP
+      - SKK
+      - SLE
+      - SLL
+      - SOS
+      - SRD
+      - SSP
+      - STD
+      - STN
+      - SVC
+      - SYP
+      - SZL
+      - THB
+      - TJS
+      - TMM
+      - TMT
+      - TND
+      - TOP
+      - TRY
+      - TTD
+      - TWD
+      - TZS
+      - UAH
+      - UGX
+      - USD
+      - USDB
+      - USDC
+      - USDG
+      - USDP
+      - USDT
+      - UYU
+      - UZS
+      - VEF
+      - VES
+      - VND
+      - VUV
+      - WST
+      - XAF
+      - XAG
+      - XAU
+      - XBA
+      - XBB
+      - XBC
+      - XBD
+      - XCD
+      - XCG
+      - XDR
+      - XFU
+      - XOF
+      - XPD
+      - XPF
+      - XPT
+      - XTS
+      - YER
+      - ZAR
+      - ZMK
+      - ZMW
+      - ZWD
+      - ZWG
+      - ZWL
+      - ZWN
+      - ZWR
+      description: Three-letter ISO currency code.
+    error_message:
+      type: object
+      properties:
+        errors:
+          type: object
+          properties:
+            code:
+              type: string
+              enum:
+              - parameter_invalid
+              - parameter_missing
+              - resource_not_found
+              - not_found
+              - forbidden
+              - invalid_ip
+              - invalid_key
+              - header_invalid
+              - expired_key
+              - conflict
+              - too_many_requests
+            message:
+              type: string
+            parameter:
+              type: string
+      required:
+      - errors
+    line_item_request:
+      type: object
+      properties:
+        amount:
+          type: integer
+          description: Value in specified currency's smallest unit. e.g. $10 would be represented as 1000.
+        metadata:
+          type: object
+          description: Additional data represented as key-value pairs. Both the key and value must be strings.
+          additionalProperties:
+            type: string
+          example:
+            key: value
+            foo: bar
+            modern: treasury
+        description:
+          type: string
+          description: A free-form description of the line item.
+          nullable: true
+        accounting_category_id:
+          type: string
+          description: The ID of one of your accounting categories. Note that these will only be accessible if your accounting system has been connected.
+          nullable: true
+      required:
+      - amount
+    ledger_entry_create_request:
+      type: object
+      properties:
+        amount:
+          type: integer
+          description: Value in specified currency's smallest unit. e.g. $10 would be represented as 1000. Can be any integer up to 36 digits.
+        effective_at:
+          type: string
+          format: date-time
+          description: The timestamp (ISO8601 format) at which the ledger transaction happened for reporting purposes.
+        direction:
+          type: string
+          enum:
+          - credit
+          - debit
+          description: One of `credit`, `debit`. Describes the direction money is flowing in the transaction. A `credit` moves money from your account to someone else's. A `debit` pulls money from someone else's account to your own. Note that wire, rtp, and check payments will always be `credit`.
+          _x-stainless-modelDefPath: $shared.transaction_direction
+        ledger_account_id:
+          type: string
+          format: uuid
+          description: The ledger account that this ledger entry is associated with.
+        lock_version:
+          type: integer
+          description: Lock version of the ledger account. This can be passed when creating a ledger transaction to only succeed if no ledger transactions have posted since the given version. See our post about Designing the Ledgers API with Optimistic Locking for more details.
+          nullable: true
+        pending_balance_amount:
+          type: object
+          additionalProperties:
+            type: integer
+          description: Use `gt` (>), `gte` (>=), `lt` (<), `lte` (<=), or `eq` (=) to lock on the account’s pending balance. If any of these conditions would be false after the transaction is created, the entire call will fail with error code 422.
+          nullable: true
+        posted_balance_amount:
+          type: object
+          additionalProperties:
+            type: integer
+          description: Use `gt` (>), `gte` (>=), `lt` (<), `lte` (<=), or `eq` (=) to lock on the account’s posted balance. If any of these conditions would be false after the transaction is created, the entire call will fail with error code 422.
+          nullable: true
+        available_balance_amount:
+          type: object
+          additionalProperties:
+            type: integer
+          description: Use `gt` (>), `gte` (>=), `lt` (<), `lte` (<=), or `eq` (=) to lock on the account’s available balance. If any of these conditions would be false after the transaction is created, the entire call will fail with error code 422.
+          nullable: true
+        show_resulting_ledger_account_balances:
+          type: boolean
+          description: If true, response will include the balance of the associated ledger account for the entry.
+          nullable: true
+        metadata:
+          type: object
+          description: Additional data represented as key-value pairs. Both the key and value must be strings.
+          additionalProperties:
+            type: string
+          example:
+            key: value
+            foo: bar
+            modern: treasury
+      required:
+      - amount
+      - direction
+      - ledger_account_id
+  parameters:
+    metadata_query:
+      name: metadata
+      in: query
+      schema:
+        type: object
+        additionalProperties:
+          type: string
+      style: deepObject
+      explode: true
+      required: false
+      description: For example, if you want to query for records with metadata key `Type` and value `Loan`, the query would be `metadata%5BType%5D=Loan`. This encodes the query parameters.
+  securitySchemes:
+    basic_auth:
+      type: http
+      scheme: basic

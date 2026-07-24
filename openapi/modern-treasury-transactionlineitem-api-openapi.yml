@@ -1,0 +1,340 @@
+openapi: 3.0.1
+info:
+  title: Modern Treasury AccountCapability TransactionLineItem API
+  version: v1
+  contact:
+    name: Modern Treasury Engineering Team
+    url: https://moderntreasury.com
+  description: The Modern Treasury REST API. Please see https://docs.moderntreasury.com for more details.
+servers:
+- url: http://localhost:3000
+- url: https://app.moderntreasury.com
+tags:
+- name: TransactionLineItem
+paths:
+  /api/transactions/{transaction_id}/line_items:
+    parameters:
+    - name: transaction_id
+      in: path
+      schema:
+        type: string
+      description: transaction_id
+      required: true
+    - name: after_cursor
+      in: query
+      schema:
+        type: string
+        nullable: true
+      required: false
+    - name: type
+      in: query
+      schema:
+        type: string
+        enum:
+        - originating
+        - receiving
+        nullable: true
+      required: false
+    - name: per_page
+      in: query
+      schema:
+        type: integer
+      required: false
+    get:
+      summary: list transaction_line_items
+      deprecated: true
+      description: This endpoint has been deprecated in favor of /api/transaction_line_items
+      tags:
+      - TransactionLineItem
+      operationId: listTransactionLineItemsNested
+      security:
+      - basic_auth: []
+      responses:
+        '200':
+          description: successful
+          headers:
+            X-After-Cursor:
+              schema:
+                type: string
+                nullable: true
+              required: false
+              description: The cursor for the next page. Including this in a call as `after_cursor` will return the next page.
+            X-Per-Page:
+              schema:
+                type: integer
+                nullable: true
+              description: The current `per_page`.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/transaction_line_item'
+  /api/transaction_line_items:
+    get:
+      summary: list transaction_line_items
+      tags:
+      - TransactionLineItem
+      operationId: listTransactionLineItems
+      parameters:
+      - name: after_cursor
+        in: query
+        schema:
+          type: string
+          nullable: true
+        required: false
+      - name: id
+        in: query
+        required: false
+        style: deepObject
+        schema:
+          type: object
+          additionalProperties:
+            type: string
+        explode: true
+      - name: type
+        in: query
+        schema:
+          type: string
+          enum:
+          - originating
+          - receiving
+          nullable: true
+        required: false
+      - name: per_page
+        in: query
+        schema:
+          type: integer
+        required: false
+      - name: transaction_id
+        in: query
+        schema:
+          type: string
+        required: false
+      security:
+      - basic_auth: []
+      responses:
+        '200':
+          description: successful
+          headers:
+            X-After-Cursor:
+              schema:
+                type: string
+                nullable: true
+              required: false
+              description: The cursor for the next page. Including this in a call as `after_cursor` will return the next page.
+            X-Per-Page:
+              schema:
+                type: integer
+                nullable: true
+              description: The current `per_page`.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/transaction_line_item'
+    post:
+      summary: create transaction line items
+      tags:
+      - TransactionLineItem
+      operationId: createTransactionLineItem
+      security:
+      - basic_auth: []
+      parameters: []
+      responses:
+        '201':
+          description: successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/transaction_line_item'
+        '422':
+          description: unsuccessful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_message'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/transaction_line_item_create_request'
+  /api/transaction_line_items/{id}:
+    parameters:
+    - name: id
+      in: path
+      schema:
+        type: string
+      description: id
+      required: true
+    get:
+      summary: get transaction line item
+      tags:
+      - TransactionLineItem
+      operationId: listTransactionLineItem
+      security:
+      - basic_auth: []
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/transaction_line_item'
+        '404':
+          description: not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_message'
+    delete:
+      summary: delete transaction line item
+      tags:
+      - TransactionLineItem
+      operationId: deleteTransactionLineItem
+      security:
+      - basic_auth: []
+      responses:
+        '200':
+          description: successful
+        '422':
+          description: unsuccessful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_message'
+components:
+  schemas:
+    transaction_line_item:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        object:
+          type: string
+        live_mode:
+          type: boolean
+          description: This field will be true if this object exists in the live environment, or false if it exists in the test environment.
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        discarded_at:
+          type: string
+          format: date-time
+          nullable: true
+        type:
+          type: string
+          enum:
+          - originating
+          - receiving
+          description: Indicates whether the line item is `originating` or `receiving` (see https://www.moderntreasury.com/journal/beginners-guide-to-ach for more).
+        transactable_type:
+          type: string
+          enum:
+          - incoming_payment_detail
+          - payment_order
+          - payment_order_attempt
+          - return
+          - reversal
+          nullable: true
+          description: If a matching object exists in Modern Treasury, the type will be populated here, otherwise `null`.
+        transactable_id:
+          type: string
+          nullable: true
+          description: If a matching object exists in Modern Treasury, the ID will be populated here, otherwise `null`.
+        amount:
+          type: integer
+          description: If a matching object exists in Modern Treasury, `amount` will be populated. Value in specified currency's smallest unit (taken from parent Transaction).
+        description:
+          type: string
+          description: If no matching object is found, `description` will be a free-form text field describing the line item. This field may contain personally identifiable information (PII) and is not included in API responses by default. Learn more about changing your settings at https://docs.moderntreasury.com/reference/personally-identifiable-information.
+        counterparty_id:
+          type: string
+          nullable: true
+          description: The ID for the counterparty for this transaction line item.
+        expected_payment_id:
+          type: string
+          nullable: true
+          description: The ID of the reconciled Expected Payment, otherwise `null`.
+        transaction_id:
+          type: string
+          description: The ID of the parent transaction.
+        reconciliation_group_id:
+          type: string
+          nullable: true
+          description: The ID of the reconciliation group this line item belongs to, otherwise `null`.
+        reconcilable:
+          type: boolean
+          description: Describes whether this line item should be counted towards the corresponding transaction’s reconciliation.
+      additionalProperties: false
+      minProperties: 16
+      required:
+      - id
+      - object
+      - live_mode
+      - created_at
+      - updated_at
+      - discarded_at
+      - type
+      - transactable_type
+      - transactable_id
+      - amount
+      - description
+      - counterparty_id
+      - expected_payment_id
+      - transaction_id
+      - reconciliation_group_id
+      - reconcilable
+    error_message:
+      type: object
+      properties:
+        errors:
+          type: object
+          properties:
+            code:
+              type: string
+              enum:
+              - parameter_invalid
+              - parameter_missing
+              - resource_not_found
+              - not_found
+              - forbidden
+              - invalid_ip
+              - invalid_key
+              - header_invalid
+              - expired_key
+              - conflict
+              - too_many_requests
+            message:
+              type: string
+            parameter:
+              type: string
+      required:
+      - errors
+    transaction_line_item_create_request:
+      type: object
+      properties:
+        amount:
+          type: integer
+          description: If a matching object exists in Modern Treasury, `amount` will be populated. Value in specified currency's smallest unit (taken from parent Transaction).
+        expected_payment_id:
+          type: string
+          format: uuid
+          description: The ID of the reconciled Expected Payment, otherwise `null`.
+        transaction_id:
+          type: string
+          format: uuid
+          description: The ID of the parent transaction.
+      required:
+      - amount
+      - transaction_id
+      - expected_payment_id
+  securitySchemes:
+    basic_auth:
+      type: http
+      scheme: basic

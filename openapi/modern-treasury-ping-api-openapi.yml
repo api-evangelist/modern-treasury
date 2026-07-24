@@ -1,0 +1,82 @@
+openapi: 3.0.1
+info:
+  title: Modern Treasury AccountCapability Ping API
+  version: v1
+  contact:
+    name: Modern Treasury Engineering Team
+    url: https://moderntreasury.com
+  description: The Modern Treasury REST API. Please see https://docs.moderntreasury.com for more details.
+servers:
+- url: http://localhost:3000
+- url: https://app.moderntreasury.com
+tags:
+- name: Ping
+paths:
+  /api/ping:
+    get:
+      summary: ping api
+      tags:
+      - Ping
+      operationId: pingAPI
+      security:
+      - basic_auth: []
+      description: A test endpoint often used to confirm credentials and headers are being passed in correctly.
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ping_response'
+        '401':
+          description: unsuccessful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_message'
+        '429':
+          description: unsuccessful
+        '500':
+          description: internal server error
+components:
+  schemas:
+    error_message:
+      type: object
+      properties:
+        errors:
+          type: object
+          properties:
+            code:
+              type: string
+              enum:
+              - parameter_invalid
+              - parameter_missing
+              - resource_not_found
+              - not_found
+              - forbidden
+              - invalid_ip
+              - invalid_key
+              - header_invalid
+              - expired_key
+              - conflict
+              - too_many_requests
+            message:
+              type: string
+            parameter:
+              type: string
+      required:
+      - errors
+    ping_response:
+      type: object
+      properties:
+        ping:
+          type: string
+          example: pong
+      additionalProperties: false
+      minProperties: 1
+      required:
+      - ping
+  securitySchemes:
+    basic_auth:
+      type: http
+      scheme: basic

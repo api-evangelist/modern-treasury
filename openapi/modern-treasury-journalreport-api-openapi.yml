@@ -1,0 +1,88 @@
+openapi: 3.0.1
+info:
+  title: Modern Treasury AccountCapability JournalReport API
+  version: v1
+  contact:
+    name: Modern Treasury Engineering Team
+    url: https://moderntreasury.com
+  description: The Modern Treasury REST API. Please see https://docs.moderntreasury.com for more details.
+servers:
+- url: http://localhost:3000
+- url: https://app.moderntreasury.com
+tags:
+- name: JournalReport
+paths:
+  /api/journal_reports:
+    get:
+      summary: list journal_reports
+      tags:
+      - JournalReport
+      operationId: listJournalReports
+      description: Retrieve a list of journal reports
+      security:
+      - basic_auth: []
+      parameters:
+      - name: status
+        in: query
+        schema:
+          type: string
+          enum:
+          - draft
+          - published
+          - ready
+        required: false
+      responses:
+        '200':
+          description: successful - returns list of journal reports
+  /api/journal_reports/{id}:
+    parameters:
+    - name: id
+      in: path
+      schema:
+        type: string
+      description: The ID of the journal report
+      required: true
+    get:
+      summary: show journal_report
+      tags:
+      - JournalReport
+      operationId: getJournalReport
+      description: Retrieve a specific journal report
+      security:
+      - basic_auth: []
+      responses:
+        '200':
+          description: successful - returns journal report with empty metadata
+        '404':
+          description: not found - returns 404 for non-existent journal report
+    patch:
+      summary: update journal_report
+      tags:
+      - JournalReport
+      operationId: updateJournalReport
+      description: Update a journal report
+      security:
+      - basic_auth: []
+      parameters: []
+      responses:
+        '200':
+          description: successful - updates metadata
+        '404':
+          description: not found - non-existent journal report
+        '422':
+          description: validation error - invalid status
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                status:
+                  type: string
+                metadata:
+                  type: object
+components:
+  securitySchemes:
+    basic_auth:
+      type: http
+      scheme: basic

@@ -1,0 +1,176 @@
+openapi: 3.0.1
+info:
+  title: Modern Treasury AccountCapability API
+  version: v1
+  contact:
+    name: Modern Treasury Engineering Team
+    url: https://moderntreasury.com
+  description: The Modern Treasury REST API. Please see https://docs.moderntreasury.com for more details.
+servers:
+- url: http://localhost:3000
+- url: https://app.moderntreasury.com
+tags:
+- name: AccountCapability
+paths:
+  /api/internal_accounts/{internal_account_id}/account_capabilities/{id}:
+    parameters:
+    - name: internal_account_id
+      in: path
+      description: Unique identifier for the internal account.
+      required: true
+      schema:
+        type: string
+    - name: id
+      in: path
+      description: Unique identifier for the account capability.
+      required: true
+      schema:
+        type: string
+    patch:
+      summary: update account_capability
+      tags:
+      - AccountCapability
+      operationId: updateAccountCapability
+      security:
+      - basic_auth: []
+      parameters: []
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    format: uuid
+                  object:
+                    type: string
+                  live_mode:
+                    type: boolean
+                    description: This field will be true if this object exists in the live environment or false if it exists in the test environment.
+                  created_at:
+                    type: string
+                    format: date-time
+                  updated_at:
+                    type: string
+                    format: date-time
+                  discarded_at:
+                    type: string
+                    format: date-time
+                    nullable: true
+                  direction:
+                    type: string
+                    enum:
+                    - credit
+                    - debit
+                    description: One of `debit` or `credit`. Indicates the direction of money movement this capability is responsible for.
+                    _x-stainless-modelDefPath: $shared.transaction_direction
+                  identifier:
+                    type: string
+                    nullable: true
+                    description: A unique reference assigned by your bank for tracking and recognizing payment files. It is important this is formatted exactly how the bank assigned it.
+                  payment_type:
+                    type: string
+                    enum:
+                    - ach
+                    - au_becs
+                    - bacs
+                    - book
+                    - card
+                    - chats
+                    - check
+                    - cross_border
+                    - dk_nets
+                    - eft
+                    - gb_fps
+                    - hu_ics
+                    - interac
+                    - masav
+                    - mx_ccen
+                    - neft
+                    - nics
+                    - nz_becs
+                    - pl_elixir
+                    - provxchange
+                    - ro_sent
+                    - rtp
+                    - se_bankgirot
+                    - sen
+                    - sepa
+                    - sg_giro
+                    - sic
+                    - signet
+                    - sknbi
+                    - stablecoin
+                    - wire
+                    - zengin
+                    description: Indicates the the type of payment this capability is responsible for originating.
+                additionalProperties: true
+                minProperties: 9
+                maxProperties: 9
+                required:
+                - id
+                - object
+                - live_mode
+                - created_at
+                - updated_at
+                - discarded_at
+                - direction
+                - identifier
+                - payment_type
+        '404':
+          description: not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_message'
+        '422':
+          description: unsuccessful
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                identifier:
+                  type: string
+                  description: A unique reference assigned by your bank for tracking and recognizing payment files. It is important this is formatted exactly how the bank assigned it.
+              required:
+              - identifier
+              additionalProperties: false
+              minProperties: 1
+              maxProperties: 1
+components:
+  schemas:
+    error_message:
+      type: object
+      properties:
+        errors:
+          type: object
+          properties:
+            code:
+              type: string
+              enum:
+              - parameter_invalid
+              - parameter_missing
+              - resource_not_found
+              - not_found
+              - forbidden
+              - invalid_ip
+              - invalid_key
+              - header_invalid
+              - expired_key
+              - conflict
+              - too_many_requests
+            message:
+              type: string
+            parameter:
+              type: string
+      required:
+      - errors
+  securitySchemes:
+    basic_auth:
+      type: http
+      scheme: basic

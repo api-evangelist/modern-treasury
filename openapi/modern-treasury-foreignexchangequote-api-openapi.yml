@@ -1,0 +1,537 @@
+openapi: 3.0.1
+info:
+  title: Modern Treasury AccountCapability ForeignExchangeQuote API
+  version: v1
+  contact:
+    name: Modern Treasury Engineering Team
+    url: https://moderntreasury.com
+  description: The Modern Treasury REST API. Please see https://docs.moderntreasury.com for more details.
+servers:
+- url: http://localhost:3000
+- url: https://app.moderntreasury.com
+tags:
+- name: ForeignExchangeQuote
+paths:
+  /api/foreign_exchange_quotes:
+    get:
+      summary: list foreign_exchange_quotes
+      tags:
+      - ForeignExchangeQuote
+      operationId: listQuotes
+      security:
+      - basic_auth: []
+      parameters:
+      - name: after_cursor
+        in: query
+        schema:
+          type: string
+          nullable: true
+        required: false
+      - name: per_page
+        in: query
+        required: false
+        schema:
+          type: integer
+      - name: internal_account_id
+        in: query
+        schema:
+          type: string
+        required: false
+        description: The ID for the `InternalAccount` this quote is associated with.
+      - name: expires_at
+        in: query
+        schema:
+          type: string
+          format: date-time
+        required: false
+        description: The timestamp until which the quote must be booked by.
+      - name: base_currency
+        in: query
+        schema:
+          type: string
+        required: false
+        description: Currency to convert, often called the "sell" currency.
+      - name: target_currency
+        in: query
+        schema:
+          type: string
+        required: false
+        description: Currency to convert the `base_currency` to, often called the "buy" currency.
+      - $ref: '#/components/parameters/metadata_query'
+      - name: effective_at_start
+        in: query
+        schema:
+          type: string
+          format: date
+        required: false
+        description: An inclusive lower bound for searching effective_at
+      - name: effective_at_end
+        in: query
+        schema:
+          type: string
+          format: date
+        required: false
+        description: An inclusive upper bound for searching effective_at
+      responses:
+        '200':
+          description: successful
+          headers:
+            X-After-Cursor:
+              schema:
+                type: string
+                nullable: true
+              required: false
+              description: The cursor for the next page. Including this in a call as `after_cursor` will return the next page.
+            X-Per-Page:
+              schema:
+                type: integer
+                nullable: true
+              description: The current `per_page`.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/foreign_exchange_quote'
+        '401':
+          description: unsuccessful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_message'
+    post:
+      summary: create foreign_exchange_quote
+      tags:
+      - ForeignExchangeQuote
+      operationId: createQuote
+      security:
+      - basic_auth: []
+      parameters:
+      - name: Idempotency-Key
+        in: header
+        required: false
+        description: This key should be something unique, preferably something like an UUID.
+        schema:
+          type: string
+      responses:
+        '201':
+          description: successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/foreign_exchange_quote'
+        '404':
+          description: not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_message'
+        '422':
+          description: invalid param
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_message'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/foreign_exchange_quote_create_request'
+  /api/foreign_exchange_quotes/{id}:
+    parameters:
+    - name: id
+      in: path
+      description: id
+      required: true
+      schema:
+        type: string
+    get:
+      summary: get foreign_exchange_quote
+      tags:
+      - ForeignExchangeQuote
+      operationId: getQuote
+      security:
+      - basic_auth: []
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/foreign_exchange_quote'
+        '404':
+          description: not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_message'
+components:
+  schemas:
+    foreign_exchange_rate:
+      type: object
+      properties:
+        base_amount:
+          type: integer
+          description: Amount in the lowest denomination of the `base_currency` to convert, often called the "sell" amount.
+        base_currency:
+          $ref: '#/components/schemas/currency'
+          description: Currency to convert, often called the "sell" currency.
+        exponent:
+          type: integer
+          description: The exponent component of the rate. The decimal is calculated as `value` / (10 ^ `exponent`).
+        rate_string:
+          type: string
+          description: A string representation of the rate.
+        target_amount:
+          type: integer
+          description: Amount in the lowest denomination of the `target_currency`, often called the "buy" amount.
+        target_currency:
+          $ref: '#/components/schemas/currency'
+          description: Currency to convert the `base_currency` to, often called the "buy" currency.
+        value:
+          type: integer
+          description: The whole number component of the rate. The decimal is calculated as `value` / (10 ^ `exponent`).
+      additionalProperties: false
+      required:
+      - base_amount
+      - base_currency
+      - exponent
+      - rate_string
+      - target_amount
+      - target_currency
+      - value
+    foreign_exchange_quote:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        object:
+          type: string
+        live_mode:
+          type: boolean
+          description: This field will be true if this object exists in the live environment or false if it exists in the test environment.
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        effective_at:
+          type: string
+          format: date-time
+          description: The timestamp until when the quoted rate is valid.
+        expires_at:
+          type: string
+          format: date-time
+          description: The timestamp until which the quote must be booked by.
+        foreign_exchange_indicator:
+          type: string
+          description: Either `fixed_to_variable` if the `base_amount` was specified, or `variable_to_fixed` if the `target_amount` was specified when requesting the quote.
+        foreign_exchange_rate:
+          $ref: '#/components/schemas/foreign_exchange_rate'
+          description: The serialized rate information represented by this quote.
+        internal_account_id:
+          type: string
+          format: uuid
+          description: The ID for the `InternalAccount` this quote is associated with.
+        metadata:
+          type: object
+          additionalProperties:
+            type: string
+          example:
+            key: value
+            foo: bar
+            modern: treasury
+          description: Additional data represented as key-value pairs. Both the key and value must be strings.
+        vendor_id:
+          type: string
+          description: This vendor assigned ID for this quote.
+      additionalProperties: false
+      required:
+      - id
+      - object
+      - live_mode
+      - created_at
+      - updated_at
+      - effective_at
+      - expires_at
+      - foreign_exchange_indicator
+      - foreign_exchange_rate
+      - internal_account_id
+      - metadata
+    currency:
+      type: string
+      enum:
+      - AED
+      - AFN
+      - ALL
+      - AMD
+      - ANG
+      - AOA
+      - ARS
+      - AUD
+      - AWG
+      - AZN
+      - BAM
+      - BBD
+      - BCH
+      - BDT
+      - BGN
+      - BHD
+      - BIF
+      - BMD
+      - BND
+      - BOB
+      - BRL
+      - BSD
+      - BTC
+      - BTN
+      - BWP
+      - BYN
+      - BYR
+      - BZD
+      - CAD
+      - CDF
+      - CHF
+      - CLF
+      - CLP
+      - CNH
+      - CNY
+      - COP
+      - CRC
+      - CUC
+      - CUP
+      - CVE
+      - CZK
+      - DJF
+      - DKK
+      - DOP
+      - DZD
+      - EEK
+      - EGP
+      - ERN
+      - ETB
+      - ETH
+      - EUR
+      - EURC
+      - FJD
+      - FKP
+      - GBP
+      - GBX
+      - GEL
+      - GGP
+      - GHS
+      - GIP
+      - GMD
+      - GNF
+      - GTQ
+      - GYD
+      - HKD
+      - HNL
+      - HRK
+      - HTG
+      - HUF
+      - IDR
+      - ILS
+      - IMP
+      - INR
+      - IQD
+      - IRR
+      - ISK
+      - JEP
+      - JMD
+      - JOD
+      - JPY
+      - KES
+      - KGS
+      - KHR
+      - KMF
+      - KPW
+      - KRW
+      - KWD
+      - KYD
+      - KZT
+      - LAK
+      - LBP
+      - LKR
+      - LRD
+      - LSL
+      - LTL
+      - LVL
+      - LYD
+      - MAD
+      - MDL
+      - MGA
+      - MKD
+      - MMK
+      - MNT
+      - MOP
+      - MRO
+      - MRU
+      - MTL
+      - MUR
+      - MVR
+      - MWK
+      - MXN
+      - MYR
+      - MZN
+      - NAD
+      - NGN
+      - NIO
+      - NOK
+      - NPR
+      - NZD
+      - OMR
+      - OP
+      - PAB
+      - PEN
+      - PGK
+      - PHP
+      - PKR
+      - PLN
+      - PYG
+      - PYUSD
+      - QAR
+      - RON
+      - RSD
+      - RUB
+      - RWF
+      - SAR
+      - SBD
+      - SCR
+      - SDG
+      - SEK
+      - SGD
+      - SHP
+      - SKK
+      - SLE
+      - SLL
+      - SOS
+      - SRD
+      - SSP
+      - STD
+      - STN
+      - SVC
+      - SYP
+      - SZL
+      - THB
+      - TJS
+      - TMM
+      - TMT
+      - TND
+      - TOP
+      - TRY
+      - TTD
+      - TWD
+      - TZS
+      - UAH
+      - UGX
+      - USD
+      - USDB
+      - USDC
+      - USDG
+      - USDP
+      - USDT
+      - UYU
+      - UZS
+      - VEF
+      - VES
+      - VND
+      - VUV
+      - WST
+      - XAF
+      - XAG
+      - XAU
+      - XBA
+      - XBB
+      - XBC
+      - XBD
+      - XCD
+      - XCG
+      - XDR
+      - XFU
+      - XOF
+      - XPD
+      - XPF
+      - XPT
+      - XTS
+      - YER
+      - ZAR
+      - ZMK
+      - ZMW
+      - ZWD
+      - ZWG
+      - ZWL
+      - ZWN
+      - ZWR
+      description: Three-letter ISO currency code.
+    error_message:
+      type: object
+      properties:
+        errors:
+          type: object
+          properties:
+            code:
+              type: string
+              enum:
+              - parameter_invalid
+              - parameter_missing
+              - resource_not_found
+              - not_found
+              - forbidden
+              - invalid_ip
+              - invalid_key
+              - header_invalid
+              - expired_key
+              - conflict
+              - too_many_requests
+            message:
+              type: string
+            parameter:
+              type: string
+      required:
+      - errors
+    foreign_exchange_quote_create_request:
+      type: object
+      properties:
+        effective_at:
+          type: string
+          format: date-time
+          description: The timestamp until when the quoted rate is valid.
+        base_amount:
+          type: integer
+          description: Amount in the lowest denomination of the `base_currency` to convert, often called the "sell" amount.
+        base_currency:
+          $ref: '#/components/schemas/currency'
+          description: Currency to convert, often called the "sell" currency.
+        internal_account_id:
+          type: string
+          format: uuid
+          description: The ID for the `InternalAccount` this quote is associated with.
+        target_amount:
+          type: integer
+          description: Amount in the lowest denomination of the `target_currency`, often called the "buy" amount.
+        target_currency:
+          $ref: '#/components/schemas/currency'
+          description: Currency to convert the `base_currency` to, often called the "buy" currency.
+      additionalProperties: false
+      required:
+      - internal_account_id
+      - target_currency
+  parameters:
+    metadata_query:
+      name: metadata
+      in: query
+      schema:
+        type: object
+        additionalProperties:
+          type: string
+      style: deepObject
+      explode: true
+      required: false
+      description: For example, if you want to query for records with metadata key `Type` and value `Loan`, the query would be `metadata%5BType%5D=Loan`. This encodes the query parameters.
+  securitySchemes:
+    basic_auth:
+      type: http
+      scheme: basic

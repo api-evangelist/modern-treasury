@@ -1,0 +1,350 @@
+openapi: 3.0.1
+info:
+  title: Modern Treasury AccountCapability Hold API
+  version: v1
+  contact:
+    name: Modern Treasury Engineering Team
+    url: https://moderntreasury.com
+  description: The Modern Treasury REST API. Please see https://docs.moderntreasury.com for more details.
+servers:
+- url: http://localhost:3000
+- url: https://app.moderntreasury.com
+tags:
+- name: Hold
+paths:
+  /api/holds:
+    get:
+      summary: list holds
+      tags:
+      - Hold
+      description: Get a list of holds.
+      operationId: listHolds
+      security:
+      - basic_auth: []
+      parameters:
+      - name: after_cursor
+        in: query
+        schema:
+          type: string
+          nullable: true
+        required: false
+      - name: per_page
+        in: query
+        required: false
+        schema:
+          type: integer
+      - name: target_id
+        in: query
+        schema:
+          type: string
+          nullable: true
+        required: false
+        description: 'Translation missing: en.openapi.descriptions.payment_order.query_params.target_id'
+      - name: target_type
+        in: query
+        schema:
+          type: string
+          enum:
+          - payment_order
+          nullable: true
+        required: false
+        description: 'Translation missing: en.openapi.descriptions.payment_order.query_params.target_type'
+      - name: status
+        in: query
+        schema:
+          type: string
+          enum:
+          - active
+          - resolved
+          nullable: true
+        required: false
+        description: 'Translation missing: en.openapi.descriptions.payment_order.query_params.status'
+      - $ref: '#/components/parameters/metadata_query'
+      responses:
+        '200':
+          description: successful
+          headers:
+            X-After-Cursor:
+              schema:
+                type: string
+                nullable: true
+              required: false
+              description: The cursor for the next page. Including this in a call as `after_cursor` will return the next page.
+            X-Per-Page:
+              schema:
+                type: integer
+                nullable: true
+              description: The current `per_page`.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/hold'
+    post:
+      summary: create hold
+      tags:
+      - Hold
+      description: Create a new hold
+      operationId: createHold
+      security:
+      - basic_auth: []
+      parameters:
+      - name: Idempotency-Key
+        in: header
+        required: false
+        description: This key should be something unique, preferably something like an UUID.
+        schema:
+          type: string
+      responses:
+        '201':
+          description: created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/hold'
+        '400':
+          description: bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_message'
+        '403':
+          description: forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_message'
+        '404':
+          description: not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_message'
+        '422':
+          description: unprocessable entity
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_message'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                target_type:
+                  type: string
+                  enum:
+                  - payment_order
+                  description: The type of target to hold
+                target_id:
+                  type: string
+                  format: uuid
+                  description: The ID of the target to hold
+                reason:
+                  type: string
+                  nullable: true
+                  description: The reason for the hold
+                status:
+                  type: string
+                  enum:
+                  - active
+                  description: The status of the hold
+                metadata:
+                  type: object
+                  additionalProperties:
+                    type: string
+                  nullable: true
+                  description: Additional metadata for the hold
+              required:
+              - target_type
+              - target_id
+              - status
+  /api/holds/{id}:
+    get:
+      summary: show hold
+      tags:
+      - Hold
+      description: Get a specific hold
+      operationId: showHold
+      security:
+      - basic_auth: []
+      parameters:
+      - name: id
+        in: path
+        schema:
+          type: string
+        description: hold id
+        required: true
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/hold'
+        '404':
+          description: not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_message'
+    patch:
+      summary: update hold
+      tags:
+      - Hold
+      description: Update a hold
+      operationId: updateHold
+      security:
+      - basic_auth: []
+      parameters:
+      - name: id
+        in: path
+        schema:
+          type: string
+        description: hold id
+        required: true
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/hold'
+        '400':
+          description: bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_message'
+        '422':
+          description: unprocessable entity
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_message'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                status:
+                  type: string
+                  enum:
+                  - resolved
+                  description: The new status of the hold
+                resolution:
+                  type: string
+                  nullable: true
+                  description: The resolution of the hold
+              required:
+              - status
+components:
+  schemas:
+    error_message:
+      type: object
+      properties:
+        errors:
+          type: object
+          properties:
+            code:
+              type: string
+              enum:
+              - parameter_invalid
+              - parameter_missing
+              - resource_not_found
+              - not_found
+              - forbidden
+              - invalid_ip
+              - invalid_key
+              - header_invalid
+              - expired_key
+              - conflict
+              - too_many_requests
+            message:
+              type: string
+            parameter:
+              type: string
+      required:
+      - errors
+    hold:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        object:
+          type: string
+          enum:
+          - hold
+          description: The type of object
+        live_mode:
+          type: boolean
+          description: This field will be true if this object exists in the live environment or false if it exists in the test environment.
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        status:
+          type: string
+          enum:
+          - active
+          - resolved
+          description: The status of the hold
+        target_type:
+          type: string
+          enum:
+          - payment_order
+          description: The type of target being held
+        target_id:
+          type: string
+          format: uuid
+          description: The ID of the target being held
+        reason:
+          type: string
+          nullable: true
+          description: The reason for the hold
+        resolution:
+          type: string
+          nullable: true
+          description: The resolution of the hold
+        resolved_at:
+          type: string
+          format: date-time
+          nullable: true
+          description: When the hold was resolved
+        metadata:
+          type: object
+          additionalProperties:
+            type: string
+          description: Additional metadata for the hold
+          nullable: true
+      required:
+      - id
+      - object
+      - status
+      - target_type
+      - target_id
+      - created_at
+      - updated_at
+      additionalProperties: false
+  parameters:
+    metadata_query:
+      name: metadata
+      in: query
+      schema:
+        type: object
+        additionalProperties:
+          type: string
+      style: deepObject
+      explode: true
+      required: false
+      description: For example, if you want to query for records with metadata key `Type` and value `Loan`, the query would be `metadata%5BType%5D=Loan`. This encodes the query parameters.
+  securitySchemes:
+    basic_auth:
+      type: http
+      scheme: basic
