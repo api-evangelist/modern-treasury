@@ -4,7 +4,20 @@ name: Modern Treasury
 kind: company
 description: Modern Treasury is a money movement platform unifying ACH, wires, RTP, checks, FX, and reconciliation across
   multiple bank partners. Operates as the financial operations system of record.
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: unknown
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/modern-treasury.png
 tags:
   - Fintech
   - Payments
@@ -15,55 +28,543 @@ created: '2026-05-08'
 modified: '2026-05-08'
 specificationVersion: '0.19'
 apis:
-  - name: Modern Treasury Payments API
-    description: Initiate and track ACH, wire, RTP, FedNow, check, and book transfers with state-machine status tracking.
-    humanURL: https://docs.moderntreasury.com/reference
-    baseURL: https://app.moderntreasury.com/api
-    tags:
-    - Payments
-    - ACH
-    - Wires
-    - RTP
-    properties:
-    - type: Documentation
-      url: https://docs.moderntreasury.com/reference
-    - type: OpenAPI
-      url: openapi/modern-treasury-openapi.yml
-  - name: Modern Treasury Ledgers API
-    description: Double-entry ledger for accounts, ledger transactions, balances, and reconciliations.
-    humanURL: https://docs.moderntreasury.com/reference
-    baseURL: https://app.moderntreasury.com/api
-    tags:
-    - Ledgers
-    - Accounting
-    properties:
-    - type: Documentation
-      url: https://docs.moderntreasury.com/reference
-    - type: OpenAPI
-      url: openapi/modern-treasury-openapi.yml
-  - name: Modern Treasury Counterparties API
-    description: Manage counterparties, external accounts, and routing details.
-    humanURL: https://docs.moderntreasury.com/reference
-    baseURL: https://app.moderntreasury.com/api
-    tags:
-    - Counterparties
-    properties:
-    - type: Documentation
-      url: https://docs.moderntreasury.com/reference
-    - type: OpenAPI
-      url: openapi/modern-treasury-openapi.yml
-  - name: Modern Treasury Connections & Webhooks API
-    description: Manage bank connections, events, and webhook subscriptions.
-    humanURL: https://docs.moderntreasury.com/reference
-    baseURL: https://app.moderntreasury.com/api
-    tags:
-    - Webhooks
-    - Events
-    properties:
-    - type: Documentation
-      url: https://docs.moderntreasury.com/reference
-    - type: OpenAPI
-      url: openapi/modern-treasury-openapi.yml
+- aid: modern-treasury:modern-treasury-accountcapability-api
+  name: Modern Treasury AccountCapability API
+  description: The AccountCapability API from Modern Treasury — 1 operation(s) for accountcapability.
+  humanURL: https://docs.moderntreasury.com/reference
+  baseURL: https://app.moderntreasury.com/api
+  tags:
+  - AccountCapability
+  properties:
+  - type: OpenAPI
+    url: openapi/modern-treasury-accountcapability-api-openapi.yml
+  - type: Documentation
+    url: https://docs.moderntreasury.com/reference
+- aid: modern-treasury:modern-treasury-accountcollectionflow-api
+  name: Modern Treasury AccountCollectionFlow API
+  description: >-
+    The AccountCollectionFlow API from Modern Treasury — 2 operation(s) for accountcollectionflow.
+  humanURL: https://docs.moderntreasury.com/reference
+  baseURL: https://app.moderntreasury.com/api
+  tags:
+  - AccountCollectionFlow
+  properties:
+  - type: OpenAPI
+    url: openapi/modern-treasury-accountcollectionflow-api-openapi.yml
+  - type: Documentation
+    url: https://docs.moderntreasury.com/reference
+- aid: modern-treasury:modern-treasury-accountdetail-api
+  name: Modern Treasury AccountDetail API
+  description: The AccountDetail API from Modern Treasury — 2 operation(s) for accountdetail.
+  humanURL: https://docs.moderntreasury.com/reference
+  baseURL: https://app.moderntreasury.com/api
+  tags:
+  - AccountDetail
+  properties:
+  - type: OpenAPI
+    url: openapi/modern-treasury-accountdetail-api-openapi.yml
+  - type: Documentation
+    url: https://docs.moderntreasury.com/reference
+- aid: modern-treasury:modern-treasury-balancereport-api
+  name: Modern Treasury BalanceReport API
+  description: The BalanceReport API from Modern Treasury — 2 operation(s) for balancereport.
+  humanURL: https://docs.moderntreasury.com/reference
+  baseURL: https://app.moderntreasury.com/api
+  tags:
+  - BalanceReport
+  properties:
+  - type: OpenAPI
+    url: openapi/modern-treasury-balancereport-api-openapi.yml
+  - type: Documentation
+    url: https://docs.moderntreasury.com/reference
+- aid: modern-treasury:modern-treasury-bulkrequest-api
+  name: Modern Treasury BulkRequest API
+  description: The BulkRequest API from Modern Treasury — 2 operation(s) for bulkrequest.
+  humanURL: https://docs.moderntreasury.com/reference
+  baseURL: https://app.moderntreasury.com/api
+  tags:
+  - BulkRequest
+  properties:
+  - type: OpenAPI
+    url: openapi/modern-treasury-bulkrequest-api-openapi.yml
+  - type: Documentation
+    url: https://docs.moderntreasury.com/reference
+- aid: modern-treasury:modern-treasury-bulkresult-api
+  name: Modern Treasury BulkResult API
+  description: The BulkResult API from Modern Treasury — 2 operation(s) for bulkresult.
+  humanURL: https://docs.moderntreasury.com/reference
+  baseURL: https://app.moderntreasury.com/api
+  tags:
+  - BulkResult
+  properties:
+  - type: OpenAPI
+    url: openapi/modern-treasury-bulkresult-api-openapi.yml
+  - type: Documentation
+    url: https://docs.moderntreasury.com/reference
+- aid: modern-treasury:modern-treasury-connection-api
+  name: Modern Treasury Connection API
+  description: The Connection API from Modern Treasury — 1 operation(s) for connection.
+  humanURL: https://docs.moderntreasury.com/reference
+  baseURL: https://app.moderntreasury.com/api
+  tags:
+  - Connection
+  properties:
+  - type: OpenAPI
+    url: openapi/modern-treasury-connection-api-openapi.yml
+  - type: Documentation
+    url: https://docs.moderntreasury.com/reference
+- aid: modern-treasury:modern-treasury-connectionlegalentity-api
+  name: Modern Treasury ConnectionLegalEntity API
+  description: >-
+    The ConnectionLegalEntity API from Modern Treasury — 2 operation(s) for connectionlegalentity.
+  humanURL: https://docs.moderntreasury.com/reference
+  baseURL: https://app.moderntreasury.com/api
+  tags:
+  - ConnectionLegalEntity
+  properties:
+  - type: OpenAPI
+    url: openapi/modern-treasury-connectionlegalentity-api-openapi.yml
+  - type: Documentation
+    url: https://docs.moderntreasury.com/reference
+- aid: modern-treasury:modern-treasury-counterparty-api
+  name: Modern Treasury Counterparty API
+  description: The Counterparty API from Modern Treasury — 3 operation(s) for counterparty.
+  humanURL: https://docs.moderntreasury.com/reference
+  baseURL: https://app.moderntreasury.com/api
+  tags:
+  - Counterparty
+  properties:
+  - type: OpenAPI
+    url: openapi/modern-treasury-counterparty-api-openapi.yml
+  - type: Documentation
+    url: https://docs.moderntreasury.com/reference
+- aid: modern-treasury:modern-treasury-document-api
+  name: Modern Treasury Document API
+  description: The Document API from Modern Treasury — 6 operation(s) for document.
+  humanURL: https://docs.moderntreasury.com/reference
+  baseURL: https://app.moderntreasury.com/api
+  tags:
+  - Document
+  properties:
+  - type: OpenAPI
+    url: openapi/modern-treasury-document-api-openapi.yml
+  - type: Documentation
+    url: https://docs.moderntreasury.com/reference
+- aid: modern-treasury:modern-treasury-event-api
+  name: Modern Treasury Event API
+  description: The Event API from Modern Treasury — 2 operation(s) for event.
+  humanURL: https://docs.moderntreasury.com/reference
+  baseURL: https://app.moderntreasury.com/api
+  tags:
+  - Event
+  properties:
+  - type: OpenAPI
+    url: openapi/modern-treasury-event-api-openapi.yml
+  - type: Documentation
+    url: https://docs.moderntreasury.com/reference
+- aid: modern-treasury:modern-treasury-expectedpayment-api
+  name: Modern Treasury ExpectedPayment API
+  description: The ExpectedPayment API from Modern Treasury — 2 operation(s) for expectedpayment.
+  humanURL: https://docs.moderntreasury.com/reference
+  baseURL: https://app.moderntreasury.com/api
+  tags:
+  - ExpectedPayment
+  properties:
+  - type: OpenAPI
+    url: openapi/modern-treasury-expectedpayment-api-openapi.yml
+  - type: Documentation
+    url: https://docs.moderntreasury.com/reference
+- aid: modern-treasury:modern-treasury-externalaccount-api
+  name: Modern Treasury ExternalAccount API
+  description: The ExternalAccount API from Modern Treasury — 4 operation(s) for externalaccount.
+  humanURL: https://docs.moderntreasury.com/reference
+  baseURL: https://app.moderntreasury.com/api
+  tags:
+  - ExternalAccount
+  properties:
+  - type: OpenAPI
+    url: openapi/modern-treasury-externalaccount-api-openapi.yml
+  - type: Documentation
+    url: https://docs.moderntreasury.com/reference
+- aid: modern-treasury:modern-treasury-foreignexchangequote-api
+  name: Modern Treasury ForeignExchangeQuote API
+  description: >-
+    The ForeignExchangeQuote API from Modern Treasury — 2 operation(s) for foreignexchangequote.
+  humanURL: https://docs.moderntreasury.com/reference
+  baseURL: https://app.moderntreasury.com/api
+  tags:
+  - ForeignExchangeQuote
+  properties:
+  - type: OpenAPI
+    url: openapi/modern-treasury-foreignexchangequote-api-openapi.yml
+  - type: Documentation
+    url: https://docs.moderntreasury.com/reference
+- aid: modern-treasury:modern-treasury-hold-api
+  name: Modern Treasury Hold API
+  description: The Hold API from Modern Treasury — 2 operation(s) for hold.
+  humanURL: https://docs.moderntreasury.com/reference
+  baseURL: https://app.moderntreasury.com/api
+  tags:
+  - Hold
+  properties:
+  - type: OpenAPI
+    url: openapi/modern-treasury-hold-api-openapi.yml
+  - type: Documentation
+    url: https://docs.moderntreasury.com/reference
+- aid: modern-treasury:modern-treasury-incomingpaymentdetail-api
+  name: Modern Treasury IncomingPaymentDetail API
+  description: >-
+    The IncomingPaymentDetail API from Modern Treasury — 3 operation(s) for incomingpaymentdetail.
+  humanURL: https://docs.moderntreasury.com/reference
+  baseURL: https://app.moderntreasury.com/api
+  tags:
+  - IncomingPaymentDetail
+  properties:
+  - type: OpenAPI
+    url: openapi/modern-treasury-incomingpaymentdetail-api-openapi.yml
+  - type: Documentation
+    url: https://docs.moderntreasury.com/reference
+- aid: modern-treasury:modern-treasury-internalaccount-api
+  name: Modern Treasury InternalAccount API
+  description: The InternalAccount API from Modern Treasury — 3 operation(s) for internalaccount.
+  humanURL: https://docs.moderntreasury.com/reference
+  baseURL: https://app.moderntreasury.com/api
+  tags:
+  - InternalAccount
+  properties:
+  - type: OpenAPI
+    url: openapi/modern-treasury-internalaccount-api-openapi.yml
+  - type: Documentation
+    url: https://docs.moderntreasury.com/reference
+- aid: modern-treasury:modern-treasury-invoice-api
+  name: Modern Treasury Invoice API
+  description: The Invoice API from Modern Treasury — 2 operation(s) for invoice.
+  humanURL: https://docs.moderntreasury.com/reference
+  baseURL: https://app.moderntreasury.com/api
+  tags:
+  - Invoice
+  properties:
+  - type: OpenAPI
+    url: openapi/modern-treasury-invoice-api-openapi.yml
+  - type: Documentation
+    url: https://docs.moderntreasury.com/reference
+- aid: modern-treasury:modern-treasury-invoicelineitem-api
+  name: Modern Treasury InvoiceLineItem API
+  description: The InvoiceLineItem API from Modern Treasury — 2 operation(s) for invoicelineitem.
+  humanURL: https://docs.moderntreasury.com/reference
+  baseURL: https://app.moderntreasury.com/api
+  tags:
+  - InvoiceLineItem
+  properties:
+  - type: OpenAPI
+    url: openapi/modern-treasury-invoicelineitem-api-openapi.yml
+  - type: Documentation
+    url: https://docs.moderntreasury.com/reference
+- aid: modern-treasury:modern-treasury-journalentry-api
+  name: Modern Treasury JournalEntry API
+  description: The JournalEntry API from Modern Treasury — 2 operation(s) for journalentry.
+  humanURL: https://docs.moderntreasury.com/reference
+  baseURL: https://app.moderntreasury.com/api
+  tags:
+  - JournalEntry
+  properties:
+  - type: OpenAPI
+    url: openapi/modern-treasury-journalentry-api-openapi.yml
+  - type: Documentation
+    url: https://docs.moderntreasury.com/reference
+- aid: modern-treasury:modern-treasury-journalreport-api
+  name: Modern Treasury JournalReport API
+  description: The JournalReport API from Modern Treasury — 2 operation(s) for journalreport.
+  humanURL: https://docs.moderntreasury.com/reference
+  baseURL: https://app.moderntreasury.com/api
+  tags:
+  - JournalReport
+  properties:
+  - type: OpenAPI
+    url: openapi/modern-treasury-journalreport-api-openapi.yml
+  - type: Documentation
+    url: https://docs.moderntreasury.com/reference
+- aid: modern-treasury:modern-treasury-journalsource-api
+  name: Modern Treasury JournalSource API
+  description: The JournalSource API from Modern Treasury — 2 operation(s) for journalsource.
+  humanURL: https://docs.moderntreasury.com/reference
+  baseURL: https://app.moderntreasury.com/api
+  tags:
+  - JournalSource
+  properties:
+  - type: OpenAPI
+    url: openapi/modern-treasury-journalsource-api-openapi.yml
+  - type: Documentation
+    url: https://docs.moderntreasury.com/reference
+- aid: modern-treasury:modern-treasury-ledger-api
+  name: Modern Treasury Ledger API
+  description: The Ledger API from Modern Treasury — 2 operation(s) for ledger.
+  humanURL: https://docs.moderntreasury.com/reference
+  baseURL: https://app.moderntreasury.com/api
+  tags:
+  - Ledger
+  properties:
+  - type: OpenAPI
+    url: openapi/modern-treasury-ledger-api-openapi.yml
+  - type: Documentation
+    url: https://docs.moderntreasury.com/reference
+- aid: modern-treasury:modern-treasury-ledgeraccount-api
+  name: Modern Treasury LedgerAccount API
+  description: The LedgerAccount API from Modern Treasury — 2 operation(s) for ledgeraccount.
+  humanURL: https://docs.moderntreasury.com/reference
+  baseURL: https://app.moderntreasury.com/api
+  tags:
+  - LedgerAccount
+  properties:
+  - type: OpenAPI
+    url: openapi/modern-treasury-ledgeraccount-api-openapi.yml
+  - type: Documentation
+    url: https://docs.moderntreasury.com/reference
+- aid: modern-treasury:modern-treasury-ledgeraccountbalancemonitor-api
+  name: Modern Treasury LedgerAccountBalanceMonitor API
+  description: >-
+    The LedgerAccountBalanceMonitor API from Modern Treasury — 2 operation(s) for ledgeraccountbalancemonitor.
+  humanURL: https://docs.moderntreasury.com/reference
+  baseURL: https://app.moderntreasury.com/api
+  tags:
+  - LedgerAccountBalanceMonitor
+  properties:
+  - type: OpenAPI
+    url: openapi/modern-treasury-ledgeraccountbalancemonitor-api-openapi.yml
+  - type: Documentation
+    url: https://docs.moderntreasury.com/reference
+- aid: modern-treasury:modern-treasury-ledgeraccountcategory-api
+  name: Modern Treasury LedgerAccountCategory API
+  description: >-
+    The LedgerAccountCategory API from Modern Treasury — 4 operation(s) for ledgeraccountcategory.
+  humanURL: https://docs.moderntreasury.com/reference
+  baseURL: https://app.moderntreasury.com/api
+  tags:
+  - LedgerAccountCategory
+  properties:
+  - type: OpenAPI
+    url: openapi/modern-treasury-ledgeraccountcategory-api-openapi.yml
+  - type: Documentation
+    url: https://docs.moderntreasury.com/reference
+- aid: modern-treasury:modern-treasury-ledgeraccountsettlement-api
+  name: Modern Treasury LedgerAccountSettlement API
+  description: >-
+    The LedgerAccountSettlement API from Modern Treasury — 3 operation(s) for ledgeraccountsettlement.
+  humanURL: https://docs.moderntreasury.com/reference
+  baseURL: https://app.moderntreasury.com/api
+  tags:
+  - LedgerAccountSettlement
+  properties:
+  - type: OpenAPI
+    url: openapi/modern-treasury-ledgeraccountsettlement-api-openapi.yml
+  - type: Documentation
+    url: https://docs.moderntreasury.com/reference
+- aid: modern-treasury:modern-treasury-ledgeraccountstatement-api
+  name: Modern Treasury LedgerAccountStatement API
+  description: >-
+    The LedgerAccountStatement API from Modern Treasury — 2 operation(s) for ledgeraccountstatement.
+  humanURL: https://docs.moderntreasury.com/reference
+  baseURL: https://app.moderntreasury.com/api
+  tags:
+  - LedgerAccountStatement
+  properties:
+  - type: OpenAPI
+    url: openapi/modern-treasury-ledgeraccountstatement-api-openapi.yml
+  - type: Documentation
+    url: https://docs.moderntreasury.com/reference
+- aid: modern-treasury:modern-treasury-ledgerentry-api
+  name: Modern Treasury LedgerEntry API
+  description: The LedgerEntry API from Modern Treasury — 2 operation(s) for ledgerentry.
+  humanURL: https://docs.moderntreasury.com/reference
+  baseURL: https://app.moderntreasury.com/api
+  tags:
+  - LedgerEntry
+  properties:
+  - type: OpenAPI
+    url: openapi/modern-treasury-ledgerentry-api-openapi.yml
+  - type: Documentation
+    url: https://docs.moderntreasury.com/reference
+- aid: modern-treasury:modern-treasury-ledgertransaction-api
+  name: Modern Treasury LedgerTransaction API
+  description: The LedgerTransaction API from Modern Treasury — 6 operation(s) for ledgertransaction.
+  humanURL: https://docs.moderntreasury.com/reference
+  baseURL: https://app.moderntreasury.com/api
+  tags:
+  - LedgerTransaction
+  properties:
+  - type: OpenAPI
+    url: openapi/modern-treasury-ledgertransaction-api-openapi.yml
+  - type: Documentation
+    url: https://docs.moderntreasury.com/reference
+- aid: modern-treasury:modern-treasury-legalentity-api
+  name: Modern Treasury LegalEntity API
+  description: The LegalEntity API from Modern Treasury — 3 operation(s) for legalentity.
+  humanURL: https://docs.moderntreasury.com/reference
+  baseURL: https://app.moderntreasury.com/api
+  tags:
+  - LegalEntity
+  properties:
+  - type: OpenAPI
+    url: openapi/modern-treasury-legalentity-api-openapi.yml
+  - type: Documentation
+    url: https://docs.moderntreasury.com/reference
+- aid: modern-treasury:modern-treasury-lineitem-api
+  name: Modern Treasury LineItem API
+  description: The LineItem API from Modern Treasury — 2 operation(s) for lineitem.
+  humanURL: https://docs.moderntreasury.com/reference
+  baseURL: https://app.moderntreasury.com/api
+  tags:
+  - LineItem
+  properties:
+  - type: OpenAPI
+    url: openapi/modern-treasury-lineitem-api-openapi.yml
+  - type: Documentation
+    url: https://docs.moderntreasury.com/reference
+- aid: modern-treasury:modern-treasury-paymentaction-api
+  name: Modern Treasury PaymentAction API
+  description: The PaymentAction API from Modern Treasury — 2 operation(s) for paymentaction.
+  humanURL: https://docs.moderntreasury.com/reference
+  baseURL: https://app.moderntreasury.com/api
+  tags:
+  - PaymentAction
+  properties:
+  - type: OpenAPI
+    url: openapi/modern-treasury-paymentaction-api-openapi.yml
+  - type: Documentation
+    url: https://docs.moderntreasury.com/reference
+- aid: modern-treasury:modern-treasury-paymentflow-api
+  name: Modern Treasury PaymentFlow API
+  description: The PaymentFlow API from Modern Treasury — 2 operation(s) for paymentflow.
+  humanURL: https://docs.moderntreasury.com/reference
+  baseURL: https://app.moderntreasury.com/api
+  tags:
+  - PaymentFlow
+  properties:
+  - type: OpenAPI
+    url: openapi/modern-treasury-paymentflow-api-openapi.yml
+  - type: Documentation
+    url: https://docs.moderntreasury.com/reference
+- aid: modern-treasury:modern-treasury-paymentorder-api
+  name: Modern Treasury PaymentOrder API
+  description: The PaymentOrder API from Modern Treasury — 4 operation(s) for paymentorder.
+  humanURL: https://docs.moderntreasury.com/reference
+  baseURL: https://app.moderntreasury.com/api
+  tags:
+  - PaymentOrder
+  properties:
+  - type: OpenAPI
+    url: openapi/modern-treasury-paymentorder-api-openapi.yml
+  - type: Documentation
+    url: https://docs.moderntreasury.com/reference
+- aid: modern-treasury:modern-treasury-paymentreference-api
+  name: Modern Treasury PaymentReference API
+  description: The PaymentReference API from Modern Treasury — 2 operation(s) for paymentreference.
+  humanURL: https://docs.moderntreasury.com/reference
+  baseURL: https://app.moderntreasury.com/api
+  tags:
+  - PaymentReference
+  properties:
+  - type: OpenAPI
+    url: openapi/modern-treasury-paymentreference-api-openapi.yml
+  - type: Documentation
+    url: https://docs.moderntreasury.com/reference
+- aid: modern-treasury:modern-treasury-ping-api
+  name: Modern Treasury Ping API
+  description: The Ping API from Modern Treasury — 1 operation(s) for ping.
+  humanURL: https://docs.moderntreasury.com/reference
+  baseURL: https://app.moderntreasury.com/api
+  tags:
+  - Ping
+  properties:
+  - type: OpenAPI
+    url: openapi/modern-treasury-ping-api-openapi.yml
+  - type: Documentation
+    url: https://docs.moderntreasury.com/reference
+- aid: modern-treasury:modern-treasury-return-api
+  name: Modern Treasury Return API
+  description: The Return API from Modern Treasury — 2 operation(s) for return.
+  humanURL: https://docs.moderntreasury.com/reference
+  baseURL: https://app.moderntreasury.com/api
+  tags:
+  - Return
+  properties:
+  - type: OpenAPI
+    url: openapi/modern-treasury-return-api-openapi.yml
+  - type: Documentation
+    url: https://docs.moderntreasury.com/reference
+- aid: modern-treasury:modern-treasury-reversal-api
+  name: Modern Treasury Reversal API
+  description: The Reversal API from Modern Treasury — 2 operation(s) for reversal.
+  humanURL: https://docs.moderntreasury.com/reference
+  baseURL: https://app.moderntreasury.com/api
+  tags:
+  - Reversal
+  properties:
+  - type: OpenAPI
+    url: openapi/modern-treasury-reversal-api-openapi.yml
+  - type: Documentation
+    url: https://docs.moderntreasury.com/reference
+- aid: modern-treasury:modern-treasury-routingdetail-api
+  name: Modern Treasury RoutingDetail API
+  description: The RoutingDetail API from Modern Treasury — 2 operation(s) for routingdetail.
+  humanURL: https://docs.moderntreasury.com/reference
+  baseURL: https://app.moderntreasury.com/api
+  tags:
+  - RoutingDetail
+  properties:
+  - type: OpenAPI
+    url: openapi/modern-treasury-routingdetail-api-openapi.yml
+  - type: Documentation
+    url: https://docs.moderntreasury.com/reference
+- aid: modern-treasury:modern-treasury-transaction-api
+  name: Modern Treasury Transaction API
+  description: The Transaction API from Modern Treasury — 2 operation(s) for transaction.
+  humanURL: https://docs.moderntreasury.com/reference
+  baseURL: https://app.moderntreasury.com/api
+  tags:
+  - Transaction
+  properties:
+  - type: OpenAPI
+    url: openapi/modern-treasury-transaction-api-openapi.yml
+  - type: Documentation
+    url: https://docs.moderntreasury.com/reference
+- aid: modern-treasury:modern-treasury-transactionlineitem-api
+  name: Modern Treasury TransactionLineItem API
+  description: >-
+    The TransactionLineItem API from Modern Treasury — 3 operation(s) for transactionlineitem.
+  humanURL: https://docs.moderntreasury.com/reference
+  baseURL: https://app.moderntreasury.com/api
+  tags:
+  - TransactionLineItem
+  properties:
+  - type: OpenAPI
+    url: openapi/modern-treasury-transactionlineitem-api-openapi.yml
+  - type: Documentation
+    url: https://docs.moderntreasury.com/reference
+- aid: modern-treasury:modern-treasury-validation-api
+  name: Modern Treasury Validation API
+  description: The Validation API from Modern Treasury — 1 operation(s) for validation.
+  humanURL: https://docs.moderntreasury.com/reference
+  baseURL: https://app.moderntreasury.com/api
+  tags:
+  - Validation
+  properties:
+  - type: OpenAPI
+    url: openapi/modern-treasury-validation-api-openapi.yml
+  - type: Documentation
+    url: https://docs.moderntreasury.com/reference
+- aid: modern-treasury:modern-treasury-virtualaccount-api
+  name: Modern Treasury VirtualAccount API
+  description: The VirtualAccount API from Modern Treasury — 2 operation(s) for virtualaccount.
+  humanURL: https://docs.moderntreasury.com/reference
+  baseURL: https://app.moderntreasury.com/api
+  tags:
+  - VirtualAccount
+  properties:
+  - type: OpenAPI
+    url: openapi/modern-treasury-virtualaccount-api-openapi.yml
+  - type: Documentation
+    url: https://docs.moderntreasury.com/reference
 common:
   - type: AgenticAccess
     url: agentic-access/modern-treasury-agentic-access.yml
