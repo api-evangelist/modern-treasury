@@ -566,6 +566,18 @@ apis:
   - type: Documentation
     url: https://docs.moderntreasury.com/reference
 common:
+  - type: Security
+    url: https://www.moderntreasury.com/security
+  - type: ChangeLog
+    url: https://docs.moderntreasury.com/platform/changelog
+  - type: PrivacyPolicy
+    url: https://www.moderntreasury.com/privacy
+  - type: TermsOfService
+    url: https://www.moderntreasury.com/legal/terms-of-use
+  - type: Pricing
+    url: https://www.moderntreasury.com/pricing
+  - type: GettingStarted
+    url: https://docs.moderntreasury.com/platform/reference/getting-started
   - type: AgenticAccess
     url: agentic-access/modern-treasury-agentic-access.yml
   - type: TrustCenter
