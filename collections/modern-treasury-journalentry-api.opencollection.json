@@ -1,0 +1,78 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Modern Treasury AccountCapability JournalEntry API",
+    "version": "v1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "JournalEntry",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "list journal_entries",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:3000/api/journal_entries",
+            "params": [
+              {
+                "name": "journal_report_id",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the journal report"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number for pagination"
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query",
+                "description": "Number of items per page"
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Retrieve a list of journal entries"
+        },
+        {
+          "info": {
+            "name": "show journal_entry",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:3000/api/journal_entries/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the journal entry"
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Retrieve a specific journal entry"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

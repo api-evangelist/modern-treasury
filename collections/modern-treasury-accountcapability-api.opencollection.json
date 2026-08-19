@@ -1,0 +1,52 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Modern Treasury AccountCapability API",
+    "version": "v1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "AccountCapability",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "update account_capability",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "http://localhost:3000/api/internal_accounts/:internal_account_id/account_capabilities/:id",
+            "params": [
+              {
+                "name": "internal_account_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the internal account."
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the account capability."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "update account_capability"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

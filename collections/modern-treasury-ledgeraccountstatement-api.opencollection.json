@@ -1,0 +1,68 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Modern Treasury AccountCapability LedgerAccountStatement API",
+    "version": "v1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "LedgerAccountStatement",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "create ledger_account_statement",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:3000/api/ledger_account_statements",
+            "headers": [
+              {
+                "name": "Idempotency-Key",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Create a ledger account statement."
+        },
+        {
+          "info": {
+            "name": "get ledger_account_statement",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:3000/api/ledger_account_statements/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "id"
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Get details on a single ledger account statement."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

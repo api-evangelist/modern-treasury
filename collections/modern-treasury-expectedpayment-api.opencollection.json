@@ -1,0 +1,213 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Modern Treasury AccountCapability ExpectedPayment API",
+    "version": "v1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "ExpectedPayment",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "list expected_payments",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:3000/api/expected_payments",
+            "params": [
+              {
+                "name": "after_cursor",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "One of unreconciled, reconciled, or archived."
+              },
+              {
+                "name": "internal_account_id",
+                "value": "",
+                "type": "query",
+                "description": "Specify internal_account_id to see expected_payments for a specific account."
+              },
+              {
+                "name": "external_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "direction",
+                "value": "",
+                "type": "query",
+                "description": "One of credit, debit"
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "One of: ach, au_becs, bacs, book, check, eft, interac, provxchange, rtp,sen, sepa, signet, wire"
+              },
+              {
+                "name": "counterparty_id",
+                "value": "",
+                "type": "query",
+                "description": "Specify counterparty_id to see expected_payments for a specific account."
+              },
+              {
+                "name": "metadata",
+                "value": "",
+                "type": "query",
+                "description": "For example, if you want to query for records with metadata key `Type` and value `Loan`, the query would be `metadata%5BType%5D=Loan`. This encodes the query parameters."
+              },
+              {
+                "name": "created_at_lower_bound",
+                "value": "",
+                "type": "query",
+                "description": "Used to return expected payments created after some datetime"
+              },
+              {
+                "name": "created_at_upper_bound",
+                "value": "",
+                "type": "query",
+                "description": "Used to return expected payments created before some datetime"
+              },
+              {
+                "name": "updated_at_lower_bound",
+                "value": "",
+                "type": "query",
+                "description": "Used to return expected payments updated after some datetime"
+              },
+              {
+                "name": "updated_at_upper_bound",
+                "value": "",
+                "type": "query",
+                "description": "Used to return expected payments updated before some datetime"
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "list expected_payments"
+        },
+        {
+          "info": {
+            "name": "create expected payment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:3000/api/expected_payments",
+            "headers": [
+              {
+                "name": "Idempotency-Key",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "create expected payment"
+        },
+        {
+          "info": {
+            "name": "get expected payment",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:3000/api/expected_payments/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "id"
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "get expected payment"
+        },
+        {
+          "info": {
+            "name": "update expected payment",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "http://localhost:3000/api/expected_payments/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "id"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "update expected payment"
+        },
+        {
+          "info": {
+            "name": "delete expected payment",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "http://localhost:3000/api/expected_payments/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "id"
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "delete expected payment"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,869 @@
+{
+  "item": [
+    {
+      "id": "0077dc1d-aed2-4998-839b-1f234e1c1c7c",
+      "name": "PaymentAction",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "90e0ce39-ecbc-470b-9b91-105e766223ce",
+          "name": "list payment_actions",
+          "request": {
+            "name": "list payment_actions",
+            "description": {
+              "content": "Get a list of all payment actions.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "payment_actions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "type",
+                  "value": "<string>",
+                  "description": "The type of payment action."
+                },
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>",
+                  "description": "Filter by payment actions of a specific status."
+                },
+                {
+                  "disabled": false,
+                  "key": "actionable_id",
+                  "value": "<string>",
+                  "description": "The ID of the associated actionable object."
+                },
+                {
+                  "disabled": false,
+                  "key": "actionable_type",
+                  "value": "<string>",
+                  "description": "The type of the associated actionable object. One of `payment_order`, `expected_payment`."
+                },
+                {
+                  "disabled": false,
+                  "key": "internal_account_id",
+                  "value": "<string>",
+                  "description": "The ID of one of your internal accounts."
+                },
+                {
+                  "disabled": false,
+                  "key": "created_at[gt]",
+                  "value": "<dateTime>",
+                  "description": "Filter by `created_at` using comparison operators like `gt` (>), `gte` (>=), `lt` (<), `lte` (<=), or `eq` (=) to filter by the created at timestamp. For example, `created_at[gte]=2024-01-01T00:00:00Z`"
+                },
+                {
+                  "disabled": false,
+                  "key": "created_at[gte]",
+                  "value": "<dateTime>",
+                  "description": "Filter by `created_at` using comparison operators like `gt` (>), `gte` (>=), `lt` (<), `lte` (<=), or `eq` (=) to filter by the created at timestamp. For example, `created_at[gte]=2024-01-01T00:00:00Z`"
+                },
+                {
+                  "disabled": false,
+                  "key": "created_at[lt]",
+                  "value": "<dateTime>",
+                  "description": "Filter by `created_at` using comparison operators like `gt` (>), `gte` (>=), `lt` (<), `lte` (<=), or `eq` (=) to filter by the created at timestamp. For example, `created_at[gte]=2024-01-01T00:00:00Z`"
+                },
+                {
+                  "disabled": false,
+                  "key": "created_at[lte]",
+                  "value": "<dateTime>",
+                  "description": "Filter by `created_at` using comparison operators like `gt` (>), `gte` (>=), `lt` (<), `lte` (<=), or `eq` (=) to filter by the created at timestamp. For example, `created_at[gte]=2024-01-01T00:00:00Z`"
+                },
+                {
+                  "disabled": false,
+                  "key": "created_at[eq]",
+                  "value": "<dateTime>",
+                  "description": "Filter by `created_at` using comparison operators like `gt` (>), `gte` (>=), `lt` (<), `lte` (<=), or `eq` (=) to filter by the created at timestamp. For example, `created_at[gte]=2024-01-01T00:00:00Z`"
+                },
+                {
+                  "disabled": false,
+                  "key": "metadata[key_0]",
+                  "value": "<string>",
+                  "description": "For example, if you want to query for records with metadata key `Type` and value `Loan`, the query would be `metadata%5BType%5D=Loan`. This encodes the query parameters."
+                },
+                {
+                  "disabled": false,
+                  "key": "after_cursor",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "per_page",
+                  "value": "<integer>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "f07b2795-5258-46ca-acfc-43e0cc2bc81b",
+              "name": "successful",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "payment_actions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "actionable_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "actionable_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "internal_account_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "created_at[gt]",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "created_at[gte]",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "created_at[lt]",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "created_at[lte]",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "created_at[eq]",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "metadata[key_0]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "metadata[key_1]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "after_cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "The cursor for the next page. Including this in a call as `after_cursor` will return the next page.",
+                  "key": "X-After-Cursor",
+                  "value": "string"
+                },
+                {
+                  "disabled": false,
+                  "description": "The current `per_page`.",
+                  "key": "X-Per-Page",
+                  "value": "7701"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"3345f974-886c-e1ef-0d80-e8f22826a8fb\",\n    \"object\": \"string\",\n    \"live_mode\": false,\n    \"created_at\": \"1994-10-08T02:09:34.097Z\",\n    \"updated_at\": \"1957-04-22T12:48:51.682Z\",\n    \"type\": \"string\",\n    \"status\": \"string\",\n    \"actionable_id\": \"3657499b-8056-42fc-2c64-3ed49ef86cd5\",\n    \"actionable_type\": \"string\",\n    \"internal_account_id\": \"56f43b51-521c-5a4f-b451-58d1c0f38d92\",\n    \"details\": {}\n  },\n  {\n    \"id\": \"102b3f7c-62ac-02b3-9bd0-3c72f2072f5e\",\n    \"object\": \"string\",\n    \"live_mode\": false,\n    \"created_at\": \"1981-12-24T04:26:17.124Z\",\n    \"updated_at\": \"1948-10-06T23:46:51.524Z\",\n    \"type\": \"string\",\n    \"status\": \"string\",\n    \"actionable_id\": \"9f725889-e57d-cf0f-bb93-b0611fe39112\",\n    \"actionable_type\": \"string\",\n    \"internal_account_id\": \"54374c1d-64e1-02b2-a1e5-3684de70df5e\",\n    \"details\": {}\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "cdd28b79-71f4-4a54-8e0b-4c1994f7601b",
+          "name": "create payment_action",
+          "request": {
+            "name": "create payment_action",
+            "description": {
+              "content": "Create a payment action.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "payment_actions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "This key should be something unique, preferably something like an UUID.",
+                "key": "Idempotency-Key",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"type\": \"<string>\",\n  \"actionable_id\": \"<uuid>\",\n  \"actionable_type\": \"<string>\",\n  \"internal_account_id\": \"<uuid>\",\n  \"details\": \"<object>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "971c04e7-c74c-4db6-9175-c546d339eed5",
+              "name": "successful",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "payment_actions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "This key should be something unique, preferably something like an UUID.",
+                    "key": "Idempotency-Key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"type\": \"<string>\",\n  \"actionable_id\": \"<uuid>\",\n  \"actionable_type\": \"<string>\",\n  \"internal_account_id\": \"<uuid>\",\n  \"details\": \"<object>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"70a0f6f2-bdfe-ba69-3103-ba14b2313218\",\n  \"object\": \"string\",\n  \"live_mode\": false,\n  \"created_at\": \"1989-06-15T18:45:00.715Z\",\n  \"updated_at\": \"1996-04-14T09:48:06.940Z\",\n  \"type\": \"string\",\n  \"status\": \"string\",\n  \"actionable_id\": \"5140bfbf-c047-beff-83df-d16c42fb96f3\",\n  \"actionable_type\": \"string\",\n  \"internal_account_id\": \"ec9a73d6-ef6d-b9e5-de57-01d43301bf91\",\n  \"details\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5135039c-42b4-43a0-a6d7-fc915a3b2369",
+              "name": "invalid type",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "payment_actions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "This key should be something unique, preferably something like an UUID.",
+                    "key": "Idempotency-Key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"type\": \"<string>\",\n  \"actionable_id\": \"<uuid>\",\n  \"actionable_type\": \"<string>\",\n  \"internal_account_id\": \"<uuid>\",\n  \"details\": \"<object>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": {\n    \"code\": \"header_invalid\",\n    \"message\": \"string\",\n    \"parameter\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1ebdf70f-a3d9-4001-a8f9-1b0f94d6a7c6",
+          "name": "get payment_action",
+          "request": {
+            "name": "get payment_action",
+            "description": {
+              "content": "Get details on a single payment action.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "payment_actions",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) id"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "a6bd5bea-8a96-494a-afd6-c54853c9e427",
+              "name": "successful",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "payment_actions",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"70a0f6f2-bdfe-ba69-3103-ba14b2313218\",\n  \"object\": \"string\",\n  \"live_mode\": false,\n  \"created_at\": \"1989-06-15T18:45:00.715Z\",\n  \"updated_at\": \"1996-04-14T09:48:06.940Z\",\n  \"type\": \"string\",\n  \"status\": \"string\",\n  \"actionable_id\": \"5140bfbf-c047-beff-83df-d16c42fb96f3\",\n  \"actionable_type\": \"string\",\n  \"internal_account_id\": \"ec9a73d6-ef6d-b9e5-de57-01d43301bf91\",\n  \"details\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1f46dd39-e0af-49c0-b699-f6f364604841",
+              "name": "not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "payment_actions",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": {\n    \"code\": \"header_invalid\",\n    \"message\": \"string\",\n    \"parameter\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "dd1da8fa-7208-4dc9-b526-ff32b3e9f140",
+          "name": "update payment_action",
+          "request": {
+            "name": "update payment_action",
+            "description": {
+              "content": "Update a single payment action.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "payment_actions",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) id"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "b15933ed-db57-423b-9044-81ee2779780e",
+              "name": "successful",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "payment_actions",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"status\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"70a0f6f2-bdfe-ba69-3103-ba14b2313218\",\n  \"object\": \"string\",\n  \"live_mode\": false,\n  \"created_at\": \"1989-06-15T18:45:00.715Z\",\n  \"updated_at\": \"1996-04-14T09:48:06.940Z\",\n  \"type\": \"string\",\n  \"status\": \"string\",\n  \"actionable_id\": \"5140bfbf-c047-beff-83df-d16c42fb96f3\",\n  \"actionable_type\": \"string\",\n  \"internal_account_id\": \"ec9a73d6-ef6d-b9e5-de57-01d43301bf91\",\n  \"details\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6d29f15c-743a-415f-902e-63b428577673",
+              "name": "not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "payment_actions",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"status\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": {\n    \"code\": \"header_invalid\",\n    \"message\": \"string\",\n    \"parameter\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "43521c82-f07b-45f2-89b3-9cfd19b58ab5",
+              "name": "missing status",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "payment_actions",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"status\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": {\n    \"code\": \"header_invalid\",\n    \"message\": \"string\",\n    \"parameter\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "http://localhost:3000",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "a45e7978-e654-4f1d-9b0b-1e5f49ac98bf",
+    "name": "Modern Treasury AccountCapability PaymentAction API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Modern Treasury REST API. Please see https://docs.moderntreasury.com for more details.\n\nContact Support:\n Name: Modern Treasury Engineering Team",
+      "type": "text/plain"
+    }
+  }
+}

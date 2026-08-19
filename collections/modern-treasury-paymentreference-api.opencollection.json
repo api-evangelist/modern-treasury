@@ -1,0 +1,88 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Modern Treasury AccountCapability PaymentReference API",
+    "version": "v1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "PaymentReference",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "list payment_references",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:3000/api/payment_references",
+            "params": [
+              {
+                "name": "after_cursor",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "referenceable_id",
+                "value": "",
+                "type": "query",
+                "description": "The id of the referenceable to search for. Must be accompanied by the referenceable_type or will return an error."
+              },
+              {
+                "name": "referenceable_type",
+                "value": "",
+                "type": "query",
+                "description": "One of the referenceable types. This must be accompanied by the id of the referenceable or will return an error."
+              },
+              {
+                "name": "reference_number",
+                "value": "",
+                "type": "query",
+                "description": "The actual reference number assigned by the bank."
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "list payment_references"
+        },
+        {
+          "info": {
+            "name": "get payment_reference",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:3000/api/payment_references/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "id"
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "get payment_reference"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,196 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Modern Treasury AccountCapability InternalAccount API",
+    "version": "v1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "InternalAccount",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "list internal accounts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:3000/api/internal_accounts",
+            "params": [
+              {
+                "name": "after_cursor",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "currency",
+                "value": "",
+                "type": "query",
+                "description": "Only return internal accounts with this currency."
+              },
+              {
+                "name": "counterparty_id",
+                "value": "",
+                "type": "query",
+                "description": "Only return internal accounts associated with this counterparty."
+              },
+              {
+                "name": "legal_entity_id",
+                "value": "",
+                "type": "query",
+                "description": "Only return internal accounts associated with this legal entity."
+              },
+              {
+                "name": "payment_type",
+                "value": "",
+                "type": "query",
+                "description": "Only return internal accounts that can make this type of payment."
+              },
+              {
+                "name": "payment_direction",
+                "value": "",
+                "type": "query",
+                "description": "Only return internal accounts that can originate payments with this direction."
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Only return internal accounts with this status."
+              },
+              {
+                "name": "external_id",
+                "value": "",
+                "type": "query",
+                "description": "An optional user-defined 180 character unique identifier."
+              },
+              {
+                "name": "metadata",
+                "value": "",
+                "type": "query",
+                "description": "For example, if you want to query for records with metadata key `Type` and value `Loan`, the query would be `metadata%5BType%5D=Loan`. This encodes the query parameters."
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "list internal accounts"
+        },
+        {
+          "info": {
+            "name": "create internal account",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:3000/api/internal_accounts",
+            "headers": [
+              {
+                "name": "Idempotency-Key",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "create internal account"
+        },
+        {
+          "info": {
+            "name": "get internal account",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:3000/api/internal_accounts/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the account."
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "get internal account"
+        },
+        {
+          "info": {
+            "name": "update internal account",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "http://localhost:3000/api/internal_accounts/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the account."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "update internal account"
+        },
+        {
+          "info": {
+            "name": "request closure of internal account",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:3000/api/internal_accounts/:id/request_closure",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the account."
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "request closure of internal account"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

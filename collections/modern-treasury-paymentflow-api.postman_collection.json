@@ -1,0 +1,780 @@
+{
+  "item": [
+    {
+      "id": "1f213675-bad2-42b7-acd5-f182b2d373fa",
+      "name": "PaymentFlow",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "5a0af338-92e5-410c-894b-bd780410aa3f",
+          "name": "list payment_flows",
+          "request": {
+            "name": "list payment_flows",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "payment_flows"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "after_cursor",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "per_page",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "client_token",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "counterparty_id",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "receiving_account_id",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "originating_account_id",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "payment_order_id",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "27245bcb-1d27-46d6-a04d-ebde87f50263",
+              "name": "successful",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "payment_flows"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "after_cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "client_token",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "counterparty_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "receiving_account_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "originating_account_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "payment_order_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "The cursor for the next page. Including this in a call as `after_cursor` will return the next page.",
+                  "key": "X-After-Cursor",
+                  "value": "string"
+                },
+                {
+                  "disabled": false,
+                  "description": "The current `per_page`.",
+                  "key": "X-Per-Page",
+                  "value": "1193"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"5e367db4-bfbd-dd65-ec18-9950c39b9139\",\n    \"object\": \"string\",\n    \"live_mode\": true,\n    \"created_at\": \"1985-08-07T12:34:47.996Z\",\n    \"updated_at\": \"1999-04-03T09:36:45.773Z\",\n    \"client_token\": \"string\",\n    \"status\": \"cancelled\",\n    \"amount\": 2269,\n    \"currency\": \"string\",\n    \"direction\": \"debit\",\n    \"counterparty_id\": \"54361bac-2d50-a948-5ee9-10597de6b11b\",\n    \"receiving_account_id\": \"974bcf70-4c55-0f2b-3be1-7513f8443ff3\",\n    \"originating_account_id\": \"88d4c324-d2e0-86e5-61f0-984a93998dce\",\n    \"payment_order_id\": \"dd6c7c38-ad27-5260-7146-b1afd743085d\",\n    \"effective_date_selection_enabled\": true,\n    \"due_date\": \"1964-08-31\",\n    \"selected_effective_date\": \"2010-02-23\",\n    \"external_account_collection\": \"disabled\",\n    \"existing_external_accounts_filter\": \"verified\"\n  },\n  {\n    \"id\": \"b9c4b0dc-7d2d-1616-8bc5-7b655c89396e\",\n    \"object\": \"string\",\n    \"live_mode\": false,\n    \"created_at\": \"1973-08-25T22:15:42.844Z\",\n    \"updated_at\": \"2003-04-09T09:27:36.165Z\",\n    \"client_token\": \"string\",\n    \"status\": \"pending\",\n    \"amount\": 7374,\n    \"currency\": \"string\",\n    \"direction\": \"credit\",\n    \"counterparty_id\": \"b5363b1f-50b1-f074-382c-2a0834fef3dc\",\n    \"receiving_account_id\": \"36e7721e-dcb0-f94d-abc0-f43602cd240a\",\n    \"originating_account_id\": \"e7ec3adc-86ef-9f7d-8238-6e297cc2d2f1\",\n    \"payment_order_id\": \"03374002-eaf0-4563-81fc-cfa06c1dd5a2\",\n    \"effective_date_selection_enabled\": true,\n    \"due_date\": \"1980-05-29\",\n    \"selected_effective_date\": \"1953-06-27\",\n    \"external_account_collection\": \"disabled\",\n    \"existing_external_accounts_filter\": \"verified\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "07f7f1db-2db4-4ecd-8d5b-dda76e436190",
+          "name": "create payment_flow",
+          "request": {
+            "name": "create payment_flow",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "payment_flows"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "This key should be something unique, preferably something like an UUID.",
+                "key": "Idempotency-Key",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"amount\": \"<integer>\",\n  \"currency\": \"<string>\",\n  \"direction\": \"<string>\",\n  \"counterparty_id\": \"<uuid>\",\n  \"originating_account_id\": \"<uuid>\",\n  \"due_date\": \"<date>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "bbdad0ca-d301-44e2-9baf-ba1f717e0ed8",
+              "name": "successful",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "payment_flows"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "This key should be something unique, preferably something like an UUID.",
+                    "key": "Idempotency-Key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"amount\": \"<integer>\",\n  \"currency\": \"<string>\",\n  \"direction\": \"<string>\",\n  \"counterparty_id\": \"<uuid>\",\n  \"originating_account_id\": \"<uuid>\",\n  \"due_date\": \"<date>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"c1ce606f-8422-4e30-a2d9-e62c7b3a435a\",\n  \"object\": \"string\",\n  \"live_mode\": false,\n  \"created_at\": \"1950-06-08T11:49:35.472Z\",\n  \"updated_at\": \"2023-12-31T02:15:39.277Z\",\n  \"client_token\": \"string\",\n  \"status\": \"cancelled\",\n  \"amount\": 3817,\n  \"currency\": \"string\",\n  \"direction\": \"credit\",\n  \"counterparty_id\": \"2b84608e-f386-0eba-efc1-3464f90d24f1\",\n  \"receiving_account_id\": \"48503456-15f3-dc79-45db-1d2ec77369d9\",\n  \"originating_account_id\": \"1b422551-5507-6837-ecbf-5050a1888557\",\n  \"payment_order_id\": \"f92394af-d356-b59d-604f-1deab007fcfe\",\n  \"effective_date_selection_enabled\": true,\n  \"due_date\": \"1960-10-05\",\n  \"selected_effective_date\": \"1973-02-04\",\n  \"external_account_collection\": \"disabled\",\n  \"existing_external_accounts_filter\": \"verified\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "164e82f0-97d8-46ad-92fa-00cf3bd31d09",
+              "name": "unsuccessful",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "payment_flows"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "This key should be something unique, preferably something like an UUID.",
+                    "key": "Idempotency-Key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"amount\": \"<integer>\",\n  \"currency\": \"<string>\",\n  \"direction\": \"<string>\",\n  \"counterparty_id\": \"<uuid>\",\n  \"originating_account_id\": \"<uuid>\",\n  \"due_date\": \"<date>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": {\n    \"code\": \"not_found\",\n    \"message\": \"string\",\n    \"parameter\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "510cd836-0d9d-4ffb-8d6c-cd64f8897a0a",
+          "name": "get payment_flow",
+          "request": {
+            "name": "get payment_flow",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "payment_flows",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) id"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "This key should be something unique, preferably something like an UUID.",
+                "key": "Idempotency-Key",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "3c8aec2a-167b-4b4d-ad46-ab8d166c0bd1",
+              "name": "successful",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "payment_flows",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "This key should be something unique, preferably something like an UUID.",
+                    "key": "Idempotency-Key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"c1ce606f-8422-4e30-a2d9-e62c7b3a435a\",\n  \"object\": \"string\",\n  \"live_mode\": false,\n  \"created_at\": \"1950-06-08T11:49:35.472Z\",\n  \"updated_at\": \"2023-12-31T02:15:39.277Z\",\n  \"client_token\": \"string\",\n  \"status\": \"cancelled\",\n  \"amount\": 3817,\n  \"currency\": \"string\",\n  \"direction\": \"credit\",\n  \"counterparty_id\": \"2b84608e-f386-0eba-efc1-3464f90d24f1\",\n  \"receiving_account_id\": \"48503456-15f3-dc79-45db-1d2ec77369d9\",\n  \"originating_account_id\": \"1b422551-5507-6837-ecbf-5050a1888557\",\n  \"payment_order_id\": \"f92394af-d356-b59d-604f-1deab007fcfe\",\n  \"effective_date_selection_enabled\": true,\n  \"due_date\": \"1960-10-05\",\n  \"selected_effective_date\": \"1973-02-04\",\n  \"external_account_collection\": \"disabled\",\n  \"existing_external_accounts_filter\": \"verified\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3eff24ac-d2f7-43fe-a258-7d27fe9d129f",
+          "name": "update payment_flow",
+          "request": {
+            "name": "update payment_flow",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "payment_flows",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) id"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "This key should be something unique, preferably something like an UUID.",
+                "key": "Idempotency-Key",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "d0ab96d6-3354-4303-8680-5444f4b9dc0a",
+              "name": "successful",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "payment_flows",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "This key should be something unique, preferably something like an UUID.",
+                    "key": "Idempotency-Key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"status\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"c1ce606f-8422-4e30-a2d9-e62c7b3a435a\",\n  \"object\": \"string\",\n  \"live_mode\": false,\n  \"created_at\": \"1950-06-08T11:49:35.472Z\",\n  \"updated_at\": \"2023-12-31T02:15:39.277Z\",\n  \"client_token\": \"string\",\n  \"status\": \"cancelled\",\n  \"amount\": 3817,\n  \"currency\": \"string\",\n  \"direction\": \"credit\",\n  \"counterparty_id\": \"2b84608e-f386-0eba-efc1-3464f90d24f1\",\n  \"receiving_account_id\": \"48503456-15f3-dc79-45db-1d2ec77369d9\",\n  \"originating_account_id\": \"1b422551-5507-6837-ecbf-5050a1888557\",\n  \"payment_order_id\": \"f92394af-d356-b59d-604f-1deab007fcfe\",\n  \"effective_date_selection_enabled\": true,\n  \"due_date\": \"1960-10-05\",\n  \"selected_effective_date\": \"1973-02-04\",\n  \"external_account_collection\": \"disabled\",\n  \"existing_external_accounts_filter\": \"verified\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4e17a1ea-bb4b-463d-beb6-7b03ef1bdf1b",
+              "name": "not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "payment_flows",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "This key should be something unique, preferably something like an UUID.",
+                    "key": "Idempotency-Key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"status\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": {\n    \"code\": \"not_found\",\n    \"message\": \"string\",\n    \"parameter\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f930ff35-98ec-4672-bb1b-8925307712cb",
+              "name": "unsuccessful",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "payment_flows",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "This key should be something unique, preferably something like an UUID.",
+                    "key": "Idempotency-Key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"status\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": {\n    \"code\": \"not_found\",\n    \"message\": \"string\",\n    \"parameter\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "http://localhost:3000",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "44ec4c6a-40a9-4736-9e35-8febdcab6384",
+    "name": "Modern Treasury AccountCapability PaymentFlow API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Modern Treasury REST API. Please see https://docs.moderntreasury.com for more details.\n\nContact Support:\n Name: Modern Treasury Engineering Team",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,615 @@
+{
+  "item": [
+    {
+      "id": "7c862f10-9ad7-44e1-b2cf-78e5362a1547",
+      "name": "BulkResult",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "c2435fb2-c54f-4fcb-927a-5e1e119a60e4",
+          "name": "list bulk_results",
+          "request": {
+            "name": "list bulk_results",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "bulk_results"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "after_cursor",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "per_page",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>",
+                  "description": "One of successful or failed."
+                },
+                {
+                  "disabled": false,
+                  "key": "request_type",
+                  "value": "<string>",
+                  "description": "The type of the request that created this result. bulk_request is the only supported `request_type`"
+                },
+                {
+                  "disabled": false,
+                  "key": "request_id",
+                  "value": "<string>",
+                  "description": "Unique identifier for the request that created this bulk result. This is the ID of the bulk request when `request_type` is bulk_request"
+                },
+                {
+                  "disabled": false,
+                  "key": "entity_type",
+                  "value": "<string>",
+                  "description": "The type of the request that created this result. bulk_request is the only supported `request_type`"
+                },
+                {
+                  "disabled": false,
+                  "key": "entity_id",
+                  "value": "<string>",
+                  "description": "Unique identifier for the result entity object."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "dca3ad2a-7533-4e6c-8eae-0d5a7ee303f8",
+              "name": "successful",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "bulk_results"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "after_cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "request_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "request_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "entity_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "entity_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "The cursor for the next page. Including this in a call as `after_cursor` will return the next page.",
+                  "key": "X-After-Cursor",
+                  "value": "string"
+                },
+                {
+                  "disabled": false,
+                  "description": "The current `per_page`.",
+                  "key": "X-Per-Page",
+                  "value": "6332"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"c04b028c-d4d6-d205-011e-3e6859d073c8\",\n    \"object\": \"string\",\n    \"live_mode\": true,\n    \"created_at\": \"1957-04-12T20:56:19.432Z\",\n    \"updated_at\": \"2021-05-19T03:45:45.530Z\",\n    \"request_id\": \"b7ecf8fb-be21-03e6-2202-d0d4e6cc06c7\",\n    \"request_type\": \"bulk_request\",\n    \"status\": \"successful\",\n    \"request_params\": {\n      \"key_0\": \"string\"\n    },\n    \"entity_id\": \"596438fd-21a8-ebc0-cf3b-beee752a7e80\",\n    \"entity_type\": \"bulk_error\",\n    \"entity\": {\n      \"id\": \"38dc1259-38f7-f013-1e04-f1f885a3fcd2\",\n      \"object\": \"string\",\n      \"live_mode\": false,\n      \"created_at\": \"1989-10-28T06:59:50.514Z\",\n      \"updated_at\": \"2002-05-20T09:35:57.705Z\",\n      \"type\": \"sepa\",\n      \"subtype\": \"bacs\",\n      \"amount\": 4168,\n      \"direction\": \"credit\",\n      \"priority\": \"high\",\n      \"originating_account_id\": \"856bb12c-3ce7-34e3-761c-d633ff9944f9\",\n      \"receiving_account_id\": \"18f357e9-2f76-5922-0ecd-ee50873ffa83\",\n      \"currency\": \"DZD\",\n      \"accounting\": {\n        \"account_id\": \"6f0664c5-fda8-580e-48cf-72cef16aa4b0\",\n        \"class_id\": \"3d057311-a163-b182-d6e0-39c67063563b\"\n      },\n      \"accounting_category_id\": \"93d0c0f3-bab1-ef5d-1095-e34464ec6421\",\n      \"accounting_ledger_class_id\": \"5d35c9d3-f544-287a-c023-26ccbaf290d1\",\n      \"effective_date\": \"2009-06-26\",\n      \"description\": \"string\",\n      \"statement_descriptor\": \"string\",\n      \"remittance_information\": \"string\",\n      \"process_after\": \"1981-03-25T04:36:41.423Z\",\n      \"purpose\": \"string\",\n      \"metadata\": {\n        \"key\": \"value\",\n        \"foo\": \"bar\",\n        \"modern\": \"treasury\"\n      },\n      \"charge_bearer\": \"sender\",\n      \"foreign_exchange_indicator\": \"variable_to_fixed\",\n      \"foreign_exchange_contract\": \"string\",\n      \"nsf_protected\": true,\n      \"originating_party_name\": \"string\",\n      \"ultimate_originating_party_name\": \"string\",\n      \"ultimate_originating_party_identifier\": \"string\",\n      \"ultimate_receiving_party_name\": \"string\",\n      \"ultimate_receiving_party_identifier\": \"string\",\n      \"send_remittance_advice\": false,\n      \"expires_at\": \"1971-08-25T11:27:38.522Z\",\n      \"reconciliation_status\": \"reconciled\",\n      \"external_id\": \"string\",\n      \"status\": \"needs_approval\",\n      \"receiving_account_type\": \"internal_account\",\n      \"ultimate_originating_account\": {\n        \"id\": \"50c362ee-29d8-f225-ecf5-bc69e8a88062\",\n        \"object\": \"string\",\n        \"live_mode\": true,\n        \"created_at\": \"1980-12-21T13:28:14.003Z\",\n        \"updated_at\": \"2024-08-29T06:31:59.702Z\",\n        \"discarded_at\": \"2012-01-23T22:55:00.892Z\",\n        \"name\": \"string\",\n        \"description\": \"string\",\n        \"counterparty_id\": \"8dbd526e-e63f-fa59-616e-459c0e4a16f8\",\n        \"internal_account_id\": \"4a7eadfa-a2c7-5c5c-f111-e7c040e1b144\",\n        \"account_details\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ],\n        \"routing_details\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ],\n        \"debit_ledger_account_id\": \"ee5918de-4b57-989a-6405-8d44a9241fbc\",\n        \"credit_ledger_account_id\": \"d5a46ae0-942e-10d5-f5ea-5e60804b3523\",\n        \"ledger_account_id\": \"3bb3c61d-5203-70a4-d088-9e794abe1c30\",\n        \"metadata\": {\n          \"key\": \"value\",\n          \"foo\": \"bar\",\n          \"modern\": \"treasury\"\n        }\n      },\n      \"ultimate_originating_account_id\": \"d287d18c-1f39-e017-e984-e851a724da8f\",\n      \"ultimate_originating_account_type\": \"internal_account\",\n      \"counterparty_id\": \"f9888971-c044-ada2-97e6-720ae8b199a7\",\n      \"transaction_ids\": [\n        \"ee6c712d-fa2f-34d0-5299-ec82f5998265\",\n        \"6870fa13-4a14-fd94-451a-62ffddcb7810\"\n      ],\n      \"ledger_transaction_id\": \"762c3cf5-8945-9e0a-4782-6f70f27fcba1\",\n      \"current_return\": {\n        \"id\": \"12b7e382-301e-907b-1a9e-1bf3e577e2bd\",\n        \"object\": \"string\",\n        \"live_mode\": false,\n        \"created_at\": \"1993-11-23T01:01:19.137Z\",\n        \"updated_at\": \"2009-10-18T20:59:36.128Z\",\n        \"discarded_at\": \"1996-05-22T13:51:46.085Z\",\n        \"returnable_id\": \"8d77b58a-9a58-bb56-83f8-f206d02e4b19\",\n        \"returnable_type\": \"incoming_payment_detail\",\n        \"code\": \"R84\",\n        \"reason\": \"string\",\n        \"date_of_death\": \"1993-12-09\",\n        \"corrections\": {\n          \"account_number\": \"string\",\n          \"company_id\": \"string\",\n          \"company_name\": \"string\",\n          \"individual_identification_number\": \"string\",\n          \"routing_number\": \"string\",\n          \"transaction_code\": \"string\"\n        },\n        \"reconciliation_status\": \"reconciled\",\n        \"status\": \"failed\",\n        \"transaction_line_item_id\": \"588e2e37-da21-3ffc-ba0a-f4ccebd8a0ae\",\n        \"transaction_id\": \"b6147dcc-005d-2cc3-3d91-b90dc4f94ae8\",\n        \"internal_account_id\": \"393641d6-0b50-d1e9-700c-dc023c19640b\",\n        \"type\": \"book\",\n        \"amount\": 2771,\n        \"currency\": \"XPT\",\n        \"failure_reason\": \"string\",\n        \"role\": \"receiving\",\n        \"current_return\": {\n          \"value\": \"<Circular reference to #/components/schemas/return detected>\"\n        },\n        \"reference_numbers\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ],\n        \"ledger_transaction_id\": \"34bc5632-9b2e-8f9e-ab35-3cfb35330f90\",\n        \"additional_information\": \"string\",\n        \"data\": {}\n      },\n      \"current_hold\": {\n        \"id\": \"4bb15c77-62c6-4a86-520b-69c74652242d\",\n        \"object\": \"hold\",\n        \"status\": \"active\",\n        \"target_type\": \"payment_order\",\n        \"target_id\": \"97e3da69-1bae-fddc-6a34-c187d27f8e51\",\n        \"created_at\": \"1969-12-12T01:48:19.346Z\",\n        \"updated_at\": \"1966-11-04T09:29:43.393Z\",\n        \"live_mode\": true,\n        \"reason\": \"string\",\n        \"resolution\": \"string\",\n        \"resolved_at\": \"1959-07-19T15:10:32.669Z\",\n        \"metadata\": {\n          \"key_0\": \"string\"\n        }\n      },\n      \"reference_numbers\": [\n        {\n          \"id\": \"d27d6d69-2c7b-3cf5-3206-18c2d70abcdf\",\n          \"object\": \"string\",\n          \"live_mode\": false,\n          \"created_at\": \"2003-08-04T11:20:57.790Z\",\n          \"updated_at\": \"1999-05-20T15:56:16.332Z\",\n          \"reference_number\": \"string\",\n          \"reference_number_type\": \"paxos_group_id\"\n        },\n        {\n          \"id\": \"f2de5fb5-4f11-9a27-fff7-e7920375602e\",\n          \"object\": \"string\",\n          \"live_mode\": false,\n          \"created_at\": \"1998-10-20T06:52:41.848Z\",\n          \"updated_at\": \"1969-08-01T07:46:30.586Z\",\n          \"reference_number\": \"string\",\n          \"reference_number_type\": \"blockchain_transaction_index\"\n        }\n      ],\n      \"vendor_failure_reason\": \"string\",\n      \"foreign_exchange_rate\": {\n        \"base_amount\": 14,\n        \"base_currency\": \"XTS\",\n        \"exponent\": 2637,\n        \"rate_string\": \"string\",\n        \"target_amount\": 6449,\n        \"target_currency\": \"STN\",\n        \"value\": 2440\n      },\n      \"vendor_attributes\": {},\n      \"batch_id\": \"e9b534e5-3c9d-5aee-09e2-1b55147fde28\"\n    }\n  },\n  {\n    \"id\": \"9281117d-3b23-9338-c013-b37e724f2669\",\n    \"object\": \"string\",\n    \"live_mode\": true,\n    \"created_at\": \"1971-02-28T10:48:11.790Z\",\n    \"updated_at\": \"2009-05-17T19:29:30.208Z\",\n    \"request_id\": \"27d9ef64-0734-7ea2-af73-a2c12b703dff\",\n    \"request_type\": \"bulk_request\",\n    \"status\": \"failed\",\n    \"request_params\": {\n      \"key_0\": \"string\",\n      \"key_1\": \"string\"\n    },\n    \"entity_id\": \"a1ab2722-8bee-2aa9-db74-0c059c2be9b9\",\n    \"entity_type\": \"ledger_account\",\n    \"entity\": {\n      \"id\": \"57159c7b-4d6e-fe33-67ca-fde8fd2c0b77\",\n      \"object\": \"string\",\n      \"live_mode\": true,\n      \"created_at\": \"2015-05-30T19:05:03.264Z\",\n      \"updated_at\": \"1963-11-14T07:51:25.865Z\",\n      \"type\": \"book\",\n      \"subtype\": \"PPD\",\n      \"amount\": 7325,\n      \"direction\": \"debit\",\n      \"priority\": \"normal\",\n      \"originating_account_id\": \"9cadde1e-ac5c-14b1-c1ca-ad67d713efb9\",\n      \"receiving_account_id\": \"9774e5e7-ceb9-2c02-5c32-2dbc453f406b\",\n      \"currency\": \"PYUSD\",\n      \"accounting\": {\n        \"account_id\": \"ceedb181-4279-15d7-89eb-b3caf3db62bc\",\n        \"class_id\": \"c40b5b92-aa04-380b-f1b7-31c23de7dc1d\"\n      },\n      \"accounting_category_id\": \"e3ca1413-9af2-86f0-ddb4-521756370ab2\",\n      \"accounting_ledger_class_id\": \"c9f51a52-51bd-3b9d-086d-7db53fd1a948\",\n      \"effective_date\": \"2011-08-15\",\n      \"description\": \"string\",\n      \"statement_descriptor\": \"string\",\n      \"remittance_information\": \"string\",\n      \"process_after\": \"2026-01-26T04:27:03.808Z\",\n      \"purpose\": \"string\",\n      \"metadata\": {\n        \"key\": \"value\",\n        \"foo\": \"bar\",\n        \"modern\": \"treasury\"\n      },\n      \"charge_bearer\": \"sender\",\n      \"foreign_exchange_indicator\": \"fixed_to_variable\",\n      \"foreign_exchange_contract\": \"string\",\n      \"nsf_protected\": true,\n      \"originating_party_name\": \"string\",\n      \"ultimate_originating_party_name\": \"string\",\n      \"ultimate_originating_party_identifier\": \"string\",\n      \"ultimate_receiving_party_name\": \"string\",\n      \"ultimate_receiving_party_identifier\": \"string\",\n      \"send_remittance_advice\": true,\n      \"expires_at\": \"1973-12-30T19:31:24.023Z\",\n      \"reconciliation_status\": \"unreconciled\",\n      \"external_id\": \"string\",\n      \"status\": \"sent\",\n      \"receiving_account_type\": \"external_account\",\n      \"ultimate_originating_account\": {\n        \"id\": \"672b8f8c-07cb-0fea-46f6-5f913731ff23\",\n        \"object\": \"string\",\n        \"live_mode\": true,\n        \"created_at\": \"2014-01-31T06:23:38.656Z\",\n        \"updated_at\": \"2013-07-19T23:35:37.114Z\",\n        \"discarded_at\": \"2008-01-18T14:07:00.804Z\",\n        \"name\": \"string\",\n        \"description\": \"string\",\n        \"counterparty_id\": \"e43d7599-098b-2413-0635-6d307930b501\",\n        \"internal_account_id\": \"9c025280-9516-9e94-89d5-b57e5114a2ad\",\n        \"account_details\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ],\n        \"routing_details\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ],\n        \"debit_ledger_account_id\": \"16ec2dbf-4039-cbea-cb12-1608f960498a\",\n        \"credit_ledger_account_id\": \"e4d9e320-0601-fe62-ac2f-41f25bba55cd\",\n        \"ledger_account_id\": \"1dc2dacb-c81c-52a3-7cb3-937d70138026\",\n        \"metadata\": {\n          \"key\": \"value\",\n          \"foo\": \"bar\",\n          \"modern\": \"treasury\"\n        }\n      },\n      \"ultimate_originating_account_id\": \"6af141af-7970-ac47-df82-6c1a4042e939\",\n      \"ultimate_originating_account_type\": \"virtual_account\",\n      \"counterparty_id\": \"eec72344-4ace-a7bb-878d-fb70e4c93cae\",\n      \"transaction_ids\": [\n        \"b01e9b33-e156-af62-a80c-10d58a972aea\",\n        \"c538c1e0-20f4-59f6-171a-52c5148d6e40\"\n      ],\n      \"ledger_transaction_id\": \"726e784e-6c8e-c73b-07e6-965b479f8265\",\n      \"current_return\": {\n        \"id\": \"a70722f4-6e1f-0955-ca26-b225024be5b8\",\n        \"object\": \"string\",\n        \"live_mode\": false,\n        \"created_at\": \"1978-04-08T22:57:37.193Z\",\n        \"updated_at\": \"1982-05-07T12:15:43.019Z\",\n        \"discarded_at\": \"1963-02-16T20:50:00.199Z\",\n        \"returnable_id\": \"a9b2b7cc-c10b-7b67-3e67-39c07dedeebb\",\n        \"returnable_type\": \"return\",\n        \"code\": \"R50\",\n        \"reason\": \"string\",\n        \"date_of_death\": \"1996-05-17\",\n        \"corrections\": {\n          \"account_number\": \"string\",\n          \"company_id\": \"string\",\n          \"company_name\": \"string\",\n          \"individual_identification_number\": \"string\",\n          \"routing_number\": \"string\",\n          \"transaction_code\": \"string\"\n        },\n        \"reconciliation_status\": \"unreconciled\",\n        \"status\": \"failed\",\n        \"transaction_line_item_id\": \"721874fe-cb06-a5de-8b01-8913075f4260\",\n        \"transaction_id\": \"7cf1436b-3d91-f287-fda4-5e11f69c777d\",\n        \"internal_account_id\": \"63e6a1f9-f37f-e948-9fd8-7d92b9868bec\",\n        \"type\": \"wire\",\n        \"amount\": 2879,\n        \"currency\": \"BYR\",\n        \"failure_reason\": \"string\",\n        \"role\": \"receiving\",\n        \"current_return\": {\n          \"value\": \"<Circular reference to #/components/schemas/return detected>\"\n        },\n        \"reference_numbers\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ],\n        \"ledger_transaction_id\": \"e7fd4282-c654-ef5c-bb09-bdefed5f40ae\",\n        \"additional_information\": \"string\",\n        \"data\": {}\n      },\n      \"current_hold\": {\n        \"id\": \"060317cb-7aa7-9ae6-7c2c-c33157dd5352\",\n        \"object\": \"hold\",\n        \"status\": \"resolved\",\n        \"target_type\": \"payment_order\",\n        \"target_id\": \"3ed2e85d-df42-654e-83f1-da11ec97e340\",\n        \"created_at\": \"1958-12-06T21:25:25.300Z\",\n        \"updated_at\": \"1953-05-05T15:48:35.805Z\",\n        \"live_mode\": true,\n        \"reason\": \"string\",\n        \"resolution\": \"string\",\n        \"resolved_at\": \"1965-02-22T22:14:49.257Z\",\n        \"metadata\": {\n          \"key_0\": \"string\",\n          \"key_1\": \"string\"\n        }\n      },\n      \"reference_numbers\": [\n        {\n          \"id\": \"11c19803-f87f-a31f-d321-0288520a51ef\",\n          \"object\": \"string\",\n          \"live_mode\": false,\n          \"created_at\": \"1980-08-23T20:03:18.153Z\",\n          \"updated_at\": \"1963-04-24T01:19:50.294Z\",\n          \"reference_number\": \"string\",\n          \"reference_number_type\": \"paxos_transfer_id\"\n        },\n        {\n          \"id\": \"a930887f-238e-dc93-89be-91e4370f75d3\",\n          \"object\": \"string\",\n          \"live_mode\": false,\n          \"created_at\": \"2002-08-31T14:01:17.682Z\",\n          \"updated_at\": \"1967-01-05T13:33:20.720Z\",\n          \"reference_number\": \"string\",\n          \"reference_number_type\": \"bofa_neft_clearing_reference_number\"\n        }\n      ],\n      \"vendor_failure_reason\": \"string\",\n      \"foreign_exchange_rate\": {\n        \"base_amount\": 1865,\n        \"base_currency\": \"BCH\",\n        \"exponent\": 8981,\n        \"rate_string\": \"string\",\n        \"target_amount\": 7661,\n        \"target_currency\": \"BTN\",\n        \"value\": 4609\n      },\n      \"vendor_attributes\": {},\n      \"batch_id\": \"0e0eb804-c57b-4460-60c4-ffe4d244babf\"\n    }\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fb812f93-a748-4001-b13f-2f23f20e5053",
+              "name": "unsuccessful",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "bulk_results"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "after_cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "request_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "request_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "entity_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "entity_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": {\n    \"code\": \"conflict\",\n    \"message\": \"string\",\n    \"parameter\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b81ecdcf-560a-4367-9231-c102c98ccad7",
+              "name": "unsuccessful",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "bulk_results"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "after_cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "request_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "request_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "entity_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "entity_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": {\n    \"code\": \"conflict\",\n    \"message\": \"string\",\n    \"parameter\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8dacd994-637a-4c83-b997-53b4d1e72844",
+          "name": "get bulk_result",
+          "request": {
+            "name": "get bulk_result",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "bulk_results",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) id"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "0dc1a99e-01a3-4f10-bcf7-8399cfa38e6c",
+              "name": "successful",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "bulk_results",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"8c5f172b-d536-293a-3d1e-4a34ca1a7eed\",\n  \"object\": \"string\",\n  \"live_mode\": true,\n  \"created_at\": \"1950-03-04T01:04:53.389Z\",\n  \"updated_at\": \"1980-11-17T04:51:29.152Z\",\n  \"request_id\": \"b9a521a1-5395-a30e-a456-0e968a9d8125\",\n  \"request_type\": \"bulk_request\",\n  \"status\": \"failed\",\n  \"request_params\": {\n    \"key_0\": \"string\",\n    \"key_1\": \"string\"\n  },\n  \"entity_id\": \"9425cbcb-623e-2890-5538-07252be9d095\",\n  \"entity_type\": \"entity_link\",\n  \"entity\": {\n    \"id\": \"f0669687-d2ab-4832-36ae-d794aebe8ace\",\n    \"object\": \"string\",\n    \"live_mode\": false,\n    \"created_at\": \"2023-06-18T13:34:34.818Z\",\n    \"updated_at\": \"2000-09-18T23:28:49.728Z\",\n    \"type\": \"nz_becs\",\n    \"subtype\": \"0N\",\n    \"amount\": 2008,\n    \"direction\": \"credit\",\n    \"priority\": \"high\",\n    \"originating_account_id\": \"2fe4aa3a-ef2c-e8b4-448f-6126cb71c60e\",\n    \"receiving_account_id\": \"6e458daf-9ef4-6560-81e6-c000f8a3256f\",\n    \"currency\": \"XOF\",\n    \"accounting\": {\n      \"account_id\": \"6d4038ee-b454-c49f-e47f-0e806d4fca2e\",\n      \"class_id\": \"cce6cf2a-171f-caa3-f469-0de12c749d03\"\n    },\n    \"accounting_category_id\": \"e14ead9f-9295-3449-a2be-7c5dfb1499b8\",\n    \"accounting_ledger_class_id\": \"88a33cde-9c86-b323-bdfa-4d569ebdb1cd\",\n    \"effective_date\": \"1957-07-20\",\n    \"description\": \"string\",\n    \"statement_descriptor\": \"string\",\n    \"remittance_information\": \"string\",\n    \"process_after\": \"2026-06-27T01:38:39.746Z\",\n    \"purpose\": \"string\",\n    \"metadata\": {\n      \"key\": \"value\",\n      \"foo\": \"bar\",\n      \"modern\": \"treasury\"\n    },\n    \"charge_bearer\": \"shared\",\n    \"foreign_exchange_indicator\": \"fixed_to_variable\",\n    \"foreign_exchange_contract\": \"string\",\n    \"nsf_protected\": true,\n    \"originating_party_name\": \"string\",\n    \"ultimate_originating_party_name\": \"string\",\n    \"ultimate_originating_party_identifier\": \"string\",\n    \"ultimate_receiving_party_name\": \"string\",\n    \"ultimate_receiving_party_identifier\": \"string\",\n    \"send_remittance_advice\": false,\n    \"expires_at\": \"1972-06-05T01:13:51.375Z\",\n    \"reconciliation_status\": \"reconciled\",\n    \"external_id\": \"string\",\n    \"status\": \"held\",\n    \"receiving_account_type\": \"external_account\",\n    \"ultimate_originating_account\": {\n      \"id\": \"0dbc2049-6106-1142-71ef-e2a87844a8a7\",\n      \"object\": \"string\",\n      \"live_mode\": true,\n      \"created_at\": \"2013-07-13T14:25:58.096Z\",\n      \"updated_at\": \"2014-08-29T08:11:28.088Z\",\n      \"discarded_at\": \"2020-05-06T19:24:16.402Z\",\n      \"name\": \"string\",\n      \"description\": \"string\",\n      \"counterparty_id\": \"69b55931-f252-d4f6-caaf-db3c2c8ee730\",\n      \"internal_account_id\": \"f63fbf6c-57e5-9e75-f499-6996039bf440\",\n      \"account_details\": [\n        {\n          \"id\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"object\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"live_mode\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"created_at\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"updated_at\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"discarded_at\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"account_number_type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"account_number_safe\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"account_number\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"id\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"object\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"live_mode\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"created_at\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"updated_at\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"discarded_at\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"account_number_type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"account_number_safe\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"account_number\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ],\n      \"routing_details\": [\n        {\n          \"id\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"object\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"live_mode\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"created_at\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"updated_at\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"discarded_at\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"routing_number\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"routing_number_type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"payment_type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"bank_name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"bank_address\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"id\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"object\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"live_mode\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"created_at\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"updated_at\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"discarded_at\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"routing_number\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"routing_number_type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"payment_type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"bank_name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"bank_address\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ],\n      \"debit_ledger_account_id\": \"04891368-6704-fa8b-8b95-9ed8215f9eef\",\n      \"credit_ledger_account_id\": \"4ad25645-c447-a41c-559c-6023361b4bf4\",\n      \"ledger_account_id\": \"dbd7bead-4e32-0ca4-d22e-454d9e0ddf18\",\n      \"metadata\": {\n        \"key\": \"value\",\n        \"foo\": \"bar\",\n        \"modern\": \"treasury\"\n      }\n    },\n    \"ultimate_originating_account_id\": \"bfee61f0-2617-403f-e1f0-37af07358783\",\n    \"ultimate_originating_account_type\": \"internal_account\",\n    \"counterparty_id\": \"597337d7-746c-cec7-d776-cfe4cb9d7d13\",\n    \"transaction_ids\": [\n      \"fa0c5721-20d3-ff9f-745a-2c2f76ff5fce\",\n      \"3b4280f4-4842-fddd-cc78-369b85d5223a\"\n    ],\n    \"ledger_transaction_id\": \"1aaeb754-c750-c7bc-5991-1783571452f8\",\n    \"current_return\": {\n      \"id\": \"2ef67bf8-8618-223b-d316-ea7d7e84affe\",\n      \"object\": \"string\",\n      \"live_mode\": false,\n      \"created_at\": \"1988-09-17T14:21:34.481Z\",\n      \"updated_at\": \"2014-07-14T15:08:51.137Z\",\n      \"discarded_at\": \"2001-05-25T15:05:42.191Z\",\n      \"returnable_id\": \"e5185192-4a82-9c77-f844-f80a364e1b91\",\n      \"returnable_type\": \"incoming_payment_detail\",\n      \"code\": \"R62\",\n      \"reason\": \"string\",\n      \"date_of_death\": \"1966-05-28\",\n      \"corrections\": {\n        \"account_number\": \"string\",\n        \"company_id\": \"string\",\n        \"company_name\": \"string\",\n        \"individual_identification_number\": \"string\",\n        \"routing_number\": \"string\",\n        \"transaction_code\": \"string\"\n      },\n      \"reconciliation_status\": \"tentatively_reconciled\",\n      \"status\": \"sent\",\n      \"transaction_line_item_id\": \"19fc9e96-789c-b4c0-1925-b15db0e06f44\",\n      \"transaction_id\": \"fc038115-1aa5-24e0-2af9-7c8dba68f0b7\",\n      \"internal_account_id\": \"7ad6c504-c9a9-98df-0164-358ff614b233\",\n      \"type\": \"cross_border\",\n      \"amount\": 9995,\n      \"currency\": \"ZMK\",\n      \"failure_reason\": \"string\",\n      \"role\": \"receiving\",\n      \"current_return\": {\n        \"value\": \"<Circular reference to #/components/schemas/return detected>\"\n      },\n      \"reference_numbers\": [\n        {\n          \"id\": \"7ffff3b6-8885-3a03-7e26-4dedde1b6516\",\n          \"object\": \"string\",\n          \"live_mode\": false,\n          \"created_at\": \"1970-12-30T01:12:34.420Z\",\n          \"updated_at\": \"1996-05-18T20:41:01.979Z\",\n          \"reference_number\": \"string\",\n          \"reference_number_type\": \"signet_request_id\"\n        },\n        {\n          \"id\": \"f88cd75e-aca7-116e-6549-2f482a33f55f\",\n          \"object\": \"string\",\n          \"live_mode\": false,\n          \"created_at\": \"2012-08-28T20:47:24.986Z\",\n          \"updated_at\": \"2024-04-06T07:35:32.779Z\",\n          \"reference_number\": \"string\",\n          \"reference_number_type\": \"column_reversal_pair_transfer_id\"\n        }\n      ],\n      \"ledger_transaction_id\": \"91eb6f55-0005-4228-d3e5-d0847cfdbcf3\",\n      \"additional_information\": \"string\",\n      \"data\": {}\n    },\n    \"current_hold\": {\n      \"id\": \"b74154bb-5a48-2c99-54c2-8128d0335dbf\",\n      \"object\": \"hold\",\n      \"status\": \"resolved\",\n      \"target_type\": \"payment_order\",\n      \"target_id\": \"87e6bd55-9b43-a3fb-5394-aaa6476d0484\",\n      \"created_at\": \"2000-10-02T14:52:27.789Z\",\n      \"updated_at\": \"2025-10-08T11:56:30.234Z\",\n      \"live_mode\": false,\n      \"reason\": \"string\",\n      \"resolution\": \"string\",\n      \"resolved_at\": \"1992-04-26T23:59:30.529Z\",\n      \"metadata\": {\n        \"key_0\": \"string\"\n      }\n    },\n    \"reference_numbers\": [\n      {\n        \"id\": \"dbef21e1-f95b-203b-8297-07ae0dc89da3\",\n        \"object\": \"string\",\n        \"live_mode\": true,\n        \"created_at\": \"2013-11-13T20:22:59.576Z\",\n        \"updated_at\": \"2000-06-05T20:22:40.856Z\",\n        \"reference_number\": \"string\",\n        \"reference_number_type\": \"rtp_instruction_id\"\n      },\n      {\n        \"id\": \"2c6d17fd-ee24-0819-9dbc-c1533cec8083\",\n        \"object\": \"string\",\n        \"live_mode\": false,\n        \"created_at\": \"2023-06-06T03:26:16.929Z\",\n        \"updated_at\": \"1974-11-30T06:37:35.102Z\",\n        \"reference_number\": \"string\",\n        \"reference_number_type\": \"jpmc_ccn\"\n      }\n    ],\n    \"vendor_failure_reason\": \"string\",\n    \"foreign_exchange_rate\": {\n      \"base_amount\": 6452,\n      \"base_currency\": \"ERN\",\n      \"exponent\": 4847,\n      \"rate_string\": \"string\",\n      \"target_amount\": 7901,\n      \"target_currency\": \"QAR\",\n      \"value\": 5441\n    },\n    \"vendor_attributes\": {},\n    \"batch_id\": \"e67b94e3-4d66-52ca-c073-0aa0a2e4467f\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "63732bc2-66ae-4fc1-8e0d-94288d19725a",
+              "name": "unsuccessful",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "bulk_results",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": {\n    \"code\": \"conflict\",\n    \"message\": \"string\",\n    \"parameter\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9ece1a02-a943-4452-9c58-e775affdd3d9",
+              "name": "unsuccessful",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "bulk_results",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": {\n    \"code\": \"conflict\",\n    \"message\": \"string\",\n    \"parameter\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9d4692e0-0325-42b8-9c36-ac26e2435dd8",
+              "name": "not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "bulk_results",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": {\n    \"code\": \"conflict\",\n    \"message\": \"string\",\n    \"parameter\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "http://localhost:3000",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "26d97a62-2052-4cd6-a125-5878cfdd4bdc",
+    "name": "Modern Treasury AccountCapability BulkResult API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Modern Treasury REST API. Please see https://docs.moderntreasury.com for more details.\n\nContact Support:\n Name: Modern Treasury Engineering Team",
+      "type": "text/plain"
+    }
+  }
+}

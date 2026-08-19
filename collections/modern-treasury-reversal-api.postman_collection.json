@@ -1,0 +1,647 @@
+{
+  "item": [
+    {
+      "id": "eae568ca-22e5-4193-b847-a45a55c0e077",
+      "name": "Reversal",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "2ebc181c-552d-438a-bead-6240d0e34c30",
+          "name": "list reversals",
+          "request": {
+            "name": "list reversals",
+            "description": {
+              "content": "Get a list of all reversals of a payment order.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "payment_orders",
+                ":payment_order_id",
+                "reversals"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "after_cursor",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "per_page",
+                  "value": "<integer>"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "payment_order_id",
+                  "description": "(Required) The ID of the relevant Payment Order."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "3571245e-6259-4e4f-8b5c-944d64171da8",
+              "name": "successful",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "payment_orders",
+                    ":payment_order_id",
+                    "reversals"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "after_cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "payment_order_id",
+                      "description": "(Required) The ID of the relevant Payment Order."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "The cursor for the next page. Including this in a call as `after_cursor` will return the next page.",
+                  "key": "X-After-Cursor",
+                  "value": "string"
+                },
+                {
+                  "disabled": false,
+                  "description": "The current `per_page`.",
+                  "key": "X-Per-Page",
+                  "value": "1381"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"d1d63496-fbfd-4146-e5a9-61190c671414\",\n    \"object\": \"string\",\n    \"live_mode\": false,\n    \"created_at\": \"2002-08-23T22:12:55.281Z\",\n    \"updated_at\": \"1983-09-21T05:02:55.101Z\",\n    \"status\": \"cancelled\",\n    \"payment_order_id\": \"4d4ffe64-8583-2548-509e-a316f76522e6\",\n    \"transaction_ids\": [\n      \"92323349-b95c-dc3a-67b2-22ba6400e146\",\n      \"b061c2c3-e477-6e4d-55fb-b2993e760421\"\n    ],\n    \"ledger_transaction_id\": \"1602c06a-9688-594c-8a10-ddff05c917fa\",\n    \"metadata\": {\n      \"key\": \"value\",\n      \"foo\": \"bar\",\n      \"modern\": \"treasury\"\n    },\n    \"reason\": \"date_earlier_than_intended\",\n    \"internal_account_id\": \"ce41c621-23eb-62ab-50db-314db743f909\",\n    \"reconciliation_status\": \"reconciled\"\n  },\n  {\n    \"id\": \"9d8aa8ff-aa5d-dbfc-60a3-47c4b00d6261\",\n    \"object\": \"string\",\n    \"live_mode\": false,\n    \"created_at\": \"2007-02-09T07:50:15.641Z\",\n    \"updated_at\": \"1983-07-05T09:26:38.857Z\",\n    \"status\": \"pending\",\n    \"payment_order_id\": \"4e8f54b6-7ca0-d65f-c454-a475ff92895f\",\n    \"transaction_ids\": [\n      \"79bbec21-a13b-2bb0-3510-5379affa94a0\",\n      \"6056cc63-d99c-0c11-b8b7-325b7caf628e\"\n    ],\n    \"ledger_transaction_id\": \"f32112bb-7567-bf22-6e27-904a49661af3\",\n    \"metadata\": {\n      \"key\": \"value\",\n      \"foo\": \"bar\",\n      \"modern\": \"treasury\"\n    },\n    \"reason\": \"date_later_than_intended\",\n    \"internal_account_id\": \"75417137-0e93-3812-0855-530516ca332d\",\n    \"reconciliation_status\": \"unreconciled\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3085c155-c2e4-487f-8e21-f424f89a57f1",
+          "name": "create reversal",
+          "request": {
+            "name": "create reversal",
+            "description": {
+              "content": "Create a reversal for a payment order.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "payment_orders",
+                ":payment_order_id",
+                "reversals"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "payment_order_id",
+                  "description": "(Required) The ID of the relevant Payment Order."
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "This key should be something unique, preferably something like an UUID.",
+                "key": "Idempotency-Key",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"reason\": \"<string>\",\n  \"metadata\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\",\n    \"key_2\": \"<string>\"\n  },\n  \"ledger_transaction\": {\n    \"ledger_entries\": [\n      {\n        \"amount\": \"<integer>\",\n        \"direction\": \"<string>\",\n        \"ledger_account_id\": \"<uuid>\",\n        \"effective_at\": \"<dateTime>\",\n        \"lock_version\": \"<integer>\",\n        \"pending_balance_amount\": {\n          \"key_0\": \"<integer>\"\n        },\n        \"posted_balance_amount\": {\n          \"key_0\": \"<integer>\",\n          \"key_1\": \"<integer>\"\n        },\n        \"available_balance_amount\": {\n          \"key_0\": \"<integer>\",\n          \"key_1\": \"<integer>\"\n        },\n        \"show_resulting_ledger_account_balances\": \"<boolean>\",\n        \"metadata\": {\n          \"key_0\": \"<string>\",\n          \"key_1\": \"<string>\"\n        }\n      },\n      {\n        \"amount\": \"<integer>\",\n        \"direction\": \"<string>\",\n        \"ledger_account_id\": \"<uuid>\",\n        \"effective_at\": \"<dateTime>\",\n        \"lock_version\": \"<integer>\",\n        \"pending_balance_amount\": {\n          \"key_0\": \"<integer>\",\n          \"key_1\": \"<integer>\"\n        },\n        \"posted_balance_amount\": {\n          \"key_0\": \"<integer>\"\n        },\n        \"available_balance_amount\": {\n          \"key_0\": \"<integer>\",\n          \"key_1\": \"<integer>\",\n          \"key_2\": \"<integer>\",\n          \"key_3\": \"<integer>\"\n        },\n        \"show_resulting_ledger_account_balances\": \"<boolean>\",\n        \"metadata\": {\n          \"key_0\": \"<string>\",\n          \"key_1\": \"<string>\",\n          \"key_2\": \"<string>\"\n        }\n      }\n    ],\n    \"description\": \"<string>\",\n    \"status\": \"<string>\",\n    \"metadata\": {\n      \"key_0\": \"<string>\",\n      \"key_1\": \"<string>\",\n      \"key_2\": \"<string>\"\n    },\n    \"effective_at\": \"<dateTime>\",\n    \"effective_date\": \"<date>\",\n    \"external_id\": \"<string>\",\n    \"ledgerable_type\": \"<string>\",\n    \"ledgerable_id\": \"<uuid>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "4e26eaa8-8b68-45b4-9e3b-8e0350154e9f",
+              "name": "successful",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "payment_orders",
+                    ":payment_order_id",
+                    "reversals"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "payment_order_id",
+                      "description": "(Required) The ID of the relevant Payment Order."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "This key should be something unique, preferably something like an UUID.",
+                    "key": "Idempotency-Key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"reason\": \"<string>\",\n  \"metadata\": {\n    \"key\": \"value\",\n    \"foo\": \"bar\",\n    \"modern\": \"treasury\"\n  },\n  \"ledger_transaction\": {\n    \"ledger_entries\": [\n      {\n        \"amount\": \"<integer>\",\n        \"direction\": \"<string>\",\n        \"ledger_account_id\": \"<uuid>\",\n        \"effective_at\": \"<dateTime>\",\n        \"lock_version\": \"<integer>\",\n        \"pending_balance_amount\": {\n          \"key_0\": \"<integer>\",\n          \"key_1\": \"<integer>\"\n        },\n        \"posted_balance_amount\": {\n          \"key_0\": \"<integer>\"\n        },\n        \"available_balance_amount\": {\n          \"key_0\": \"<integer>\",\n          \"key_1\": \"<integer>\"\n        },\n        \"show_resulting_ledger_account_balances\": \"<boolean>\",\n        \"metadata\": {\n          \"key\": \"value\",\n          \"foo\": \"bar\",\n          \"modern\": \"treasury\"\n        }\n      },\n      {\n        \"amount\": \"<integer>\",\n        \"direction\": \"<string>\",\n        \"ledger_account_id\": \"<uuid>\",\n        \"effective_at\": \"<dateTime>\",\n        \"lock_version\": \"<integer>\",\n        \"pending_balance_amount\": {\n          \"key_0\": \"<integer>\",\n          \"key_1\": \"<integer>\"\n        },\n        \"posted_balance_amount\": {\n          \"key_0\": \"<integer>\"\n        },\n        \"available_balance_amount\": {\n          \"key_0\": \"<integer>\"\n        },\n        \"show_resulting_ledger_account_balances\": \"<boolean>\",\n        \"metadata\": {\n          \"key\": \"value\",\n          \"foo\": \"bar\",\n          \"modern\": \"treasury\"\n        }\n      }\n    ],\n    \"description\": \"<string>\",\n    \"status\": \"<string>\",\n    \"metadata\": {\n      \"key\": \"value\",\n      \"foo\": \"bar\",\n      \"modern\": \"treasury\"\n    },\n    \"effective_at\": \"<dateTime>\",\n    \"effective_date\": \"<date>\",\n    \"external_id\": \"<string>\",\n    \"ledgerable_type\": \"<string>\",\n    \"ledgerable_id\": \"<uuid>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"b54d754f-cd70-9e7c-2614-dd93c10b815f\",\n  \"object\": \"string\",\n  \"live_mode\": true,\n  \"created_at\": \"1947-06-06T21:59:09.201Z\",\n  \"updated_at\": \"1969-02-07T09:16:28.431Z\",\n  \"status\": \"completed\",\n  \"payment_order_id\": \"659932c2-4012-ec6f-eb52-256760295365\",\n  \"transaction_ids\": [\n    \"711df932-718c-932d-6945-83c2448c2a5d\",\n    \"fbc04a6b-8075-1ff3-1739-6c81eac3ec1a\"\n  ],\n  \"ledger_transaction_id\": \"56d28976-d4d6-10c4-8c8f-7029bdfa6055\",\n  \"metadata\": {\n    \"key\": \"value\",\n    \"foo\": \"bar\",\n    \"modern\": \"treasury\"\n  },\n  \"reason\": \"date_later_than_intended\",\n  \"internal_account_id\": \"89831520-981f-6859-01d1-4eba7438edd8\",\n  \"reconciliation_status\": \"unreconciled\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1248de45-f048-4fe6-b609-8fe8e2c54232",
+              "name": "unsuccessful",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "payment_orders",
+                    ":payment_order_id",
+                    "reversals"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "payment_order_id",
+                      "description": "(Required) The ID of the relevant Payment Order."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "This key should be something unique, preferably something like an UUID.",
+                    "key": "Idempotency-Key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"reason\": \"<string>\",\n  \"metadata\": {\n    \"key\": \"value\",\n    \"foo\": \"bar\",\n    \"modern\": \"treasury\"\n  },\n  \"ledger_transaction\": {\n    \"ledger_entries\": [\n      {\n        \"amount\": \"<integer>\",\n        \"direction\": \"<string>\",\n        \"ledger_account_id\": \"<uuid>\",\n        \"effective_at\": \"<dateTime>\",\n        \"lock_version\": \"<integer>\",\n        \"pending_balance_amount\": {\n          \"key_0\": \"<integer>\",\n          \"key_1\": \"<integer>\"\n        },\n        \"posted_balance_amount\": {\n          \"key_0\": \"<integer>\"\n        },\n        \"available_balance_amount\": {\n          \"key_0\": \"<integer>\",\n          \"key_1\": \"<integer>\"\n        },\n        \"show_resulting_ledger_account_balances\": \"<boolean>\",\n        \"metadata\": {\n          \"key\": \"value\",\n          \"foo\": \"bar\",\n          \"modern\": \"treasury\"\n        }\n      },\n      {\n        \"amount\": \"<integer>\",\n        \"direction\": \"<string>\",\n        \"ledger_account_id\": \"<uuid>\",\n        \"effective_at\": \"<dateTime>\",\n        \"lock_version\": \"<integer>\",\n        \"pending_balance_amount\": {\n          \"key_0\": \"<integer>\",\n          \"key_1\": \"<integer>\"\n        },\n        \"posted_balance_amount\": {\n          \"key_0\": \"<integer>\"\n        },\n        \"available_balance_amount\": {\n          \"key_0\": \"<integer>\"\n        },\n        \"show_resulting_ledger_account_balances\": \"<boolean>\",\n        \"metadata\": {\n          \"key\": \"value\",\n          \"foo\": \"bar\",\n          \"modern\": \"treasury\"\n        }\n      }\n    ],\n    \"description\": \"<string>\",\n    \"status\": \"<string>\",\n    \"metadata\": {\n      \"key\": \"value\",\n      \"foo\": \"bar\",\n      \"modern\": \"treasury\"\n    },\n    \"effective_at\": \"<dateTime>\",\n    \"effective_date\": \"<date>\",\n    \"external_id\": \"<string>\",\n    \"ledgerable_type\": \"<string>\",\n    \"ledgerable_id\": \"<uuid>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": {\n    \"code\": \"conflict\",\n    \"message\": \"string\",\n    \"parameter\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7e10e476-f1a4-4da9-9aa0-79b0c4dc7370",
+              "name": "unsuccessful",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "payment_orders",
+                    ":payment_order_id",
+                    "reversals"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "payment_order_id",
+                      "description": "(Required) The ID of the relevant Payment Order."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "This key should be something unique, preferably something like an UUID.",
+                    "key": "Idempotency-Key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"reason\": \"<string>\",\n  \"metadata\": {\n    \"key\": \"value\",\n    \"foo\": \"bar\",\n    \"modern\": \"treasury\"\n  },\n  \"ledger_transaction\": {\n    \"ledger_entries\": [\n      {\n        \"amount\": \"<integer>\",\n        \"direction\": \"<string>\",\n        \"ledger_account_id\": \"<uuid>\",\n        \"effective_at\": \"<dateTime>\",\n        \"lock_version\": \"<integer>\",\n        \"pending_balance_amount\": {\n          \"key_0\": \"<integer>\",\n          \"key_1\": \"<integer>\"\n        },\n        \"posted_balance_amount\": {\n          \"key_0\": \"<integer>\"\n        },\n        \"available_balance_amount\": {\n          \"key_0\": \"<integer>\",\n          \"key_1\": \"<integer>\"\n        },\n        \"show_resulting_ledger_account_balances\": \"<boolean>\",\n        \"metadata\": {\n          \"key\": \"value\",\n          \"foo\": \"bar\",\n          \"modern\": \"treasury\"\n        }\n      },\n      {\n        \"amount\": \"<integer>\",\n        \"direction\": \"<string>\",\n        \"ledger_account_id\": \"<uuid>\",\n        \"effective_at\": \"<dateTime>\",\n        \"lock_version\": \"<integer>\",\n        \"pending_balance_amount\": {\n          \"key_0\": \"<integer>\",\n          \"key_1\": \"<integer>\"\n        },\n        \"posted_balance_amount\": {\n          \"key_0\": \"<integer>\"\n        },\n        \"available_balance_amount\": {\n          \"key_0\": \"<integer>\"\n        },\n        \"show_resulting_ledger_account_balances\": \"<boolean>\",\n        \"metadata\": {\n          \"key\": \"value\",\n          \"foo\": \"bar\",\n          \"modern\": \"treasury\"\n        }\n      }\n    ],\n    \"description\": \"<string>\",\n    \"status\": \"<string>\",\n    \"metadata\": {\n      \"key\": \"value\",\n      \"foo\": \"bar\",\n      \"modern\": \"treasury\"\n    },\n    \"effective_at\": \"<dateTime>\",\n    \"effective_date\": \"<date>\",\n    \"external_id\": \"<string>\",\n    \"ledgerable_type\": \"<string>\",\n    \"ledgerable_id\": \"<uuid>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": {\n    \"code\": \"conflict\",\n    \"message\": \"string\",\n    \"parameter\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a95127bf-33a8-44f1-9bf6-0876df220925",
+          "name": "show reversal",
+          "request": {
+            "name": "show reversal",
+            "description": {
+              "content": "Get details on a single reversal of a payment order.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "payment_orders",
+                ":payment_order_id",
+                "reversals",
+                ":reversal_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "payment_order_id",
+                  "description": "(Required) The id of the payment order being reversed."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "reversal_id",
+                  "description": "(Required) The ID of the reversal."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "10c62720-2717-43dc-9a15-2848921c424b",
+              "name": "successful",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "payment_orders",
+                    ":payment_order_id",
+                    "reversals",
+                    ":reversal_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "payment_order_id",
+                      "description": "(Required) The id of the payment order being reversed."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "reversal_id",
+                      "description": "(Required) The ID of the reversal."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"b54d754f-cd70-9e7c-2614-dd93c10b815f\",\n  \"object\": \"string\",\n  \"live_mode\": true,\n  \"created_at\": \"1947-06-06T21:59:09.201Z\",\n  \"updated_at\": \"1969-02-07T09:16:28.431Z\",\n  \"status\": \"completed\",\n  \"payment_order_id\": \"659932c2-4012-ec6f-eb52-256760295365\",\n  \"transaction_ids\": [\n    \"711df932-718c-932d-6945-83c2448c2a5d\",\n    \"fbc04a6b-8075-1ff3-1739-6c81eac3ec1a\"\n  ],\n  \"ledger_transaction_id\": \"56d28976-d4d6-10c4-8c8f-7029bdfa6055\",\n  \"metadata\": {\n    \"key\": \"value\",\n    \"foo\": \"bar\",\n    \"modern\": \"treasury\"\n  },\n  \"reason\": \"date_later_than_intended\",\n  \"internal_account_id\": \"89831520-981f-6859-01d1-4eba7438edd8\",\n  \"reconciliation_status\": \"unreconciled\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9f2339e1-bd55-42cd-abb3-543bfadd0c44",
+              "name": "not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "payment_orders",
+                    ":payment_order_id",
+                    "reversals",
+                    ":reversal_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "payment_order_id",
+                      "description": "(Required) The id of the payment order being reversed."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "reversal_id",
+                      "description": "(Required) The ID of the reversal."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": {\n    \"code\": \"conflict\",\n    \"message\": \"string\",\n    \"parameter\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "http://localhost:3000",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "7d0efe28-2cc0-4ceb-bb25-0f08bce1fd35",
+    "name": "Modern Treasury AccountCapability Reversal API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Modern Treasury REST API. Please see https://docs.moderntreasury.com for more details.\n\nContact Support:\n Name: Modern Treasury Engineering Team",
+      "type": "text/plain"
+    }
+  }
+}

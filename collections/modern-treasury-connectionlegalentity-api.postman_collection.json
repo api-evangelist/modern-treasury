@@ -1,0 +1,800 @@
+{
+  "item": [
+    {
+      "id": "66503a1a-3b40-4b63-810e-c65c9c893d1d",
+      "name": "ConnectionLegalEntity",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "dd1b3a45-8600-46dc-bca2-0c86d1db0e55",
+          "name": "list connection_legal_entities",
+          "request": {
+            "name": "list connection_legal_entities",
+            "description": {
+              "content": "Get a list of all connection legal entities.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "connection_legal_entities"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "after_cursor",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "per_page",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "connection_id",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "legal_entity_id",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "fc858bc5-f0a8-47f1-9232-16220db25252",
+              "name": "successful",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "connection_legal_entities"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "after_cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "connection_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "legal_entity_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "The cursor for the next page. Including this in a call as `after_cursor` will return the next page.",
+                  "key": "X-After-Cursor",
+                  "value": "string"
+                },
+                {
+                  "disabled": false,
+                  "description": "The current `per_page`.",
+                  "key": "X-Per-Page",
+                  "value": "7421"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"0b01310c-3dc7-cebe-6f45-bedbc8e5acda\",\n    \"object\": \"string\",\n    \"live_mode\": true,\n    \"created_at\": \"2000-06-07T23:01:43.142Z\",\n    \"updated_at\": \"1990-06-20T23:15:16.292Z\",\n    \"discarded_at\": \"1955-05-22T04:46:13.307Z\",\n    \"connection_id\": \"string\",\n    \"legal_entity_id\": \"string\",\n    \"status\": \"suspended\",\n    \"vendor_id\": \"string\"\n  },\n  {\n    \"id\": \"ba02ccc5-6921-9931-0f0a-e0b7bc634abc\",\n    \"object\": \"string\",\n    \"live_mode\": false,\n    \"created_at\": \"1981-06-21T11:30:47.669Z\",\n    \"updated_at\": \"1952-11-25T08:03:20.453Z\",\n    \"discarded_at\": \"1976-03-11T22:31:59.766Z\",\n    \"connection_id\": \"string\",\n    \"legal_entity_id\": \"string\",\n    \"status\": \"completed\",\n    \"vendor_id\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2b18162b-c46a-496b-bde5-786041aba1ca",
+          "name": "create connection_legal_entity",
+          "request": {
+            "name": "create connection_legal_entity",
+            "description": {
+              "content": "Create a connection legal entity.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "connection_legal_entities"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "This key should be something unique, preferably something like an UUID.",
+                "key": "Idempotency-Key",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"connection_id\": \"<string>\",\n  \"legal_entity_id\": \"<string>\",\n  \"legal_entity\": {\n    \"legal_entity_type\": \"<string>\",\n    \"risk_rating\": \"<string>\",\n    \"prefix\": \"<string>\",\n    \"first_name\": \"<string>\",\n    \"middle_name\": \"<string>\",\n    \"last_name\": \"<string>\",\n    \"suffix\": \"<string>\",\n    \"preferred_name\": \"<string>\",\n    \"citizenship_country\": \"<string>\",\n    \"politically_exposed_person\": \"<boolean>\",\n    \"date_of_birth\": \"<date>\",\n    \"date_formed\": \"<date>\",\n    \"business_name\": \"<string>\",\n    \"doing_business_as_names\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"legal_structure\": \"<string>\",\n    \"phone_numbers\": [\n      {\n        \"phone_number\": \"<string>\"\n      },\n      {\n        \"phone_number\": \"<string>\"\n      }\n    ],\n    \"email\": \"<string>\",\n    \"website\": \"<string>\",\n    \"business_description\": \"<string>\",\n    \"intended_use\": \"<string>\",\n    \"expected_activity_volume\": \"<integer>\",\n    \"country_of_incorporation\": \"<string>\",\n    \"operating_jurisdictions\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"primary_social_media_sites\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"listed_exchange\": \"<string>\",\n    \"ticker_symbol\": \"<string>\",\n    \"regulators\": [\n      {\n        \"name\": \"<string>\",\n        \"jurisdiction\": \"<string>\",\n        \"registration_number\": \"<string>\"\n      },\n      {\n        \"name\": \"<string>\",\n        \"jurisdiction\": \"<string>\",\n        \"registration_number\": \"<string>\"\n      }\n    ],\n    \"third_party_verification\": {\n      \"vendor_verification_id\": \"<string>\",\n      \"vendor\": \"<string>\",\n      \"verification_category\": \"<string>\",\n      \"verification_method\": \"<string>\",\n      \"outcome\": \"<string>\",\n      \"verification_time\": \"<dateTime>\",\n      \"comment\": \"<string>\"\n    },\n    \"third_party_verifications\": [\n      {\n        \"vendor_verification_id\": \"<string>\",\n        \"vendor\": \"<string>\",\n        \"verification_category\": \"<string>\",\n        \"verification_method\": \"<string>\",\n        \"outcome\": \"<string>\",\n        \"verification_time\": \"<dateTime>\",\n        \"comment\": \"<string>\"\n      },\n      {\n        \"vendor_verification_id\": \"<string>\",\n        \"vendor\": \"<string>\",\n        \"verification_category\": \"<string>\",\n        \"verification_method\": \"<string>\",\n        \"outcome\": \"<string>\",\n        \"verification_time\": \"<dateTime>\",\n        \"comment\": \"<string>\"\n      }\n    ],\n    \"service_provider_legal_entity_id\": \"<uuid>\",\n    \"metadata\": {\n      \"key_0\": \"<string>\",\n      \"key_1\": \"<string>\"\n    },\n    \"external_id\": \"<string>\",\n    \"bank_settings\": {\n      \"id\": \"<uuid>\",\n      \"object\": \"<string>\",\n      \"live_mode\": \"<boolean>\",\n      \"created_at\": \"<dateTime>\",\n      \"updated_at\": \"<dateTime>\",\n      \"discarded_at\": \"<dateTime>\",\n      \"enable_backup_withholding\": \"<boolean>\",\n      \"backup_withholding_percentage\": \"<integer>\",\n      \"privacy_opt_out\": \"<boolean>\",\n      \"regulation_o\": \"<boolean>\"\n    },\n    \"wealth_and_employment_details\": {\n      \"id\": \"<uuid>\",\n      \"object\": \"<string>\",\n      \"live_mode\": \"<boolean>\",\n      \"created_at\": \"<dateTime>\",\n      \"updated_at\": \"<dateTime>\",\n      \"discarded_at\": \"<dateTime>\",\n      \"employment_status\": \"<string>\",\n      \"occupation\": \"<string>\",\n      \"industry\": \"<string>\",\n      \"income_source\": \"<string>\",\n      \"income_state\": \"<string>\",\n      \"income_country\": \"<string>\",\n      \"employer_name\": \"<string>\",\n      \"employer_state\": \"<string>\",\n      \"employer_country\": \"<string>\",\n      \"source_of_funds\": \"<string>\",\n      \"wealth_source\": \"<string>\",\n      \"annual_income\": \"<integer>\"\n    },\n    \"compliance_details\": \"<object>\",\n    \"addresses\": [\n      {\n        \"line1\": \"<string>\",\n        \"locality\": \"<string>\",\n        \"region\": \"<string>\",\n        \"postal_code\": \"<string>\",\n        \"country\": \"<string>\",\n        \"address_types\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"line2\": \"<string>\"\n      },\n      {\n        \"line1\": \"<string>\",\n        \"locality\": \"<string>\",\n        \"region\": \"<string>\",\n        \"postal_code\": \"<string>\",\n        \"country\": \"<string>\",\n        \"address_types\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"line2\": \"<string>\"\n      }\n    ],\n    \"identifications\": [\n      {\n        \"id_number\": \"<string>\",\n        \"id_type\": \"<string>\",\n        \"documents\": [\n          {\n            \"document_type\": \"<string>\",\n            \"file_data\": \"<string>\",\n            \"filename\": \"<string>\"\n          },\n          {\n            \"document_type\": \"<string>\",\n            \"file_data\": \"<string>\",\n            \"filename\": \"<string>\"\n          }\n        ],\n        \"expiration_date\": \"<date>\",\n        \"issuing_country\": \"<string>\",\n        \"issuing_region\": \"<string>\"\n      },\n      {\n        \"id_number\": \"<string>\",\n        \"id_type\": \"<string>\",\n        \"documents\": [\n          {\n            \"document_type\": \"<string>\",\n            \"file_data\": \"<string>\",\n            \"filename\": \"<string>\"\n          },\n          {\n            \"document_type\": \"<string>\",\n            \"file_data\": \"<string>\",\n            \"filename\": \"<string>\"\n          }\n        ],\n        \"expiration_date\": \"<date>\",\n        \"issuing_country\": \"<string>\",\n        \"issuing_region\": \"<string>\"\n      }\n    ],\n    \"documents\": [\n      {\n        \"document_type\": \"<string>\",\n        \"file_data\": \"<string>\",\n        \"filename\": \"<string>\"\n      },\n      {\n        \"document_type\": \"<string>\",\n        \"file_data\": \"<string>\",\n        \"filename\": \"<string>\"\n      }\n    ],\n    \"industry_classifications\": [\n      {\n        \"id\": \"<uuid>\",\n        \"object\": \"<string>\",\n        \"live_mode\": \"<boolean>\",\n        \"created_at\": \"<dateTime>\",\n        \"updated_at\": \"<dateTime>\",\n        \"discarded_at\": \"<dateTime>\",\n        \"classification_type\": \"<string>\",\n        \"classification_codes\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      },\n      {\n        \"id\": \"<uuid>\",\n        \"object\": \"<string>\",\n        \"live_mode\": \"<boolean>\",\n        \"created_at\": \"<dateTime>\",\n        \"updated_at\": \"<dateTime>\",\n        \"discarded_at\": \"<dateTime>\",\n        \"classification_type\": \"<string>\",\n        \"classification_codes\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      }\n    ],\n    \"legal_entity_associations\": [\n      {\n        \"relationship_types\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"title\": \"<string>\",\n        \"ownership_percentage\": \"<integer>\",\n        \"child_legal_entity\": {\n          \"legal_entity_type\": \"<string>\",\n          \"risk_rating\": \"<string>\",\n          \"prefix\": \"<string>\",\n          \"first_name\": \"<string>\",\n          \"middle_name\": \"<string>\",\n          \"last_name\": \"<string>\",\n          \"suffix\": \"<string>\",\n          \"preferred_name\": \"<string>\",\n          \"citizenship_country\": \"<string>\",\n          \"politically_exposed_person\": \"<boolean>\",\n          \"date_of_birth\": \"<date>\",\n          \"date_formed\": \"<date>\",\n          \"business_name\": \"<string>\",\n          \"doing_business_as_names\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"legal_structure\": \"<string>\",\n          \"phone_numbers\": [\n            {\n              \"phone_number\": \"<string>\"\n            },\n            {\n              \"phone_number\": \"<string>\"\n            }\n          ],\n          \"email\": \"<string>\",\n          \"website\": \"<string>\",\n          \"business_description\": \"<string>\",\n          \"intended_use\": \"<string>\",\n          \"expected_activity_volume\": \"<integer>\",\n          \"country_of_incorporation\": \"<string>\",\n          \"operating_jurisdictions\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"primary_social_media_sites\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"listed_exchange\": \"<string>\",\n          \"ticker_symbol\": \"<string>\",\n          \"regulators\": [\n            {\n              \"name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"jurisdiction\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"registration_number\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"jurisdiction\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"registration_number\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"third_party_verification\": {\n            \"vendor_verification_id\": \"<string>\",\n            \"vendor\": \"<string>\",\n            \"verification_category\": \"<string>\",\n            \"verification_method\": \"<string>\",\n            \"outcome\": \"<string>\",\n            \"verification_time\": \"<dateTime>\",\n            \"comment\": \"<string>\"\n          },\n          \"third_party_verifications\": [\n            {\n              \"vendor_verification_id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"vendor\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"verification_category\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"verification_method\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"outcome\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"verification_time\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"comment\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"vendor_verification_id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"vendor\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"verification_category\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"verification_method\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"outcome\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"verification_time\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"comment\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"service_provider_legal_entity_id\": \"<uuid>\",\n          \"metadata\": {\n            \"key_0\": \"<string>\",\n            \"key_1\": \"<string>\"\n          },\n          \"external_id\": \"<string>\",\n          \"bank_settings\": {\n            \"id\": \"<uuid>\",\n            \"object\": \"<string>\",\n            \"live_mode\": \"<boolean>\",\n            \"created_at\": \"<dateTime>\",\n            \"updated_at\": \"<dateTime>\",\n            \"discarded_at\": \"<dateTime>\",\n            \"enable_backup_withholding\": \"<boolean>\",\n            \"backup_withholding_percentage\": \"<integer>\",\n            \"privacy_opt_out\": \"<boolean>\",\n            \"regulation_o\": \"<boolean>\"\n          },\n          \"wealth_and_employment_details\": {\n            \"id\": \"<uuid>\",\n            \"object\": \"<string>\",\n            \"live_mode\": \"<boolean>\",\n            \"created_at\": \"<dateTime>\",\n            \"updated_at\": \"<dateTime>\",\n            \"discarded_at\": \"<dateTime>\",\n            \"employment_status\": \"<string>\",\n            \"occupation\": \"<string>\",\n            \"industry\": \"<string>\",\n            \"income_source\": \"<string>\",\n            \"income_state\": \"<string>\",\n            \"income_country\": \"<string>\",\n            \"employer_name\": \"<string>\",\n            \"employer_state\": \"<string>\",\n            \"employer_country\": \"<string>\",\n            \"source_of_funds\": \"<string>\",\n            \"wealth_source\": \"<string>\",\n            \"annual_income\": \"<integer>\"\n          },\n          \"compliance_details\": \"<object>\",\n          \"addresses\": [\n            {\n              \"line1\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"locality\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"region\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"postal_code\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"country\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"address_types\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"line2\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"line1\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"locality\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"region\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"postal_code\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"country\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"address_types\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"line2\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"identifications\": [\n            {\n              \"id_number\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"id_type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"documents\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"expiration_date\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"issuing_country\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"issuing_region\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"id_number\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"id_type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"documents\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"expiration_date\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"issuing_country\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"issuing_region\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"documents\": [\n            {\n              \"document_type\": \"<string>\",\n              \"file_data\": \"<string>\",\n              \"filename\": \"<string>\"\n            },\n            {\n              \"document_type\": \"<string>\",\n              \"file_data\": \"<string>\",\n              \"filename\": \"<string>\"\n            }\n          ],\n          \"industry_classifications\": [\n            {\n              \"id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"object\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"live_mode\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"created_at\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"updated_at\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"discarded_at\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"classification_type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"classification_codes\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"object\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"live_mode\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"created_at\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"updated_at\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"discarded_at\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"classification_type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"classification_codes\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"legal_entity_associations\": [\n            {\n              \"value\": \"<Circular reference to #/components/schemas/legal_entity_association_inline_create_request detected>\"\n            },\n            {\n              \"value\": \"<Circular reference to #/components/schemas/legal_entity_association_inline_create_request detected>\"\n            }\n          ],\n          \"connection_id\": \"<string>\"\n        },\n        \"child_legal_entity_id\": \"<string>\"\n      },\n      {\n        \"relationship_types\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"title\": \"<string>\",\n        \"ownership_percentage\": \"<integer>\",\n        \"child_legal_entity\": {\n          \"legal_entity_type\": \"<string>\",\n          \"risk_rating\": \"<string>\",\n          \"prefix\": \"<string>\",\n          \"first_name\": \"<string>\",\n          \"middle_name\": \"<string>\",\n          \"last_name\": \"<string>\",\n          \"suffix\": \"<string>\",\n          \"preferred_name\": \"<string>\",\n          \"citizenship_country\": \"<string>\",\n          \"politically_exposed_person\": \"<boolean>\",\n          \"date_of_birth\": \"<date>\",\n          \"date_formed\": \"<date>\",\n          \"business_name\": \"<string>\",\n          \"doing_business_as_names\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"legal_structure\": \"<string>\",\n          \"phone_numbers\": [\n            {\n              \"phone_number\": \"<string>\"\n            },\n            {\n              \"phone_number\": \"<string>\"\n            }\n          ],\n          \"email\": \"<string>\",\n          \"website\": \"<string>\",\n          \"business_description\": \"<string>\",\n          \"intended_use\": \"<string>\",\n          \"expected_activity_volume\": \"<integer>\",\n          \"country_of_incorporation\": \"<string>\",\n          \"operating_jurisdictions\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"primary_social_media_sites\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"listed_exchange\": \"<string>\",\n          \"ticker_symbol\": \"<string>\",\n          \"regulators\": [\n            {\n              \"name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"jurisdiction\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"registration_number\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"jurisdiction\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"registration_number\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"third_party_verification\": {\n            \"vendor_verification_id\": \"<string>\",\n            \"vendor\": \"<string>\",\n            \"verification_category\": \"<string>\",\n            \"verification_method\": \"<string>\",\n            \"outcome\": \"<string>\",\n            \"verification_time\": \"<dateTime>\",\n            \"comment\": \"<string>\"\n          },\n          \"third_party_verifications\": [\n            {\n              \"vendor_verification_id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"vendor\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"verification_category\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"verification_method\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"outcome\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"verification_time\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"comment\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"vendor_verification_id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"vendor\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"verification_category\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"verification_method\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"outcome\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"verification_time\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"comment\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"service_provider_legal_entity_id\": \"<uuid>\",\n          \"metadata\": {\n            \"key_0\": \"<string>\",\n            \"key_1\": \"<string>\",\n            \"key_2\": \"<string>\",\n            \"key_3\": \"<string>\"\n          },\n          \"external_id\": \"<string>\",\n          \"bank_settings\": {\n            \"id\": \"<uuid>\",\n            \"object\": \"<string>\",\n            \"live_mode\": \"<boolean>\",\n            \"created_at\": \"<dateTime>\",\n            \"updated_at\": \"<dateTime>\",\n            \"discarded_at\": \"<dateTime>\",\n            \"enable_backup_withholding\": \"<boolean>\",\n            \"backup_withholding_percentage\": \"<integer>\",\n            \"privacy_opt_out\": \"<boolean>\",\n            \"regulation_o\": \"<boolean>\"\n          },\n          \"wealth_and_employment_details\": {\n            \"id\": \"<uuid>\",\n            \"object\": \"<string>\",\n            \"live_mode\": \"<boolean>\",\n            \"created_at\": \"<dateTime>\",\n            \"updated_at\": \"<dateTime>\",\n            \"discarded_at\": \"<dateTime>\",\n            \"employment_status\": \"<string>\",\n            \"occupation\": \"<string>\",\n            \"industry\": \"<string>\",\n            \"income_source\": \"<string>\",\n            \"income_state\": \"<string>\",\n            \"income_country\": \"<string>\",\n            \"employer_name\": \"<string>\",\n            \"employer_state\": \"<string>\",\n            \"employer_country\": \"<string>\",\n            \"source_of_funds\": \"<string>\",\n            \"wealth_source\": \"<string>\",\n            \"annual_income\": \"<integer>\"\n          },\n          \"compliance_details\": \"<object>\",\n          \"addresses\": [\n            {\n              \"line1\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"locality\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"region\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"postal_code\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"country\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"address_types\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"line2\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"line1\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"locality\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"region\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"postal_code\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"country\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"address_types\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"line2\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"identifications\": [\n            {\n              \"id_number\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"id_type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"documents\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"expiration_date\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"issuing_country\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"issuing_region\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"id_number\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"id_type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"documents\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"expiration_date\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"issuing_country\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"issuing_region\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"documents\": [\n            {\n              \"document_type\": \"<string>\",\n              \"file_data\": \"<string>\",\n              \"filename\": \"<string>\"\n            },\n            {\n              \"document_type\": \"<string>\",\n              \"file_data\": \"<string>\",\n              \"filename\": \"<string>\"\n            }\n          ],\n          \"industry_classifications\": [\n            {\n              \"id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"object\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"live_mode\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"created_at\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"updated_at\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"discarded_at\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"classification_type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"classification_codes\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"object\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"live_mode\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"created_at\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"updated_at\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"discarded_at\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"classification_type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"classification_codes\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"legal_entity_associations\": [\n            {\n              \"value\": \"<Circular reference to #/components/schemas/legal_entity_association_inline_create_request detected>\"\n            },\n            {\n              \"value\": \"<Circular reference to #/components/schemas/legal_entity_association_inline_create_request detected>\"\n            }\n          ],\n          \"connection_id\": \"<string>\"\n        },\n        \"child_legal_entity_id\": \"<string>\"\n      }\n    ],\n    \"connection_id\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "63b09e19-fe32-402b-8863-98f07ec66d81",
+              "name": "successful",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "connection_legal_entities"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "This key should be something unique, preferably something like an UUID.",
+                    "key": "Idempotency-Key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"connection_id\": \"<string>\",\n  \"legal_entity_id\": \"<string>\",\n  \"legal_entity\": {\n    \"legal_entity_type\": \"<string>\",\n    \"risk_rating\": \"<string>\",\n    \"prefix\": \"<string>\",\n    \"first_name\": \"<string>\",\n    \"middle_name\": \"<string>\",\n    \"last_name\": \"<string>\",\n    \"suffix\": \"<string>\",\n    \"preferred_name\": \"<string>\",\n    \"citizenship_country\": \"<string>\",\n    \"politically_exposed_person\": \"<boolean>\",\n    \"date_of_birth\": \"<date>\",\n    \"date_formed\": \"<date>\",\n    \"business_name\": \"<string>\",\n    \"doing_business_as_names\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"legal_structure\": \"<string>\",\n    \"phone_numbers\": [\n      {\n        \"phone_number\": \"<string>\"\n      },\n      {\n        \"phone_number\": \"<string>\"\n      }\n    ],\n    \"email\": \"<string>\",\n    \"website\": \"<string>\",\n    \"business_description\": \"<string>\",\n    \"intended_use\": \"<string>\",\n    \"expected_activity_volume\": \"<integer>\",\n    \"country_of_incorporation\": \"<string>\",\n    \"operating_jurisdictions\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"primary_social_media_sites\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"listed_exchange\": \"<string>\",\n    \"ticker_symbol\": \"<string>\",\n    \"regulators\": [\n      {\n        \"name\": \"<string>\",\n        \"jurisdiction\": \"<string>\",\n        \"registration_number\": \"<string>\"\n      },\n      {\n        \"name\": \"<string>\",\n        \"jurisdiction\": \"<string>\",\n        \"registration_number\": \"<string>\"\n      }\n    ],\n    \"third_party_verification\": {\n      \"vendor_verification_id\": \"<string>\",\n      \"vendor\": \"<string>\",\n      \"verification_category\": \"<string>\",\n      \"verification_method\": \"<string>\",\n      \"outcome\": \"<string>\",\n      \"verification_time\": \"<dateTime>\",\n      \"comment\": \"<string>\"\n    },\n    \"third_party_verifications\": [\n      {\n        \"vendor_verification_id\": \"<string>\",\n        \"vendor\": \"<string>\",\n        \"verification_category\": \"<string>\",\n        \"verification_method\": \"<string>\",\n        \"outcome\": \"<string>\",\n        \"verification_time\": \"<dateTime>\",\n        \"comment\": \"<string>\"\n      },\n      {\n        \"vendor_verification_id\": \"<string>\",\n        \"vendor\": \"<string>\",\n        \"verification_category\": \"<string>\",\n        \"verification_method\": \"<string>\",\n        \"outcome\": \"<string>\",\n        \"verification_time\": \"<dateTime>\",\n        \"comment\": \"<string>\"\n      }\n    ],\n    \"service_provider_legal_entity_id\": \"<uuid>\",\n    \"metadata\": {\n      \"key\": \"value\",\n      \"foo\": \"bar\",\n      \"modern\": \"treasury\"\n    },\n    \"external_id\": \"<string>\",\n    \"bank_settings\": {\n      \"id\": \"<uuid>\",\n      \"object\": \"<string>\",\n      \"live_mode\": \"<boolean>\",\n      \"created_at\": \"<dateTime>\",\n      \"updated_at\": \"<dateTime>\",\n      \"discarded_at\": \"<dateTime>\",\n      \"enable_backup_withholding\": \"<boolean>\",\n      \"backup_withholding_percentage\": \"<integer>\",\n      \"privacy_opt_out\": \"<boolean>\",\n      \"regulation_o\": \"<boolean>\"\n    },\n    \"wealth_and_employment_details\": {\n      \"id\": \"<uuid>\",\n      \"object\": \"<string>\",\n      \"live_mode\": \"<boolean>\",\n      \"created_at\": \"<dateTime>\",\n      \"updated_at\": \"<dateTime>\",\n      \"discarded_at\": \"<dateTime>\",\n      \"employment_status\": \"<string>\",\n      \"occupation\": \"<string>\",\n      \"industry\": \"<string>\",\n      \"income_source\": \"<string>\",\n      \"income_state\": \"<string>\",\n      \"income_country\": \"<string>\",\n      \"employer_name\": \"<string>\",\n      \"employer_state\": \"<string>\",\n      \"employer_country\": \"<string>\",\n      \"source_of_funds\": \"<string>\",\n      \"wealth_source\": \"<string>\",\n      \"annual_income\": \"<integer>\"\n    },\n    \"compliance_details\": \"<object>\",\n    \"addresses\": [\n      {\n        \"line1\": \"<string>\",\n        \"locality\": \"<string>\",\n        \"region\": \"<string>\",\n        \"postal_code\": \"<string>\",\n        \"country\": \"<string>\",\n        \"address_types\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"line2\": \"<string>\"\n      },\n      {\n        \"line1\": \"<string>\",\n        \"locality\": \"<string>\",\n        \"region\": \"<string>\",\n        \"postal_code\": \"<string>\",\n        \"country\": \"<string>\",\n        \"address_types\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"line2\": \"<string>\"\n      }\n    ],\n    \"identifications\": [\n      {\n        \"id_number\": \"<string>\",\n        \"id_type\": \"<string>\",\n        \"documents\": [\n          {\n            \"document_type\": \"<string>\",\n            \"file_data\": \"<string>\",\n            \"filename\": \"<string>\"\n          },\n          {\n            \"document_type\": \"<string>\",\n            \"file_data\": \"<string>\",\n            \"filename\": \"<string>\"\n          }\n        ],\n        \"expiration_date\": \"<date>\",\n        \"issuing_country\": \"<string>\",\n        \"issuing_region\": \"<string>\"\n      },\n      {\n        \"id_number\": \"<string>\",\n        \"id_type\": \"<string>\",\n        \"documents\": [\n          {\n            \"document_type\": \"<string>\",\n            \"file_data\": \"<string>\",\n            \"filename\": \"<string>\"\n          },\n          {\n            \"document_type\": \"<string>\",\n            \"file_data\": \"<string>\",\n            \"filename\": \"<string>\"\n          }\n        ],\n        \"expiration_date\": \"<date>\",\n        \"issuing_country\": \"<string>\",\n        \"issuing_region\": \"<string>\"\n      }\n    ],\n    \"documents\": [\n      {\n        \"document_type\": \"<string>\",\n        \"file_data\": \"<string>\",\n        \"filename\": \"<string>\"\n      },\n      {\n        \"document_type\": \"<string>\",\n        \"file_data\": \"<string>\",\n        \"filename\": \"<string>\"\n      }\n    ],\n    \"industry_classifications\": [\n      {\n        \"id\": \"<uuid>\",\n        \"object\": \"<string>\",\n        \"live_mode\": \"<boolean>\",\n        \"created_at\": \"<dateTime>\",\n        \"updated_at\": \"<dateTime>\",\n        \"discarded_at\": \"<dateTime>\",\n        \"classification_type\": \"<string>\",\n        \"classification_codes\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      },\n      {\n        \"id\": \"<uuid>\",\n        \"object\": \"<string>\",\n        \"live_mode\": \"<boolean>\",\n        \"created_at\": \"<dateTime>\",\n        \"updated_at\": \"<dateTime>\",\n        \"discarded_at\": \"<dateTime>\",\n        \"classification_type\": \"<string>\",\n        \"classification_codes\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      }\n    ],\n    \"legal_entity_associations\": [\n      {\n        \"relationship_types\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"title\": \"<string>\",\n        \"ownership_percentage\": \"<integer>\",\n        \"child_legal_entity\": {\n          \"legal_entity_type\": \"<string>\",\n          \"risk_rating\": \"<string>\",\n          \"prefix\": \"<string>\",\n          \"first_name\": \"<string>\",\n          \"middle_name\": \"<string>\",\n          \"last_name\": \"<string>\",\n          \"suffix\": \"<string>\",\n          \"preferred_name\": \"<string>\",\n          \"citizenship_country\": \"<string>\",\n          \"politically_exposed_person\": \"<boolean>\",\n          \"date_of_birth\": \"<date>\",\n          \"date_formed\": \"<date>\",\n          \"business_name\": \"<string>\",\n          \"doing_business_as_names\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"legal_structure\": \"<string>\",\n          \"phone_numbers\": [\n            {\n              \"phone_number\": \"<string>\"\n            },\n            {\n              \"phone_number\": \"<string>\"\n            }\n          ],\n          \"email\": \"<string>\",\n          \"website\": \"<string>\",\n          \"business_description\": \"<string>\",\n          \"intended_use\": \"<string>\",\n          \"expected_activity_volume\": \"<integer>\",\n          \"country_of_incorporation\": \"<string>\",\n          \"operating_jurisdictions\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"primary_social_media_sites\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"listed_exchange\": \"<string>\",\n          \"ticker_symbol\": \"<string>\",\n          \"regulators\": [\n            {\n              \"name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"jurisdiction\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"registration_number\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"jurisdiction\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"registration_number\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"third_party_verification\": {\n            \"vendor_verification_id\": \"<string>\",\n            \"vendor\": \"<string>\",\n            \"verification_category\": \"<string>\",\n            \"verification_method\": \"<string>\",\n            \"outcome\": \"<string>\",\n            \"verification_time\": \"<dateTime>\",\n            \"comment\": \"<string>\"\n          },\n          \"third_party_verifications\": [\n            {\n              \"vendor_verification_id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"vendor\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"verification_category\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"verification_method\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"outcome\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"verification_time\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"comment\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"vendor_verification_id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"vendor\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"verification_category\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"verification_method\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"outcome\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"verification_time\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"comment\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"service_provider_legal_entity_id\": \"<uuid>\",\n          \"metadata\": {\n            \"key\": \"value\",\n            \"foo\": \"bar\",\n            \"modern\": \"treasury\"\n          },\n          \"external_id\": \"<string>\",\n          \"bank_settings\": {\n            \"id\": \"<uuid>\",\n            \"object\": \"<string>\",\n            \"live_mode\": \"<boolean>\",\n            \"created_at\": \"<dateTime>\",\n            \"updated_at\": \"<dateTime>\",\n            \"discarded_at\": \"<dateTime>\",\n            \"enable_backup_withholding\": \"<boolean>\",\n            \"backup_withholding_percentage\": \"<integer>\",\n            \"privacy_opt_out\": \"<boolean>\",\n            \"regulation_o\": \"<boolean>\"\n          },\n          \"wealth_and_employment_details\": {\n            \"id\": \"<uuid>\",\n            \"object\": \"<string>\",\n            \"live_mode\": \"<boolean>\",\n            \"created_at\": \"<dateTime>\",\n            \"updated_at\": \"<dateTime>\",\n            \"discarded_at\": \"<dateTime>\",\n            \"employment_status\": \"<string>\",\n            \"occupation\": \"<string>\",\n            \"industry\": \"<string>\",\n            \"income_source\": \"<string>\",\n            \"income_state\": \"<string>\",\n            \"income_country\": \"<string>\",\n            \"employer_name\": \"<string>\",\n            \"employer_state\": \"<string>\",\n            \"employer_country\": \"<string>\",\n            \"source_of_funds\": \"<string>\",\n            \"wealth_source\": \"<string>\",\n            \"annual_income\": \"<integer>\"\n          },\n          \"compliance_details\": \"<object>\",\n          \"addresses\": [\n            {\n              \"line1\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"locality\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"region\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"postal_code\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"country\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"address_types\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"line2\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"line1\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"locality\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"region\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"postal_code\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"country\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"address_types\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"line2\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"identifications\": [\n            {\n              \"id_number\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"id_type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"documents\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"expiration_date\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"issuing_country\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"issuing_region\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"id_number\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"id_type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"documents\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"expiration_date\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"issuing_country\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"issuing_region\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"documents\": [\n            {\n              \"document_type\": \"<string>\",\n              \"file_data\": \"<string>\",\n              \"filename\": \"<string>\"\n            },\n            {\n              \"document_type\": \"<string>\",\n              \"file_data\": \"<string>\",\n              \"filename\": \"<string>\"\n            }\n          ],\n          \"industry_classifications\": [\n            {\n              \"id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"object\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"live_mode\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"created_at\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"updated_at\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"discarded_at\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"classification_type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"classification_codes\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"object\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"live_mode\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"created_at\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"updated_at\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"discarded_at\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"classification_type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"classification_codes\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"legal_entity_associations\": [\n            {\n              \"value\": \"<Circular reference to #/components/schemas/legal_entity_association_inline_create_request detected>\"\n            },\n            {\n              \"value\": \"<Circular reference to #/components/schemas/legal_entity_association_inline_create_request detected>\"\n            }\n          ],\n          \"connection_id\": \"<string>\"\n        },\n        \"child_legal_entity_id\": \"<string>\"\n      },\n      {\n        \"relationship_types\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"title\": \"<string>\",\n        \"ownership_percentage\": \"<integer>\",\n        \"child_legal_entity\": {\n          \"legal_entity_type\": \"<string>\",\n          \"risk_rating\": \"<string>\",\n          \"prefix\": \"<string>\",\n          \"first_name\": \"<string>\",\n          \"middle_name\": \"<string>\",\n          \"last_name\": \"<string>\",\n          \"suffix\": \"<string>\",\n          \"preferred_name\": \"<string>\",\n          \"citizenship_country\": \"<string>\",\n          \"politically_exposed_person\": \"<boolean>\",\n          \"date_of_birth\": \"<date>\",\n          \"date_formed\": \"<date>\",\n          \"business_name\": \"<string>\",\n          \"doing_business_as_names\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"legal_structure\": \"<string>\",\n          \"phone_numbers\": [\n            {\n              \"phone_number\": \"<string>\"\n            },\n            {\n              \"phone_number\": \"<string>\"\n            }\n          ],\n          \"email\": \"<string>\",\n          \"website\": \"<string>\",\n          \"business_description\": \"<string>\",\n          \"intended_use\": \"<string>\",\n          \"expected_activity_volume\": \"<integer>\",\n          \"country_of_incorporation\": \"<string>\",\n          \"operating_jurisdictions\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"primary_social_media_sites\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"listed_exchange\": \"<string>\",\n          \"ticker_symbol\": \"<string>\",\n          \"regulators\": [\n            {\n              \"name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"jurisdiction\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"registration_number\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"jurisdiction\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"registration_number\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"third_party_verification\": {\n            \"vendor_verification_id\": \"<string>\",\n            \"vendor\": \"<string>\",\n            \"verification_category\": \"<string>\",\n            \"verification_method\": \"<string>\",\n            \"outcome\": \"<string>\",\n            \"verification_time\": \"<dateTime>\",\n            \"comment\": \"<string>\"\n          },\n          \"third_party_verifications\": [\n            {\n              \"vendor_verification_id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"vendor\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"verification_category\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"verification_method\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"outcome\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"verification_time\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"comment\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"vendor_verification_id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"vendor\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"verification_category\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"verification_method\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"outcome\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"verification_time\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"comment\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"service_provider_legal_entity_id\": \"<uuid>\",\n          \"metadata\": {\n            \"key\": \"value\",\n            \"foo\": \"bar\",\n            \"modern\": \"treasury\"\n          },\n          \"external_id\": \"<string>\",\n          \"bank_settings\": {\n            \"id\": \"<uuid>\",\n            \"object\": \"<string>\",\n            \"live_mode\": \"<boolean>\",\n            \"created_at\": \"<dateTime>\",\n            \"updated_at\": \"<dateTime>\",\n            \"discarded_at\": \"<dateTime>\",\n            \"enable_backup_withholding\": \"<boolean>\",\n            \"backup_withholding_percentage\": \"<integer>\",\n            \"privacy_opt_out\": \"<boolean>\",\n            \"regulation_o\": \"<boolean>\"\n          },\n          \"wealth_and_employment_details\": {\n            \"id\": \"<uuid>\",\n            \"object\": \"<string>\",\n            \"live_mode\": \"<boolean>\",\n            \"created_at\": \"<dateTime>\",\n            \"updated_at\": \"<dateTime>\",\n            \"discarded_at\": \"<dateTime>\",\n            \"employment_status\": \"<string>\",\n            \"occupation\": \"<string>\",\n            \"industry\": \"<string>\",\n            \"income_source\": \"<string>\",\n            \"income_state\": \"<string>\",\n            \"income_country\": \"<string>\",\n            \"employer_name\": \"<string>\",\n            \"employer_state\": \"<string>\",\n            \"employer_country\": \"<string>\",\n            \"source_of_funds\": \"<string>\",\n            \"wealth_source\": \"<string>\",\n            \"annual_income\": \"<integer>\"\n          },\n          \"compliance_details\": \"<object>\",\n          \"addresses\": [\n            {\n              \"line1\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"locality\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"region\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"postal_code\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"country\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"address_types\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"line2\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"line1\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"locality\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"region\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"postal_code\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"country\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"address_types\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"line2\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"identifications\": [\n            {\n              \"id_number\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"id_type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"documents\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"expiration_date\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"issuing_country\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"issuing_region\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"id_number\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"id_type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"documents\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"expiration_date\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"issuing_country\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"issuing_region\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"documents\": [\n            {\n              \"document_type\": \"<string>\",\n              \"file_data\": \"<string>\",\n              \"filename\": \"<string>\"\n            },\n            {\n              \"document_type\": \"<string>\",\n              \"file_data\": \"<string>\",\n              \"filename\": \"<string>\"\n            }\n          ],\n          \"industry_classifications\": [\n            {\n              \"id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"object\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"live_mode\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"created_at\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"updated_at\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"discarded_at\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"classification_type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"classification_codes\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"object\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"live_mode\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"created_at\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"updated_at\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"discarded_at\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"classification_type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"classification_codes\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"legal_entity_associations\": [\n            {\n              \"value\": \"<Circular reference to #/components/schemas/legal_entity_association_inline_create_request detected>\"\n            },\n            {\n              \"value\": \"<Circular reference to #/components/schemas/legal_entity_association_inline_create_request detected>\"\n            }\n          ],\n          \"connection_id\": \"<string>\"\n        },\n        \"child_legal_entity_id\": \"<string>\"\n      }\n    ],\n    \"connection_id\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"fced5fef-357b-4b0a-f8b3-3506d98eefc3\",\n  \"object\": \"string\",\n  \"live_mode\": true,\n  \"created_at\": \"1996-09-28T07:26:07.614Z\",\n  \"updated_at\": \"1957-09-02T15:21:04.432Z\",\n  \"discarded_at\": \"2001-05-20T06:10:07.509Z\",\n  \"connection_id\": \"string\",\n  \"legal_entity_id\": \"string\",\n  \"status\": \"completed\",\n  \"vendor_id\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3fc2103b-3510-4fe5-a565-232f4398e921",
+              "name": "unsuccessful",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "connection_legal_entities"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "This key should be something unique, preferably something like an UUID.",
+                    "key": "Idempotency-Key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"connection_id\": \"<string>\",\n  \"legal_entity_id\": \"<string>\",\n  \"legal_entity\": {\n    \"legal_entity_type\": \"<string>\",\n    \"risk_rating\": \"<string>\",\n    \"prefix\": \"<string>\",\n    \"first_name\": \"<string>\",\n    \"middle_name\": \"<string>\",\n    \"last_name\": \"<string>\",\n    \"suffix\": \"<string>\",\n    \"preferred_name\": \"<string>\",\n    \"citizenship_country\": \"<string>\",\n    \"politically_exposed_person\": \"<boolean>\",\n    \"date_of_birth\": \"<date>\",\n    \"date_formed\": \"<date>\",\n    \"business_name\": \"<string>\",\n    \"doing_business_as_names\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"legal_structure\": \"<string>\",\n    \"phone_numbers\": [\n      {\n        \"phone_number\": \"<string>\"\n      },\n      {\n        \"phone_number\": \"<string>\"\n      }\n    ],\n    \"email\": \"<string>\",\n    \"website\": \"<string>\",\n    \"business_description\": \"<string>\",\n    \"intended_use\": \"<string>\",\n    \"expected_activity_volume\": \"<integer>\",\n    \"country_of_incorporation\": \"<string>\",\n    \"operating_jurisdictions\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"primary_social_media_sites\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"listed_exchange\": \"<string>\",\n    \"ticker_symbol\": \"<string>\",\n    \"regulators\": [\n      {\n        \"name\": \"<string>\",\n        \"jurisdiction\": \"<string>\",\n        \"registration_number\": \"<string>\"\n      },\n      {\n        \"name\": \"<string>\",\n        \"jurisdiction\": \"<string>\",\n        \"registration_number\": \"<string>\"\n      }\n    ],\n    \"third_party_verification\": {\n      \"vendor_verification_id\": \"<string>\",\n      \"vendor\": \"<string>\",\n      \"verification_category\": \"<string>\",\n      \"verification_method\": \"<string>\",\n      \"outcome\": \"<string>\",\n      \"verification_time\": \"<dateTime>\",\n      \"comment\": \"<string>\"\n    },\n    \"third_party_verifications\": [\n      {\n        \"vendor_verification_id\": \"<string>\",\n        \"vendor\": \"<string>\",\n        \"verification_category\": \"<string>\",\n        \"verification_method\": \"<string>\",\n        \"outcome\": \"<string>\",\n        \"verification_time\": \"<dateTime>\",\n        \"comment\": \"<string>\"\n      },\n      {\n        \"vendor_verification_id\": \"<string>\",\n        \"vendor\": \"<string>\",\n        \"verification_category\": \"<string>\",\n        \"verification_method\": \"<string>\",\n        \"outcome\": \"<string>\",\n        \"verification_time\": \"<dateTime>\",\n        \"comment\": \"<string>\"\n      }\n    ],\n    \"service_provider_legal_entity_id\": \"<uuid>\",\n    \"metadata\": {\n      \"key\": \"value\",\n      \"foo\": \"bar\",\n      \"modern\": \"treasury\"\n    },\n    \"external_id\": \"<string>\",\n    \"bank_settings\": {\n      \"id\": \"<uuid>\",\n      \"object\": \"<string>\",\n      \"live_mode\": \"<boolean>\",\n      \"created_at\": \"<dateTime>\",\n      \"updated_at\": \"<dateTime>\",\n      \"discarded_at\": \"<dateTime>\",\n      \"enable_backup_withholding\": \"<boolean>\",\n      \"backup_withholding_percentage\": \"<integer>\",\n      \"privacy_opt_out\": \"<boolean>\",\n      \"regulation_o\": \"<boolean>\"\n    },\n    \"wealth_and_employment_details\": {\n      \"id\": \"<uuid>\",\n      \"object\": \"<string>\",\n      \"live_mode\": \"<boolean>\",\n      \"created_at\": \"<dateTime>\",\n      \"updated_at\": \"<dateTime>\",\n      \"discarded_at\": \"<dateTime>\",\n      \"employment_status\": \"<string>\",\n      \"occupation\": \"<string>\",\n      \"industry\": \"<string>\",\n      \"income_source\": \"<string>\",\n      \"income_state\": \"<string>\",\n      \"income_country\": \"<string>\",\n      \"employer_name\": \"<string>\",\n      \"employer_state\": \"<string>\",\n      \"employer_country\": \"<string>\",\n      \"source_of_funds\": \"<string>\",\n      \"wealth_source\": \"<string>\",\n      \"annual_income\": \"<integer>\"\n    },\n    \"compliance_details\": \"<object>\",\n    \"addresses\": [\n      {\n        \"line1\": \"<string>\",\n        \"locality\": \"<string>\",\n        \"region\": \"<string>\",\n        \"postal_code\": \"<string>\",\n        \"country\": \"<string>\",\n        \"address_types\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"line2\": \"<string>\"\n      },\n      {\n        \"line1\": \"<string>\",\n        \"locality\": \"<string>\",\n        \"region\": \"<string>\",\n        \"postal_code\": \"<string>\",\n        \"country\": \"<string>\",\n        \"address_types\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"line2\": \"<string>\"\n      }\n    ],\n    \"identifications\": [\n      {\n        \"id_number\": \"<string>\",\n        \"id_type\": \"<string>\",\n        \"documents\": [\n          {\n            \"document_type\": \"<string>\",\n            \"file_data\": \"<string>\",\n            \"filename\": \"<string>\"\n          },\n          {\n            \"document_type\": \"<string>\",\n            \"file_data\": \"<string>\",\n            \"filename\": \"<string>\"\n          }\n        ],\n        \"expiration_date\": \"<date>\",\n        \"issuing_country\": \"<string>\",\n        \"issuing_region\": \"<string>\"\n      },\n      {\n        \"id_number\": \"<string>\",\n        \"id_type\": \"<string>\",\n        \"documents\": [\n          {\n            \"document_type\": \"<string>\",\n            \"file_data\": \"<string>\",\n            \"filename\": \"<string>\"\n          },\n          {\n            \"document_type\": \"<string>\",\n            \"file_data\": \"<string>\",\n            \"filename\": \"<string>\"\n          }\n        ],\n        \"expiration_date\": \"<date>\",\n        \"issuing_country\": \"<string>\",\n        \"issuing_region\": \"<string>\"\n      }\n    ],\n    \"documents\": [\n      {\n        \"document_type\": \"<string>\",\n        \"file_data\": \"<string>\",\n        \"filename\": \"<string>\"\n      },\n      {\n        \"document_type\": \"<string>\",\n        \"file_data\": \"<string>\",\n        \"filename\": \"<string>\"\n      }\n    ],\n    \"industry_classifications\": [\n      {\n        \"id\": \"<uuid>\",\n        \"object\": \"<string>\",\n        \"live_mode\": \"<boolean>\",\n        \"created_at\": \"<dateTime>\",\n        \"updated_at\": \"<dateTime>\",\n        \"discarded_at\": \"<dateTime>\",\n        \"classification_type\": \"<string>\",\n        \"classification_codes\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      },\n      {\n        \"id\": \"<uuid>\",\n        \"object\": \"<string>\",\n        \"live_mode\": \"<boolean>\",\n        \"created_at\": \"<dateTime>\",\n        \"updated_at\": \"<dateTime>\",\n        \"discarded_at\": \"<dateTime>\",\n        \"classification_type\": \"<string>\",\n        \"classification_codes\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      }\n    ],\n    \"legal_entity_associations\": [\n      {\n        \"relationship_types\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"title\": \"<string>\",\n        \"ownership_percentage\": \"<integer>\",\n        \"child_legal_entity\": {\n          \"legal_entity_type\": \"<string>\",\n          \"risk_rating\": \"<string>\",\n          \"prefix\": \"<string>\",\n          \"first_name\": \"<string>\",\n          \"middle_name\": \"<string>\",\n          \"last_name\": \"<string>\",\n          \"suffix\": \"<string>\",\n          \"preferred_name\": \"<string>\",\n          \"citizenship_country\": \"<string>\",\n          \"politically_exposed_person\": \"<boolean>\",\n          \"date_of_birth\": \"<date>\",\n          \"date_formed\": \"<date>\",\n          \"business_name\": \"<string>\",\n          \"doing_business_as_names\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"legal_structure\": \"<string>\",\n          \"phone_numbers\": [\n            {\n              \"phone_number\": \"<string>\"\n            },\n            {\n              \"phone_number\": \"<string>\"\n            }\n          ],\n          \"email\": \"<string>\",\n          \"website\": \"<string>\",\n          \"business_description\": \"<string>\",\n          \"intended_use\": \"<string>\",\n          \"expected_activity_volume\": \"<integer>\",\n          \"country_of_incorporation\": \"<string>\",\n          \"operating_jurisdictions\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"primary_social_media_sites\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"listed_exchange\": \"<string>\",\n          \"ticker_symbol\": \"<string>\",\n          \"regulators\": [\n            {\n              \"name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"jurisdiction\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"registration_number\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"jurisdiction\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"registration_number\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"third_party_verification\": {\n            \"vendor_verification_id\": \"<string>\",\n            \"vendor\": \"<string>\",\n            \"verification_category\": \"<string>\",\n            \"verification_method\": \"<string>\",\n            \"outcome\": \"<string>\",\n            \"verification_time\": \"<dateTime>\",\n            \"comment\": \"<string>\"\n          },\n          \"third_party_verifications\": [\n            {\n              \"vendor_verification_id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"vendor\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"verification_category\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"verification_method\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"outcome\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"verification_time\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"comment\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"vendor_verification_id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"vendor\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"verification_category\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"verification_method\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"outcome\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"verification_time\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"comment\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"service_provider_legal_entity_id\": \"<uuid>\",\n          \"metadata\": {\n            \"key\": \"value\",\n            \"foo\": \"bar\",\n            \"modern\": \"treasury\"\n          },\n          \"external_id\": \"<string>\",\n          \"bank_settings\": {\n            \"id\": \"<uuid>\",\n            \"object\": \"<string>\",\n            \"live_mode\": \"<boolean>\",\n            \"created_at\": \"<dateTime>\",\n            \"updated_at\": \"<dateTime>\",\n            \"discarded_at\": \"<dateTime>\",\n            \"enable_backup_withholding\": \"<boolean>\",\n            \"backup_withholding_percentage\": \"<integer>\",\n            \"privacy_opt_out\": \"<boolean>\",\n            \"regulation_o\": \"<boolean>\"\n          },\n          \"wealth_and_employment_details\": {\n            \"id\": \"<uuid>\",\n            \"object\": \"<string>\",\n            \"live_mode\": \"<boolean>\",\n            \"created_at\": \"<dateTime>\",\n            \"updated_at\": \"<dateTime>\",\n            \"discarded_at\": \"<dateTime>\",\n            \"employment_status\": \"<string>\",\n            \"occupation\": \"<string>\",\n            \"industry\": \"<string>\",\n            \"income_source\": \"<string>\",\n            \"income_state\": \"<string>\",\n            \"income_country\": \"<string>\",\n            \"employer_name\": \"<string>\",\n            \"employer_state\": \"<string>\",\n            \"employer_country\": \"<string>\",\n            \"source_of_funds\": \"<string>\",\n            \"wealth_source\": \"<string>\",\n            \"annual_income\": \"<integer>\"\n          },\n          \"compliance_details\": \"<object>\",\n          \"addresses\": [\n            {\n              \"line1\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"locality\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"region\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"postal_code\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"country\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"address_types\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"line2\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"line1\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"locality\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"region\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"postal_code\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"country\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"address_types\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"line2\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"identifications\": [\n            {\n              \"id_number\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"id_type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"documents\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"expiration_date\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"issuing_country\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"issuing_region\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"id_number\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"id_type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"documents\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"expiration_date\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"issuing_country\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"issuing_region\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"documents\": [\n            {\n              \"document_type\": \"<string>\",\n              \"file_data\": \"<string>\",\n              \"filename\": \"<string>\"\n            },\n            {\n              \"document_type\": \"<string>\",\n              \"file_data\": \"<string>\",\n              \"filename\": \"<string>\"\n            }\n          ],\n          \"industry_classifications\": [\n            {\n              \"id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"object\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"live_mode\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"created_at\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"updated_at\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"discarded_at\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"classification_type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"classification_codes\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"object\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"live_mode\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"created_at\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"updated_at\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"discarded_at\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"classification_type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"classification_codes\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"legal_entity_associations\": [\n            {\n              \"value\": \"<Circular reference to #/components/schemas/legal_entity_association_inline_create_request detected>\"\n            },\n            {\n              \"value\": \"<Circular reference to #/components/schemas/legal_entity_association_inline_create_request detected>\"\n            }\n          ],\n          \"connection_id\": \"<string>\"\n        },\n        \"child_legal_entity_id\": \"<string>\"\n      },\n      {\n        \"relationship_types\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"title\": \"<string>\",\n        \"ownership_percentage\": \"<integer>\",\n        \"child_legal_entity\": {\n          \"legal_entity_type\": \"<string>\",\n          \"risk_rating\": \"<string>\",\n          \"prefix\": \"<string>\",\n          \"first_name\": \"<string>\",\n          \"middle_name\": \"<string>\",\n          \"last_name\": \"<string>\",\n          \"suffix\": \"<string>\",\n          \"preferred_name\": \"<string>\",\n          \"citizenship_country\": \"<string>\",\n          \"politically_exposed_person\": \"<boolean>\",\n          \"date_of_birth\": \"<date>\",\n          \"date_formed\": \"<date>\",\n          \"business_name\": \"<string>\",\n          \"doing_business_as_names\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"legal_structure\": \"<string>\",\n          \"phone_numbers\": [\n            {\n              \"phone_number\": \"<string>\"\n            },\n            {\n              \"phone_number\": \"<string>\"\n            }\n          ],\n          \"email\": \"<string>\",\n          \"website\": \"<string>\",\n          \"business_description\": \"<string>\",\n          \"intended_use\": \"<string>\",\n          \"expected_activity_volume\": \"<integer>\",\n          \"country_of_incorporation\": \"<string>\",\n          \"operating_jurisdictions\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"primary_social_media_sites\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"listed_exchange\": \"<string>\",\n          \"ticker_symbol\": \"<string>\",\n          \"regulators\": [\n            {\n              \"name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"jurisdiction\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"registration_number\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"jurisdiction\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"registration_number\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"third_party_verification\": {\n            \"vendor_verification_id\": \"<string>\",\n            \"vendor\": \"<string>\",\n            \"verification_category\": \"<string>\",\n            \"verification_method\": \"<string>\",\n            \"outcome\": \"<string>\",\n            \"verification_time\": \"<dateTime>\",\n            \"comment\": \"<string>\"\n          },\n          \"third_party_verifications\": [\n            {\n              \"vendor_verification_id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"vendor\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"verification_category\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"verification_method\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"outcome\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"verification_time\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"comment\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"vendor_verification_id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"vendor\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"verification_category\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"verification_method\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"outcome\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"verification_time\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"comment\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"service_provider_legal_entity_id\": \"<uuid>\",\n          \"metadata\": {\n            \"key\": \"value\",\n            \"foo\": \"bar\",\n            \"modern\": \"treasury\"\n          },\n          \"external_id\": \"<string>\",\n          \"bank_settings\": {\n            \"id\": \"<uuid>\",\n            \"object\": \"<string>\",\n            \"live_mode\": \"<boolean>\",\n            \"created_at\": \"<dateTime>\",\n            \"updated_at\": \"<dateTime>\",\n            \"discarded_at\": \"<dateTime>\",\n            \"enable_backup_withholding\": \"<boolean>\",\n            \"backup_withholding_percentage\": \"<integer>\",\n            \"privacy_opt_out\": \"<boolean>\",\n            \"regulation_o\": \"<boolean>\"\n          },\n          \"wealth_and_employment_details\": {\n            \"id\": \"<uuid>\",\n            \"object\": \"<string>\",\n            \"live_mode\": \"<boolean>\",\n            \"created_at\": \"<dateTime>\",\n            \"updated_at\": \"<dateTime>\",\n            \"discarded_at\": \"<dateTime>\",\n            \"employment_status\": \"<string>\",\n            \"occupation\": \"<string>\",\n            \"industry\": \"<string>\",\n            \"income_source\": \"<string>\",\n            \"income_state\": \"<string>\",\n            \"income_country\": \"<string>\",\n            \"employer_name\": \"<string>\",\n            \"employer_state\": \"<string>\",\n            \"employer_country\": \"<string>\",\n            \"source_of_funds\": \"<string>\",\n            \"wealth_source\": \"<string>\",\n            \"annual_income\": \"<integer>\"\n          },\n          \"compliance_details\": \"<object>\",\n          \"addresses\": [\n            {\n              \"line1\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"locality\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"region\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"postal_code\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"country\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"address_types\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"line2\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"line1\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"locality\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"region\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"postal_code\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"country\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"address_types\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"line2\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"identifications\": [\n            {\n              \"id_number\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"id_type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"documents\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"expiration_date\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"issuing_country\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"issuing_region\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"id_number\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"id_type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"documents\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"expiration_date\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"issuing_country\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"issuing_region\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"documents\": [\n            {\n              \"document_type\": \"<string>\",\n              \"file_data\": \"<string>\",\n              \"filename\": \"<string>\"\n            },\n            {\n              \"document_type\": \"<string>\",\n              \"file_data\": \"<string>\",\n              \"filename\": \"<string>\"\n            }\n          ],\n          \"industry_classifications\": [\n            {\n              \"id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"object\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"live_mode\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"created_at\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"updated_at\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"discarded_at\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"classification_type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"classification_codes\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"object\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"live_mode\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"created_at\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"updated_at\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"discarded_at\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"classification_type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"classification_codes\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"legal_entity_associations\": [\n            {\n              \"value\": \"<Circular reference to #/components/schemas/legal_entity_association_inline_create_request detected>\"\n            },\n            {\n              \"value\": \"<Circular reference to #/components/schemas/legal_entity_association_inline_create_request detected>\"\n            }\n          ],\n          \"connection_id\": \"<string>\"\n        },\n        \"child_legal_entity_id\": \"<string>\"\n      }\n    ],\n    \"connection_id\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": {\n    \"code\": \"not_found\",\n    \"message\": \"string\",\n    \"parameter\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "bffd34ff-fcfb-405b-a6d9-3c1dd675d378",
+          "name": "get connection_legal_entity",
+          "request": {
+            "name": "get connection_legal_entity",
+            "description": {
+              "content": "Get details on a single connection legal entity.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "connection_legal_entities",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The id of an existing connection legal entity."
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "This key should be something unique, preferably something like an UUID.",
+                "key": "Idempotency-Key",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "b061ce22-7a84-486b-8a91-36af880016b3",
+              "name": "successful",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "connection_legal_entities",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The id of an existing connection legal entity."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "This key should be something unique, preferably something like an UUID.",
+                    "key": "Idempotency-Key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"fced5fef-357b-4b0a-f8b3-3506d98eefc3\",\n  \"object\": \"string\",\n  \"live_mode\": true,\n  \"created_at\": \"1996-09-28T07:26:07.614Z\",\n  \"updated_at\": \"1957-09-02T15:21:04.432Z\",\n  \"discarded_at\": \"2001-05-20T06:10:07.509Z\",\n  \"connection_id\": \"string\",\n  \"legal_entity_id\": \"string\",\n  \"status\": \"completed\",\n  \"vendor_id\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a4116af0-dce3-4908-8eaf-5f37a9fa308c",
+              "name": "not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "connection_legal_entities",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The id of an existing connection legal entity."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "This key should be something unique, preferably something like an UUID.",
+                    "key": "Idempotency-Key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": {\n    \"code\": \"not_found\",\n    \"message\": \"string\",\n    \"parameter\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d4a60fb2-f654-48ba-a6d2-d8ec6ab47853",
+          "name": "update connection_legal_entity",
+          "request": {
+            "name": "update connection_legal_entity",
+            "description": {
+              "content": "Update a connection legal entity.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "connection_legal_entities",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The id of an existing connection legal entity."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "146023c4-3e80-4dac-b730-8403df87f127",
+              "name": "successful",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "connection_legal_entities",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The id of an existing connection legal entity."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"status\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"fced5fef-357b-4b0a-f8b3-3506d98eefc3\",\n  \"object\": \"string\",\n  \"live_mode\": true,\n  \"created_at\": \"1996-09-28T07:26:07.614Z\",\n  \"updated_at\": \"1957-09-02T15:21:04.432Z\",\n  \"discarded_at\": \"2001-05-20T06:10:07.509Z\",\n  \"connection_id\": \"string\",\n  \"legal_entity_id\": \"string\",\n  \"status\": \"completed\",\n  \"vendor_id\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "36d1027a-2315-4e8b-84d2-7286da73e8ec",
+              "name": "not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "connection_legal_entities",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The id of an existing connection legal entity."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"status\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": {\n    \"code\": \"not_found\",\n    \"message\": \"string\",\n    \"parameter\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "dee5b589-5e0f-4b5d-9635-53b2b6470708",
+              "name": "unsuccessful",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "connection_legal_entities",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The id of an existing connection legal entity."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"status\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": {\n    \"code\": \"not_found\",\n    \"message\": \"string\",\n    \"parameter\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "http://localhost:3000",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "cab1bd00-987e-46d8-a064-fdd0a1bab0c4",
+    "name": "Modern Treasury AccountCapability ConnectionLegalEntity API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Modern Treasury REST API. Please see https://docs.moderntreasury.com for more details.\n\nContact Support:\n Name: Modern Treasury Engineering Team",
+      "type": "text/plain"
+    }
+  }
+}

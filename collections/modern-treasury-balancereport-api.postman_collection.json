@@ -1,0 +1,977 @@
+{
+  "item": [
+    {
+      "id": "8da4a981-f6ce-47ff-b435-61a3ccad0f48",
+      "name": "BalanceReport",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "a269c69a-4f2c-472b-95c0-3b7c28fbba95",
+          "name": "list balance_reports",
+          "request": {
+            "name": "list balance_reports",
+            "description": {
+              "content": "Get all balance reports for a given internal account.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "internal_accounts",
+                ":internal_account_id",
+                "balance_reports"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "as_of_date",
+                  "value": "<date>",
+                  "description": "The date of the balance report in local time."
+                },
+                {
+                  "disabled": false,
+                  "key": "balance_report_type",
+                  "value": "<string>",
+                  "description": "The specific type of balance report. One of `intraday`, `previous_day`, `real_time`, or `other`."
+                },
+                {
+                  "disabled": false,
+                  "key": "after_cursor",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "per_page",
+                  "value": "<integer>"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "internal_account_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "024884b0-79cc-42f8-895c-0f04fb5fcc20",
+              "name": "successful",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "internal_accounts",
+                    ":internal_account_id",
+                    "balance_reports"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "as_of_date",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "balance_report_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "after_cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "internal_account_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "The cursor for the next page. Including this in a call as `after_cursor` will return the next page.",
+                  "key": "X-After-Cursor",
+                  "value": "string"
+                },
+                {
+                  "disabled": false,
+                  "description": "The current `per_page`.",
+                  "key": "X-Per-Page",
+                  "value": "1931"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"64bd36c1-c38d-0c35-8f4c-84cf12515df6\",\n    \"object\": \"string\",\n    \"live_mode\": true,\n    \"created_at\": \"1997-09-28T12:40:39.129Z\",\n    \"updated_at\": \"1961-09-05T20:12:21.801Z\",\n    \"balance_report_type\": \"real_time\",\n    \"as_of_date\": \"1952-01-01\",\n    \"as_of_time\": \"01:48:48.026Z\",\n    \"balances\": [\n      {\n        \"id\": \"b1eed89e-dcae-0fe7-41fe-8fdb1abbf2ba\",\n        \"object\": \"string\",\n        \"live_mode\": true,\n        \"created_at\": \"2005-08-08T06:10:21.157Z\",\n        \"updated_at\": \"1955-09-20T05:19:38.251Z\",\n        \"amount\": 5882,\n        \"currency\": \"DKK\",\n        \"balance_type\": \"previously_closed_book\",\n        \"vendor_code\": \"string\",\n        \"vendor_code_type\": \"string\",\n        \"as_of_date\": \"1953-05-03\",\n        \"as_of_time\": \"18:18:34.491Z\",\n        \"value_date\": \"2020-10-21\"\n      },\n      {\n        \"id\": \"b09b33be-ad44-d1f7-04a2-bce8ee05bbd1\",\n        \"object\": \"string\",\n        \"live_mode\": false,\n        \"created_at\": \"1982-02-01T00:57:26.609Z\",\n        \"updated_at\": \"1967-08-20T16:31:06.448Z\",\n        \"amount\": 8689,\n        \"currency\": \"YER\",\n        \"balance_type\": \"current_available\",\n        \"vendor_code\": \"string\",\n        \"vendor_code_type\": \"string\",\n        \"as_of_date\": \"1980-02-22\",\n        \"as_of_time\": \"11:30:22.937Z\",\n        \"value_date\": \"1963-09-13\"\n      }\n    ],\n    \"internal_account_id\": \"f6a055ec-c171-19ca-e651-1eb58fbe7015\"\n  },\n  {\n    \"id\": \"f0d1337f-a059-d8ab-dc96-769061061d57\",\n    \"object\": \"string\",\n    \"live_mode\": false,\n    \"created_at\": \"1980-01-15T05:19:39.356Z\",\n    \"updated_at\": \"2006-01-22T01:46:43.018Z\",\n    \"balance_report_type\": \"real_time\",\n    \"as_of_date\": \"2012-06-10\",\n    \"as_of_time\": \"17:45:02.865Z\",\n    \"balances\": [\n      {\n        \"id\": \"5d57930e-9fc6-f1a9-1d9a-987433dd867a\",\n        \"object\": \"string\",\n        \"live_mode\": true,\n        \"created_at\": \"1998-08-03T14:21:30.856Z\",\n        \"updated_at\": \"2017-03-29T05:40:15.235Z\",\n        \"amount\": 5083,\n        \"currency\": \"SYP\",\n        \"balance_type\": \"closing_available\",\n        \"vendor_code\": \"string\",\n        \"vendor_code_type\": \"string\",\n        \"as_of_date\": \"2002-10-27\",\n        \"as_of_time\": \"12:26:38.885Z\",\n        \"value_date\": \"2016-05-16\"\n      },\n      {\n        \"id\": \"378491f3-e140-dd37-94a6-2685ccf17a90\",\n        \"object\": \"string\",\n        \"live_mode\": true,\n        \"created_at\": \"2013-08-04T10:24:20.696Z\",\n        \"updated_at\": \"2017-06-13T02:56:16.193Z\",\n        \"amount\": 4600,\n        \"currency\": \"MXN\",\n        \"balance_type\": \"other\",\n        \"vendor_code\": \"string\",\n        \"vendor_code_type\": \"string\",\n        \"as_of_date\": \"2017-10-15\",\n        \"as_of_time\": \"13:37:35.289Z\",\n        \"value_date\": \"2019-01-04\"\n      }\n    ],\n    \"internal_account_id\": \"e18e557e-24ae-7aad-91fe-aa53144c50d0\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a775646c-f3c0-40ef-81c8-dc4c12abb0f5",
+              "name": "forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "internal_accounts",
+                    ":internal_account_id",
+                    "balance_reports"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "as_of_date",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "balance_report_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "after_cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "internal_account_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": {\n    \"code\": \"too_many_requests\",\n    \"message\": \"string\",\n    \"parameter\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "fe5d7d11-9686-4c87-9288-9a238e561b63",
+          "name": "create balance reports",
+          "request": {
+            "name": "create balance reports",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "internal_accounts",
+                ":internal_account_id",
+                "balance_reports"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "internal_account_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "This key should be something unique, preferably something like an UUID.",
+                "key": "Idempotency-Key",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"as_of_date\": \"<date>\",\n  \"as_of_time\": \"<string>\",\n  \"balance_report_type\": \"<string>\",\n  \"balances\": [\n    {\n      \"amount\": \"<integer>\",\n      \"balance_type\": \"<string>\",\n      \"vendor_code\": \"<string>\",\n      \"vendor_code_type\": \"<string>\"\n    },\n    {\n      \"amount\": \"<integer>\",\n      \"balance_type\": \"<string>\",\n      \"vendor_code\": \"<string>\",\n      \"vendor_code_type\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "e8eb2407-997f-43d3-85f8-47336c0ae5fe",
+              "name": "successful",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "internal_accounts",
+                    ":internal_account_id",
+                    "balance_reports"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "internal_account_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "This key should be something unique, preferably something like an UUID.",
+                    "key": "Idempotency-Key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"as_of_date\": \"<date>\",\n  \"as_of_time\": \"<string>\",\n  \"balance_report_type\": \"<string>\",\n  \"balances\": [\n    {\n      \"amount\": \"<integer>\",\n      \"balance_type\": \"<string>\",\n      \"vendor_code\": \"<string>\",\n      \"vendor_code_type\": \"<string>\"\n    },\n    {\n      \"amount\": \"<integer>\",\n      \"balance_type\": \"<string>\",\n      \"vendor_code\": \"<string>\",\n      \"vendor_code_type\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"79de95ff-2904-5b8b-3e58-b71376ca88fe\",\n  \"object\": \"string\",\n  \"live_mode\": false,\n  \"created_at\": \"1992-03-05T17:19:08.941Z\",\n  \"updated_at\": \"1989-08-29T20:47:39.096Z\",\n  \"balance_report_type\": \"intraday\",\n  \"as_of_date\": \"2019-09-15\",\n  \"as_of_time\": \"05:06:29.863Z\",\n  \"balances\": [\n    {\n      \"id\": \"dc854692-6ef6-145e-fdfb-ac17dccaaccd\",\n      \"object\": \"string\",\n      \"live_mode\": true,\n      \"created_at\": \"1951-09-05T07:58:37.653Z\",\n      \"updated_at\": \"1975-07-31T21:13:28.036Z\",\n      \"amount\": 4410,\n      \"currency\": \"SGD\",\n      \"balance_type\": \"current_available\",\n      \"vendor_code\": \"string\",\n      \"vendor_code_type\": \"string\",\n      \"as_of_date\": \"1965-12-28\",\n      \"as_of_time\": \"19:24:30.290Z\",\n      \"value_date\": \"1969-10-09\"\n    },\n    {\n      \"id\": \"b6ce4cb4-61cd-82f0-8c93-598d9f855ba1\",\n      \"object\": \"string\",\n      \"live_mode\": true,\n      \"created_at\": \"1987-07-01T05:11:23.413Z\",\n      \"updated_at\": \"1960-09-21T12:38:22.232Z\",\n      \"amount\": 3141,\n      \"currency\": \"JMD\",\n      \"balance_type\": \"closing_ledger\",\n      \"vendor_code\": \"string\",\n      \"vendor_code_type\": \"string\",\n      \"as_of_date\": \"2010-09-06\",\n      \"as_of_time\": \"05:46:39.370Z\",\n      \"value_date\": \"1986-02-14\"\n    }\n  ],\n  \"internal_account_id\": \"9c33546e-9898-3f41-4e7a-190b9bcb2cfb\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "64636864-84dd-4ff8-b71f-4479bb234c50",
+              "name": "unsuccessful",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "internal_accounts",
+                    ":internal_account_id",
+                    "balance_reports"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "internal_account_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "This key should be something unique, preferably something like an UUID.",
+                    "key": "Idempotency-Key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"as_of_date\": \"<date>\",\n  \"as_of_time\": \"<string>\",\n  \"balance_report_type\": \"<string>\",\n  \"balances\": [\n    {\n      \"amount\": \"<integer>\",\n      \"balance_type\": \"<string>\",\n      \"vendor_code\": \"<string>\",\n      \"vendor_code_type\": \"<string>\"\n    },\n    {\n      \"amount\": \"<integer>\",\n      \"balance_type\": \"<string>\",\n      \"vendor_code\": \"<string>\",\n      \"vendor_code_type\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": {\n    \"code\": \"too_many_requests\",\n    \"message\": \"string\",\n    \"parameter\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5b0920c7-d6b4-42f7-865c-02161670da31",
+          "name": "get balance_report",
+          "request": {
+            "name": "get balance_report",
+            "description": {
+              "content": "Get a single balance report for a given internal account.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "internal_accounts",
+                ":internal_account_id",
+                "balance_reports",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "internal_account_id",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Either the unique identifier of the balance report or 'latest' for the latest balance report."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "8efbe76d-5f0e-426a-8f9a-ee08fe51d441",
+              "name": "successful",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "internal_accounts",
+                    ":internal_account_id",
+                    "balance_reports",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "internal_account_id",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Either the unique identifier of the balance report or 'latest' for the latest balance report."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"79de95ff-2904-5b8b-3e58-b71376ca88fe\",\n  \"object\": \"string\",\n  \"live_mode\": false,\n  \"created_at\": \"1992-03-05T17:19:08.941Z\",\n  \"updated_at\": \"1989-08-29T20:47:39.096Z\",\n  \"balance_report_type\": \"intraday\",\n  \"as_of_date\": \"2019-09-15\",\n  \"as_of_time\": \"05:06:29.863Z\",\n  \"balances\": [\n    {\n      \"id\": \"dc854692-6ef6-145e-fdfb-ac17dccaaccd\",\n      \"object\": \"string\",\n      \"live_mode\": true,\n      \"created_at\": \"1951-09-05T07:58:37.653Z\",\n      \"updated_at\": \"1975-07-31T21:13:28.036Z\",\n      \"amount\": 4410,\n      \"currency\": \"SGD\",\n      \"balance_type\": \"current_available\",\n      \"vendor_code\": \"string\",\n      \"vendor_code_type\": \"string\",\n      \"as_of_date\": \"1965-12-28\",\n      \"as_of_time\": \"19:24:30.290Z\",\n      \"value_date\": \"1969-10-09\"\n    },\n    {\n      \"id\": \"b6ce4cb4-61cd-82f0-8c93-598d9f855ba1\",\n      \"object\": \"string\",\n      \"live_mode\": true,\n      \"created_at\": \"1987-07-01T05:11:23.413Z\",\n      \"updated_at\": \"1960-09-21T12:38:22.232Z\",\n      \"amount\": 3141,\n      \"currency\": \"JMD\",\n      \"balance_type\": \"closing_ledger\",\n      \"vendor_code\": \"string\",\n      \"vendor_code_type\": \"string\",\n      \"as_of_date\": \"2010-09-06\",\n      \"as_of_time\": \"05:46:39.370Z\",\n      \"value_date\": \"1986-02-14\"\n    }\n  ],\n  \"internal_account_id\": \"9c33546e-9898-3f41-4e7a-190b9bcb2cfb\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "98dacf53-f1a0-4afc-ad28-082d2f5fbd71",
+              "name": "not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "internal_accounts",
+                    ":internal_account_id",
+                    "balance_reports",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "internal_account_id",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Either the unique identifier of the balance report or 'latest' for the latest balance report."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": {\n    \"code\": \"too_many_requests\",\n    \"message\": \"string\",\n    \"parameter\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7fedd98d-423c-4b96-a472-d9ca7abde358",
+          "name": "delete balance_report",
+          "request": {
+            "name": "delete balance_report",
+            "description": {
+              "content": "Deletes a given balance report.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "internal_accounts",
+                ":internal_account_id",
+                "balance_reports",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "internal_account_id",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Either the unique identifier of the balance report or 'latest' for the latest balance report."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "34981c50-79fa-4c55-9ada-07afd77aae7d",
+              "name": "no content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "internal_accounts",
+                    ":internal_account_id",
+                    "balance_reports",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "internal_account_id",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Either the unique identifier of the balance report or 'latest' for the latest balance report."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "b7a3ebd5-cb18-41bc-b603-3abd660388f5",
+              "name": "forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "internal_accounts",
+                    ":internal_account_id",
+                    "balance_reports",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "internal_account_id",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Either the unique identifier of the balance report or 'latest' for the latest balance report."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": {\n    \"code\": \"too_many_requests\",\n    \"message\": \"string\",\n    \"parameter\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e68e2b3c-fc2e-4c91-aa22-ba7cc1b18dfe",
+              "name": "not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "internal_accounts",
+                    ":internal_account_id",
+                    "balance_reports",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "internal_account_id",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Either the unique identifier of the balance report or 'latest' for the latest balance report."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": {\n    \"code\": \"too_many_requests\",\n    \"message\": \"string\",\n    \"parameter\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ee88f4a1-591c-40d1-af12-e4e209ae55fa",
+              "name": "not allowed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "internal_accounts",
+                    ":internal_account_id",
+                    "balance_reports",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "internal_account_id",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Either the unique identifier of the balance report or 'latest' for the latest balance report."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": {\n    \"code\": \"too_many_requests\",\n    \"message\": \"string\",\n    \"parameter\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "http://localhost:3000",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "f83fe2a7-95c9-409f-b6f8-47e92bc9f320",
+    "name": "Modern Treasury AccountCapability BalanceReport API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Modern Treasury REST API. Please see https://docs.moderntreasury.com for more details.\n\nContact Support:\n Name: Modern Treasury Engineering Team",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,330 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Modern Treasury AccountCapability LedgerAccountCategory API",
+    "version": "v1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "LedgerAccountCategory",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "list ledger_account_categories",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:3000/api/ledger_account_categories",
+            "params": [
+              {
+                "name": "after_cursor",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "metadata",
+                "value": "",
+                "type": "query",
+                "description": "For example, if you want to query for records with metadata key `Type` and value `Loan`, the query would be `metadata%5BType%5D=Loan`. This encodes the query parameters."
+              },
+              {
+                "name": "id[]",
+                "value": "",
+                "type": "query",
+                "description": "If you have specific IDs to retrieve in bulk, you can pass them as query parameters delimited with `id[]=`, for example `?id[]=123&id[]=abc`."
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "name[]",
+                "value": "",
+                "type": "query",
+                "description": "If you have specific names to retrieve in bulk, you can pass them as query parameters delimited with `name[]=`, for example `?name[]=123&name[]=abc`."
+              },
+              {
+                "name": "ledger_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "currency",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "external_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "parent_ledger_account_category_id",
+                "value": "",
+                "type": "query",
+                "description": "Query categories that are nested underneath a parent category"
+              },
+              {
+                "name": "ledger_account_id",
+                "value": "",
+                "type": "query",
+                "description": "Query categories which contain a ledger account directly or through child categories."
+              },
+              {
+                "name": "balances",
+                "value": "",
+                "type": "query",
+                "description": "For example, if you want the balances as of a particular time (ISO8601), the encoded query string would be `balances%5Beffective_at%5D=2000-12-31T12:00:00Z`. The balances as of a time are inclusive of entries with that exact time, but with respect to the ledger accounts that are currently present in the category."
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Get a list of ledger account categories."
+        },
+        {
+          "info": {
+            "name": "create ledger_account_category",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:3000/api/ledger_account_categories",
+            "headers": [
+              {
+                "name": "Idempotency-Key",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Create a ledger account category."
+        },
+        {
+          "info": {
+            "name": "get ledger_account_category",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:3000/api/ledger_account_categories/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "id"
+              },
+              {
+                "name": "balances",
+                "value": "",
+                "type": "query",
+                "description": "For example, if you want the balances as of a particular time (ISO8601), the encoded query string would be `balances%5Beffective_at%5D=2000-12-31T12:00:00Z`. The balances as of a time are inclusive of entries with that exact time, but with respect to the ledger accounts that are currently present in the category."
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Get the details on a single ledger account category."
+        },
+        {
+          "info": {
+            "name": "update ledger_account_category",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "http://localhost:3000/api/ledger_account_categories/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "id"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Update the details of a ledger account category."
+        },
+        {
+          "info": {
+            "name": "delete ledger_account_category",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "http://localhost:3000/api/ledger_account_categories/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "id"
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Delete a ledger account category."
+        },
+        {
+          "info": {
+            "name": "add ledger_account to ledger_account_category",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "http://localhost:3000/api/ledger_account_categories/:id/ledger_accounts/:ledger_account_id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "id"
+              },
+              {
+                "name": "ledger_account_id",
+                "value": "",
+                "type": "path",
+                "description": "ledger_account_id"
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Add a ledger account to a ledger account category."
+        },
+        {
+          "info": {
+            "name": "remove ledger_account from ledger_account_category",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "http://localhost:3000/api/ledger_account_categories/:id/ledger_accounts/:ledger_account_id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "id"
+              },
+              {
+                "name": "ledger_account_id",
+                "value": "",
+                "type": "path",
+                "description": "ledger_account_id"
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Remove a ledger account from a ledger account category."
+        },
+        {
+          "info": {
+            "name": "add ledger_account_category to ledger_account_category",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "http://localhost:3000/api/ledger_account_categories/:id/ledger_account_categories/:sub_category_id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "id"
+              },
+              {
+                "name": "sub_category_id",
+                "value": "",
+                "type": "path",
+                "description": "sub_category_id"
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Add a ledger account category to a ledger account category."
+        },
+        {
+          "info": {
+            "name": "delete ledger_account_category from ledger_account_category",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "http://localhost:3000/api/ledger_account_categories/:id/ledger_account_categories/:sub_category_id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "id"
+              },
+              {
+                "name": "sub_category_id",
+                "value": "",
+                "type": "path",
+                "description": "sub_category_id"
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Delete a ledger account category from a ledger account category."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

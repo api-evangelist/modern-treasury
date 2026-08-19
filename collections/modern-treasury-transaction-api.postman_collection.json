@@ -1,0 +1,974 @@
+{
+  "item": [
+    {
+      "id": "2bb5bd9d-b98a-498c-a01a-742e8086dd7e",
+      "name": "Transaction",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "c79fb204-8180-4c27-bf6f-949241494ff3",
+          "name": "list transactions",
+          "request": {
+            "name": "list transactions",
+            "description": {
+              "content": "Get a list of all transactions.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "transactions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "after_cursor",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "per_page",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "internal_account_id",
+                  "value": "<string>",
+                  "description": "Specify `internal_account_id` if you wish to see transactions to/from a specific account."
+                },
+                {
+                  "disabled": false,
+                  "key": "virtual_account_id",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "posted",
+                  "value": "<boolean>",
+                  "description": "Either `true` or `false`."
+                },
+                {
+                  "disabled": false,
+                  "key": "as_of_date_start",
+                  "value": "<date>",
+                  "description": "Filters transactions with an `as_of_date` starting on or after the specified date (YYYY-MM-DD)."
+                },
+                {
+                  "disabled": false,
+                  "key": "as_of_date_end",
+                  "value": "<date>",
+                  "description": "Filters transactions with an `as_of_date` starting on or before the specified date (YYYY-MM-DD)."
+                },
+                {
+                  "disabled": false,
+                  "key": "direction",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "counterparty_id",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "payment_type",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "transactable_type",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "description",
+                  "value": "<string>",
+                  "description": "Filters for transactions including the queried string in the description."
+                },
+                {
+                  "disabled": false,
+                  "key": "vendor_id",
+                  "value": "<string>",
+                  "description": "Filters for transactions including the queried vendor id (an identifier given to transactions by the bank)."
+                },
+                {
+                  "disabled": false,
+                  "key": "metadata[key_0]",
+                  "value": "<string>",
+                  "description": "For example, if you want to query for records with metadata key `Type` and value `Loan`, the query would be `metadata%5BType%5D=Loan`. This encodes the query parameters."
+                },
+                {
+                  "disabled": false,
+                  "key": "metadata[key_1]",
+                  "value": "<string>",
+                  "description": "For example, if you want to query for records with metadata key `Type` and value `Loan`, the query would be `metadata%5BType%5D=Loan`. This encodes the query parameters."
+                },
+                {
+                  "disabled": false,
+                  "key": "metadata[key_2]",
+                  "value": "<string>",
+                  "description": "For example, if you want to query for records with metadata key `Type` and value `Loan`, the query would be `metadata%5BType%5D=Loan`. This encodes the query parameters."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "5325b36e-2e00-4a2c-8dda-73754ebe3284",
+              "name": "successful",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "transactions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "after_cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "internal_account_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "virtual_account_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "posted",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "as_of_date_start",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "as_of_date_end",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "direction",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "counterparty_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "payment_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "transactable_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "description",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "vendor_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "metadata[key_0]",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "The cursor for the next page. Including this in a call as `after_cursor` will return the next page.",
+                  "key": "X-After-Cursor",
+                  "value": "string"
+                },
+                {
+                  "disabled": false,
+                  "description": "The current `per_page`.",
+                  "key": "X-Per-Page",
+                  "value": "7801"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"e5d726f2-fada-e92e-d32d-b07e4362e19f\",\n    \"object\": \"string\",\n    \"live_mode\": true,\n    \"created_at\": \"1978-02-05T04:59:03.300Z\",\n    \"updated_at\": \"1995-03-01T10:04:14.190Z\",\n    \"discarded_at\": \"1969-01-02T22:16:01.851Z\",\n    \"amount\": 5398,\n    \"currency\": \"MUR\",\n    \"direction\": \"string\",\n    \"vendor_code\": \"string\",\n    \"vendor_code_type\": \"bankprov\",\n    \"vendor_id\": \"string\",\n    \"as_of_date\": \"1983-07-23\",\n    \"as_of_time\": \"04:27:21.646Z\",\n    \"as_of_timezone\": \"string\",\n    \"internal_account_id\": \"ca61332c-f3fe-23dd-ae19-62276f0afb3b\",\n    \"metadata\": {\n      \"key\": \"value\",\n      \"foo\": \"bar\",\n      \"modern\": \"treasury\"\n    },\n    \"posted\": true,\n    \"vendor_customer_id\": \"string\",\n    \"reconciled\": true,\n    \"type\": \"hu_ics\",\n    \"foreign_exchange_rate\": {\n      \"base_amount\": 3313,\n      \"base_currency\": \"ERN\",\n      \"exponent\": 4670,\n      \"rate_string\": \"string\",\n      \"target_amount\": 8928,\n      \"target_currency\": \"LKR\",\n      \"value\": 8333\n    },\n    \"custom_identifiers\": {\n      \"key\": \"value\",\n      \"foo\": \"bar\",\n      \"modern\": \"treasury\"\n    },\n    \"vendor_description\": \"string\",\n    \"details\": {\n      \"key_0\": \"string\"\n    }\n  },\n  {\n    \"id\": \"18341f4f-aeb7-8f6b-be27-d162c7a4470f\",\n    \"object\": \"string\",\n    \"live_mode\": true,\n    \"created_at\": \"1960-06-11T13:57:49.647Z\",\n    \"updated_at\": \"2021-10-13T20:25:38.342Z\",\n    \"discarded_at\": \"2022-06-27T05:14:29.368Z\",\n    \"amount\": 6414,\n    \"currency\": \"MNT\",\n    \"direction\": \"string\",\n    \"vendor_code\": \"string\",\n    \"vendor_code_type\": \"silvergate\",\n    \"vendor_id\": \"string\",\n    \"as_of_date\": \"1969-09-21\",\n    \"as_of_time\": \"11:29:41.980Z\",\n    \"as_of_timezone\": \"string\",\n    \"internal_account_id\": \"9d8b276c-3c54-8692-a67d-7a91aaa98023\",\n    \"metadata\": {\n      \"key\": \"value\",\n      \"foo\": \"bar\",\n      \"modern\": \"treasury\"\n    },\n    \"posted\": false,\n    \"vendor_customer_id\": \"string\",\n    \"reconciled\": false,\n    \"type\": \"provxchange\",\n    \"foreign_exchange_rate\": {\n      \"base_amount\": 4716,\n      \"base_currency\": \"ZMK\",\n      \"exponent\": 5672,\n      \"rate_string\": \"string\",\n      \"target_amount\": 1386,\n      \"target_currency\": \"ZWR\",\n      \"value\": 7008\n    },\n    \"custom_identifiers\": {\n      \"key\": \"value\",\n      \"foo\": \"bar\",\n      \"modern\": \"treasury\"\n    },\n    \"vendor_description\": \"string\",\n    \"details\": {\n      \"key_0\": \"string\",\n      \"key_1\": \"string\"\n    }\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "da471301-8776-4861-9a6b-dbfb749f41a1",
+          "name": "create transaction",
+          "request": {
+            "name": "create transaction",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "transactions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "This key should be something unique, preferably something like an UUID.",
+                "key": "Idempotency-Key",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"amount\": \"<integer>\",\n  \"direction\": \"<string>\",\n  \"vendor_code\": \"<string>\",\n  \"vendor_code_type\": \"<string>\",\n  \"as_of_date\": \"<date>\",\n  \"internal_account_id\": \"<uuid>\",\n  \"vendor_description\": \"<string>\",\n  \"vendor_customer_id\": \"<string>\",\n  \"metadata\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\"\n  },\n  \"posted\": \"<boolean>\",\n  \"type\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "fbb01c74-d5c6-4543-9791-cc07750c1541",
+              "name": "successful",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "transactions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "This key should be something unique, preferably something like an UUID.",
+                    "key": "Idempotency-Key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"amount\": \"<integer>\",\n  \"direction\": \"<string>\",\n  \"vendor_code\": \"<string>\",\n  \"vendor_code_type\": \"<string>\",\n  \"as_of_date\": \"<date>\",\n  \"internal_account_id\": \"<uuid>\",\n  \"vendor_description\": \"<string>\",\n  \"vendor_customer_id\": \"<string>\",\n  \"metadata\": {\n    \"key\": \"value\",\n    \"foo\": \"bar\",\n    \"modern\": \"treasury\"\n  },\n  \"posted\": \"<boolean>\",\n  \"type\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"0639ba71-55aa-1a6b-ae4d-76841a8b0df1\",\n  \"object\": \"string\",\n  \"live_mode\": true,\n  \"created_at\": \"1998-08-09T01:10:15.928Z\",\n  \"updated_at\": \"1976-05-14T12:52:39.210Z\",\n  \"discarded_at\": \"2015-08-24T15:51:05.651Z\",\n  \"amount\": 4074,\n  \"currency\": \"AZN\",\n  \"direction\": \"string\",\n  \"vendor_code\": \"string\",\n  \"vendor_code_type\": \"dwolla\",\n  \"vendor_id\": \"string\",\n  \"as_of_date\": \"2018-09-19\",\n  \"as_of_time\": \"21:11:01.959Z\",\n  \"as_of_timezone\": \"string\",\n  \"internal_account_id\": \"c85978bd-e756-c306-5663-0f1660062c3f\",\n  \"metadata\": {\n    \"key\": \"value\",\n    \"foo\": \"bar\",\n    \"modern\": \"treasury\"\n  },\n  \"posted\": true,\n  \"vendor_customer_id\": \"string\",\n  \"reconciled\": true,\n  \"type\": \"wire\",\n  \"foreign_exchange_rate\": {\n    \"base_amount\": 8085,\n    \"base_currency\": \"MAD\",\n    \"exponent\": 7787,\n    \"rate_string\": \"string\",\n    \"target_amount\": 3422,\n    \"target_currency\": \"BWP\",\n    \"value\": 3304\n  },\n  \"custom_identifiers\": {\n    \"key\": \"value\",\n    \"foo\": \"bar\",\n    \"modern\": \"treasury\"\n  },\n  \"vendor_description\": \"string\",\n  \"details\": {\n    \"key_0\": \"string\",\n    \"key_1\": \"string\",\n    \"key_2\": \"string\",\n    \"key_3\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6c71b6d0-8e18-49f0-a6fd-ac701432fe6b",
+              "name": "unsuccessful",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "transactions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "This key should be something unique, preferably something like an UUID.",
+                    "key": "Idempotency-Key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"amount\": \"<integer>\",\n  \"direction\": \"<string>\",\n  \"vendor_code\": \"<string>\",\n  \"vendor_code_type\": \"<string>\",\n  \"as_of_date\": \"<date>\",\n  \"internal_account_id\": \"<uuid>\",\n  \"vendor_description\": \"<string>\",\n  \"vendor_customer_id\": \"<string>\",\n  \"metadata\": {\n    \"key\": \"value\",\n    \"foo\": \"bar\",\n    \"modern\": \"treasury\"\n  },\n  \"posted\": \"<boolean>\",\n  \"type\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": {\n    \"code\": \"conflict\",\n    \"message\": \"string\",\n    \"parameter\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "14c3b206-ba24-4543-8f54-84f8d589dd84",
+          "name": "get transaction",
+          "request": {
+            "name": "get transaction",
+            "description": {
+              "content": "Get details on a single transaction.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "transactions",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Transaction ID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "fa3a36fe-0792-400f-99d8-c0886017ddb3",
+              "name": "successful",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "transactions",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Transaction ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"0639ba71-55aa-1a6b-ae4d-76841a8b0df1\",\n  \"object\": \"string\",\n  \"live_mode\": true,\n  \"created_at\": \"1998-08-09T01:10:15.928Z\",\n  \"updated_at\": \"1976-05-14T12:52:39.210Z\",\n  \"discarded_at\": \"2015-08-24T15:51:05.651Z\",\n  \"amount\": 4074,\n  \"currency\": \"AZN\",\n  \"direction\": \"string\",\n  \"vendor_code\": \"string\",\n  \"vendor_code_type\": \"dwolla\",\n  \"vendor_id\": \"string\",\n  \"as_of_date\": \"2018-09-19\",\n  \"as_of_time\": \"21:11:01.959Z\",\n  \"as_of_timezone\": \"string\",\n  \"internal_account_id\": \"c85978bd-e756-c306-5663-0f1660062c3f\",\n  \"metadata\": {\n    \"key\": \"value\",\n    \"foo\": \"bar\",\n    \"modern\": \"treasury\"\n  },\n  \"posted\": true,\n  \"vendor_customer_id\": \"string\",\n  \"reconciled\": true,\n  \"type\": \"wire\",\n  \"foreign_exchange_rate\": {\n    \"base_amount\": 8085,\n    \"base_currency\": \"MAD\",\n    \"exponent\": 7787,\n    \"rate_string\": \"string\",\n    \"target_amount\": 3422,\n    \"target_currency\": \"BWP\",\n    \"value\": 3304\n  },\n  \"custom_identifiers\": {\n    \"key\": \"value\",\n    \"foo\": \"bar\",\n    \"modern\": \"treasury\"\n  },\n  \"vendor_description\": \"string\",\n  \"details\": {\n    \"key_0\": \"string\",\n    \"key_1\": \"string\",\n    \"key_2\": \"string\",\n    \"key_3\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "661be15b-2595-4c03-bfc4-c28440d1c1a1",
+              "name": "not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "transactions",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Transaction ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": {\n    \"code\": \"conflict\",\n    \"message\": \"string\",\n    \"parameter\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f52e2357-d8d7-4c46-9b36-506537e25c3b",
+          "name": "update transaction",
+          "request": {
+            "name": "update transaction",
+            "description": {
+              "content": "Update a single transaction.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "transactions",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Transaction ID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"metadata\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\",\n    \"key_2\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "b1357bc6-ece6-4d53-884f-04980cf59f1d",
+              "name": "successful",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "transactions",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Transaction ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"metadata\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"0639ba71-55aa-1a6b-ae4d-76841a8b0df1\",\n  \"object\": \"string\",\n  \"live_mode\": true,\n  \"created_at\": \"1998-08-09T01:10:15.928Z\",\n  \"updated_at\": \"1976-05-14T12:52:39.210Z\",\n  \"discarded_at\": \"2015-08-24T15:51:05.651Z\",\n  \"amount\": 4074,\n  \"currency\": \"AZN\",\n  \"direction\": \"string\",\n  \"vendor_code\": \"string\",\n  \"vendor_code_type\": \"dwolla\",\n  \"vendor_id\": \"string\",\n  \"as_of_date\": \"2018-09-19\",\n  \"as_of_time\": \"21:11:01.959Z\",\n  \"as_of_timezone\": \"string\",\n  \"internal_account_id\": \"c85978bd-e756-c306-5663-0f1660062c3f\",\n  \"metadata\": {\n    \"key\": \"value\",\n    \"foo\": \"bar\",\n    \"modern\": \"treasury\"\n  },\n  \"posted\": true,\n  \"vendor_customer_id\": \"string\",\n  \"reconciled\": true,\n  \"type\": \"wire\",\n  \"foreign_exchange_rate\": {\n    \"base_amount\": 8085,\n    \"base_currency\": \"MAD\",\n    \"exponent\": 7787,\n    \"rate_string\": \"string\",\n    \"target_amount\": 3422,\n    \"target_currency\": \"BWP\",\n    \"value\": 3304\n  },\n  \"custom_identifiers\": {\n    \"key\": \"value\",\n    \"foo\": \"bar\",\n    \"modern\": \"treasury\"\n  },\n  \"vendor_description\": \"string\",\n  \"details\": {\n    \"key_0\": \"string\",\n    \"key_1\": \"string\",\n    \"key_2\": \"string\",\n    \"key_3\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7bc97286-0644-44e9-87ec-b3e713aba3de",
+              "name": "not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "transactions",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Transaction ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"metadata\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": {\n    \"code\": \"conflict\",\n    \"message\": \"string\",\n    \"parameter\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6a9db347-f04d-4e97-8842-e9d1e084e245",
+          "name": "delete transaction",
+          "request": {
+            "name": "delete transaction",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "transactions",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Transaction ID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "808702df-f9af-472d-9343-43e57490db92",
+              "name": "successful",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "transactions",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Transaction ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "110467ef-2521-425d-8b77-01301a6ac68c",
+              "name": "unsuccessful",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "transactions",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Transaction ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": {\n    \"code\": \"conflict\",\n    \"message\": \"string\",\n    \"parameter\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "http://localhost:3000",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "021bb420-b29f-4d30-9e41-5e1d0bb76633",
+    "name": "Modern Treasury AccountCapability Transaction API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Modern Treasury REST API. Please see https://docs.moderntreasury.com for more details.\n\nContact Support:\n Name: Modern Treasury Engineering Team",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,1144 @@
+{
+  "item": [
+    {
+      "id": "128525c8-9499-4515-9362-e4894d058b17",
+      "name": "LedgerAccountBalanceMonitor",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "9c593140-d56b-47e9-830f-087a138e719a",
+          "name": "list ledger_account_balance_monitors",
+          "request": {
+            "name": "list ledger_account_balance_monitors",
+            "description": {
+              "content": "Get a list of ledger account balance monitors.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "ledger_account_balance_monitors"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "after_cursor",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "per_page",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "metadata[key_0]",
+                  "value": "<string>",
+                  "description": "For example, if you want to query for records with metadata key `Type` and value `Loan`, the query would be `metadata%5BType%5D=Loan`. This encodes the query parameters."
+                },
+                {
+                  "disabled": false,
+                  "key": "metadata[key_1]",
+                  "value": "<string>",
+                  "description": "For example, if you want to query for records with metadata key `Type` and value `Loan`, the query would be `metadata%5BType%5D=Loan`. This encodes the query parameters."
+                },
+                {
+                  "disabled": false,
+                  "key": "id[]",
+                  "value": "<string>",
+                  "description": "If you have specific IDs to retrieve in bulk, you can pass them as query parameters delimited with `id[]=`, for example `?id[]=123&id[]=abc`."
+                },
+                {
+                  "disabled": false,
+                  "key": "id[]",
+                  "value": "<string>",
+                  "description": "If you have specific IDs to retrieve in bulk, you can pass them as query parameters delimited with `id[]=`, for example `?id[]=123&id[]=abc`."
+                },
+                {
+                  "disabled": false,
+                  "key": "ledger_account_id",
+                  "value": "<string>",
+                  "description": "Query the balance monitors for a single ledger account."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "15964223-e28d-4436-913d-98a112802695",
+              "name": "successful",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "ledger_account_balance_monitors"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "after_cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "metadata[key_0]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "metadata[key_1]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "metadata[key_2]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "id[]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "id[]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ledger_account_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "The cursor for the next page. Including this in a call as `after_cursor` will return the next page.",
+                  "key": "X-After-Cursor",
+                  "value": "string"
+                },
+                {
+                  "disabled": false,
+                  "description": "The current `per_page`.",
+                  "key": "X-Per-Page",
+                  "value": "2647"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"8d11fec5-1638-c2b4-0eff-8882e6e51f59\",\n    \"object\": \"string\",\n    \"live_mode\": false,\n    \"created_at\": \"2002-07-01T22:40:43.648Z\",\n    \"updated_at\": \"1961-01-22T11:39:59.413Z\",\n    \"discarded_at\": \"1968-03-11T19:06:11.857Z\",\n    \"ledger_account_id\": \"string\",\n    \"description\": \"string\",\n    \"alert_condition\": {\n      \"field\": \"string\",\n      \"operator\": \"string\",\n      \"value\": 5826\n    },\n    \"current_ledger_account_balance_state\": {\n      \"balances\": {\n        \"pending_balance\": {\n          \"credits\": 9693,\n          \"debits\": 4052,\n          \"amount\": 9546,\n          \"currency\": \"string\",\n          \"currency_exponent\": 5867\n        },\n        \"posted_balance\": {\n          \"credits\": 4133,\n          \"debits\": 8596,\n          \"amount\": 3039,\n          \"currency\": \"string\",\n          \"currency_exponent\": 361\n        },\n        \"available_balance\": {\n          \"credits\": 7632,\n          \"debits\": 7824,\n          \"amount\": 1785,\n          \"currency\": \"string\",\n          \"currency_exponent\": 6995\n        }\n      },\n      \"ledger_account_lock_version\": 6256,\n      \"triggered\": false\n    },\n    \"metadata\": {\n      \"key\": \"value\",\n      \"foo\": \"bar\",\n      \"modern\": \"treasury\"\n    }\n  },\n  {\n    \"id\": \"2862d406-c256-f1ff-602a-4e08b59823ea\",\n    \"object\": \"string\",\n    \"live_mode\": false,\n    \"created_at\": \"1972-04-24T00:51:33.165Z\",\n    \"updated_at\": \"2020-01-03T16:11:08.169Z\",\n    \"discarded_at\": \"1984-05-30T18:50:28.028Z\",\n    \"ledger_account_id\": \"string\",\n    \"description\": \"string\",\n    \"alert_condition\": {\n      \"field\": \"string\",\n      \"operator\": \"string\",\n      \"value\": 5949\n    },\n    \"current_ledger_account_balance_state\": {\n      \"balances\": {\n        \"pending_balance\": {\n          \"credits\": 8566,\n          \"debits\": 7587,\n          \"amount\": 9069,\n          \"currency\": \"string\",\n          \"currency_exponent\": 3346\n        },\n        \"posted_balance\": {\n          \"credits\": 8301,\n          \"debits\": 3606,\n          \"amount\": 6598,\n          \"currency\": \"string\",\n          \"currency_exponent\": 3009\n        },\n        \"available_balance\": {\n          \"credits\": 8384,\n          \"debits\": 2285,\n          \"amount\": 6422,\n          \"currency\": \"string\",\n          \"currency_exponent\": 5481\n        }\n      },\n      \"ledger_account_lock_version\": 9006,\n      \"triggered\": false\n    },\n    \"metadata\": {\n      \"key\": \"value\",\n      \"foo\": \"bar\",\n      \"modern\": \"treasury\"\n    }\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "be9ba055-7fe3-4dc3-9ecd-10a531c2825f",
+          "name": "create ledger_account_balance_monitor",
+          "request": {
+            "name": "create ledger_account_balance_monitor",
+            "description": {
+              "content": "Create a ledger account balance monitor.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "ledger_account_balance_monitors"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "This key should be something unique, preferably something like an UUID.",
+                "key": "Idempotency-Key",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"ledger_account_id\": \"<string>\",\n  \"alert_condition\": {\n    \"field\": \"<string>\",\n    \"operator\": \"<string>\",\n    \"value\": \"<integer>\"\n  },\n  \"description\": \"<string>\",\n  \"metadata\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\",\n    \"key_2\": \"<string>\",\n    \"key_3\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "e2b87f06-549a-4a95-b177-95fe47078b24",
+              "name": "successful",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "ledger_account_balance_monitors"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "This key should be something unique, preferably something like an UUID.",
+                    "key": "Idempotency-Key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ledger_account_id\": \"<string>\",\n  \"alert_condition\": {\n    \"field\": \"<string>\",\n    \"operator\": \"<string>\",\n    \"value\": \"<integer>\"\n  },\n  \"description\": \"<string>\",\n  \"metadata\": {\n    \"key\": \"value\",\n    \"foo\": \"bar\",\n    \"modern\": \"treasury\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"3117bd38-2a39-725c-5c26-cd5a4a562541\",\n  \"object\": \"string\",\n  \"live_mode\": true,\n  \"created_at\": \"1962-11-02T06:38:47.868Z\",\n  \"updated_at\": \"2015-08-11T14:08:23.592Z\",\n  \"discarded_at\": \"2004-07-07T03:08:42.078Z\",\n  \"ledger_account_id\": \"string\",\n  \"description\": \"string\",\n  \"alert_condition\": {\n    \"field\": \"string\",\n    \"operator\": \"string\",\n    \"value\": 8262\n  },\n  \"current_ledger_account_balance_state\": {\n    \"balances\": {\n      \"pending_balance\": {\n        \"credits\": 5451,\n        \"debits\": 7208,\n        \"amount\": 9905,\n        \"currency\": \"string\",\n        \"currency_exponent\": 3766\n      },\n      \"posted_balance\": {\n        \"credits\": 9366,\n        \"debits\": 3164,\n        \"amount\": 7757,\n        \"currency\": \"string\",\n        \"currency_exponent\": 2217\n      },\n      \"available_balance\": {\n        \"credits\": 7767,\n        \"debits\": 7728,\n        \"amount\": 7904,\n        \"currency\": \"string\",\n        \"currency_exponent\": 6786\n      }\n    },\n    \"ledger_account_lock_version\": 4721,\n    \"triggered\": false\n  },\n  \"metadata\": {\n    \"key\": \"value\",\n    \"foo\": \"bar\",\n    \"modern\": \"treasury\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2e30d455-84fa-49f9-97e6-aa6f28ff414d",
+              "name": "forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "ledger_account_balance_monitors"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "This key should be something unique, preferably something like an UUID.",
+                    "key": "Idempotency-Key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ledger_account_id\": \"<string>\",\n  \"alert_condition\": {\n    \"field\": \"<string>\",\n    \"operator\": \"<string>\",\n    \"value\": \"<integer>\"\n  },\n  \"description\": \"<string>\",\n  \"metadata\": {\n    \"key\": \"value\",\n    \"foo\": \"bar\",\n    \"modern\": \"treasury\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": {\n    \"code\": \"invalid_key\",\n    \"message\": \"string\",\n    \"parameter\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4cd8aca9-3d47-4201-88f3-96ee7305c8f2",
+              "name": "unsuccessful",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "ledger_account_balance_monitors"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "This key should be something unique, preferably something like an UUID.",
+                    "key": "Idempotency-Key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ledger_account_id\": \"<string>\",\n  \"alert_condition\": {\n    \"field\": \"<string>\",\n    \"operator\": \"<string>\",\n    \"value\": \"<integer>\"\n  },\n  \"description\": \"<string>\",\n  \"metadata\": {\n    \"key\": \"value\",\n    \"foo\": \"bar\",\n    \"modern\": \"treasury\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": {\n    \"code\": \"invalid_key\",\n    \"message\": \"string\",\n    \"parameter\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "70d77d88-1aa2-478d-979c-66b9b3c2d934",
+          "name": "get ledger_account_balance_monitor",
+          "request": {
+            "name": "get ledger_account_balance_monitor",
+            "description": {
+              "content": "Get details on a single ledger account balance monitor.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "ledger_account_balance_monitors",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) id"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "5096c8e7-ad52-4c53-9373-048d68755bd3",
+              "name": "successful",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "ledger_account_balance_monitors",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"3117bd38-2a39-725c-5c26-cd5a4a562541\",\n  \"object\": \"string\",\n  \"live_mode\": true,\n  \"created_at\": \"1962-11-02T06:38:47.868Z\",\n  \"updated_at\": \"2015-08-11T14:08:23.592Z\",\n  \"discarded_at\": \"2004-07-07T03:08:42.078Z\",\n  \"ledger_account_id\": \"string\",\n  \"description\": \"string\",\n  \"alert_condition\": {\n    \"field\": \"string\",\n    \"operator\": \"string\",\n    \"value\": 8262\n  },\n  \"current_ledger_account_balance_state\": {\n    \"balances\": {\n      \"pending_balance\": {\n        \"credits\": 5451,\n        \"debits\": 7208,\n        \"amount\": 9905,\n        \"currency\": \"string\",\n        \"currency_exponent\": 3766\n      },\n      \"posted_balance\": {\n        \"credits\": 9366,\n        \"debits\": 3164,\n        \"amount\": 7757,\n        \"currency\": \"string\",\n        \"currency_exponent\": 2217\n      },\n      \"available_balance\": {\n        \"credits\": 7767,\n        \"debits\": 7728,\n        \"amount\": 7904,\n        \"currency\": \"string\",\n        \"currency_exponent\": 6786\n      }\n    },\n    \"ledger_account_lock_version\": 4721,\n    \"triggered\": false\n  },\n  \"metadata\": {\n    \"key\": \"value\",\n    \"foo\": \"bar\",\n    \"modern\": \"treasury\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2914377a-cad2-4361-ac1b-d9e218586bbf",
+              "name": "not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "ledger_account_balance_monitors",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": {\n    \"code\": \"invalid_key\",\n    \"message\": \"string\",\n    \"parameter\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5c539231-bcfb-4099-9455-27826f081e36",
+          "name": "update ledger_account_balance_monitor",
+          "request": {
+            "name": "update ledger_account_balance_monitor",
+            "description": {
+              "content": "Update a ledger account balance monitor.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "ledger_account_balance_monitors",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) id"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"description\": \"<string>\",\n  \"metadata\": {\n    \"key_0\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "b2ae8dc3-ab06-48f2-a9c2-e7a944d99594",
+              "name": "successful",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "ledger_account_balance_monitors",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"description\": \"<string>\",\n  \"metadata\": {\n    \"key\": \"value\",\n    \"foo\": \"bar\",\n    \"modern\": \"treasury\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"3117bd38-2a39-725c-5c26-cd5a4a562541\",\n  \"object\": \"string\",\n  \"live_mode\": true,\n  \"created_at\": \"1962-11-02T06:38:47.868Z\",\n  \"updated_at\": \"2015-08-11T14:08:23.592Z\",\n  \"discarded_at\": \"2004-07-07T03:08:42.078Z\",\n  \"ledger_account_id\": \"string\",\n  \"description\": \"string\",\n  \"alert_condition\": {\n    \"field\": \"string\",\n    \"operator\": \"string\",\n    \"value\": 8262\n  },\n  \"current_ledger_account_balance_state\": {\n    \"balances\": {\n      \"pending_balance\": {\n        \"credits\": 5451,\n        \"debits\": 7208,\n        \"amount\": 9905,\n        \"currency\": \"string\",\n        \"currency_exponent\": 3766\n      },\n      \"posted_balance\": {\n        \"credits\": 9366,\n        \"debits\": 3164,\n        \"amount\": 7757,\n        \"currency\": \"string\",\n        \"currency_exponent\": 2217\n      },\n      \"available_balance\": {\n        \"credits\": 7767,\n        \"debits\": 7728,\n        \"amount\": 7904,\n        \"currency\": \"string\",\n        \"currency_exponent\": 6786\n      }\n    },\n    \"ledger_account_lock_version\": 4721,\n    \"triggered\": false\n  },\n  \"metadata\": {\n    \"key\": \"value\",\n    \"foo\": \"bar\",\n    \"modern\": \"treasury\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f5da593a-20bb-45f3-8690-17053a936f56",
+              "name": "forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "ledger_account_balance_monitors",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"description\": \"<string>\",\n  \"metadata\": {\n    \"key\": \"value\",\n    \"foo\": \"bar\",\n    \"modern\": \"treasury\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": {\n    \"code\": \"invalid_key\",\n    \"message\": \"string\",\n    \"parameter\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0b2d9439-9e3a-4bca-8f4b-8f3c506bd3b1",
+              "name": "not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "ledger_account_balance_monitors",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"description\": \"<string>\",\n  \"metadata\": {\n    \"key\": \"value\",\n    \"foo\": \"bar\",\n    \"modern\": \"treasury\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": {\n    \"code\": \"invalid_key\",\n    \"message\": \"string\",\n    \"parameter\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c2df5d90-af84-4e41-abc8-5a1c3335d43a",
+              "name": "unsuccessful",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "ledger_account_balance_monitors",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"description\": \"<string>\",\n  \"metadata\": {\n    \"key\": \"value\",\n    \"foo\": \"bar\",\n    \"modern\": \"treasury\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": {\n    \"code\": \"invalid_key\",\n    \"message\": \"string\",\n    \"parameter\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "53acb381-045d-48a6-98fd-c1a0f0077818",
+          "name": "delete ledger_account_balance_monitor",
+          "request": {
+            "name": "delete ledger_account_balance_monitor",
+            "description": {
+              "content": "Delete a ledger account balance monitor.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "ledger_account_balance_monitors",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) id"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "3e09ba71-af28-4a35-82af-8134fed5cd09",
+              "name": "successful",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "ledger_account_balance_monitors",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"3117bd38-2a39-725c-5c26-cd5a4a562541\",\n  \"object\": \"string\",\n  \"live_mode\": true,\n  \"created_at\": \"1962-11-02T06:38:47.868Z\",\n  \"updated_at\": \"2015-08-11T14:08:23.592Z\",\n  \"discarded_at\": \"2004-07-07T03:08:42.078Z\",\n  \"ledger_account_id\": \"string\",\n  \"description\": \"string\",\n  \"alert_condition\": {\n    \"field\": \"string\",\n    \"operator\": \"string\",\n    \"value\": 8262\n  },\n  \"current_ledger_account_balance_state\": {\n    \"balances\": {\n      \"pending_balance\": {\n        \"credits\": 5451,\n        \"debits\": 7208,\n        \"amount\": 9905,\n        \"currency\": \"string\",\n        \"currency_exponent\": 3766\n      },\n      \"posted_balance\": {\n        \"credits\": 9366,\n        \"debits\": 3164,\n        \"amount\": 7757,\n        \"currency\": \"string\",\n        \"currency_exponent\": 2217\n      },\n      \"available_balance\": {\n        \"credits\": 7767,\n        \"debits\": 7728,\n        \"amount\": 7904,\n        \"currency\": \"string\",\n        \"currency_exponent\": 6786\n      }\n    },\n    \"ledger_account_lock_version\": 4721,\n    \"triggered\": false\n  },\n  \"metadata\": {\n    \"key\": \"value\",\n    \"foo\": \"bar\",\n    \"modern\": \"treasury\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3581b125-a743-450d-b2bb-b5d3afffc2a2",
+              "name": "forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "ledger_account_balance_monitors",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": {\n    \"code\": \"invalid_key\",\n    \"message\": \"string\",\n    \"parameter\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "94486363-115f-41c3-8b97-1c91575a568d",
+              "name": "not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "ledger_account_balance_monitors",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": {\n    \"code\": \"invalid_key\",\n    \"message\": \"string\",\n    \"parameter\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "http://localhost:3000",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "2617eeb2-45a8-4c25-8e90-d0e02fef8177",
+    "name": "Modern Treasury AccountCapability LedgerAccountBalanceMonitor API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Modern Treasury REST API. Please see https://docs.moderntreasury.com for more details.\n\nContact Support:\n Name: Modern Treasury Engineering Team",
+      "type": "text/plain"
+    }
+  }
+}

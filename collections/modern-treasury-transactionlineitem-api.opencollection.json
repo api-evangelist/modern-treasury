@@ -1,0 +1,168 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Modern Treasury AccountCapability TransactionLineItem API",
+    "version": "v1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "TransactionLineItem",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "list transaction_line_items",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:3000/api/transactions/:transaction_id/line_items",
+            "params": [
+              {
+                "name": "transaction_id",
+                "value": "",
+                "type": "path",
+                "description": "transaction_id"
+              },
+              {
+                "name": "after_cursor",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "This endpoint has been deprecated in favor of /api/transaction_line_items"
+        },
+        {
+          "info": {
+            "name": "list transaction_line_items",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:3000/api/transaction_line_items",
+            "params": [
+              {
+                "name": "after_cursor",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "transaction_id",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "list transaction_line_items"
+        },
+        {
+          "info": {
+            "name": "create transaction line items",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:3000/api/transaction_line_items",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "create transaction line items"
+        },
+        {
+          "info": {
+            "name": "get transaction line item",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:3000/api/transaction_line_items/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "id"
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "get transaction line item"
+        },
+        {
+          "info": {
+            "name": "delete transaction line item",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "http://localhost:3000/api/transaction_line_items/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "id"
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "delete transaction line item"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

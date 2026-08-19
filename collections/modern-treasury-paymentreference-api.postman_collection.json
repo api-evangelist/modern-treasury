@@ -1,0 +1,355 @@
+{
+  "item": [
+    {
+      "id": "dfbc6b06-76f9-4243-b3e1-33a788e7addb",
+      "name": "PaymentReference",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "788580d7-bddf-4e11-8315-c3bf03035381",
+          "name": "list payment_references",
+          "request": {
+            "name": "list payment_references",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "payment_references"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "after_cursor",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "per_page",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "referenceable_id",
+                  "value": "<string>",
+                  "description": "The id of the referenceable to search for. Must be accompanied by the referenceable_type or will return an error."
+                },
+                {
+                  "disabled": false,
+                  "key": "referenceable_type",
+                  "value": "<string>",
+                  "description": "One of the referenceable types. This must be accompanied by the id of the referenceable or will return an error."
+                },
+                {
+                  "disabled": false,
+                  "key": "reference_number",
+                  "value": "<string>",
+                  "description": "The actual reference number assigned by the bank."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "c0a9be57-5105-49d1-a8a7-ceed0379168d",
+              "name": "successful",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "payment_references"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "after_cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "referenceable_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "referenceable_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "reference_number",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "The cursor for the next page. Including this in a call as `after_cursor` will return the next page.",
+                  "key": "X-After-Cursor",
+                  "value": "string"
+                },
+                {
+                  "disabled": false,
+                  "description": "The current `per_page`.",
+                  "key": "X-Per-Page",
+                  "value": "3641"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"7cd44f92-fcb5-e740-06d4-bbc0c1f697e6\",\n    \"object\": \"string\",\n    \"live_mode\": false,\n    \"created_at\": \"1974-09-28T09:16:04.254Z\",\n    \"updated_at\": \"2005-03-17T18:17:48.372Z\",\n    \"referenceable_id\": \"string\",\n    \"referenceable_type\": \"payment_order\",\n    \"reference_number\": \"string\",\n    \"reference_number_type\": \"signet_request_id\"\n  },\n  {\n    \"id\": \"a822d9e9-1794-0b35-2810-327f467b7623\",\n    \"object\": \"string\",\n    \"live_mode\": false,\n    \"created_at\": \"2020-01-30T07:55:46.575Z\",\n    \"updated_at\": \"2017-11-21T22:43:21.066Z\",\n    \"referenceable_id\": \"string\",\n    \"referenceable_type\": \"reversal\",\n    \"reference_number\": \"string\",\n    \"reference_number_type\": \"jpmc_clearing_system_reference\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "eebccf52-7b62-4fa4-896a-4b015286e187",
+              "name": "validation error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "payment_references"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "after_cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "referenceable_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "referenceable_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "reference_number",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f6354c0c-e6e6-4aa6-8e9e-19b935578975",
+          "name": "get payment_reference",
+          "request": {
+            "name": "get payment_reference",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "payment_references",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) id"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "946ea390-dcd7-4e80-8353-d9a2fc8c1d39",
+              "name": "successful",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "payment_references",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"dc3b1eee-1c45-91a3-8ab0-521677288599\",\n  \"object\": \"string\",\n  \"live_mode\": false,\n  \"created_at\": \"2008-04-02T20:26:23.302Z\",\n  \"updated_at\": \"2007-05-08T00:02:31.632Z\",\n  \"referenceable_id\": \"string\",\n  \"referenceable_type\": \"payment_order\",\n  \"reference_number\": \"string\",\n  \"reference_number_type\": \"bny_mellon_transaction_reference_number\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "http://localhost:3000",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "c0e0ea7e-3edc-420f-8eb6-9d1d5a95181d",
+    "name": "Modern Treasury AccountCapability PaymentReference API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Modern Treasury REST API. Please see https://docs.moderntreasury.com for more details.\n\nContact Support:\n Name: Modern Treasury Engineering Team",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,116 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Modern Treasury AccountCapability Reversal API",
+    "version": "v1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Reversal",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "list reversals",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:3000/api/payment_orders/:payment_order_id/reversals",
+            "params": [
+              {
+                "name": "payment_order_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the relevant Payment Order."
+              },
+              {
+                "name": "after_cursor",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Get a list of all reversals of a payment order."
+        },
+        {
+          "info": {
+            "name": "create reversal",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:3000/api/payment_orders/:payment_order_id/reversals",
+            "headers": [
+              {
+                "name": "Idempotency-Key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "payment_order_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the relevant Payment Order."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Create a reversal for a payment order."
+        },
+        {
+          "info": {
+            "name": "show reversal",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:3000/api/payment_orders/:payment_order_id/reversals/:reversal_id",
+            "params": [
+              {
+                "name": "payment_order_id",
+                "value": "",
+                "type": "path",
+                "description": "The id of the payment order being reversed."
+              },
+              {
+                "name": "reversal_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the reversal."
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Get details on a single reversal of a payment order."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

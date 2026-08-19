@@ -1,0 +1,34 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Modern Treasury AccountCapability Ping API",
+    "version": "v1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Ping",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "ping api",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:3000/api/ping",
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "A test endpoint often used to confirm credentials and headers are being passed in correctly."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,1139 @@
+{
+  "item": [
+    {
+      "id": "8856f604-68c1-4359-b6ee-2ab18c825c5a",
+      "name": "LedgerEntry",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "108662cb-0364-4661-99e9-dba4b33080ef",
+          "name": "list ledger_entries",
+          "request": {
+            "name": "list ledger_entries",
+            "description": {
+              "content": "Get a list of all ledger entries.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "ledger_entries"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "after_cursor",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "per_page",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "id[]",
+                  "value": "<string>",
+                  "description": "If you have specific IDs to retrieve in bulk, you can pass them as query parameters delimited with `id[]=`, for example `?id[]=123&id[]=abc`."
+                },
+                {
+                  "disabled": false,
+                  "key": "id[]",
+                  "value": "<string>",
+                  "description": "If you have specific IDs to retrieve in bulk, you can pass them as query parameters delimited with `id[]=`, for example `?id[]=123&id[]=abc`."
+                },
+                {
+                  "disabled": false,
+                  "key": "ledger_account_id",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "ledger_transaction_id",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "ledger_account_payout_id",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "ledger_account_settlement_id",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "effective_date[key_0]",
+                  "value": "<date>",
+                  "description": "Use `gt` (>), `gte` (>=), `lt` (<), `lte` (<=), or `eq` (=) to filter by the transaction's effective date. Format YYYY-MM-DD"
+                },
+                {
+                  "disabled": false,
+                  "key": "effective_date[key_1]",
+                  "value": "<date>",
+                  "description": "Use `gt` (>), `gte` (>=), `lt` (<), `lte` (<=), or `eq` (=) to filter by the transaction's effective date. Format YYYY-MM-DD"
+                },
+                {
+                  "disabled": false,
+                  "key": "effective_date[key_2]",
+                  "value": "<date>",
+                  "description": "Use `gt` (>), `gte` (>=), `lt` (<), `lte` (<=), or `eq` (=) to filter by the transaction's effective date. Format YYYY-MM-DD"
+                },
+                {
+                  "disabled": false,
+                  "key": "effective_date[key_3]",
+                  "value": "<date>",
+                  "description": "Use `gt` (>), `gte` (>=), `lt` (<), `lte` (<=), or `eq` (=) to filter by the transaction's effective date. Format YYYY-MM-DD"
+                },
+                {
+                  "disabled": false,
+                  "key": "effective_at[key_0]",
+                  "value": "<dateTime>",
+                  "description": "Use `gt` (>), `gte` (>=), `lt` (<), `lte` (<=), or `eq` (=) to filter by the transaction's effective time. Format ISO8601"
+                },
+                {
+                  "disabled": false,
+                  "key": "updated_at[key_0]",
+                  "value": "<dateTime>",
+                  "description": "Use `gt` (>), `gte` (>=), `lt` (<), `lte` (<=), or `eq` (=) to filter by the posted at timestamp. For example, for all times after Jan 1 2000 12:00 UTC, use updated_at%5Bgt%5D=2000-01-01T12:00:00Z."
+                },
+                {
+                  "disabled": false,
+                  "key": "as_of_lock_version",
+                  "value": "<integer>",
+                  "description": "Shows all ledger entries that were present on a ledger account at a particular `lock_version`. You must also specify `ledger_account_id`."
+                },
+                {
+                  "disabled": false,
+                  "key": "ledger_account_lock_version[key_0]",
+                  "value": "<integer>",
+                  "description": "Use `gt` (>), `gte` (>=), `lt` (<), `lte` (<=), or `eq` (=) to filter by the lock_version of a ledger account. For example, for all entries created at or before before lock_version 1000 of a ledger account, use `ledger_account_lock_version%5Blte%5D=1000`."
+                },
+                {
+                  "disabled": false,
+                  "key": "ledger_account_category_id",
+                  "value": "<string>",
+                  "description": "Get all ledger entries that match the direction specified. One of `credit`, `debit`."
+                },
+                {
+                  "disabled": false,
+                  "key": "ledger_account_statement_id",
+                  "value": "<string>",
+                  "description": "Get all ledger entries that are included in the ledger account statement."
+                },
+                {
+                  "disabled": false,
+                  "key": "show_deleted",
+                  "value": "<boolean>",
+                  "description": "If true, response will include ledger entries that were deleted. When you update a ledger transaction to specify a new set of entries, the previous entries are deleted."
+                },
+                {
+                  "disabled": false,
+                  "key": "direction",
+                  "value": "<string>",
+                  "description": "If true, response will include ledger entries that were deleted. When you update a ledger transaction to specify a new set of entries, the previous entries are deleted."
+                },
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>",
+                  "description": "Get all ledger entries that match the status specified. One of `pending`, `posted`, or `archived`. For multiple statuses, use `status[]=pending&status[]=posted`."
+                },
+                {
+                  "disabled": false,
+                  "key": "status[]",
+                  "value": "<string>",
+                  "description": "Get all ledger entries that match the status specified. One of `pending`, `posted`, or `archived`. For multiple statuses, use `status[]=pending&status[]=posted`."
+                },
+                {
+                  "disabled": false,
+                  "key": "status[]",
+                  "value": "<string>",
+                  "description": "Get all ledger entries that match the status specified. One of `pending`, `posted`, or `archived`. For multiple statuses, use `status[]=pending&status[]=posted`."
+                },
+                {
+                  "disabled": false,
+                  "key": "order_by[created_at]",
+                  "value": "<string>",
+                  "description": "Order by `created_at` or `effective_at` in `asc` or `desc` order. For example, to order by `effective_at asc`, use `order_by%5Beffective_at%5D=asc`. Ordering by only one field at a time is supported."
+                },
+                {
+                  "disabled": false,
+                  "key": "order_by[effective_at]",
+                  "value": "<string>",
+                  "description": "Order by `created_at` or `effective_at` in `asc` or `desc` order. For example, to order by `effective_at asc`, use `order_by%5Beffective_at%5D=asc`. Ordering by only one field at a time is supported."
+                },
+                {
+                  "disabled": false,
+                  "key": "amount[gte]",
+                  "value": "<integer>",
+                  "description": "Use `gt` (>), `gte` (>=), `lt` (<), `lte` (<=), or `eq` (=) to filter by amount."
+                },
+                {
+                  "disabled": false,
+                  "key": "amount[lte]",
+                  "value": "<integer>",
+                  "description": "Use `gt` (>), `gte` (>=), `lt` (<), `lte` (<=), or `eq` (=) to filter by amount."
+                },
+                {
+                  "disabled": false,
+                  "key": "amount[gt]",
+                  "value": "<integer>",
+                  "description": "Use `gt` (>), `gte` (>=), `lt` (<), `lte` (<=), or `eq` (=) to filter by amount."
+                },
+                {
+                  "disabled": false,
+                  "key": "amount[lt]",
+                  "value": "<integer>",
+                  "description": "Use `gt` (>), `gte` (>=), `lt` (<), `lte` (<=), or `eq` (=) to filter by amount."
+                },
+                {
+                  "disabled": false,
+                  "key": "amount[eq]",
+                  "value": "<integer>",
+                  "description": "Use `gt` (>), `gte` (>=), `lt` (<), `lte` (<=), or `eq` (=) to filter by amount."
+                },
+                {
+                  "disabled": false,
+                  "key": "show_balances",
+                  "value": "<boolean>",
+                  "description": "If true, response will include the balances attached to the ledger entry. If there is no balance available, null will be returned instead."
+                },
+                {
+                  "disabled": false,
+                  "key": "metadata[key_0]",
+                  "value": "<string>",
+                  "description": "For example, if you want to query for records with metadata key `Type` and value `Loan`, the query would be `metadata%5BType%5D=Loan`. This encodes the query parameters."
+                },
+                {
+                  "disabled": false,
+                  "key": "metadata[key_1]",
+                  "value": "<string>",
+                  "description": "For example, if you want to query for records with metadata key `Type` and value `Loan`, the query would be `metadata%5BType%5D=Loan`. This encodes the query parameters."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "3a93b114-2671-49a0-b0d4-577de6cb07a2",
+              "name": "successful",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "ledger_entries"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "after_cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "id[]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "id[]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ledger_account_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ledger_transaction_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ledger_account_payout_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ledger_account_settlement_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "effective_date[key_0]",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "effective_date[key_1]",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "effective_at[key_0]",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "effective_at[key_1]",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "updated_at[key_0]",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "updated_at[key_1]",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "as_of_lock_version",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "ledger_account_lock_version[key_0]",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "ledger_account_lock_version[key_1]",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "ledger_account_category_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ledger_account_statement_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "show_deleted",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "direction",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status[]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status[]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "order_by[created_at]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "order_by[effective_at]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "amount[gte]",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "amount[lte]",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "amount[gt]",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "amount[lt]",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "amount[eq]",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "show_balances",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "metadata[key_0]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "metadata[key_1]",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "The cursor for the next page. Including this in a call as `after_cursor` will return the next page.",
+                  "key": "X-After-Cursor",
+                  "value": "string"
+                },
+                {
+                  "disabled": false,
+                  "description": "The current `per_page`.",
+                  "key": "X-Per-Page",
+                  "value": "1023"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"179a943d-1ea1-0f56-9ed0-3a8b05923943\",\n    \"object\": \"string\",\n    \"live_mode\": false,\n    \"created_at\": \"1973-12-31T01:20:24.825Z\",\n    \"updated_at\": \"2012-05-16T16:56:18.878Z\",\n    \"discarded_at\": \"2019-08-22T18:33:37.748Z\",\n    \"amount\": 4089,\n    \"effective_at\": \"1995-04-04T22:29:26.750Z\",\n    \"direction\": \"debit\",\n    \"status\": \"posted\",\n    \"ledger_account_id\": \"0e9949fc-ad07-d219-6db5-fdf1510f8cf5\",\n    \"ledger_account_lock_version\": 9558,\n    \"ledger_account_currency\": \"string\",\n    \"ledger_account_currency_exponent\": 6981,\n    \"ledger_transaction_id\": \"string\",\n    \"resulting_ledger_account_balances\": {\n      \"pending_balance\": {\n        \"credits\": 813,\n        \"debits\": 1667,\n        \"amount\": 8750,\n        \"currency\": \"string\",\n        \"currency_exponent\": 6933\n      },\n      \"posted_balance\": {\n        \"credits\": 8579,\n        \"debits\": 3005,\n        \"amount\": 1917,\n        \"currency\": \"string\",\n        \"currency_exponent\": 3737\n      },\n      \"available_balance\": {\n        \"credits\": 1723,\n        \"debits\": 5891,\n        \"amount\": 5922,\n        \"currency\": \"string\",\n        \"currency_exponent\": 4320\n      }\n    },\n    \"metadata\": {\n      \"key\": \"value\",\n      \"foo\": \"bar\",\n      \"modern\": \"treasury\"\n    }\n  },\n  {\n    \"id\": \"87b7fe74-5ced-bad5-6938-f9c2b6dca7f6\",\n    \"object\": \"string\",\n    \"live_mode\": true,\n    \"created_at\": \"2022-03-30T00:31:18.590Z\",\n    \"updated_at\": \"1948-12-15T20:21:10.363Z\",\n    \"discarded_at\": \"1950-09-04T06:56:13.924Z\",\n    \"amount\": 7647,\n    \"effective_at\": \"1966-08-24T23:25:02.756Z\",\n    \"direction\": \"credit\",\n    \"status\": \"archived\",\n    \"ledger_account_id\": \"2427562c-900e-a305-7069-c8966ece1a92\",\n    \"ledger_account_lock_version\": 4838,\n    \"ledger_account_currency\": \"string\",\n    \"ledger_account_currency_exponent\": 9094,\n    \"ledger_transaction_id\": \"string\",\n    \"resulting_ledger_account_balances\": {\n      \"pending_balance\": {\n        \"credits\": 7226,\n        \"debits\": 6989,\n        \"amount\": 8092,\n        \"currency\": \"string\",\n        \"currency_exponent\": 2178\n      },\n      \"posted_balance\": {\n        \"credits\": 9497,\n        \"debits\": 7979,\n        \"amount\": 8559,\n        \"currency\": \"string\",\n        \"currency_exponent\": 9930\n      },\n      \"available_balance\": {\n        \"credits\": 1324,\n        \"debits\": 3698,\n        \"amount\": 1249,\n        \"currency\": \"string\",\n        \"currency_exponent\": 8568\n      }\n    },\n    \"metadata\": {\n      \"key\": \"value\",\n      \"foo\": \"bar\",\n      \"modern\": \"treasury\"\n    }\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e2187282-b303-4f6d-b5b3-dc1650498509",
+              "name": "forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "ledger_entries"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "after_cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "id[]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "id[]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ledger_account_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ledger_transaction_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ledger_account_payout_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ledger_account_settlement_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "effective_date[key_0]",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "effective_date[key_1]",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "effective_at[key_0]",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "effective_at[key_1]",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "updated_at[key_0]",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "updated_at[key_1]",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "as_of_lock_version",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "ledger_account_lock_version[key_0]",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "ledger_account_lock_version[key_1]",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "ledger_account_category_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ledger_account_statement_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "show_deleted",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "direction",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status[]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status[]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "order_by[created_at]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "order_by[effective_at]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "amount[gte]",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "amount[lte]",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "amount[gt]",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "amount[lt]",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "amount[eq]",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "show_balances",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "metadata[key_0]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "metadata[key_1]",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": {\n    \"code\": \"header_invalid\",\n    \"message\": \"string\",\n    \"parameter\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2229d96d-6a8a-43bb-bdaf-778051185840",
+              "name": "unsuccessful",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "ledger_entries"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "after_cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "id[]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "id[]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ledger_account_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ledger_transaction_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ledger_account_payout_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ledger_account_settlement_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "effective_date[key_0]",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "effective_date[key_1]",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "effective_at[key_0]",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "effective_at[key_1]",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "updated_at[key_0]",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "updated_at[key_1]",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "as_of_lock_version",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "ledger_account_lock_version[key_0]",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "ledger_account_lock_version[key_1]",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "ledger_account_category_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ledger_account_statement_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "show_deleted",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "direction",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status[]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status[]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "order_by[created_at]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "order_by[effective_at]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "amount[gte]",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "amount[lte]",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "amount[gt]",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "amount[lt]",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "amount[eq]",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "show_balances",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "metadata[key_0]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "metadata[key_1]",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": {\n    \"code\": \"header_invalid\",\n    \"message\": \"string\",\n    \"parameter\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5ef60c42-fb64-4e50-b544-a94715b2a682",
+          "name": "update ledger_entry",
+          "request": {
+            "name": "update ledger_entry",
+            "description": {
+              "content": "Update the details of a ledger entry.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "ledger_entries",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) id"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"metadata\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\",\n    \"key_2\": \"<string>\",\n    \"key_3\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "8d65db9a-3bd4-4cf7-8742-6317271baaf5",
+              "name": "successful",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "ledger_entries",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"metadata\": {\n    \"key\": \"value\",\n    \"foo\": \"bar\",\n    \"modern\": \"treasury\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"9baded34-191a-f2cb-b113-5762e7e1a31b\",\n  \"object\": \"string\",\n  \"live_mode\": false,\n  \"created_at\": \"2004-01-30T23:25:02.226Z\",\n  \"updated_at\": \"1980-02-26T11:51:14.865Z\",\n  \"discarded_at\": \"2000-06-05T05:50:17.142Z\",\n  \"amount\": 3092,\n  \"effective_at\": \"1992-03-27T13:15:14.853Z\",\n  \"direction\": \"debit\",\n  \"status\": \"archived\",\n  \"ledger_account_id\": \"1c21bedf-da09-eb21-864d-be6db983afeb\",\n  \"ledger_account_lock_version\": 3657,\n  \"ledger_account_currency\": \"string\",\n  \"ledger_account_currency_exponent\": 907,\n  \"ledger_transaction_id\": \"string\",\n  \"resulting_ledger_account_balances\": {\n    \"pending_balance\": {\n      \"credits\": 7255,\n      \"debits\": 9121,\n      \"amount\": 7763,\n      \"currency\": \"string\",\n      \"currency_exponent\": 4586\n    },\n    \"posted_balance\": {\n      \"credits\": 5321,\n      \"debits\": 2733,\n      \"amount\": 1419,\n      \"currency\": \"string\",\n      \"currency_exponent\": 3854\n    },\n    \"available_balance\": {\n      \"credits\": 7867,\n      \"debits\": 9769,\n      \"amount\": 4395,\n      \"currency\": \"string\",\n      \"currency_exponent\": 6823\n    }\n  },\n  \"metadata\": {\n    \"key\": \"value\",\n    \"foo\": \"bar\",\n    \"modern\": \"treasury\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e74eeff4-d3ed-47c0-b41d-dde766037897",
+          "name": "get ledger_entry",
+          "request": {
+            "name": "get ledger_entry",
+            "description": {
+              "content": "Get details on a single ledger entry.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "ledger_entries",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "show_balances",
+                  "value": "<boolean>",
+                  "description": "If true, response will include the balances attached to the ledger entry. If there is no balance available, null will be returned instead."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) id"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "bf9d5c65-0beb-413f-9804-389b4bbf5420",
+              "name": "successful",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "ledger_entries",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "show_balances",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"9baded34-191a-f2cb-b113-5762e7e1a31b\",\n  \"object\": \"string\",\n  \"live_mode\": false,\n  \"created_at\": \"2004-01-30T23:25:02.226Z\",\n  \"updated_at\": \"1980-02-26T11:51:14.865Z\",\n  \"discarded_at\": \"2000-06-05T05:50:17.142Z\",\n  \"amount\": 3092,\n  \"effective_at\": \"1992-03-27T13:15:14.853Z\",\n  \"direction\": \"debit\",\n  \"status\": \"archived\",\n  \"ledger_account_id\": \"1c21bedf-da09-eb21-864d-be6db983afeb\",\n  \"ledger_account_lock_version\": 3657,\n  \"ledger_account_currency\": \"string\",\n  \"ledger_account_currency_exponent\": 907,\n  \"ledger_transaction_id\": \"string\",\n  \"resulting_ledger_account_balances\": {\n    \"pending_balance\": {\n      \"credits\": 7255,\n      \"debits\": 9121,\n      \"amount\": 7763,\n      \"currency\": \"string\",\n      \"currency_exponent\": 4586\n    },\n    \"posted_balance\": {\n      \"credits\": 5321,\n      \"debits\": 2733,\n      \"amount\": 1419,\n      \"currency\": \"string\",\n      \"currency_exponent\": 3854\n    },\n    \"available_balance\": {\n      \"credits\": 7867,\n      \"debits\": 9769,\n      \"amount\": 4395,\n      \"currency\": \"string\",\n      \"currency_exponent\": 6823\n    }\n  },\n  \"metadata\": {\n    \"key\": \"value\",\n    \"foo\": \"bar\",\n    \"modern\": \"treasury\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "95fb51fa-a239-4f96-92e9-d3ab5cd5c335",
+              "name": "not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "ledger_entries",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "show_balances",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": {\n    \"code\": \"header_invalid\",\n    \"message\": \"string\",\n    \"parameter\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "http://localhost:3000",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "7d0c4e99-6900-4f6a-92ab-d0896fe6ba08",
+    "name": "Modern Treasury AccountCapability LedgerEntry API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Modern Treasury REST API. Please see https://docs.moderntreasury.com for more details.\n\nContact Support:\n Name: Modern Treasury Engineering Team",
+      "type": "text/plain"
+    }
+  }
+}

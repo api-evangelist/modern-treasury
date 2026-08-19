@@ -1,0 +1,134 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Modern Treasury AccountCapability LineItem API",
+    "version": "v1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "LineItem",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "list line items",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:3000/api/:itemizable_type/:itemizable_id/line_items",
+            "params": [
+              {
+                "name": "itemizable_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the payment order or expected payment."
+              },
+              {
+                "name": "itemizable_type",
+                "value": "",
+                "type": "path",
+                "description": "One of `payment_orders` or `expected_payments`."
+              },
+              {
+                "name": "after_cursor",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Get a list of line items"
+        },
+        {
+          "info": {
+            "name": "get line item",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:3000/api/:itemizable_type/:itemizable_id/line_items/:id",
+            "params": [
+              {
+                "name": "itemizable_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the payment order or expected payment."
+              },
+              {
+                "name": "itemizable_type",
+                "value": "",
+                "type": "path",
+                "description": "One of `payment_orders` or `expected_payments`."
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the line item."
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Get a single line item"
+        },
+        {
+          "info": {
+            "name": "update line item",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "http://localhost:3000/api/:itemizable_type/:itemizable_id/line_items/:id",
+            "params": [
+              {
+                "name": "itemizable_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the payment order or expected payment."
+              },
+              {
+                "name": "itemizable_type",
+                "value": "",
+                "type": "path",
+                "description": "One of `payment_orders` or `expected_payments`."
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the line item."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "update line item"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,1989 @@
+{
+  "item": [
+    {
+      "id": "8ad039fa-8289-4eb5-ac67-1b357326d683",
+      "name": "Document",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "c7485e2d-dc26-436f-b8e7-f5f6058ea791",
+          "name": "list documents",
+          "request": {
+            "name": "list documents",
+            "description": {
+              "content": "Get a list of documents.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "documents"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "documentable_id",
+                  "value": "<string>",
+                  "description": "The unique identifier for the associated object."
+                },
+                {
+                  "disabled": false,
+                  "key": "documentable_type",
+                  "value": "<string>",
+                  "description": "The type of the associated object. Currently can be one of `payment_order`, `transaction`, `expected_payment`, `counterparty`, `organization`, `case`, `internal_account`, `decision`, or `external_account`."
+                },
+                {
+                  "disabled": false,
+                  "key": "after_cursor",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "per_page",
+                  "value": "<integer>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "95fa6046-949a-485d-933a-9e7c9640c28b",
+              "name": "successful",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "documents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "documentable_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "documentable_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "after_cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "The cursor for the next page. Including this in a call as `after_cursor` will return the next page.",
+                  "key": "X-After-Cursor",
+                  "value": "string"
+                },
+                {
+                  "disabled": false,
+                  "description": "The current `per_page`.",
+                  "key": "X-Per-Page",
+                  "value": "3992"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"92660382-859e-e5c3-47b7-a66661650107\",\n    \"object\": \"string\",\n    \"live_mode\": false,\n    \"created_at\": \"2010-10-22T03:02:02.514Z\",\n    \"updated_at\": \"1966-10-17T19:24:04.754Z\",\n    \"discarded_at\": \"1973-10-06T07:00:56.611Z\",\n    \"document_type\": \"string\",\n    \"source\": \"string\",\n    \"documentable_id\": \"52553bf2-75f1-432b-c09e-7de4e26400d1\",\n    \"documentable_type\": \"internal_account\",\n    \"document_details\": [\n      {\n        \"id\": \"bd32532b-b5e3-a07e-a3d9-a27251c9278c\",\n        \"object\": \"string\",\n        \"live_mode\": false,\n        \"created_at\": \"2010-05-19T17:10:37.457Z\",\n        \"updated_at\": \"1955-11-04T17:44:28.240Z\",\n        \"discarded_at\": \"1990-03-30T13:15:57.137Z\",\n        \"document_identifier_type\": \"string\",\n        \"document_identifier\": \"string\"\n      },\n      {\n        \"id\": \"cbcc5c49-8f86-ebaa-da95-2e2984a17376\",\n        \"object\": \"string\",\n        \"live_mode\": true,\n        \"created_at\": \"2007-01-06T20:42:26.461Z\",\n        \"updated_at\": \"1972-08-10T13:15:38.883Z\",\n        \"discarded_at\": \"2018-09-10T02:50:45.126Z\",\n        \"document_identifier_type\": \"string\",\n        \"document_identifier\": \"string\"\n      }\n    ],\n    \"file\": {\n      \"size\": 8606,\n      \"filename\": \"string\",\n      \"content_type\": \"string\"\n    }\n  },\n  {\n    \"id\": \"da3868d5-d386-9421-48bb-d6182745a409\",\n    \"object\": \"string\",\n    \"live_mode\": true,\n    \"created_at\": \"2006-05-18T19:01:46.880Z\",\n    \"updated_at\": \"1969-12-04T03:16:52.672Z\",\n    \"discarded_at\": \"2020-04-18T23:18:07.209Z\",\n    \"document_type\": \"string\",\n    \"source\": \"string\",\n    \"documentable_id\": \"21975ad7-b607-d9db-dff4-2b44afab2681\",\n    \"documentable_type\": \"counterparty\",\n    \"document_details\": [\n      {\n        \"id\": \"e1fd837b-af2f-f6fa-29a2-488285c89184\",\n        \"object\": \"string\",\n        \"live_mode\": true,\n        \"created_at\": \"1992-01-25T11:32:59.665Z\",\n        \"updated_at\": \"1984-04-01T13:06:38.095Z\",\n        \"discarded_at\": \"2020-05-05T09:07:31.576Z\",\n        \"document_identifier_type\": \"string\",\n        \"document_identifier\": \"string\"\n      },\n      {\n        \"id\": \"e539a0c6-0a59-d357-c463-b77fb851a04a\",\n        \"object\": \"string\",\n        \"live_mode\": false,\n        \"created_at\": \"1980-03-18T03:34:51.824Z\",\n        \"updated_at\": \"2011-10-22T05:54:27.909Z\",\n        \"discarded_at\": \"2025-05-27T23:50:36.106Z\",\n        \"document_identifier_type\": \"string\",\n        \"document_identifier\": \"string\"\n      }\n    ],\n    \"file\": {\n      \"size\": 2400,\n      \"filename\": \"string\",\n      \"content_type\": \"string\"\n    }\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ce186d4e-c8f6-4469-9219-11c8333d0060",
+              "name": "not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "documents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "documentable_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "documentable_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "after_cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": {\n    \"code\": \"invalid_ip\",\n    \"message\": \"string\",\n    \"parameter\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ebf20fe1-fb15-418d-ae6b-daebb67527d1",
+          "name": "create document",
+          "request": {
+            "name": "create document",
+            "description": {
+              "content": "Create a document.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "documents"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "This key should be something unique, preferably something like an UUID.",
+                "key": "Idempotency-Key",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "multipart/form-data"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "file",
+                  "type": "file",
+                  "description": "(Required) "
+                },
+                {
+                  "key": "documentable_id",
+                  "value": "<string>",
+                  "type": "text",
+                  "description": "The unique identifier for the associated object."
+                },
+                {
+                  "key": "documentable_type",
+                  "value": "<string>",
+                  "type": "text",
+                  "description": " (This can only be one of connections,counterparties,expected_payments,external_accounts,identifications,incoming_payment_details,internal_accounts,legal_entities,organizations,payment_orders,transactions)"
+                },
+                {
+                  "key": "document_type",
+                  "value": "<string>",
+                  "type": "text",
+                  "description": "A category given to the document, can be `null`."
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "d9ff4c1f-5acb-4905-86b5-65e5d37e056b",
+              "name": "successful",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "documents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "This key should be something unique, preferably something like an UUID.",
+                    "key": "Idempotency-Key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "file",
+                      "value": "<binary>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "The unique identifier for the associated object.",
+                        "type": "text/plain"
+                      },
+                      "key": "documentable_id",
+                      "value": "<string>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": " (This can only be one of connections,counterparties,expected_payments,external_accounts,identifications,incoming_payment_details,internal_accounts,legal_entities,organizations,payment_orders,transactions)",
+                        "type": "text/plain"
+                      },
+                      "key": "documentable_type",
+                      "value": "<string>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "A category given to the document, can be `null`.",
+                        "type": "text/plain"
+                      },
+                      "key": "document_type",
+                      "value": "<string>",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"749ea19d-1772-fefd-d8e0-22a61ceeee4e\",\n  \"object\": \"string\",\n  \"live_mode\": true,\n  \"created_at\": \"1950-11-15T20:43:29.189Z\",\n  \"updated_at\": \"2013-10-07T06:13:28.218Z\",\n  \"discarded_at\": \"1977-02-25T07:59:47.740Z\",\n  \"document_type\": \"string\",\n  \"source\": \"string\",\n  \"documentable_id\": \"0aa138dc-1a05-e4d3-d310-a2eaee1a78f9\",\n  \"documentable_type\": \"counterparty\",\n  \"document_details\": [\n    {\n      \"id\": \"347fac6f-7e87-70e9-c7a9-f9f113e0e04c\",\n      \"object\": \"string\",\n      \"live_mode\": false,\n      \"created_at\": \"2002-11-10T13:26:09.937Z\",\n      \"updated_at\": \"2010-04-25T08:04:13.902Z\",\n      \"discarded_at\": \"1976-09-01T23:33:30.483Z\",\n      \"document_identifier_type\": \"string\",\n      \"document_identifier\": \"string\"\n    },\n    {\n      \"id\": \"2333cff4-c1f9-3d65-cafe-33cee2e88700\",\n      \"object\": \"string\",\n      \"live_mode\": true,\n      \"created_at\": \"1981-04-18T12:35:16.285Z\",\n      \"updated_at\": \"2002-07-15T08:19:42.390Z\",\n      \"discarded_at\": \"1971-05-02T04:18:59.838Z\",\n      \"document_identifier_type\": \"string\",\n      \"document_identifier\": \"string\"\n    }\n  ],\n  \"file\": {\n    \"size\": 3137,\n    \"filename\": \"string\",\n    \"content_type\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "835ee155-7d7e-4f01-ab9d-ba8299c6e267",
+              "name": "forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "documents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "This key should be something unique, preferably something like an UUID.",
+                    "key": "Idempotency-Key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "file",
+                      "value": "<binary>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "The unique identifier for the associated object.",
+                        "type": "text/plain"
+                      },
+                      "key": "documentable_id",
+                      "value": "<string>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": " (This can only be one of connections,counterparties,expected_payments,external_accounts,identifications,incoming_payment_details,internal_accounts,legal_entities,organizations,payment_orders,transactions)",
+                        "type": "text/plain"
+                      },
+                      "key": "documentable_type",
+                      "value": "<string>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "A category given to the document, can be `null`.",
+                        "type": "text/plain"
+                      },
+                      "key": "document_type",
+                      "value": "<string>",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": {\n    \"code\": \"invalid_ip\",\n    \"message\": \"string\",\n    \"parameter\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "98c18ff5-2d7c-4711-adf4-1a6d6855e87c",
+              "name": "not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "documents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "This key should be something unique, preferably something like an UUID.",
+                    "key": "Idempotency-Key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "file",
+                      "value": "<binary>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "The unique identifier for the associated object.",
+                        "type": "text/plain"
+                      },
+                      "key": "documentable_id",
+                      "value": "<string>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": " (This can only be one of connections,counterparties,expected_payments,external_accounts,identifications,incoming_payment_details,internal_accounts,legal_entities,organizations,payment_orders,transactions)",
+                        "type": "text/plain"
+                      },
+                      "key": "documentable_type",
+                      "value": "<string>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "A category given to the document, can be `null`.",
+                        "type": "text/plain"
+                      },
+                      "key": "document_type",
+                      "value": "<string>",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": {\n    \"code\": \"invalid_ip\",\n    \"message\": \"string\",\n    \"parameter\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "562931ba-29c6-4558-9164-064d8029cb15",
+          "name": "list documents - nested path (legacy)",
+          "request": {
+            "name": "list documents - nested path (legacy)",
+            "description": {
+              "content": "Get a list of documents.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                ":documentable_type",
+                ":documentable_id",
+                "documents"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "document_type",
+                  "value": "<string>",
+                  "description": "A category given to the document, can be `null`."
+                },
+                {
+                  "disabled": false,
+                  "key": "after_cursor",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "per_page",
+                  "value": "<integer>"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "documentable_id",
+                  "description": "(Required) The unique identifier for the associated object."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "documentable_type",
+                  "description": "(Required) The type of the associated object. Currently can be one of `payment_order`, `transaction`, `expected_payment`, `counterparty`, `organization`, `case`, `internal_account`, `decision`, or `external_account`."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "7d0132e9-aff9-4742-b377-d4c58436f976",
+              "name": "successful",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    ":documentable_type",
+                    ":documentable_id",
+                    "documents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "document_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "after_cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "documentable_id",
+                      "description": "(Required) The unique identifier for the associated object."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "documentable_type",
+                      "description": "(Required) The type of the associated object. Currently can be one of `payment_order`, `transaction`, `expected_payment`, `counterparty`, `organization`, `case`, `internal_account`, `decision`, or `external_account`."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "The cursor for the next page. Including this in a call as `after_cursor` will return the next page.",
+                  "key": "X-After-Cursor",
+                  "value": "string"
+                },
+                {
+                  "disabled": false,
+                  "description": "The current `per_page`.",
+                  "key": "X-Per-Page",
+                  "value": "3992"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"426d0775-8117-a3cd-33de-90f9551e9a1d\",\n    \"object\": \"string\",\n    \"live_mode\": true,\n    \"created_at\": \"1960-03-22T07:25:07.423Z\",\n    \"updated_at\": \"1998-11-28T09:30:45.296Z\",\n    \"discarded_at\": \"1983-06-29T16:42:27.596Z\",\n    \"document_type\": \"string\",\n    \"source\": \"string\",\n    \"documentable_id\": \"52b9ce2c-8a71-2525-a637-8fd3c4b19ba8\",\n    \"documentable_type\": \"incoming_payment_detail\",\n    \"document_details\": [\n      {\n        \"id\": \"82c01722-ac55-1474-20ee-0abe0b929492\",\n        \"object\": \"string\",\n        \"live_mode\": false,\n        \"created_at\": \"1963-07-01T15:20:00.985Z\",\n        \"updated_at\": \"1958-06-21T02:31:36.394Z\",\n        \"discarded_at\": \"1971-07-01T19:05:43.646Z\",\n        \"document_identifier_type\": \"string\",\n        \"document_identifier\": \"string\"\n      },\n      {\n        \"id\": \"e7bc1b04-7f25-ba51-2c58-ef8d21e3e74b\",\n        \"object\": \"string\",\n        \"live_mode\": true,\n        \"created_at\": \"2016-02-06T23:08:25.174Z\",\n        \"updated_at\": \"1994-05-22T11:49:42.353Z\",\n        \"discarded_at\": \"1951-12-20T09:27:50.362Z\",\n        \"document_identifier_type\": \"string\",\n        \"document_identifier\": \"string\"\n      }\n    ],\n    \"file\": {\n      \"size\": 1556,\n      \"filename\": \"string\",\n      \"content_type\": \"string\"\n    }\n  },\n  {\n    \"id\": \"c161f124-fb16-b231-379a-7437213f735a\",\n    \"object\": \"string\",\n    \"live_mode\": false,\n    \"created_at\": \"1953-06-10T13:17:02.873Z\",\n    \"updated_at\": \"1958-11-09T22:35:57.121Z\",\n    \"discarded_at\": \"1993-04-29T11:36:19.609Z\",\n    \"document_type\": \"string\",\n    \"source\": \"string\",\n    \"documentable_id\": \"4e858fbb-d1b9-60b4-b34e-26ceadc0c521\",\n    \"documentable_type\": \"legal_entity\",\n    \"document_details\": [\n      {\n        \"id\": \"4d2ea1b9-7aa1-50c5-a1d9-6fc2f796518f\",\n        \"object\": \"string\",\n        \"live_mode\": true,\n        \"created_at\": \"2007-12-10T23:19:38.268Z\",\n        \"updated_at\": \"1959-09-27T16:52:56.743Z\",\n        \"discarded_at\": \"1988-03-30T21:19:41.037Z\",\n        \"document_identifier_type\": \"string\",\n        \"document_identifier\": \"string\"\n      },\n      {\n        \"id\": \"adf78f92-2c7e-52db-e715-96bb2539cb8d\",\n        \"object\": \"string\",\n        \"live_mode\": true,\n        \"created_at\": \"1957-05-31T00:40:50.777Z\",\n        \"updated_at\": \"2021-12-04T14:54:45.381Z\",\n        \"discarded_at\": \"2012-04-17T06:14:07.030Z\",\n        \"document_identifier_type\": \"string\",\n        \"document_identifier\": \"string\"\n      }\n    ],\n    \"file\": {\n      \"size\": 3281,\n      \"filename\": \"string\",\n      \"content_type\": \"string\"\n    }\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b0e62a1e-7f11-4607-92ea-f4323e95e80c",
+          "name": "create document - nested path (legacy)",
+          "request": {
+            "name": "create document - nested path (legacy)",
+            "description": {
+              "content": "Create a document.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                ":documentable_type",
+                ":documentable_id",
+                "documents"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "documentable_id",
+                  "description": "(Required) The unique identifier for the associated object."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "documentable_type",
+                  "description": "(Required) The type of the associated object. Currently can be one of `payment_order`, `transaction`, `expected_payment`, `counterparty`, `organization`, `case`, `internal_account`, `decision`, or `external_account`."
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "This key should be something unique, preferably something like an UUID.",
+                "key": "Idempotency-Key",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "multipart/form-data"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "file",
+                  "type": "file",
+                  "description": "(Required) "
+                },
+                {
+                  "key": "document_type",
+                  "value": "<string>",
+                  "type": "text",
+                  "description": "A category given to the document, can be `null`."
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "3f276326-5cae-4b02-beec-80d65a101c64",
+              "name": "successful",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    ":documentable_type",
+                    ":documentable_id",
+                    "documents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "documentable_id",
+                      "description": "(Required) The unique identifier for the associated object."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "documentable_type",
+                      "description": "(Required) The type of the associated object. Currently can be one of `payment_order`, `transaction`, `expected_payment`, `counterparty`, `organization`, `case`, `internal_account`, `decision`, or `external_account`."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "This key should be something unique, preferably something like an UUID.",
+                    "key": "Idempotency-Key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "file",
+                      "value": "<binary>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "A category given to the document, can be `null`.",
+                        "type": "text/plain"
+                      },
+                      "key": "document_type",
+                      "value": "<string>",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"749ea19d-1772-fefd-d8e0-22a61ceeee4e\",\n  \"object\": \"string\",\n  \"live_mode\": true,\n  \"created_at\": \"1950-11-15T20:43:29.189Z\",\n  \"updated_at\": \"2013-10-07T06:13:28.218Z\",\n  \"discarded_at\": \"1977-02-25T07:59:47.740Z\",\n  \"document_type\": \"string\",\n  \"source\": \"string\",\n  \"documentable_id\": \"0aa138dc-1a05-e4d3-d310-a2eaee1a78f9\",\n  \"documentable_type\": \"counterparty\",\n  \"document_details\": [\n    {\n      \"id\": \"347fac6f-7e87-70e9-c7a9-f9f113e0e04c\",\n      \"object\": \"string\",\n      \"live_mode\": false,\n      \"created_at\": \"2002-11-10T13:26:09.937Z\",\n      \"updated_at\": \"2010-04-25T08:04:13.902Z\",\n      \"discarded_at\": \"1976-09-01T23:33:30.483Z\",\n      \"document_identifier_type\": \"string\",\n      \"document_identifier\": \"string\"\n    },\n    {\n      \"id\": \"2333cff4-c1f9-3d65-cafe-33cee2e88700\",\n      \"object\": \"string\",\n      \"live_mode\": true,\n      \"created_at\": \"1981-04-18T12:35:16.285Z\",\n      \"updated_at\": \"2002-07-15T08:19:42.390Z\",\n      \"discarded_at\": \"1971-05-02T04:18:59.838Z\",\n      \"document_identifier_type\": \"string\",\n      \"document_identifier\": \"string\"\n    }\n  ],\n  \"file\": {\n    \"size\": 3137,\n    \"filename\": \"string\",\n    \"content_type\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a050e094-79ec-440c-b538-b4ada2932fb9",
+              "name": "forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    ":documentable_type",
+                    ":documentable_id",
+                    "documents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "documentable_id",
+                      "description": "(Required) The unique identifier for the associated object."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "documentable_type",
+                      "description": "(Required) The type of the associated object. Currently can be one of `payment_order`, `transaction`, `expected_payment`, `counterparty`, `organization`, `case`, `internal_account`, `decision`, or `external_account`."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "This key should be something unique, preferably something like an UUID.",
+                    "key": "Idempotency-Key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "file",
+                      "value": "<binary>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "A category given to the document, can be `null`.",
+                        "type": "text/plain"
+                      },
+                      "key": "document_type",
+                      "value": "<string>",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": {\n    \"code\": \"invalid_ip\",\n    \"message\": \"string\",\n    \"parameter\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4848620f-70a4-43c2-9d76-e49487839103",
+              "name": "not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    ":documentable_type",
+                    ":documentable_id",
+                    "documents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "documentable_id",
+                      "description": "(Required) The unique identifier for the associated object."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "documentable_type",
+                      "description": "(Required) The type of the associated object. Currently can be one of `payment_order`, `transaction`, `expected_payment`, `counterparty`, `organization`, `case`, `internal_account`, `decision`, or `external_account`."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "This key should be something unique, preferably something like an UUID.",
+                    "key": "Idempotency-Key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "file",
+                      "value": "<binary>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "A category given to the document, can be `null`.",
+                        "type": "text/plain"
+                      },
+                      "key": "document_type",
+                      "value": "<string>",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": {\n    \"code\": \"invalid_ip\",\n    \"message\": \"string\",\n    \"parameter\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "878c3d71-6410-4eb9-8090-712f47d6de0e",
+          "name": "get document - nested path (legacy)",
+          "request": {
+            "name": "get document - nested path (legacy)",
+            "description": {
+              "content": "Get an existing document.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                ":documentable_type",
+                ":documentable_id",
+                "documents",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "documentable_id",
+                  "description": "(Required) The unique identifier for the associated object."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "documentable_type",
+                  "description": "(Required) The type of the associated object. Currently can be one of `payment_order`, `transaction`, `expected_payment`, `counterparty`, `organization`, `case`, `internal_account`, `decision`, or `external_account`."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The ID of the document."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "f7175789-d9d4-4c32-a073-65a5456658d5",
+              "name": "successful",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    ":documentable_type",
+                    ":documentable_id",
+                    "documents",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "documentable_id",
+                      "description": "(Required) The unique identifier for the associated object."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "documentable_type",
+                      "description": "(Required) The type of the associated object. Currently can be one of `payment_order`, `transaction`, `expected_payment`, `counterparty`, `organization`, `case`, `internal_account`, `decision`, or `external_account`."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the document."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"749ea19d-1772-fefd-d8e0-22a61ceeee4e\",\n  \"object\": \"string\",\n  \"live_mode\": true,\n  \"created_at\": \"1950-11-15T20:43:29.189Z\",\n  \"updated_at\": \"2013-10-07T06:13:28.218Z\",\n  \"discarded_at\": \"1977-02-25T07:59:47.740Z\",\n  \"document_type\": \"string\",\n  \"source\": \"string\",\n  \"documentable_id\": \"0aa138dc-1a05-e4d3-d310-a2eaee1a78f9\",\n  \"documentable_type\": \"counterparty\",\n  \"document_details\": [\n    {\n      \"id\": \"347fac6f-7e87-70e9-c7a9-f9f113e0e04c\",\n      \"object\": \"string\",\n      \"live_mode\": false,\n      \"created_at\": \"2002-11-10T13:26:09.937Z\",\n      \"updated_at\": \"2010-04-25T08:04:13.902Z\",\n      \"discarded_at\": \"1976-09-01T23:33:30.483Z\",\n      \"document_identifier_type\": \"string\",\n      \"document_identifier\": \"string\"\n    },\n    {\n      \"id\": \"2333cff4-c1f9-3d65-cafe-33cee2e88700\",\n      \"object\": \"string\",\n      \"live_mode\": true,\n      \"created_at\": \"1981-04-18T12:35:16.285Z\",\n      \"updated_at\": \"2002-07-15T08:19:42.390Z\",\n      \"discarded_at\": \"1971-05-02T04:18:59.838Z\",\n      \"document_identifier_type\": \"string\",\n      \"document_identifier\": \"string\"\n    }\n  ],\n  \"file\": {\n    \"size\": 3137,\n    \"filename\": \"string\",\n    \"content_type\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "217714ce-7e4b-495d-9862-a0eab600ad5e",
+              "name": "not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    ":documentable_type",
+                    ":documentable_id",
+                    "documents",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "documentable_id",
+                      "description": "(Required) The unique identifier for the associated object."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "documentable_type",
+                      "description": "(Required) The type of the associated object. Currently can be one of `payment_order`, `transaction`, `expected_payment`, `counterparty`, `organization`, `case`, `internal_account`, `decision`, or `external_account`."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the document."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": {\n    \"code\": \"invalid_ip\",\n    \"message\": \"string\",\n    \"parameter\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2904b8b1-f9a2-4533-afcc-eedf2b9a6836",
+          "name": "get document",
+          "request": {
+            "name": "get document",
+            "description": {
+              "content": "Get an existing document.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "documents",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The ID of the document."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "967df6d3-ff51-4a26-863c-120532cd7ab1",
+              "name": "successful",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "documents",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the document."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"749ea19d-1772-fefd-d8e0-22a61ceeee4e\",\n  \"object\": \"string\",\n  \"live_mode\": true,\n  \"created_at\": \"1950-11-15T20:43:29.189Z\",\n  \"updated_at\": \"2013-10-07T06:13:28.218Z\",\n  \"discarded_at\": \"1977-02-25T07:59:47.740Z\",\n  \"document_type\": \"string\",\n  \"source\": \"string\",\n  \"documentable_id\": \"0aa138dc-1a05-e4d3-d310-a2eaee1a78f9\",\n  \"documentable_type\": \"counterparty\",\n  \"document_details\": [\n    {\n      \"id\": \"347fac6f-7e87-70e9-c7a9-f9f113e0e04c\",\n      \"object\": \"string\",\n      \"live_mode\": false,\n      \"created_at\": \"2002-11-10T13:26:09.937Z\",\n      \"updated_at\": \"2010-04-25T08:04:13.902Z\",\n      \"discarded_at\": \"1976-09-01T23:33:30.483Z\",\n      \"document_identifier_type\": \"string\",\n      \"document_identifier\": \"string\"\n    },\n    {\n      \"id\": \"2333cff4-c1f9-3d65-cafe-33cee2e88700\",\n      \"object\": \"string\",\n      \"live_mode\": true,\n      \"created_at\": \"1981-04-18T12:35:16.285Z\",\n      \"updated_at\": \"2002-07-15T08:19:42.390Z\",\n      \"discarded_at\": \"1971-05-02T04:18:59.838Z\",\n      \"document_identifier_type\": \"string\",\n      \"document_identifier\": \"string\"\n    }\n  ],\n  \"file\": {\n    \"size\": 3137,\n    \"filename\": \"string\",\n    \"content_type\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6593cb19-ba21-410b-97ef-ec7e511064dd",
+              "name": "not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "documents",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the document."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": {\n    \"code\": \"invalid_ip\",\n    \"message\": \"string\",\n    \"parameter\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "00744cf1-77e8-47f7-bb8a-8074f6bdc57f",
+          "name": "download document - nested path (legacy)",
+          "request": {
+            "name": "download document - nested path (legacy)",
+            "description": {
+              "content": "Download an existing document.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                ":documentable_type",
+                ":documentable_id",
+                "documents",
+                ":id",
+                "download"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "documentable_id",
+                  "description": "(Required) The unique identifier for the associated object."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "documentable_type",
+                  "description": "(Required) The type of the associated object. Currently can be one of `payment_order`, `transaction`, `expected_payment`, `counterparty`, `organization`, `case`, `internal_account`, `decision`, or `external_account`."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The ID of the document."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "d21f3eea-94ca-49a4-a94b-02893eabed90",
+              "name": "redirect",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    ":documentable_type",
+                    ":documentable_id",
+                    "documents",
+                    ":id",
+                    "download"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "documentable_id",
+                      "description": "(Required) The unique identifier for the associated object."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "documentable_type",
+                      "description": "(Required) The type of the associated object. Currently can be one of `payment_order`, `transaction`, `expected_payment`, `counterparty`, `organization`, `case`, `internal_account`, `decision`, or `external_account`."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the document."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Found",
+              "code": 302,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "e4085f67-0336-4b8d-98ab-b0d6b541c2eb",
+              "name": "forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    ":documentable_type",
+                    ":documentable_id",
+                    "documents",
+                    ":id",
+                    "download"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "documentable_id",
+                      "description": "(Required) The unique identifier for the associated object."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "documentable_type",
+                      "description": "(Required) The type of the associated object. Currently can be one of `payment_order`, `transaction`, `expected_payment`, `counterparty`, `organization`, `case`, `internal_account`, `decision`, or `external_account`."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the document."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": {\n    \"code\": \"invalid_ip\",\n    \"message\": \"string\",\n    \"parameter\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4c5e3ce9-75a9-4519-a956-35708379c167",
+              "name": "not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    ":documentable_type",
+                    ":documentable_id",
+                    "documents",
+                    ":id",
+                    "download"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "documentable_id",
+                      "description": "(Required) The unique identifier for the associated object."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "documentable_type",
+                      "description": "(Required) The type of the associated object. Currently can be one of `payment_order`, `transaction`, `expected_payment`, `counterparty`, `organization`, `case`, `internal_account`, `decision`, or `external_account`."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the document."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": {\n    \"code\": \"invalid_ip\",\n    \"message\": \"string\",\n    \"parameter\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0221166a-ef1a-4994-8788-9ae28e513661",
+          "name": "download document",
+          "request": {
+            "name": "download document",
+            "description": {
+              "content": "Download an existing document.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "documents",
+                ":id",
+                "download"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The ID of the document."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "c0b1f782-bedb-45ab-990d-1e23fec4fb6e",
+              "name": "redirect",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "documents",
+                    ":id",
+                    "download"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the document."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Found",
+              "code": 302,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "b273d69d-f58a-4923-9628-499405ed475d",
+              "name": "forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "documents",
+                    ":id",
+                    "download"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the document."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": {\n    \"code\": \"invalid_ip\",\n    \"message\": \"string\",\n    \"parameter\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ab20aea7-1d88-447f-bce9-bc431cd791fc",
+              "name": "not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "documents",
+                    ":id",
+                    "download"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the document."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": {\n    \"code\": \"invalid_ip\",\n    \"message\": \"string\",\n    \"parameter\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "http://localhost:3000",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "f7849ebe-53f6-4dda-a096-0e9d658a57fc",
+    "name": "Modern Treasury AccountCapability Document API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Modern Treasury REST API. Please see https://docs.moderntreasury.com for more details.\n\nContact Support:\n Name: Modern Treasury Engineering Team",
+      "type": "text/plain"
+    }
+  }
+}

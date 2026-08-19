@@ -1,0 +1,436 @@
+{
+  "item": [
+    {
+      "id": "62e147c9-6a40-4178-82d6-28da538820e4",
+      "name": "LedgerAccountStatement",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "5c98efb8-0670-4d15-9a8d-d72d0333deb7",
+          "name": "create ledger_account_statement",
+          "request": {
+            "name": "create ledger_account_statement",
+            "description": {
+              "content": "Create a ledger account statement.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "ledger_account_statements"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "This key should be something unique, preferably something like an UUID.",
+                "key": "Idempotency-Key",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"ledger_account_id\": \"<uuid>\",\n  \"effective_at_lower_bound\": \"<dateTime>\",\n  \"effective_at_upper_bound\": \"<dateTime>\",\n  \"description\": \"<string>\",\n  \"metadata\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "0591e4fd-57b4-4ede-953f-19e28ee3c679",
+              "name": "successful",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "ledger_account_statements"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "This key should be something unique, preferably something like an UUID.",
+                    "key": "Idempotency-Key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ledger_account_id\": \"<uuid>\",\n  \"effective_at_lower_bound\": \"<dateTime>\",\n  \"effective_at_upper_bound\": \"<dateTime>\",\n  \"description\": \"<string>\",\n  \"metadata\": {\n    \"key\": \"value\",\n    \"foo\": \"bar\",\n    \"modern\": \"treasury\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"4b0e5ac2-cb3a-b5fe-66c2-053981e7c7ed\",\n  \"object\": \"string\",\n  \"live_mode\": false,\n  \"created_at\": \"1966-08-19T03:02:13.733Z\",\n  \"updated_at\": \"2023-05-02T17:25:55.399Z\",\n  \"ledger_id\": \"de968fc3-f15d-55b7-5826-01efb7d59ee4\",\n  \"description\": \"string\",\n  \"ledger_account_id\": \"d210a10e-f4b4-258b-7b81-94c2f3f81800\",\n  \"ledger_account_lock_version\": 3666,\n  \"ledger_account_normal_balance\": \"credit\",\n  \"effective_at_lower_bound\": \"1972-06-07T09:14:02.616Z\",\n  \"effective_at_upper_bound\": \"1951-01-08T09:16:19.992Z\",\n  \"starting_balance\": {\n    \"pending_balance\": {\n      \"credits\": 8703,\n      \"debits\": 3575,\n      \"amount\": 5730,\n      \"currency\": \"string\",\n      \"currency_exponent\": 2652\n    },\n    \"posted_balance\": {\n      \"credits\": 1078,\n      \"debits\": 8547,\n      \"amount\": 5481,\n      \"currency\": \"string\",\n      \"currency_exponent\": 326\n    },\n    \"available_balance\": {\n      \"credits\": 4105,\n      \"debits\": 3258,\n      \"amount\": 7585,\n      \"currency\": \"string\",\n      \"currency_exponent\": 3319\n    }\n  },\n  \"ending_balance\": {\n    \"pending_balance\": {\n      \"credits\": 4833,\n      \"debits\": 8191,\n      \"amount\": 2515,\n      \"currency\": \"string\",\n      \"currency_exponent\": 9789\n    },\n    \"posted_balance\": {\n      \"credits\": 142,\n      \"debits\": 9202,\n      \"amount\": 1345,\n      \"currency\": \"string\",\n      \"currency_exponent\": 2851\n    },\n    \"available_balance\": {\n      \"credits\": 7030,\n      \"debits\": 5481,\n      \"amount\": 5458,\n      \"currency\": \"string\",\n      \"currency_exponent\": 1188\n    }\n  },\n  \"metadata\": {\n    \"key\": \"value\",\n    \"foo\": \"bar\",\n    \"modern\": \"treasury\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e1564173-5eff-419d-94ba-59123243abaa",
+              "name": "forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "ledger_account_statements"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "This key should be something unique, preferably something like an UUID.",
+                    "key": "Idempotency-Key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ledger_account_id\": \"<uuid>\",\n  \"effective_at_lower_bound\": \"<dateTime>\",\n  \"effective_at_upper_bound\": \"<dateTime>\",\n  \"description\": \"<string>\",\n  \"metadata\": {\n    \"key\": \"value\",\n    \"foo\": \"bar\",\n    \"modern\": \"treasury\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": {\n    \"code\": \"resource_not_found\",\n    \"message\": \"string\",\n    \"parameter\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e99ea328-44c4-4fdd-9e5b-3a650558303d",
+              "name": "unsuccessful",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "ledger_account_statements"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "This key should be something unique, preferably something like an UUID.",
+                    "key": "Idempotency-Key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ledger_account_id\": \"<uuid>\",\n  \"effective_at_lower_bound\": \"<dateTime>\",\n  \"effective_at_upper_bound\": \"<dateTime>\",\n  \"description\": \"<string>\",\n  \"metadata\": {\n    \"key\": \"value\",\n    \"foo\": \"bar\",\n    \"modern\": \"treasury\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": {\n    \"code\": \"resource_not_found\",\n    \"message\": \"string\",\n    \"parameter\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5044160a-2b83-4991-977e-6bf6acdd0137",
+          "name": "get ledger_account_statement",
+          "request": {
+            "name": "get ledger_account_statement",
+            "description": {
+              "content": "Get details on a single ledger account statement.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "ledger_account_statements",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) id"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "7f4683f5-4f66-410c-b1c1-d26160c49fbf",
+              "name": "successful",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "ledger_account_statements",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"4b0e5ac2-cb3a-b5fe-66c2-053981e7c7ed\",\n  \"object\": \"string\",\n  \"live_mode\": false,\n  \"created_at\": \"1966-08-19T03:02:13.733Z\",\n  \"updated_at\": \"2023-05-02T17:25:55.399Z\",\n  \"ledger_id\": \"de968fc3-f15d-55b7-5826-01efb7d59ee4\",\n  \"description\": \"string\",\n  \"ledger_account_id\": \"d210a10e-f4b4-258b-7b81-94c2f3f81800\",\n  \"ledger_account_lock_version\": 3666,\n  \"ledger_account_normal_balance\": \"credit\",\n  \"effective_at_lower_bound\": \"1972-06-07T09:14:02.616Z\",\n  \"effective_at_upper_bound\": \"1951-01-08T09:16:19.992Z\",\n  \"starting_balance\": {\n    \"pending_balance\": {\n      \"credits\": 8703,\n      \"debits\": 3575,\n      \"amount\": 5730,\n      \"currency\": \"string\",\n      \"currency_exponent\": 2652\n    },\n    \"posted_balance\": {\n      \"credits\": 1078,\n      \"debits\": 8547,\n      \"amount\": 5481,\n      \"currency\": \"string\",\n      \"currency_exponent\": 326\n    },\n    \"available_balance\": {\n      \"credits\": 4105,\n      \"debits\": 3258,\n      \"amount\": 7585,\n      \"currency\": \"string\",\n      \"currency_exponent\": 3319\n    }\n  },\n  \"ending_balance\": {\n    \"pending_balance\": {\n      \"credits\": 4833,\n      \"debits\": 8191,\n      \"amount\": 2515,\n      \"currency\": \"string\",\n      \"currency_exponent\": 9789\n    },\n    \"posted_balance\": {\n      \"credits\": 142,\n      \"debits\": 9202,\n      \"amount\": 1345,\n      \"currency\": \"string\",\n      \"currency_exponent\": 2851\n    },\n    \"available_balance\": {\n      \"credits\": 7030,\n      \"debits\": 5481,\n      \"amount\": 5458,\n      \"currency\": \"string\",\n      \"currency_exponent\": 1188\n    }\n  },\n  \"metadata\": {\n    \"key\": \"value\",\n    \"foo\": \"bar\",\n    \"modern\": \"treasury\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "49f13a40-a64e-487c-9674-2fa458d7d5e7",
+              "name": "not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "ledger_account_statements",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": {\n    \"code\": \"resource_not_found\",\n    \"message\": \"string\",\n    \"parameter\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "http://localhost:3000",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "31e608c0-7d71-4a6d-90e5-eb1f6c3b2f8b",
+    "name": "Modern Treasury AccountCapability LedgerAccountStatement API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Modern Treasury REST API. Please see https://docs.moderntreasury.com for more details.\n\nContact Support:\n Name: Modern Treasury Engineering Team",
+      "type": "text/plain"
+    }
+  }
+}

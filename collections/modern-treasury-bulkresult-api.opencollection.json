@@ -1,0 +1,100 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Modern Treasury AccountCapability BulkResult API",
+    "version": "v1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "BulkResult",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "list bulk_results",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:3000/api/bulk_results",
+            "params": [
+              {
+                "name": "after_cursor",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "One of successful or failed."
+              },
+              {
+                "name": "request_type",
+                "value": "",
+                "type": "query",
+                "description": "The type of the request that created this result. bulk_request is the only supported `request_type`"
+              },
+              {
+                "name": "request_id",
+                "value": "",
+                "type": "query",
+                "description": "Unique identifier for the request that created this bulk result. This is the ID of the bulk request when `request_type` is bulk_request"
+              },
+              {
+                "name": "entity_type",
+                "value": "",
+                "type": "query",
+                "description": "The type of the request that created this result. bulk_request is the only supported `request_type`"
+              },
+              {
+                "name": "entity_id",
+                "value": "",
+                "type": "query",
+                "description": "Unique identifier for the result entity object."
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "list bulk_results"
+        },
+        {
+          "info": {
+            "name": "get bulk_result",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:3000/api/bulk_results/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "id"
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "get bulk_result"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

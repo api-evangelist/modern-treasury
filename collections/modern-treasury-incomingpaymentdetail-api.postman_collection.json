@@ -1,0 +1,1069 @@
+{
+  "item": [
+    {
+      "id": "b2e52f01-479b-41a6-a2fa-d8efeae36166",
+      "name": "IncomingPaymentDetail",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "9ee29462-b3e7-4d6a-bd23-3f3063199af5",
+          "name": "list incoming payment_details",
+          "request": {
+            "name": "list incoming payment_details",
+            "description": {
+              "content": "Get a list of Incoming Payment Details.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "incoming_payment_details"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "after_cursor",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "per_page",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "direction",
+                  "value": "<string>",
+                  "description": "One of `credit` or `debit`."
+                },
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>",
+                  "description": "The current status of the incoming payment order. One of `pending`, `completed`, or `returned`."
+                },
+                {
+                  "disabled": false,
+                  "key": "type",
+                  "value": "<string>",
+                  "description": "One of: `ach`, `book`, `check`, `eft`, `interac`, `rtp`, `sepa`, `signet`, or `wire`."
+                },
+                {
+                  "disabled": false,
+                  "key": "as_of_date_start",
+                  "value": "<date>",
+                  "description": "Filters incoming payment details with an as_of_date starting on or after the specified date (YYYY-MM-DD)."
+                },
+                {
+                  "disabled": false,
+                  "key": "as_of_date_end",
+                  "value": "<date>",
+                  "description": "Filters incoming payment details with an as_of_date starting on or before the specified date (YYYY-MM-DD)."
+                },
+                {
+                  "disabled": false,
+                  "key": "metadata[key_0]",
+                  "value": "<string>",
+                  "description": "For example, if you want to query for records with metadata key `Type` and value `Loan`, the query would be `metadata%5BType%5D=Loan`. This encodes the query parameters."
+                },
+                {
+                  "disabled": false,
+                  "key": "virtual_account_id",
+                  "value": "<string>",
+                  "description": "If the incoming payment detail is in a virtual account, the ID of the Virtual Account."
+                },
+                {
+                  "disabled": false,
+                  "key": "subtype",
+                  "value": "<string>",
+                  "description": "An additional layer of classification for the type of incoming payment detail. For example, a `type` of `stablecoin` may have a `subtype` of `ethereum` or `solana`."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "ea0a7129-8fd5-4a71-bd3b-78e2a5269da9",
+              "name": "successful",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "incoming_payment_details"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "after_cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "direction",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "as_of_date_start",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "as_of_date_end",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "metadata[key_0]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "metadata[key_1]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "metadata[key_2]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "metadata[key_3]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "virtual_account_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "subtype",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "The cursor for the next page. Including this in a call as `after_cursor` will return the next page.",
+                  "key": "X-After-Cursor",
+                  "value": "string"
+                },
+                {
+                  "disabled": false,
+                  "description": "The current `per_page`.",
+                  "key": "X-Per-Page",
+                  "value": "1408"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"18ce6baf-0881-6150-bc6c-15fa2564cdd8\",\n    \"object\": \"string\",\n    \"live_mode\": false,\n    \"created_at\": \"2020-05-14T19:57:06.569Z\",\n    \"updated_at\": \"1972-11-27T07:24:11.984Z\",\n    \"internal_account_id\": \"737b6093-315c-da24-f29a-5be57959853e\",\n    \"virtual_account_id\": \"4baff430-b7ab-bc9a-8f70-fafc32f44e08\",\n    \"virtual_account\": {\n      \"id\": \"7fcc9a8a-d7e3-ee5d-8694-82b9dbbcb044\",\n      \"object\": \"string\",\n      \"live_mode\": false,\n      \"created_at\": \"1953-02-28T09:31:06.197Z\",\n      \"updated_at\": \"1957-11-08T10:44:41.908Z\",\n      \"discarded_at\": \"1957-05-21T01:03:22.622Z\",\n      \"name\": \"string\",\n      \"description\": \"string\",\n      \"counterparty_id\": \"96769fed-09d4-5fc1-71d4-5d6e0edd0215\",\n      \"internal_account_id\": \"29219bc9-510f-c3b5-2b06-bca3eff91472\",\n      \"account_details\": [\n        {\n          \"id\": \"a874d866-cea3-dae5-294f-6ba2810d3c26\",\n          \"object\": \"string\",\n          \"live_mode\": false,\n          \"created_at\": \"2018-04-29T21:35:14.604Z\",\n          \"updated_at\": \"2015-06-22T15:49:11.754Z\",\n          \"discarded_at\": \"2026-05-20T11:48:29.825Z\",\n          \"account_number_type\": \"id_number\",\n          \"account_number_safe\": \"string\",\n          \"account_number\": \"string\"\n        },\n        {\n          \"id\": \"f86a01f2-1546-b835-46ec-7e37f03f4d2b\",\n          \"object\": \"string\",\n          \"live_mode\": true,\n          \"created_at\": \"1984-10-08T21:51:52.916Z\",\n          \"updated_at\": \"1980-05-21T13:17:32.054Z\",\n          \"discarded_at\": \"2017-10-15T03:07:54.682Z\",\n          \"account_number_type\": \"polygon_address\",\n          \"account_number_safe\": \"string\",\n          \"account_number\": \"string\"\n        }\n      ],\n      \"routing_details\": [\n        {\n          \"id\": \"28fcac6b-bd51-601f-c5af-11cf749e0323\",\n          \"object\": \"string\",\n          \"live_mode\": true,\n          \"created_at\": \"2003-03-02T01:44:25.344Z\",\n          \"updated_at\": \"2014-11-27T02:41:22.335Z\",\n          \"discarded_at\": \"1989-05-20T02:02:23.461Z\",\n          \"routing_number\": \"string\",\n          \"routing_number_type\": \"in_ifsc\",\n          \"payment_type\": \"sepa\",\n          \"bank_name\": \"string\",\n          \"bank_address\": {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"object\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"live_mode\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"created_at\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"updated_at\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"line1\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"line2\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"locality\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"region\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"postal_code\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"country\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        },\n        {\n          \"id\": \"207ac759-715a-6dcd-e3e8-4a637c05322c\",\n          \"object\": \"string\",\n          \"live_mode\": true,\n          \"created_at\": \"1956-12-25T08:31:08.152Z\",\n          \"updated_at\": \"2000-05-07T23:22:13.681Z\",\n          \"discarded_at\": \"2022-05-26T00:51:48.126Z\",\n          \"routing_number\": \"string\",\n          \"routing_number_type\": \"chips\",\n          \"payment_type\": \"stablecoin\",\n          \"bank_name\": \"string\",\n          \"bank_address\": {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"object\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"live_mode\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"created_at\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"updated_at\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"line1\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"line2\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"locality\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"region\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"postal_code\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"country\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        }\n      ],\n      \"debit_ledger_account_id\": \"c4674805-8bad-71d9-9f04-2cf74295af31\",\n      \"credit_ledger_account_id\": \"eafad057-a788-164e-f9f4-01edb2ce006c\",\n      \"ledger_account_id\": \"8259c574-0c60-9e7e-f8f3-b6863a1a4e0c\",\n      \"metadata\": {\n        \"key\": \"value\",\n        \"foo\": \"bar\",\n        \"modern\": \"treasury\"\n      }\n    },\n    \"transaction_line_item_id\": \"5c5fee5e-e235-2829-f246-a6f216c144ca\",\n    \"transaction_id\": \"285ca49b-2173-afb3-5ad2-84a2b65dbf7e\",\n    \"ledger_transaction_id\": \"052ca7a6-7531-2bbe-6ab8-863d16cee5d1\",\n    \"type\": \"nz_becs\",\n    \"data\": {\n      \"key_0\": true\n    },\n    \"amount\": 2929,\n    \"currency\": \"EEK\",\n    \"direction\": \"credit\",\n    \"status\": \"completed\",\n    \"metadata\": {\n      \"key\": \"value\",\n      \"foo\": \"bar\",\n      \"modern\": \"treasury\"\n    },\n    \"as_of_date\": \"2023-07-17\",\n    \"vendor_id\": \"e8638fcf-c22e-df86-2fcc-a831aa28c394\",\n    \"originating_routing_number\": \"string\",\n    \"originating_routing_number_type\": \"jp_zengin_code\",\n    \"originating_account_number_safe\": \"string\",\n    \"originating_account_number_type\": \"card_token\",\n    \"subtype\": \"string\",\n    \"reconciliation_status\": \"unreconciled\",\n    \"originating_account_number\": \"string\",\n    \"originating_party_name\": \"string\",\n    \"originating_party_address\": {\n      \"id\": \"1da4eafe-ac34-2c92-7d44-8b9afc755644\",\n      \"object\": \"string\",\n      \"live_mode\": false,\n      \"created_at\": \"1955-03-23T08:33:37.115Z\",\n      \"updated_at\": \"1976-12-17T15:11:58.337Z\",\n      \"line1\": \"string\",\n      \"line2\": \"string\",\n      \"locality\": \"string\",\n      \"region\": \"string\",\n      \"postal_code\": \"string\",\n      \"country\": \"string\"\n    },\n    \"originating_party_vendor_identifier\": \"string\",\n    \"receiving_account_number\": \"string\",\n    \"receiving_account_number_safe\": \"string\"\n  },\n  {\n    \"id\": \"df5a5302-ece9-420d-5b17-71312658d917\",\n    \"object\": \"string\",\n    \"live_mode\": false,\n    \"created_at\": \"2001-05-05T07:06:12.058Z\",\n    \"updated_at\": \"1977-12-21T16:37:43.103Z\",\n    \"internal_account_id\": \"c6b083a2-8ea4-30fc-0e6f-80abd47f7e4b\",\n    \"virtual_account_id\": \"e9bbe6f1-e761-cbf5-1c9c-605bceaf558d\",\n    \"virtual_account\": {\n      \"id\": \"c7a1d9e5-d0a7-16a5-8fe5-9d0dbc0ba03a\",\n      \"object\": \"string\",\n      \"live_mode\": true,\n      \"created_at\": \"1971-03-03T01:42:25.414Z\",\n      \"updated_at\": \"2024-07-02T19:08:44.375Z\",\n      \"discarded_at\": \"1987-02-27T00:59:50.282Z\",\n      \"name\": \"string\",\n      \"description\": \"string\",\n      \"counterparty_id\": \"30607d94-338a-5f60-7e73-d1bf3ce96fbe\",\n      \"internal_account_id\": \"52a97c69-16c7-038d-3b1a-c4d1ec659483\",\n      \"account_details\": [\n        {\n          \"id\": \"61ec7811-5879-3a7e-a6d3-cf4fbb7a92da\",\n          \"object\": \"string\",\n          \"live_mode\": false,\n          \"created_at\": \"1950-01-03T05:59:38.059Z\",\n          \"updated_at\": \"2006-03-01T05:40:35.630Z\",\n          \"discarded_at\": \"1950-04-19T03:00:54.225Z\",\n          \"account_number_type\": \"other\",\n          \"account_number_safe\": \"string\",\n          \"account_number\": \"string\"\n        },\n        {\n          \"id\": \"a96d3ce7-0037-75dd-fd74-653aeb217b15\",\n          \"object\": \"string\",\n          \"live_mode\": false,\n          \"created_at\": \"2008-02-03T09:53:52.887Z\",\n          \"updated_at\": \"1979-09-25T01:27:11.608Z\",\n          \"discarded_at\": \"2014-07-21T05:25:32.245Z\",\n          \"account_number_type\": \"clabe\",\n          \"account_number_safe\": \"string\",\n          \"account_number\": \"string\"\n        }\n      ],\n      \"routing_details\": [\n        {\n          \"id\": \"feba9bae-5442-0e61-11a1-e6f8fe6f3a7a\",\n          \"object\": \"string\",\n          \"live_mode\": false,\n          \"created_at\": \"1966-04-11T10:48:07.129Z\",\n          \"updated_at\": \"1972-11-02T21:36:26.740Z\",\n          \"discarded_at\": \"2022-08-10T10:13:10.655Z\",\n          \"routing_number\": \"string\",\n          \"routing_number_type\": \"gb_sort_code\",\n          \"payment_type\": \"gb_fps\",\n          \"bank_name\": \"string\",\n          \"bank_address\": {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"object\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"live_mode\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"created_at\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"updated_at\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"line1\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"line2\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"locality\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"region\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"postal_code\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"country\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        },\n        {\n          \"id\": \"7bef0fe8-3e08-df33-2b27-9763e2684332\",\n          \"object\": \"string\",\n          \"live_mode\": true,\n          \"created_at\": \"1956-12-04T18:42:07.676Z\",\n          \"updated_at\": \"1949-08-20T16:05:13.474Z\",\n          \"discarded_at\": \"1965-01-28T20:27:41.478Z\",\n          \"routing_number\": \"string\",\n          \"routing_number_type\": \"pl_national_clearing_code\",\n          \"payment_type\": \"pl_elixir\",\n          \"bank_name\": \"string\",\n          \"bank_address\": {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"object\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"live_mode\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"created_at\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"updated_at\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"line1\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"line2\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"locality\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"region\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"postal_code\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"country\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        }\n      ],\n      \"debit_ledger_account_id\": \"ef7b0cea-a8d2-5073-3701-8a5373a08299\",\n      \"credit_ledger_account_id\": \"234e7431-daf0-6cb5-2f9d-0c842bdbde59\",\n      \"ledger_account_id\": \"15c2b94f-c00c-34d0-27f1-397216c56a7c\",\n      \"metadata\": {\n        \"key\": \"value\",\n        \"foo\": \"bar\",\n        \"modern\": \"treasury\"\n      }\n    },\n    \"transaction_line_item_id\": \"9540a65b-cded-1a37-0738-5245f1797e44\",\n    \"transaction_id\": \"079921cd-4256-195f-0970-d800325f7ac5\",\n    \"ledger_transaction_id\": \"3e1771f0-21b4-724f-f99d-14159365b285\",\n    \"type\": \"au_becs\",\n    \"data\": {\n      \"key_0\": \"string\",\n      \"key_1\": 8228.501421677647,\n      \"key_2\": 9407,\n      \"key_3\": \"string\"\n    },\n    \"amount\": 3056,\n    \"currency\": \"MUR\",\n    \"direction\": \"debit\",\n    \"status\": \"pending\",\n    \"metadata\": {\n      \"key\": \"value\",\n      \"foo\": \"bar\",\n      \"modern\": \"treasury\"\n    },\n    \"as_of_date\": \"2005-10-12\",\n    \"vendor_id\": \"3ec36747-4fbe-8b64-456d-ac7b695b2865\",\n    \"originating_routing_number\": \"string\",\n    \"originating_routing_number_type\": \"il_bank_code\",\n    \"originating_account_number_safe\": \"string\",\n    \"originating_account_number_type\": \"solana_address\",\n    \"subtype\": \"string\",\n    \"reconciliation_status\": \"unreconciled\",\n    \"originating_account_number\": \"string\",\n    \"originating_party_name\": \"string\",\n    \"originating_party_address\": {\n      \"id\": \"79e6f406-2301-b9d8-896f-8b2953d22c88\",\n      \"object\": \"string\",\n      \"live_mode\": false,\n      \"created_at\": \"2018-03-14T23:50:36.826Z\",\n      \"updated_at\": \"1957-04-19T12:08:43.837Z\",\n      \"line1\": \"string\",\n      \"line2\": \"string\",\n      \"locality\": \"string\",\n      \"region\": \"string\",\n      \"postal_code\": \"string\",\n      \"country\": \"string\"\n    },\n    \"originating_party_vendor_identifier\": \"string\",\n    \"receiving_account_number\": \"string\",\n    \"receiving_account_number_safe\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "70b04e06-0d22-467d-b047-0efb82d0ebb8",
+              "name": "unsuccessful",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "incoming_payment_details"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "after_cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "direction",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "as_of_date_start",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "as_of_date_end",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "metadata[key_0]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "metadata[key_1]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "metadata[key_2]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "metadata[key_3]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "virtual_account_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "subtype",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": {\n    \"code\": \"header_invalid\",\n    \"message\": \"string\",\n    \"parameter\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2e739a39-3570-4e4f-89b5-8f4191cc4c5c",
+          "name": "get incoming payment detail",
+          "request": {
+            "name": "get incoming payment detail",
+            "description": {
+              "content": "Get an existing Incoming Payment Detail.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "incoming_payment_details",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The unique identifier of the incoming payment detail."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "b8603269-5499-46bd-8488-ea3d752ea641",
+              "name": "successful",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "incoming_payment_details",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the incoming payment detail."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"fea188c6-a3f5-8784-e9b0-accb01caef13\",\n  \"object\": \"string\",\n  \"live_mode\": false,\n  \"created_at\": \"1965-07-10T16:06:39.245Z\",\n  \"updated_at\": \"1968-12-09T19:08:29.157Z\",\n  \"internal_account_id\": \"7d8e15b5-3977-d9aa-a20b-b81fe766befd\",\n  \"virtual_account_id\": \"61f8df79-c587-eebe-01bc-7b898d1803d5\",\n  \"virtual_account\": {\n    \"id\": \"742ae0f0-0c75-f0e0-28f8-1df4134798a4\",\n    \"object\": \"string\",\n    \"live_mode\": true,\n    \"created_at\": \"1978-11-19T21:04:17.284Z\",\n    \"updated_at\": \"1970-06-24T22:02:20.368Z\",\n    \"discarded_at\": \"1975-05-15T17:52:05.831Z\",\n    \"name\": \"string\",\n    \"description\": \"string\",\n    \"counterparty_id\": \"b574c7a5-e5b1-02b1-d182-6c27beb1d713\",\n    \"internal_account_id\": \"540feee8-49a4-44c4-699a-9d449ff2ebe7\",\n    \"account_details\": [\n      {\n        \"id\": \"f7cd3f35-9065-1b96-66e1-e0dabcf83b03\",\n        \"object\": \"string\",\n        \"live_mode\": false,\n        \"created_at\": \"1971-06-08T23:42:42.144Z\",\n        \"updated_at\": \"1980-09-12T03:34:45.873Z\",\n        \"discarded_at\": \"1954-04-19T23:55:27.698Z\",\n        \"account_number_type\": \"card_token\",\n        \"account_number_safe\": \"string\",\n        \"account_number\": \"string\"\n      },\n      {\n        \"id\": \"dbb5b1c3-c214-613c-e758-1580a10f84b8\",\n        \"object\": \"string\",\n        \"live_mode\": true,\n        \"created_at\": \"1975-04-09T19:05:57.818Z\",\n        \"updated_at\": \"1970-12-19T23:50:19.421Z\",\n        \"discarded_at\": \"1963-08-22T09:30:26.375Z\",\n        \"account_number_type\": \"ethereum_address\",\n        \"account_number_safe\": \"string\",\n        \"account_number\": \"string\"\n      }\n    ],\n    \"routing_details\": [\n      {\n        \"id\": \"df8b2785-edd6-7597-0e32-a899f4378172\",\n        \"object\": \"string\",\n        \"live_mode\": false,\n        \"created_at\": \"1955-06-17T21:26:59.943Z\",\n        \"updated_at\": \"1977-09-17T21:41:39.186Z\",\n        \"discarded_at\": \"1963-02-13T01:15:39.607Z\",\n        \"routing_number\": \"string\",\n        \"routing_number_type\": \"jp_zengin_code\",\n        \"payment_type\": \"chats\",\n        \"bank_name\": \"string\",\n        \"bank_address\": {\n          \"id\": \"08526ae0-fdf6-a810-15f4-729d27602227\",\n          \"object\": \"string\",\n          \"live_mode\": false,\n          \"created_at\": \"1975-09-15T12:01:00.997Z\",\n          \"updated_at\": \"2013-01-16T01:46:56.100Z\",\n          \"line1\": \"string\",\n          \"line2\": \"string\",\n          \"locality\": \"string\",\n          \"region\": \"string\",\n          \"postal_code\": \"string\",\n          \"country\": \"string\"\n        }\n      },\n      {\n        \"id\": \"586540d8-50b3-8f32-7f8b-09866a9bbf35\",\n        \"object\": \"string\",\n        \"live_mode\": true,\n        \"created_at\": \"2024-01-31T22:59:38.862Z\",\n        \"updated_at\": \"1955-08-24T01:17:27.118Z\",\n        \"discarded_at\": \"2009-06-01T09:47:43.042Z\",\n        \"routing_number\": \"string\",\n        \"routing_number_type\": \"se_bankgiro_clearing_code\",\n        \"payment_type\": \"sen\",\n        \"bank_name\": \"string\",\n        \"bank_address\": {\n          \"id\": \"3424e819-e05d-1ba1-acc0-6c6560e6952b\",\n          \"object\": \"string\",\n          \"live_mode\": true,\n          \"created_at\": \"1950-01-08T10:53:02.880Z\",\n          \"updated_at\": \"1954-07-14T01:15:02.119Z\",\n          \"line1\": \"string\",\n          \"line2\": \"string\",\n          \"locality\": \"string\",\n          \"region\": \"string\",\n          \"postal_code\": \"string\",\n          \"country\": \"string\"\n        }\n      }\n    ],\n    \"debit_ledger_account_id\": \"f44100b7-f4a9-685e-4edb-da83d38f350a\",\n    \"credit_ledger_account_id\": \"5a0e528e-aff4-16f0-7a34-a0187edfc1e4\",\n    \"ledger_account_id\": \"62a1b024-e1c4-45d8-f8c6-128ce890226e\",\n    \"metadata\": {\n      \"key\": \"value\",\n      \"foo\": \"bar\",\n      \"modern\": \"treasury\"\n    }\n  },\n  \"transaction_line_item_id\": \"a7cae4e0-4ddf-594a-69ec-fe91caf4738c\",\n  \"transaction_id\": \"64fa3984-fe16-896e-c71d-e256d3c51359\",\n  \"ledger_transaction_id\": \"c8e2ccbd-0a9e-a8a3-b7e7-304962bbacbf\",\n  \"type\": \"rtp\",\n  \"data\": {\n    \"key_0\": \"string\",\n    \"key_1\": 5141\n  },\n  \"amount\": 1317,\n  \"currency\": \"XFU\",\n  \"direction\": \"credit\",\n  \"status\": \"completed\",\n  \"metadata\": {\n    \"key\": \"value\",\n    \"foo\": \"bar\",\n    \"modern\": \"treasury\"\n  },\n  \"as_of_date\": \"2002-06-14\",\n  \"vendor_id\": \"297955fc-f44f-c132-7f29-b3219f063204\",\n  \"originating_routing_number\": \"string\",\n  \"originating_routing_number_type\": \"br_codigo\",\n  \"originating_account_number_safe\": \"string\",\n  \"originating_account_number_type\": \"card_token\",\n  \"subtype\": \"string\",\n  \"reconciliation_status\": \"reconciled\",\n  \"originating_account_number\": \"string\",\n  \"originating_party_name\": \"string\",\n  \"originating_party_address\": {\n    \"id\": \"54d5388e-e594-cf2c-9dfa-b33b6b35173c\",\n    \"object\": \"string\",\n    \"live_mode\": false,\n    \"created_at\": \"2008-02-23T02:31:59.032Z\",\n    \"updated_at\": \"1949-01-26T22:08:57.521Z\",\n    \"line1\": \"string\",\n    \"line2\": \"string\",\n    \"locality\": \"string\",\n    \"region\": \"string\",\n    \"postal_code\": \"string\",\n    \"country\": \"string\"\n  },\n  \"originating_party_vendor_identifier\": \"string\",\n  \"receiving_account_number\": \"string\",\n  \"receiving_account_number_safe\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "db8c59f2-bf4b-40e0-a715-ebec256703c4",
+              "name": "not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "incoming_payment_details",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the incoming payment detail."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": {\n    \"code\": \"header_invalid\",\n    \"message\": \"string\",\n    \"parameter\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "661a6f6a-8ed1-4b42-98da-090a79c02d1e",
+          "name": "update incoming payment detail",
+          "request": {
+            "name": "update incoming payment detail",
+            "description": {
+              "content": "Update an existing Incoming Payment Detail.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "incoming_payment_details",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The unique identifier of the incoming payment detail."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"metadata\": {\n    \"key_0\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "96b64300-3ed7-4c75-a0bc-46ad718452e6",
+              "name": "successful",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "incoming_payment_details",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the incoming payment detail."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"metadata\": {\n    \"key_0\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"fea188c6-a3f5-8784-e9b0-accb01caef13\",\n  \"object\": \"string\",\n  \"live_mode\": false,\n  \"created_at\": \"1965-07-10T16:06:39.245Z\",\n  \"updated_at\": \"1968-12-09T19:08:29.157Z\",\n  \"internal_account_id\": \"7d8e15b5-3977-d9aa-a20b-b81fe766befd\",\n  \"virtual_account_id\": \"61f8df79-c587-eebe-01bc-7b898d1803d5\",\n  \"virtual_account\": {\n    \"id\": \"742ae0f0-0c75-f0e0-28f8-1df4134798a4\",\n    \"object\": \"string\",\n    \"live_mode\": true,\n    \"created_at\": \"1978-11-19T21:04:17.284Z\",\n    \"updated_at\": \"1970-06-24T22:02:20.368Z\",\n    \"discarded_at\": \"1975-05-15T17:52:05.831Z\",\n    \"name\": \"string\",\n    \"description\": \"string\",\n    \"counterparty_id\": \"b574c7a5-e5b1-02b1-d182-6c27beb1d713\",\n    \"internal_account_id\": \"540feee8-49a4-44c4-699a-9d449ff2ebe7\",\n    \"account_details\": [\n      {\n        \"id\": \"f7cd3f35-9065-1b96-66e1-e0dabcf83b03\",\n        \"object\": \"string\",\n        \"live_mode\": false,\n        \"created_at\": \"1971-06-08T23:42:42.144Z\",\n        \"updated_at\": \"1980-09-12T03:34:45.873Z\",\n        \"discarded_at\": \"1954-04-19T23:55:27.698Z\",\n        \"account_number_type\": \"card_token\",\n        \"account_number_safe\": \"string\",\n        \"account_number\": \"string\"\n      },\n      {\n        \"id\": \"dbb5b1c3-c214-613c-e758-1580a10f84b8\",\n        \"object\": \"string\",\n        \"live_mode\": true,\n        \"created_at\": \"1975-04-09T19:05:57.818Z\",\n        \"updated_at\": \"1970-12-19T23:50:19.421Z\",\n        \"discarded_at\": \"1963-08-22T09:30:26.375Z\",\n        \"account_number_type\": \"ethereum_address\",\n        \"account_number_safe\": \"string\",\n        \"account_number\": \"string\"\n      }\n    ],\n    \"routing_details\": [\n      {\n        \"id\": \"df8b2785-edd6-7597-0e32-a899f4378172\",\n        \"object\": \"string\",\n        \"live_mode\": false,\n        \"created_at\": \"1955-06-17T21:26:59.943Z\",\n        \"updated_at\": \"1977-09-17T21:41:39.186Z\",\n        \"discarded_at\": \"1963-02-13T01:15:39.607Z\",\n        \"routing_number\": \"string\",\n        \"routing_number_type\": \"jp_zengin_code\",\n        \"payment_type\": \"chats\",\n        \"bank_name\": \"string\",\n        \"bank_address\": {\n          \"id\": \"08526ae0-fdf6-a810-15f4-729d27602227\",\n          \"object\": \"string\",\n          \"live_mode\": false,\n          \"created_at\": \"1975-09-15T12:01:00.997Z\",\n          \"updated_at\": \"2013-01-16T01:46:56.100Z\",\n          \"line1\": \"string\",\n          \"line2\": \"string\",\n          \"locality\": \"string\",\n          \"region\": \"string\",\n          \"postal_code\": \"string\",\n          \"country\": \"string\"\n        }\n      },\n      {\n        \"id\": \"586540d8-50b3-8f32-7f8b-09866a9bbf35\",\n        \"object\": \"string\",\n        \"live_mode\": true,\n        \"created_at\": \"2024-01-31T22:59:38.862Z\",\n        \"updated_at\": \"1955-08-24T01:17:27.118Z\",\n        \"discarded_at\": \"2009-06-01T09:47:43.042Z\",\n        \"routing_number\": \"string\",\n        \"routing_number_type\": \"se_bankgiro_clearing_code\",\n        \"payment_type\": \"sen\",\n        \"bank_name\": \"string\",\n        \"bank_address\": {\n          \"id\": \"3424e819-e05d-1ba1-acc0-6c6560e6952b\",\n          \"object\": \"string\",\n          \"live_mode\": true,\n          \"created_at\": \"1950-01-08T10:53:02.880Z\",\n          \"updated_at\": \"1954-07-14T01:15:02.119Z\",\n          \"line1\": \"string\",\n          \"line2\": \"string\",\n          \"locality\": \"string\",\n          \"region\": \"string\",\n          \"postal_code\": \"string\",\n          \"country\": \"string\"\n        }\n      }\n    ],\n    \"debit_ledger_account_id\": \"f44100b7-f4a9-685e-4edb-da83d38f350a\",\n    \"credit_ledger_account_id\": \"5a0e528e-aff4-16f0-7a34-a0187edfc1e4\",\n    \"ledger_account_id\": \"62a1b024-e1c4-45d8-f8c6-128ce890226e\",\n    \"metadata\": {\n      \"key\": \"value\",\n      \"foo\": \"bar\",\n      \"modern\": \"treasury\"\n    }\n  },\n  \"transaction_line_item_id\": \"a7cae4e0-4ddf-594a-69ec-fe91caf4738c\",\n  \"transaction_id\": \"64fa3984-fe16-896e-c71d-e256d3c51359\",\n  \"ledger_transaction_id\": \"c8e2ccbd-0a9e-a8a3-b7e7-304962bbacbf\",\n  \"type\": \"rtp\",\n  \"data\": {\n    \"key_0\": \"string\",\n    \"key_1\": 5141\n  },\n  \"amount\": 1317,\n  \"currency\": \"XFU\",\n  \"direction\": \"credit\",\n  \"status\": \"completed\",\n  \"metadata\": {\n    \"key\": \"value\",\n    \"foo\": \"bar\",\n    \"modern\": \"treasury\"\n  },\n  \"as_of_date\": \"2002-06-14\",\n  \"vendor_id\": \"297955fc-f44f-c132-7f29-b3219f063204\",\n  \"originating_routing_number\": \"string\",\n  \"originating_routing_number_type\": \"br_codigo\",\n  \"originating_account_number_safe\": \"string\",\n  \"originating_account_number_type\": \"card_token\",\n  \"subtype\": \"string\",\n  \"reconciliation_status\": \"reconciled\",\n  \"originating_account_number\": \"string\",\n  \"originating_party_name\": \"string\",\n  \"originating_party_address\": {\n    \"id\": \"54d5388e-e594-cf2c-9dfa-b33b6b35173c\",\n    \"object\": \"string\",\n    \"live_mode\": false,\n    \"created_at\": \"2008-02-23T02:31:59.032Z\",\n    \"updated_at\": \"1949-01-26T22:08:57.521Z\",\n    \"line1\": \"string\",\n    \"line2\": \"string\",\n    \"locality\": \"string\",\n    \"region\": \"string\",\n    \"postal_code\": \"string\",\n    \"country\": \"string\"\n  },\n  \"originating_party_vendor_identifier\": \"string\",\n  \"receiving_account_number\": \"string\",\n  \"receiving_account_number_safe\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "02bc2367-04f7-462c-9c92-7fbb5247d298",
+              "name": "not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "incoming_payment_details",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the incoming payment detail."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"metadata\": {\n    \"key_0\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": {\n    \"code\": \"header_invalid\",\n    \"message\": \"string\",\n    \"parameter\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "be739f6c-61b3-4667-bd98-4f168e10b592",
+          "name": "create async incoming payment detail",
+          "request": {
+            "name": "create async incoming payment detail",
+            "description": {
+              "content": "Simulate Incoming Payment Detail",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "simulations",
+                "incoming_payment_details",
+                "create_async"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "This key should be something unique, preferably something like an UUID.",
+                "key": "Idempotency-Key",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"type\": \"<string>\",\n  \"direction\": \"<string>\",\n  \"amount\": \"<integer>\",\n  \"currency\": \"<string>\",\n  \"internal_account_id\": \"<uuid>\",\n  \"virtual_account_id\": \"<uuid>\",\n  \"as_of_date\": \"<date>\",\n  \"description\": \"<string>\",\n  \"subtype\": \"<string>\",\n  \"data\": \"<object>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "f76fece5-e26f-4ead-9f2f-c1145fa96467",
+              "name": "successful",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "simulations",
+                    "incoming_payment_details",
+                    "create_async"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "This key should be something unique, preferably something like an UUID.",
+                    "key": "Idempotency-Key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"type\": \"<string>\",\n  \"direction\": \"<string>\",\n  \"amount\": \"<integer>\",\n  \"currency\": \"<string>\",\n  \"internal_account_id\": \"<uuid>\",\n  \"virtual_account_id\": \"<uuid>\",\n  \"as_of_date\": \"<date>\",\n  \"description\": \"<string>\",\n  \"subtype\": \"<string>\",\n  \"data\": \"<object>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"47b04f54-0644-126f-de42-52fe0599a5f4\",\n  \"object\": \"string\",\n  \"live_mode\": false,\n  \"created_at\": \"1967-10-07T10:28:41.518Z\",\n  \"updated_at\": \"1973-11-03T07:28:28.009Z\",\n  \"internal_account_id\": \"b2bb2fd2-10db-85cf-4ffa-0970bbe189e0\",\n  \"virtual_account_id\": \"e327a2db-aecb-256f-60a7-6fdcc3b69ce3\",\n  \"virtual_account\": {\n    \"id\": \"6275ba91-14d6-9dd2-f0f4-71fa189a65a1\",\n    \"object\": \"string\",\n    \"live_mode\": true,\n    \"created_at\": \"2025-05-29T16:53:16.013Z\",\n    \"updated_at\": \"1970-02-11T00:53:35.446Z\",\n    \"discarded_at\": \"2001-03-07T18:34:17.249Z\",\n    \"name\": \"string\",\n    \"description\": \"string\",\n    \"counterparty_id\": \"ae084d0f-2ae0-039c-2d2d-650ab54a69e6\",\n    \"internal_account_id\": \"1fc1f9ac-0bd4-db68-ffc8-5b96fba96397\",\n    \"account_details\": [\n      {\n        \"id\": \"caf4bfb1-6084-38da-3f9a-53e9280cef24\",\n        \"object\": \"string\",\n        \"live_mode\": true,\n        \"created_at\": \"1998-04-06T06:45:03.421Z\",\n        \"updated_at\": \"1951-05-23T03:01:02.254Z\",\n        \"discarded_at\": \"1995-08-25T04:07:17.707Z\",\n        \"account_number_type\": \"other\",\n        \"account_number_safe\": \"string\",\n        \"account_number\": \"string\"\n      },\n      {\n        \"id\": \"26530ee3-5e9e-8d80-bf02-304b21d7bb9d\",\n        \"object\": \"string\",\n        \"live_mode\": true,\n        \"created_at\": \"2014-10-02T13:52:19.573Z\",\n        \"updated_at\": \"2008-08-14T21:42:46.036Z\",\n        \"discarded_at\": \"2008-11-24T10:13:39.775Z\",\n        \"account_number_type\": \"base_address\",\n        \"account_number_safe\": \"string\",\n        \"account_number\": \"string\"\n      }\n    ],\n    \"routing_details\": [\n      {\n        \"id\": \"d91fa83b-2745-d85a-aa5f-bfd5813336d0\",\n        \"object\": \"string\",\n        \"live_mode\": false,\n        \"created_at\": \"1992-11-24T05:20:15.641Z\",\n        \"updated_at\": \"2004-06-06T20:28:12.355Z\",\n        \"discarded_at\": \"1999-03-18T14:53:45.469Z\",\n        \"routing_number\": \"string\",\n        \"routing_number_type\": \"dk_interbank_clearing_code\",\n        \"payment_type\": \"card\",\n        \"bank_name\": \"string\",\n        \"bank_address\": {\n          \"id\": \"ad55f40a-15c0-dd56-7593-03008cc011b7\",\n          \"object\": \"string\",\n          \"live_mode\": false,\n          \"created_at\": \"1987-05-18T23:03:05.520Z\",\n          \"updated_at\": \"1993-08-07T01:49:05.986Z\",\n          \"line1\": \"string\",\n          \"line2\": \"string\",\n          \"locality\": \"string\",\n          \"region\": \"string\",\n          \"postal_code\": \"string\",\n          \"country\": \"string\"\n        }\n      },\n      {\n        \"id\": \"d94f2782-26bd-4c85-ad35-8e58fb12361d\",\n        \"object\": \"string\",\n        \"live_mode\": true,\n        \"created_at\": \"1995-12-01T04:21:17.540Z\",\n        \"updated_at\": \"1990-11-06T05:36:39.659Z\",\n        \"discarded_at\": \"1991-06-26T02:12:21.494Z\",\n        \"routing_number\": \"string\",\n        \"routing_number_type\": \"za_national_clearing_code\",\n        \"payment_type\": \"gb_fps\",\n        \"bank_name\": \"string\",\n        \"bank_address\": {\n          \"id\": \"e1bbb23a-d947-5345-7985-f1f0dc679b45\",\n          \"object\": \"string\",\n          \"live_mode\": false,\n          \"created_at\": \"2003-12-18T16:46:23.645Z\",\n          \"updated_at\": \"1993-02-08T08:38:56.975Z\",\n          \"line1\": \"string\",\n          \"line2\": \"string\",\n          \"locality\": \"string\",\n          \"region\": \"string\",\n          \"postal_code\": \"string\",\n          \"country\": \"string\"\n        }\n      }\n    ],\n    \"debit_ledger_account_id\": \"2b194cac-065a-3584-bed4-4807f058a129\",\n    \"credit_ledger_account_id\": \"b2c89263-6478-e9f4-7600-8c2f5eddbb5c\",\n    \"ledger_account_id\": \"e4dbff58-be83-9039-e77f-154564d1b69b\",\n    \"metadata\": {\n      \"key\": \"value\",\n      \"foo\": \"bar\",\n      \"modern\": \"treasury\"\n    }\n  },\n  \"transaction_line_item_id\": \"218040b6-2db7-7d9a-20ba-fdce5981e7c1\",\n  \"transaction_id\": \"fc0b2a94-6893-5c3e-8669-9a5390fe3d24\",\n  \"ledger_transaction_id\": \"4d4f574d-812e-4473-ea97-fab811054214\",\n  \"type\": \"au_becs\",\n  \"data\": {\n    \"key_0\": \"string\",\n    \"key_1\": 4130.591483045119,\n    \"key_2\": \"string\",\n    \"key_3\": \"string\",\n    \"key_4\": 3505\n  },\n  \"amount\": 8108,\n  \"currency\": \"<string>\",\n  \"direction\": \"credit\",\n  \"status\": \"pending\",\n  \"metadata\": {\n    \"key\": \"value\",\n    \"foo\": \"bar\",\n    \"modern\": \"treasury\"\n  },\n  \"as_of_date\": \"1947-11-03\",\n  \"vendor_id\": \"9a781e33-b15d-55f5-e716-0e790884e33a\",\n  \"originating_routing_number\": \"string\",\n  \"originating_routing_number_type\": \"br_codigo\",\n  \"originating_account_number_safe\": \"string\",\n  \"originating_account_number_type\": \"nz_number\",\n  \"subtype\": \"string\",\n  \"reconciliation_status\": \"unreconciled\",\n  \"originating_account_number\": \"string\",\n  \"originating_party_name\": \"string\",\n  \"originating_party_address\": {\n    \"id\": \"506d2be7-3105-db9d-62b2-8d0e6ce1a7cd\",\n    \"object\": \"string\",\n    \"live_mode\": false,\n    \"created_at\": \"2002-05-15T08:46:57.713Z\",\n    \"updated_at\": \"2003-04-07T14:04:27.041Z\",\n    \"line1\": \"string\",\n    \"line2\": \"string\",\n    \"locality\": \"string\",\n    \"region\": \"string\",\n    \"postal_code\": \"string\",\n    \"country\": \"string\"\n  },\n  \"originating_party_vendor_identifier\": \"string\",\n  \"receiving_account_number\": \"string\",\n  \"receiving_account_number_safe\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7eb45c68-0d08-486c-aa10-28266960cb5e",
+              "name": "bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "simulations",
+                    "incoming_payment_details",
+                    "create_async"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "This key should be something unique, preferably something like an UUID.",
+                    "key": "Idempotency-Key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"type\": \"<string>\",\n  \"direction\": \"<string>\",\n  \"amount\": \"<integer>\",\n  \"currency\": \"<string>\",\n  \"internal_account_id\": \"<uuid>\",\n  \"virtual_account_id\": \"<uuid>\",\n  \"as_of_date\": \"<date>\",\n  \"description\": \"<string>\",\n  \"subtype\": \"<string>\",\n  \"data\": \"<object>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": {\n    \"code\": \"header_invalid\",\n    \"message\": \"string\",\n    \"parameter\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "65e37082-c8d4-48cd-8bb5-2fa65c436614",
+              "name": "not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "simulations",
+                    "incoming_payment_details",
+                    "create_async"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "This key should be something unique, preferably something like an UUID.",
+                    "key": "Idempotency-Key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"type\": \"<string>\",\n  \"direction\": \"<string>\",\n  \"amount\": \"<integer>\",\n  \"currency\": \"<string>\",\n  \"internal_account_id\": \"<uuid>\",\n  \"virtual_account_id\": \"<uuid>\",\n  \"as_of_date\": \"<date>\",\n  \"description\": \"<string>\",\n  \"subtype\": \"<string>\",\n  \"data\": \"<object>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": {\n    \"code\": \"header_invalid\",\n    \"message\": \"string\",\n    \"parameter\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9416ca2e-f66a-4654-b88c-a87f871db97d",
+              "name": "not allowed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "simulations",
+                    "incoming_payment_details",
+                    "create_async"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "This key should be something unique, preferably something like an UUID.",
+                    "key": "Idempotency-Key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"type\": \"<string>\",\n  \"direction\": \"<string>\",\n  \"amount\": \"<integer>\",\n  \"currency\": \"<string>\",\n  \"internal_account_id\": \"<uuid>\",\n  \"virtual_account_id\": \"<uuid>\",\n  \"as_of_date\": \"<date>\",\n  \"description\": \"<string>\",\n  \"subtype\": \"<string>\",\n  \"data\": \"<object>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Method Not Allowed",
+              "code": 405,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": {\n    \"code\": \"header_invalid\",\n    \"message\": \"string\",\n    \"parameter\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "13fea29b-c61e-4b0e-8a24-55711453e2ad",
+              "name": "unsuccessful",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "simulations",
+                    "incoming_payment_details",
+                    "create_async"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "This key should be something unique, preferably something like an UUID.",
+                    "key": "Idempotency-Key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"type\": \"<string>\",\n  \"direction\": \"<string>\",\n  \"amount\": \"<integer>\",\n  \"currency\": \"<string>\",\n  \"internal_account_id\": \"<uuid>\",\n  \"virtual_account_id\": \"<uuid>\",\n  \"as_of_date\": \"<date>\",\n  \"description\": \"<string>\",\n  \"subtype\": \"<string>\",\n  \"data\": \"<object>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": {\n    \"code\": \"header_invalid\",\n    \"message\": \"string\",\n    \"parameter\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "http://localhost:3000",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "2b735725-8836-48ec-87bf-d99d978b385e",
+    "name": "Modern Treasury AccountCapability IncomingPaymentDetail API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Modern Treasury REST API. Please see https://docs.moderntreasury.com for more details.\n\nContact Support:\n Name: Modern Treasury Engineering Team",
+      "type": "text/plain"
+    }
+  }
+}

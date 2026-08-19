@@ -1,0 +1,1132 @@
+{
+  "item": [
+    {
+      "id": "957830fe-7f49-47da-8241-212fea6f33f9",
+      "name": "ExpectedPayment",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "b77b9c08-3b61-4359-a6ba-a3ffa9d892ce",
+          "name": "list expected_payments",
+          "request": {
+            "name": "list expected_payments",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "expected_payments"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "after_cursor",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "per_page",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>",
+                  "description": "One of unreconciled, reconciled, or archived."
+                },
+                {
+                  "disabled": false,
+                  "key": "internal_account_id",
+                  "value": "<string>",
+                  "description": "Specify internal_account_id to see expected_payments for a specific account."
+                },
+                {
+                  "disabled": false,
+                  "key": "external_id",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "direction",
+                  "value": "<string>",
+                  "description": "One of credit, debit"
+                },
+                {
+                  "disabled": false,
+                  "key": "type",
+                  "value": "<string>",
+                  "description": "One of: ach, au_becs, bacs, book, check, eft, interac, provxchange, rtp,sen, sepa, signet, wire"
+                },
+                {
+                  "disabled": false,
+                  "key": "counterparty_id",
+                  "value": "<string>",
+                  "description": "Specify counterparty_id to see expected_payments for a specific account."
+                },
+                {
+                  "disabled": false,
+                  "key": "metadata[key_0]",
+                  "value": "<string>",
+                  "description": "For example, if you want to query for records with metadata key `Type` and value `Loan`, the query would be `metadata%5BType%5D=Loan`. This encodes the query parameters."
+                },
+                {
+                  "disabled": false,
+                  "key": "metadata[key_1]",
+                  "value": "<string>",
+                  "description": "For example, if you want to query for records with metadata key `Type` and value `Loan`, the query would be `metadata%5BType%5D=Loan`. This encodes the query parameters."
+                },
+                {
+                  "disabled": false,
+                  "key": "metadata[key_2]",
+                  "value": "<string>",
+                  "description": "For example, if you want to query for records with metadata key `Type` and value `Loan`, the query would be `metadata%5BType%5D=Loan`. This encodes the query parameters."
+                },
+                {
+                  "disabled": false,
+                  "key": "metadata[key_3]",
+                  "value": "<string>",
+                  "description": "For example, if you want to query for records with metadata key `Type` and value `Loan`, the query would be `metadata%5BType%5D=Loan`. This encodes the query parameters."
+                },
+                {
+                  "disabled": false,
+                  "key": "created_at_lower_bound",
+                  "value": "<dateTime>",
+                  "description": "Used to return expected payments created after some datetime"
+                },
+                {
+                  "disabled": false,
+                  "key": "created_at_upper_bound",
+                  "value": "<dateTime>",
+                  "description": "Used to return expected payments created before some datetime"
+                },
+                {
+                  "disabled": false,
+                  "key": "updated_at_lower_bound",
+                  "value": "<dateTime>",
+                  "description": "Used to return expected payments updated after some datetime"
+                },
+                {
+                  "disabled": false,
+                  "key": "updated_at_upper_bound",
+                  "value": "<dateTime>",
+                  "description": "Used to return expected payments updated before some datetime"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "d41993e2-76e9-46f8-b720-ec952f326e39",
+              "name": "successful",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "expected_payments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "after_cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "internal_account_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "external_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "direction",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "counterparty_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "metadata[key_0]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "metadata[key_1]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "created_at_lower_bound",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "created_at_upper_bound",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "updated_at_lower_bound",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "updated_at_upper_bound",
+                      "value": "<dateTime>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "The cursor for the next page. Including this in a call as `after_cursor` will return the next page.",
+                  "key": "X-After-Cursor",
+                  "value": "string"
+                },
+                {
+                  "disabled": false,
+                  "description": "The current `per_page`.",
+                  "key": "X-Per-Page",
+                  "value": "6830"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"e9e512eb-b4a5-d52b-2503-3a606cc14b35\",\n    \"object\": \"string\",\n    \"live_mode\": true,\n    \"created_at\": \"1973-06-13T13:43:53.552Z\",\n    \"updated_at\": \"1998-12-15T08:35:47.419Z\",\n    \"external_id\": \"string\",\n    \"amount_upper_bound\": 616,\n    \"amount_lower_bound\": 8,\n    \"direction\": \"credit\",\n    \"internal_account_id\": \"23c08abb-ecbc-e203-dd6a-4a59ee3414aa\",\n    \"type\": \"stablecoin\",\n    \"currency\": \"YER\",\n    \"date_upper_bound\": \"1990-06-11\",\n    \"date_lower_bound\": \"1999-06-28\",\n    \"description\": \"string\",\n    \"statement_descriptor\": \"string\",\n    \"metadata\": {\n      \"key\": \"value\",\n      \"foo\": \"bar\",\n      \"modern\": \"treasury\"\n    },\n    \"counterparty_id\": \"2b51014c-bb88-b982-7ae3-d9d74d4473a7\",\n    \"remittance_information\": \"string\",\n    \"reconciliation_groups\": {},\n    \"reconciliation_filters\": {},\n    \"reconciliation_rule_variables\": [\n      {\n        \"amount_upper_bound\": 6580,\n        \"amount_lower_bound\": 4758,\n        \"direction\": \"credit\",\n        \"internal_account_id\": \"2d0c05fa-bf55-6da2-be03-2a87568ed5d0\",\n        \"type\": \"masav\",\n        \"currency\": \"CLP\",\n        \"date_upper_bound\": \"1947-03-19\",\n        \"date_lower_bound\": \"1977-03-30\",\n        \"counterparty_id\": \"79324483-6aba-93e7-339f-701c7ccfcdab\",\n        \"custom_identifiers\": {\n          \"key_0\": \"string\"\n        }\n      },\n      {\n        \"amount_upper_bound\": 9374,\n        \"amount_lower_bound\": 204,\n        \"direction\": \"credit\",\n        \"internal_account_id\": \"f33c8459-534c-e200-961e-e60f6839425b\",\n        \"type\": \"nz_becs\",\n        \"currency\": \"CVE\",\n        \"date_upper_bound\": \"2010-10-07\",\n        \"date_lower_bound\": \"1986-04-11\",\n        \"counterparty_id\": \"3732455d-3c85-844a-86b7-5b66851e8a9c\",\n        \"custom_identifiers\": {\n          \"key_0\": \"string\"\n        }\n      }\n    ],\n    \"amount_reconciled\": 191,\n    \"amount_reconciled_direction\": \"credit\",\n    \"amount_unreconciled\": 9634,\n    \"amount_unreconciled_direction\": \"debit\",\n    \"transaction_id\": \"fac2aef3-d4e1-4477-3e6a-57ce0fa85232\",\n    \"transaction_line_item_id\": \"63fc1daf-e693-ca55-93aa-12c73d35ef32\",\n    \"status\": \"partially_reconciled\",\n    \"reconciliation_method\": \"manual\",\n    \"ledger_transaction_id\": \"61c4273f-f0e7-fb5c-a93c-6d9c9cbbd5a0\"\n  },\n  {\n    \"id\": \"84f39116-3e64-1ec6-21a4-3543c53802bd\",\n    \"object\": \"string\",\n    \"live_mode\": false,\n    \"created_at\": \"1947-05-24T20:21:36.446Z\",\n    \"updated_at\": \"1997-09-16T01:00:32.205Z\",\n    \"external_id\": \"string\",\n    \"amount_upper_bound\": 7389,\n    \"amount_lower_bound\": 2969,\n    \"direction\": \"credit\",\n    \"internal_account_id\": \"84175fd8-1351-c803-2ace-f0d7ff9dddc1\",\n    \"type\": \"stablecoin\",\n    \"currency\": \"SSP\",\n    \"date_upper_bound\": \"1959-02-17\",\n    \"date_lower_bound\": \"2025-12-09\",\n    \"description\": \"string\",\n    \"statement_descriptor\": \"string\",\n    \"metadata\": {\n      \"key\": \"value\",\n      \"foo\": \"bar\",\n      \"modern\": \"treasury\"\n    },\n    \"counterparty_id\": \"50f27ac5-4059-ce20-b5e1-2bc31a09cc9d\",\n    \"remittance_information\": \"string\",\n    \"reconciliation_groups\": {},\n    \"reconciliation_filters\": {},\n    \"reconciliation_rule_variables\": [\n      {\n        \"amount_upper_bound\": 92,\n        \"amount_lower_bound\": 9429,\n        \"direction\": \"debit\",\n        \"internal_account_id\": \"29b75066-e556-332e-fc8e-febb5a76e4b6\",\n        \"type\": \"mx_ccen\",\n        \"currency\": \"STN\",\n        \"date_upper_bound\": \"1963-04-04\",\n        \"date_lower_bound\": \"1953-06-29\",\n        \"counterparty_id\": \"1fd15774-16d6-0b98-424d-6d5e9f1bd782\",\n        \"custom_identifiers\": {\n          \"key_0\": \"string\"\n        }\n      },\n      {\n        \"amount_upper_bound\": 1123,\n        \"amount_lower_bound\": 3590,\n        \"direction\": \"credit\",\n        \"internal_account_id\": \"d264b34a-69dd-32e4-8eb3-1e91750e93ec\",\n        \"type\": \"neft\",\n        \"currency\": \"MTL\",\n        \"date_upper_bound\": \"2023-04-16\",\n        \"date_lower_bound\": \"1968-09-01\",\n        \"counterparty_id\": \"40ca05bf-9b43-8d7b-ad76-88a9c440b0c0\",\n        \"custom_identifiers\": {\n          \"key_0\": \"string\"\n        }\n      }\n    ],\n    \"amount_reconciled\": 8495,\n    \"amount_reconciled_direction\": \"debit\",\n    \"amount_unreconciled\": 3854,\n    \"amount_unreconciled_direction\": \"credit\",\n    \"transaction_id\": \"32cb714b-b798-1399-4ddf-76794fc1043f\",\n    \"transaction_line_item_id\": \"96382a5a-7eca-0c98-27a2-74cb57cc3b17\",\n    \"status\": \"archived\",\n    \"reconciliation_method\": \"automatic\",\n    \"ledger_transaction_id\": \"11dd0304-8900-e50c-9d12-eeb7d4e496ef\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "42a594ea-055d-4fa5-9a7b-83b310005075",
+              "name": "unsuccessful",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "expected_payments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "after_cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "internal_account_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "external_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "direction",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "counterparty_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "metadata[key_0]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "metadata[key_1]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "created_at_lower_bound",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "created_at_upper_bound",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "updated_at_lower_bound",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "updated_at_upper_bound",
+                      "value": "<dateTime>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": {\n    \"code\": \"invalid_key\",\n    \"message\": \"string\",\n    \"parameter\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b241ff8e-2f6b-447a-a1dc-30e72487ff38",
+          "name": "create expected payment",
+          "request": {
+            "name": "create expected payment",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "expected_payments"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "This key should be something unique, preferably something like an UUID.",
+                "key": "Idempotency-Key",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"external_id\": \"<string>\",\n  \"amount_upper_bound\": \"<integer>\",\n  \"amount_lower_bound\": \"<integer>\",\n  \"direction\": \"<string>\",\n  \"internal_account_id\": \"<uuid>\",\n  \"type\": \"<string>\",\n  \"currency\": \"<string>\",\n  \"date_upper_bound\": \"<date>\",\n  \"date_lower_bound\": \"<date>\",\n  \"description\": \"<string>\",\n  \"statement_descriptor\": \"<string>\",\n  \"metadata\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\"\n  },\n  \"counterparty_id\": \"<uuid>\",\n  \"remittance_information\": \"<string>\",\n  \"reconciliation_groups\": \"<object>\",\n  \"reconciliation_filters\": \"<object>\",\n  \"reconciliation_rule_variables\": [\n    {\n      \"amount_upper_bound\": \"<integer>\",\n      \"amount_lower_bound\": \"<integer>\",\n      \"direction\": \"<string>\",\n      \"internal_account_id\": \"<uuid>\",\n      \"type\": \"<string>\",\n      \"currency\": \"<string>\",\n      \"date_upper_bound\": \"<date>\",\n      \"date_lower_bound\": \"<date>\",\n      \"counterparty_id\": \"<uuid>\",\n      \"custom_identifiers\": {\n        \"key_0\": \"<string>\"\n      }\n    },\n    {\n      \"amount_upper_bound\": \"<integer>\",\n      \"amount_lower_bound\": \"<integer>\",\n      \"direction\": \"<string>\",\n      \"internal_account_id\": \"<uuid>\",\n      \"type\": \"<string>\",\n      \"currency\": \"<string>\",\n      \"date_upper_bound\": \"<date>\",\n      \"date_lower_bound\": \"<date>\",\n      \"counterparty_id\": \"<uuid>\",\n      \"custom_identifiers\": {\n        \"key_0\": \"<string>\"\n      }\n    }\n  ],\n  \"amount_reconciled\": \"<integer>\",\n  \"amount_reconciled_direction\": \"<string>\",\n  \"amount_unreconciled\": \"<integer>\",\n  \"amount_unreconciled_direction\": \"<string>\",\n  \"line_items\": [\n    {\n      \"amount\": \"<integer>\",\n      \"metadata\": {\n        \"key_0\": \"<string>\",\n        \"key_1\": \"<string>\",\n        \"key_2\": \"<string>\"\n      },\n      \"description\": \"<string>\",\n      \"accounting_category_id\": \"<string>\"\n    },\n    {\n      \"amount\": \"<integer>\",\n      \"metadata\": {\n        \"key_0\": \"<string>\",\n        \"key_1\": \"<string>\",\n        \"key_2\": \"<string>\",\n        \"key_3\": \"<string>\"\n      },\n      \"description\": \"<string>\",\n      \"accounting_category_id\": \"<string>\"\n    }\n  ],\n  \"ledger_transaction\": {\n    \"ledger_entries\": [\n      {\n        \"amount\": \"<integer>\",\n        \"direction\": \"<string>\",\n        \"ledger_account_id\": \"<uuid>\",\n        \"effective_at\": \"<dateTime>\",\n        \"lock_version\": \"<integer>\",\n        \"pending_balance_amount\": {\n          \"key_0\": \"<integer>\"\n        },\n        \"posted_balance_amount\": {\n          \"key_0\": \"<integer>\",\n          \"key_1\": \"<integer>\"\n        },\n        \"available_balance_amount\": {\n          \"key_0\": \"<integer>\",\n          \"key_1\": \"<integer>\"\n        },\n        \"show_resulting_ledger_account_balances\": \"<boolean>\",\n        \"metadata\": {\n          \"key_0\": \"<string>\"\n        }\n      },\n      {\n        \"amount\": \"<integer>\",\n        \"direction\": \"<string>\",\n        \"ledger_account_id\": \"<uuid>\",\n        \"effective_at\": \"<dateTime>\",\n        \"lock_version\": \"<integer>\",\n        \"pending_balance_amount\": {\n          \"key_0\": \"<integer>\",\n          \"key_1\": \"<integer>\",\n          \"key_2\": \"<integer>\"\n        },\n        \"posted_balance_amount\": {\n          \"key_0\": \"<integer>\"\n        },\n        \"available_balance_amount\": {\n          \"key_0\": \"<integer>\",\n          \"key_1\": \"<integer>\",\n          \"key_2\": \"<integer>\"\n        },\n        \"show_resulting_ledger_account_balances\": \"<boolean>\",\n        \"metadata\": {\n          \"key_0\": \"<string>\"\n        }\n      }\n    ],\n    \"description\": \"<string>\",\n    \"status\": \"<string>\",\n    \"metadata\": {\n      \"key_0\": \"<string>\",\n      \"key_1\": \"<string>\"\n    },\n    \"effective_at\": \"<dateTime>\",\n    \"effective_date\": \"<date>\",\n    \"external_id\": \"<string>\",\n    \"ledgerable_type\": \"<string>\",\n    \"ledgerable_id\": \"<uuid>\"\n  },\n  \"ledger_transaction_id\": \"<uuid>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "e79ba75c-7966-49d2-8b91-365308569e59",
+              "name": "successful",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "expected_payments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "This key should be something unique, preferably something like an UUID.",
+                    "key": "Idempotency-Key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"external_id\": \"<string>\",\n  \"amount_upper_bound\": \"<integer>\",\n  \"amount_lower_bound\": \"<integer>\",\n  \"direction\": \"<string>\",\n  \"internal_account_id\": \"<uuid>\",\n  \"type\": \"<string>\",\n  \"currency\": \"<string>\",\n  \"date_upper_bound\": \"<date>\",\n  \"date_lower_bound\": \"<date>\",\n  \"description\": \"<string>\",\n  \"statement_descriptor\": \"<string>\",\n  \"metadata\": {\n    \"key\": \"value\",\n    \"foo\": \"bar\",\n    \"modern\": \"treasury\"\n  },\n  \"counterparty_id\": \"<uuid>\",\n  \"remittance_information\": \"<string>\",\n  \"reconciliation_groups\": \"<object>\",\n  \"reconciliation_filters\": \"<object>\",\n  \"reconciliation_rule_variables\": [\n    {\n      \"amount_upper_bound\": \"<integer>\",\n      \"amount_lower_bound\": \"<integer>\",\n      \"direction\": \"<string>\",\n      \"internal_account_id\": \"<uuid>\",\n      \"type\": \"<string>\",\n      \"currency\": \"<string>\",\n      \"date_upper_bound\": \"<date>\",\n      \"date_lower_bound\": \"<date>\",\n      \"counterparty_id\": \"<uuid>\",\n      \"custom_identifiers\": {\n        \"key_0\": \"<string>\",\n        \"key_1\": \"<string>\"\n      }\n    },\n    {\n      \"amount_upper_bound\": \"<integer>\",\n      \"amount_lower_bound\": \"<integer>\",\n      \"direction\": \"<string>\",\n      \"internal_account_id\": \"<uuid>\",\n      \"type\": \"<string>\",\n      \"currency\": \"<string>\",\n      \"date_upper_bound\": \"<date>\",\n      \"date_lower_bound\": \"<date>\",\n      \"counterparty_id\": \"<uuid>\",\n      \"custom_identifiers\": {\n        \"key_0\": \"<string>\",\n        \"key_1\": \"<string>\"\n      }\n    }\n  ],\n  \"amount_reconciled\": \"<integer>\",\n  \"amount_reconciled_direction\": \"<string>\",\n  \"amount_unreconciled\": \"<integer>\",\n  \"amount_unreconciled_direction\": \"<string>\",\n  \"line_items\": [\n    {\n      \"amount\": \"<integer>\",\n      \"metadata\": {\n        \"key\": \"value\",\n        \"foo\": \"bar\",\n        \"modern\": \"treasury\"\n      },\n      \"description\": \"<string>\",\n      \"accounting_category_id\": \"<string>\"\n    },\n    {\n      \"amount\": \"<integer>\",\n      \"metadata\": {\n        \"key\": \"value\",\n        \"foo\": \"bar\",\n        \"modern\": \"treasury\"\n      },\n      \"description\": \"<string>\",\n      \"accounting_category_id\": \"<string>\"\n    }\n  ],\n  \"ledger_transaction\": {\n    \"ledger_entries\": [\n      {\n        \"amount\": \"<integer>\",\n        \"direction\": \"<string>\",\n        \"ledger_account_id\": \"<uuid>\",\n        \"effective_at\": \"<dateTime>\",\n        \"lock_version\": \"<integer>\",\n        \"pending_balance_amount\": {\n          \"key_0\": \"<integer>\",\n          \"key_1\": \"<integer>\"\n        },\n        \"posted_balance_amount\": {\n          \"key_0\": \"<integer>\",\n          \"key_1\": \"<integer>\"\n        },\n        \"available_balance_amount\": {\n          \"key_0\": \"<integer>\",\n          \"key_1\": \"<integer>\"\n        },\n        \"show_resulting_ledger_account_balances\": \"<boolean>\",\n        \"metadata\": {\n          \"key\": \"value\",\n          \"foo\": \"bar\",\n          \"modern\": \"treasury\"\n        }\n      },\n      {\n        \"amount\": \"<integer>\",\n        \"direction\": \"<string>\",\n        \"ledger_account_id\": \"<uuid>\",\n        \"effective_at\": \"<dateTime>\",\n        \"lock_version\": \"<integer>\",\n        \"pending_balance_amount\": {\n          \"key_0\": \"<integer>\",\n          \"key_1\": \"<integer>\"\n        },\n        \"posted_balance_amount\": {\n          \"key_0\": \"<integer>\",\n          \"key_1\": \"<integer>\",\n          \"key_2\": \"<integer>\"\n        },\n        \"available_balance_amount\": {\n          \"key_0\": \"<integer>\",\n          \"key_1\": \"<integer>\",\n          \"key_2\": \"<integer>\"\n        },\n        \"show_resulting_ledger_account_balances\": \"<boolean>\",\n        \"metadata\": {\n          \"key\": \"value\",\n          \"foo\": \"bar\",\n          \"modern\": \"treasury\"\n        }\n      }\n    ],\n    \"description\": \"<string>\",\n    \"status\": \"<string>\",\n    \"metadata\": {\n      \"key\": \"value\",\n      \"foo\": \"bar\",\n      \"modern\": \"treasury\"\n    },\n    \"effective_at\": \"<dateTime>\",\n    \"effective_date\": \"<date>\",\n    \"external_id\": \"<string>\",\n    \"ledgerable_type\": \"<string>\",\n    \"ledgerable_id\": \"<uuid>\"\n  },\n  \"ledger_transaction_id\": \"<uuid>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"ac0f2738-e048-60d1-eabd-62d426a515a7\",\n  \"object\": \"string\",\n  \"live_mode\": true,\n  \"created_at\": \"1947-06-05T10:53:00.863Z\",\n  \"updated_at\": \"1998-04-19T06:22:48.904Z\",\n  \"external_id\": \"string\",\n  \"amount_upper_bound\": 9076,\n  \"amount_lower_bound\": 9550,\n  \"direction\": \"credit\",\n  \"internal_account_id\": \"3bf7f6ee-aa01-d4d4-2fe6-f915ee16f165\",\n  \"type\": \"<string>\",\n  \"currency\": \"<string>\",\n  \"date_upper_bound\": \"1954-05-21\",\n  \"date_lower_bound\": \"2004-02-15\",\n  \"description\": \"string\",\n  \"statement_descriptor\": \"string\",\n  \"metadata\": {\n    \"key\": \"value\",\n    \"foo\": \"bar\",\n    \"modern\": \"treasury\"\n  },\n  \"counterparty_id\": \"31c81873-1a4a-45bd-918d-7b7fedb55f8c\",\n  \"remittance_information\": \"string\",\n  \"reconciliation_groups\": {},\n  \"reconciliation_filters\": {},\n  \"reconciliation_rule_variables\": [\n    {\n      \"amount_upper_bound\": \"<integer>\",\n      \"amount_lower_bound\": \"<integer>\",\n      \"direction\": \"<string>\",\n      \"internal_account_id\": \"<uuid>\",\n      \"type\": \"<string>\",\n      \"currency\": \"<string>\",\n      \"date_upper_bound\": \"<date>\",\n      \"date_lower_bound\": \"<date>\",\n      \"counterparty_id\": \"<uuid>\",\n      \"custom_identifiers\": {\n        \"key_0\": \"<string>\",\n        \"key_1\": \"<string>\",\n        \"key_2\": \"<string>\"\n      }\n    },\n    {\n      \"amount_upper_bound\": \"<integer>\",\n      \"amount_lower_bound\": \"<integer>\",\n      \"direction\": \"<string>\",\n      \"internal_account_id\": \"<uuid>\",\n      \"type\": \"<string>\",\n      \"currency\": \"<string>\",\n      \"date_upper_bound\": \"<date>\",\n      \"date_lower_bound\": \"<date>\",\n      \"counterparty_id\": \"<uuid>\",\n      \"custom_identifiers\": {\n        \"key_0\": \"<string>\",\n        \"key_1\": \"<string>\",\n        \"key_2\": \"<string>\",\n        \"key_3\": \"<string>\",\n        \"key_4\": \"<string>\"\n      }\n    }\n  ],\n  \"amount_reconciled\": 1874,\n  \"amount_reconciled_direction\": \"debit\",\n  \"amount_unreconciled\": 1233,\n  \"amount_unreconciled_direction\": \"credit\",\n  \"transaction_id\": \"e2fe7953-5f87-8b15-7928-0c8cb1d5e0c8\",\n  \"transaction_line_item_id\": \"661c0165-bde7-dd14-c1b3-b23aec66c795\",\n  \"status\": \"archived\",\n  \"reconciliation_method\": \"manual\",\n  \"ledger_transaction_id\": \"fe7092c4-5bb9-1db3-088b-a4a2a2be3fbf\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4269fc7c-02eb-4a50-8d3e-78a6b935b281",
+              "name": "conflict",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "expected_payments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "This key should be something unique, preferably something like an UUID.",
+                    "key": "Idempotency-Key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"external_id\": \"<string>\",\n  \"amount_upper_bound\": \"<integer>\",\n  \"amount_lower_bound\": \"<integer>\",\n  \"direction\": \"<string>\",\n  \"internal_account_id\": \"<uuid>\",\n  \"type\": \"<string>\",\n  \"currency\": \"<string>\",\n  \"date_upper_bound\": \"<date>\",\n  \"date_lower_bound\": \"<date>\",\n  \"description\": \"<string>\",\n  \"statement_descriptor\": \"<string>\",\n  \"metadata\": {\n    \"key\": \"value\",\n    \"foo\": \"bar\",\n    \"modern\": \"treasury\"\n  },\n  \"counterparty_id\": \"<uuid>\",\n  \"remittance_information\": \"<string>\",\n  \"reconciliation_groups\": \"<object>\",\n  \"reconciliation_filters\": \"<object>\",\n  \"reconciliation_rule_variables\": [\n    {\n      \"amount_upper_bound\": \"<integer>\",\n      \"amount_lower_bound\": \"<integer>\",\n      \"direction\": \"<string>\",\n      \"internal_account_id\": \"<uuid>\",\n      \"type\": \"<string>\",\n      \"currency\": \"<string>\",\n      \"date_upper_bound\": \"<date>\",\n      \"date_lower_bound\": \"<date>\",\n      \"counterparty_id\": \"<uuid>\",\n      \"custom_identifiers\": {\n        \"key_0\": \"<string>\",\n        \"key_1\": \"<string>\"\n      }\n    },\n    {\n      \"amount_upper_bound\": \"<integer>\",\n      \"amount_lower_bound\": \"<integer>\",\n      \"direction\": \"<string>\",\n      \"internal_account_id\": \"<uuid>\",\n      \"type\": \"<string>\",\n      \"currency\": \"<string>\",\n      \"date_upper_bound\": \"<date>\",\n      \"date_lower_bound\": \"<date>\",\n      \"counterparty_id\": \"<uuid>\",\n      \"custom_identifiers\": {\n        \"key_0\": \"<string>\",\n        \"key_1\": \"<string>\"\n      }\n    }\n  ],\n  \"amount_reconciled\": \"<integer>\",\n  \"amount_reconciled_direction\": \"<string>\",\n  \"amount_unreconciled\": \"<integer>\",\n  \"amount_unreconciled_direction\": \"<string>\",\n  \"line_items\": [\n    {\n      \"amount\": \"<integer>\",\n      \"metadata\": {\n        \"key\": \"value\",\n        \"foo\": \"bar\",\n        \"modern\": \"treasury\"\n      },\n      \"description\": \"<string>\",\n      \"accounting_category_id\": \"<string>\"\n    },\n    {\n      \"amount\": \"<integer>\",\n      \"metadata\": {\n        \"key\": \"value\",\n        \"foo\": \"bar\",\n        \"modern\": \"treasury\"\n      },\n      \"description\": \"<string>\",\n      \"accounting_category_id\": \"<string>\"\n    }\n  ],\n  \"ledger_transaction\": {\n    \"ledger_entries\": [\n      {\n        \"amount\": \"<integer>\",\n        \"direction\": \"<string>\",\n        \"ledger_account_id\": \"<uuid>\",\n        \"effective_at\": \"<dateTime>\",\n        \"lock_version\": \"<integer>\",\n        \"pending_balance_amount\": {\n          \"key_0\": \"<integer>\",\n          \"key_1\": \"<integer>\"\n        },\n        \"posted_balance_amount\": {\n          \"key_0\": \"<integer>\",\n          \"key_1\": \"<integer>\"\n        },\n        \"available_balance_amount\": {\n          \"key_0\": \"<integer>\",\n          \"key_1\": \"<integer>\"\n        },\n        \"show_resulting_ledger_account_balances\": \"<boolean>\",\n        \"metadata\": {\n          \"key\": \"value\",\n          \"foo\": \"bar\",\n          \"modern\": \"treasury\"\n        }\n      },\n      {\n        \"amount\": \"<integer>\",\n        \"direction\": \"<string>\",\n        \"ledger_account_id\": \"<uuid>\",\n        \"effective_at\": \"<dateTime>\",\n        \"lock_version\": \"<integer>\",\n        \"pending_balance_amount\": {\n          \"key_0\": \"<integer>\",\n          \"key_1\": \"<integer>\"\n        },\n        \"posted_balance_amount\": {\n          \"key_0\": \"<integer>\",\n          \"key_1\": \"<integer>\",\n          \"key_2\": \"<integer>\"\n        },\n        \"available_balance_amount\": {\n          \"key_0\": \"<integer>\",\n          \"key_1\": \"<integer>\",\n          \"key_2\": \"<integer>\"\n        },\n        \"show_resulting_ledger_account_balances\": \"<boolean>\",\n        \"metadata\": {\n          \"key\": \"value\",\n          \"foo\": \"bar\",\n          \"modern\": \"treasury\"\n        }\n      }\n    ],\n    \"description\": \"<string>\",\n    \"status\": \"<string>\",\n    \"metadata\": {\n      \"key\": \"value\",\n      \"foo\": \"bar\",\n      \"modern\": \"treasury\"\n    },\n    \"effective_at\": \"<dateTime>\",\n    \"effective_date\": \"<date>\",\n    \"external_id\": \"<string>\",\n    \"ledgerable_type\": \"<string>\",\n    \"ledgerable_id\": \"<uuid>\"\n  },\n  \"ledger_transaction_id\": \"<uuid>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": {\n    \"code\": \"invalid_key\",\n    \"message\": \"string\",\n    \"parameter\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9d0c9b30-79ba-4d2e-8a89-b4a46b8b5737",
+              "name": "unsuccessful",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "expected_payments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "This key should be something unique, preferably something like an UUID.",
+                    "key": "Idempotency-Key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"external_id\": \"<string>\",\n  \"amount_upper_bound\": \"<integer>\",\n  \"amount_lower_bound\": \"<integer>\",\n  \"direction\": \"<string>\",\n  \"internal_account_id\": \"<uuid>\",\n  \"type\": \"<string>\",\n  \"currency\": \"<string>\",\n  \"date_upper_bound\": \"<date>\",\n  \"date_lower_bound\": \"<date>\",\n  \"description\": \"<string>\",\n  \"statement_descriptor\": \"<string>\",\n  \"metadata\": {\n    \"key\": \"value\",\n    \"foo\": \"bar\",\n    \"modern\": \"treasury\"\n  },\n  \"counterparty_id\": \"<uuid>\",\n  \"remittance_information\": \"<string>\",\n  \"reconciliation_groups\": \"<object>\",\n  \"reconciliation_filters\": \"<object>\",\n  \"reconciliation_rule_variables\": [\n    {\n      \"amount_upper_bound\": \"<integer>\",\n      \"amount_lower_bound\": \"<integer>\",\n      \"direction\": \"<string>\",\n      \"internal_account_id\": \"<uuid>\",\n      \"type\": \"<string>\",\n      \"currency\": \"<string>\",\n      \"date_upper_bound\": \"<date>\",\n      \"date_lower_bound\": \"<date>\",\n      \"counterparty_id\": \"<uuid>\",\n      \"custom_identifiers\": {\n        \"key_0\": \"<string>\",\n        \"key_1\": \"<string>\"\n      }\n    },\n    {\n      \"amount_upper_bound\": \"<integer>\",\n      \"amount_lower_bound\": \"<integer>\",\n      \"direction\": \"<string>\",\n      \"internal_account_id\": \"<uuid>\",\n      \"type\": \"<string>\",\n      \"currency\": \"<string>\",\n      \"date_upper_bound\": \"<date>\",\n      \"date_lower_bound\": \"<date>\",\n      \"counterparty_id\": \"<uuid>\",\n      \"custom_identifiers\": {\n        \"key_0\": \"<string>\",\n        \"key_1\": \"<string>\"\n      }\n    }\n  ],\n  \"amount_reconciled\": \"<integer>\",\n  \"amount_reconciled_direction\": \"<string>\",\n  \"amount_unreconciled\": \"<integer>\",\n  \"amount_unreconciled_direction\": \"<string>\",\n  \"line_items\": [\n    {\n      \"amount\": \"<integer>\",\n      \"metadata\": {\n        \"key\": \"value\",\n        \"foo\": \"bar\",\n        \"modern\": \"treasury\"\n      },\n      \"description\": \"<string>\",\n      \"accounting_category_id\": \"<string>\"\n    },\n    {\n      \"amount\": \"<integer>\",\n      \"metadata\": {\n        \"key\": \"value\",\n        \"foo\": \"bar\",\n        \"modern\": \"treasury\"\n      },\n      \"description\": \"<string>\",\n      \"accounting_category_id\": \"<string>\"\n    }\n  ],\n  \"ledger_transaction\": {\n    \"ledger_entries\": [\n      {\n        \"amount\": \"<integer>\",\n        \"direction\": \"<string>\",\n        \"ledger_account_id\": \"<uuid>\",\n        \"effective_at\": \"<dateTime>\",\n        \"lock_version\": \"<integer>\",\n        \"pending_balance_amount\": {\n          \"key_0\": \"<integer>\",\n          \"key_1\": \"<integer>\"\n        },\n        \"posted_balance_amount\": {\n          \"key_0\": \"<integer>\",\n          \"key_1\": \"<integer>\"\n        },\n        \"available_balance_amount\": {\n          \"key_0\": \"<integer>\",\n          \"key_1\": \"<integer>\"\n        },\n        \"show_resulting_ledger_account_balances\": \"<boolean>\",\n        \"metadata\": {\n          \"key\": \"value\",\n          \"foo\": \"bar\",\n          \"modern\": \"treasury\"\n        }\n      },\n      {\n        \"amount\": \"<integer>\",\n        \"direction\": \"<string>\",\n        \"ledger_account_id\": \"<uuid>\",\n        \"effective_at\": \"<dateTime>\",\n        \"lock_version\": \"<integer>\",\n        \"pending_balance_amount\": {\n          \"key_0\": \"<integer>\",\n          \"key_1\": \"<integer>\"\n        },\n        \"posted_balance_amount\": {\n          \"key_0\": \"<integer>\",\n          \"key_1\": \"<integer>\",\n          \"key_2\": \"<integer>\"\n        },\n        \"available_balance_amount\": {\n          \"key_0\": \"<integer>\",\n          \"key_1\": \"<integer>\",\n          \"key_2\": \"<integer>\"\n        },\n        \"show_resulting_ledger_account_balances\": \"<boolean>\",\n        \"metadata\": {\n          \"key\": \"value\",\n          \"foo\": \"bar\",\n          \"modern\": \"treasury\"\n        }\n      }\n    ],\n    \"description\": \"<string>\",\n    \"status\": \"<string>\",\n    \"metadata\": {\n      \"key\": \"value\",\n      \"foo\": \"bar\",\n      \"modern\": \"treasury\"\n    },\n    \"effective_at\": \"<dateTime>\",\n    \"effective_date\": \"<date>\",\n    \"external_id\": \"<string>\",\n    \"ledgerable_type\": \"<string>\",\n    \"ledgerable_id\": \"<uuid>\"\n  },\n  \"ledger_transaction_id\": \"<uuid>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": {\n    \"code\": \"invalid_key\",\n    \"message\": \"string\",\n    \"parameter\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5cf20b3c-f5d1-4d41-8b94-bf32d1546653",
+          "name": "get expected payment",
+          "request": {
+            "name": "get expected payment",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "expected_payments",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) id"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "9439f616-c4b8-4d52-b92c-afedc3d2fffd",
+              "name": "successful",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "expected_payments",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"ac0f2738-e048-60d1-eabd-62d426a515a7\",\n  \"object\": \"string\",\n  \"live_mode\": true,\n  \"created_at\": \"1947-06-05T10:53:00.863Z\",\n  \"updated_at\": \"1998-04-19T06:22:48.904Z\",\n  \"external_id\": \"string\",\n  \"amount_upper_bound\": 9076,\n  \"amount_lower_bound\": 9550,\n  \"direction\": \"credit\",\n  \"internal_account_id\": \"3bf7f6ee-aa01-d4d4-2fe6-f915ee16f165\",\n  \"type\": \"<string>\",\n  \"currency\": \"<string>\",\n  \"date_upper_bound\": \"1954-05-21\",\n  \"date_lower_bound\": \"2004-02-15\",\n  \"description\": \"string\",\n  \"statement_descriptor\": \"string\",\n  \"metadata\": {\n    \"key\": \"value\",\n    \"foo\": \"bar\",\n    \"modern\": \"treasury\"\n  },\n  \"counterparty_id\": \"31c81873-1a4a-45bd-918d-7b7fedb55f8c\",\n  \"remittance_information\": \"string\",\n  \"reconciliation_groups\": {},\n  \"reconciliation_filters\": {},\n  \"reconciliation_rule_variables\": [\n    {\n      \"amount_upper_bound\": \"<integer>\",\n      \"amount_lower_bound\": \"<integer>\",\n      \"direction\": \"<string>\",\n      \"internal_account_id\": \"<uuid>\",\n      \"type\": \"<string>\",\n      \"currency\": \"<string>\",\n      \"date_upper_bound\": \"<date>\",\n      \"date_lower_bound\": \"<date>\",\n      \"counterparty_id\": \"<uuid>\",\n      \"custom_identifiers\": {\n        \"key_0\": \"<string>\",\n        \"key_1\": \"<string>\",\n        \"key_2\": \"<string>\"\n      }\n    },\n    {\n      \"amount_upper_bound\": \"<integer>\",\n      \"amount_lower_bound\": \"<integer>\",\n      \"direction\": \"<string>\",\n      \"internal_account_id\": \"<uuid>\",\n      \"type\": \"<string>\",\n      \"currency\": \"<string>\",\n      \"date_upper_bound\": \"<date>\",\n      \"date_lower_bound\": \"<date>\",\n      \"counterparty_id\": \"<uuid>\",\n      \"custom_identifiers\": {\n        \"key_0\": \"<string>\",\n        \"key_1\": \"<string>\",\n        \"key_2\": \"<string>\",\n        \"key_3\": \"<string>\",\n        \"key_4\": \"<string>\"\n      }\n    }\n  ],\n  \"amount_reconciled\": 1874,\n  \"amount_reconciled_direction\": \"debit\",\n  \"amount_unreconciled\": 1233,\n  \"amount_unreconciled_direction\": \"credit\",\n  \"transaction_id\": \"e2fe7953-5f87-8b15-7928-0c8cb1d5e0c8\",\n  \"transaction_line_item_id\": \"661c0165-bde7-dd14-c1b3-b23aec66c795\",\n  \"status\": \"archived\",\n  \"reconciliation_method\": \"manual\",\n  \"ledger_transaction_id\": \"fe7092c4-5bb9-1db3-088b-a4a2a2be3fbf\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f69423eb-9115-4fa3-8cc6-67cc7aca7680",
+              "name": "not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "expected_payments",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": {\n    \"code\": \"invalid_key\",\n    \"message\": \"string\",\n    \"parameter\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c9f0a8e7-2275-456f-87e9-b531b4c2b14d",
+          "name": "update expected payment",
+          "request": {
+            "name": "update expected payment",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "expected_payments",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) id"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"external_id\": \"<string>\",\n  \"amount_upper_bound\": \"<integer>\",\n  \"amount_lower_bound\": \"<integer>\",\n  \"direction\": \"<string>\",\n  \"internal_account_id\": \"<uuid>\",\n  \"type\": \"<string>\",\n  \"currency\": \"<string>\",\n  \"date_upper_bound\": \"<date>\",\n  \"date_lower_bound\": \"<date>\",\n  \"description\": \"<string>\",\n  \"statement_descriptor\": \"<string>\",\n  \"metadata\": {\n    \"key_0\": \"<string>\"\n  },\n  \"counterparty_id\": \"<uuid>\",\n  \"remittance_information\": \"<string>\",\n  \"reconciliation_groups\": \"<object>\",\n  \"reconciliation_filters\": \"<object>\",\n  \"reconciliation_rule_variables\": [\n    {\n      \"amount_upper_bound\": \"<integer>\",\n      \"amount_lower_bound\": \"<integer>\",\n      \"direction\": \"<string>\",\n      \"internal_account_id\": \"<uuid>\",\n      \"type\": \"<string>\",\n      \"currency\": \"<string>\",\n      \"date_upper_bound\": \"<date>\",\n      \"date_lower_bound\": \"<date>\",\n      \"counterparty_id\": \"<uuid>\",\n      \"custom_identifiers\": {\n        \"key_0\": \"<string>\",\n        \"key_1\": \"<string>\"\n      }\n    },\n    {\n      \"amount_upper_bound\": \"<integer>\",\n      \"amount_lower_bound\": \"<integer>\",\n      \"direction\": \"<string>\",\n      \"internal_account_id\": \"<uuid>\",\n      \"type\": \"<string>\",\n      \"currency\": \"<string>\",\n      \"date_upper_bound\": \"<date>\",\n      \"date_lower_bound\": \"<date>\",\n      \"counterparty_id\": \"<uuid>\",\n      \"custom_identifiers\": {\n        \"key_0\": \"<string>\",\n        \"key_1\": \"<string>\"\n      }\n    }\n  ],\n  \"amount_reconciled\": \"<integer>\",\n  \"amount_reconciled_direction\": \"<string>\",\n  \"amount_unreconciled\": \"<integer>\",\n  \"amount_unreconciled_direction\": \"<string>\",\n  \"status\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "653ee4f2-7e87-4647-b159-5a10c5f7fc21",
+              "name": "successful",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "expected_payments",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"external_id\": \"<string>\",\n  \"amount_upper_bound\": \"<integer>\",\n  \"amount_lower_bound\": \"<integer>\",\n  \"direction\": \"<string>\",\n  \"internal_account_id\": \"<uuid>\",\n  \"type\": \"<string>\",\n  \"currency\": \"<string>\",\n  \"date_upper_bound\": \"<date>\",\n  \"date_lower_bound\": \"<date>\",\n  \"description\": \"<string>\",\n  \"statement_descriptor\": \"<string>\",\n  \"metadata\": {\n    \"key\": \"value\",\n    \"foo\": \"bar\",\n    \"modern\": \"treasury\"\n  },\n  \"counterparty_id\": \"<uuid>\",\n  \"remittance_information\": \"<string>\",\n  \"reconciliation_groups\": \"<object>\",\n  \"reconciliation_filters\": \"<object>\",\n  \"reconciliation_rule_variables\": [\n    {\n      \"amount_upper_bound\": \"<integer>\",\n      \"amount_lower_bound\": \"<integer>\",\n      \"direction\": \"<string>\",\n      \"internal_account_id\": \"<uuid>\",\n      \"type\": \"<string>\",\n      \"currency\": \"<string>\",\n      \"date_upper_bound\": \"<date>\",\n      \"date_lower_bound\": \"<date>\",\n      \"counterparty_id\": \"<uuid>\",\n      \"custom_identifiers\": {\n        \"key_0\": \"<string>\"\n      }\n    },\n    {\n      \"amount_upper_bound\": \"<integer>\",\n      \"amount_lower_bound\": \"<integer>\",\n      \"direction\": \"<string>\",\n      \"internal_account_id\": \"<uuid>\",\n      \"type\": \"<string>\",\n      \"currency\": \"<string>\",\n      \"date_upper_bound\": \"<date>\",\n      \"date_lower_bound\": \"<date>\",\n      \"counterparty_id\": \"<uuid>\",\n      \"custom_identifiers\": {\n        \"key_0\": \"<string>\"\n      }\n    }\n  ],\n  \"amount_reconciled\": \"<integer>\",\n  \"amount_reconciled_direction\": \"<string>\",\n  \"amount_unreconciled\": \"<integer>\",\n  \"amount_unreconciled_direction\": \"<string>\",\n  \"status\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"ac0f2738-e048-60d1-eabd-62d426a515a7\",\n  \"object\": \"string\",\n  \"live_mode\": true,\n  \"created_at\": \"1947-06-05T10:53:00.863Z\",\n  \"updated_at\": \"1998-04-19T06:22:48.904Z\",\n  \"external_id\": \"string\",\n  \"amount_upper_bound\": 9076,\n  \"amount_lower_bound\": 9550,\n  \"direction\": \"credit\",\n  \"internal_account_id\": \"3bf7f6ee-aa01-d4d4-2fe6-f915ee16f165\",\n  \"type\": \"<string>\",\n  \"currency\": \"<string>\",\n  \"date_upper_bound\": \"1954-05-21\",\n  \"date_lower_bound\": \"2004-02-15\",\n  \"description\": \"string\",\n  \"statement_descriptor\": \"string\",\n  \"metadata\": {\n    \"key\": \"value\",\n    \"foo\": \"bar\",\n    \"modern\": \"treasury\"\n  },\n  \"counterparty_id\": \"31c81873-1a4a-45bd-918d-7b7fedb55f8c\",\n  \"remittance_information\": \"string\",\n  \"reconciliation_groups\": {},\n  \"reconciliation_filters\": {},\n  \"reconciliation_rule_variables\": [\n    {\n      \"amount_upper_bound\": \"<integer>\",\n      \"amount_lower_bound\": \"<integer>\",\n      \"direction\": \"<string>\",\n      \"internal_account_id\": \"<uuid>\",\n      \"type\": \"<string>\",\n      \"currency\": \"<string>\",\n      \"date_upper_bound\": \"<date>\",\n      \"date_lower_bound\": \"<date>\",\n      \"counterparty_id\": \"<uuid>\",\n      \"custom_identifiers\": {\n        \"key_0\": \"<string>\",\n        \"key_1\": \"<string>\",\n        \"key_2\": \"<string>\"\n      }\n    },\n    {\n      \"amount_upper_bound\": \"<integer>\",\n      \"amount_lower_bound\": \"<integer>\",\n      \"direction\": \"<string>\",\n      \"internal_account_id\": \"<uuid>\",\n      \"type\": \"<string>\",\n      \"currency\": \"<string>\",\n      \"date_upper_bound\": \"<date>\",\n      \"date_lower_bound\": \"<date>\",\n      \"counterparty_id\": \"<uuid>\",\n      \"custom_identifiers\": {\n        \"key_0\": \"<string>\",\n        \"key_1\": \"<string>\",\n        \"key_2\": \"<string>\",\n        \"key_3\": \"<string>\",\n        \"key_4\": \"<string>\"\n      }\n    }\n  ],\n  \"amount_reconciled\": 1874,\n  \"amount_reconciled_direction\": \"debit\",\n  \"amount_unreconciled\": 1233,\n  \"amount_unreconciled_direction\": \"credit\",\n  \"transaction_id\": \"e2fe7953-5f87-8b15-7928-0c8cb1d5e0c8\",\n  \"transaction_line_item_id\": \"661c0165-bde7-dd14-c1b3-b23aec66c795\",\n  \"status\": \"archived\",\n  \"reconciliation_method\": \"manual\",\n  \"ledger_transaction_id\": \"fe7092c4-5bb9-1db3-088b-a4a2a2be3fbf\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ab947267-b8ae-4e70-a5c5-bd5442fbe0a7",
+              "name": "conflict",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "expected_payments",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"external_id\": \"<string>\",\n  \"amount_upper_bound\": \"<integer>\",\n  \"amount_lower_bound\": \"<integer>\",\n  \"direction\": \"<string>\",\n  \"internal_account_id\": \"<uuid>\",\n  \"type\": \"<string>\",\n  \"currency\": \"<string>\",\n  \"date_upper_bound\": \"<date>\",\n  \"date_lower_bound\": \"<date>\",\n  \"description\": \"<string>\",\n  \"statement_descriptor\": \"<string>\",\n  \"metadata\": {\n    \"key\": \"value\",\n    \"foo\": \"bar\",\n    \"modern\": \"treasury\"\n  },\n  \"counterparty_id\": \"<uuid>\",\n  \"remittance_information\": \"<string>\",\n  \"reconciliation_groups\": \"<object>\",\n  \"reconciliation_filters\": \"<object>\",\n  \"reconciliation_rule_variables\": [\n    {\n      \"amount_upper_bound\": \"<integer>\",\n      \"amount_lower_bound\": \"<integer>\",\n      \"direction\": \"<string>\",\n      \"internal_account_id\": \"<uuid>\",\n      \"type\": \"<string>\",\n      \"currency\": \"<string>\",\n      \"date_upper_bound\": \"<date>\",\n      \"date_lower_bound\": \"<date>\",\n      \"counterparty_id\": \"<uuid>\",\n      \"custom_identifiers\": {\n        \"key_0\": \"<string>\"\n      }\n    },\n    {\n      \"amount_upper_bound\": \"<integer>\",\n      \"amount_lower_bound\": \"<integer>\",\n      \"direction\": \"<string>\",\n      \"internal_account_id\": \"<uuid>\",\n      \"type\": \"<string>\",\n      \"currency\": \"<string>\",\n      \"date_upper_bound\": \"<date>\",\n      \"date_lower_bound\": \"<date>\",\n      \"counterparty_id\": \"<uuid>\",\n      \"custom_identifiers\": {\n        \"key_0\": \"<string>\"\n      }\n    }\n  ],\n  \"amount_reconciled\": \"<integer>\",\n  \"amount_reconciled_direction\": \"<string>\",\n  \"amount_unreconciled\": \"<integer>\",\n  \"amount_unreconciled_direction\": \"<string>\",\n  \"status\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": {\n    \"code\": \"invalid_key\",\n    \"message\": \"string\",\n    \"parameter\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "01c152cf-8b9f-4f36-a85f-5fb4eb8fada8",
+          "name": "delete expected payment",
+          "request": {
+            "name": "delete expected payment",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "expected_payments",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) id"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "7e391eb2-19a1-45c4-9220-4b1528730e48",
+              "name": "successful",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "expected_payments",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"ac0f2738-e048-60d1-eabd-62d426a515a7\",\n  \"object\": \"string\",\n  \"live_mode\": true,\n  \"created_at\": \"1947-06-05T10:53:00.863Z\",\n  \"updated_at\": \"1998-04-19T06:22:48.904Z\",\n  \"external_id\": \"string\",\n  \"amount_upper_bound\": 9076,\n  \"amount_lower_bound\": 9550,\n  \"direction\": \"credit\",\n  \"internal_account_id\": \"3bf7f6ee-aa01-d4d4-2fe6-f915ee16f165\",\n  \"type\": \"<string>\",\n  \"currency\": \"<string>\",\n  \"date_upper_bound\": \"1954-05-21\",\n  \"date_lower_bound\": \"2004-02-15\",\n  \"description\": \"string\",\n  \"statement_descriptor\": \"string\",\n  \"metadata\": {\n    \"key\": \"value\",\n    \"foo\": \"bar\",\n    \"modern\": \"treasury\"\n  },\n  \"counterparty_id\": \"31c81873-1a4a-45bd-918d-7b7fedb55f8c\",\n  \"remittance_information\": \"string\",\n  \"reconciliation_groups\": {},\n  \"reconciliation_filters\": {},\n  \"reconciliation_rule_variables\": [\n    {\n      \"amount_upper_bound\": \"<integer>\",\n      \"amount_lower_bound\": \"<integer>\",\n      \"direction\": \"<string>\",\n      \"internal_account_id\": \"<uuid>\",\n      \"type\": \"<string>\",\n      \"currency\": \"<string>\",\n      \"date_upper_bound\": \"<date>\",\n      \"date_lower_bound\": \"<date>\",\n      \"counterparty_id\": \"<uuid>\",\n      \"custom_identifiers\": {\n        \"key_0\": \"<string>\",\n        \"key_1\": \"<string>\",\n        \"key_2\": \"<string>\"\n      }\n    },\n    {\n      \"amount_upper_bound\": \"<integer>\",\n      \"amount_lower_bound\": \"<integer>\",\n      \"direction\": \"<string>\",\n      \"internal_account_id\": \"<uuid>\",\n      \"type\": \"<string>\",\n      \"currency\": \"<string>\",\n      \"date_upper_bound\": \"<date>\",\n      \"date_lower_bound\": \"<date>\",\n      \"counterparty_id\": \"<uuid>\",\n      \"custom_identifiers\": {\n        \"key_0\": \"<string>\",\n        \"key_1\": \"<string>\",\n        \"key_2\": \"<string>\",\n        \"key_3\": \"<string>\",\n        \"key_4\": \"<string>\"\n      }\n    }\n  ],\n  \"amount_reconciled\": 1874,\n  \"amount_reconciled_direction\": \"debit\",\n  \"amount_unreconciled\": 1233,\n  \"amount_unreconciled_direction\": \"credit\",\n  \"transaction_id\": \"e2fe7953-5f87-8b15-7928-0c8cb1d5e0c8\",\n  \"transaction_line_item_id\": \"661c0165-bde7-dd14-c1b3-b23aec66c795\",\n  \"status\": \"archived\",\n  \"reconciliation_method\": \"manual\",\n  \"ledger_transaction_id\": \"fe7092c4-5bb9-1db3-088b-a4a2a2be3fbf\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "13db0285-4cb1-45e2-b728-39d201d2b0b3",
+              "name": "parameter_invalid",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "expected_payments",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": {\n    \"code\": \"invalid_key\",\n    \"message\": \"string\",\n    \"parameter\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "http://localhost:3000",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "72be0948-3ada-440a-b1a1-512b9fea0141",
+    "name": "Modern Treasury AccountCapability ExpectedPayment API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Modern Treasury REST API. Please see https://docs.moderntreasury.com for more details.\n\nContact Support:\n Name: Modern Treasury Engineering Team",
+      "type": "text/plain"
+    }
+  }
+}

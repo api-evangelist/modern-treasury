@@ -1,0 +1,48 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Modern Treasury AccountCapability Validation API",
+    "version": "v1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Validation",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "validate routing numbers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:3000/api/validations/routing_numbers",
+            "params": [
+              {
+                "name": "routing_number",
+                "value": "",
+                "type": "query",
+                "description": "The routing number that is being validated."
+              },
+              {
+                "name": "routing_number_type",
+                "value": "",
+                "type": "query",
+                "description": "The type of routing number. See https://docs.moderntreasury.com/platform/reference/routing-detail-object for more details. In sandbox mode we currently only support `aba` and `swift` with routing numbers '123456789' and 'GRINUST0XXX' respectively."
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Validates the routing number information supplied without creating a routing detail"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

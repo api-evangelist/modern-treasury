@@ -1,0 +1,120 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Modern Treasury AccountCapability BulkRequest API",
+    "version": "v1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "BulkRequest",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "list bulk_requests",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:3000/api/bulk_requests",
+            "params": [
+              {
+                "name": "after_cursor",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "One of pending, processing, or completed."
+              },
+              {
+                "name": "resource_type",
+                "value": "",
+                "type": "query",
+                "description": "One of payment_order, expected_payment, or ledger_transaction."
+              },
+              {
+                "name": "action_type",
+                "value": "",
+                "type": "query",
+                "description": "One of create, or update."
+              },
+              {
+                "name": "metadata",
+                "value": "",
+                "type": "query",
+                "description": "For example, if you want to query for records with metadata key `Type` and value `Loan`, the query would be `metadata%5BType%5D=Loan`. This encodes the query parameters."
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "list bulk_requests"
+        },
+        {
+          "info": {
+            "name": "create bulk_request",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:3000/api/bulk_requests",
+            "headers": [
+              {
+                "name": "Idempotency-Key",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "create bulk_request"
+        },
+        {
+          "info": {
+            "name": "get bulk_request",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:3000/api/bulk_requests/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "id"
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "get bulk_request"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

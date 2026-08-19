@@ -1,0 +1,923 @@
+{
+  "item": [
+    {
+      "id": "407f8365-5660-40eb-bac8-0b0785107e9a",
+      "name": "BulkRequest",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "62e45e4a-f401-48a7-81b5-22840ae27967",
+          "name": "list bulk_requests",
+          "request": {
+            "name": "list bulk_requests",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "bulk_requests"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "after_cursor",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "per_page",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>",
+                  "description": "One of pending, processing, or completed."
+                },
+                {
+                  "disabled": false,
+                  "key": "resource_type",
+                  "value": "<string>",
+                  "description": "One of payment_order, expected_payment, or ledger_transaction."
+                },
+                {
+                  "disabled": false,
+                  "key": "action_type",
+                  "value": "<string>",
+                  "description": "One of create, or update."
+                },
+                {
+                  "disabled": false,
+                  "key": "metadata[key_0]",
+                  "value": "<string>",
+                  "description": "For example, if you want to query for records with metadata key `Type` and value `Loan`, the query would be `metadata%5BType%5D=Loan`. This encodes the query parameters."
+                },
+                {
+                  "disabled": false,
+                  "key": "metadata[key_1]",
+                  "value": "<string>",
+                  "description": "For example, if you want to query for records with metadata key `Type` and value `Loan`, the query would be `metadata%5BType%5D=Loan`. This encodes the query parameters."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "844adb64-4cc0-436a-a24a-9309d7b0fd6c",
+              "name": "successful",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "bulk_requests"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "after_cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "resource_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "action_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "metadata[key_0]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "metadata[key_1]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "metadata[key_2]",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "The cursor for the next page. Including this in a call as `after_cursor` will return the next page.",
+                  "key": "X-After-Cursor",
+                  "value": "string"
+                },
+                {
+                  "disabled": false,
+                  "description": "The current `per_page`.",
+                  "key": "X-Per-Page",
+                  "value": "8906"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"31078384-63cd-c51f-3237-f7b90434a1dd\",\n    \"object\": \"string\",\n    \"live_mode\": true,\n    \"created_at\": \"1991-03-21T11:37:38.033Z\",\n    \"updated_at\": \"1973-05-06T11:27:44.171Z\",\n    \"action_type\": \"delete\",\n    \"resource_type\": \"entity_link\",\n    \"status\": \"pending\",\n    \"total_resource_count\": 2627,\n    \"success_result_count\": 1693,\n    \"failed_result_count\": 1997,\n    \"metadata\": {\n      \"key\": \"value\",\n      \"foo\": \"bar\",\n      \"modern\": \"treasury\"\n    }\n  },\n  {\n    \"id\": \"60b82523-b22f-6e74-0f5f-f21c57a4b6a4\",\n    \"object\": \"string\",\n    \"live_mode\": false,\n    \"created_at\": \"1980-04-06T14:17:37.154Z\",\n    \"updated_at\": \"1979-10-28T23:22:55.153Z\",\n    \"action_type\": \"create\",\n    \"resource_type\": \"payment_order\",\n    \"status\": \"processing\",\n    \"total_resource_count\": 3230,\n    \"success_result_count\": 7027,\n    \"failed_result_count\": 3742,\n    \"metadata\": {\n      \"key\": \"value\",\n      \"foo\": \"bar\",\n      \"modern\": \"treasury\"\n    }\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "31209543-9e88-4bf8-a39e-eb3b8990eb9a",
+              "name": "unsuccessful",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "bulk_requests"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "after_cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "resource_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "action_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "metadata[key_0]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "metadata[key_1]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "metadata[key_2]",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": {\n    \"code\": \"parameter_invalid\",\n    \"message\": \"string\",\n    \"parameter\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0301c3ff-4620-4d46-bbbe-3ba66b15506b",
+              "name": "unsuccessful",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "bulk_requests"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "after_cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "resource_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "action_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "metadata[key_0]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "metadata[key_1]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "metadata[key_2]",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": {\n    \"code\": \"parameter_invalid\",\n    \"message\": \"string\",\n    \"parameter\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "250ac114-552b-41da-bc34-f692c72f2b78",
+          "name": "create bulk_request",
+          "request": {
+            "name": "create bulk_request",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "bulk_requests"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "This key should be something unique, preferably something like an UUID.",
+                "key": "Idempotency-Key",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"action_type\": \"<string>\",\n  \"resource_type\": \"<string>\",\n  \"resources\": [\n    {\n      \"type\": \"<string>\",\n      \"amount\": \"<integer>\",\n      \"direction\": \"<string>\",\n      \"originating_account_id\": \"<uuid>\",\n      \"subtype\": \"<string>\",\n      \"priority\": \"<string>\",\n      \"receiving_account_id\": \"<uuid>\",\n      \"currency\": \"<string>\",\n      \"accounting\": {\n        \"account_id\": \"<uuid>\",\n        \"class_id\": \"<uuid>\"\n      },\n      \"accounting_category_id\": \"<uuid>\",\n      \"accounting_ledger_class_id\": \"<uuid>\",\n      \"effective_date\": \"<date>\",\n      \"description\": \"<string>\",\n      \"statement_descriptor\": \"<string>\",\n      \"remittance_information\": \"<string>\",\n      \"process_after\": \"<dateTime>\",\n      \"purpose\": \"<string>\",\n      \"metadata\": {\n        \"key_0\": \"<string>\"\n      },\n      \"charge_bearer\": \"<string>\",\n      \"foreign_exchange_indicator\": \"<string>\",\n      \"foreign_exchange_contract\": \"<string>\",\n      \"nsf_protected\": \"<boolean>\",\n      \"originating_party_name\": \"<string>\",\n      \"ultimate_originating_party_name\": \"<string>\",\n      \"ultimate_originating_party_identifier\": \"<string>\",\n      \"ultimate_receiving_party_name\": \"<string>\",\n      \"ultimate_receiving_party_identifier\": \"<string>\",\n      \"send_remittance_advice\": \"<boolean>\",\n      \"expires_at\": \"<dateTime>\",\n      \"reconciliation_status\": \"<string>\",\n      \"external_id\": \"<string>\",\n      \"fallback_type\": \"<string>\",\n      \"receiving_account\": {\n        \"account_type\": \"<string>\",\n        \"party_type\": \"<string>\",\n        \"party_address\": {\n          \"line1\": \"<string>\",\n          \"line2\": \"<string>\",\n          \"locality\": \"<string>\",\n          \"region\": \"<string>\",\n          \"postal_code\": \"<string>\",\n          \"country\": \"<string>\"\n        },\n        \"name\": \"<string>\",\n        \"account_details\": [\n          {\n            \"account_number\": \"<string>\",\n            \"account_number_type\": \"<string>\"\n          },\n          {\n            \"account_number\": \"<string>\",\n            \"account_number_type\": \"<string>\"\n          }\n        ],\n        \"routing_details\": [\n          {\n            \"routing_number\": \"<string>\",\n            \"routing_number_type\": \"<string>\",\n            \"payment_type\": \"<string>\"\n          },\n          {\n            \"routing_number\": \"<string>\",\n            \"routing_number_type\": \"<string>\",\n            \"payment_type\": \"<string>\"\n          }\n        ],\n        \"external_id\": \"<string>\",\n        \"metadata\": {\n          \"key_0\": \"<string>\",\n          \"key_1\": \"<string>\"\n        },\n        \"party_name\": \"<string>\",\n        \"party_identifier\": \"<string>\",\n        \"ledger_account\": {\n          \"name\": \"<string>\",\n          \"normal_balance\": \"<string>\",\n          \"ledger_id\": \"<uuid>\",\n          \"currency\": \"<string>\",\n          \"description\": \"<string>\",\n          \"currency_exponent\": \"<integer>\",\n          \"ledger_account_category_ids\": [\n            \"<uuid>\",\n            \"<uuid>\"\n          ],\n          \"ledgerable_id\": \"<uuid>\",\n          \"ledgerable_type\": \"<string>\",\n          \"metadata\": {\n            \"key_0\": \"<string>\",\n            \"key_1\": \"<string>\"\n          },\n          \"external_id\": \"<string>\"\n        },\n        \"plaid_processor_token\": \"<string>\",\n        \"contact_details\": [\n          {\n            \"contact_identifier\": \"<string>\",\n            \"contact_identifier_type\": \"<string>\"\n          },\n          {\n            \"contact_identifier\": \"<string>\",\n            \"contact_identifier_type\": \"<string>\"\n          }\n        ]\n      },\n      \"ledger_transaction\": {\n        \"ledger_entries\": [\n          {\n            \"amount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"direction\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"ledger_account_id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"effective_at\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"lock_version\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"pending_balance_amount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"posted_balance_amount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"available_balance_amount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"show_resulting_ledger_account_balances\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"metadata\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"amount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"direction\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"ledger_account_id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"effective_at\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"lock_version\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"pending_balance_amount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"posted_balance_amount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"available_balance_amount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"show_resulting_ledger_account_balances\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"metadata\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"description\": \"<string>\",\n        \"status\": \"<string>\",\n        \"metadata\": {\n          \"key_0\": \"<string>\",\n          \"key_1\": \"<string>\"\n        },\n        \"effective_at\": \"<dateTime>\",\n        \"effective_date\": \"<date>\",\n        \"external_id\": \"<string>\",\n        \"ledgerable_type\": \"<string>\",\n        \"ledgerable_id\": \"<uuid>\"\n      },\n      \"ledger_transaction_id\": \"<uuid>\",\n      \"line_items\": [\n        {\n          \"amount\": \"<integer>\",\n          \"metadata\": {\n            \"key_0\": \"<string>\"\n          },\n          \"description\": \"<string>\",\n          \"accounting_category_id\": \"<string>\"\n        },\n        {\n          \"amount\": \"<integer>\",\n          \"metadata\": {\n            \"key_0\": \"<string>\",\n            \"key_1\": \"<string>\"\n          },\n          \"description\": \"<string>\",\n          \"accounting_category_id\": \"<string>\"\n        }\n      ],\n      \"transaction_monitoring_enabled\": \"<boolean>\",\n      \"ultimate_originating_account_id\": \"<uuid>\",\n      \"ultimate_originating_party_address\": {\n        \"line1\": \"<string>\",\n        \"line2\": \"<string>\",\n        \"locality\": \"<string>\",\n        \"region\": \"<string>\",\n        \"postal_code\": \"<string>\",\n        \"country\": \"<string>\"\n      },\n      \"vendor_attributes\": \"<object>\"\n    },\n    {\n      \"type\": \"<string>\",\n      \"amount\": \"<integer>\",\n      \"direction\": \"<string>\",\n      \"originating_account_id\": \"<uuid>\",\n      \"subtype\": \"<string>\",\n      \"priority\": \"<string>\",\n      \"receiving_account_id\": \"<uuid>\",\n      \"currency\": \"<string>\",\n      \"accounting\": {\n        \"account_id\": \"<uuid>\",\n        \"class_id\": \"<uuid>\"\n      },\n      \"accounting_category_id\": \"<uuid>\",\n      \"accounting_ledger_class_id\": \"<uuid>\",\n      \"effective_date\": \"<date>\",\n      \"description\": \"<string>\",\n      \"statement_descriptor\": \"<string>\",\n      \"remittance_information\": \"<string>\",\n      \"process_after\": \"<dateTime>\",\n      \"purpose\": \"<string>\",\n      \"metadata\": {\n        \"key_0\": \"<string>\",\n        \"key_1\": \"<string>\"\n      },\n      \"charge_bearer\": \"<string>\",\n      \"foreign_exchange_indicator\": \"<string>\",\n      \"foreign_exchange_contract\": \"<string>\",\n      \"nsf_protected\": \"<boolean>\",\n      \"originating_party_name\": \"<string>\",\n      \"ultimate_originating_party_name\": \"<string>\",\n      \"ultimate_originating_party_identifier\": \"<string>\",\n      \"ultimate_receiving_party_name\": \"<string>\",\n      \"ultimate_receiving_party_identifier\": \"<string>\",\n      \"send_remittance_advice\": \"<boolean>\",\n      \"expires_at\": \"<dateTime>\",\n      \"reconciliation_status\": \"<string>\",\n      \"external_id\": \"<string>\",\n      \"fallback_type\": \"<string>\",\n      \"receiving_account\": {\n        \"account_type\": \"<string>\",\n        \"party_type\": \"<string>\",\n        \"party_address\": {\n          \"line1\": \"<string>\",\n          \"line2\": \"<string>\",\n          \"locality\": \"<string>\",\n          \"region\": \"<string>\",\n          \"postal_code\": \"<string>\",\n          \"country\": \"<string>\"\n        },\n        \"name\": \"<string>\",\n        \"account_details\": [\n          {\n            \"account_number\": \"<string>\",\n            \"account_number_type\": \"<string>\"\n          },\n          {\n            \"account_number\": \"<string>\",\n            \"account_number_type\": \"<string>\"\n          }\n        ],\n        \"routing_details\": [\n          {\n            \"routing_number\": \"<string>\",\n            \"routing_number_type\": \"<string>\",\n            \"payment_type\": \"<string>\"\n          },\n          {\n            \"routing_number\": \"<string>\",\n            \"routing_number_type\": \"<string>\",\n            \"payment_type\": \"<string>\"\n          }\n        ],\n        \"external_id\": \"<string>\",\n        \"metadata\": {\n          \"key_0\": \"<string>\",\n          \"key_1\": \"<string>\"\n        },\n        \"party_name\": \"<string>\",\n        \"party_identifier\": \"<string>\",\n        \"ledger_account\": {\n          \"name\": \"<string>\",\n          \"normal_balance\": \"<string>\",\n          \"ledger_id\": \"<uuid>\",\n          \"currency\": \"<string>\",\n          \"description\": \"<string>\",\n          \"currency_exponent\": \"<integer>\",\n          \"ledger_account_category_ids\": [\n            \"<uuid>\",\n            \"<uuid>\"\n          ],\n          \"ledgerable_id\": \"<uuid>\",\n          \"ledgerable_type\": \"<string>\",\n          \"metadata\": {\n            \"key_0\": \"<string>\",\n            \"key_1\": \"<string>\",\n            \"key_2\": \"<string>\"\n          },\n          \"external_id\": \"<string>\"\n        },\n        \"plaid_processor_token\": \"<string>\",\n        \"contact_details\": [\n          {\n            \"contact_identifier\": \"<string>\",\n            \"contact_identifier_type\": \"<string>\"\n          },\n          {\n            \"contact_identifier\": \"<string>\",\n            \"contact_identifier_type\": \"<string>\"\n          }\n        ]\n      },\n      \"ledger_transaction\": {\n        \"ledger_entries\": [\n          {\n            \"amount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"direction\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"ledger_account_id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"effective_at\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"lock_version\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"pending_balance_amount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"posted_balance_amount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"available_balance_amount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"show_resulting_ledger_account_balances\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"metadata\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"amount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"direction\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"ledger_account_id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"effective_at\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"lock_version\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"pending_balance_amount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"posted_balance_amount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"available_balance_amount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"show_resulting_ledger_account_balances\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"metadata\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"description\": \"<string>\",\n        \"status\": \"<string>\",\n        \"metadata\": {\n          \"key_0\": \"<string>\"\n        },\n        \"effective_at\": \"<dateTime>\",\n        \"effective_date\": \"<date>\",\n        \"external_id\": \"<string>\",\n        \"ledgerable_type\": \"<string>\",\n        \"ledgerable_id\": \"<uuid>\"\n      },\n      \"ledger_transaction_id\": \"<uuid>\",\n      \"line_items\": [\n        {\n          \"amount\": \"<integer>\",\n          \"metadata\": {\n            \"key_0\": \"<string>\",\n            \"key_1\": \"<string>\"\n          },\n          \"description\": \"<string>\",\n          \"accounting_category_id\": \"<string>\"\n        },\n        {\n          \"amount\": \"<integer>\",\n          \"metadata\": {\n            \"key_0\": \"<string>\",\n            \"key_1\": \"<string>\"\n          },\n          \"description\": \"<string>\",\n          \"accounting_category_id\": \"<string>\"\n        }\n      ],\n      \"transaction_monitoring_enabled\": \"<boolean>\",\n      \"ultimate_originating_account_id\": \"<uuid>\",\n      \"ultimate_originating_party_address\": {\n        \"line1\": \"<string>\",\n        \"line2\": \"<string>\",\n        \"locality\": \"<string>\",\n        \"region\": \"<string>\",\n        \"postal_code\": \"<string>\",\n        \"country\": \"<string>\"\n      },\n      \"vendor_attributes\": \"<object>\"\n    }\n  ],\n  \"metadata\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "0fb1ed56-010b-4f8a-8058-b6a949585e24",
+              "name": "successful",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "bulk_requests"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "This key should be something unique, preferably something like an UUID.",
+                    "key": "Idempotency-Key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"action_type\": \"<string>\",\n  \"resource_type\": \"<string>\",\n  \"resources\": [\n    {\n      \"type\": \"<string>\",\n      \"amount\": \"<integer>\",\n      \"direction\": \"<string>\",\n      \"originating_account_id\": \"<uuid>\",\n      \"subtype\": \"<string>\",\n      \"priority\": \"<string>\",\n      \"receiving_account_id\": \"<uuid>\",\n      \"currency\": \"<string>\",\n      \"accounting\": {\n        \"account_id\": \"<uuid>\",\n        \"class_id\": \"<uuid>\"\n      },\n      \"accounting_category_id\": \"<uuid>\",\n      \"accounting_ledger_class_id\": \"<uuid>\",\n      \"effective_date\": \"<date>\",\n      \"description\": \"<string>\",\n      \"statement_descriptor\": \"<string>\",\n      \"remittance_information\": \"<string>\",\n      \"process_after\": \"<dateTime>\",\n      \"purpose\": \"<string>\",\n      \"metadata\": {\n        \"key\": \"value\",\n        \"foo\": \"bar\",\n        \"modern\": \"treasury\"\n      },\n      \"charge_bearer\": \"<string>\",\n      \"foreign_exchange_indicator\": \"<string>\",\n      \"foreign_exchange_contract\": \"<string>\",\n      \"nsf_protected\": \"<boolean>\",\n      \"originating_party_name\": \"<string>\",\n      \"ultimate_originating_party_name\": \"<string>\",\n      \"ultimate_originating_party_identifier\": \"<string>\",\n      \"ultimate_receiving_party_name\": \"<string>\",\n      \"ultimate_receiving_party_identifier\": \"<string>\",\n      \"send_remittance_advice\": \"<boolean>\",\n      \"expires_at\": \"<dateTime>\",\n      \"reconciliation_status\": \"<string>\",\n      \"external_id\": \"<string>\",\n      \"fallback_type\": \"<string>\",\n      \"receiving_account\": {\n        \"account_type\": \"<string>\",\n        \"party_type\": \"<string>\",\n        \"party_address\": {\n          \"line1\": \"<string>\",\n          \"line2\": \"<string>\",\n          \"locality\": \"<string>\",\n          \"region\": \"<string>\",\n          \"postal_code\": \"<string>\",\n          \"country\": \"<string>\"\n        },\n        \"name\": \"<string>\",\n        \"account_details\": [\n          {\n            \"account_number\": \"<string>\",\n            \"account_number_type\": \"<string>\"\n          },\n          {\n            \"account_number\": \"<string>\",\n            \"account_number_type\": \"<string>\"\n          }\n        ],\n        \"routing_details\": [\n          {\n            \"routing_number\": \"<string>\",\n            \"routing_number_type\": \"<string>\",\n            \"payment_type\": \"<string>\"\n          },\n          {\n            \"routing_number\": \"<string>\",\n            \"routing_number_type\": \"<string>\",\n            \"payment_type\": \"<string>\"\n          }\n        ],\n        \"external_id\": \"<string>\",\n        \"metadata\": {\n          \"key\": \"value\",\n          \"foo\": \"bar\",\n          \"modern\": \"treasury\"\n        },\n        \"party_name\": \"<string>\",\n        \"party_identifier\": \"<string>\",\n        \"ledger_account\": {\n          \"name\": \"<string>\",\n          \"normal_balance\": \"<string>\",\n          \"ledger_id\": \"<uuid>\",\n          \"currency\": \"<string>\",\n          \"description\": \"<string>\",\n          \"currency_exponent\": \"<integer>\",\n          \"ledger_account_category_ids\": [\n            \"<uuid>\",\n            \"<uuid>\"\n          ],\n          \"ledgerable_id\": \"<uuid>\",\n          \"ledgerable_type\": \"<string>\",\n          \"metadata\": {\n            \"key\": \"value\",\n            \"foo\": \"bar\",\n            \"modern\": \"treasury\"\n          },\n          \"external_id\": \"<string>\"\n        },\n        \"plaid_processor_token\": \"<string>\",\n        \"contact_details\": [\n          {\n            \"contact_identifier\": \"<string>\",\n            \"contact_identifier_type\": \"<string>\"\n          },\n          {\n            \"contact_identifier\": \"<string>\",\n            \"contact_identifier_type\": \"<string>\"\n          }\n        ]\n      },\n      \"ledger_transaction\": {\n        \"ledger_entries\": [\n          {\n            \"amount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"direction\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"ledger_account_id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"effective_at\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"lock_version\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"pending_balance_amount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"posted_balance_amount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"available_balance_amount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"show_resulting_ledger_account_balances\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"metadata\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"amount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"direction\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"ledger_account_id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"effective_at\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"lock_version\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"pending_balance_amount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"posted_balance_amount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"available_balance_amount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"show_resulting_ledger_account_balances\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"metadata\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"description\": \"<string>\",\n        \"status\": \"<string>\",\n        \"metadata\": {\n          \"key\": \"value\",\n          \"foo\": \"bar\",\n          \"modern\": \"treasury\"\n        },\n        \"effective_at\": \"<dateTime>\",\n        \"effective_date\": \"<date>\",\n        \"external_id\": \"<string>\",\n        \"ledgerable_type\": \"<string>\",\n        \"ledgerable_id\": \"<uuid>\"\n      },\n      \"ledger_transaction_id\": \"<uuid>\",\n      \"line_items\": [\n        {\n          \"amount\": \"<integer>\",\n          \"metadata\": {\n            \"key\": \"value\",\n            \"foo\": \"bar\",\n            \"modern\": \"treasury\"\n          },\n          \"description\": \"<string>\",\n          \"accounting_category_id\": \"<string>\"\n        },\n        {\n          \"amount\": \"<integer>\",\n          \"metadata\": {\n            \"key\": \"value\",\n            \"foo\": \"bar\",\n            \"modern\": \"treasury\"\n          },\n          \"description\": \"<string>\",\n          \"accounting_category_id\": \"<string>\"\n        }\n      ],\n      \"transaction_monitoring_enabled\": \"<boolean>\",\n      \"ultimate_originating_account_id\": \"<uuid>\",\n      \"ultimate_originating_party_address\": {\n        \"line1\": \"<string>\",\n        \"line2\": \"<string>\",\n        \"locality\": \"<string>\",\n        \"region\": \"<string>\",\n        \"postal_code\": \"<string>\",\n        \"country\": \"<string>\"\n      },\n      \"vendor_attributes\": \"<object>\"\n    },\n    {\n      \"type\": \"<string>\",\n      \"amount\": \"<integer>\",\n      \"direction\": \"<string>\",\n      \"originating_account_id\": \"<uuid>\",\n      \"subtype\": \"<string>\",\n      \"priority\": \"<string>\",\n      \"receiving_account_id\": \"<uuid>\",\n      \"currency\": \"<string>\",\n      \"accounting\": {\n        \"account_id\": \"<uuid>\",\n        \"class_id\": \"<uuid>\"\n      },\n      \"accounting_category_id\": \"<uuid>\",\n      \"accounting_ledger_class_id\": \"<uuid>\",\n      \"effective_date\": \"<date>\",\n      \"description\": \"<string>\",\n      \"statement_descriptor\": \"<string>\",\n      \"remittance_information\": \"<string>\",\n      \"process_after\": \"<dateTime>\",\n      \"purpose\": \"<string>\",\n      \"metadata\": {\n        \"key\": \"value\",\n        \"foo\": \"bar\",\n        \"modern\": \"treasury\"\n      },\n      \"charge_bearer\": \"<string>\",\n      \"foreign_exchange_indicator\": \"<string>\",\n      \"foreign_exchange_contract\": \"<string>\",\n      \"nsf_protected\": \"<boolean>\",\n      \"originating_party_name\": \"<string>\",\n      \"ultimate_originating_party_name\": \"<string>\",\n      \"ultimate_originating_party_identifier\": \"<string>\",\n      \"ultimate_receiving_party_name\": \"<string>\",\n      \"ultimate_receiving_party_identifier\": \"<string>\",\n      \"send_remittance_advice\": \"<boolean>\",\n      \"expires_at\": \"<dateTime>\",\n      \"reconciliation_status\": \"<string>\",\n      \"external_id\": \"<string>\",\n      \"fallback_type\": \"<string>\",\n      \"receiving_account\": {\n        \"account_type\": \"<string>\",\n        \"party_type\": \"<string>\",\n        \"party_address\": {\n          \"line1\": \"<string>\",\n          \"line2\": \"<string>\",\n          \"locality\": \"<string>\",\n          \"region\": \"<string>\",\n          \"postal_code\": \"<string>\",\n          \"country\": \"<string>\"\n        },\n        \"name\": \"<string>\",\n        \"account_details\": [\n          {\n            \"account_number\": \"<string>\",\n            \"account_number_type\": \"<string>\"\n          },\n          {\n            \"account_number\": \"<string>\",\n            \"account_number_type\": \"<string>\"\n          }\n        ],\n        \"routing_details\": [\n          {\n            \"routing_number\": \"<string>\",\n            \"routing_number_type\": \"<string>\",\n            \"payment_type\": \"<string>\"\n          },\n          {\n            \"routing_number\": \"<string>\",\n            \"routing_number_type\": \"<string>\",\n            \"payment_type\": \"<string>\"\n          }\n        ],\n        \"external_id\": \"<string>\",\n        \"metadata\": {\n          \"key\": \"value\",\n          \"foo\": \"bar\",\n          \"modern\": \"treasury\"\n        },\n        \"party_name\": \"<string>\",\n        \"party_identifier\": \"<string>\",\n        \"ledger_account\": {\n          \"name\": \"<string>\",\n          \"normal_balance\": \"<string>\",\n          \"ledger_id\": \"<uuid>\",\n          \"currency\": \"<string>\",\n          \"description\": \"<string>\",\n          \"currency_exponent\": \"<integer>\",\n          \"ledger_account_category_ids\": [\n            \"<uuid>\",\n            \"<uuid>\"\n          ],\n          \"ledgerable_id\": \"<uuid>\",\n          \"ledgerable_type\": \"<string>\",\n          \"metadata\": {\n            \"key\": \"value\",\n            \"foo\": \"bar\",\n            \"modern\": \"treasury\"\n          },\n          \"external_id\": \"<string>\"\n        },\n        \"plaid_processor_token\": \"<string>\",\n        \"contact_details\": [\n          {\n            \"contact_identifier\": \"<string>\",\n            \"contact_identifier_type\": \"<string>\"\n          },\n          {\n            \"contact_identifier\": \"<string>\",\n            \"contact_identifier_type\": \"<string>\"\n          }\n        ]\n      },\n      \"ledger_transaction\": {\n        \"ledger_entries\": [\n          {\n            \"amount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"direction\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"ledger_account_id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"effective_at\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"lock_version\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"pending_balance_amount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"posted_balance_amount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"available_balance_amount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"show_resulting_ledger_account_balances\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"metadata\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"amount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"direction\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"ledger_account_id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"effective_at\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"lock_version\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"pending_balance_amount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"posted_balance_amount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"available_balance_amount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"show_resulting_ledger_account_balances\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"metadata\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"description\": \"<string>\",\n        \"status\": \"<string>\",\n        \"metadata\": {\n          \"key\": \"value\",\n          \"foo\": \"bar\",\n          \"modern\": \"treasury\"\n        },\n        \"effective_at\": \"<dateTime>\",\n        \"effective_date\": \"<date>\",\n        \"external_id\": \"<string>\",\n        \"ledgerable_type\": \"<string>\",\n        \"ledgerable_id\": \"<uuid>\"\n      },\n      \"ledger_transaction_id\": \"<uuid>\",\n      \"line_items\": [\n        {\n          \"amount\": \"<integer>\",\n          \"metadata\": {\n            \"key\": \"value\",\n            \"foo\": \"bar\",\n            \"modern\": \"treasury\"\n          },\n          \"description\": \"<string>\",\n          \"accounting_category_id\": \"<string>\"\n        },\n        {\n          \"amount\": \"<integer>\",\n          \"metadata\": {\n            \"key\": \"value\",\n            \"foo\": \"bar\",\n            \"modern\": \"treasury\"\n          },\n          \"description\": \"<string>\",\n          \"accounting_category_id\": \"<string>\"\n        }\n      ],\n      \"transaction_monitoring_enabled\": \"<boolean>\",\n      \"ultimate_originating_account_id\": \"<uuid>\",\n      \"ultimate_originating_party_address\": {\n        \"line1\": \"<string>\",\n        \"line2\": \"<string>\",\n        \"locality\": \"<string>\",\n        \"region\": \"<string>\",\n        \"postal_code\": \"<string>\",\n        \"country\": \"<string>\"\n      },\n      \"vendor_attributes\": \"<object>\"\n    }\n  ],\n  \"metadata\": {\n    \"key\": \"value\",\n    \"foo\": \"bar\",\n    \"modern\": \"treasury\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"714e11d3-6846-323c-9c8a-d7117d4be6e1\",\n  \"object\": \"string\",\n  \"live_mode\": false,\n  \"created_at\": \"1952-11-20T07:15:59.582Z\",\n  \"updated_at\": \"2005-05-11T23:35:54.041Z\",\n  \"action_type\": \"delete\",\n  \"resource_type\": \"transaction_line_item\",\n  \"status\": \"completed\",\n  \"total_resource_count\": 1300,\n  \"success_result_count\": 7425,\n  \"failed_result_count\": 199,\n  \"metadata\": {\n    \"key\": \"value\",\n    \"foo\": \"bar\",\n    \"modern\": \"treasury\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c7239a50-2516-43eb-bd6c-2f7e07b419c1",
+              "name": "unsuccessful",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "bulk_requests"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "This key should be something unique, preferably something like an UUID.",
+                    "key": "Idempotency-Key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"action_type\": \"<string>\",\n  \"resource_type\": \"<string>\",\n  \"resources\": [\n    {\n      \"type\": \"<string>\",\n      \"amount\": \"<integer>\",\n      \"direction\": \"<string>\",\n      \"originating_account_id\": \"<uuid>\",\n      \"subtype\": \"<string>\",\n      \"priority\": \"<string>\",\n      \"receiving_account_id\": \"<uuid>\",\n      \"currency\": \"<string>\",\n      \"accounting\": {\n        \"account_id\": \"<uuid>\",\n        \"class_id\": \"<uuid>\"\n      },\n      \"accounting_category_id\": \"<uuid>\",\n      \"accounting_ledger_class_id\": \"<uuid>\",\n      \"effective_date\": \"<date>\",\n      \"description\": \"<string>\",\n      \"statement_descriptor\": \"<string>\",\n      \"remittance_information\": \"<string>\",\n      \"process_after\": \"<dateTime>\",\n      \"purpose\": \"<string>\",\n      \"metadata\": {\n        \"key\": \"value\",\n        \"foo\": \"bar\",\n        \"modern\": \"treasury\"\n      },\n      \"charge_bearer\": \"<string>\",\n      \"foreign_exchange_indicator\": \"<string>\",\n      \"foreign_exchange_contract\": \"<string>\",\n      \"nsf_protected\": \"<boolean>\",\n      \"originating_party_name\": \"<string>\",\n      \"ultimate_originating_party_name\": \"<string>\",\n      \"ultimate_originating_party_identifier\": \"<string>\",\n      \"ultimate_receiving_party_name\": \"<string>\",\n      \"ultimate_receiving_party_identifier\": \"<string>\",\n      \"send_remittance_advice\": \"<boolean>\",\n      \"expires_at\": \"<dateTime>\",\n      \"reconciliation_status\": \"<string>\",\n      \"external_id\": \"<string>\",\n      \"fallback_type\": \"<string>\",\n      \"receiving_account\": {\n        \"account_type\": \"<string>\",\n        \"party_type\": \"<string>\",\n        \"party_address\": {\n          \"line1\": \"<string>\",\n          \"line2\": \"<string>\",\n          \"locality\": \"<string>\",\n          \"region\": \"<string>\",\n          \"postal_code\": \"<string>\",\n          \"country\": \"<string>\"\n        },\n        \"name\": \"<string>\",\n        \"account_details\": [\n          {\n            \"account_number\": \"<string>\",\n            \"account_number_type\": \"<string>\"\n          },\n          {\n            \"account_number\": \"<string>\",\n            \"account_number_type\": \"<string>\"\n          }\n        ],\n        \"routing_details\": [\n          {\n            \"routing_number\": \"<string>\",\n            \"routing_number_type\": \"<string>\",\n            \"payment_type\": \"<string>\"\n          },\n          {\n            \"routing_number\": \"<string>\",\n            \"routing_number_type\": \"<string>\",\n            \"payment_type\": \"<string>\"\n          }\n        ],\n        \"external_id\": \"<string>\",\n        \"metadata\": {\n          \"key\": \"value\",\n          \"foo\": \"bar\",\n          \"modern\": \"treasury\"\n        },\n        \"party_name\": \"<string>\",\n        \"party_identifier\": \"<string>\",\n        \"ledger_account\": {\n          \"name\": \"<string>\",\n          \"normal_balance\": \"<string>\",\n          \"ledger_id\": \"<uuid>\",\n          \"currency\": \"<string>\",\n          \"description\": \"<string>\",\n          \"currency_exponent\": \"<integer>\",\n          \"ledger_account_category_ids\": [\n            \"<uuid>\",\n            \"<uuid>\"\n          ],\n          \"ledgerable_id\": \"<uuid>\",\n          \"ledgerable_type\": \"<string>\",\n          \"metadata\": {\n            \"key\": \"value\",\n            \"foo\": \"bar\",\n            \"modern\": \"treasury\"\n          },\n          \"external_id\": \"<string>\"\n        },\n        \"plaid_processor_token\": \"<string>\",\n        \"contact_details\": [\n          {\n            \"contact_identifier\": \"<string>\",\n            \"contact_identifier_type\": \"<string>\"\n          },\n          {\n            \"contact_identifier\": \"<string>\",\n            \"contact_identifier_type\": \"<string>\"\n          }\n        ]\n      },\n      \"ledger_transaction\": {\n        \"ledger_entries\": [\n          {\n            \"amount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"direction\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"ledger_account_id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"effective_at\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"lock_version\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"pending_balance_amount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"posted_balance_amount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"available_balance_amount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"show_resulting_ledger_account_balances\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"metadata\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"amount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"direction\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"ledger_account_id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"effective_at\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"lock_version\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"pending_balance_amount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"posted_balance_amount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"available_balance_amount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"show_resulting_ledger_account_balances\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"metadata\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"description\": \"<string>\",\n        \"status\": \"<string>\",\n        \"metadata\": {\n          \"key\": \"value\",\n          \"foo\": \"bar\",\n          \"modern\": \"treasury\"\n        },\n        \"effective_at\": \"<dateTime>\",\n        \"effective_date\": \"<date>\",\n        \"external_id\": \"<string>\",\n        \"ledgerable_type\": \"<string>\",\n        \"ledgerable_id\": \"<uuid>\"\n      },\n      \"ledger_transaction_id\": \"<uuid>\",\n      \"line_items\": [\n        {\n          \"amount\": \"<integer>\",\n          \"metadata\": {\n            \"key\": \"value\",\n            \"foo\": \"bar\",\n            \"modern\": \"treasury\"\n          },\n          \"description\": \"<string>\",\n          \"accounting_category_id\": \"<string>\"\n        },\n        {\n          \"amount\": \"<integer>\",\n          \"metadata\": {\n            \"key\": \"value\",\n            \"foo\": \"bar\",\n            \"modern\": \"treasury\"\n          },\n          \"description\": \"<string>\",\n          \"accounting_category_id\": \"<string>\"\n        }\n      ],\n      \"transaction_monitoring_enabled\": \"<boolean>\",\n      \"ultimate_originating_account_id\": \"<uuid>\",\n      \"ultimate_originating_party_address\": {\n        \"line1\": \"<string>\",\n        \"line2\": \"<string>\",\n        \"locality\": \"<string>\",\n        \"region\": \"<string>\",\n        \"postal_code\": \"<string>\",\n        \"country\": \"<string>\"\n      },\n      \"vendor_attributes\": \"<object>\"\n    },\n    {\n      \"type\": \"<string>\",\n      \"amount\": \"<integer>\",\n      \"direction\": \"<string>\",\n      \"originating_account_id\": \"<uuid>\",\n      \"subtype\": \"<string>\",\n      \"priority\": \"<string>\",\n      \"receiving_account_id\": \"<uuid>\",\n      \"currency\": \"<string>\",\n      \"accounting\": {\n        \"account_id\": \"<uuid>\",\n        \"class_id\": \"<uuid>\"\n      },\n      \"accounting_category_id\": \"<uuid>\",\n      \"accounting_ledger_class_id\": \"<uuid>\",\n      \"effective_date\": \"<date>\",\n      \"description\": \"<string>\",\n      \"statement_descriptor\": \"<string>\",\n      \"remittance_information\": \"<string>\",\n      \"process_after\": \"<dateTime>\",\n      \"purpose\": \"<string>\",\n      \"metadata\": {\n        \"key\": \"value\",\n        \"foo\": \"bar\",\n        \"modern\": \"treasury\"\n      },\n      \"charge_bearer\": \"<string>\",\n      \"foreign_exchange_indicator\": \"<string>\",\n      \"foreign_exchange_contract\": \"<string>\",\n      \"nsf_protected\": \"<boolean>\",\n      \"originating_party_name\": \"<string>\",\n      \"ultimate_originating_party_name\": \"<string>\",\n      \"ultimate_originating_party_identifier\": \"<string>\",\n      \"ultimate_receiving_party_name\": \"<string>\",\n      \"ultimate_receiving_party_identifier\": \"<string>\",\n      \"send_remittance_advice\": \"<boolean>\",\n      \"expires_at\": \"<dateTime>\",\n      \"reconciliation_status\": \"<string>\",\n      \"external_id\": \"<string>\",\n      \"fallback_type\": \"<string>\",\n      \"receiving_account\": {\n        \"account_type\": \"<string>\",\n        \"party_type\": \"<string>\",\n        \"party_address\": {\n          \"line1\": \"<string>\",\n          \"line2\": \"<string>\",\n          \"locality\": \"<string>\",\n          \"region\": \"<string>\",\n          \"postal_code\": \"<string>\",\n          \"country\": \"<string>\"\n        },\n        \"name\": \"<string>\",\n        \"account_details\": [\n          {\n            \"account_number\": \"<string>\",\n            \"account_number_type\": \"<string>\"\n          },\n          {\n            \"account_number\": \"<string>\",\n            \"account_number_type\": \"<string>\"\n          }\n        ],\n        \"routing_details\": [\n          {\n            \"routing_number\": \"<string>\",\n            \"routing_number_type\": \"<string>\",\n            \"payment_type\": \"<string>\"\n          },\n          {\n            \"routing_number\": \"<string>\",\n            \"routing_number_type\": \"<string>\",\n            \"payment_type\": \"<string>\"\n          }\n        ],\n        \"external_id\": \"<string>\",\n        \"metadata\": {\n          \"key\": \"value\",\n          \"foo\": \"bar\",\n          \"modern\": \"treasury\"\n        },\n        \"party_name\": \"<string>\",\n        \"party_identifier\": \"<string>\",\n        \"ledger_account\": {\n          \"name\": \"<string>\",\n          \"normal_balance\": \"<string>\",\n          \"ledger_id\": \"<uuid>\",\n          \"currency\": \"<string>\",\n          \"description\": \"<string>\",\n          \"currency_exponent\": \"<integer>\",\n          \"ledger_account_category_ids\": [\n            \"<uuid>\",\n            \"<uuid>\"\n          ],\n          \"ledgerable_id\": \"<uuid>\",\n          \"ledgerable_type\": \"<string>\",\n          \"metadata\": {\n            \"key\": \"value\",\n            \"foo\": \"bar\",\n            \"modern\": \"treasury\"\n          },\n          \"external_id\": \"<string>\"\n        },\n        \"plaid_processor_token\": \"<string>\",\n        \"contact_details\": [\n          {\n            \"contact_identifier\": \"<string>\",\n            \"contact_identifier_type\": \"<string>\"\n          },\n          {\n            \"contact_identifier\": \"<string>\",\n            \"contact_identifier_type\": \"<string>\"\n          }\n        ]\n      },\n      \"ledger_transaction\": {\n        \"ledger_entries\": [\n          {\n            \"amount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"direction\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"ledger_account_id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"effective_at\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"lock_version\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"pending_balance_amount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"posted_balance_amount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"available_balance_amount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"show_resulting_ledger_account_balances\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"metadata\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"amount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"direction\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"ledger_account_id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"effective_at\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"lock_version\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"pending_balance_amount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"posted_balance_amount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"available_balance_amount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"show_resulting_ledger_account_balances\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"metadata\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"description\": \"<string>\",\n        \"status\": \"<string>\",\n        \"metadata\": {\n          \"key\": \"value\",\n          \"foo\": \"bar\",\n          \"modern\": \"treasury\"\n        },\n        \"effective_at\": \"<dateTime>\",\n        \"effective_date\": \"<date>\",\n        \"external_id\": \"<string>\",\n        \"ledgerable_type\": \"<string>\",\n        \"ledgerable_id\": \"<uuid>\"\n      },\n      \"ledger_transaction_id\": \"<uuid>\",\n      \"line_items\": [\n        {\n          \"amount\": \"<integer>\",\n          \"metadata\": {\n            \"key\": \"value\",\n            \"foo\": \"bar\",\n            \"modern\": \"treasury\"\n          },\n          \"description\": \"<string>\",\n          \"accounting_category_id\": \"<string>\"\n        },\n        {\n          \"amount\": \"<integer>\",\n          \"metadata\": {\n            \"key\": \"value\",\n            \"foo\": \"bar\",\n            \"modern\": \"treasury\"\n          },\n          \"description\": \"<string>\",\n          \"accounting_category_id\": \"<string>\"\n        }\n      ],\n      \"transaction_monitoring_enabled\": \"<boolean>\",\n      \"ultimate_originating_account_id\": \"<uuid>\",\n      \"ultimate_originating_party_address\": {\n        \"line1\": \"<string>\",\n        \"line2\": \"<string>\",\n        \"locality\": \"<string>\",\n        \"region\": \"<string>\",\n        \"postal_code\": \"<string>\",\n        \"country\": \"<string>\"\n      },\n      \"vendor_attributes\": \"<object>\"\n    }\n  ],\n  \"metadata\": {\n    \"key\": \"value\",\n    \"foo\": \"bar\",\n    \"modern\": \"treasury\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": {\n    \"code\": \"parameter_invalid\",\n    \"message\": \"string\",\n    \"parameter\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6619390b-5763-4d69-aa07-130bc99ca8a9",
+              "name": "unsuccessful",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "bulk_requests"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "This key should be something unique, preferably something like an UUID.",
+                    "key": "Idempotency-Key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"action_type\": \"<string>\",\n  \"resource_type\": \"<string>\",\n  \"resources\": [\n    {\n      \"type\": \"<string>\",\n      \"amount\": \"<integer>\",\n      \"direction\": \"<string>\",\n      \"originating_account_id\": \"<uuid>\",\n      \"subtype\": \"<string>\",\n      \"priority\": \"<string>\",\n      \"receiving_account_id\": \"<uuid>\",\n      \"currency\": \"<string>\",\n      \"accounting\": {\n        \"account_id\": \"<uuid>\",\n        \"class_id\": \"<uuid>\"\n      },\n      \"accounting_category_id\": \"<uuid>\",\n      \"accounting_ledger_class_id\": \"<uuid>\",\n      \"effective_date\": \"<date>\",\n      \"description\": \"<string>\",\n      \"statement_descriptor\": \"<string>\",\n      \"remittance_information\": \"<string>\",\n      \"process_after\": \"<dateTime>\",\n      \"purpose\": \"<string>\",\n      \"metadata\": {\n        \"key\": \"value\",\n        \"foo\": \"bar\",\n        \"modern\": \"treasury\"\n      },\n      \"charge_bearer\": \"<string>\",\n      \"foreign_exchange_indicator\": \"<string>\",\n      \"foreign_exchange_contract\": \"<string>\",\n      \"nsf_protected\": \"<boolean>\",\n      \"originating_party_name\": \"<string>\",\n      \"ultimate_originating_party_name\": \"<string>\",\n      \"ultimate_originating_party_identifier\": \"<string>\",\n      \"ultimate_receiving_party_name\": \"<string>\",\n      \"ultimate_receiving_party_identifier\": \"<string>\",\n      \"send_remittance_advice\": \"<boolean>\",\n      \"expires_at\": \"<dateTime>\",\n      \"reconciliation_status\": \"<string>\",\n      \"external_id\": \"<string>\",\n      \"fallback_type\": \"<string>\",\n      \"receiving_account\": {\n        \"account_type\": \"<string>\",\n        \"party_type\": \"<string>\",\n        \"party_address\": {\n          \"line1\": \"<string>\",\n          \"line2\": \"<string>\",\n          \"locality\": \"<string>\",\n          \"region\": \"<string>\",\n          \"postal_code\": \"<string>\",\n          \"country\": \"<string>\"\n        },\n        \"name\": \"<string>\",\n        \"account_details\": [\n          {\n            \"account_number\": \"<string>\",\n            \"account_number_type\": \"<string>\"\n          },\n          {\n            \"account_number\": \"<string>\",\n            \"account_number_type\": \"<string>\"\n          }\n        ],\n        \"routing_details\": [\n          {\n            \"routing_number\": \"<string>\",\n            \"routing_number_type\": \"<string>\",\n            \"payment_type\": \"<string>\"\n          },\n          {\n            \"routing_number\": \"<string>\",\n            \"routing_number_type\": \"<string>\",\n            \"payment_type\": \"<string>\"\n          }\n        ],\n        \"external_id\": \"<string>\",\n        \"metadata\": {\n          \"key\": \"value\",\n          \"foo\": \"bar\",\n          \"modern\": \"treasury\"\n        },\n        \"party_name\": \"<string>\",\n        \"party_identifier\": \"<string>\",\n        \"ledger_account\": {\n          \"name\": \"<string>\",\n          \"normal_balance\": \"<string>\",\n          \"ledger_id\": \"<uuid>\",\n          \"currency\": \"<string>\",\n          \"description\": \"<string>\",\n          \"currency_exponent\": \"<integer>\",\n          \"ledger_account_category_ids\": [\n            \"<uuid>\",\n            \"<uuid>\"\n          ],\n          \"ledgerable_id\": \"<uuid>\",\n          \"ledgerable_type\": \"<string>\",\n          \"metadata\": {\n            \"key\": \"value\",\n            \"foo\": \"bar\",\n            \"modern\": \"treasury\"\n          },\n          \"external_id\": \"<string>\"\n        },\n        \"plaid_processor_token\": \"<string>\",\n        \"contact_details\": [\n          {\n            \"contact_identifier\": \"<string>\",\n            \"contact_identifier_type\": \"<string>\"\n          },\n          {\n            \"contact_identifier\": \"<string>\",\n            \"contact_identifier_type\": \"<string>\"\n          }\n        ]\n      },\n      \"ledger_transaction\": {\n        \"ledger_entries\": [\n          {\n            \"amount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"direction\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"ledger_account_id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"effective_at\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"lock_version\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"pending_balance_amount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"posted_balance_amount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"available_balance_amount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"show_resulting_ledger_account_balances\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"metadata\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"amount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"direction\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"ledger_account_id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"effective_at\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"lock_version\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"pending_balance_amount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"posted_balance_amount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"available_balance_amount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"show_resulting_ledger_account_balances\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"metadata\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"description\": \"<string>\",\n        \"status\": \"<string>\",\n        \"metadata\": {\n          \"key\": \"value\",\n          \"foo\": \"bar\",\n          \"modern\": \"treasury\"\n        },\n        \"effective_at\": \"<dateTime>\",\n        \"effective_date\": \"<date>\",\n        \"external_id\": \"<string>\",\n        \"ledgerable_type\": \"<string>\",\n        \"ledgerable_id\": \"<uuid>\"\n      },\n      \"ledger_transaction_id\": \"<uuid>\",\n      \"line_items\": [\n        {\n          \"amount\": \"<integer>\",\n          \"metadata\": {\n            \"key\": \"value\",\n            \"foo\": \"bar\",\n            \"modern\": \"treasury\"\n          },\n          \"description\": \"<string>\",\n          \"accounting_category_id\": \"<string>\"\n        },\n        {\n          \"amount\": \"<integer>\",\n          \"metadata\": {\n            \"key\": \"value\",\n            \"foo\": \"bar\",\n            \"modern\": \"treasury\"\n          },\n          \"description\": \"<string>\",\n          \"accounting_category_id\": \"<string>\"\n        }\n      ],\n      \"transaction_monitoring_enabled\": \"<boolean>\",\n      \"ultimate_originating_account_id\": \"<uuid>\",\n      \"ultimate_originating_party_address\": {\n        \"line1\": \"<string>\",\n        \"line2\": \"<string>\",\n        \"locality\": \"<string>\",\n        \"region\": \"<string>\",\n        \"postal_code\": \"<string>\",\n        \"country\": \"<string>\"\n      },\n      \"vendor_attributes\": \"<object>\"\n    },\n    {\n      \"type\": \"<string>\",\n      \"amount\": \"<integer>\",\n      \"direction\": \"<string>\",\n      \"originating_account_id\": \"<uuid>\",\n      \"subtype\": \"<string>\",\n      \"priority\": \"<string>\",\n      \"receiving_account_id\": \"<uuid>\",\n      \"currency\": \"<string>\",\n      \"accounting\": {\n        \"account_id\": \"<uuid>\",\n        \"class_id\": \"<uuid>\"\n      },\n      \"accounting_category_id\": \"<uuid>\",\n      \"accounting_ledger_class_id\": \"<uuid>\",\n      \"effective_date\": \"<date>\",\n      \"description\": \"<string>\",\n      \"statement_descriptor\": \"<string>\",\n      \"remittance_information\": \"<string>\",\n      \"process_after\": \"<dateTime>\",\n      \"purpose\": \"<string>\",\n      \"metadata\": {\n        \"key\": \"value\",\n        \"foo\": \"bar\",\n        \"modern\": \"treasury\"\n      },\n      \"charge_bearer\": \"<string>\",\n      \"foreign_exchange_indicator\": \"<string>\",\n      \"foreign_exchange_contract\": \"<string>\",\n      \"nsf_protected\": \"<boolean>\",\n      \"originating_party_name\": \"<string>\",\n      \"ultimate_originating_party_name\": \"<string>\",\n      \"ultimate_originating_party_identifier\": \"<string>\",\n      \"ultimate_receiving_party_name\": \"<string>\",\n      \"ultimate_receiving_party_identifier\": \"<string>\",\n      \"send_remittance_advice\": \"<boolean>\",\n      \"expires_at\": \"<dateTime>\",\n      \"reconciliation_status\": \"<string>\",\n      \"external_id\": \"<string>\",\n      \"fallback_type\": \"<string>\",\n      \"receiving_account\": {\n        \"account_type\": \"<string>\",\n        \"party_type\": \"<string>\",\n        \"party_address\": {\n          \"line1\": \"<string>\",\n          \"line2\": \"<string>\",\n          \"locality\": \"<string>\",\n          \"region\": \"<string>\",\n          \"postal_code\": \"<string>\",\n          \"country\": \"<string>\"\n        },\n        \"name\": \"<string>\",\n        \"account_details\": [\n          {\n            \"account_number\": \"<string>\",\n            \"account_number_type\": \"<string>\"\n          },\n          {\n            \"account_number\": \"<string>\",\n            \"account_number_type\": \"<string>\"\n          }\n        ],\n        \"routing_details\": [\n          {\n            \"routing_number\": \"<string>\",\n            \"routing_number_type\": \"<string>\",\n            \"payment_type\": \"<string>\"\n          },\n          {\n            \"routing_number\": \"<string>\",\n            \"routing_number_type\": \"<string>\",\n            \"payment_type\": \"<string>\"\n          }\n        ],\n        \"external_id\": \"<string>\",\n        \"metadata\": {\n          \"key\": \"value\",\n          \"foo\": \"bar\",\n          \"modern\": \"treasury\"\n        },\n        \"party_name\": \"<string>\",\n        \"party_identifier\": \"<string>\",\n        \"ledger_account\": {\n          \"name\": \"<string>\",\n          \"normal_balance\": \"<string>\",\n          \"ledger_id\": \"<uuid>\",\n          \"currency\": \"<string>\",\n          \"description\": \"<string>\",\n          \"currency_exponent\": \"<integer>\",\n          \"ledger_account_category_ids\": [\n            \"<uuid>\",\n            \"<uuid>\"\n          ],\n          \"ledgerable_id\": \"<uuid>\",\n          \"ledgerable_type\": \"<string>\",\n          \"metadata\": {\n            \"key\": \"value\",\n            \"foo\": \"bar\",\n            \"modern\": \"treasury\"\n          },\n          \"external_id\": \"<string>\"\n        },\n        \"plaid_processor_token\": \"<string>\",\n        \"contact_details\": [\n          {\n            \"contact_identifier\": \"<string>\",\n            \"contact_identifier_type\": \"<string>\"\n          },\n          {\n            \"contact_identifier\": \"<string>\",\n            \"contact_identifier_type\": \"<string>\"\n          }\n        ]\n      },\n      \"ledger_transaction\": {\n        \"ledger_entries\": [\n          {\n            \"amount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"direction\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"ledger_account_id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"effective_at\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"lock_version\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"pending_balance_amount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"posted_balance_amount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"available_balance_amount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"show_resulting_ledger_account_balances\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"metadata\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"amount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"direction\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"ledger_account_id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"effective_at\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"lock_version\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"pending_balance_amount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"posted_balance_amount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"available_balance_amount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"show_resulting_ledger_account_balances\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"metadata\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"description\": \"<string>\",\n        \"status\": \"<string>\",\n        \"metadata\": {\n          \"key\": \"value\",\n          \"foo\": \"bar\",\n          \"modern\": \"treasury\"\n        },\n        \"effective_at\": \"<dateTime>\",\n        \"effective_date\": \"<date>\",\n        \"external_id\": \"<string>\",\n        \"ledgerable_type\": \"<string>\",\n        \"ledgerable_id\": \"<uuid>\"\n      },\n      \"ledger_transaction_id\": \"<uuid>\",\n      \"line_items\": [\n        {\n          \"amount\": \"<integer>\",\n          \"metadata\": {\n            \"key\": \"value\",\n            \"foo\": \"bar\",\n            \"modern\": \"treasury\"\n          },\n          \"description\": \"<string>\",\n          \"accounting_category_id\": \"<string>\"\n        },\n        {\n          \"amount\": \"<integer>\",\n          \"metadata\": {\n            \"key\": \"value\",\n            \"foo\": \"bar\",\n            \"modern\": \"treasury\"\n          },\n          \"description\": \"<string>\",\n          \"accounting_category_id\": \"<string>\"\n        }\n      ],\n      \"transaction_monitoring_enabled\": \"<boolean>\",\n      \"ultimate_originating_account_id\": \"<uuid>\",\n      \"ultimate_originating_party_address\": {\n        \"line1\": \"<string>\",\n        \"line2\": \"<string>\",\n        \"locality\": \"<string>\",\n        \"region\": \"<string>\",\n        \"postal_code\": \"<string>\",\n        \"country\": \"<string>\"\n      },\n      \"vendor_attributes\": \"<object>\"\n    }\n  ],\n  \"metadata\": {\n    \"key\": \"value\",\n    \"foo\": \"bar\",\n    \"modern\": \"treasury\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": {\n    \"code\": \"parameter_invalid\",\n    \"message\": \"string\",\n    \"parameter\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f346aeb2-b32f-492f-b869-2ead793f8a32",
+              "name": "unsuccessful",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "bulk_requests"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "This key should be something unique, preferably something like an UUID.",
+                    "key": "Idempotency-Key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"action_type\": \"<string>\",\n  \"resource_type\": \"<string>\",\n  \"resources\": [\n    {\n      \"type\": \"<string>\",\n      \"amount\": \"<integer>\",\n      \"direction\": \"<string>\",\n      \"originating_account_id\": \"<uuid>\",\n      \"subtype\": \"<string>\",\n      \"priority\": \"<string>\",\n      \"receiving_account_id\": \"<uuid>\",\n      \"currency\": \"<string>\",\n      \"accounting\": {\n        \"account_id\": \"<uuid>\",\n        \"class_id\": \"<uuid>\"\n      },\n      \"accounting_category_id\": \"<uuid>\",\n      \"accounting_ledger_class_id\": \"<uuid>\",\n      \"effective_date\": \"<date>\",\n      \"description\": \"<string>\",\n      \"statement_descriptor\": \"<string>\",\n      \"remittance_information\": \"<string>\",\n      \"process_after\": \"<dateTime>\",\n      \"purpose\": \"<string>\",\n      \"metadata\": {\n        \"key\": \"value\",\n        \"foo\": \"bar\",\n        \"modern\": \"treasury\"\n      },\n      \"charge_bearer\": \"<string>\",\n      \"foreign_exchange_indicator\": \"<string>\",\n      \"foreign_exchange_contract\": \"<string>\",\n      \"nsf_protected\": \"<boolean>\",\n      \"originating_party_name\": \"<string>\",\n      \"ultimate_originating_party_name\": \"<string>\",\n      \"ultimate_originating_party_identifier\": \"<string>\",\n      \"ultimate_receiving_party_name\": \"<string>\",\n      \"ultimate_receiving_party_identifier\": \"<string>\",\n      \"send_remittance_advice\": \"<boolean>\",\n      \"expires_at\": \"<dateTime>\",\n      \"reconciliation_status\": \"<string>\",\n      \"external_id\": \"<string>\",\n      \"fallback_type\": \"<string>\",\n      \"receiving_account\": {\n        \"account_type\": \"<string>\",\n        \"party_type\": \"<string>\",\n        \"party_address\": {\n          \"line1\": \"<string>\",\n          \"line2\": \"<string>\",\n          \"locality\": \"<string>\",\n          \"region\": \"<string>\",\n          \"postal_code\": \"<string>\",\n          \"country\": \"<string>\"\n        },\n        \"name\": \"<string>\",\n        \"account_details\": [\n          {\n            \"account_number\": \"<string>\",\n            \"account_number_type\": \"<string>\"\n          },\n          {\n            \"account_number\": \"<string>\",\n            \"account_number_type\": \"<string>\"\n          }\n        ],\n        \"routing_details\": [\n          {\n            \"routing_number\": \"<string>\",\n            \"routing_number_type\": \"<string>\",\n            \"payment_type\": \"<string>\"\n          },\n          {\n            \"routing_number\": \"<string>\",\n            \"routing_number_type\": \"<string>\",\n            \"payment_type\": \"<string>\"\n          }\n        ],\n        \"external_id\": \"<string>\",\n        \"metadata\": {\n          \"key\": \"value\",\n          \"foo\": \"bar\",\n          \"modern\": \"treasury\"\n        },\n        \"party_name\": \"<string>\",\n        \"party_identifier\": \"<string>\",\n        \"ledger_account\": {\n          \"name\": \"<string>\",\n          \"normal_balance\": \"<string>\",\n          \"ledger_id\": \"<uuid>\",\n          \"currency\": \"<string>\",\n          \"description\": \"<string>\",\n          \"currency_exponent\": \"<integer>\",\n          \"ledger_account_category_ids\": [\n            \"<uuid>\",\n            \"<uuid>\"\n          ],\n          \"ledgerable_id\": \"<uuid>\",\n          \"ledgerable_type\": \"<string>\",\n          \"metadata\": {\n            \"key\": \"value\",\n            \"foo\": \"bar\",\n            \"modern\": \"treasury\"\n          },\n          \"external_id\": \"<string>\"\n        },\n        \"plaid_processor_token\": \"<string>\",\n        \"contact_details\": [\n          {\n            \"contact_identifier\": \"<string>\",\n            \"contact_identifier_type\": \"<string>\"\n          },\n          {\n            \"contact_identifier\": \"<string>\",\n            \"contact_identifier_type\": \"<string>\"\n          }\n        ]\n      },\n      \"ledger_transaction\": {\n        \"ledger_entries\": [\n          {\n            \"amount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"direction\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"ledger_account_id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"effective_at\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"lock_version\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"pending_balance_amount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"posted_balance_amount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"available_balance_amount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"show_resulting_ledger_account_balances\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"metadata\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"amount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"direction\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"ledger_account_id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"effective_at\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"lock_version\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"pending_balance_amount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"posted_balance_amount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"available_balance_amount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"show_resulting_ledger_account_balances\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"metadata\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"description\": \"<string>\",\n        \"status\": \"<string>\",\n        \"metadata\": {\n          \"key\": \"value\",\n          \"foo\": \"bar\",\n          \"modern\": \"treasury\"\n        },\n        \"effective_at\": \"<dateTime>\",\n        \"effective_date\": \"<date>\",\n        \"external_id\": \"<string>\",\n        \"ledgerable_type\": \"<string>\",\n        \"ledgerable_id\": \"<uuid>\"\n      },\n      \"ledger_transaction_id\": \"<uuid>\",\n      \"line_items\": [\n        {\n          \"amount\": \"<integer>\",\n          \"metadata\": {\n            \"key\": \"value\",\n            \"foo\": \"bar\",\n            \"modern\": \"treasury\"\n          },\n          \"description\": \"<string>\",\n          \"accounting_category_id\": \"<string>\"\n        },\n        {\n          \"amount\": \"<integer>\",\n          \"metadata\": {\n            \"key\": \"value\",\n            \"foo\": \"bar\",\n            \"modern\": \"treasury\"\n          },\n          \"description\": \"<string>\",\n          \"accounting_category_id\": \"<string>\"\n        }\n      ],\n      \"transaction_monitoring_enabled\": \"<boolean>\",\n      \"ultimate_originating_account_id\": \"<uuid>\",\n      \"ultimate_originating_party_address\": {\n        \"line1\": \"<string>\",\n        \"line2\": \"<string>\",\n        \"locality\": \"<string>\",\n        \"region\": \"<string>\",\n        \"postal_code\": \"<string>\",\n        \"country\": \"<string>\"\n      },\n      \"vendor_attributes\": \"<object>\"\n    },\n    {\n      \"type\": \"<string>\",\n      \"amount\": \"<integer>\",\n      \"direction\": \"<string>\",\n      \"originating_account_id\": \"<uuid>\",\n      \"subtype\": \"<string>\",\n      \"priority\": \"<string>\",\n      \"receiving_account_id\": \"<uuid>\",\n      \"currency\": \"<string>\",\n      \"accounting\": {\n        \"account_id\": \"<uuid>\",\n        \"class_id\": \"<uuid>\"\n      },\n      \"accounting_category_id\": \"<uuid>\",\n      \"accounting_ledger_class_id\": \"<uuid>\",\n      \"effective_date\": \"<date>\",\n      \"description\": \"<string>\",\n      \"statement_descriptor\": \"<string>\",\n      \"remittance_information\": \"<string>\",\n      \"process_after\": \"<dateTime>\",\n      \"purpose\": \"<string>\",\n      \"metadata\": {\n        \"key\": \"value\",\n        \"foo\": \"bar\",\n        \"modern\": \"treasury\"\n      },\n      \"charge_bearer\": \"<string>\",\n      \"foreign_exchange_indicator\": \"<string>\",\n      \"foreign_exchange_contract\": \"<string>\",\n      \"nsf_protected\": \"<boolean>\",\n      \"originating_party_name\": \"<string>\",\n      \"ultimate_originating_party_name\": \"<string>\",\n      \"ultimate_originating_party_identifier\": \"<string>\",\n      \"ultimate_receiving_party_name\": \"<string>\",\n      \"ultimate_receiving_party_identifier\": \"<string>\",\n      \"send_remittance_advice\": \"<boolean>\",\n      \"expires_at\": \"<dateTime>\",\n      \"reconciliation_status\": \"<string>\",\n      \"external_id\": \"<string>\",\n      \"fallback_type\": \"<string>\",\n      \"receiving_account\": {\n        \"account_type\": \"<string>\",\n        \"party_type\": \"<string>\",\n        \"party_address\": {\n          \"line1\": \"<string>\",\n          \"line2\": \"<string>\",\n          \"locality\": \"<string>\",\n          \"region\": \"<string>\",\n          \"postal_code\": \"<string>\",\n          \"country\": \"<string>\"\n        },\n        \"name\": \"<string>\",\n        \"account_details\": [\n          {\n            \"account_number\": \"<string>\",\n            \"account_number_type\": \"<string>\"\n          },\n          {\n            \"account_number\": \"<string>\",\n            \"account_number_type\": \"<string>\"\n          }\n        ],\n        \"routing_details\": [\n          {\n            \"routing_number\": \"<string>\",\n            \"routing_number_type\": \"<string>\",\n            \"payment_type\": \"<string>\"\n          },\n          {\n            \"routing_number\": \"<string>\",\n            \"routing_number_type\": \"<string>\",\n            \"payment_type\": \"<string>\"\n          }\n        ],\n        \"external_id\": \"<string>\",\n        \"metadata\": {\n          \"key\": \"value\",\n          \"foo\": \"bar\",\n          \"modern\": \"treasury\"\n        },\n        \"party_name\": \"<string>\",\n        \"party_identifier\": \"<string>\",\n        \"ledger_account\": {\n          \"name\": \"<string>\",\n          \"normal_balance\": \"<string>\",\n          \"ledger_id\": \"<uuid>\",\n          \"currency\": \"<string>\",\n          \"description\": \"<string>\",\n          \"currency_exponent\": \"<integer>\",\n          \"ledger_account_category_ids\": [\n            \"<uuid>\",\n            \"<uuid>\"\n          ],\n          \"ledgerable_id\": \"<uuid>\",\n          \"ledgerable_type\": \"<string>\",\n          \"metadata\": {\n            \"key\": \"value\",\n            \"foo\": \"bar\",\n            \"modern\": \"treasury\"\n          },\n          \"external_id\": \"<string>\"\n        },\n        \"plaid_processor_token\": \"<string>\",\n        \"contact_details\": [\n          {\n            \"contact_identifier\": \"<string>\",\n            \"contact_identifier_type\": \"<string>\"\n          },\n          {\n            \"contact_identifier\": \"<string>\",\n            \"contact_identifier_type\": \"<string>\"\n          }\n        ]\n      },\n      \"ledger_transaction\": {\n        \"ledger_entries\": [\n          {\n            \"amount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"direction\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"ledger_account_id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"effective_at\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"lock_version\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"pending_balance_amount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"posted_balance_amount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"available_balance_amount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"show_resulting_ledger_account_balances\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"metadata\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"amount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"direction\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"ledger_account_id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"effective_at\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"lock_version\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"pending_balance_amount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"posted_balance_amount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"available_balance_amount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"show_resulting_ledger_account_balances\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"metadata\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"description\": \"<string>\",\n        \"status\": \"<string>\",\n        \"metadata\": {\n          \"key\": \"value\",\n          \"foo\": \"bar\",\n          \"modern\": \"treasury\"\n        },\n        \"effective_at\": \"<dateTime>\",\n        \"effective_date\": \"<date>\",\n        \"external_id\": \"<string>\",\n        \"ledgerable_type\": \"<string>\",\n        \"ledgerable_id\": \"<uuid>\"\n      },\n      \"ledger_transaction_id\": \"<uuid>\",\n      \"line_items\": [\n        {\n          \"amount\": \"<integer>\",\n          \"metadata\": {\n            \"key\": \"value\",\n            \"foo\": \"bar\",\n            \"modern\": \"treasury\"\n          },\n          \"description\": \"<string>\",\n          \"accounting_category_id\": \"<string>\"\n        },\n        {\n          \"amount\": \"<integer>\",\n          \"metadata\": {\n            \"key\": \"value\",\n            \"foo\": \"bar\",\n            \"modern\": \"treasury\"\n          },\n          \"description\": \"<string>\",\n          \"accounting_category_id\": \"<string>\"\n        }\n      ],\n      \"transaction_monitoring_enabled\": \"<boolean>\",\n      \"ultimate_originating_account_id\": \"<uuid>\",\n      \"ultimate_originating_party_address\": {\n        \"line1\": \"<string>\",\n        \"line2\": \"<string>\",\n        \"locality\": \"<string>\",\n        \"region\": \"<string>\",\n        \"postal_code\": \"<string>\",\n        \"country\": \"<string>\"\n      },\n      \"vendor_attributes\": \"<object>\"\n    }\n  ],\n  \"metadata\": {\n    \"key\": \"value\",\n    \"foo\": \"bar\",\n    \"modern\": \"treasury\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": {\n    \"code\": \"parameter_invalid\",\n    \"message\": \"string\",\n    \"parameter\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e70259f3-fc29-4192-8087-8c6220ae6ed6",
+          "name": "get bulk_request",
+          "request": {
+            "name": "get bulk_request",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "bulk_requests",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) id"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "152fbbf9-f949-4e9a-ac3c-137735d1ca83",
+              "name": "successful",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "bulk_requests",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"714e11d3-6846-323c-9c8a-d7117d4be6e1\",\n  \"object\": \"string\",\n  \"live_mode\": false,\n  \"created_at\": \"1952-11-20T07:15:59.582Z\",\n  \"updated_at\": \"2005-05-11T23:35:54.041Z\",\n  \"action_type\": \"delete\",\n  \"resource_type\": \"transaction_line_item\",\n  \"status\": \"completed\",\n  \"total_resource_count\": 1300,\n  \"success_result_count\": 7425,\n  \"failed_result_count\": 199,\n  \"metadata\": {\n    \"key\": \"value\",\n    \"foo\": \"bar\",\n    \"modern\": \"treasury\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e0b8ec7f-5e97-4e35-a3b5-ceb55150c547",
+              "name": "unsuccessful",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "bulk_requests",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": {\n    \"code\": \"parameter_invalid\",\n    \"message\": \"string\",\n    \"parameter\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4a6e0661-f0f8-45a8-9fec-261e746ccf3e",
+              "name": "unsuccessful",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "bulk_requests",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": {\n    \"code\": \"parameter_invalid\",\n    \"message\": \"string\",\n    \"parameter\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3e55ab1e-4651-4a06-8575-6643077725f5",
+              "name": "not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "bulk_requests",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": {\n    \"code\": \"parameter_invalid\",\n    \"message\": \"string\",\n    \"parameter\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "http://localhost:3000",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "a0421f8c-afc5-427e-b1b4-3ce33073bb7f",
+    "name": "Modern Treasury AccountCapability BulkRequest API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Modern Treasury REST API. Please see https://docs.moderntreasury.com for more details.\n\nContact Support:\n Name: Modern Treasury Engineering Team",
+      "type": "text/plain"
+    }
+  }
+}

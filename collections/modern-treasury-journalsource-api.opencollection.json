@@ -1,0 +1,96 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Modern Treasury AccountCapability JournalSource API",
+    "version": "v1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "JournalSource",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "list journal_sources",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:3000/api/journal_sources",
+            "params": [
+              {
+                "name": "journal_report_id",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the journal report"
+              },
+              {
+                "name": "journal_entry_id",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the journal entry"
+              },
+              {
+                "name": "source_id",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the source object"
+              },
+              {
+                "name": "source_type",
+                "value": "",
+                "type": "query",
+                "description": "The type of the source object"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number for pagination"
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query",
+                "description": "Number of items per page"
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Retrieve a list of journal sources"
+        },
+        {
+          "info": {
+            "name": "show journal_source",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:3000/api/journal_sources/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the journal source"
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Retrieve a specific journal source"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

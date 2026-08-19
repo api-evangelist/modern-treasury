@@ -1,0 +1,138 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Modern Treasury AccountCapability ForeignExchangeQuote API",
+    "version": "v1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "ForeignExchangeQuote",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "list foreign_exchange_quotes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:3000/api/foreign_exchange_quotes",
+            "params": [
+              {
+                "name": "after_cursor",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "internal_account_id",
+                "value": "",
+                "type": "query",
+                "description": "The ID for the `InternalAccount` this quote is associated with."
+              },
+              {
+                "name": "expires_at",
+                "value": "",
+                "type": "query",
+                "description": "The timestamp until which the quote must be booked by."
+              },
+              {
+                "name": "base_currency",
+                "value": "",
+                "type": "query",
+                "description": "Currency to convert, often called the \"sell\" currency."
+              },
+              {
+                "name": "target_currency",
+                "value": "",
+                "type": "query",
+                "description": "Currency to convert the `base_currency` to, often called the \"buy\" currency."
+              },
+              {
+                "name": "metadata",
+                "value": "",
+                "type": "query",
+                "description": "For example, if you want to query for records with metadata key `Type` and value `Loan`, the query would be `metadata%5BType%5D=Loan`. This encodes the query parameters."
+              },
+              {
+                "name": "effective_at_start",
+                "value": "",
+                "type": "query",
+                "description": "An inclusive lower bound for searching effective_at"
+              },
+              {
+                "name": "effective_at_end",
+                "value": "",
+                "type": "query",
+                "description": "An inclusive upper bound for searching effective_at"
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "list foreign_exchange_quotes"
+        },
+        {
+          "info": {
+            "name": "create foreign_exchange_quote",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:3000/api/foreign_exchange_quotes",
+            "headers": [
+              {
+                "name": "Idempotency-Key",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "create foreign_exchange_quote"
+        },
+        {
+          "info": {
+            "name": "get foreign_exchange_quote",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:3000/api/foreign_exchange_quotes/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "id"
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "get foreign_exchange_quote"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

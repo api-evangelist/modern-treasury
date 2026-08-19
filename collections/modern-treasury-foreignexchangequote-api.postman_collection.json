@@ -1,0 +1,728 @@
+{
+  "item": [
+    {
+      "id": "06e42c86-e6d6-41cc-99ee-02597cb24dde",
+      "name": "ForeignExchangeQuote",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "0a41c7e7-edd8-4de0-ac19-84972f9b5cad",
+          "name": "list foreign_exchange_quotes",
+          "request": {
+            "name": "list foreign_exchange_quotes",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "foreign_exchange_quotes"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "after_cursor",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "per_page",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "internal_account_id",
+                  "value": "<string>",
+                  "description": "The ID for the `InternalAccount` this quote is associated with."
+                },
+                {
+                  "disabled": false,
+                  "key": "expires_at",
+                  "value": "<dateTime>",
+                  "description": "The timestamp until which the quote must be booked by."
+                },
+                {
+                  "disabled": false,
+                  "key": "base_currency",
+                  "value": "<string>",
+                  "description": "Currency to convert, often called the \"sell\" currency."
+                },
+                {
+                  "disabled": false,
+                  "key": "target_currency",
+                  "value": "<string>",
+                  "description": "Currency to convert the `base_currency` to, often called the \"buy\" currency."
+                },
+                {
+                  "disabled": false,
+                  "key": "metadata[key_0]",
+                  "value": "<string>",
+                  "description": "For example, if you want to query for records with metadata key `Type` and value `Loan`, the query would be `metadata%5BType%5D=Loan`. This encodes the query parameters."
+                },
+                {
+                  "disabled": false,
+                  "key": "metadata[key_1]",
+                  "value": "<string>",
+                  "description": "For example, if you want to query for records with metadata key `Type` and value `Loan`, the query would be `metadata%5BType%5D=Loan`. This encodes the query parameters."
+                },
+                {
+                  "disabled": false,
+                  "key": "metadata[key_2]",
+                  "value": "<string>",
+                  "description": "For example, if you want to query for records with metadata key `Type` and value `Loan`, the query would be `metadata%5BType%5D=Loan`. This encodes the query parameters."
+                },
+                {
+                  "disabled": false,
+                  "key": "metadata[key_3]",
+                  "value": "<string>",
+                  "description": "For example, if you want to query for records with metadata key `Type` and value `Loan`, the query would be `metadata%5BType%5D=Loan`. This encodes the query parameters."
+                },
+                {
+                  "disabled": false,
+                  "key": "effective_at_start",
+                  "value": "<date>",
+                  "description": "An inclusive lower bound for searching effective_at"
+                },
+                {
+                  "disabled": false,
+                  "key": "effective_at_end",
+                  "value": "<date>",
+                  "description": "An inclusive upper bound for searching effective_at"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "511edbe1-e05b-4d6c-b1b8-0f951587445b",
+              "name": "successful",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "foreign_exchange_quotes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "after_cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "internal_account_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "expires_at",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "base_currency",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "target_currency",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "metadata[key_0]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "metadata[key_1]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "effective_at_start",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "effective_at_end",
+                      "value": "<date>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "The cursor for the next page. Including this in a call as `after_cursor` will return the next page.",
+                  "key": "X-After-Cursor",
+                  "value": "string"
+                },
+                {
+                  "disabled": false,
+                  "description": "The current `per_page`.",
+                  "key": "X-Per-Page",
+                  "value": "3330"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"b5f6fdf8-d28e-0f46-0241-4b372c23a39c\",\n    \"object\": \"string\",\n    \"live_mode\": false,\n    \"created_at\": \"1988-05-30T08:26:35.856Z\",\n    \"updated_at\": \"2013-10-15T20:59:01.576Z\",\n    \"effective_at\": \"1969-03-17T03:23:48.414Z\",\n    \"expires_at\": \"1965-01-01T23:43:32.338Z\",\n    \"foreign_exchange_indicator\": \"string\",\n    \"foreign_exchange_rate\": {\n      \"base_amount\": 7495,\n      \"base_currency\": \"COP\",\n      \"exponent\": 8611,\n      \"rate_string\": \"string\",\n      \"target_amount\": 843,\n      \"target_currency\": \"NAD\",\n      \"value\": 2336\n    },\n    \"internal_account_id\": \"bbe380d0-a5cc-ce5f-2923-5e527a74568a\",\n    \"metadata\": {\n      \"key\": \"value\",\n      \"foo\": \"bar\",\n      \"modern\": \"treasury\"\n    },\n    \"vendor_id\": \"string\"\n  },\n  {\n    \"id\": \"e061d11c-44df-1151-9182-a7aeee66cb1b\",\n    \"object\": \"string\",\n    \"live_mode\": true,\n    \"created_at\": \"2003-10-29T03:01:16.994Z\",\n    \"updated_at\": \"1973-03-07T13:14:15.976Z\",\n    \"effective_at\": \"1968-06-09T02:18:47.930Z\",\n    \"expires_at\": \"2020-05-19T21:53:18.903Z\",\n    \"foreign_exchange_indicator\": \"string\",\n    \"foreign_exchange_rate\": {\n      \"base_amount\": 3870,\n      \"base_currency\": \"AWG\",\n      \"exponent\": 4449,\n      \"rate_string\": \"string\",\n      \"target_amount\": 1571,\n      \"target_currency\": \"MYR\",\n      \"value\": 5322\n    },\n    \"internal_account_id\": \"6daf1430-83d7-ddf2-b3a8-749b8aaf2561\",\n    \"metadata\": {\n      \"key\": \"value\",\n      \"foo\": \"bar\",\n      \"modern\": \"treasury\"\n    },\n    \"vendor_id\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "57c43c77-ddbc-49a2-b79c-382b8b85eb22",
+              "name": "unsuccessful",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "foreign_exchange_quotes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "after_cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "internal_account_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "expires_at",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "base_currency",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "target_currency",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "metadata[key_0]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "metadata[key_1]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "effective_at_start",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "effective_at_end",
+                      "value": "<date>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": {\n    \"code\": \"invalid_ip\",\n    \"message\": \"string\",\n    \"parameter\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "368e785e-5b28-49b9-8825-4f6256d4892b",
+          "name": "create foreign_exchange_quote",
+          "request": {
+            "name": "create foreign_exchange_quote",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "foreign_exchange_quotes"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "This key should be something unique, preferably something like an UUID.",
+                "key": "Idempotency-Key",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"internal_account_id\": \"<uuid>\",\n  \"target_currency\": \"<string>\",\n  \"effective_at\": \"<dateTime>\",\n  \"base_amount\": \"<integer>\",\n  \"base_currency\": \"<string>\",\n  \"target_amount\": \"<integer>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "cf1228d4-ae81-45be-95b6-7c51f0dbb0f1",
+              "name": "successful",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "foreign_exchange_quotes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "This key should be something unique, preferably something like an UUID.",
+                    "key": "Idempotency-Key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"internal_account_id\": \"<uuid>\",\n  \"target_currency\": \"<string>\",\n  \"effective_at\": \"<dateTime>\",\n  \"base_amount\": \"<integer>\",\n  \"base_currency\": \"<string>\",\n  \"target_amount\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"7bae783a-15e2-e559-348f-7b486fcec3bf\",\n  \"object\": \"string\",\n  \"live_mode\": true,\n  \"created_at\": \"1990-06-23T15:21:33.298Z\",\n  \"updated_at\": \"1975-07-05T05:47:44.575Z\",\n  \"effective_at\": \"1952-01-09T06:51:41.557Z\",\n  \"expires_at\": \"1973-10-23T10:20:44.911Z\",\n  \"foreign_exchange_indicator\": \"string\",\n  \"foreign_exchange_rate\": {\n    \"base_amount\": 6550,\n    \"base_currency\": \"<string>\",\n    \"exponent\": 4078,\n    \"rate_string\": \"string\",\n    \"target_amount\": 1468,\n    \"target_currency\": \"<string>\",\n    \"value\": 4920\n  },\n  \"internal_account_id\": \"4e1a2c4f-bacc-9e95-3f00-14a071226ff7\",\n  \"metadata\": {\n    \"key\": \"value\",\n    \"foo\": \"bar\",\n    \"modern\": \"treasury\"\n  },\n  \"vendor_id\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "66449118-8bf5-42b4-aaa7-40843d2aaf22",
+              "name": "not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "foreign_exchange_quotes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "This key should be something unique, preferably something like an UUID.",
+                    "key": "Idempotency-Key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"internal_account_id\": \"<uuid>\",\n  \"target_currency\": \"<string>\",\n  \"effective_at\": \"<dateTime>\",\n  \"base_amount\": \"<integer>\",\n  \"base_currency\": \"<string>\",\n  \"target_amount\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": {\n    \"code\": \"invalid_ip\",\n    \"message\": \"string\",\n    \"parameter\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ac912d65-ae60-4c28-a10b-d815b6eebca4",
+              "name": "invalid param",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "foreign_exchange_quotes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "This key should be something unique, preferably something like an UUID.",
+                    "key": "Idempotency-Key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"internal_account_id\": \"<uuid>\",\n  \"target_currency\": \"<string>\",\n  \"effective_at\": \"<dateTime>\",\n  \"base_amount\": \"<integer>\",\n  \"base_currency\": \"<string>\",\n  \"target_amount\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": {\n    \"code\": \"invalid_ip\",\n    \"message\": \"string\",\n    \"parameter\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1ca22df9-d185-49ee-b77f-4ea234faec1a",
+          "name": "get foreign_exchange_quote",
+          "request": {
+            "name": "get foreign_exchange_quote",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "foreign_exchange_quotes",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) id"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "3b8284bb-a2d2-4668-a668-d314b2550292",
+              "name": "successful",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "foreign_exchange_quotes",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"7bae783a-15e2-e559-348f-7b486fcec3bf\",\n  \"object\": \"string\",\n  \"live_mode\": true,\n  \"created_at\": \"1990-06-23T15:21:33.298Z\",\n  \"updated_at\": \"1975-07-05T05:47:44.575Z\",\n  \"effective_at\": \"1952-01-09T06:51:41.557Z\",\n  \"expires_at\": \"1973-10-23T10:20:44.911Z\",\n  \"foreign_exchange_indicator\": \"string\",\n  \"foreign_exchange_rate\": {\n    \"base_amount\": 6550,\n    \"base_currency\": \"<string>\",\n    \"exponent\": 4078,\n    \"rate_string\": \"string\",\n    \"target_amount\": 1468,\n    \"target_currency\": \"<string>\",\n    \"value\": 4920\n  },\n  \"internal_account_id\": \"4e1a2c4f-bacc-9e95-3f00-14a071226ff7\",\n  \"metadata\": {\n    \"key\": \"value\",\n    \"foo\": \"bar\",\n    \"modern\": \"treasury\"\n  },\n  \"vendor_id\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3d6fa8cb-bc87-4705-af59-bbddae98dcdf",
+              "name": "not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "foreign_exchange_quotes",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": {\n    \"code\": \"invalid_ip\",\n    \"message\": \"string\",\n    \"parameter\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "http://localhost:3000",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "1797c10e-29c9-4549-a4b1-6e7f605f6705",
+    "name": "Modern Treasury AccountCapability ForeignExchangeQuote API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Modern Treasury REST API. Please see https://docs.moderntreasury.com for more details.\n\nContact Support:\n Name: Modern Treasury Engineering Team",
+      "type": "text/plain"
+    }
+  }
+}

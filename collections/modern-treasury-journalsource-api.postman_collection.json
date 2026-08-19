@@ -1,0 +1,390 @@
+{
+  "item": [
+    {
+      "id": "c5200f74-af0a-43d9-9c5d-85677e834816",
+      "name": "JournalSource",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "6fb802b8-18eb-4c2b-bf3e-beb6766f6b73",
+          "name": "list journal_sources",
+          "request": {
+            "name": "list journal_sources",
+            "description": {
+              "content": "Retrieve a list of journal sources",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "journal_sources"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "journal_report_id",
+                  "value": "<string>",
+                  "description": "The ID of the journal report"
+                },
+                {
+                  "disabled": false,
+                  "key": "journal_entry_id",
+                  "value": "<string>",
+                  "description": "The ID of the journal entry"
+                },
+                {
+                  "disabled": false,
+                  "key": "source_id",
+                  "value": "<string>",
+                  "description": "The ID of the source object"
+                },
+                {
+                  "disabled": false,
+                  "key": "source_type",
+                  "value": "<string>",
+                  "description": "The type of the source object"
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "<integer>",
+                  "description": "Page number for pagination"
+                },
+                {
+                  "disabled": false,
+                  "key": "per_page",
+                  "value": "<integer>",
+                  "description": "Number of items per page"
+                }
+              ],
+              "variable": []
+            },
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "fe74c5ae-ba1c-4d49-90b6-4a8a5b7dc671",
+              "name": "successful - only returns sources for current organization",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "journal_sources"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "journal_report_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "journal_entry_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "source_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "source_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "e6d8a5ac-df43-41d5-818b-dd1dcdaf0acb",
+              "name": "page disabled - returns not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "journal_sources"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "journal_report_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "journal_entry_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "source_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "source_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "699c1651-095c-4f71-9321-cef69deaca91",
+          "name": "show journal_source",
+          "request": {
+            "name": "show journal_source",
+            "description": {
+              "content": "Retrieve a specific journal source",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "journal_sources",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The ID of the journal source"
+                }
+              ]
+            },
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "b953e3b9-2ac2-4ef4-939a-9c1a6db8c0fa",
+              "name": "successful - returns journal source with all attributes",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "journal_sources",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the journal source"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "560c72e2-cc8c-40cf-a4b2-df10a09273e8",
+              "name": "page disabled - returns not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "journal_sources",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the journal source"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "http://localhost:3000",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "a5a5b644-4a19-4837-bf81-a5baf8776bd5",
+    "name": "Modern Treasury AccountCapability JournalSource API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Modern Treasury REST API. Please see https://docs.moderntreasury.com for more details.\n\nContact Support:\n Name: Modern Treasury Engineering Team",
+      "type": "text/plain"
+    }
+  }
+}

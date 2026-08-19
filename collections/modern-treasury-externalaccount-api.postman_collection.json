@@ -1,0 +1,1435 @@
+{
+  "item": [
+    {
+      "id": "2027a4b9-1b62-406a-86a0-aaed5203ccd5",
+      "name": "ExternalAccount",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "ba9e3ece-237e-4fcf-b2bb-0e9b8a8bfed7",
+          "name": "verify external account",
+          "request": {
+            "name": "verify external account",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "external_accounts",
+                ":id",
+                "verify"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) external account id"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "This key should be something unique, preferably something like an UUID.",
+                "key": "Idempotency-Key",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"originating_account_id\": \"<uuid>\",\n  \"payment_type\": \"<string>\",\n  \"currency\": \"<string>\",\n  \"fallback_type\": \"<string>\",\n  \"priority\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "ea24371b-b069-4072-99a7-8b443c43f89f",
+              "name": "successful",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "external_accounts",
+                    ":id",
+                    "verify"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) external account id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "This key should be something unique, preferably something like an UUID.",
+                    "key": "Idempotency-Key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"originating_account_id\": \"<uuid>\",\n  \"payment_type\": \"<string>\",\n  \"currency\": \"<string>\",\n  \"fallback_type\": \"<string>\",\n  \"priority\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"a7bab718-5f53-5eba-7765-ba6b8b6945cc\",\n  \"object\": \"string\",\n  \"live_mode\": false,\n  \"created_at\": \"2014-10-30T05:00:22.148Z\",\n  \"updated_at\": \"1965-12-28T14:31:39.303Z\",\n  \"discarded_at\": \"1951-07-17T03:34:33.612Z\",\n  \"account_type\": \"polygon_wallet\",\n  \"party_type\": \"individual\",\n  \"party_address\": {\n    \"id\": \"f358c0bc-1e31-bdaa-530f-1be6b4d33f3c\",\n    \"object\": \"string\",\n    \"live_mode\": false,\n    \"created_at\": \"2019-01-06T20:01:59.909Z\",\n    \"updated_at\": \"1971-10-25T06:29:00.782Z\",\n    \"line1\": \"string\",\n    \"line2\": \"string\",\n    \"locality\": \"string\",\n    \"region\": \"string\",\n    \"postal_code\": \"string\",\n    \"country\": \"string\"\n  },\n  \"name\": \"string\",\n  \"counterparty_id\": \"0368af5b-9063-6294-7d39-29aba77e64eb\",\n  \"account_details\": [\n    {\n      \"id\": \"4dcf7ac8-abd6-aec6-23c4-7b60e0decd3a\",\n      \"object\": \"string\",\n      \"live_mode\": false,\n      \"created_at\": \"1988-06-21T22:17:44.814Z\",\n      \"updated_at\": \"2004-11-16T08:19:17.292Z\",\n      \"discarded_at\": \"2007-08-20T18:51:17.946Z\",\n      \"account_number_type\": \"polygon_address\",\n      \"account_number_safe\": \"string\",\n      \"account_number\": \"string\"\n    },\n    {\n      \"id\": \"c35a3ec8-8385-7050-c76f-8321f3bdf940\",\n      \"object\": \"string\",\n      \"live_mode\": true,\n      \"created_at\": \"1960-12-29T07:22:42.146Z\",\n      \"updated_at\": \"1967-05-22T10:07:21.154Z\",\n      \"discarded_at\": \"1999-01-07T07:41:41.088Z\",\n      \"account_number_type\": \"solana_address\",\n      \"account_number_safe\": \"string\",\n      \"account_number\": \"string\"\n    }\n  ],\n  \"routing_details\": [\n    {\n      \"id\": \"3c96cdd7-05ae-39c2-99b2-329176892e3b\",\n      \"object\": \"string\",\n      \"live_mode\": false,\n      \"created_at\": \"1949-06-08T19:37:35.965Z\",\n      \"updated_at\": \"1987-02-19T06:54:18.806Z\",\n      \"discarded_at\": \"2025-03-04T23:41:58.511Z\",\n      \"routing_number\": \"string\",\n      \"routing_number_type\": \"id_sknbi_code\",\n      \"payment_type\": \"bacs\",\n      \"bank_name\": \"string\",\n      \"bank_address\": {\n        \"id\": \"128f9095-b2d3-fbf1-aaf7-86df1f7f839d\",\n        \"object\": \"string\",\n        \"live_mode\": false,\n        \"created_at\": \"2023-02-26T01:39:55.511Z\",\n        \"updated_at\": \"1960-12-18T09:01:33.318Z\",\n        \"line1\": \"string\",\n        \"line2\": \"string\",\n        \"locality\": \"string\",\n        \"region\": \"string\",\n        \"postal_code\": \"string\",\n        \"country\": \"string\"\n      }\n    },\n    {\n      \"id\": \"25ae6582-4c44-0695-441e-be66e9a797aa\",\n      \"object\": \"string\",\n      \"live_mode\": false,\n      \"created_at\": \"1985-01-15T16:25:35.520Z\",\n      \"updated_at\": \"2003-11-30T23:41:15.433Z\",\n      \"discarded_at\": \"1952-01-16T20:31:58.373Z\",\n      \"routing_number\": \"string\",\n      \"routing_number_type\": \"il_bank_code\",\n      \"payment_type\": \"sg_giro\",\n      \"bank_name\": \"string\",\n      \"bank_address\": {\n        \"id\": \"e921f288-c694-7034-58a4-ed7d14351509\",\n        \"object\": \"string\",\n        \"live_mode\": false,\n        \"created_at\": \"1984-04-05T02:28:38.959Z\",\n        \"updated_at\": \"2019-10-12T09:21:52.465Z\",\n        \"line1\": \"string\",\n        \"line2\": \"string\",\n        \"locality\": \"string\",\n        \"region\": \"string\",\n        \"postal_code\": \"string\",\n        \"country\": \"string\"\n      }\n    }\n  ],\n  \"external_id\": \"string\",\n  \"metadata\": {\n    \"key\": \"value\",\n    \"foo\": \"bar\",\n    \"modern\": \"treasury\"\n  },\n  \"party_name\": \"string\",\n  \"contact_details\": [\n    {\n      \"id\": \"805d7366-7815-4466-befa-74e3c5029405\",\n      \"object\": \"string\",\n      \"live_mode\": false,\n      \"created_at\": \"1966-03-20T15:31:58.085Z\",\n      \"updated_at\": \"1996-05-06T21:37:35.778Z\",\n      \"discarded_at\": \"2009-10-31T14:24:38.531Z\",\n      \"contact_identifier\": \"string\",\n      \"contact_identifier_type\": \"phone_number\"\n    },\n    {\n      \"id\": \"62e58f14-749e-0dd1-cd81-d457c7231df5\",\n      \"object\": \"string\",\n      \"live_mode\": false,\n      \"created_at\": \"2023-01-04T11:24:55.458Z\",\n      \"updated_at\": \"1964-09-12T19:56:55.218Z\",\n      \"discarded_at\": \"1991-06-25T01:07:58.510Z\",\n      \"contact_identifier\": \"string\",\n      \"contact_identifier_type\": \"phone_number\"\n    }\n  ],\n  \"ledger_account_id\": \"b042c54d-486c-6296-c411-f9cf4a2bdde9\",\n  \"verification_status\": \"unverified\",\n  \"verification_source\": \"ach_prenote\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5e4c08c4-de32-46c1-8367-d91777ba7c71",
+              "name": "unsuccessful",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "external_accounts",
+                    ":id",
+                    "verify"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) external account id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "This key should be something unique, preferably something like an UUID.",
+                    "key": "Idempotency-Key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"originating_account_id\": \"<uuid>\",\n  \"payment_type\": \"<string>\",\n  \"currency\": \"<string>\",\n  \"fallback_type\": \"<string>\",\n  \"priority\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": {\n    \"code\": \"forbidden\",\n    \"message\": \"string\",\n    \"parameter\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "661cc5cf-2d04-4193-ac26-81f76a92e7f2",
+          "name": "complete verification of external account",
+          "request": {
+            "name": "complete verification of external account",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "external_accounts",
+                ":id",
+                "complete_verification"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) external account id"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "This key should be something unique, preferably something like an UUID.",
+                "key": "Idempotency-Key",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"amounts\": [\n    \"<integer>\",\n    \"<integer>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "d9df66c0-72d2-4729-aea2-83c8afae9dfd",
+              "name": "successful",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "external_accounts",
+                    ":id",
+                    "complete_verification"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) external account id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "This key should be something unique, preferably something like an UUID.",
+                    "key": "Idempotency-Key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"amounts\": [\n    2,\n    4\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"269a9e2b-19b0-a0d7-fea8-33c354482c03\",\n  \"object\": \"string\",\n  \"live_mode\": true,\n  \"created_at\": \"2016-11-03T05:57:02.174Z\",\n  \"updated_at\": \"2002-05-15T21:41:38.119Z\",\n  \"discarded_at\": \"2021-04-10T07:40:29.281Z\",\n  \"account_type\": \"overdraft\",\n  \"party_type\": \"business\",\n  \"party_address\": {\n    \"id\": \"c059de70-3c56-6046-f6c9-8c5de1624558\",\n    \"object\": \"string\",\n    \"live_mode\": false,\n    \"created_at\": \"1948-04-24T12:10:17.462Z\",\n    \"updated_at\": \"1978-02-02T15:47:17.436Z\",\n    \"line1\": \"string\",\n    \"line2\": \"string\",\n    \"locality\": \"string\",\n    \"region\": \"string\",\n    \"postal_code\": \"string\",\n    \"country\": \"string\"\n  },\n  \"name\": \"string\",\n  \"counterparty_id\": \"18bb34fd-adac-e8e7-f101-0c85660e497e\",\n  \"account_details\": [\n    {\n      \"id\": \"e0e9d54f-b43a-47a7-dd1d-1f33cc36c7d4\",\n      \"object\": \"string\",\n      \"live_mode\": true,\n      \"created_at\": \"1968-05-06T08:44:29.578Z\",\n      \"updated_at\": \"2000-11-14T23:58:32.586Z\",\n      \"discarded_at\": \"1999-07-23T03:57:57.027Z\",\n      \"account_number_type\": \"clabe\",\n      \"account_number_safe\": \"string\",\n      \"account_number\": \"string\"\n    },\n    {\n      \"id\": \"f048b9a1-95d1-71bf-ea1c-7b02edbb84c6\",\n      \"object\": \"string\",\n      \"live_mode\": false,\n      \"created_at\": \"2011-07-31T00:19:12.309Z\",\n      \"updated_at\": \"1995-07-10T02:46:15.498Z\",\n      \"discarded_at\": \"1950-04-14T13:19:40.451Z\",\n      \"account_number_type\": \"wallet_address\",\n      \"account_number_safe\": \"string\",\n      \"account_number\": \"string\"\n    }\n  ],\n  \"routing_details\": [\n    {\n      \"id\": \"438a62d3-580e-cf2d-adf3-ef3c02f86f41\",\n      \"object\": \"string\",\n      \"live_mode\": true,\n      \"created_at\": \"1965-04-16T22:58:21.766Z\",\n      \"updated_at\": \"1971-06-17T14:07:04.968Z\",\n      \"discarded_at\": \"1986-09-11T20:01:45.867Z\",\n      \"routing_number\": \"string\",\n      \"routing_number_type\": \"ca_cpa\",\n      \"payment_type\": \"dk_nets\",\n      \"bank_name\": \"string\",\n      \"bank_address\": {\n        \"id\": \"3e740198-1c2d-33b9-6d47-92806be8111f\",\n        \"object\": \"string\",\n        \"live_mode\": true,\n        \"created_at\": \"1956-07-09T01:05:41.834Z\",\n        \"updated_at\": \"2021-05-22T21:58:13.603Z\",\n        \"line1\": \"string\",\n        \"line2\": \"string\",\n        \"locality\": \"string\",\n        \"region\": \"string\",\n        \"postal_code\": \"string\",\n        \"country\": \"string\"\n      }\n    },\n    {\n      \"id\": \"6967f221-846b-4cca-6ac8-ee0319b9f114\",\n      \"object\": \"string\",\n      \"live_mode\": false,\n      \"created_at\": \"1965-10-09T03:35:27.966Z\",\n      \"updated_at\": \"1957-12-29T01:34:31.100Z\",\n      \"discarded_at\": \"2003-03-22T22:05:15.300Z\",\n      \"routing_number\": \"string\",\n      \"routing_number_type\": \"ca_cpa\",\n      \"payment_type\": \"eft\",\n      \"bank_name\": \"string\",\n      \"bank_address\": {\n        \"id\": \"bda69d8b-ebbb-f11a-e095-2efdb7a22042\",\n        \"object\": \"string\",\n        \"live_mode\": false,\n        \"created_at\": \"1960-08-08T14:59:21.686Z\",\n        \"updated_at\": \"2024-04-29T11:29:13.567Z\",\n        \"line1\": \"string\",\n        \"line2\": \"string\",\n        \"locality\": \"string\",\n        \"region\": \"string\",\n        \"postal_code\": \"string\",\n        \"country\": \"string\"\n      }\n    }\n  ],\n  \"external_id\": \"string\",\n  \"metadata\": {\n    \"key\": \"value\",\n    \"foo\": \"bar\",\n    \"modern\": \"treasury\"\n  },\n  \"party_name\": \"string\",\n  \"contact_details\": [\n    {\n      \"id\": \"c89c52f6-bdd2-cb05-3255-6f23a4d45d80\",\n      \"object\": \"string\",\n      \"live_mode\": false,\n      \"created_at\": \"1976-07-19T00:32:39.227Z\",\n      \"updated_at\": \"1990-08-19T10:47:39.028Z\",\n      \"discarded_at\": \"1961-03-01T11:14:20.820Z\",\n      \"contact_identifier\": \"string\",\n      \"contact_identifier_type\": \"phone_number\"\n    },\n    {\n      \"id\": \"c64552d0-d566-adf3-1fad-d3d521c63708\",\n      \"object\": \"string\",\n      \"live_mode\": false,\n      \"created_at\": \"2016-07-25T02:39:08.366Z\",\n      \"updated_at\": \"1970-01-30T14:45:20.461Z\",\n      \"discarded_at\": \"1980-09-27T05:29:15.115Z\",\n      \"contact_identifier\": \"string\",\n      \"contact_identifier_type\": \"phone_number\"\n    }\n  ],\n  \"ledger_account_id\": \"eec5dd96-a4db-8595-dc84-eb5b77fc7323\",\n  \"verification_status\": \"verified\",\n  \"verification_source\": \"ach_prenote\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "01f44a33-9be2-40ef-b1cc-a49e0bfea6a3",
+              "name": "unsuccessful",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "external_accounts",
+                    ":id",
+                    "complete_verification"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) external account id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "This key should be something unique, preferably something like an UUID.",
+                    "key": "Idempotency-Key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"amounts\": [\n    2,\n    4\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": {\n    \"code\": \"forbidden\",\n    \"message\": \"string\",\n    \"parameter\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b2db7182-c4c6-45b8-93a0-050c1ac93f4a",
+          "name": "list external accounts",
+          "request": {
+            "name": "list external accounts",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "external_accounts"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "after_cursor",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "per_page",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "party_name",
+                  "value": "<string>",
+                  "description": "Searches the ExternalAccount's party_name AND the Counterparty's party_name"
+                },
+                {
+                  "disabled": false,
+                  "key": "counterparty_id",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "external_id",
+                  "value": "<string>",
+                  "description": "An optional user-defined 180 character unique identifier."
+                },
+                {
+                  "disabled": false,
+                  "key": "metadata[key_0]",
+                  "value": "<string>",
+                  "description": "For example, if you want to query for records with metadata key `Type` and value `Loan`, the query would be `metadata%5BType%5D=Loan`. This encodes the query parameters."
+                },
+                {
+                  "disabled": false,
+                  "key": "metadata[key_1]",
+                  "value": "<string>",
+                  "description": "For example, if you want to query for records with metadata key `Type` and value `Loan`, the query would be `metadata%5BType%5D=Loan`. This encodes the query parameters."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "65294a29-f5b7-4e3d-947f-ca96263d6a5f",
+              "name": "successful",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "external_accounts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "after_cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "party_name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "counterparty_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "external_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "metadata[key_0]",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "The cursor for the next page. Including this in a call as `after_cursor` will return the next page.",
+                  "key": "X-After-Cursor",
+                  "value": "string"
+                },
+                {
+                  "disabled": false,
+                  "description": "The current `per_page`.",
+                  "key": "X-Per-Page",
+                  "value": "7093"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"ebb6c6df-e857-c31c-e6be-b0a18a0c904e\",\n    \"object\": \"string\",\n    \"live_mode\": false,\n    \"created_at\": \"1948-04-24T22:09:02.010Z\",\n    \"updated_at\": \"2006-01-28T00:55:41.238Z\",\n    \"discarded_at\": \"1952-09-04T22:40:05.180Z\",\n    \"account_type\": \"savings\",\n    \"party_type\": \"business\",\n    \"party_address\": {\n      \"id\": \"ec01d22e-6f5c-7083-6f68-6a072703f4cd\",\n      \"object\": \"string\",\n      \"live_mode\": false,\n      \"created_at\": \"1955-07-26T00:19:33.486Z\",\n      \"updated_at\": \"2019-06-10T09:34:03.910Z\",\n      \"line1\": \"string\",\n      \"line2\": \"string\",\n      \"locality\": \"string\",\n      \"region\": \"string\",\n      \"postal_code\": \"string\",\n      \"country\": \"string\"\n    },\n    \"name\": \"string\",\n    \"counterparty_id\": \"d12ccccf-7d77-9eb7-6d7a-e2d9e153bb65\",\n    \"account_details\": [\n      {\n        \"id\": \"ecb34e77-def9-fbeb-919c-955f86c572a7\",\n        \"object\": \"string\",\n        \"live_mode\": false,\n        \"created_at\": \"1996-05-04T05:48:45.699Z\",\n        \"updated_at\": \"1969-03-22T05:15:28.900Z\",\n        \"discarded_at\": \"1957-11-20T01:55:23.986Z\",\n        \"account_number_type\": \"pan\",\n        \"account_number_safe\": \"string\",\n        \"account_number\": \"string\"\n      },\n      {\n        \"id\": \"179b737d-6f32-0885-2add-9f78931aac83\",\n        \"object\": \"string\",\n        \"live_mode\": true,\n        \"created_at\": \"1954-01-26T23:22:14.777Z\",\n        \"updated_at\": \"1954-02-28T14:55:51.965Z\",\n        \"discarded_at\": \"1949-11-15T11:18:51.757Z\",\n        \"account_number_type\": \"pan\",\n        \"account_number_safe\": \"string\",\n        \"account_number\": \"string\"\n      }\n    ],\n    \"routing_details\": [\n      {\n        \"id\": \"1ec30ffa-83be-b421-0244-908816434d34\",\n        \"object\": \"string\",\n        \"live_mode\": false,\n        \"created_at\": \"1999-09-23T23:06:34.956Z\",\n        \"updated_at\": \"1953-01-28T00:28:35.556Z\",\n        \"discarded_at\": \"1988-07-14T06:09:36.391Z\",\n        \"routing_number\": \"string\",\n        \"routing_number_type\": \"swift\",\n        \"payment_type\": \"se_bankgirot\",\n        \"bank_name\": \"string\",\n        \"bank_address\": {\n          \"id\": \"7f9ab23c-553a-8a53-944e-38ef622d6796\",\n          \"object\": \"string\",\n          \"live_mode\": false,\n          \"created_at\": \"1959-12-31T15:52:23.345Z\",\n          \"updated_at\": \"2025-06-03T04:28:51.915Z\",\n          \"line1\": \"string\",\n          \"line2\": \"string\",\n          \"locality\": \"string\",\n          \"region\": \"string\",\n          \"postal_code\": \"string\",\n          \"country\": \"string\"\n        }\n      },\n      {\n        \"id\": \"49977467-0bb2-9d98-b55c-ecf2c3473304\",\n        \"object\": \"string\",\n        \"live_mode\": false,\n        \"created_at\": \"1986-07-18T16:39:08.215Z\",\n        \"updated_at\": \"1958-02-28T18:04:44.512Z\",\n        \"discarded_at\": \"2026-06-22T20:10:03.735Z\",\n        \"routing_number\": \"string\",\n        \"routing_number_type\": \"jp_zengin_code\",\n        \"payment_type\": \"bacs\",\n        \"bank_name\": \"string\",\n        \"bank_address\": {\n          \"id\": \"f249e563-de89-3945-31ab-b7fea1afc6a8\",\n          \"object\": \"string\",\n          \"live_mode\": false,\n          \"created_at\": \"1951-03-10T18:41:58.380Z\",\n          \"updated_at\": \"2009-01-10T21:15:19.560Z\",\n          \"line1\": \"string\",\n          \"line2\": \"string\",\n          \"locality\": \"string\",\n          \"region\": \"string\",\n          \"postal_code\": \"string\",\n          \"country\": \"string\"\n        }\n      }\n    ],\n    \"external_id\": \"string\",\n    \"metadata\": {\n      \"key\": \"value\",\n      \"foo\": \"bar\",\n      \"modern\": \"treasury\"\n    },\n    \"party_name\": \"string\",\n    \"contact_details\": [\n      {\n        \"id\": \"7fc48205-2d59-55c4-29a3-08ff860fa4df\",\n        \"object\": \"string\",\n        \"live_mode\": true,\n        \"created_at\": \"1980-01-05T13:44:42.009Z\",\n        \"updated_at\": \"1961-05-06T23:47:26.035Z\",\n        \"discarded_at\": \"2017-01-08T17:46:40.638Z\",\n        \"contact_identifier\": \"string\",\n        \"contact_identifier_type\": \"email\"\n      },\n      {\n        \"id\": \"216eadae-4453-43e6-a5c4-8558d60875ca\",\n        \"object\": \"string\",\n        \"live_mode\": true,\n        \"created_at\": \"2019-12-13T10:54:40.285Z\",\n        \"updated_at\": \"1985-01-30T16:53:40.623Z\",\n        \"discarded_at\": \"1975-04-28T08:15:40.586Z\",\n        \"contact_identifier\": \"string\",\n        \"contact_identifier_type\": \"phone_number\"\n      }\n    ],\n    \"ledger_account_id\": \"3452391c-8d74-df5a-6e7e-eeddb834e934\",\n    \"verification_status\": \"unverified\",\n    \"verification_source\": \"microdeposits\"\n  },\n  {\n    \"id\": \"3939bee7-244c-0b4e-bc63-1e6f710a5634\",\n    \"object\": \"string\",\n    \"live_mode\": false,\n    \"created_at\": \"1977-12-06T16:52:54.331Z\",\n    \"updated_at\": \"1966-12-10T18:31:47.676Z\",\n    \"discarded_at\": \"1963-02-17T00:02:18.341Z\",\n    \"account_type\": \"polygon_wallet\",\n    \"party_type\": \"individual\",\n    \"party_address\": {\n      \"id\": \"3f490b22-7362-8ba8-767e-230549f98756\",\n      \"object\": \"string\",\n      \"live_mode\": false,\n      \"created_at\": \"1974-11-19T11:05:21.883Z\",\n      \"updated_at\": \"2015-08-10T05:58:46.117Z\",\n      \"line1\": \"string\",\n      \"line2\": \"string\",\n      \"locality\": \"string\",\n      \"region\": \"string\",\n      \"postal_code\": \"string\",\n      \"country\": \"string\"\n    },\n    \"name\": \"string\",\n    \"counterparty_id\": \"1d86174b-8b88-aebc-695e-9ac6835c7b9a\",\n    \"account_details\": [\n      {\n        \"id\": \"fd6636dd-a4c2-7c17-5602-690a6fa33488\",\n        \"object\": \"string\",\n        \"live_mode\": true,\n        \"created_at\": \"1998-10-19T22:29:32.803Z\",\n        \"updated_at\": \"1994-06-10T03:28:17.207Z\",\n        \"discarded_at\": \"2000-10-26T08:30:24.437Z\",\n        \"account_number_type\": \"base_address\",\n        \"account_number_safe\": \"string\",\n        \"account_number\": \"string\"\n      },\n      {\n        \"id\": \"2ecf59e9-0af0-6499-03cf-ac4fef203bc4\",\n        \"object\": \"string\",\n        \"live_mode\": false,\n        \"created_at\": \"1951-06-11T10:24:28.181Z\",\n        \"updated_at\": \"1991-07-07T01:58:34.610Z\",\n        \"discarded_at\": \"1977-09-15T19:16:11.213Z\",\n        \"account_number_type\": \"nz_number\",\n        \"account_number_safe\": \"string\",\n        \"account_number\": \"string\"\n      }\n    ],\n    \"routing_details\": [\n      {\n        \"id\": \"fbdfd2f9-16a3-0fe3-feda-74a662f0c0c4\",\n        \"object\": \"string\",\n        \"live_mode\": false,\n        \"created_at\": \"1964-12-14T04:15:38.133Z\",\n        \"updated_at\": \"1990-04-19T16:42:50.616Z\",\n        \"discarded_at\": \"2006-03-27T13:09:38.972Z\",\n        \"routing_number\": \"string\",\n        \"routing_number_type\": \"br_codigo\",\n        \"payment_type\": \"provxchange\",\n        \"bank_name\": \"string\",\n        \"bank_address\": {\n          \"id\": \"bc37f7a9-d95c-7438-1f32-fff5f4a60f77\",\n          \"object\": \"string\",\n          \"live_mode\": false,\n          \"created_at\": \"1993-03-15T16:39:13.561Z\",\n          \"updated_at\": \"1954-01-06T23:19:52.132Z\",\n          \"line1\": \"string\",\n          \"line2\": \"string\",\n          \"locality\": \"string\",\n          \"region\": \"string\",\n          \"postal_code\": \"string\",\n          \"country\": \"string\"\n        }\n      },\n      {\n        \"id\": \"ec187a9f-334f-4470-76c0-629565fd7dcf\",\n        \"object\": \"string\",\n        \"live_mode\": true,\n        \"created_at\": \"2000-01-26T00:21:08.435Z\",\n        \"updated_at\": \"1990-05-06T13:27:09.855Z\",\n        \"discarded_at\": \"1971-09-10T16:28:16.141Z\",\n        \"routing_number\": \"string\",\n        \"routing_number_type\": \"hu_interbank_clearing_code\",\n        \"payment_type\": \"rtp\",\n        \"bank_name\": \"string\",\n        \"bank_address\": {\n          \"id\": \"332d3e2f-c1be-ce4c-dc16-2930fd68ce29\",\n          \"object\": \"string\",\n          \"live_mode\": false,\n          \"created_at\": \"1990-04-04T14:05:52.118Z\",\n          \"updated_at\": \"2026-02-09T09:38:44.414Z\",\n          \"line1\": \"string\",\n          \"line2\": \"string\",\n          \"locality\": \"string\",\n          \"region\": \"string\",\n          \"postal_code\": \"string\",\n          \"country\": \"string\"\n        }\n      }\n    ],\n    \"external_id\": \"string\",\n    \"metadata\": {\n      \"key\": \"value\",\n      \"foo\": \"bar\",\n      \"modern\": \"treasury\"\n    },\n    \"party_name\": \"string\",\n    \"contact_details\": [\n      {\n        \"id\": \"0a1f29b5-3fa9-27e7-e01a-5e7f50c4cc4e\",\n        \"object\": \"string\",\n        \"live_mode\": true,\n        \"created_at\": \"2000-08-23T19:38:49.355Z\",\n        \"updated_at\": \"2005-10-03T04:56:06.388Z\",\n        \"discarded_at\": \"1988-02-27T01:48:46.471Z\",\n        \"contact_identifier\": \"string\",\n        \"contact_identifier_type\": \"phone_number\"\n      },\n      {\n        \"id\": \"709ba387-a859-2d95-c02f-8a77b3634b0b\",\n        \"object\": \"string\",\n        \"live_mode\": true,\n        \"created_at\": \"1957-07-27T07:33:01.640Z\",\n        \"updated_at\": \"1974-05-13T09:32:07.879Z\",\n        \"discarded_at\": \"1988-10-20T03:59:09.002Z\",\n        \"contact_identifier\": \"string\",\n        \"contact_identifier_type\": \"phone_number\"\n      }\n    ],\n    \"ledger_account_id\": \"15fbe7ab-0c8f-4d43-4119-2c61ea517173\",\n    \"verification_status\": \"unverified\",\n    \"verification_source\": \"ach_prenote\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d684eb69-e10e-41ce-8255-494cfe186729",
+              "name": "unsuccessful",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "external_accounts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "after_cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "party_name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "counterparty_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "external_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "metadata[key_0]",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": {\n    \"code\": \"forbidden\",\n    \"message\": \"string\",\n    \"parameter\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "46174a7f-104f-45db-a0e4-c9e7a0cc448f",
+          "name": "create external account",
+          "request": {
+            "name": "create external account",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "external_accounts"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "This key should be something unique, preferably something like an UUID.",
+                "key": "Idempotency-Key",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"counterparty_id\": \"<uuid>\",\n  \"account_type\": \"<string>\",\n  \"party_type\": \"<string>\",\n  \"party_address\": {\n    \"line1\": \"<string>\",\n    \"line2\": \"<string>\",\n    \"locality\": \"<string>\",\n    \"region\": \"<string>\",\n    \"postal_code\": \"<string>\",\n    \"country\": \"<string>\"\n  },\n  \"name\": \"<string>\",\n  \"account_details\": [\n    {\n      \"account_number\": \"<string>\",\n      \"account_number_type\": \"<string>\"\n    },\n    {\n      \"account_number\": \"<string>\",\n      \"account_number_type\": \"<string>\"\n    }\n  ],\n  \"routing_details\": [\n    {\n      \"routing_number\": \"<string>\",\n      \"routing_number_type\": \"<string>\",\n      \"payment_type\": \"<string>\"\n    },\n    {\n      \"routing_number\": \"<string>\",\n      \"routing_number_type\": \"<string>\",\n      \"payment_type\": \"<string>\"\n    }\n  ],\n  \"external_id\": \"<string>\",\n  \"metadata\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\"\n  },\n  \"party_name\": \"<string>\",\n  \"party_identifier\": \"<string>\",\n  \"ledger_account\": {\n    \"name\": \"<string>\",\n    \"normal_balance\": \"<string>\",\n    \"ledger_id\": \"<uuid>\",\n    \"currency\": \"<string>\",\n    \"description\": \"<string>\",\n    \"currency_exponent\": \"<integer>\",\n    \"ledger_account_category_ids\": [\n      \"<uuid>\",\n      \"<uuid>\"\n    ],\n    \"ledgerable_id\": \"<uuid>\",\n    \"ledgerable_type\": \"<string>\",\n    \"metadata\": {\n      \"key_0\": \"<string>\"\n    },\n    \"external_id\": \"<string>\"\n  },\n  \"plaid_processor_token\": \"<string>\",\n  \"contact_details\": [\n    {\n      \"contact_identifier\": \"<string>\",\n      \"contact_identifier_type\": \"<string>\"\n    },\n    {\n      \"contact_identifier\": \"<string>\",\n      \"contact_identifier_type\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "f6374a6a-2e45-4fe6-ac36-e88f6e3b8f69",
+              "name": "successful",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "external_accounts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "This key should be something unique, preferably something like an UUID.",
+                    "key": "Idempotency-Key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"counterparty_id\": \"<uuid>\",\n  \"account_type\": \"<string>\",\n  \"party_type\": \"<string>\",\n  \"party_address\": {\n    \"line1\": \"<string>\",\n    \"line2\": \"<string>\",\n    \"locality\": \"<string>\",\n    \"region\": \"<string>\",\n    \"postal_code\": \"<string>\",\n    \"country\": \"<string>\"\n  },\n  \"name\": \"<string>\",\n  \"account_details\": [\n    {\n      \"account_number\": \"<string>\",\n      \"account_number_type\": \"<string>\"\n    },\n    {\n      \"account_number\": \"<string>\",\n      \"account_number_type\": \"<string>\"\n    }\n  ],\n  \"routing_details\": [\n    {\n      \"routing_number\": \"<string>\",\n      \"routing_number_type\": \"<string>\",\n      \"payment_type\": \"<string>\"\n    },\n    {\n      \"routing_number\": \"<string>\",\n      \"routing_number_type\": \"<string>\",\n      \"payment_type\": \"<string>\"\n    }\n  ],\n  \"external_id\": \"<string>\",\n  \"metadata\": {\n    \"key\": \"value\",\n    \"foo\": \"bar\",\n    \"modern\": \"treasury\"\n  },\n  \"party_name\": \"<string>\",\n  \"party_identifier\": \"<string>\",\n  \"ledger_account\": {\n    \"name\": \"<string>\",\n    \"normal_balance\": \"<string>\",\n    \"ledger_id\": \"<uuid>\",\n    \"currency\": \"<string>\",\n    \"description\": \"<string>\",\n    \"currency_exponent\": \"<integer>\",\n    \"ledger_account_category_ids\": [\n      \"<uuid>\",\n      \"<uuid>\"\n    ],\n    \"ledgerable_id\": \"<uuid>\",\n    \"ledgerable_type\": \"<string>\",\n    \"metadata\": {\n      \"key\": \"value\",\n      \"foo\": \"bar\",\n      \"modern\": \"treasury\"\n    },\n    \"external_id\": \"<string>\"\n  },\n  \"plaid_processor_token\": \"<string>\",\n  \"contact_details\": [\n    {\n      \"contact_identifier\": \"<string>\",\n      \"contact_identifier_type\": \"<string>\"\n    },\n    {\n      \"contact_identifier\": \"<string>\",\n      \"contact_identifier_type\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"e1e33583-96b6-4589-0d54-4eff097ead5f\",\n  \"object\": \"string\",\n  \"live_mode\": true,\n  \"created_at\": \"1976-11-17T05:03:07.296Z\",\n  \"updated_at\": \"2024-09-30T05:39:27.586Z\",\n  \"discarded_at\": \"1969-08-04T02:44:06.618Z\",\n  \"account_type\": \"<string>\",\n  \"party_type\": \"individual\",\n  \"party_address\": {\n    \"id\": \"50120a98-e747-1942-d6cd-56a450a77d2a\",\n    \"object\": \"string\",\n    \"live_mode\": true,\n    \"created_at\": \"2026-03-30T18:09:33.642Z\",\n    \"updated_at\": \"2017-12-09T11:58:27.140Z\",\n    \"line1\": \"string\",\n    \"line2\": \"string\",\n    \"locality\": \"string\",\n    \"region\": \"string\",\n    \"postal_code\": \"string\",\n    \"country\": \"string\"\n  },\n  \"name\": \"string\",\n  \"counterparty_id\": \"7fd55286-b8e0-e83a-f827-4258b7f66d87\",\n  \"account_details\": [\n    {\n      \"id\": \"bf04b8da-c6d9-11d1-c384-e258c0358f1b\",\n      \"object\": \"string\",\n      \"live_mode\": false,\n      \"created_at\": \"1964-05-16T08:40:54.768Z\",\n      \"updated_at\": \"2010-01-14T22:59:45.595Z\",\n      \"discarded_at\": \"2011-10-24T21:10:39.719Z\",\n      \"account_number_type\": \"ethereum_address\",\n      \"account_number_safe\": \"string\",\n      \"account_number\": \"string\"\n    },\n    {\n      \"id\": \"46f10650-2550-9ae9-1eba-b010efef07bb\",\n      \"object\": \"string\",\n      \"live_mode\": true,\n      \"created_at\": \"1959-07-27T21:12:55.249Z\",\n      \"updated_at\": \"1953-02-12T17:48:25.822Z\",\n      \"discarded_at\": \"1949-07-16T22:07:15.322Z\",\n      \"account_number_type\": \"card_token\",\n      \"account_number_safe\": \"string\",\n      \"account_number\": \"string\"\n    }\n  ],\n  \"routing_details\": [\n    {\n      \"id\": \"ce96e3ac-fc24-28b4-a037-ac2646270cfa\",\n      \"object\": \"string\",\n      \"live_mode\": true,\n      \"created_at\": \"2016-03-15T10:03:29.915Z\",\n      \"updated_at\": \"2006-11-26T07:44:28.797Z\",\n      \"discarded_at\": \"1956-04-20T07:51:36.355Z\",\n      \"routing_number\": \"string\",\n      \"routing_number_type\": \"za_national_clearing_code\",\n      \"payment_type\": \"dk_nets\",\n      \"bank_name\": \"string\",\n      \"bank_address\": {\n        \"id\": \"bed3ab58-3402-115b-a48e-8c4f0ac54e87\",\n        \"object\": \"string\",\n        \"live_mode\": true,\n        \"created_at\": \"1950-04-15T09:21:03.741Z\",\n        \"updated_at\": \"1964-09-07T20:04:31.286Z\",\n        \"line1\": \"string\",\n        \"line2\": \"string\",\n        \"locality\": \"string\",\n        \"region\": \"string\",\n        \"postal_code\": \"string\",\n        \"country\": \"string\"\n      }\n    },\n    {\n      \"id\": \"87796571-4714-6cce-965d-9a1a4b068652\",\n      \"object\": \"string\",\n      \"live_mode\": false,\n      \"created_at\": \"1972-03-21T02:29:06.129Z\",\n      \"updated_at\": \"1965-12-03T16:13:05.904Z\",\n      \"discarded_at\": \"1967-10-17T23:33:28.725Z\",\n      \"routing_number\": \"string\",\n      \"routing_number_type\": \"mx_bank_identifier\",\n      \"payment_type\": \"au_becs\",\n      \"bank_name\": \"string\",\n      \"bank_address\": {\n        \"id\": \"4c12bcda-1afb-2557-9c87-63ea51d8e1c4\",\n        \"object\": \"string\",\n        \"live_mode\": false,\n        \"created_at\": \"1961-05-10T05:55:40.236Z\",\n        \"updated_at\": \"1997-02-11T17:16:05.557Z\",\n        \"line1\": \"string\",\n        \"line2\": \"string\",\n        \"locality\": \"string\",\n        \"region\": \"string\",\n        \"postal_code\": \"string\",\n        \"country\": \"string\"\n      }\n    }\n  ],\n  \"external_id\": \"string\",\n  \"metadata\": {\n    \"key\": \"value\",\n    \"foo\": \"bar\",\n    \"modern\": \"treasury\"\n  },\n  \"party_name\": \"string\",\n  \"contact_details\": [\n    {\n      \"id\": \"faaa25d5-9db5-a8bd-e787-542db888310d\",\n      \"object\": \"string\",\n      \"live_mode\": true,\n      \"created_at\": \"1992-02-19T04:35:41.029Z\",\n      \"updated_at\": \"1948-10-18T17:42:51.318Z\",\n      \"discarded_at\": \"2010-10-23T15:19:13.830Z\",\n      \"contact_identifier\": \"string\",\n      \"contact_identifier_type\": \"website\"\n    },\n    {\n      \"id\": \"391694ab-e5ae-9cae-3fe2-5b10e5286dfa\",\n      \"object\": \"string\",\n      \"live_mode\": true,\n      \"created_at\": \"1990-09-01T05:05:24.763Z\",\n      \"updated_at\": \"1962-09-29T15:58:44.099Z\",\n      \"discarded_at\": \"1988-11-28T10:34:48.747Z\",\n      \"contact_identifier\": \"string\",\n      \"contact_identifier_type\": \"website\"\n    }\n  ],\n  \"ledger_account_id\": \"3bd4e87e-f9c7-893b-4646-e8198d273856\",\n  \"verification_status\": \"pending_verification\",\n  \"verification_source\": \"microdeposits\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "98d8a653-241f-498e-be4e-f96ec85666d9",
+              "name": "unsuccessful",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "external_accounts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "This key should be something unique, preferably something like an UUID.",
+                    "key": "Idempotency-Key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"counterparty_id\": \"<uuid>\",\n  \"account_type\": \"<string>\",\n  \"party_type\": \"<string>\",\n  \"party_address\": {\n    \"line1\": \"<string>\",\n    \"line2\": \"<string>\",\n    \"locality\": \"<string>\",\n    \"region\": \"<string>\",\n    \"postal_code\": \"<string>\",\n    \"country\": \"<string>\"\n  },\n  \"name\": \"<string>\",\n  \"account_details\": [\n    {\n      \"account_number\": \"<string>\",\n      \"account_number_type\": \"<string>\"\n    },\n    {\n      \"account_number\": \"<string>\",\n      \"account_number_type\": \"<string>\"\n    }\n  ],\n  \"routing_details\": [\n    {\n      \"routing_number\": \"<string>\",\n      \"routing_number_type\": \"<string>\",\n      \"payment_type\": \"<string>\"\n    },\n    {\n      \"routing_number\": \"<string>\",\n      \"routing_number_type\": \"<string>\",\n      \"payment_type\": \"<string>\"\n    }\n  ],\n  \"external_id\": \"<string>\",\n  \"metadata\": {\n    \"key\": \"value\",\n    \"foo\": \"bar\",\n    \"modern\": \"treasury\"\n  },\n  \"party_name\": \"<string>\",\n  \"party_identifier\": \"<string>\",\n  \"ledger_account\": {\n    \"name\": \"<string>\",\n    \"normal_balance\": \"<string>\",\n    \"ledger_id\": \"<uuid>\",\n    \"currency\": \"<string>\",\n    \"description\": \"<string>\",\n    \"currency_exponent\": \"<integer>\",\n    \"ledger_account_category_ids\": [\n      \"<uuid>\",\n      \"<uuid>\"\n    ],\n    \"ledgerable_id\": \"<uuid>\",\n    \"ledgerable_type\": \"<string>\",\n    \"metadata\": {\n      \"key\": \"value\",\n      \"foo\": \"bar\",\n      \"modern\": \"treasury\"\n    },\n    \"external_id\": \"<string>\"\n  },\n  \"plaid_processor_token\": \"<string>\",\n  \"contact_details\": [\n    {\n      \"contact_identifier\": \"<string>\",\n      \"contact_identifier_type\": \"<string>\"\n    },\n    {\n      \"contact_identifier\": \"<string>\",\n      \"contact_identifier_type\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": {\n    \"code\": \"forbidden\",\n    \"message\": \"string\",\n    \"parameter\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c79ff6cd-1184-4830-82ff-392ab09a0993",
+          "name": "show external account",
+          "request": {
+            "name": "show external account",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "external_accounts",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) external account id"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "d4b160a9-fc67-486a-bf00-b305cbc8b805",
+              "name": "successful",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "external_accounts",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) external account id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"e1e33583-96b6-4589-0d54-4eff097ead5f\",\n  \"object\": \"string\",\n  \"live_mode\": true,\n  \"created_at\": \"1976-11-17T05:03:07.296Z\",\n  \"updated_at\": \"2024-09-30T05:39:27.586Z\",\n  \"discarded_at\": \"1969-08-04T02:44:06.618Z\",\n  \"account_type\": \"<string>\",\n  \"party_type\": \"individual\",\n  \"party_address\": {\n    \"id\": \"50120a98-e747-1942-d6cd-56a450a77d2a\",\n    \"object\": \"string\",\n    \"live_mode\": true,\n    \"created_at\": \"2026-03-30T18:09:33.642Z\",\n    \"updated_at\": \"2017-12-09T11:58:27.140Z\",\n    \"line1\": \"string\",\n    \"line2\": \"string\",\n    \"locality\": \"string\",\n    \"region\": \"string\",\n    \"postal_code\": \"string\",\n    \"country\": \"string\"\n  },\n  \"name\": \"string\",\n  \"counterparty_id\": \"7fd55286-b8e0-e83a-f827-4258b7f66d87\",\n  \"account_details\": [\n    {\n      \"id\": \"bf04b8da-c6d9-11d1-c384-e258c0358f1b\",\n      \"object\": \"string\",\n      \"live_mode\": false,\n      \"created_at\": \"1964-05-16T08:40:54.768Z\",\n      \"updated_at\": \"2010-01-14T22:59:45.595Z\",\n      \"discarded_at\": \"2011-10-24T21:10:39.719Z\",\n      \"account_number_type\": \"ethereum_address\",\n      \"account_number_safe\": \"string\",\n      \"account_number\": \"string\"\n    },\n    {\n      \"id\": \"46f10650-2550-9ae9-1eba-b010efef07bb\",\n      \"object\": \"string\",\n      \"live_mode\": true,\n      \"created_at\": \"1959-07-27T21:12:55.249Z\",\n      \"updated_at\": \"1953-02-12T17:48:25.822Z\",\n      \"discarded_at\": \"1949-07-16T22:07:15.322Z\",\n      \"account_number_type\": \"card_token\",\n      \"account_number_safe\": \"string\",\n      \"account_number\": \"string\"\n    }\n  ],\n  \"routing_details\": [\n    {\n      \"id\": \"ce96e3ac-fc24-28b4-a037-ac2646270cfa\",\n      \"object\": \"string\",\n      \"live_mode\": true,\n      \"created_at\": \"2016-03-15T10:03:29.915Z\",\n      \"updated_at\": \"2006-11-26T07:44:28.797Z\",\n      \"discarded_at\": \"1956-04-20T07:51:36.355Z\",\n      \"routing_number\": \"string\",\n      \"routing_number_type\": \"za_national_clearing_code\",\n      \"payment_type\": \"dk_nets\",\n      \"bank_name\": \"string\",\n      \"bank_address\": {\n        \"id\": \"bed3ab58-3402-115b-a48e-8c4f0ac54e87\",\n        \"object\": \"string\",\n        \"live_mode\": true,\n        \"created_at\": \"1950-04-15T09:21:03.741Z\",\n        \"updated_at\": \"1964-09-07T20:04:31.286Z\",\n        \"line1\": \"string\",\n        \"line2\": \"string\",\n        \"locality\": \"string\",\n        \"region\": \"string\",\n        \"postal_code\": \"string\",\n        \"country\": \"string\"\n      }\n    },\n    {\n      \"id\": \"87796571-4714-6cce-965d-9a1a4b068652\",\n      \"object\": \"string\",\n      \"live_mode\": false,\n      \"created_at\": \"1972-03-21T02:29:06.129Z\",\n      \"updated_at\": \"1965-12-03T16:13:05.904Z\",\n      \"discarded_at\": \"1967-10-17T23:33:28.725Z\",\n      \"routing_number\": \"string\",\n      \"routing_number_type\": \"mx_bank_identifier\",\n      \"payment_type\": \"au_becs\",\n      \"bank_name\": \"string\",\n      \"bank_address\": {\n        \"id\": \"4c12bcda-1afb-2557-9c87-63ea51d8e1c4\",\n        \"object\": \"string\",\n        \"live_mode\": false,\n        \"created_at\": \"1961-05-10T05:55:40.236Z\",\n        \"updated_at\": \"1997-02-11T17:16:05.557Z\",\n        \"line1\": \"string\",\n        \"line2\": \"string\",\n        \"locality\": \"string\",\n        \"region\": \"string\",\n        \"postal_code\": \"string\",\n        \"country\": \"string\"\n      }\n    }\n  ],\n  \"external_id\": \"string\",\n  \"metadata\": {\n    \"key\": \"value\",\n    \"foo\": \"bar\",\n    \"modern\": \"treasury\"\n  },\n  \"party_name\": \"string\",\n  \"contact_details\": [\n    {\n      \"id\": \"faaa25d5-9db5-a8bd-e787-542db888310d\",\n      \"object\": \"string\",\n      \"live_mode\": true,\n      \"created_at\": \"1992-02-19T04:35:41.029Z\",\n      \"updated_at\": \"1948-10-18T17:42:51.318Z\",\n      \"discarded_at\": \"2010-10-23T15:19:13.830Z\",\n      \"contact_identifier\": \"string\",\n      \"contact_identifier_type\": \"website\"\n    },\n    {\n      \"id\": \"391694ab-e5ae-9cae-3fe2-5b10e5286dfa\",\n      \"object\": \"string\",\n      \"live_mode\": true,\n      \"created_at\": \"1990-09-01T05:05:24.763Z\",\n      \"updated_at\": \"1962-09-29T15:58:44.099Z\",\n      \"discarded_at\": \"1988-11-28T10:34:48.747Z\",\n      \"contact_identifier\": \"string\",\n      \"contact_identifier_type\": \"website\"\n    }\n  ],\n  \"ledger_account_id\": \"3bd4e87e-f9c7-893b-4646-e8198d273856\",\n  \"verification_status\": \"pending_verification\",\n  \"verification_source\": \"microdeposits\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "80a2a568-9e7e-42eb-88b3-4aa6e25e7676",
+              "name": "not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "external_accounts",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) external account id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": {\n    \"code\": \"forbidden\",\n    \"message\": \"string\",\n    \"parameter\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c14abadd-e3c1-4a5a-85a2-d42e9cf5d25a",
+          "name": "update external account",
+          "request": {
+            "name": "update external account",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "external_accounts",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) external account id"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"party_type\": \"<string>\",\n  \"account_type\": \"<string>\",\n  \"counterparty_id\": \"<uuid>\",\n  \"name\": \"<string>\",\n  \"party_name\": \"<string>\",\n  \"party_address\": {\n    \"line1\": \"<string>\",\n    \"line2\": \"<string>\",\n    \"locality\": \"<string>\",\n    \"region\": \"<string>\",\n    \"postal_code\": \"<string>\",\n    \"country\": \"<string>\"\n  },\n  \"metadata\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\",\n    \"key_2\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "94866a49-e30d-4df3-b614-ba11d3229417",
+              "name": "successful",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "external_accounts",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) external account id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"party_type\": \"<string>\",\n  \"account_type\": \"<string>\",\n  \"counterparty_id\": \"<uuid>\",\n  \"name\": \"<string>\",\n  \"party_name\": \"<string>\",\n  \"party_address\": {\n    \"line1\": \"<string>\",\n    \"line2\": \"<string>\",\n    \"locality\": \"<string>\",\n    \"region\": \"<string>\",\n    \"postal_code\": \"<string>\",\n    \"country\": \"<string>\"\n  },\n  \"metadata\": {\n    \"key_0\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"e1e33583-96b6-4589-0d54-4eff097ead5f\",\n  \"object\": \"string\",\n  \"live_mode\": true,\n  \"created_at\": \"1976-11-17T05:03:07.296Z\",\n  \"updated_at\": \"2024-09-30T05:39:27.586Z\",\n  \"discarded_at\": \"1969-08-04T02:44:06.618Z\",\n  \"account_type\": \"<string>\",\n  \"party_type\": \"individual\",\n  \"party_address\": {\n    \"id\": \"50120a98-e747-1942-d6cd-56a450a77d2a\",\n    \"object\": \"string\",\n    \"live_mode\": true,\n    \"created_at\": \"2026-03-30T18:09:33.642Z\",\n    \"updated_at\": \"2017-12-09T11:58:27.140Z\",\n    \"line1\": \"string\",\n    \"line2\": \"string\",\n    \"locality\": \"string\",\n    \"region\": \"string\",\n    \"postal_code\": \"string\",\n    \"country\": \"string\"\n  },\n  \"name\": \"string\",\n  \"counterparty_id\": \"7fd55286-b8e0-e83a-f827-4258b7f66d87\",\n  \"account_details\": [\n    {\n      \"id\": \"bf04b8da-c6d9-11d1-c384-e258c0358f1b\",\n      \"object\": \"string\",\n      \"live_mode\": false,\n      \"created_at\": \"1964-05-16T08:40:54.768Z\",\n      \"updated_at\": \"2010-01-14T22:59:45.595Z\",\n      \"discarded_at\": \"2011-10-24T21:10:39.719Z\",\n      \"account_number_type\": \"ethereum_address\",\n      \"account_number_safe\": \"string\",\n      \"account_number\": \"string\"\n    },\n    {\n      \"id\": \"46f10650-2550-9ae9-1eba-b010efef07bb\",\n      \"object\": \"string\",\n      \"live_mode\": true,\n      \"created_at\": \"1959-07-27T21:12:55.249Z\",\n      \"updated_at\": \"1953-02-12T17:48:25.822Z\",\n      \"discarded_at\": \"1949-07-16T22:07:15.322Z\",\n      \"account_number_type\": \"card_token\",\n      \"account_number_safe\": \"string\",\n      \"account_number\": \"string\"\n    }\n  ],\n  \"routing_details\": [\n    {\n      \"id\": \"ce96e3ac-fc24-28b4-a037-ac2646270cfa\",\n      \"object\": \"string\",\n      \"live_mode\": true,\n      \"created_at\": \"2016-03-15T10:03:29.915Z\",\n      \"updated_at\": \"2006-11-26T07:44:28.797Z\",\n      \"discarded_at\": \"1956-04-20T07:51:36.355Z\",\n      \"routing_number\": \"string\",\n      \"routing_number_type\": \"za_national_clearing_code\",\n      \"payment_type\": \"dk_nets\",\n      \"bank_name\": \"string\",\n      \"bank_address\": {\n        \"id\": \"bed3ab58-3402-115b-a48e-8c4f0ac54e87\",\n        \"object\": \"string\",\n        \"live_mode\": true,\n        \"created_at\": \"1950-04-15T09:21:03.741Z\",\n        \"updated_at\": \"1964-09-07T20:04:31.286Z\",\n        \"line1\": \"string\",\n        \"line2\": \"string\",\n        \"locality\": \"string\",\n        \"region\": \"string\",\n        \"postal_code\": \"string\",\n        \"country\": \"string\"\n      }\n    },\n    {\n      \"id\": \"87796571-4714-6cce-965d-9a1a4b068652\",\n      \"object\": \"string\",\n      \"live_mode\": false,\n      \"created_at\": \"1972-03-21T02:29:06.129Z\",\n      \"updated_at\": \"1965-12-03T16:13:05.904Z\",\n      \"discarded_at\": \"1967-10-17T23:33:28.725Z\",\n      \"routing_number\": \"string\",\n      \"routing_number_type\": \"mx_bank_identifier\",\n      \"payment_type\": \"au_becs\",\n      \"bank_name\": \"string\",\n      \"bank_address\": {\n        \"id\": \"4c12bcda-1afb-2557-9c87-63ea51d8e1c4\",\n        \"object\": \"string\",\n        \"live_mode\": false,\n        \"created_at\": \"1961-05-10T05:55:40.236Z\",\n        \"updated_at\": \"1997-02-11T17:16:05.557Z\",\n        \"line1\": \"string\",\n        \"line2\": \"string\",\n        \"locality\": \"string\",\n        \"region\": \"string\",\n        \"postal_code\": \"string\",\n        \"country\": \"string\"\n      }\n    }\n  ],\n  \"external_id\": \"string\",\n  \"metadata\": {\n    \"key\": \"value\",\n    \"foo\": \"bar\",\n    \"modern\": \"treasury\"\n  },\n  \"party_name\": \"string\",\n  \"contact_details\": [\n    {\n      \"id\": \"faaa25d5-9db5-a8bd-e787-542db888310d\",\n      \"object\": \"string\",\n      \"live_mode\": true,\n      \"created_at\": \"1992-02-19T04:35:41.029Z\",\n      \"updated_at\": \"1948-10-18T17:42:51.318Z\",\n      \"discarded_at\": \"2010-10-23T15:19:13.830Z\",\n      \"contact_identifier\": \"string\",\n      \"contact_identifier_type\": \"website\"\n    },\n    {\n      \"id\": \"391694ab-e5ae-9cae-3fe2-5b10e5286dfa\",\n      \"object\": \"string\",\n      \"live_mode\": true,\n      \"created_at\": \"1990-09-01T05:05:24.763Z\",\n      \"updated_at\": \"1962-09-29T15:58:44.099Z\",\n      \"discarded_at\": \"1988-11-28T10:34:48.747Z\",\n      \"contact_identifier\": \"string\",\n      \"contact_identifier_type\": \"website\"\n    }\n  ],\n  \"ledger_account_id\": \"3bd4e87e-f9c7-893b-4646-e8198d273856\",\n  \"verification_status\": \"pending_verification\",\n  \"verification_source\": \"microdeposits\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "36311462-68f7-4fab-ac7d-af196c865de8",
+              "name": "not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "external_accounts",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) external account id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"party_type\": \"<string>\",\n  \"account_type\": \"<string>\",\n  \"counterparty_id\": \"<uuid>\",\n  \"name\": \"<string>\",\n  \"party_name\": \"<string>\",\n  \"party_address\": {\n    \"line1\": \"<string>\",\n    \"line2\": \"<string>\",\n    \"locality\": \"<string>\",\n    \"region\": \"<string>\",\n    \"postal_code\": \"<string>\",\n    \"country\": \"<string>\"\n  },\n  \"metadata\": {\n    \"key_0\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": {\n    \"code\": \"forbidden\",\n    \"message\": \"string\",\n    \"parameter\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "85823f68-66a0-4b7b-b4c4-dd9747710556",
+              "name": "conflict",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "external_accounts",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) external account id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"party_type\": \"<string>\",\n  \"account_type\": \"<string>\",\n  \"counterparty_id\": \"<uuid>\",\n  \"name\": \"<string>\",\n  \"party_name\": \"<string>\",\n  \"party_address\": {\n    \"line1\": \"<string>\",\n    \"line2\": \"<string>\",\n    \"locality\": \"<string>\",\n    \"region\": \"<string>\",\n    \"postal_code\": \"<string>\",\n    \"country\": \"<string>\"\n  },\n  \"metadata\": {\n    \"key_0\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": {\n    \"code\": \"forbidden\",\n    \"message\": \"string\",\n    \"parameter\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "79c7f7d1-2895-4ddc-9993-b388d4d99172",
+              "name": "unsuccessful",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "external_accounts",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) external account id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"party_type\": \"<string>\",\n  \"account_type\": \"<string>\",\n  \"counterparty_id\": \"<uuid>\",\n  \"name\": \"<string>\",\n  \"party_name\": \"<string>\",\n  \"party_address\": {\n    \"line1\": \"<string>\",\n    \"line2\": \"<string>\",\n    \"locality\": \"<string>\",\n    \"region\": \"<string>\",\n    \"postal_code\": \"<string>\",\n    \"country\": \"<string>\"\n  },\n  \"metadata\": {\n    \"key_0\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": {\n    \"code\": \"forbidden\",\n    \"message\": \"string\",\n    \"parameter\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "252af5c7-187f-42a6-9229-a610a441a3d0",
+          "name": "delete external account",
+          "request": {
+            "name": "delete external account",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "external_accounts",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) external account id"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "39470cf2-f8a1-4a56-9bba-da8dc5cdbe4a",
+              "name": "successful",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "external_accounts",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) external account id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "http://localhost:3000",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "a9d9b386-abb1-4838-9ec3-15b4d1fdcf91",
+    "name": "Modern Treasury AccountCapability ExternalAccount API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Modern Treasury REST API. Please see https://docs.moderntreasury.com for more details.\n\nContact Support:\n Name: Modern Treasury Engineering Team",
+      "type": "text/plain"
+    }
+  }
+}

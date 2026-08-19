@@ -1,0 +1,979 @@
+{
+  "item": [
+    {
+      "id": "a610631b-8c78-488c-993d-0e93fb26bc72",
+      "name": "VirtualAccount",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "4b8e57fb-429f-4dca-8957-8af0c3382c2c",
+          "name": "list virtual_accounts",
+          "request": {
+            "name": "list virtual_accounts",
+            "description": {
+              "content": "Get a list of virtual accounts.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "virtual_accounts"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "after_cursor",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "per_page",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "internal_account_id",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "counterparty_id",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "metadata[key_0]",
+                  "value": "<string>",
+                  "description": "For example, if you want to query for records with metadata key `Type` and value `Loan`, the query would be `metadata%5BType%5D=Loan`. This encodes the query parameters."
+                },
+                {
+                  "disabled": false,
+                  "key": "metadata[key_1]",
+                  "value": "<string>",
+                  "description": "For example, if you want to query for records with metadata key `Type` and value `Loan`, the query would be `metadata%5BType%5D=Loan`. This encodes the query parameters."
+                },
+                {
+                  "disabled": false,
+                  "key": "metadata[key_2]",
+                  "value": "<string>",
+                  "description": "For example, if you want to query for records with metadata key `Type` and value `Loan`, the query would be `metadata%5BType%5D=Loan`. This encodes the query parameters."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "46b25e4a-9524-4871-a91b-66a04a423961",
+              "name": "successful",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "virtual_accounts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "after_cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "internal_account_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "counterparty_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "metadata[key_0]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "metadata[key_1]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "metadata[key_2]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "metadata[key_3]",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "The cursor for the next page. Including this in a call as `after_cursor` will return the next page.",
+                  "key": "X-After-Cursor",
+                  "value": "string"
+                },
+                {
+                  "disabled": false,
+                  "description": "The current `per_page`.",
+                  "key": "X-Per-Page",
+                  "value": "7628"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"135406b3-4d76-69d5-29c5-0efa41d2477b\",\n    \"object\": \"string\",\n    \"live_mode\": true,\n    \"created_at\": \"1958-04-06T01:52:35.182Z\",\n    \"updated_at\": \"1979-07-15T00:46:20.410Z\",\n    \"discarded_at\": \"2024-01-02T10:17:11.812Z\",\n    \"name\": \"string\",\n    \"description\": \"string\",\n    \"counterparty_id\": \"714f032e-5fc0-b47a-2631-7c86d1174da2\",\n    \"internal_account_id\": \"9f35d1c7-6e61-6bc2-1827-e998d17564b0\",\n    \"account_details\": [\n      {\n        \"id\": \"31e68b4b-3f0e-8710-10c4-57c3d52b229f\",\n        \"object\": \"string\",\n        \"live_mode\": false,\n        \"created_at\": \"1988-03-15T21:58:16.038Z\",\n        \"updated_at\": \"1998-12-03T13:57:52.424Z\",\n        \"discarded_at\": \"1996-02-01T04:21:27.854Z\",\n        \"account_number_type\": \"clabe\",\n        \"account_number_safe\": \"string\",\n        \"account_number\": \"string\"\n      },\n      {\n        \"id\": \"3f161766-3c36-8e6d-9598-93a1bbe96b88\",\n        \"object\": \"string\",\n        \"live_mode\": false,\n        \"created_at\": \"2015-04-19T01:34:27.826Z\",\n        \"updated_at\": \"1974-03-30T11:34:33.333Z\",\n        \"discarded_at\": \"2015-11-17T03:10:45.381Z\",\n        \"account_number_type\": \"other\",\n        \"account_number_safe\": \"string\",\n        \"account_number\": \"string\"\n      }\n    ],\n    \"routing_details\": [\n      {\n        \"id\": \"bcf3082c-ab63-d779-1b1b-e5b76ab83d90\",\n        \"object\": \"string\",\n        \"live_mode\": false,\n        \"created_at\": \"1953-11-27T18:37:41.281Z\",\n        \"updated_at\": \"1966-09-30T14:01:06.256Z\",\n        \"discarded_at\": \"1969-11-10T05:42:26.736Z\",\n        \"routing_number\": \"string\",\n        \"routing_number_type\": \"chips\",\n        \"payment_type\": \"stablecoin\",\n        \"bank_name\": \"string\",\n        \"bank_address\": {\n          \"id\": \"ab427814-6158-3114-9aab-954ecc7ec6b9\",\n          \"object\": \"string\",\n          \"live_mode\": false,\n          \"created_at\": \"1998-09-09T02:22:28.347Z\",\n          \"updated_at\": \"1997-07-12T13:31:29.895Z\",\n          \"line1\": \"string\",\n          \"line2\": \"string\",\n          \"locality\": \"string\",\n          \"region\": \"string\",\n          \"postal_code\": \"string\",\n          \"country\": \"string\"\n        }\n      },\n      {\n        \"id\": \"3479a086-4d1a-ed94-6b20-57ec64ca1aa1\",\n        \"object\": \"string\",\n        \"live_mode\": false,\n        \"created_at\": \"1979-12-31T13:44:57.103Z\",\n        \"updated_at\": \"2014-08-22T14:26:05.284Z\",\n        \"discarded_at\": \"1959-12-24T02:29:56.392Z\",\n        \"routing_number\": \"string\",\n        \"routing_number_type\": \"ca_cpa\",\n        \"payment_type\": \"chats\",\n        \"bank_name\": \"string\",\n        \"bank_address\": {\n          \"id\": \"0c59348f-9c8e-d41f-b49f-03dc623c8d7e\",\n          \"object\": \"string\",\n          \"live_mode\": false,\n          \"created_at\": \"1969-01-21T04:44:34.025Z\",\n          \"updated_at\": \"1966-12-31T07:34:53.932Z\",\n          \"line1\": \"string\",\n          \"line2\": \"string\",\n          \"locality\": \"string\",\n          \"region\": \"string\",\n          \"postal_code\": \"string\",\n          \"country\": \"string\"\n        }\n      }\n    ],\n    \"debit_ledger_account_id\": \"39a3bb23-f82b-2a05-c332-a1b3885e42e6\",\n    \"credit_ledger_account_id\": \"f3aed4a9-7294-6508-eb7a-f79b6e2e316c\",\n    \"ledger_account_id\": \"c11865e5-abfa-ea72-d72f-94df7c164094\",\n    \"metadata\": {\n      \"key\": \"value\",\n      \"foo\": \"bar\",\n      \"modern\": \"treasury\"\n    }\n  },\n  {\n    \"id\": \"f3282dbf-4016-0fe3-277b-b2475ff92d79\",\n    \"object\": \"string\",\n    \"live_mode\": true,\n    \"created_at\": \"2017-12-07T14:16:27.636Z\",\n    \"updated_at\": \"1952-11-06T21:43:49.737Z\",\n    \"discarded_at\": \"2000-03-17T03:19:58.229Z\",\n    \"name\": \"string\",\n    \"description\": \"string\",\n    \"counterparty_id\": \"d3a0ec0a-e005-1de7-b1f5-1368ae614aec\",\n    \"internal_account_id\": \"bca98e25-f0a3-06ef-03b9-1cd78a3530f2\",\n    \"account_details\": [\n      {\n        \"id\": \"b88bb500-26e9-62ef-25df-a2073ba3dff8\",\n        \"object\": \"string\",\n        \"live_mode\": true,\n        \"created_at\": \"1961-11-17T23:45:44.943Z\",\n        \"updated_at\": \"2019-05-02T08:07:18.129Z\",\n        \"discarded_at\": \"1966-04-24T04:29:47.576Z\",\n        \"account_number_type\": \"ethereum_address\",\n        \"account_number_safe\": \"string\",\n        \"account_number\": \"string\"\n      },\n      {\n        \"id\": \"355ed463-22d7-228a-357b-292cf7dd4e8f\",\n        \"object\": \"string\",\n        \"live_mode\": true,\n        \"created_at\": \"1992-12-06T00:01:47.181Z\",\n        \"updated_at\": \"2007-05-08T14:39:35.412Z\",\n        \"discarded_at\": \"2019-12-24T15:39:50.883Z\",\n        \"account_number_type\": \"solana_address\",\n        \"account_number_safe\": \"string\",\n        \"account_number\": \"string\"\n      }\n    ],\n    \"routing_details\": [\n      {\n        \"id\": \"0bf87427-1330-c9a8-65c0-03fd81323b83\",\n        \"object\": \"string\",\n        \"live_mode\": false,\n        \"created_at\": \"1988-05-12T09:43:14.454Z\",\n        \"updated_at\": \"1998-12-19T09:47:59.237Z\",\n        \"discarded_at\": \"1955-05-09T22:49:24.085Z\",\n        \"routing_number\": \"string\",\n        \"routing_number_type\": \"cnaps\",\n        \"payment_type\": \"nz_becs\",\n        \"bank_name\": \"string\",\n        \"bank_address\": {\n          \"id\": \"40451451-c5e2-3c9b-b4b4-7fd72f487bfd\",\n          \"object\": \"string\",\n          \"live_mode\": true,\n          \"created_at\": \"1985-05-15T21:02:19.251Z\",\n          \"updated_at\": \"2020-03-05T13:39:48.812Z\",\n          \"line1\": \"string\",\n          \"line2\": \"string\",\n          \"locality\": \"string\",\n          \"region\": \"string\",\n          \"postal_code\": \"string\",\n          \"country\": \"string\"\n        }\n      },\n      {\n        \"id\": \"40b3b317-b519-1d15-ca5c-70c02fe20fdb\",\n        \"object\": \"string\",\n        \"live_mode\": true,\n        \"created_at\": \"1986-05-07T14:50:54.873Z\",\n        \"updated_at\": \"1960-09-01T21:27:02.999Z\",\n        \"discarded_at\": \"1972-02-09T02:40:26.599Z\",\n        \"routing_number\": \"string\",\n        \"routing_number_type\": \"za_national_clearing_code\",\n        \"payment_type\": \"hu_ics\",\n        \"bank_name\": \"string\",\n        \"bank_address\": {\n          \"id\": \"a639f4a2-1f70-a489-cc2d-4c85b3f3549d\",\n          \"object\": \"string\",\n          \"live_mode\": true,\n          \"created_at\": \"1949-08-16T03:14:57.805Z\",\n          \"updated_at\": \"1966-07-22T08:35:13.468Z\",\n          \"line1\": \"string\",\n          \"line2\": \"string\",\n          \"locality\": \"string\",\n          \"region\": \"string\",\n          \"postal_code\": \"string\",\n          \"country\": \"string\"\n        }\n      }\n    ],\n    \"debit_ledger_account_id\": \"badbbb97-c6a8-4d51-7dcc-d67dc51915a1\",\n    \"credit_ledger_account_id\": \"480c39ee-e113-f3da-5900-d9230074fdf9\",\n    \"ledger_account_id\": \"932f95ac-3e58-74df-e6d3-ff2d61fbfd07\",\n    \"metadata\": {\n      \"key\": \"value\",\n      \"foo\": \"bar\",\n      \"modern\": \"treasury\"\n    }\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5025a073-3219-49ea-8a51-6b2a1ab1230e",
+              "name": "unsuccessful",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "virtual_accounts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "after_cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "internal_account_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "counterparty_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "metadata[key_0]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "metadata[key_1]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "metadata[key_2]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "metadata[key_3]",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": {\n    \"code\": \"expired_key\",\n    \"message\": \"string\",\n    \"parameter\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "554a8e98-e4cc-4c03-846e-5d99f8aa68cd",
+          "name": "create virtual_account",
+          "request": {
+            "name": "create virtual_account",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "virtual_accounts"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "This key should be something unique, preferably something like an UUID.",
+                "key": "Idempotency-Key",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"internal_account_id\": \"<uuid>\",\n  \"description\": \"<string>\",\n  \"counterparty_id\": \"<uuid>\",\n  \"account_details\": [\n    {\n      \"account_number\": \"<string>\",\n      \"account_number_type\": \"<string>\"\n    },\n    {\n      \"account_number\": \"<string>\",\n      \"account_number_type\": \"<string>\"\n    }\n  ],\n  \"routing_details\": [\n    {\n      \"routing_number\": \"<string>\",\n      \"routing_number_type\": \"<string>\",\n      \"payment_type\": \"<string>\"\n    },\n    {\n      \"routing_number\": \"<string>\",\n      \"routing_number_type\": \"<string>\",\n      \"payment_type\": \"<string>\"\n    }\n  ],\n  \"debit_ledger_account_id\": \"<uuid>\",\n  \"credit_ledger_account_id\": \"<uuid>\",\n  \"ledger_account\": {\n    \"name\": \"<string>\",\n    \"normal_balance\": \"<string>\",\n    \"ledger_id\": \"<uuid>\",\n    \"currency\": \"<string>\",\n    \"description\": \"<string>\",\n    \"currency_exponent\": \"<integer>\",\n    \"ledger_account_category_ids\": [\n      \"<uuid>\",\n      \"<uuid>\"\n    ],\n    \"ledgerable_id\": \"<uuid>\",\n    \"ledgerable_type\": \"<string>\",\n    \"metadata\": {\n      \"key_0\": \"<string>\",\n      \"key_1\": \"<string>\"\n    },\n    \"external_id\": \"<string>\"\n  },\n  \"metadata\": {\n    \"key_0\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "97041df7-7f22-4236-83b0-745220f996e0",
+              "name": "successful",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "virtual_accounts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "This key should be something unique, preferably something like an UUID.",
+                    "key": "Idempotency-Key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"internal_account_id\": \"<uuid>\",\n  \"description\": \"<string>\",\n  \"counterparty_id\": \"<uuid>\",\n  \"account_details\": [\n    {\n      \"account_number\": \"<string>\",\n      \"account_number_type\": \"<string>\"\n    },\n    {\n      \"account_number\": \"<string>\",\n      \"account_number_type\": \"<string>\"\n    }\n  ],\n  \"routing_details\": [\n    {\n      \"routing_number\": \"<string>\",\n      \"routing_number_type\": \"<string>\",\n      \"payment_type\": \"<string>\"\n    },\n    {\n      \"routing_number\": \"<string>\",\n      \"routing_number_type\": \"<string>\",\n      \"payment_type\": \"<string>\"\n    }\n  ],\n  \"debit_ledger_account_id\": \"<uuid>\",\n  \"credit_ledger_account_id\": \"<uuid>\",\n  \"ledger_account\": {\n    \"name\": \"<string>\",\n    \"normal_balance\": \"<string>\",\n    \"ledger_id\": \"<uuid>\",\n    \"currency\": \"<string>\",\n    \"description\": \"<string>\",\n    \"currency_exponent\": \"<integer>\",\n    \"ledger_account_category_ids\": [\n      \"<uuid>\",\n      \"<uuid>\"\n    ],\n    \"ledgerable_id\": \"<uuid>\",\n    \"ledgerable_type\": \"<string>\",\n    \"metadata\": {\n      \"key\": \"value\",\n      \"foo\": \"bar\",\n      \"modern\": \"treasury\"\n    },\n    \"external_id\": \"<string>\"\n  },\n  \"metadata\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\",\n    \"key_2\": \"<string>\",\n    \"key_3\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"1df76342-f313-54f3-5573-62285a9ed313\",\n  \"object\": \"string\",\n  \"live_mode\": true,\n  \"created_at\": \"1952-01-13T01:26:44.809Z\",\n  \"updated_at\": \"1955-03-08T11:17:14.211Z\",\n  \"discarded_at\": \"2010-03-19T16:56:08.759Z\",\n  \"name\": \"string\",\n  \"description\": \"string\",\n  \"counterparty_id\": \"ff98b741-8c59-2723-e042-fa45da134114\",\n  \"internal_account_id\": \"f148e487-fee5-a045-a65d-0d5dec886078\",\n  \"account_details\": [\n    {\n      \"id\": \"270a1569-211d-d479-024d-19e304f339da\",\n      \"object\": \"string\",\n      \"live_mode\": false,\n      \"created_at\": \"1992-03-26T13:22:03.955Z\",\n      \"updated_at\": \"1996-07-28T08:35:24.709Z\",\n      \"discarded_at\": \"1996-02-22T13:32:25.629Z\",\n      \"account_number_type\": \"pan\",\n      \"account_number_safe\": \"string\",\n      \"account_number\": \"string\"\n    },\n    {\n      \"id\": \"c8a69a7a-afff-9c5e-0c5a-bfbaf10f5cf1\",\n      \"object\": \"string\",\n      \"live_mode\": false,\n      \"created_at\": \"1954-02-28T02:51:27.768Z\",\n      \"updated_at\": \"2026-06-09T13:58:20.257Z\",\n      \"discarded_at\": \"1998-07-03T16:42:14.194Z\",\n      \"account_number_type\": \"hk_number\",\n      \"account_number_safe\": \"string\",\n      \"account_number\": \"string\"\n    }\n  ],\n  \"routing_details\": [\n    {\n      \"id\": \"95dc2d3b-e9cf-aad5-ef83-65a729aeccf6\",\n      \"object\": \"string\",\n      \"live_mode\": true,\n      \"created_at\": \"1978-06-22T19:33:39.069Z\",\n      \"updated_at\": \"1957-08-17T07:38:49.524Z\",\n      \"discarded_at\": \"2024-11-08T23:44:02.932Z\",\n      \"routing_number\": \"string\",\n      \"routing_number_type\": \"mx_bank_identifier\",\n      \"payment_type\": \"dk_nets\",\n      \"bank_name\": \"string\",\n      \"bank_address\": {\n        \"id\": \"3daed98f-be63-5587-62b9-79d749008cde\",\n        \"object\": \"string\",\n        \"live_mode\": false,\n        \"created_at\": \"1987-10-23T04:30:38.879Z\",\n        \"updated_at\": \"1968-04-16T07:54:37.389Z\",\n        \"line1\": \"string\",\n        \"line2\": \"string\",\n        \"locality\": \"string\",\n        \"region\": \"string\",\n        \"postal_code\": \"string\",\n        \"country\": \"string\"\n      }\n    },\n    {\n      \"id\": \"b4cb71a7-fad8-574e-155b-57d62af681f5\",\n      \"object\": \"string\",\n      \"live_mode\": true,\n      \"created_at\": \"1957-11-24T05:29:02.450Z\",\n      \"updated_at\": \"1959-06-25T02:48:17.221Z\",\n      \"discarded_at\": \"1972-12-13T01:27:02.710Z\",\n      \"routing_number\": \"string\",\n      \"routing_number_type\": \"br_codigo\",\n      \"payment_type\": \"sen\",\n      \"bank_name\": \"string\",\n      \"bank_address\": {\n        \"id\": \"3623b3f7-996f-7fa1-b9e0-8e1eed0aa87f\",\n        \"object\": \"string\",\n        \"live_mode\": false,\n        \"created_at\": \"1999-01-13T18:57:15.727Z\",\n        \"updated_at\": \"2013-05-18T05:07:08.064Z\",\n        \"line1\": \"string\",\n        \"line2\": \"string\",\n        \"locality\": \"string\",\n        \"region\": \"string\",\n        \"postal_code\": \"string\",\n        \"country\": \"string\"\n      }\n    }\n  ],\n  \"debit_ledger_account_id\": \"c2273435-46af-a4a4-895e-0be935245515\",\n  \"credit_ledger_account_id\": \"f3afd251-9c3f-ef50-a43a-de13e60cc4da\",\n  \"ledger_account_id\": \"ffde040e-f5c6-a863-35bd-500ce586eedf\",\n  \"metadata\": {\n    \"key\": \"value\",\n    \"foo\": \"bar\",\n    \"modern\": \"treasury\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ee37ac70-d64b-45d0-b856-a84887700fd6",
+              "name": "unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "virtual_accounts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "This key should be something unique, preferably something like an UUID.",
+                    "key": "Idempotency-Key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"internal_account_id\": \"<uuid>\",\n  \"description\": \"<string>\",\n  \"counterparty_id\": \"<uuid>\",\n  \"account_details\": [\n    {\n      \"account_number\": \"<string>\",\n      \"account_number_type\": \"<string>\"\n    },\n    {\n      \"account_number\": \"<string>\",\n      \"account_number_type\": \"<string>\"\n    }\n  ],\n  \"routing_details\": [\n    {\n      \"routing_number\": \"<string>\",\n      \"routing_number_type\": \"<string>\",\n      \"payment_type\": \"<string>\"\n    },\n    {\n      \"routing_number\": \"<string>\",\n      \"routing_number_type\": \"<string>\",\n      \"payment_type\": \"<string>\"\n    }\n  ],\n  \"debit_ledger_account_id\": \"<uuid>\",\n  \"credit_ledger_account_id\": \"<uuid>\",\n  \"ledger_account\": {\n    \"name\": \"<string>\",\n    \"normal_balance\": \"<string>\",\n    \"ledger_id\": \"<uuid>\",\n    \"currency\": \"<string>\",\n    \"description\": \"<string>\",\n    \"currency_exponent\": \"<integer>\",\n    \"ledger_account_category_ids\": [\n      \"<uuid>\",\n      \"<uuid>\"\n    ],\n    \"ledgerable_id\": \"<uuid>\",\n    \"ledgerable_type\": \"<string>\",\n    \"metadata\": {\n      \"key\": \"value\",\n      \"foo\": \"bar\",\n      \"modern\": \"treasury\"\n    },\n    \"external_id\": \"<string>\"\n  },\n  \"metadata\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\",\n    \"key_2\": \"<string>\",\n    \"key_3\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": {\n    \"code\": \"expired_key\",\n    \"message\": \"string\",\n    \"parameter\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ea2e5969-96bd-4be5-b984-1c20a3240b73",
+              "name": "unsuccessful",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "virtual_accounts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "This key should be something unique, preferably something like an UUID.",
+                    "key": "Idempotency-Key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"internal_account_id\": \"<uuid>\",\n  \"description\": \"<string>\",\n  \"counterparty_id\": \"<uuid>\",\n  \"account_details\": [\n    {\n      \"account_number\": \"<string>\",\n      \"account_number_type\": \"<string>\"\n    },\n    {\n      \"account_number\": \"<string>\",\n      \"account_number_type\": \"<string>\"\n    }\n  ],\n  \"routing_details\": [\n    {\n      \"routing_number\": \"<string>\",\n      \"routing_number_type\": \"<string>\",\n      \"payment_type\": \"<string>\"\n    },\n    {\n      \"routing_number\": \"<string>\",\n      \"routing_number_type\": \"<string>\",\n      \"payment_type\": \"<string>\"\n    }\n  ],\n  \"debit_ledger_account_id\": \"<uuid>\",\n  \"credit_ledger_account_id\": \"<uuid>\",\n  \"ledger_account\": {\n    \"name\": \"<string>\",\n    \"normal_balance\": \"<string>\",\n    \"ledger_id\": \"<uuid>\",\n    \"currency\": \"<string>\",\n    \"description\": \"<string>\",\n    \"currency_exponent\": \"<integer>\",\n    \"ledger_account_category_ids\": [\n      \"<uuid>\",\n      \"<uuid>\"\n    ],\n    \"ledgerable_id\": \"<uuid>\",\n    \"ledgerable_type\": \"<string>\",\n    \"metadata\": {\n      \"key\": \"value\",\n      \"foo\": \"bar\",\n      \"modern\": \"treasury\"\n    },\n    \"external_id\": \"<string>\"\n  },\n  \"metadata\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\",\n    \"key_2\": \"<string>\",\n    \"key_3\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": {\n    \"code\": \"expired_key\",\n    \"message\": \"string\",\n    \"parameter\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "dbb6e9c7-b6a8-452e-a1ab-5ac01959f60a",
+          "name": "get virtual_account",
+          "request": {
+            "name": "get virtual_account",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "virtual_accounts",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Virtual Acccount ID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "51e4ee0d-c249-4d8d-a7c0-32abecdca44e",
+              "name": "successful",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "virtual_accounts",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Virtual Acccount ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"1df76342-f313-54f3-5573-62285a9ed313\",\n  \"object\": \"string\",\n  \"live_mode\": true,\n  \"created_at\": \"1952-01-13T01:26:44.809Z\",\n  \"updated_at\": \"1955-03-08T11:17:14.211Z\",\n  \"discarded_at\": \"2010-03-19T16:56:08.759Z\",\n  \"name\": \"string\",\n  \"description\": \"string\",\n  \"counterparty_id\": \"ff98b741-8c59-2723-e042-fa45da134114\",\n  \"internal_account_id\": \"f148e487-fee5-a045-a65d-0d5dec886078\",\n  \"account_details\": [\n    {\n      \"id\": \"270a1569-211d-d479-024d-19e304f339da\",\n      \"object\": \"string\",\n      \"live_mode\": false,\n      \"created_at\": \"1992-03-26T13:22:03.955Z\",\n      \"updated_at\": \"1996-07-28T08:35:24.709Z\",\n      \"discarded_at\": \"1996-02-22T13:32:25.629Z\",\n      \"account_number_type\": \"pan\",\n      \"account_number_safe\": \"string\",\n      \"account_number\": \"string\"\n    },\n    {\n      \"id\": \"c8a69a7a-afff-9c5e-0c5a-bfbaf10f5cf1\",\n      \"object\": \"string\",\n      \"live_mode\": false,\n      \"created_at\": \"1954-02-28T02:51:27.768Z\",\n      \"updated_at\": \"2026-06-09T13:58:20.257Z\",\n      \"discarded_at\": \"1998-07-03T16:42:14.194Z\",\n      \"account_number_type\": \"hk_number\",\n      \"account_number_safe\": \"string\",\n      \"account_number\": \"string\"\n    }\n  ],\n  \"routing_details\": [\n    {\n      \"id\": \"95dc2d3b-e9cf-aad5-ef83-65a729aeccf6\",\n      \"object\": \"string\",\n      \"live_mode\": true,\n      \"created_at\": \"1978-06-22T19:33:39.069Z\",\n      \"updated_at\": \"1957-08-17T07:38:49.524Z\",\n      \"discarded_at\": \"2024-11-08T23:44:02.932Z\",\n      \"routing_number\": \"string\",\n      \"routing_number_type\": \"mx_bank_identifier\",\n      \"payment_type\": \"dk_nets\",\n      \"bank_name\": \"string\",\n      \"bank_address\": {\n        \"id\": \"3daed98f-be63-5587-62b9-79d749008cde\",\n        \"object\": \"string\",\n        \"live_mode\": false,\n        \"created_at\": \"1987-10-23T04:30:38.879Z\",\n        \"updated_at\": \"1968-04-16T07:54:37.389Z\",\n        \"line1\": \"string\",\n        \"line2\": \"string\",\n        \"locality\": \"string\",\n        \"region\": \"string\",\n        \"postal_code\": \"string\",\n        \"country\": \"string\"\n      }\n    },\n    {\n      \"id\": \"b4cb71a7-fad8-574e-155b-57d62af681f5\",\n      \"object\": \"string\",\n      \"live_mode\": true,\n      \"created_at\": \"1957-11-24T05:29:02.450Z\",\n      \"updated_at\": \"1959-06-25T02:48:17.221Z\",\n      \"discarded_at\": \"1972-12-13T01:27:02.710Z\",\n      \"routing_number\": \"string\",\n      \"routing_number_type\": \"br_codigo\",\n      \"payment_type\": \"sen\",\n      \"bank_name\": \"string\",\n      \"bank_address\": {\n        \"id\": \"3623b3f7-996f-7fa1-b9e0-8e1eed0aa87f\",\n        \"object\": \"string\",\n        \"live_mode\": false,\n        \"created_at\": \"1999-01-13T18:57:15.727Z\",\n        \"updated_at\": \"2013-05-18T05:07:08.064Z\",\n        \"line1\": \"string\",\n        \"line2\": \"string\",\n        \"locality\": \"string\",\n        \"region\": \"string\",\n        \"postal_code\": \"string\",\n        \"country\": \"string\"\n      }\n    }\n  ],\n  \"debit_ledger_account_id\": \"c2273435-46af-a4a4-895e-0be935245515\",\n  \"credit_ledger_account_id\": \"f3afd251-9c3f-ef50-a43a-de13e60cc4da\",\n  \"ledger_account_id\": \"ffde040e-f5c6-a863-35bd-500ce586eedf\",\n  \"metadata\": {\n    \"key\": \"value\",\n    \"foo\": \"bar\",\n    \"modern\": \"treasury\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "852c1f3c-218b-4a2f-9cd8-48fb79df18b9",
+              "name": "not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "virtual_accounts",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Virtual Acccount ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": {\n    \"code\": \"expired_key\",\n    \"message\": \"string\",\n    \"parameter\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c35109cd-83e0-4ee5-b2bc-e54877777f3d",
+          "name": "update virtual_account",
+          "request": {
+            "name": "update virtual_account",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "virtual_accounts",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Virtual Acccount ID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"counterparty_id\": \"<uuid>\",\n  \"ledger_account_id\": \"<uuid>\",\n  \"metadata\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "cc7e3f25-d5b9-4abe-8755-34899f72f13a",
+              "name": "successful",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "virtual_accounts",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Virtual Acccount ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"counterparty_id\": \"<uuid>\",\n  \"ledger_account_id\": \"<uuid>\",\n  \"metadata\": {\n    \"key_0\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"1df76342-f313-54f3-5573-62285a9ed313\",\n  \"object\": \"string\",\n  \"live_mode\": true,\n  \"created_at\": \"1952-01-13T01:26:44.809Z\",\n  \"updated_at\": \"1955-03-08T11:17:14.211Z\",\n  \"discarded_at\": \"2010-03-19T16:56:08.759Z\",\n  \"name\": \"string\",\n  \"description\": \"string\",\n  \"counterparty_id\": \"ff98b741-8c59-2723-e042-fa45da134114\",\n  \"internal_account_id\": \"f148e487-fee5-a045-a65d-0d5dec886078\",\n  \"account_details\": [\n    {\n      \"id\": \"270a1569-211d-d479-024d-19e304f339da\",\n      \"object\": \"string\",\n      \"live_mode\": false,\n      \"created_at\": \"1992-03-26T13:22:03.955Z\",\n      \"updated_at\": \"1996-07-28T08:35:24.709Z\",\n      \"discarded_at\": \"1996-02-22T13:32:25.629Z\",\n      \"account_number_type\": \"pan\",\n      \"account_number_safe\": \"string\",\n      \"account_number\": \"string\"\n    },\n    {\n      \"id\": \"c8a69a7a-afff-9c5e-0c5a-bfbaf10f5cf1\",\n      \"object\": \"string\",\n      \"live_mode\": false,\n      \"created_at\": \"1954-02-28T02:51:27.768Z\",\n      \"updated_at\": \"2026-06-09T13:58:20.257Z\",\n      \"discarded_at\": \"1998-07-03T16:42:14.194Z\",\n      \"account_number_type\": \"hk_number\",\n      \"account_number_safe\": \"string\",\n      \"account_number\": \"string\"\n    }\n  ],\n  \"routing_details\": [\n    {\n      \"id\": \"95dc2d3b-e9cf-aad5-ef83-65a729aeccf6\",\n      \"object\": \"string\",\n      \"live_mode\": true,\n      \"created_at\": \"1978-06-22T19:33:39.069Z\",\n      \"updated_at\": \"1957-08-17T07:38:49.524Z\",\n      \"discarded_at\": \"2024-11-08T23:44:02.932Z\",\n      \"routing_number\": \"string\",\n      \"routing_number_type\": \"mx_bank_identifier\",\n      \"payment_type\": \"dk_nets\",\n      \"bank_name\": \"string\",\n      \"bank_address\": {\n        \"id\": \"3daed98f-be63-5587-62b9-79d749008cde\",\n        \"object\": \"string\",\n        \"live_mode\": false,\n        \"created_at\": \"1987-10-23T04:30:38.879Z\",\n        \"updated_at\": \"1968-04-16T07:54:37.389Z\",\n        \"line1\": \"string\",\n        \"line2\": \"string\",\n        \"locality\": \"string\",\n        \"region\": \"string\",\n        \"postal_code\": \"string\",\n        \"country\": \"string\"\n      }\n    },\n    {\n      \"id\": \"b4cb71a7-fad8-574e-155b-57d62af681f5\",\n      \"object\": \"string\",\n      \"live_mode\": true,\n      \"created_at\": \"1957-11-24T05:29:02.450Z\",\n      \"updated_at\": \"1959-06-25T02:48:17.221Z\",\n      \"discarded_at\": \"1972-12-13T01:27:02.710Z\",\n      \"routing_number\": \"string\",\n      \"routing_number_type\": \"br_codigo\",\n      \"payment_type\": \"sen\",\n      \"bank_name\": \"string\",\n      \"bank_address\": {\n        \"id\": \"3623b3f7-996f-7fa1-b9e0-8e1eed0aa87f\",\n        \"object\": \"string\",\n        \"live_mode\": false,\n        \"created_at\": \"1999-01-13T18:57:15.727Z\",\n        \"updated_at\": \"2013-05-18T05:07:08.064Z\",\n        \"line1\": \"string\",\n        \"line2\": \"string\",\n        \"locality\": \"string\",\n        \"region\": \"string\",\n        \"postal_code\": \"string\",\n        \"country\": \"string\"\n      }\n    }\n  ],\n  \"debit_ledger_account_id\": \"c2273435-46af-a4a4-895e-0be935245515\",\n  \"credit_ledger_account_id\": \"f3afd251-9c3f-ef50-a43a-de13e60cc4da\",\n  \"ledger_account_id\": \"ffde040e-f5c6-a863-35bd-500ce586eedf\",\n  \"metadata\": {\n    \"key\": \"value\",\n    \"foo\": \"bar\",\n    \"modern\": \"treasury\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "eae87fe2-e8fe-4c46-bad2-4ec31b4cc97e",
+              "name": "unsuccessful",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "virtual_accounts",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Virtual Acccount ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"counterparty_id\": \"<uuid>\",\n  \"ledger_account_id\": \"<uuid>\",\n  \"metadata\": {\n    \"key_0\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": {\n    \"code\": \"expired_key\",\n    \"message\": \"string\",\n    \"parameter\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "28628d1f-b781-469a-b7df-59b3ac0c909e",
+          "name": "delete virtual_account",
+          "request": {
+            "name": "delete virtual_account",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "virtual_accounts",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Virtual Acccount ID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "7b3bd8c9-9b43-4507-afd3-35cb603bf5ac",
+              "name": "successful",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "virtual_accounts",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Virtual Acccount ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"1df76342-f313-54f3-5573-62285a9ed313\",\n  \"object\": \"string\",\n  \"live_mode\": true,\n  \"created_at\": \"1952-01-13T01:26:44.809Z\",\n  \"updated_at\": \"1955-03-08T11:17:14.211Z\",\n  \"discarded_at\": \"2010-03-19T16:56:08.759Z\",\n  \"name\": \"string\",\n  \"description\": \"string\",\n  \"counterparty_id\": \"ff98b741-8c59-2723-e042-fa45da134114\",\n  \"internal_account_id\": \"f148e487-fee5-a045-a65d-0d5dec886078\",\n  \"account_details\": [\n    {\n      \"id\": \"270a1569-211d-d479-024d-19e304f339da\",\n      \"object\": \"string\",\n      \"live_mode\": false,\n      \"created_at\": \"1992-03-26T13:22:03.955Z\",\n      \"updated_at\": \"1996-07-28T08:35:24.709Z\",\n      \"discarded_at\": \"1996-02-22T13:32:25.629Z\",\n      \"account_number_type\": \"pan\",\n      \"account_number_safe\": \"string\",\n      \"account_number\": \"string\"\n    },\n    {\n      \"id\": \"c8a69a7a-afff-9c5e-0c5a-bfbaf10f5cf1\",\n      \"object\": \"string\",\n      \"live_mode\": false,\n      \"created_at\": \"1954-02-28T02:51:27.768Z\",\n      \"updated_at\": \"2026-06-09T13:58:20.257Z\",\n      \"discarded_at\": \"1998-07-03T16:42:14.194Z\",\n      \"account_number_type\": \"hk_number\",\n      \"account_number_safe\": \"string\",\n      \"account_number\": \"string\"\n    }\n  ],\n  \"routing_details\": [\n    {\n      \"id\": \"95dc2d3b-e9cf-aad5-ef83-65a729aeccf6\",\n      \"object\": \"string\",\n      \"live_mode\": true,\n      \"created_at\": \"1978-06-22T19:33:39.069Z\",\n      \"updated_at\": \"1957-08-17T07:38:49.524Z\",\n      \"discarded_at\": \"2024-11-08T23:44:02.932Z\",\n      \"routing_number\": \"string\",\n      \"routing_number_type\": \"mx_bank_identifier\",\n      \"payment_type\": \"dk_nets\",\n      \"bank_name\": \"string\",\n      \"bank_address\": {\n        \"id\": \"3daed98f-be63-5587-62b9-79d749008cde\",\n        \"object\": \"string\",\n        \"live_mode\": false,\n        \"created_at\": \"1987-10-23T04:30:38.879Z\",\n        \"updated_at\": \"1968-04-16T07:54:37.389Z\",\n        \"line1\": \"string\",\n        \"line2\": \"string\",\n        \"locality\": \"string\",\n        \"region\": \"string\",\n        \"postal_code\": \"string\",\n        \"country\": \"string\"\n      }\n    },\n    {\n      \"id\": \"b4cb71a7-fad8-574e-155b-57d62af681f5\",\n      \"object\": \"string\",\n      \"live_mode\": true,\n      \"created_at\": \"1957-11-24T05:29:02.450Z\",\n      \"updated_at\": \"1959-06-25T02:48:17.221Z\",\n      \"discarded_at\": \"1972-12-13T01:27:02.710Z\",\n      \"routing_number\": \"string\",\n      \"routing_number_type\": \"br_codigo\",\n      \"payment_type\": \"sen\",\n      \"bank_name\": \"string\",\n      \"bank_address\": {\n        \"id\": \"3623b3f7-996f-7fa1-b9e0-8e1eed0aa87f\",\n        \"object\": \"string\",\n        \"live_mode\": false,\n        \"created_at\": \"1999-01-13T18:57:15.727Z\",\n        \"updated_at\": \"2013-05-18T05:07:08.064Z\",\n        \"line1\": \"string\",\n        \"line2\": \"string\",\n        \"locality\": \"string\",\n        \"region\": \"string\",\n        \"postal_code\": \"string\",\n        \"country\": \"string\"\n      }\n    }\n  ],\n  \"debit_ledger_account_id\": \"c2273435-46af-a4a4-895e-0be935245515\",\n  \"credit_ledger_account_id\": \"f3afd251-9c3f-ef50-a43a-de13e60cc4da\",\n  \"ledger_account_id\": \"ffde040e-f5c6-a863-35bd-500ce586eedf\",\n  \"metadata\": {\n    \"key\": \"value\",\n    \"foo\": \"bar\",\n    \"modern\": \"treasury\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "http://localhost:3000",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "ba42258b-0f62-4d6a-a1da-f6b7893b64c7",
+    "name": "Modern Treasury AccountCapability VirtualAccount API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Modern Treasury REST API. Please see https://docs.moderntreasury.com for more details.\n\nContact Support:\n Name: Modern Treasury Engineering Team",
+      "type": "text/plain"
+    }
+  }
+}

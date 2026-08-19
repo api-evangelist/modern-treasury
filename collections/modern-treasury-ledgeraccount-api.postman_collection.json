@@ -1,0 +1,1934 @@
+{
+  "item": [
+    {
+      "id": "81c0f4ea-3003-4383-820a-afbcbf7bfc62",
+      "name": "LedgerAccount",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "8536e7c6-dcd7-4785-967e-1eac53435201",
+          "name": "list ledger_accounts",
+          "request": {
+            "name": "list ledger_accounts",
+            "description": {
+              "content": "Get a list of ledger accounts.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "ledger_accounts"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "after_cursor",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "per_page",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "metadata[key_0]",
+                  "value": "<string>",
+                  "description": "For example, if you want to query for records with metadata key `Type` and value `Loan`, the query would be `metadata%5BType%5D=Loan`. This encodes the query parameters."
+                },
+                {
+                  "disabled": false,
+                  "key": "metadata[key_1]",
+                  "value": "<string>",
+                  "description": "For example, if you want to query for records with metadata key `Type` and value `Loan`, the query would be `metadata%5BType%5D=Loan`. This encodes the query parameters."
+                },
+                {
+                  "disabled": false,
+                  "key": "id[]",
+                  "value": "<string>",
+                  "description": "If you have specific IDs to retrieve in bulk, you can pass them as query parameters delimited with `id[]=`, for example `?id[]=123&id[]=abc`."
+                },
+                {
+                  "disabled": false,
+                  "key": "id[]",
+                  "value": "<string>",
+                  "description": "If you have specific IDs to retrieve in bulk, you can pass them as query parameters delimited with `id[]=`, for example `?id[]=123&id[]=abc`."
+                },
+                {
+                  "disabled": false,
+                  "key": "name[]",
+                  "value": "<string>",
+                  "description": "If you have specific names to retrieve in bulk, you can pass them as query parameters delimited with `name[]=`, for example `?name[]=123&name[]=abc`."
+                },
+                {
+                  "disabled": false,
+                  "key": "name[]",
+                  "value": "<string>",
+                  "description": "If you have specific names to retrieve in bulk, you can pass them as query parameters delimited with `name[]=`, for example `?name[]=123&name[]=abc`."
+                },
+                {
+                  "disabled": false,
+                  "key": "ledger_id",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "external_id",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "currency",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "balances[as_of_date]",
+                  "value": "<date>",
+                  "description": "Use `balances[effective_at_lower_bound]` and `balances[effective_at_upper_bound]` to get the balances change between the two timestamps. The lower bound is inclusive while the upper bound is exclusive of the provided timestamps. If no value is supplied the balances will be retrieved not including that bound."
+                },
+                {
+                  "disabled": false,
+                  "key": "balances[effective_at]",
+                  "value": "<dateTime>",
+                  "description": "Use `balances[effective_at_lower_bound]` and `balances[effective_at_upper_bound]` to get the balances change between the two timestamps. The lower bound is inclusive while the upper bound is exclusive of the provided timestamps. If no value is supplied the balances will be retrieved not including that bound."
+                },
+                {
+                  "disabled": false,
+                  "key": "balances[effective_at_lower_bound]",
+                  "value": "<dateTime>",
+                  "description": "Use `balances[effective_at_lower_bound]` and `balances[effective_at_upper_bound]` to get the balances change between the two timestamps. The lower bound is inclusive while the upper bound is exclusive of the provided timestamps. If no value is supplied the balances will be retrieved not including that bound."
+                },
+                {
+                  "disabled": false,
+                  "key": "balances[effective_at_upper_bound]",
+                  "value": "<dateTime>",
+                  "description": "Use `balances[effective_at_lower_bound]` and `balances[effective_at_upper_bound]` to get the balances change between the two timestamps. The lower bound is inclusive while the upper bound is exclusive of the provided timestamps. If no value is supplied the balances will be retrieved not including that bound."
+                },
+                {
+                  "disabled": false,
+                  "key": "pending_balance_amount[gt]",
+                  "value": "<integer>",
+                  "description": "Use `gt` (>), `gte` (>=), `lt` (<), `lte` (<=), `eq` (=), or `not_eq` (!=) to filter by balance amount."
+                },
+                {
+                  "disabled": false,
+                  "key": "pending_balance_amount[lt]",
+                  "value": "<integer>",
+                  "description": "Use `gt` (>), `gte` (>=), `lt` (<), `lte` (<=), `eq` (=), or `not_eq` (!=) to filter by balance amount."
+                },
+                {
+                  "disabled": false,
+                  "key": "pending_balance_amount[gte]",
+                  "value": "<integer>",
+                  "description": "Use `gt` (>), `gte` (>=), `lt` (<), `lte` (<=), `eq` (=), or `not_eq` (!=) to filter by balance amount."
+                },
+                {
+                  "disabled": false,
+                  "key": "pending_balance_amount[lte]",
+                  "value": "<integer>",
+                  "description": "Use `gt` (>), `gte` (>=), `lt` (<), `lte` (<=), `eq` (=), or `not_eq` (!=) to filter by balance amount."
+                },
+                {
+                  "disabled": false,
+                  "key": "pending_balance_amount[eq]",
+                  "value": "<integer>",
+                  "description": "Use `gt` (>), `gte` (>=), `lt` (<), `lte` (<=), `eq` (=), or `not_eq` (!=) to filter by balance amount."
+                },
+                {
+                  "disabled": false,
+                  "key": "pending_balance_amount[not_eq]",
+                  "value": "<integer>",
+                  "description": "Use `gt` (>), `gte` (>=), `lt` (<), `lte` (<=), `eq` (=), or `not_eq` (!=) to filter by balance amount."
+                },
+                {
+                  "disabled": false,
+                  "key": "posted_balance_amount[gt]",
+                  "value": "<integer>",
+                  "description": "Use `gt` (>), `gte` (>=), `lt` (<), `lte` (<=), `eq` (=), or `not_eq` (!=) to filter by balance amount."
+                },
+                {
+                  "disabled": false,
+                  "key": "posted_balance_amount[lt]",
+                  "value": "<integer>",
+                  "description": "Use `gt` (>), `gte` (>=), `lt` (<), `lte` (<=), `eq` (=), or `not_eq` (!=) to filter by balance amount."
+                },
+                {
+                  "disabled": false,
+                  "key": "posted_balance_amount[gte]",
+                  "value": "<integer>",
+                  "description": "Use `gt` (>), `gte` (>=), `lt` (<), `lte` (<=), `eq` (=), or `not_eq` (!=) to filter by balance amount."
+                },
+                {
+                  "disabled": false,
+                  "key": "posted_balance_amount[lte]",
+                  "value": "<integer>",
+                  "description": "Use `gt` (>), `gte` (>=), `lt` (<), `lte` (<=), `eq` (=), or `not_eq` (!=) to filter by balance amount."
+                },
+                {
+                  "disabled": false,
+                  "key": "posted_balance_amount[eq]",
+                  "value": "<integer>",
+                  "description": "Use `gt` (>), `gte` (>=), `lt` (<), `lte` (<=), `eq` (=), or `not_eq` (!=) to filter by balance amount."
+                },
+                {
+                  "disabled": false,
+                  "key": "posted_balance_amount[not_eq]",
+                  "value": "<integer>",
+                  "description": "Use `gt` (>), `gte` (>=), `lt` (<), `lte` (<=), `eq` (=), or `not_eq` (!=) to filter by balance amount."
+                },
+                {
+                  "disabled": false,
+                  "key": "available_balance_amount[gt]",
+                  "value": "<integer>",
+                  "description": "Use `gt` (>), `gte` (>=), `lt` (<), `lte` (<=), `eq` (=), or `not_eq` (!=) to filter by balance amount."
+                },
+                {
+                  "disabled": false,
+                  "key": "available_balance_amount[lt]",
+                  "value": "<integer>",
+                  "description": "Use `gt` (>), `gte` (>=), `lt` (<), `lte` (<=), `eq` (=), or `not_eq` (!=) to filter by balance amount."
+                },
+                {
+                  "disabled": false,
+                  "key": "available_balance_amount[gte]",
+                  "value": "<integer>",
+                  "description": "Use `gt` (>), `gte` (>=), `lt` (<), `lte` (<=), `eq` (=), or `not_eq` (!=) to filter by balance amount."
+                },
+                {
+                  "disabled": false,
+                  "key": "available_balance_amount[lte]",
+                  "value": "<integer>",
+                  "description": "Use `gt` (>), `gte` (>=), `lt` (<), `lte` (<=), `eq` (=), or `not_eq` (!=) to filter by balance amount."
+                },
+                {
+                  "disabled": false,
+                  "key": "available_balance_amount[eq]",
+                  "value": "<integer>",
+                  "description": "Use `gt` (>), `gte` (>=), `lt` (<), `lte` (<=), `eq` (=), or `not_eq` (!=) to filter by balance amount."
+                },
+                {
+                  "disabled": false,
+                  "key": "available_balance_amount[not_eq]",
+                  "value": "<integer>",
+                  "description": "Use `gt` (>), `gte` (>=), `lt` (<), `lte` (<=), `eq` (=), or `not_eq` (!=) to filter by balance amount."
+                },
+                {
+                  "disabled": false,
+                  "key": "normal_balance",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "created_at[key_0]",
+                  "value": "<dateTime>",
+                  "description": "Use `gt` (>), `gte` (>=), `lt` (<), `lte` (<=), or `eq` (=) to filter by the created at timestamp. For example, for all times after Jan 1 2000 12:00 UTC, use created_at%5Bgt%5D=2000-01-01T12:00:00Z."
+                },
+                {
+                  "disabled": false,
+                  "key": "updated_at[key_0]",
+                  "value": "<dateTime>",
+                  "description": "Use `gt` (>), `gte` (>=), `lt` (<), `lte` (<=), or `eq` (=) to filter by the updated at timestamp. For example, for all times after Jan 1 2000 12:00 UTC, use updated_at%5Bgt%5D=2000-01-01T12:00:00Z."
+                },
+                {
+                  "disabled": false,
+                  "key": "ledger_account_category_id",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "54e059de-f1dc-4dbd-b190-f20784354cec",
+              "name": "successful",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "ledger_accounts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "after_cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "metadata[key_0]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "metadata[key_1]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "metadata[key_2]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "id[]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "id[]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "name[]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "name[]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ledger_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "external_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "currency",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "balances[as_of_date]",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "balances[effective_at]",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "balances[effective_at_lower_bound]",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "balances[effective_at_upper_bound]",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "pending_balance_amount[gt]",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "pending_balance_amount[lt]",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "pending_balance_amount[gte]",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "pending_balance_amount[lte]",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "pending_balance_amount[eq]",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "pending_balance_amount[not_eq]",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "posted_balance_amount[gt]",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "posted_balance_amount[lt]",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "posted_balance_amount[gte]",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "posted_balance_amount[lte]",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "posted_balance_amount[eq]",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "posted_balance_amount[not_eq]",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "available_balance_amount[gt]",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "available_balance_amount[lt]",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "available_balance_amount[gte]",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "available_balance_amount[lte]",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "available_balance_amount[eq]",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "available_balance_amount[not_eq]",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "normal_balance",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "created_at[key_0]",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "created_at[key_1]",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "created_at[key_2]",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "updated_at[key_0]",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "updated_at[key_1]",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "updated_at[key_2]",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "ledger_account_category_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "The cursor for the next page. Including this in a call as `after_cursor` will return the next page.",
+                  "key": "X-After-Cursor",
+                  "value": "string"
+                },
+                {
+                  "disabled": false,
+                  "description": "The current `per_page`.",
+                  "key": "X-Per-Page",
+                  "value": "8557"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"8f91f381-f63f-dbeb-9269-f619ff49b32f\",\n    \"object\": \"string\",\n    \"live_mode\": false,\n    \"created_at\": \"1965-04-11T20:26:43.696Z\",\n    \"updated_at\": \"1988-11-18T18:16:10.186Z\",\n    \"discarded_at\": \"2003-05-09T14:32:12.636Z\",\n    \"name\": \"string\",\n    \"description\": \"string\",\n    \"normal_balance\": \"debit\",\n    \"balances\": {\n      \"effective_at_lower_bound\": \"2017-11-26T06:10:26.892Z\",\n      \"effective_at_upper_bound\": \"2013-02-07T07:01:13.194Z\",\n      \"pending_balance\": {\n        \"credits\": 1318,\n        \"debits\": 2659,\n        \"amount\": 608,\n        \"currency\": \"string\",\n        \"currency_exponent\": 9355\n      },\n      \"posted_balance\": {\n        \"credits\": 1687,\n        \"debits\": 8257,\n        \"amount\": 7202,\n        \"currency\": \"string\",\n        \"currency_exponent\": 2060\n      },\n      \"available_balance\": {\n        \"credits\": 7515,\n        \"debits\": 9118,\n        \"amount\": 2978,\n        \"currency\": \"string\",\n        \"currency_exponent\": 4610\n      }\n    },\n    \"lock_version\": 266,\n    \"ledger_id\": \"f64650b5-b778-0385-e322-200520ef8fb2\",\n    \"ledgerable_id\": \"61d69f29-b715-0b70-825c-6305d79e3bf2\",\n    \"external_id\": \"string\",\n    \"ledgerable_type\": \"internal_account\",\n    \"metadata\": {\n      \"key\": \"value\",\n      \"foo\": \"bar\",\n      \"modern\": \"treasury\"\n    }\n  },\n  {\n    \"id\": \"374a3dda-7830-6ade-6504-7e600f4c2e52\",\n    \"object\": \"string\",\n    \"live_mode\": false,\n    \"created_at\": \"1965-09-23T19:33:21.322Z\",\n    \"updated_at\": \"2001-09-01T06:30:52.733Z\",\n    \"discarded_at\": \"1972-11-18T08:39:17.408Z\",\n    \"name\": \"string\",\n    \"description\": \"string\",\n    \"normal_balance\": \"debit\",\n    \"balances\": {\n      \"effective_at_lower_bound\": \"2002-08-08T15:48:27.951Z\",\n      \"effective_at_upper_bound\": \"1990-05-19T12:26:45.920Z\",\n      \"pending_balance\": {\n        \"credits\": 8112,\n        \"debits\": 5715,\n        \"amount\": 7533,\n        \"currency\": \"string\",\n        \"currency_exponent\": 375\n      },\n      \"posted_balance\": {\n        \"credits\": 5966,\n        \"debits\": 8671,\n        \"amount\": 2448,\n        \"currency\": \"string\",\n        \"currency_exponent\": 2758\n      },\n      \"available_balance\": {\n        \"credits\": 5855,\n        \"debits\": 9737,\n        \"amount\": 212,\n        \"currency\": \"string\",\n        \"currency_exponent\": 9998\n      }\n    },\n    \"lock_version\": 1189,\n    \"ledger_id\": \"a0350653-8fbe-2a5a-e033-e63b22da74f5\",\n    \"ledgerable_id\": \"0ef4d382-ee06-6592-9691-7365ecfcd8e9\",\n    \"external_id\": \"string\",\n    \"ledgerable_type\": \"external_account\",\n    \"metadata\": {\n      \"key\": \"value\",\n      \"foo\": \"bar\",\n      \"modern\": \"treasury\"\n    }\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7dd1a112-ae9a-497d-9608-e403e381eeba",
+              "name": "unsuccessful",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "ledger_accounts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "after_cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "metadata[key_0]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "metadata[key_1]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "metadata[key_2]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "id[]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "id[]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "name[]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "name[]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ledger_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "external_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "currency",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "balances[as_of_date]",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "balances[effective_at]",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "balances[effective_at_lower_bound]",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "balances[effective_at_upper_bound]",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "pending_balance_amount[gt]",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "pending_balance_amount[lt]",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "pending_balance_amount[gte]",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "pending_balance_amount[lte]",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "pending_balance_amount[eq]",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "pending_balance_amount[not_eq]",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "posted_balance_amount[gt]",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "posted_balance_amount[lt]",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "posted_balance_amount[gte]",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "posted_balance_amount[lte]",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "posted_balance_amount[eq]",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "posted_balance_amount[not_eq]",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "available_balance_amount[gt]",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "available_balance_amount[lt]",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "available_balance_amount[gte]",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "available_balance_amount[lte]",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "available_balance_amount[eq]",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "available_balance_amount[not_eq]",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "normal_balance",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "created_at[key_0]",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "created_at[key_1]",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "created_at[key_2]",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "updated_at[key_0]",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "updated_at[key_1]",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "updated_at[key_2]",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "ledger_account_category_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": {\n    \"code\": \"parameter_invalid\",\n    \"message\": \"string\",\n    \"parameter\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "edc4797f-756b-4bf3-9041-53baa91218af",
+          "name": "create ledger_account",
+          "request": {
+            "name": "create ledger_account",
+            "description": {
+              "content": "Create a ledger account.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "ledger_accounts"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "This key should be something unique, preferably something like an UUID.",
+                "key": "Idempotency-Key",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"normal_balance\": \"<string>\",\n  \"ledger_id\": \"<uuid>\",\n  \"currency\": \"<string>\",\n  \"description\": \"<string>\",\n  \"currency_exponent\": \"<integer>\",\n  \"ledger_account_category_ids\": [\n    \"<uuid>\",\n    \"<uuid>\"\n  ],\n  \"ledgerable_id\": \"<uuid>\",\n  \"ledgerable_type\": \"<string>\",\n  \"metadata\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\",\n    \"key_2\": \"<string>\"\n  },\n  \"external_id\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "d9426127-d5de-43c8-8f28-775b907e00bf",
+              "name": "successful",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "ledger_accounts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "This key should be something unique, preferably something like an UUID.",
+                    "key": "Idempotency-Key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"normal_balance\": \"<string>\",\n  \"ledger_id\": \"<uuid>\",\n  \"currency\": \"<string>\",\n  \"description\": \"<string>\",\n  \"currency_exponent\": \"<integer>\",\n  \"ledger_account_category_ids\": [\n    \"<uuid>\",\n    \"<uuid>\"\n  ],\n  \"ledgerable_id\": \"<uuid>\",\n  \"ledgerable_type\": \"<string>\",\n  \"metadata\": {\n    \"key\": \"value\",\n    \"foo\": \"bar\",\n    \"modern\": \"treasury\"\n  },\n  \"external_id\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"4060f113-4648-c23d-94f7-0eb988e61237\",\n  \"object\": \"string\",\n  \"live_mode\": false,\n  \"created_at\": \"1961-01-30T11:15:04.495Z\",\n  \"updated_at\": \"1966-06-08T15:07:59.429Z\",\n  \"discarded_at\": \"1991-01-22T03:53:37.127Z\",\n  \"name\": \"string\",\n  \"description\": \"string\",\n  \"normal_balance\": \"debit\",\n  \"balances\": {\n    \"effective_at_lower_bound\": \"1950-05-26T11:37:56.154Z\",\n    \"effective_at_upper_bound\": \"1984-05-17T10:38:08.196Z\",\n    \"pending_balance\": {\n      \"credits\": 2936,\n      \"debits\": 7658,\n      \"amount\": 601,\n      \"currency\": \"string\",\n      \"currency_exponent\": 7423\n    },\n    \"posted_balance\": {\n      \"credits\": 9687,\n      \"debits\": 6302,\n      \"amount\": 4251,\n      \"currency\": \"string\",\n      \"currency_exponent\": 3364\n    },\n    \"available_balance\": {\n      \"credits\": 7330,\n      \"debits\": 9993,\n      \"amount\": 6714,\n      \"currency\": \"string\",\n      \"currency_exponent\": 861\n    }\n  },\n  \"lock_version\": 7701,\n  \"ledger_id\": \"ad1d5653-d82d-6749-38b8-dd028ddb4552\",\n  \"ledgerable_id\": \"b39482bd-9bf7-9e57-e7e9-8001e90f05b2\",\n  \"external_id\": \"string\",\n  \"ledgerable_type\": \"virtual_account\",\n  \"metadata\": {\n    \"key\": \"value\",\n    \"foo\": \"bar\",\n    \"modern\": \"treasury\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "514044d6-dd5e-4329-924a-7f66e789f895",
+              "name": "forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "ledger_accounts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "This key should be something unique, preferably something like an UUID.",
+                    "key": "Idempotency-Key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"normal_balance\": \"<string>\",\n  \"ledger_id\": \"<uuid>\",\n  \"currency\": \"<string>\",\n  \"description\": \"<string>\",\n  \"currency_exponent\": \"<integer>\",\n  \"ledger_account_category_ids\": [\n    \"<uuid>\",\n    \"<uuid>\"\n  ],\n  \"ledgerable_id\": \"<uuid>\",\n  \"ledgerable_type\": \"<string>\",\n  \"metadata\": {\n    \"key\": \"value\",\n    \"foo\": \"bar\",\n    \"modern\": \"treasury\"\n  },\n  \"external_id\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": {\n    \"code\": \"parameter_invalid\",\n    \"message\": \"string\",\n    \"parameter\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "48803497-6d6c-4033-94d0-6d04ed46308c",
+              "name": "not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "ledger_accounts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "This key should be something unique, preferably something like an UUID.",
+                    "key": "Idempotency-Key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"normal_balance\": \"<string>\",\n  \"ledger_id\": \"<uuid>\",\n  \"currency\": \"<string>\",\n  \"description\": \"<string>\",\n  \"currency_exponent\": \"<integer>\",\n  \"ledger_account_category_ids\": [\n    \"<uuid>\",\n    \"<uuid>\"\n  ],\n  \"ledgerable_id\": \"<uuid>\",\n  \"ledgerable_type\": \"<string>\",\n  \"metadata\": {\n    \"key\": \"value\",\n    \"foo\": \"bar\",\n    \"modern\": \"treasury\"\n  },\n  \"external_id\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": {\n    \"code\": \"parameter_invalid\",\n    \"message\": \"string\",\n    \"parameter\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "012b24cb-df41-4de6-903f-ed0f25e11830",
+              "name": "unsuccessful",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "ledger_accounts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "This key should be something unique, preferably something like an UUID.",
+                    "key": "Idempotency-Key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"normal_balance\": \"<string>\",\n  \"ledger_id\": \"<uuid>\",\n  \"currency\": \"<string>\",\n  \"description\": \"<string>\",\n  \"currency_exponent\": \"<integer>\",\n  \"ledger_account_category_ids\": [\n    \"<uuid>\",\n    \"<uuid>\"\n  ],\n  \"ledgerable_id\": \"<uuid>\",\n  \"ledgerable_type\": \"<string>\",\n  \"metadata\": {\n    \"key\": \"value\",\n    \"foo\": \"bar\",\n    \"modern\": \"treasury\"\n  },\n  \"external_id\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": {\n    \"code\": \"parameter_invalid\",\n    \"message\": \"string\",\n    \"parameter\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "aa3f5247-cd0f-4146-9422-dbd33df6d369",
+          "name": "get ledger_account",
+          "request": {
+            "name": "get ledger_account",
+            "description": {
+              "content": "Get details on a single ledger account.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "ledger_accounts",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "balances[as_of_date]",
+                  "value": "<date>",
+                  "description": "Use `balances[effective_at_lower_bound]` and `balances[effective_at_upper_bound]` to get the balances change between the two timestamps. The lower bound is inclusive while the upper bound is exclusive of the provided timestamps. If no value is supplied the balances will be retrieved not including that bound. Use `balances[as_of_lock_version]` to retrieve a balance as of a specific Ledger Account `lock_version`."
+                },
+                {
+                  "disabled": false,
+                  "key": "balances[effective_at]",
+                  "value": "<dateTime>",
+                  "description": "Use `balances[effective_at_lower_bound]` and `balances[effective_at_upper_bound]` to get the balances change between the two timestamps. The lower bound is inclusive while the upper bound is exclusive of the provided timestamps. If no value is supplied the balances will be retrieved not including that bound. Use `balances[as_of_lock_version]` to retrieve a balance as of a specific Ledger Account `lock_version`."
+                },
+                {
+                  "disabled": false,
+                  "key": "balances[effective_at_lower_bound]",
+                  "value": "<dateTime>",
+                  "description": "Use `balances[effective_at_lower_bound]` and `balances[effective_at_upper_bound]` to get the balances change between the two timestamps. The lower bound is inclusive while the upper bound is exclusive of the provided timestamps. If no value is supplied the balances will be retrieved not including that bound. Use `balances[as_of_lock_version]` to retrieve a balance as of a specific Ledger Account `lock_version`."
+                },
+                {
+                  "disabled": false,
+                  "key": "balances[effective_at_upper_bound]",
+                  "value": "<dateTime>",
+                  "description": "Use `balances[effective_at_lower_bound]` and `balances[effective_at_upper_bound]` to get the balances change between the two timestamps. The lower bound is inclusive while the upper bound is exclusive of the provided timestamps. If no value is supplied the balances will be retrieved not including that bound. Use `balances[as_of_lock_version]` to retrieve a balance as of a specific Ledger Account `lock_version`."
+                },
+                {
+                  "disabled": false,
+                  "key": "balances[as_of_lock_version]",
+                  "value": "<integer>",
+                  "description": "Use `balances[effective_at_lower_bound]` and `balances[effective_at_upper_bound]` to get the balances change between the two timestamps. The lower bound is inclusive while the upper bound is exclusive of the provided timestamps. If no value is supplied the balances will be retrieved not including that bound. Use `balances[as_of_lock_version]` to retrieve a balance as of a specific Ledger Account `lock_version`."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The ledger account id (UUID) or external_id"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "c92fb050-4394-467b-8f7c-612fa041ff4b",
+              "name": "successful",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "ledger_accounts",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "balances[as_of_date]",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "balances[effective_at]",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "balances[effective_at_lower_bound]",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "balances[effective_at_upper_bound]",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "balances[as_of_lock_version]",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ledger account id (UUID) or external_id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"4060f113-4648-c23d-94f7-0eb988e61237\",\n  \"object\": \"string\",\n  \"live_mode\": false,\n  \"created_at\": \"1961-01-30T11:15:04.495Z\",\n  \"updated_at\": \"1966-06-08T15:07:59.429Z\",\n  \"discarded_at\": \"1991-01-22T03:53:37.127Z\",\n  \"name\": \"string\",\n  \"description\": \"string\",\n  \"normal_balance\": \"debit\",\n  \"balances\": {\n    \"effective_at_lower_bound\": \"1950-05-26T11:37:56.154Z\",\n    \"effective_at_upper_bound\": \"1984-05-17T10:38:08.196Z\",\n    \"pending_balance\": {\n      \"credits\": 2936,\n      \"debits\": 7658,\n      \"amount\": 601,\n      \"currency\": \"string\",\n      \"currency_exponent\": 7423\n    },\n    \"posted_balance\": {\n      \"credits\": 9687,\n      \"debits\": 6302,\n      \"amount\": 4251,\n      \"currency\": \"string\",\n      \"currency_exponent\": 3364\n    },\n    \"available_balance\": {\n      \"credits\": 7330,\n      \"debits\": 9993,\n      \"amount\": 6714,\n      \"currency\": \"string\",\n      \"currency_exponent\": 861\n    }\n  },\n  \"lock_version\": 7701,\n  \"ledger_id\": \"ad1d5653-d82d-6749-38b8-dd028ddb4552\",\n  \"ledgerable_id\": \"b39482bd-9bf7-9e57-e7e9-8001e90f05b2\",\n  \"external_id\": \"string\",\n  \"ledgerable_type\": \"virtual_account\",\n  \"metadata\": {\n    \"key\": \"value\",\n    \"foo\": \"bar\",\n    \"modern\": \"treasury\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5819277f-69af-4b23-a688-a2ef92d11a73",
+              "name": "not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "ledger_accounts",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "balances[as_of_date]",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "balances[effective_at]",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "balances[effective_at_lower_bound]",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "balances[effective_at_upper_bound]",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "balances[as_of_lock_version]",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ledger account id (UUID) or external_id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": {\n    \"code\": \"parameter_invalid\",\n    \"message\": \"string\",\n    \"parameter\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4825dc4d-6720-49c2-b5fd-d830054039cd",
+              "name": "unsuccessful",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "ledger_accounts",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "balances[as_of_date]",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "balances[effective_at]",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "balances[effective_at_lower_bound]",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "balances[effective_at_upper_bound]",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "balances[as_of_lock_version]",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ledger account id (UUID) or external_id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": {\n    \"code\": \"parameter_invalid\",\n    \"message\": \"string\",\n    \"parameter\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "afe16b6d-213b-41d1-87bd-d0d249e4ceb7",
+          "name": "update ledger_account",
+          "request": {
+            "name": "update ledger_account",
+            "description": {
+              "content": "Update the details of a ledger account.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "ledger_accounts",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The ledger account id (UUID)"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"metadata\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\",\n    \"key_2\": \"<string>\"\n  },\n  \"external_id\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "0e59b786-9b4b-4a7d-bdda-2240060006e2",
+              "name": "successful",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "ledger_accounts",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ledger account id (UUID)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"metadata\": {\n    \"key\": \"value\",\n    \"foo\": \"bar\",\n    \"modern\": \"treasury\"\n  },\n  \"external_id\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"4060f113-4648-c23d-94f7-0eb988e61237\",\n  \"object\": \"string\",\n  \"live_mode\": false,\n  \"created_at\": \"1961-01-30T11:15:04.495Z\",\n  \"updated_at\": \"1966-06-08T15:07:59.429Z\",\n  \"discarded_at\": \"1991-01-22T03:53:37.127Z\",\n  \"name\": \"string\",\n  \"description\": \"string\",\n  \"normal_balance\": \"debit\",\n  \"balances\": {\n    \"effective_at_lower_bound\": \"1950-05-26T11:37:56.154Z\",\n    \"effective_at_upper_bound\": \"1984-05-17T10:38:08.196Z\",\n    \"pending_balance\": {\n      \"credits\": 2936,\n      \"debits\": 7658,\n      \"amount\": 601,\n      \"currency\": \"string\",\n      \"currency_exponent\": 7423\n    },\n    \"posted_balance\": {\n      \"credits\": 9687,\n      \"debits\": 6302,\n      \"amount\": 4251,\n      \"currency\": \"string\",\n      \"currency_exponent\": 3364\n    },\n    \"available_balance\": {\n      \"credits\": 7330,\n      \"debits\": 9993,\n      \"amount\": 6714,\n      \"currency\": \"string\",\n      \"currency_exponent\": 861\n    }\n  },\n  \"lock_version\": 7701,\n  \"ledger_id\": \"ad1d5653-d82d-6749-38b8-dd028ddb4552\",\n  \"ledgerable_id\": \"b39482bd-9bf7-9e57-e7e9-8001e90f05b2\",\n  \"external_id\": \"string\",\n  \"ledgerable_type\": \"virtual_account\",\n  \"metadata\": {\n    \"key\": \"value\",\n    \"foo\": \"bar\",\n    \"modern\": \"treasury\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9a5d6811-544c-4397-b794-613aaf4f614b",
+              "name": "forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "ledger_accounts",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ledger account id (UUID)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"metadata\": {\n    \"key\": \"value\",\n    \"foo\": \"bar\",\n    \"modern\": \"treasury\"\n  },\n  \"external_id\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": {\n    \"code\": \"parameter_invalid\",\n    \"message\": \"string\",\n    \"parameter\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "56714283-83c8-4b8c-8137-2ba6d1192f8f",
+              "name": "not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "ledger_accounts",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ledger account id (UUID)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"metadata\": {\n    \"key\": \"value\",\n    \"foo\": \"bar\",\n    \"modern\": \"treasury\"\n  },\n  \"external_id\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": {\n    \"code\": \"parameter_invalid\",\n    \"message\": \"string\",\n    \"parameter\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fec16173-0001-439d-b88a-1606ccfa9c2b",
+              "name": "conflict",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "ledger_accounts",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ledger account id (UUID)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"metadata\": {\n    \"key\": \"value\",\n    \"foo\": \"bar\",\n    \"modern\": \"treasury\"\n  },\n  \"external_id\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": {\n    \"code\": \"parameter_invalid\",\n    \"message\": \"string\",\n    \"parameter\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5c827586-88fa-40ec-926a-1b8dfb5428e5",
+              "name": "unsuccessful",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "ledger_accounts",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ledger account id (UUID)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"metadata\": {\n    \"key\": \"value\",\n    \"foo\": \"bar\",\n    \"modern\": \"treasury\"\n  },\n  \"external_id\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": {\n    \"code\": \"parameter_invalid\",\n    \"message\": \"string\",\n    \"parameter\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "30e3e3fc-df63-43d6-9d24-ae263889fc03",
+          "name": "delete ledger_account",
+          "request": {
+            "name": "delete ledger_account",
+            "description": {
+              "content": "Delete a ledger account.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "ledger_accounts",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The ledger account id (UUID)"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "240f0f84-df16-4a76-ba1d-cfd183d455cd",
+              "name": "successful",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "ledger_accounts",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ledger account id (UUID)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"4060f113-4648-c23d-94f7-0eb988e61237\",\n  \"object\": \"string\",\n  \"live_mode\": false,\n  \"created_at\": \"1961-01-30T11:15:04.495Z\",\n  \"updated_at\": \"1966-06-08T15:07:59.429Z\",\n  \"discarded_at\": \"1991-01-22T03:53:37.127Z\",\n  \"name\": \"string\",\n  \"description\": \"string\",\n  \"normal_balance\": \"debit\",\n  \"balances\": {\n    \"effective_at_lower_bound\": \"1950-05-26T11:37:56.154Z\",\n    \"effective_at_upper_bound\": \"1984-05-17T10:38:08.196Z\",\n    \"pending_balance\": {\n      \"credits\": 2936,\n      \"debits\": 7658,\n      \"amount\": 601,\n      \"currency\": \"string\",\n      \"currency_exponent\": 7423\n    },\n    \"posted_balance\": {\n      \"credits\": 9687,\n      \"debits\": 6302,\n      \"amount\": 4251,\n      \"currency\": \"string\",\n      \"currency_exponent\": 3364\n    },\n    \"available_balance\": {\n      \"credits\": 7330,\n      \"debits\": 9993,\n      \"amount\": 6714,\n      \"currency\": \"string\",\n      \"currency_exponent\": 861\n    }\n  },\n  \"lock_version\": 7701,\n  \"ledger_id\": \"ad1d5653-d82d-6749-38b8-dd028ddb4552\",\n  \"ledgerable_id\": \"b39482bd-9bf7-9e57-e7e9-8001e90f05b2\",\n  \"external_id\": \"string\",\n  \"ledgerable_type\": \"virtual_account\",\n  \"metadata\": {\n    \"key\": \"value\",\n    \"foo\": \"bar\",\n    \"modern\": \"treasury\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "20505e45-c305-4892-90d0-46ee28c89b03",
+              "name": "forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "ledger_accounts",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ledger account id (UUID)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": {\n    \"code\": \"parameter_invalid\",\n    \"message\": \"string\",\n    \"parameter\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "907961fd-1eda-43ec-aa4a-027b1e8fe5cd",
+              "name": "not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "ledger_accounts",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ledger account id (UUID)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": {\n    \"code\": \"parameter_invalid\",\n    \"message\": \"string\",\n    \"parameter\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "http://localhost:3000",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "664eb1ce-9b99-4ab1-a6b7-8241e2a58c9e",
+    "name": "Modern Treasury AccountCapability LedgerAccount API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Modern Treasury REST API. Please see https://docs.moderntreasury.com for more details.\n\nContact Support:\n Name: Modern Treasury Engineering Team",
+      "type": "text/plain"
+    }
+  }
+}

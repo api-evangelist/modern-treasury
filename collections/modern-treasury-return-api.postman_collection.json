@@ -1,0 +1,669 @@
+{
+  "item": [
+    {
+      "id": "869b3a4f-8fcc-4e2b-8491-f2f5d6a48378",
+      "name": "Return",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "e7275632-4900-4121-aaef-f0cd6a9f614a",
+          "name": "list returns",
+          "request": {
+            "name": "list returns",
+            "description": {
+              "content": "Get a list of returns.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "returns"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "after_cursor",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "per_page",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "internal_account_id",
+                  "value": "<string>",
+                  "description": "Specify `internal_account_id` if you wish to see returns to/from a specific account."
+                },
+                {
+                  "disabled": false,
+                  "key": "counterparty_id",
+                  "value": "<string>",
+                  "description": "Specify `counterparty_id` if you wish to see returns that occurred with a specific counterparty."
+                },
+                {
+                  "disabled": false,
+                  "key": "returnable_id",
+                  "value": "<string>",
+                  "description": "The ID of a valid returnable. Must be accompanied by `returnable_type`."
+                },
+                {
+                  "disabled": false,
+                  "key": "returnable_type",
+                  "value": "<string>",
+                  "description": "One of `payment_order`, `reversal`, or `incoming_payment_detail`. Must be accompanied by `returnable_id`."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "2d81be83-b121-40ae-ac9c-8627433ac36f",
+              "name": "successful",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "returns"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "after_cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "internal_account_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "counterparty_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "returnable_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "returnable_type",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "The cursor for the next page. Including this in a call as `after_cursor` will return the next page.",
+                  "key": "X-After-Cursor",
+                  "value": "string"
+                },
+                {
+                  "disabled": false,
+                  "description": "The current `per_page`.",
+                  "key": "X-Per-Page",
+                  "value": "9705"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"40bd9043-932e-bf06-88c6-2d90b697c182\",\n    \"object\": \"string\",\n    \"live_mode\": false,\n    \"created_at\": \"1958-05-01T06:30:10.562Z\",\n    \"updated_at\": \"2025-08-29T01:00:52.100Z\",\n    \"discarded_at\": \"1967-01-06T20:48:11.983Z\",\n    \"returnable_id\": \"f91e6e4a-090b-447f-7e20-cac4e6ab2e5c\",\n    \"returnable_type\": \"incoming_payment_detail\",\n    \"code\": \"R24\",\n    \"reason\": \"string\",\n    \"date_of_death\": \"1996-01-28\",\n    \"corrections\": {\n      \"account_number\": \"string\",\n      \"company_id\": \"string\",\n      \"company_name\": \"string\",\n      \"individual_identification_number\": \"string\",\n      \"routing_number\": \"string\",\n      \"transaction_code\": \"string\"\n    },\n    \"reconciliation_status\": \"tentatively_reconciled\",\n    \"status\": \"sent\",\n    \"transaction_line_item_id\": \"81cc14c4-ab1a-7596-ee2e-d3fd13b63a52\",\n    \"transaction_id\": \"4c0e2ac5-1331-4958-365a-541ed516bc55\",\n    \"internal_account_id\": \"29674e97-7b7b-a990-7384-04a343b32201\",\n    \"type\": \"wire\",\n    \"amount\": 7551,\n    \"currency\": \"ZWG\",\n    \"failure_reason\": \"string\",\n    \"role\": \"receiving\",\n    \"current_return\": {\n      \"value\": \"<Circular reference to #/components/schemas/return detected>\"\n    },\n    \"reference_numbers\": [\n      {\n        \"id\": \"618d7b2d-d75c-053e-4036-483fb99a556e\",\n        \"object\": \"string\",\n        \"live_mode\": false,\n        \"created_at\": \"1963-03-21T11:11:05.395Z\",\n        \"updated_at\": \"1980-06-16T11:07:35.167Z\",\n        \"reference_number\": \"string\",\n        \"reference_number_type\": \"citibank_reference_number\"\n      },\n      {\n        \"id\": \"df245d53-fa77-7297-e0a5-d97832c9c939\",\n        \"object\": \"string\",\n        \"live_mode\": true,\n        \"created_at\": \"1998-01-03T17:41:38.288Z\",\n        \"updated_at\": \"1994-01-18T15:00:12.459Z\",\n        \"reference_number\": \"string\",\n        \"reference_number_type\": \"paxos_group_id\"\n      }\n    ],\n    \"ledger_transaction_id\": \"421b55ab-0759-02a9-b8b9-262a41912d28\",\n    \"additional_information\": \"string\",\n    \"data\": {}\n  },\n  {\n    \"id\": \"2702d930-8062-7218-63d6-a7f71d65d5fe\",\n    \"object\": \"string\",\n    \"live_mode\": true,\n    \"created_at\": \"1992-04-22T14:28:36.415Z\",\n    \"updated_at\": \"2021-05-13T23:57:28.095Z\",\n    \"discarded_at\": \"2003-10-05T02:55:32.778Z\",\n    \"returnable_id\": \"f17e45d2-1bda-cd75-d276-5918515f7d65\",\n    \"returnable_type\": \"return\",\n    \"code\": \"R85\",\n    \"reason\": \"string\",\n    \"date_of_death\": \"1963-01-31\",\n    \"corrections\": {\n      \"account_number\": \"string\",\n      \"company_id\": \"string\",\n      \"company_name\": \"string\",\n      \"individual_identification_number\": \"string\",\n      \"routing_number\": \"string\",\n      \"transaction_code\": \"string\"\n    },\n    \"reconciliation_status\": \"reconciled\",\n    \"status\": \"completed\",\n    \"transaction_line_item_id\": \"2473be98-33f2-9f20-a88a-fdf031d7d395\",\n    \"transaction_id\": \"53a726fb-faa1-337b-5541-4aea57d83a40\",\n    \"internal_account_id\": \"b7e01316-69af-79de-5199-5e9b52a3d50b\",\n    \"type\": \"wire\",\n    \"amount\": 7047,\n    \"currency\": \"XBB\",\n    \"failure_reason\": \"string\",\n    \"role\": \"originating\",\n    \"current_return\": {\n      \"value\": \"<Circular reference to #/components/schemas/return detected>\"\n    },\n    \"reference_numbers\": [\n      {\n        \"id\": \"645e641a-ca44-36f5-d859-f5adbb03dc99\",\n        \"object\": \"string\",\n        \"live_mode\": true,\n        \"created_at\": \"2019-01-16T03:22:37.340Z\",\n        \"updated_at\": \"2005-07-10T14:01:03.049Z\",\n        \"reference_number\": \"string\",\n        \"reference_number_type\": \"jpmc_fx_trn_id\"\n      },\n      {\n        \"id\": \"f45b1e86-2259-90cb-bd95-deb9248c4e1d\",\n        \"object\": \"string\",\n        \"live_mode\": true,\n        \"created_at\": \"1987-08-05T21:58:48.998Z\",\n        \"updated_at\": \"1972-12-08T02:38:28.111Z\",\n        \"reference_number\": \"string\",\n        \"reference_number_type\": \"bnk_dev_prenotification_id\"\n      }\n    ],\n    \"ledger_transaction_id\": \"8c0c1bf4-5c53-ec5a-8334-611673ad18c7\",\n    \"additional_information\": \"string\",\n    \"data\": {}\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9e339e87-4593-432c-b6be-a25928ca11e3",
+              "name": "unsuccessful",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "returns"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "after_cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "internal_account_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "counterparty_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "returnable_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "returnable_type",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": {\n    \"code\": \"too_many_requests\",\n    \"message\": \"string\",\n    \"parameter\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1c6ca57c-36cc-40ee-afb8-13222eba647a",
+          "name": "create return",
+          "request": {
+            "name": "create return",
+            "description": {
+              "content": "Create a return.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "returns"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "This key should be something unique, preferably something like an UUID.",
+                "key": "Idempotency-Key",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"returnable_id\": \"<uuid>\",\n  \"returnable_type\": \"<string>\",\n  \"code\": \"<string>\",\n  \"reason\": \"<string>\",\n  \"date_of_death\": \"<date>\",\n  \"additional_information\": \"<string>\",\n  \"data\": \"<object>\",\n  \"corrections\": {\n    \"account_number\": \"<string>\",\n    \"company_id\": \"<string>\",\n    \"company_name\": \"<string>\",\n    \"individual_identification_number\": \"<string>\",\n    \"routing_number\": \"<string>\",\n    \"transaction_code\": \"<string>\"\n  },\n  \"reconciliation_status\": \"<string>\",\n  \"ledger_transaction\": {\n    \"ledger_entries\": [\n      {\n        \"amount\": \"<integer>\",\n        \"direction\": \"<string>\",\n        \"ledger_account_id\": \"<uuid>\",\n        \"effective_at\": \"<dateTime>\",\n        \"lock_version\": \"<integer>\",\n        \"pending_balance_amount\": {\n          \"key_0\": \"<integer>\",\n          \"key_1\": \"<integer>\"\n        },\n        \"posted_balance_amount\": {\n          \"key_0\": \"<integer>\"\n        },\n        \"available_balance_amount\": {\n          \"key_0\": \"<integer>\",\n          \"key_1\": \"<integer>\",\n          \"key_2\": \"<integer>\",\n          \"key_3\": \"<integer>\"\n        },\n        \"show_resulting_ledger_account_balances\": \"<boolean>\",\n        \"metadata\": {\n          \"key_0\": \"<string>\",\n          \"key_1\": \"<string>\"\n        }\n      },\n      {\n        \"amount\": \"<integer>\",\n        \"direction\": \"<string>\",\n        \"ledger_account_id\": \"<uuid>\",\n        \"effective_at\": \"<dateTime>\",\n        \"lock_version\": \"<integer>\",\n        \"pending_balance_amount\": {\n          \"key_0\": \"<integer>\",\n          \"key_1\": \"<integer>\"\n        },\n        \"posted_balance_amount\": {\n          \"key_0\": \"<integer>\",\n          \"key_1\": \"<integer>\",\n          \"key_2\": \"<integer>\"\n        },\n        \"available_balance_amount\": {\n          \"key_0\": \"<integer>\",\n          \"key_1\": \"<integer>\"\n        },\n        \"show_resulting_ledger_account_balances\": \"<boolean>\",\n        \"metadata\": {\n          \"key_0\": \"<string>\"\n        }\n      }\n    ],\n    \"description\": \"<string>\",\n    \"status\": \"<string>\",\n    \"metadata\": {\n      \"key_0\": \"<string>\",\n      \"key_1\": \"<string>\"\n    },\n    \"effective_at\": \"<dateTime>\",\n    \"effective_date\": \"<date>\",\n    \"external_id\": \"<string>\",\n    \"ledgerable_type\": \"<string>\",\n    \"ledgerable_id\": \"<uuid>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "0d7c0b08-7bef-4560-ace8-638cc77e50b6",
+              "name": "successful",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "returns"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "This key should be something unique, preferably something like an UUID.",
+                    "key": "Idempotency-Key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"returnable_id\": \"<uuid>\",\n  \"returnable_type\": \"<string>\",\n  \"code\": \"<string>\",\n  \"reason\": \"<string>\",\n  \"date_of_death\": \"<date>\",\n  \"additional_information\": \"<string>\",\n  \"data\": \"<object>\",\n  \"corrections\": {\n    \"account_number\": \"<string>\",\n    \"company_id\": \"<string>\",\n    \"company_name\": \"<string>\",\n    \"individual_identification_number\": \"<string>\",\n    \"routing_number\": \"<string>\",\n    \"transaction_code\": \"<string>\"\n  },\n  \"reconciliation_status\": \"<string>\",\n  \"ledger_transaction\": {\n    \"ledger_entries\": [\n      {\n        \"amount\": \"<integer>\",\n        \"direction\": \"<string>\",\n        \"ledger_account_id\": \"<uuid>\",\n        \"effective_at\": \"<dateTime>\",\n        \"lock_version\": \"<integer>\",\n        \"pending_balance_amount\": {\n          \"key_0\": \"<integer>\",\n          \"key_1\": \"<integer>\"\n        },\n        \"posted_balance_amount\": {\n          \"key_0\": \"<integer>\"\n        },\n        \"available_balance_amount\": {\n          \"key_0\": \"<integer>\",\n          \"key_1\": \"<integer>\",\n          \"key_2\": \"<integer>\",\n          \"key_3\": \"<integer>\"\n        },\n        \"show_resulting_ledger_account_balances\": \"<boolean>\",\n        \"metadata\": {\n          \"key\": \"value\",\n          \"foo\": \"bar\",\n          \"modern\": \"treasury\"\n        }\n      },\n      {\n        \"amount\": \"<integer>\",\n        \"direction\": \"<string>\",\n        \"ledger_account_id\": \"<uuid>\",\n        \"effective_at\": \"<dateTime>\",\n        \"lock_version\": \"<integer>\",\n        \"pending_balance_amount\": {\n          \"key_0\": \"<integer>\",\n          \"key_1\": \"<integer>\"\n        },\n        \"posted_balance_amount\": {\n          \"key_0\": \"<integer>\",\n          \"key_1\": \"<integer>\",\n          \"key_2\": \"<integer>\"\n        },\n        \"available_balance_amount\": {\n          \"key_0\": \"<integer>\",\n          \"key_1\": \"<integer>\",\n          \"key_2\": \"<integer>\",\n          \"key_3\": \"<integer>\"\n        },\n        \"show_resulting_ledger_account_balances\": \"<boolean>\",\n        \"metadata\": {\n          \"key\": \"value\",\n          \"foo\": \"bar\",\n          \"modern\": \"treasury\"\n        }\n      }\n    ],\n    \"description\": \"<string>\",\n    \"status\": \"<string>\",\n    \"metadata\": {\n      \"key\": \"value\",\n      \"foo\": \"bar\",\n      \"modern\": \"treasury\"\n    },\n    \"effective_at\": \"<dateTime>\",\n    \"effective_date\": \"<date>\",\n    \"external_id\": \"<string>\",\n    \"ledgerable_type\": \"<string>\",\n    \"ledgerable_id\": \"<uuid>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"fb015e8b-d629-3068-939c-be98fd9a2502\",\n  \"object\": \"string\",\n  \"live_mode\": false,\n  \"created_at\": \"1988-05-28T14:16:30.684Z\",\n  \"updated_at\": \"1964-03-13T20:17:49.589Z\",\n  \"discarded_at\": \"1950-11-05T23:52:03.302Z\",\n  \"returnable_id\": \"a635d4a6-45b1-f360-42e1-56b899cfbfcf\",\n  \"returnable_type\": \"return\",\n  \"code\": \"R33\",\n  \"reason\": \"string\",\n  \"date_of_death\": \"2014-04-06\",\n  \"corrections\": {\n    \"account_number\": \"string\",\n    \"company_id\": \"string\",\n    \"company_name\": \"string\",\n    \"individual_identification_number\": \"string\",\n    \"routing_number\": \"string\",\n    \"transaction_code\": \"string\"\n  },\n  \"reconciliation_status\": \"unreconciled\",\n  \"status\": \"returned\",\n  \"transaction_line_item_id\": \"46032b03-d32a-8d65-3b6d-47c263dea046\",\n  \"transaction_id\": \"410efcac-7a58-0e54-cf19-c3219f2afdc2\",\n  \"internal_account_id\": \"0ad60a3b-797b-c0b9-e541-e933cb5f4630\",\n  \"type\": \"gb_fps\",\n  \"amount\": 969,\n  \"currency\": \"MXN\",\n  \"failure_reason\": \"string\",\n  \"role\": \"receiving\",\n  \"current_return\": {\n    \"id\": \"0c2e42f8-a751-2979-b7e7-52b3d0c515a9\",\n    \"object\": \"string\",\n    \"live_mode\": true,\n    \"created_at\": \"1956-11-12T02:43:48.918Z\",\n    \"updated_at\": \"1958-02-03T20:10:18.918Z\",\n    \"discarded_at\": \"1981-08-11T12:16:10.389Z\",\n    \"returnable_id\": \"46cf22b4-9bdf-be2f-03d8-ea99895beb8d\",\n    \"returnable_type\": \"reversal\",\n    \"code\": \"C06\",\n    \"reason\": \"string\",\n    \"date_of_death\": \"1957-01-25\",\n    \"corrections\": {\n      \"account_number\": \"string\",\n      \"company_id\": \"string\",\n      \"company_name\": \"string\",\n      \"individual_identification_number\": \"string\",\n      \"routing_number\": \"string\",\n      \"transaction_code\": \"string\"\n    },\n    \"reconciliation_status\": \"unreconciled\",\n    \"status\": \"completed\",\n    \"transaction_line_item_id\": \"d720d84a-60c1-13a9-2995-d633f43b9b0a\",\n    \"transaction_id\": \"2420a733-1962-4bba-161d-cf5e39c1a029\",\n    \"internal_account_id\": \"ed735288-9df7-9a38-5a39-e88e9867bbd3\",\n    \"type\": \"interac\",\n    \"amount\": 7682,\n    \"currency\": \"TJS\",\n    \"failure_reason\": \"string\",\n    \"role\": \"originating\",\n    \"current_return\": {\n      \"value\": \"<Circular reference to #/components/schemas/return detected>\"\n    },\n    \"reference_numbers\": [\n      {\n        \"id\": \"e5c7ac01-13ba-142b-dbc2-b761759f3826\",\n        \"object\": \"string\",\n        \"live_mode\": true,\n        \"created_at\": \"1979-06-19T02:27:02.904Z\",\n        \"updated_at\": \"1978-07-20T20:10:25.810Z\",\n        \"reference_number\": \"string\",\n        \"reference_number_type\": \"goldman_sachs_end_to_end_id\"\n      },\n      {\n        \"id\": \"5907909b-cdb8-324b-0dd1-bc715337c6a7\",\n        \"object\": \"string\",\n        \"live_mode\": true,\n        \"created_at\": \"1952-04-01T07:03:13.113Z\",\n        \"updated_at\": \"1978-11-26T10:10:01.171Z\",\n        \"reference_number\": \"string\",\n        \"reference_number_type\": \"evolve_core_file_key\"\n      }\n    ],\n    \"ledger_transaction_id\": \"825e71d8-1621-6c43-868f-63a3ddd109c0\",\n    \"additional_information\": \"string\",\n    \"data\": {}\n  },\n  \"reference_numbers\": [\n    {\n      \"id\": \"d1dfa673-8200-35fb-f485-f8f58452bf08\",\n      \"object\": \"string\",\n      \"live_mode\": true,\n      \"created_at\": \"2005-02-08T14:19:39.295Z\",\n      \"updated_at\": \"1987-03-02T13:16:13.115Z\",\n      \"reference_number\": \"string\",\n      \"reference_number_type\": \"western_alliance_payment_id\"\n    },\n    {\n      \"id\": \"ef6fe259-ee4e-7918-11ca-2096632bccaa\",\n      \"object\": \"string\",\n      \"live_mode\": true,\n      \"created_at\": \"1959-02-09T18:30:46.993Z\",\n      \"updated_at\": \"1978-06-18T02:29:48.541Z\",\n      \"reference_number\": \"string\",\n      \"reference_number_type\": \"evolve_core_seq\"\n    }\n  ],\n  \"ledger_transaction_id\": \"84d3ac1a-9304-9987-246c-8496e7222e24\",\n  \"additional_information\": \"string\",\n  \"data\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "65f51b2d-1c12-4320-8816-8de59535e02c",
+              "name": "unsuccessful",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "returns"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "This key should be something unique, preferably something like an UUID.",
+                    "key": "Idempotency-Key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"returnable_id\": \"<uuid>\",\n  \"returnable_type\": \"<string>\",\n  \"code\": \"<string>\",\n  \"reason\": \"<string>\",\n  \"date_of_death\": \"<date>\",\n  \"additional_information\": \"<string>\",\n  \"data\": \"<object>\",\n  \"corrections\": {\n    \"account_number\": \"<string>\",\n    \"company_id\": \"<string>\",\n    \"company_name\": \"<string>\",\n    \"individual_identification_number\": \"<string>\",\n    \"routing_number\": \"<string>\",\n    \"transaction_code\": \"<string>\"\n  },\n  \"reconciliation_status\": \"<string>\",\n  \"ledger_transaction\": {\n    \"ledger_entries\": [\n      {\n        \"amount\": \"<integer>\",\n        \"direction\": \"<string>\",\n        \"ledger_account_id\": \"<uuid>\",\n        \"effective_at\": \"<dateTime>\",\n        \"lock_version\": \"<integer>\",\n        \"pending_balance_amount\": {\n          \"key_0\": \"<integer>\",\n          \"key_1\": \"<integer>\"\n        },\n        \"posted_balance_amount\": {\n          \"key_0\": \"<integer>\"\n        },\n        \"available_balance_amount\": {\n          \"key_0\": \"<integer>\",\n          \"key_1\": \"<integer>\",\n          \"key_2\": \"<integer>\",\n          \"key_3\": \"<integer>\"\n        },\n        \"show_resulting_ledger_account_balances\": \"<boolean>\",\n        \"metadata\": {\n          \"key\": \"value\",\n          \"foo\": \"bar\",\n          \"modern\": \"treasury\"\n        }\n      },\n      {\n        \"amount\": \"<integer>\",\n        \"direction\": \"<string>\",\n        \"ledger_account_id\": \"<uuid>\",\n        \"effective_at\": \"<dateTime>\",\n        \"lock_version\": \"<integer>\",\n        \"pending_balance_amount\": {\n          \"key_0\": \"<integer>\",\n          \"key_1\": \"<integer>\"\n        },\n        \"posted_balance_amount\": {\n          \"key_0\": \"<integer>\",\n          \"key_1\": \"<integer>\",\n          \"key_2\": \"<integer>\"\n        },\n        \"available_balance_amount\": {\n          \"key_0\": \"<integer>\",\n          \"key_1\": \"<integer>\",\n          \"key_2\": \"<integer>\",\n          \"key_3\": \"<integer>\"\n        },\n        \"show_resulting_ledger_account_balances\": \"<boolean>\",\n        \"metadata\": {\n          \"key\": \"value\",\n          \"foo\": \"bar\",\n          \"modern\": \"treasury\"\n        }\n      }\n    ],\n    \"description\": \"<string>\",\n    \"status\": \"<string>\",\n    \"metadata\": {\n      \"key\": \"value\",\n      \"foo\": \"bar\",\n      \"modern\": \"treasury\"\n    },\n    \"effective_at\": \"<dateTime>\",\n    \"effective_date\": \"<date>\",\n    \"external_id\": \"<string>\",\n    \"ledgerable_type\": \"<string>\",\n    \"ledgerable_id\": \"<uuid>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": {\n    \"code\": \"too_many_requests\",\n    \"message\": \"string\",\n    \"parameter\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cb172dd6-7741-4d17-9fad-95e80a8fa06b",
+              "name": "unsuccessful",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "returns"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "This key should be something unique, preferably something like an UUID.",
+                    "key": "Idempotency-Key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"returnable_id\": \"<uuid>\",\n  \"returnable_type\": \"<string>\",\n  \"code\": \"<string>\",\n  \"reason\": \"<string>\",\n  \"date_of_death\": \"<date>\",\n  \"additional_information\": \"<string>\",\n  \"data\": \"<object>\",\n  \"corrections\": {\n    \"account_number\": \"<string>\",\n    \"company_id\": \"<string>\",\n    \"company_name\": \"<string>\",\n    \"individual_identification_number\": \"<string>\",\n    \"routing_number\": \"<string>\",\n    \"transaction_code\": \"<string>\"\n  },\n  \"reconciliation_status\": \"<string>\",\n  \"ledger_transaction\": {\n    \"ledger_entries\": [\n      {\n        \"amount\": \"<integer>\",\n        \"direction\": \"<string>\",\n        \"ledger_account_id\": \"<uuid>\",\n        \"effective_at\": \"<dateTime>\",\n        \"lock_version\": \"<integer>\",\n        \"pending_balance_amount\": {\n          \"key_0\": \"<integer>\",\n          \"key_1\": \"<integer>\"\n        },\n        \"posted_balance_amount\": {\n          \"key_0\": \"<integer>\"\n        },\n        \"available_balance_amount\": {\n          \"key_0\": \"<integer>\",\n          \"key_1\": \"<integer>\",\n          \"key_2\": \"<integer>\",\n          \"key_3\": \"<integer>\"\n        },\n        \"show_resulting_ledger_account_balances\": \"<boolean>\",\n        \"metadata\": {\n          \"key\": \"value\",\n          \"foo\": \"bar\",\n          \"modern\": \"treasury\"\n        }\n      },\n      {\n        \"amount\": \"<integer>\",\n        \"direction\": \"<string>\",\n        \"ledger_account_id\": \"<uuid>\",\n        \"effective_at\": \"<dateTime>\",\n        \"lock_version\": \"<integer>\",\n        \"pending_balance_amount\": {\n          \"key_0\": \"<integer>\",\n          \"key_1\": \"<integer>\"\n        },\n        \"posted_balance_amount\": {\n          \"key_0\": \"<integer>\",\n          \"key_1\": \"<integer>\",\n          \"key_2\": \"<integer>\"\n        },\n        \"available_balance_amount\": {\n          \"key_0\": \"<integer>\",\n          \"key_1\": \"<integer>\",\n          \"key_2\": \"<integer>\",\n          \"key_3\": \"<integer>\"\n        },\n        \"show_resulting_ledger_account_balances\": \"<boolean>\",\n        \"metadata\": {\n          \"key\": \"value\",\n          \"foo\": \"bar\",\n          \"modern\": \"treasury\"\n        }\n      }\n    ],\n    \"description\": \"<string>\",\n    \"status\": \"<string>\",\n    \"metadata\": {\n      \"key\": \"value\",\n      \"foo\": \"bar\",\n      \"modern\": \"treasury\"\n    },\n    \"effective_at\": \"<dateTime>\",\n    \"effective_date\": \"<date>\",\n    \"external_id\": \"<string>\",\n    \"ledgerable_type\": \"<string>\",\n    \"ledgerable_id\": \"<uuid>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": {\n    \"code\": \"too_many_requests\",\n    \"message\": \"string\",\n    \"parameter\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0826d809-f9c2-449a-a48c-e91f431f534b",
+          "name": "show return",
+          "request": {
+            "name": "show return",
+            "description": {
+              "content": "Get a single return.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "returns",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The ID of an existing return."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "29fee0ce-d12c-4bd9-8ab4-3b2f7a438021",
+              "name": "successful",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "returns",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of an existing return."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"fb015e8b-d629-3068-939c-be98fd9a2502\",\n  \"object\": \"string\",\n  \"live_mode\": false,\n  \"created_at\": \"1988-05-28T14:16:30.684Z\",\n  \"updated_at\": \"1964-03-13T20:17:49.589Z\",\n  \"discarded_at\": \"1950-11-05T23:52:03.302Z\",\n  \"returnable_id\": \"a635d4a6-45b1-f360-42e1-56b899cfbfcf\",\n  \"returnable_type\": \"return\",\n  \"code\": \"R33\",\n  \"reason\": \"string\",\n  \"date_of_death\": \"2014-04-06\",\n  \"corrections\": {\n    \"account_number\": \"string\",\n    \"company_id\": \"string\",\n    \"company_name\": \"string\",\n    \"individual_identification_number\": \"string\",\n    \"routing_number\": \"string\",\n    \"transaction_code\": \"string\"\n  },\n  \"reconciliation_status\": \"unreconciled\",\n  \"status\": \"returned\",\n  \"transaction_line_item_id\": \"46032b03-d32a-8d65-3b6d-47c263dea046\",\n  \"transaction_id\": \"410efcac-7a58-0e54-cf19-c3219f2afdc2\",\n  \"internal_account_id\": \"0ad60a3b-797b-c0b9-e541-e933cb5f4630\",\n  \"type\": \"gb_fps\",\n  \"amount\": 969,\n  \"currency\": \"MXN\",\n  \"failure_reason\": \"string\",\n  \"role\": \"receiving\",\n  \"current_return\": {\n    \"id\": \"0c2e42f8-a751-2979-b7e7-52b3d0c515a9\",\n    \"object\": \"string\",\n    \"live_mode\": true,\n    \"created_at\": \"1956-11-12T02:43:48.918Z\",\n    \"updated_at\": \"1958-02-03T20:10:18.918Z\",\n    \"discarded_at\": \"1981-08-11T12:16:10.389Z\",\n    \"returnable_id\": \"46cf22b4-9bdf-be2f-03d8-ea99895beb8d\",\n    \"returnable_type\": \"reversal\",\n    \"code\": \"C06\",\n    \"reason\": \"string\",\n    \"date_of_death\": \"1957-01-25\",\n    \"corrections\": {\n      \"account_number\": \"string\",\n      \"company_id\": \"string\",\n      \"company_name\": \"string\",\n      \"individual_identification_number\": \"string\",\n      \"routing_number\": \"string\",\n      \"transaction_code\": \"string\"\n    },\n    \"reconciliation_status\": \"unreconciled\",\n    \"status\": \"completed\",\n    \"transaction_line_item_id\": \"d720d84a-60c1-13a9-2995-d633f43b9b0a\",\n    \"transaction_id\": \"2420a733-1962-4bba-161d-cf5e39c1a029\",\n    \"internal_account_id\": \"ed735288-9df7-9a38-5a39-e88e9867bbd3\",\n    \"type\": \"interac\",\n    \"amount\": 7682,\n    \"currency\": \"TJS\",\n    \"failure_reason\": \"string\",\n    \"role\": \"originating\",\n    \"current_return\": {\n      \"value\": \"<Circular reference to #/components/schemas/return detected>\"\n    },\n    \"reference_numbers\": [\n      {\n        \"id\": \"e5c7ac01-13ba-142b-dbc2-b761759f3826\",\n        \"object\": \"string\",\n        \"live_mode\": true,\n        \"created_at\": \"1979-06-19T02:27:02.904Z\",\n        \"updated_at\": \"1978-07-20T20:10:25.810Z\",\n        \"reference_number\": \"string\",\n        \"reference_number_type\": \"goldman_sachs_end_to_end_id\"\n      },\n      {\n        \"id\": \"5907909b-cdb8-324b-0dd1-bc715337c6a7\",\n        \"object\": \"string\",\n        \"live_mode\": true,\n        \"created_at\": \"1952-04-01T07:03:13.113Z\",\n        \"updated_at\": \"1978-11-26T10:10:01.171Z\",\n        \"reference_number\": \"string\",\n        \"reference_number_type\": \"evolve_core_file_key\"\n      }\n    ],\n    \"ledger_transaction_id\": \"825e71d8-1621-6c43-868f-63a3ddd109c0\",\n    \"additional_information\": \"string\",\n    \"data\": {}\n  },\n  \"reference_numbers\": [\n    {\n      \"id\": \"d1dfa673-8200-35fb-f485-f8f58452bf08\",\n      \"object\": \"string\",\n      \"live_mode\": true,\n      \"created_at\": \"2005-02-08T14:19:39.295Z\",\n      \"updated_at\": \"1987-03-02T13:16:13.115Z\",\n      \"reference_number\": \"string\",\n      \"reference_number_type\": \"western_alliance_payment_id\"\n    },\n    {\n      \"id\": \"ef6fe259-ee4e-7918-11ca-2096632bccaa\",\n      \"object\": \"string\",\n      \"live_mode\": true,\n      \"created_at\": \"1959-02-09T18:30:46.993Z\",\n      \"updated_at\": \"1978-06-18T02:29:48.541Z\",\n      \"reference_number\": \"string\",\n      \"reference_number_type\": \"evolve_core_seq\"\n    }\n  ],\n  \"ledger_transaction_id\": \"84d3ac1a-9304-9987-246c-8496e7222e24\",\n  \"additional_information\": \"string\",\n  \"data\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6096ad3c-09bc-43ba-9189-ca5f9b8dd259",
+              "name": "not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "returns",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of an existing return."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": {\n    \"code\": \"too_many_requests\",\n    \"message\": \"string\",\n    \"parameter\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "http://localhost:3000",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "270c1b3b-015c-4124-bc78-7424dd75994e",
+    "name": "Modern Treasury AccountCapability Return API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Modern Treasury REST API. Please see https://docs.moderntreasury.com for more details.\n\nContact Support:\n Name: Modern Treasury Engineering Team",
+      "type": "text/plain"
+    }
+  }
+}

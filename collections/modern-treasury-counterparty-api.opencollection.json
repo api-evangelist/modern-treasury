@@ -1,0 +1,224 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Modern Treasury AccountCapability Counterparty API",
+    "version": "v1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Counterparty",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "collect account details",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:3000/api/counterparties/:id/collect_account",
+            "headers": [
+              {
+                "name": "Idempotency-Key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "counterparty id"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Send an email requesting account details."
+        },
+        {
+          "info": {
+            "name": "list counterparties",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:3000/api/counterparties",
+            "params": [
+              {
+                "name": "after_cursor",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "Performs a partial string match of the name field. This is also case insensitive."
+              },
+              {
+                "name": "email",
+                "value": "",
+                "type": "query",
+                "description": "Performs a partial string match of the email field. This is also case insensitive."
+              },
+              {
+                "name": "external_id",
+                "value": "",
+                "type": "query",
+                "description": "An optional user-defined 180 character unique identifier."
+              },
+              {
+                "name": "legal_entity_id",
+                "value": "",
+                "type": "query",
+                "description": "Filters for counterparties with the given legal entity ID."
+              },
+              {
+                "name": "metadata",
+                "value": "",
+                "type": "query",
+                "description": "For example, if you want to query for records with metadata key `Type` and value `Loan`, the query would be `metadata%5BType%5D=Loan`. This encodes the query parameters."
+              },
+              {
+                "name": "created_at_lower_bound",
+                "value": "",
+                "type": "query",
+                "description": "Used to return counterparties created after some datetime."
+              },
+              {
+                "name": "created_at_upper_bound",
+                "value": "",
+                "type": "query",
+                "description": "Used to return counterparties created before some datetime."
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Get a paginated list of all counterparties."
+        },
+        {
+          "info": {
+            "name": "create counterparty",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:3000/api/counterparties",
+            "headers": [
+              {
+                "name": "Idempotency-Key",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Create a new counterparty."
+        },
+        {
+          "info": {
+            "name": "show counterparty",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:3000/api/counterparties/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The id of an existing counterparty."
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Get details on a single counterparty."
+        },
+        {
+          "info": {
+            "name": "update counterparty",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "http://localhost:3000/api/counterparties/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The id of an existing counterparty."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Updates a given counterparty with new information."
+        },
+        {
+          "info": {
+            "name": "delete counterparty",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "http://localhost:3000/api/counterparties/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The id of an existing counterparty."
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Deletes a given counterparty."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

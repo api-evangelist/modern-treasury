@@ -1,0 +1,154 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Modern Treasury AccountCapability BalanceReport API",
+    "version": "v1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "BalanceReport",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "list balance_reports",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:3000/api/internal_accounts/:internal_account_id/balance_reports",
+            "params": [
+              {
+                "name": "internal_account_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "as_of_date",
+                "value": "",
+                "type": "query",
+                "description": "The date of the balance report in local time."
+              },
+              {
+                "name": "balance_report_type",
+                "value": "",
+                "type": "query",
+                "description": "The specific type of balance report. One of `intraday`, `previous_day`, `real_time`, or `other`."
+              },
+              {
+                "name": "after_cursor",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Get all balance reports for a given internal account."
+        },
+        {
+          "info": {
+            "name": "create balance reports",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:3000/api/internal_accounts/:internal_account_id/balance_reports",
+            "headers": [
+              {
+                "name": "Idempotency-Key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "internal_account_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "create balance reports"
+        },
+        {
+          "info": {
+            "name": "get balance_report",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:3000/api/internal_accounts/:internal_account_id/balance_reports/:id",
+            "params": [
+              {
+                "name": "internal_account_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Either the unique identifier of the balance report or 'latest' for the latest balance report."
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Get a single balance report for a given internal account."
+        },
+        {
+          "info": {
+            "name": "delete balance_report",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "http://localhost:3000/api/internal_accounts/:internal_account_id/balance_reports/:id",
+            "params": [
+              {
+                "name": "internal_account_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Either the unique identifier of the balance report or 'latest' for the latest balance report."
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Deletes a given balance report."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

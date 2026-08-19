@@ -1,0 +1,268 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Modern Treasury AccountCapability PaymentOrder API",
+    "version": "v1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "PaymentOrder",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "add payment_order_id to invoice",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "http://localhost:3000/api/invoices/:id/payment_orders/:payment_order_id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "id"
+              },
+              {
+                "name": "payment_order_id",
+                "value": "",
+                "type": "path",
+                "description": "payment_order_id"
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Add a payment order to an invoice."
+        },
+        {
+          "info": {
+            "name": "create async payment order",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:3000/api/payment_orders/create_async",
+            "headers": [
+              {
+                "name": "Idempotency-Key",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Create a new payment order asynchronously"
+        },
+        {
+          "info": {
+            "name": "list payment orders",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:3000/api/payment_orders",
+            "params": [
+              {
+                "name": "after_cursor",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "priority",
+                "value": "",
+                "type": "query",
+                "description": "Either `normal` or `high`. For ACH and EFT payments, `high` represents a same-day ACH or EFT transfer, respectively. For check payments, `high` can mean an overnight check rather than standard mail."
+              },
+              {
+                "name": "counterparty_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "originating_account_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "transaction_id",
+                "value": "",
+                "type": "query",
+                "description": "The ID of a transaction that the payment order has been reconciled to."
+              },
+              {
+                "name": "external_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "direction",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "reference_number",
+                "value": "",
+                "type": "query",
+                "description": "Query for records with the provided reference number"
+              },
+              {
+                "name": "effective_date_start",
+                "value": "",
+                "type": "query",
+                "description": "An inclusive lower bound for searching effective_date"
+              },
+              {
+                "name": "effective_date_end",
+                "value": "",
+                "type": "query",
+                "description": "An inclusive upper bound for searching effective_date"
+              },
+              {
+                "name": "created_at_start",
+                "value": "",
+                "type": "query",
+                "description": "An inclusive lower bound for searching created_at"
+              },
+              {
+                "name": "created_at_end",
+                "value": "",
+                "type": "query",
+                "description": "An inclusive upper bound for searching created_at"
+              },
+              {
+                "name": "process_after_start",
+                "value": "",
+                "type": "query",
+                "description": "An inclusive lower bound for searching process_after"
+              },
+              {
+                "name": "process_after_end",
+                "value": "",
+                "type": "query",
+                "description": "An inclusive upper bound for searching process_after"
+              },
+              {
+                "name": "metadata",
+                "value": "",
+                "type": "query",
+                "description": "For example, if you want to query for records with metadata key `Type` and value `Loan`, the query would be `metadata%5BType%5D=Loan`. This encodes the query parameters."
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Get a list of all payment orders"
+        },
+        {
+          "info": {
+            "name": "create payment order",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:3000/api/payment_orders",
+            "headers": [
+              {
+                "name": "Idempotency-Key",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Create a new Payment Order"
+        },
+        {
+          "info": {
+            "name": "get payment order",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:3000/api/payment_orders/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Get details on a single payment order"
+        },
+        {
+          "info": {
+            "name": "update payment order",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "http://localhost:3000/api/payment_orders/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Update a payment order"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
