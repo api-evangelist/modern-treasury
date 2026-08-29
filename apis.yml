@@ -14,7 +14,7 @@ deliveryModel:
   source:
   - openapi
   - pricing
-  generated: '2026-08-11'
+  generated: '2026-08-28'
   method: derived
 accessModel:
   pricing: unknown
@@ -587,6 +587,9 @@ apis:
   - type: Documentation
     url: https://docs.moderntreasury.com/reference
 common:
+  - type: CapabilityMap
+    url: capabilities/modern-treasury-capability-edges.yml
+    name: Modern Treasury Business Capability Map
   - type: Security
     url: https://www.moderntreasury.com/security
   - type: ChangeLog
