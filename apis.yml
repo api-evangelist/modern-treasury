@@ -326,6 +326,8 @@ apis:
   humanURL: https://docs.moderntreasury.com/reference
   baseURL: https://app.moderntreasury.com/api
   tags:
+  - Ledger Account
+  tags_raw:
   - LedgerAccount
   properties:
   - type: OpenAPI
@@ -390,7 +392,7 @@ apis:
   humanURL: https://docs.moderntreasury.com/reference
   baseURL: https://app.moderntreasury.com/api
   tags:
-  - Ledger Entry
+  - LedgerEntry
   tags_raw:
   - LedgerEntry
   properties:
@@ -416,7 +418,7 @@ apis:
   humanURL: https://docs.moderntreasury.com/reference
   baseURL: https://app.moderntreasury.com/api
   tags:
-  - Legal Entity
+  - LegalEntity
   tags_raw:
   - LegalEntity
   properties:
@@ -429,7 +431,8 @@ apis:
   description: The LineItem API from Modern Treasury — 2 operation(s) for lineitem.
   humanURL: https://docs.moderntreasury.com/reference
   baseURL: https://app.moderntreasury.com/api
-  tags: []
+  tags:
+  - LineItem
   tags_raw:
   - LineItem
   properties:
@@ -455,7 +458,7 @@ apis:
   humanURL: https://docs.moderntreasury.com/reference
   baseURL: https://app.moderntreasury.com/api
   tags:
-  - Payment Flow
+  - PaymentFlow
   tags_raw:
   - PaymentFlow
   properties:
@@ -578,7 +581,7 @@ apis:
   humanURL: https://docs.moderntreasury.com/reference
   baseURL: https://app.moderntreasury.com/api
   tags:
-  - Virtual Account
+  - VirtualAccount
   tags_raw:
   - VirtualAccount
   properties:
