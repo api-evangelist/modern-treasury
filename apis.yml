@@ -392,7 +392,7 @@ apis:
   humanURL: https://docs.moderntreasury.com/reference
   baseURL: https://app.moderntreasury.com/api
   tags:
-  - LedgerEntry
+  - Ledger Entry
   tags_raw:
   - LedgerEntry
   properties:
@@ -418,7 +418,7 @@ apis:
   humanURL: https://docs.moderntreasury.com/reference
   baseURL: https://app.moderntreasury.com/api
   tags:
-  - LegalEntity
+  - Legal Entity
   tags_raw:
   - LegalEntity
   properties:
@@ -432,7 +432,7 @@ apis:
   humanURL: https://docs.moderntreasury.com/reference
   baseURL: https://app.moderntreasury.com/api
   tags:
-  - LineItem
+  - Line Item
   tags_raw:
   - LineItem
   properties:
@@ -458,7 +458,7 @@ apis:
   humanURL: https://docs.moderntreasury.com/reference
   baseURL: https://app.moderntreasury.com/api
   tags:
-  - PaymentFlow
+  - Payment Flow
   tags_raw:
   - PaymentFlow
   properties:
@@ -581,7 +581,7 @@ apis:
   humanURL: https://docs.moderntreasury.com/reference
   baseURL: https://app.moderntreasury.com/api
   tags:
-  - VirtualAccount
+  - Virtual Account
   tags_raw:
   - VirtualAccount
   properties:
