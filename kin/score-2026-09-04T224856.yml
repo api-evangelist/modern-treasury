@@ -1,28 +1,31 @@
-# Kin Score artifact — modern-treasury — 2026-08-12T193225
+# Kin Score artifact — modern-treasury — 2026-09-04T224856
 # The API Evangelist rating (https://github.com/api-evangelist/kin-score). Generated; do not edit.
 ---
 kin_score:
   slug: modern-treasury
-  schema_version: 0.11.0
-  scored_at: '2026-08-12'
-  run_ts: 2026-08-12T193225
-  composite: 48.1
+  schema_version: 0.18.3
+  scored_at: '2026-09-04'
+  run_ts: 2026-09-04T224856
+  composite: 43.7
   band: developing
   facets:
-    discoverability: 72.2
-    contract_quality: 56.8
-    governance: 58.3
-    operational_transparency: 36.8
-    developer_ergonomics: 21.7
+    discoverability: 66.7
+    contract_quality: 56.3
+    governance: 9.8
+    operational_transparency: 26.3
+    developer_ergonomics: 27.4
     commercial_clarity: 52.6
+    contract_governance: 9.8
+    access_clarity: 52.6
   agent_readiness:
-    score: 45.9
+    score: 32.0
     band: agent-ready
     dimensions:
       spec_presence: true
       agentic_access: derived
+      reversibility_documented: false
       mcp_server: false
-      auth_clarity: true
+      auth_clarity: bearer
       idempotency: verified
       error_semantics: verified
       openapi_examples: false
@@ -33,6 +36,10 @@ kin_score:
       consent_identity: false
       agent_card: false
       dry_run_mode: false
+      delegated_identity: false
+      protected_resource_metadata: false
+      dynamic_client_registration: false
+      agentic_commerce: false
   regulatory:
     applies: true
     regime: Payments
