@@ -261,30 +261,6 @@ apis:
     url: openapi/modern-treasury-invoice-api-openapi.yml
   - type: Documentation
     url: https://docs.moderntreasury.com/reference
-- aid: modern-treasury:modern-treasury-invoicelineitem-api
-  name: Modern Treasury InvoiceLineItem API
-  description: The InvoiceLineItem API from Modern Treasury — 2 operation(s) for invoicelineitem.
-  humanURL: https://docs.moderntreasury.com/reference
-  baseURL: https://app.moderntreasury.com/api
-  tags:
-  - InvoiceLineItem
-  properties:
-  - type: OpenAPI
-    url: openapi/modern-treasury-invoicelineitem-api-openapi.yml
-  - type: Documentation
-    url: https://docs.moderntreasury.com/reference
-- aid: modern-treasury:modern-treasury-journalentry-api
-  name: Modern Treasury JournalEntry API
-  description: The JournalEntry API from Modern Treasury — 2 operation(s) for journalentry.
-  humanURL: https://docs.moderntreasury.com/reference
-  baseURL: https://app.moderntreasury.com/api
-  tags:
-  - JournalEntry
-  properties:
-  - type: OpenAPI
-    url: openapi/modern-treasury-journalentry-api-openapi.yml
-  - type: Documentation
-    url: https://docs.moderntreasury.com/reference
 - aid: modern-treasury:modern-treasury-journalreport-api
   name: Modern Treasury JournalReport API
   description: The JournalReport API from Modern Treasury — 2 operation(s) for journalreport.
@@ -319,20 +295,6 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/modern-treasury-ledger-api-openapi.yml
-  - type: Documentation
-    url: https://docs.moderntreasury.com/reference
-- aid: modern-treasury:modern-treasury-ledgeraccount-api
-  name: Modern Treasury LedgerAccount API
-  description: The LedgerAccount API from Modern Treasury — 2 operation(s) for ledgeraccount.
-  humanURL: https://docs.moderntreasury.com/reference
-  baseURL: https://app.moderntreasury.com/api
-  tags:
-  - Ledger Account
-  tags_raw:
-  - LedgerAccount
-  properties:
-  - type: OpenAPI
-    url: openapi/modern-treasury-ledgeraccount-api-openapi.yml
   - type: Documentation
     url: https://docs.moderntreasury.com/reference
 - aid: modern-treasury:modern-treasury-ledgeraccountbalancemonitor-api
@@ -387,20 +349,6 @@ apis:
     url: openapi/modern-treasury-ledgeraccountstatement-api-openapi.yml
   - type: Documentation
     url: https://docs.moderntreasury.com/reference
-- aid: modern-treasury:modern-treasury-ledgerentry-api
-  name: Modern Treasury LedgerEntry API
-  description: The LedgerEntry API from Modern Treasury — 2 operation(s) for ledgerentry.
-  humanURL: https://docs.moderntreasury.com/reference
-  baseURL: https://app.moderntreasury.com/api
-  tags:
-  - Ledger Entry
-  tags_raw:
-  - LedgerEntry
-  properties:
-  - type: OpenAPI
-    url: openapi/modern-treasury-ledgerentry-api-openapi.yml
-  - type: Documentation
-    url: https://docs.moderntreasury.com/reference
 - aid: modern-treasury:modern-treasury-ledgertransaction-api
   name: Modern Treasury LedgerTransaction API
   description: The LedgerTransaction API from Modern Treasury — 6 operation(s) for ledgertransaction.
@@ -413,34 +361,6 @@ apis:
     url: openapi/modern-treasury-ledgertransaction-api-openapi.yml
   - type: Documentation
     url: https://docs.moderntreasury.com/reference
-- aid: modern-treasury:modern-treasury-legalentity-api
-  name: Modern Treasury LegalEntity API
-  description: The LegalEntity API from Modern Treasury — 3 operation(s) for legalentity.
-  humanURL: https://docs.moderntreasury.com/reference
-  baseURL: https://app.moderntreasury.com/api
-  tags:
-  - Legal Entity
-  tags_raw:
-  - LegalEntity
-  properties:
-  - type: OpenAPI
-    url: openapi/modern-treasury-legalentity-api-openapi.yml
-  - type: Documentation
-    url: https://docs.moderntreasury.com/reference
-- aid: modern-treasury:modern-treasury-lineitem-api
-  name: Modern Treasury LineItem API
-  description: The LineItem API from Modern Treasury — 2 operation(s) for lineitem.
-  humanURL: https://docs.moderntreasury.com/reference
-  baseURL: https://app.moderntreasury.com/api
-  tags:
-  - Line Item
-  tags_raw:
-  - LineItem
-  properties:
-  - type: OpenAPI
-    url: openapi/modern-treasury-lineitem-api-openapi.yml
-  - type: Documentation
-    url: https://docs.moderntreasury.com/reference
 - aid: modern-treasury:modern-treasury-paymentaction-api
   name: Modern Treasury PaymentAction API
   description: The PaymentAction API from Modern Treasury — 2 operation(s) for paymentaction.
@@ -451,20 +371,6 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/modern-treasury-paymentaction-api-openapi.yml
-  - type: Documentation
-    url: https://docs.moderntreasury.com/reference
-- aid: modern-treasury:modern-treasury-paymentflow-api
-  name: Modern Treasury PaymentFlow API
-  description: The PaymentFlow API from Modern Treasury — 2 operation(s) for paymentflow.
-  humanURL: https://docs.moderntreasury.com/reference
-  baseURL: https://app.moderntreasury.com/api
-  tags:
-  - Payment Flow
-  tags_raw:
-  - PaymentFlow
-  properties:
-  - type: OpenAPI
-    url: openapi/modern-treasury-paymentflow-api-openapi.yml
   - type: Documentation
     url: https://docs.moderntreasury.com/reference
 - aid: modern-treasury:modern-treasury-paymentorder-api
@@ -576,18 +482,100 @@ apis:
     url: openapi/modern-treasury-validation-api-openapi.yml
   - type: Documentation
     url: https://docs.moderntreasury.com/reference
-- aid: modern-treasury:modern-treasury-virtualaccount-api
-  name: Modern Treasury VirtualAccount API
-  description: The VirtualAccount API from Modern Treasury — 2 operation(s) for virtualaccount.
+- aid: modern-treasury:modern-treasury-invoice-line-item-api
+  name: Modern Treasury Invoice Line Item API
+  description: The Invoice Line Item API from Modern Treasury — 2 operation(s) for invoice line item.
+  humanURL: https://docs.moderntreasury.com/reference
+  baseURL: https://app.moderntreasury.com/api
+  tags:
+  - Invoice Line Item
+  properties:
+  - type: OpenAPI
+    url: openapi/modern-treasury-invoice-line-item-api-openapi.yml
+  - type: Documentation
+    url: https://docs.moderntreasury.com/reference
+- aid: modern-treasury:modern-treasury-journal-entry-api
+  name: Modern Treasury Journal Entry API
+  description: The Journal Entry API from Modern Treasury — 2 operation(s) for journal entry.
+  humanURL: https://docs.moderntreasury.com/reference
+  baseURL: https://app.moderntreasury.com/api
+  tags:
+  - Journal Entry
+  properties:
+  - type: OpenAPI
+    url: openapi/modern-treasury-journal-entry-api-openapi.yml
+  - type: Documentation
+    url: https://docs.moderntreasury.com/reference
+- aid: modern-treasury:modern-treasury-ledger-account-api
+  name: Modern Treasury Ledger Account API
+  description: The Ledger Account API from Modern Treasury — 2 operation(s) for ledger account.
+  humanURL: https://docs.moderntreasury.com/reference
+  baseURL: https://app.moderntreasury.com/api
+  tags:
+  - Ledger Account
+  properties:
+  - type: OpenAPI
+    url: openapi/modern-treasury-ledger-account-api-openapi.yml
+  - type: Documentation
+    url: https://docs.moderntreasury.com/reference
+- aid: modern-treasury:modern-treasury-ledger-entry-api
+  name: Modern Treasury Ledger Entry API
+  description: The Ledger Entry API from Modern Treasury — 2 operation(s) for ledger entry.
+  humanURL: https://docs.moderntreasury.com/reference
+  baseURL: https://app.moderntreasury.com/api
+  tags:
+  - Ledger Entry
+  properties:
+  - type: OpenAPI
+    url: openapi/modern-treasury-ledger-entry-api-openapi.yml
+  - type: Documentation
+    url: https://docs.moderntreasury.com/reference
+- aid: modern-treasury:modern-treasury-legal-entity-api
+  name: Modern Treasury Legal Entity API
+  description: The Legal Entity API from Modern Treasury — 3 operation(s) for legal entity.
+  humanURL: https://docs.moderntreasury.com/reference
+  baseURL: https://app.moderntreasury.com/api
+  tags:
+  - Legal Entity
+  properties:
+  - type: OpenAPI
+    url: openapi/modern-treasury-legal-entity-api-openapi.yml
+  - type: Documentation
+    url: https://docs.moderntreasury.com/reference
+- aid: modern-treasury:modern-treasury-line-item-api
+  name: Modern Treasury Line Item API
+  description: The Line Item API from Modern Treasury — 2 operation(s) for line item.
+  humanURL: https://docs.moderntreasury.com/reference
+  baseURL: https://app.moderntreasury.com/api
+  tags:
+  - Line Item
+  properties:
+  - type: OpenAPI
+    url: openapi/modern-treasury-line-item-api-openapi.yml
+  - type: Documentation
+    url: https://docs.moderntreasury.com/reference
+- aid: modern-treasury:modern-treasury-payment-flow-api
+  name: Modern Treasury Payment Flow API
+  description: The Payment Flow API from Modern Treasury — 2 operation(s) for payment flow.
+  humanURL: https://docs.moderntreasury.com/reference
+  baseURL: https://app.moderntreasury.com/api
+  tags:
+  - Payment Flow
+  properties:
+  - type: OpenAPI
+    url: openapi/modern-treasury-payment-flow-api-openapi.yml
+  - type: Documentation
+    url: https://docs.moderntreasury.com/reference
+- aid: modern-treasury:modern-treasury-virtual-account-api
+  name: Modern Treasury Virtual Account API
+  description: The Virtual Account API from Modern Treasury — 2 operation(s) for virtual account.
   humanURL: https://docs.moderntreasury.com/reference
   baseURL: https://app.moderntreasury.com/api
   tags:
   - Virtual Account
-  tags_raw:
-  - VirtualAccount
   properties:
   - type: OpenAPI
-    url: openapi/modern-treasury-virtualaccount-api-openapi.yml
+    url: openapi/modern-treasury-virtual-account-api-openapi.yml
   - type: Documentation
     url: https://docs.moderntreasury.com/reference
 common:
