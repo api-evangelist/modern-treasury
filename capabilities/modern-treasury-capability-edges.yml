@@ -11,7 +11,7 @@ capability_model:
   attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
     CC BY 4.0
   notice: NOTICE
-edge_count: 11
+edge_count: 16
 edges:
 - tag: PaymentOrder
   spec_file: modern-treasury-paymentorder-api-openapi.yml
@@ -43,6 +43,17 @@ edges:
     ledger_entry_of_transaction_version, ledger_transaction_version'
   reason: Balanced transactions composed of ledger entries, with posting, partial post, reversal and versioning
     — this is journal entry / general ledger posting functionality.
+- tag: InternalAccount
+  spec_file: modern-treasury-internalaccount-api-openapi.yml
+  capability_id: BC-210.60
+  capability_id_l1: BC-210
+  capability_name: Bank Relationship Management
+  confidence: 0.75
+  evidence: 'POST /api/internal_accounts  create internal account; POST /api/internal_accounts/{id}/request_closure  request
+    closure of internal account; schemas: connection, account_capability, routing_detail'
+  reason: Lifecycle of the company's own bank accounts held at partner banks, including opening and closure
+    and account capabilities — bank account structure / banking partner management.
+  recovered_from: sweep-20260829T005356Z-edges.json
 - tag: Ledger
   spec_file: modern-treasury-ledger-api-openapi.yml
   capability_id: BC-200.10
@@ -64,6 +75,41 @@ edges:
     ledger_balances_with_effective_at'
   reason: Ledger accounts are the account structure of the double-entry ledger with debit/credit balances
     — chart-of-accounts style general ledger management, not customer deposit accounts.
+- tag: LedgerAccountStatement
+  spec_file: modern-treasury-ledgeraccountstatement-api-openapi.yml
+  capability_id: BC-200.10
+  capability_id_l1: BC-200
+  capability_name: General Ledger Management
+  confidence: 0.75
+  evidence: 'POST /api/ledger_account_statements  create ledger_account_statement; schemas: ledger_balance,
+    ledger_balances'
+  reason: Operations create and retrieve statements of ledger account balances over a period — this is
+    ledger/book-keeping functionality, mapping to General Ledger Management. Modern Treasury's ledger
+    is a double-entry accounting store, not a customer-facing bank statement service.
+  recovered_from: sweep-20260829T005356Z-edges.json
+- tag: InvoiceLineItem
+  spec_file: modern-treasury-invoice-line-item-api-openapi.yml
+  capability_id: BC-200.30
+  capability_id_l1: BC-200
+  capability_name: Accounts Receivable Management
+  confidence: 0.72
+  evidence: POST /api/invoices/{invoice_id}/invoice_line_items  create invoice_line_item
+  reason: Sub-resource of the customer invoice — line-level detail of outbound invoices, i.e. accounts
+    receivable invoicing.
+  recovered_from: sweep-20260829T005356Z-edges.json
+  reanchored_from: modern-treasury-invoicelineitem-api-openapi.yml
+- tag: BalanceReport
+  spec_file: modern-treasury-balancereport-api-openapi.yml
+  capability_id: BC-210.10
+  capability_id_l1: BC-210
+  capability_name: Cash Management
+  confidence: 0.7
+  evidence: 'GET /api/internal_accounts/{internal_account_id}/balance_reports  list balance_reports; schemas:
+    balance_report, balance, currency'
+  reason: Operations retrieve and create balance reports for internal (bank) accounts, i.e. balance/position
+    reporting on the company's own accounts — treasury cash positioning rather than accounting ledger
+    work. Mapped to Cash Management with moderate confidence since the surface is purely balance snapshots.
+  recovered_from: sweep-20260829T005356Z-edges.json
 - tag: ForeignExchangeQuote
   spec_file: modern-treasury-foreignexchangequote-api-openapi.yml
   capability_id: BC-1340.40
@@ -123,3 +169,15 @@ edges:
   confidence: 0.7
   evidence: POST /api/payment_orders/{payment_order_id}/reversals createReversal
   reason: Reversal of an existing payment order is post-initiation payment processing/exception handling.
+- tag: VirtualAccount
+  spec_file: modern-treasury-virtual-account-api-openapi.yml
+  capability_id: BC-210.60
+  capability_id_l1: BC-210
+  capability_name: Bank Relationship Management
+  confidence: 0.7
+  evidence: 'POST /api/virtual_accounts  create virtual_account; schemas: account_detail, routing_detail,
+    ledger_account_create_request'
+  reason: Creation and lifecycle of virtual bank accounts with account details and routing at bank partners
+    — bank account structure / banking partner management within Treasury Management.
+  recovered_from: sweep-20260829T005356Z-edges.json
+  reanchored_from: modern-treasury-virtualaccount-api-openapi.yml
