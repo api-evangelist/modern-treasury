@@ -24,7 +24,8 @@ edges:
   reason: Operations capture, create and update payment instructions (payment orders) for money movement
     — payment initiation.
 - tag: LedgerEntry
-  spec_file: modern-treasury-ledgerentry-api-openapi.yml
+  spec_file: modern-treasury-ledger-entry-api-openapi.yml
+  reanchored_from: modern-treasury-ledgerentry-api-openapi.yml
   capability_id: BC-200.10
   capability_id_l1: BC-200
   capability_name: General Ledger Management
@@ -53,7 +54,8 @@ edges:
     accounts, entries, transactions), so the surface realises general ledger / books-of-record management
     rather than any payment rail capability.
 - tag: LedgerAccount
-  spec_file: modern-treasury-ledgeraccount-api-openapi.yml
+  spec_file: modern-treasury-ledger-account-api-openapi.yml
+  reanchored_from: modern-treasury-ledgeraccount-api-openapi.yml
   capability_id: BC-200.10
   capability_id_l1: BC-200
   capability_name: General Ledger Management
