@@ -1,0 +1,123 @@
+slug: modern-treasury
+provider: Modern Treasury
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Banking & Capital Markets
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 11
+edges:
+- tag: PaymentOrder
+  spec_file: modern-treasury-paymentorder-api-openapi.yml
+  capability_id: BC-1340.10
+  capability_id_l1: BC-1340
+  capability_name: Payment Initiation Management
+  confidence: 0.9
+  evidence: POST /api/payment_orders createPaymentOrder 'create payment order'; schemas payment_order_create_request,
+    payment_order_type
+  reason: Operations capture, create and update payment instructions (payment orders) for money movement
+    — payment initiation.
+- tag: LedgerEntry
+  spec_file: modern-treasury-ledgerentry-api-openapi.yml
+  capability_id: BC-200.10
+  capability_id_l1: BC-200
+  capability_name: General Ledger Management
+  confidence: 0.8
+  evidence: 'GET /api/ledger_entries  listLedgerEntries; schemas: ledger_entry, ledger_balance'
+  reason: Ledger entries are the individual debit/credit postings of the double-entry ledger — core general
+    ledger journal management.
+- tag: LedgerTransaction
+  spec_file: modern-treasury-ledgertransaction-api-openapi.yml
+  capability_id: BC-200.10
+  capability_id_l1: BC-200
+  capability_name: General Ledger Management
+  confidence: 0.8
+  evidence: 'POST /api/ledger_transactions/{id}/reversal  create ledger_transaction reversal; schemas:
+    ledger_entry_of_transaction_version, ledger_transaction_version'
+  reason: Balanced transactions composed of ledger entries, with posting, partial post, reversal and versioning
+    — this is journal entry / general ledger posting functionality.
+- tag: Ledger
+  spec_file: modern-treasury-ledger-api-openapi.yml
+  capability_id: BC-200.10
+  capability_id_l1: BC-200
+  capability_name: General Ledger Management
+  confidence: 0.75
+  evidence: 'POST /api/ledgers  createLedger  create ledger; schemas: ledger, ledger_create_request'
+  reason: Modern Treasury's Ledger object is the container for a double-entry bookkeeping ledger (ledger
+    accounts, entries, transactions), so the surface realises general ledger / books-of-record management
+    rather than any payment rail capability.
+- tag: LedgerAccount
+  spec_file: modern-treasury-ledgeraccount-api-openapi.yml
+  capability_id: BC-200.10
+  capability_id_l1: BC-200
+  capability_name: General Ledger Management
+  confidence: 0.75
+  evidence: 'POST /api/ledger_accounts  createLedgerAccount; schemas: ledger_account, ledger_balance,
+    ledger_balances_with_effective_at'
+  reason: Ledger accounts are the account structure of the double-entry ledger with debit/credit balances
+    — chart-of-accounts style general ledger management, not customer deposit accounts.
+- tag: ForeignExchangeQuote
+  spec_file: modern-treasury-foreignexchangequote-api-openapi.yml
+  capability_id: BC-1340.40
+  capability_id_l1: BC-1340
+  capability_name: Cross-Border Payment Management
+  confidence: 0.7
+  evidence: 'POST /api/foreign_exchange_quotes  createQuote  create foreign_exchange_quote; schemas: foreign_exchange_rate,
+    currency'
+  reason: FX quoting for currency conversion within payment flows on a money movement platform, matching
+    cross-border payment management (international payments, FX). Some chance it should sit under corporate
+    treasury FX instead.
+- tag: IncomingPaymentDetail
+  spec_file: modern-treasury-incomingpaymentdetail-api-openapi.yml
+  capability_id: BC-1340
+  capability_id_l1: BC-1340
+  capability_name: Payments & Card Management
+  confidence: 0.7
+  evidence: 'GET /api/incoming_payment_details  listIncomingPaymentDetails  list incoming payment_details;
+    schemas: virtual_account, routing_detail, currency'
+  reason: Records of inbound payments received into bank/virtual accounts on a payments platform, plus
+    a simulation endpoint. Clearly payments; the sub-capability (processing vs. reconciliation of receipts)
+    is ambiguous.
+- tag: Invoice
+  spec_file: modern-treasury-invoice-api-openapi.yml
+  capability_id: BC-200.30
+  capability_id_l1: BC-200
+  capability_name: Accounts Receivable Management
+  confidence: 0.7
+  evidence: 'POST /api/invoices  createInvoice  create invoice; schemas: invoice_line_item_create_request,
+    expected_payment, payment_order'
+  reason: Customer invoice issuance linked to expected payments and payment orders, i.e. receivables invoicing
+    and cash application. Small chance it is intended as a billing/pay-by-invoice product surface rather
+    than AR accounting.
+- tag: LedgerAccountCategory
+  spec_file: modern-treasury-ledgeraccountcategory-api-openapi.yml
+  capability_id: BC-200.10
+  capability_id_l1: BC-200
+  capability_name: General Ledger Management
+  confidence: 0.7
+  evidence: PUT /api/ledger_account_categories/{id}/ledger_accounts/{ledger_account_id}  addLedgerAccountToLedgerAccountCategory
+  reason: Grouping and nesting ledger accounts into categories/sub-categories is chart-of-accounts hierarchy
+    maintenance within the general ledger.
+- tag: Return
+  spec_file: modern-treasury-return-api-openapi.yml
+  capability_id: BC-1340.30
+  capability_id_l1: BC-1340
+  capability_name: Clearing & Settlement Management
+  confidence: 0.7
+  evidence: POST /api/returns createReturn; schema return_create_request alongside ledger_transaction_create_request
+  reason: ACH/wire returns are exception handling in clearing and settlement of payments on bank rails;
+    sub-capability choice somewhat uncertain.
+- tag: Reversal
+  spec_file: modern-treasury-reversal-api-openapi.yml
+  capability_id: BC-1340.20
+  capability_id_l1: BC-1340
+  capability_name: Payment Processing Management
+  confidence: 0.7
+  evidence: POST /api/payment_orders/{payment_order_id}/reversals createReversal
+  reason: Reversal of an existing payment order is post-initiation payment processing/exception handling.
