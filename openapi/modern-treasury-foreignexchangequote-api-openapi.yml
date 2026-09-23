@@ -1,6 +1,6 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Modern Treasury AccountCapability ForeignExchangeQuote API
+  title: Modern Treasury Foreign Exchange Quote API
   version: v1
   contact:
     name: Modern Treasury Engineering Team
@@ -24,8 +24,9 @@ paths:
       - name: after_cursor
         in: query
         schema:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         required: false
       - name: per_page
         in: query
@@ -78,14 +79,16 @@ paths:
           headers:
             X-After-Cursor:
               schema:
-                type: string
-                nullable: true
+                type:
+                - string
+                - 'null'
               required: false
               description: The cursor for the next page. Including this in a call as `after_cursor` will return the next page.
             X-Per-Page:
               schema:
-                type: integer
-                nullable: true
+                type:
+                - integer
+                - 'null'
               description: The current `per_page`.
           content:
             application/json:
@@ -200,6 +203,33 @@ components:
       - target_amount
       - target_currency
       - value
+    foreign_exchange_quote_create_request:
+      type: object
+      properties:
+        effective_at:
+          type: string
+          format: date-time
+          description: The timestamp until when the quoted rate is valid.
+        base_amount:
+          type: integer
+          description: Amount in the lowest denomination of the `base_currency` to convert, often called the "sell" amount.
+        base_currency:
+          $ref: '#/components/schemas/currency'
+          description: Currency to convert, often called the "sell" currency.
+        internal_account_id:
+          type: string
+          format: uuid
+          description: The ID for the `InternalAccount` this quote is associated with.
+        target_amount:
+          type: integer
+          description: Amount in the lowest denomination of the `target_currency`, often called the "buy" amount.
+        target_currency:
+          $ref: '#/components/schemas/currency'
+          description: Currency to convert the `base_currency` to, often called the "buy" currency.
+      additionalProperties: false
+      required:
+      - internal_account_id
+      - target_currency
     foreign_exchange_quote:
       type: object
       properties:
@@ -260,6 +290,32 @@ components:
       - foreign_exchange_rate
       - internal_account_id
       - metadata
+    error_message:
+      type: object
+      properties:
+        errors:
+          type: object
+          properties:
+            code:
+              type: string
+              enum:
+              - parameter_invalid
+              - parameter_missing
+              - resource_not_found
+              - not_found
+              - forbidden
+              - invalid_ip
+              - invalid_key
+              - header_invalid
+              - expired_key
+              - conflict
+              - too_many_requests
+            message:
+              type: string
+            parameter:
+              type: string
+      required:
+      - errors
     currency:
       type: string
       enum:
@@ -466,59 +522,6 @@ components:
       - ZWN
       - ZWR
       description: Three-letter ISO currency code.
-    error_message:
-      type: object
-      properties:
-        errors:
-          type: object
-          properties:
-            code:
-              type: string
-              enum:
-              - parameter_invalid
-              - parameter_missing
-              - resource_not_found
-              - not_found
-              - forbidden
-              - invalid_ip
-              - invalid_key
-              - header_invalid
-              - expired_key
-              - conflict
-              - too_many_requests
-            message:
-              type: string
-            parameter:
-              type: string
-      required:
-      - errors
-    foreign_exchange_quote_create_request:
-      type: object
-      properties:
-        effective_at:
-          type: string
-          format: date-time
-          description: The timestamp until when the quoted rate is valid.
-        base_amount:
-          type: integer
-          description: Amount in the lowest denomination of the `base_currency` to convert, often called the "sell" amount.
-        base_currency:
-          $ref: '#/components/schemas/currency'
-          description: Currency to convert, often called the "sell" currency.
-        internal_account_id:
-          type: string
-          format: uuid
-          description: The ID for the `InternalAccount` this quote is associated with.
-        target_amount:
-          type: integer
-          description: Amount in the lowest denomination of the `target_currency`, often called the "buy" amount.
-        target_currency:
-          $ref: '#/components/schemas/currency'
-          description: Currency to convert the `base_currency` to, often called the "buy" currency.
-      additionalProperties: false
-      required:
-      - internal_account_id
-      - target_currency
   parameters:
     metadata_query:
       name: metadata

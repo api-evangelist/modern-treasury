@@ -1,6 +1,6 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Modern Treasury AccountCapability LedgerAccount API
+  title: Modern Treasury Ledger Account API
   version: v1
   contact:
     name: Modern Treasury Engineering Team
@@ -10,13 +10,13 @@ servers:
 - url: http://localhost:3000
 - url: https://app.moderntreasury.com
 tags:
-- name: LedgerAccount
+- name: Ledger Account
 paths:
   /api/ledger_accounts:
     get:
       summary: list ledger_accounts
       tags:
-      - LedgerAccount
+      - Ledger Account
       operationId: listLedgerAccounts
       description: Get a list of ledger accounts.
       security:
@@ -25,8 +25,9 @@ paths:
       - name: after_cursor
         in: query
         schema:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         required: false
       - name: per_page
         in: query
@@ -180,14 +181,16 @@ paths:
           headers:
             X-After-Cursor:
               schema:
-                type: string
-                nullable: true
+                type:
+                - string
+                - 'null'
               required: false
               description: The cursor for the next page. Including this in a call as `after_cursor` will return the next page.
             X-Per-Page:
               schema:
-                type: integer
-                nullable: true
+                type:
+                - integer
+                - 'null'
               description: The current `per_page`.
           content:
             application/json:
@@ -204,7 +207,7 @@ paths:
     post:
       summary: create ledger_account
       tags:
-      - LedgerAccount
+      - Ledger Account
       operationId: createLedgerAccount
       description: Create a ledger account.
       security:
@@ -257,7 +260,7 @@ paths:
     get:
       summary: get ledger_account
       tags:
-      - LedgerAccount
+      - Ledger Account
       operationId: getLedgerAccount
       description: Get details on a single ledger account.
       security:
@@ -315,7 +318,7 @@ paths:
     patch:
       summary: update ledger_account
       tags:
-      - LedgerAccount
+      - Ledger Account
       operationId: updateLedgerAccount
       description: Update the details of a ledger account.
       security:
@@ -360,7 +363,7 @@ paths:
     delete:
       summary: delete ledger_account
       tags:
-      - LedgerAccount
+      - Ledger Account
       operationId: deleteLedgerAccount
       description: Delete a ledger account.
       security:
@@ -385,133 +388,58 @@ paths:
               schema:
                 $ref: '#/components/schemas/error_message'
 components:
+  parameters:
+    metadata_query:
+      name: metadata
+      in: query
+      schema:
+        type: object
+        additionalProperties:
+          type: string
+      style: deepObject
+      explode: true
+      required: false
+      description: For example, if you want to query for records with metadata key `Type` and value `Loan`, the query would be `metadata%5BType%5D=Loan`. This encodes the query parameters.
+    bulk_id:
+      name: id[]
+      in: query
+      style: form
+      explode: true
+      allowReserved: true
+      schema:
+        type: array
+        items:
+          type: string
+      required: false
+      description: If you have specific IDs to retrieve in bulk, you can pass them as query parameters delimited with `id[]=`, for example `?id[]=123&id[]=abc`.
+    bulk_name:
+      name: name[]
+      in: query
+      style: form
+      explode: true
+      allowReserved: true
+      schema:
+        type: array
+        items:
+          type: string
+      required: false
+      description: If you have specific names to retrieve in bulk, you can pass them as query parameters delimited with `name[]=`, for example `?name[]=123&name[]=abc`.
   schemas:
-    ledger_account_update_request:
-      type: object
-      properties:
-        name:
-          type: string
-          description: The name of the ledger account.
-        description:
-          type: string
-          description: The description of the ledger account.
-          nullable: true
-        metadata:
-          type: object
-          description: Additional data represented as key-value pairs. Both the key and value must be strings.
-          additionalProperties:
-            type: string
-          example:
-            key: value
-            foo: bar
-            modern: treasury
-        external_id:
-          type: string
-          description: An optional user-defined 180 character unique identifier.
-          nullable: true
-    ledger_account_create_request:
-      type: object
-      properties:
-        name:
-          type: string
-          description: The name of the ledger account.
-        description:
-          type: string
-          description: The description of the ledger account.
-          nullable: true
-        normal_balance:
-          type: string
-          enum:
-          - credit
-          - debit
-          description: The normal balance of the ledger account.
-          _x-stainless-modelDefPath: $shared.transaction_direction
-        ledger_id:
-          type: string
-          format: uuid
-          description: The id of the ledger that this account belongs to.
-        currency:
-          type: string
-          description: The currency of the ledger account.
-        currency_exponent:
-          type: integer
-          description: The currency exponent of the ledger account.
-          nullable: true
-        ledger_account_category_ids:
-          type: array
-          items:
-            type: string
-            format: uuid
-          description: The array of ledger account category ids that this ledger account should be a child of.
-        ledgerable_id:
-          type: string
-          format: uuid
-          description: If the ledger account links to another object in Modern Treasury, the id will be populated here, otherwise null.
-        ledgerable_type:
-          type: string
-          enum:
-          - counterparty
-          - external_account
-          - internal_account
-          - virtual_account
-          description: If the ledger account links to another object in Modern Treasury, the type will be populated here, otherwise null. The value is one of internal_account or external_account.
-        metadata:
-          type: object
-          description: Additional data represented as key-value pairs. Both the key and value must be strings.
-          additionalProperties:
-            type: string
-          example:
-            key: value
-            foo: bar
-            modern: treasury
-        external_id:
-          type: string
-          nullable: true
-          description: An optional user-defined 180 character unique identifier.
-      required:
-      - name
-      - normal_balance
-      - ledger_id
-      - currency
-    error_message:
-      type: object
-      properties:
-        errors:
-          type: object
-          properties:
-            code:
-              type: string
-              enum:
-              - parameter_invalid
-              - parameter_missing
-              - resource_not_found
-              - not_found
-              - forbidden
-              - invalid_ip
-              - invalid_key
-              - header_invalid
-              - expired_key
-              - conflict
-              - too_many_requests
-            message:
-              type: string
-            parameter:
-              type: string
-      required:
-      - errors
     ledger_balances_with_effective_at:
       type: object
       properties:
         effective_at_lower_bound:
-          type: string
+          type:
+          - string
+          - 'null'
           format: date-time
           description: The inclusive lower bound of the effective_at timestamp for the returned balances.
-          nullable: true
         effective_at_upper_bound:
-          type: string
+          type:
+          - string
+          - 'null'
           format: date-time
           description: The exclusive upper bound of the effective_at timestamp for the returned balances.
-          nullable: true
         pending_balance:
           $ref: '#/components/schemas/ledger_balance'
           description: The pending_balance is the sum of all pending and posted entries.
@@ -529,29 +457,6 @@ components:
       - pending_balance
       - posted_balance
       - available_balance
-    ledger_balance:
-      type: object
-      properties:
-        credits:
-          type: integer
-        debits:
-          type: integer
-        amount:
-          type: integer
-        currency:
-          type: string
-          description: The currency of the ledger account.
-        currency_exponent:
-          type: integer
-          description: The currency exponent of the ledger account.
-      additionalProperties: false
-      minProperties: 5
-      required:
-      - credits
-      - debits
-      - amount
-      - currency
-      - currency_exponent
     ledger_account:
       type: object
       properties:
@@ -570,16 +475,18 @@ components:
           type: string
           format: date-time
         discarded_at:
-          type: string
+          type:
+          - string
+          - 'null'
           format: date-time
-          nullable: true
         name:
           type: string
           description: The name of the ledger account.
         description:
-          type: string
+          type:
+          - string
+          - 'null'
           description: The description of the ledger account.
-          nullable: true
         normal_balance:
           type: string
           enum:
@@ -598,22 +505,25 @@ components:
           format: uuid
           description: The id of the ledger that this account belongs to.
         ledgerable_id:
-          type: string
+          type:
+          - string
+          - 'null'
           format: uuid
-          nullable: true
           description: If the ledger account links to another object in Modern Treasury, the id will be populated here, otherwise null.
         external_id:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           description: An optional user-defined 180 character unique identifier.
         ledgerable_type:
-          type: string
+          type:
+          - string
+          - 'null'
           enum:
           - counterparty
           - external_account
           - internal_account
           - virtual_account
-          nullable: true
           description: If the ledger account links to another object in Modern Treasury, the type will be populated here, otherwise null. The value is one of internal_account or external_account.
         metadata:
           type: object
@@ -643,42 +553,147 @@ components:
       - external_id
       - ledgerable_type
       - metadata
-  parameters:
-    bulk_id:
-      name: id[]
-      in: query
-      style: form
-      explode: true
-      allowReserved: true
-      schema:
-        type: array
-        items:
+    error_message:
+      type: object
+      properties:
+        errors:
+          type: object
+          properties:
+            code:
+              type: string
+              enum:
+              - parameter_invalid
+              - parameter_missing
+              - resource_not_found
+              - not_found
+              - forbidden
+              - invalid_ip
+              - invalid_key
+              - header_invalid
+              - expired_key
+              - conflict
+              - too_many_requests
+            message:
+              type: string
+            parameter:
+              type: string
+      required:
+      - errors
+    ledger_account_update_request:
+      type: object
+      properties:
+        name:
           type: string
-      required: false
-      description: If you have specific IDs to retrieve in bulk, you can pass them as query parameters delimited with `id[]=`, for example `?id[]=123&id[]=abc`.
-    bulk_name:
-      name: name[]
-      in: query
-      style: form
-      explode: true
-      allowReserved: true
-      schema:
-        type: array
-        items:
+          description: The name of the ledger account.
+        description:
+          type:
+          - string
+          - 'null'
+          description: The description of the ledger account.
+        metadata:
+          type: object
+          description: Additional data represented as key-value pairs. Both the key and value must be strings.
+          additionalProperties:
+            type: string
+          example:
+            key: value
+            foo: bar
+            modern: treasury
+        external_id:
+          type:
+          - string
+          - 'null'
+          description: An optional user-defined 180 character unique identifier.
+    ledger_account_create_request:
+      type: object
+      properties:
+        name:
           type: string
-      required: false
-      description: If you have specific names to retrieve in bulk, you can pass them as query parameters delimited with `name[]=`, for example `?name[]=123&name[]=abc`.
-    metadata_query:
-      name: metadata
-      in: query
-      schema:
-        type: object
-        additionalProperties:
+          description: The name of the ledger account.
+        description:
+          type:
+          - string
+          - 'null'
+          description: The description of the ledger account.
+        normal_balance:
           type: string
-      style: deepObject
-      explode: true
-      required: false
-      description: For example, if you want to query for records with metadata key `Type` and value `Loan`, the query would be `metadata%5BType%5D=Loan`. This encodes the query parameters.
+          enum:
+          - credit
+          - debit
+          description: The normal balance of the ledger account.
+          _x-stainless-modelDefPath: $shared.transaction_direction
+        ledger_id:
+          type: string
+          format: uuid
+          description: The id of the ledger that this account belongs to.
+        currency:
+          type: string
+          description: The currency of the ledger account.
+        currency_exponent:
+          type:
+          - integer
+          - 'null'
+          description: The currency exponent of the ledger account.
+        ledger_account_category_ids:
+          type: array
+          items:
+            type: string
+            format: uuid
+          description: The array of ledger account category ids that this ledger account should be a child of.
+        ledgerable_id:
+          type: string
+          format: uuid
+          description: If the ledger account links to another object in Modern Treasury, the id will be populated here, otherwise null.
+        ledgerable_type:
+          type: string
+          enum:
+          - counterparty
+          - external_account
+          - internal_account
+          - virtual_account
+          description: If the ledger account links to another object in Modern Treasury, the type will be populated here, otherwise null. The value is one of internal_account or external_account.
+        metadata:
+          type: object
+          description: Additional data represented as key-value pairs. Both the key and value must be strings.
+          additionalProperties:
+            type: string
+          example:
+            key: value
+            foo: bar
+            modern: treasury
+        external_id:
+          type:
+          - string
+          - 'null'
+          description: An optional user-defined 180 character unique identifier.
+      required:
+      - name
+      - normal_balance
+      - ledger_id
+      - currency
+    ledger_balance:
+      type: object
+      properties:
+        credits:
+          type: integer
+        debits:
+          type: integer
+        amount:
+          type: integer
+        currency:
+          type: string
+          description: The currency of the ledger account.
+        currency_exponent:
+          type: integer
+          description: The currency exponent of the ledger account.
+      additionalProperties: false
+      minProperties: 5
+      required:
+      - credits
+      - debits
+      - amount
+      - currency
+      - currency_exponent
   securitySchemes:
     basic_auth:
       type: http

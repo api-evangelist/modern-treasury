@@ -1,6 +1,6 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Modern Treasury AccountCapability JournalEntry API
+  title: Modern Treasury Journal Entry API
   version: v1
   contact:
     name: Modern Treasury Engineering Team
@@ -10,13 +10,13 @@ servers:
 - url: http://localhost:3000
 - url: https://app.moderntreasury.com
 tags:
-- name: JournalEntry
+- name: Journal Entry
 paths:
   /api/journal_entries:
     get:
       summary: list journal_entries
       tags:
-      - JournalEntry
+      - Journal Entry
       operationId: listJournalEntries
       description: Retrieve a list of journal entries
       security:
@@ -58,7 +58,7 @@ paths:
     get:
       summary: show journal_entry
       tags:
-      - JournalEntry
+      - Journal Entry
       operationId: getJournalEntry
       description: Retrieve a specific journal entry
       security:

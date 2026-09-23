@@ -1,6 +1,6 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Modern Treasury AccountCapability API
+  title: Modern Treasury Account Capability API
   version: v1
   contact:
     name: Modern Treasury Engineering Team
@@ -57,9 +57,10 @@ paths:
                     type: string
                     format: date-time
                   discarded_at:
-                    type: string
+                    type:
+                    - string
+                    - 'null'
                     format: date-time
-                    nullable: true
                   direction:
                     type: string
                     enum:
@@ -68,8 +69,9 @@ paths:
                     description: One of `debit` or `credit`. Indicates the direction of money movement this capability is responsible for.
                     _x-stainless-modelDefPath: $shared.transaction_direction
                   identifier:
-                    type: string
-                    nullable: true
+                    type:
+                    - string
+                    - 'null'
                     description: A unique reference assigned by your bank for tracking and recognizing payment files. It is important this is formatted exactly how the bank assigned it.
                   payment_type:
                     type: string

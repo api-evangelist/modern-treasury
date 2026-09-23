@@ -1,6 +1,6 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Modern Treasury AccountCapability Document API
+  title: Modern Treasury Document API
   version: v1
   contact:
     name: Modern Treasury Engineering Team
@@ -49,8 +49,9 @@ paths:
       - name: after_cursor
         in: query
         schema:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         required: false
       - name: per_page
         in: query
@@ -63,14 +64,16 @@ paths:
           headers:
             X-After-Cursor:
               schema:
-                type: string
-                nullable: true
+                type:
+                - string
+                - 'null'
               required: false
               description: The cursor for the next page. Including this in a call as `after_cursor` will return the next page.
             X-Per-Page:
               schema:
-                type: integer
-                nullable: true
+                type:
+                - integer
+                - 'null'
               description: The current `per_page`.
           content:
             application/json:
@@ -166,8 +169,9 @@ paths:
       - name: after_cursor
         in: query
         schema:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         required: false
       - name: per_page
         in: query
@@ -180,14 +184,16 @@ paths:
           headers:
             X-After-Cursor:
               schema:
-                type: string
-                nullable: true
+                type:
+                - string
+                - 'null'
               required: false
               description: The cursor for the next page. Including this in a call as `after_cursor` will return the next page.
             X-Per-Page:
               schema:
-                type: integer
-                nullable: true
+                type:
+                - integer
+                - 'null'
               description: The current `per_page`.
           content:
             application/json:
@@ -428,68 +434,6 @@ paths:
                 $ref: '#/components/schemas/error_message'
 components:
   schemas:
-    document_detail:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-        object:
-          type: string
-        live_mode:
-          type: boolean
-          description: This field will be true if this object exists in the live environment or false if it exists in the test environment.
-        created_at:
-          type: string
-          format: date-time
-        updated_at:
-          type: string
-          format: date-time
-        discarded_at:
-          type: string
-          format: date-time
-          nullable: true
-        document_identifier_type:
-          type: string
-        document_identifier:
-          type: string
-      additionalProperties: false
-      minProperties: 8
-      required:
-      - id
-      - object
-      - live_mode
-      - created_at
-      - updated_at
-      - discarded_at
-      - document_identifier_type
-      - document_identifier
-    error_message:
-      type: object
-      properties:
-        errors:
-          type: object
-          properties:
-            code:
-              type: string
-              enum:
-              - parameter_invalid
-              - parameter_missing
-              - resource_not_found
-              - not_found
-              - forbidden
-              - invalid_ip
-              - invalid_key
-              - header_invalid
-              - expired_key
-              - conflict
-              - too_many_requests
-            message:
-              type: string
-            parameter:
-              type: string
-      required:
-      - errors
     document:
       type: object
       properties:
@@ -508,23 +452,28 @@ components:
           type: string
           format: date-time
         discarded_at:
-          type: string
+          type:
+          - string
+          - 'null'
           format: date-time
-          nullable: true
         document_type:
-          type: string
+          type:
+          - string
+          - 'null'
           description: A category given to the document, can be `null`.
-          nullable: true
         source:
           type: string
           description: The source of the document. Can be `vendor`, `customer`, or `modern_treasury`.
         documentable_id:
-          type: string
+          type:
+          - string
+          - 'null'
           format: uuid
           description: The unique identifier for the associated object.
-          nullable: true
         documentable_type:
-          type: string
+          type:
+          - string
+          - 'null'
           enum:
           - connection
           - counterparty
@@ -538,7 +487,6 @@ components:
           - payment_order
           - transaction
           description: The type of the associated object. Currently can be one of `payment_order`, `transaction`, `expected_payment`, `counterparty`, `organization`, `case`, `internal_account`, `decision`, or `external_account`.
-          nullable: true
         document_details:
           type: array
           items:
@@ -572,17 +520,6 @@ components:
       - documentable_type
       - document_details
       - file
-    legacy_document_create_request:
-      type: object
-      properties:
-        document_type:
-          type: string
-          description: A category given to the document, can be `null`.
-        file:
-          type: string
-          format: binary
-      required:
-      - file
     document_create_request:
       type: object
       properties:
@@ -603,6 +540,80 @@ components:
           - organizations
           - payment_orders
           - transactions
+        document_type:
+          type: string
+          description: A category given to the document, can be `null`.
+        file:
+          type: string
+          format: binary
+      required:
+      - file
+    error_message:
+      type: object
+      properties:
+        errors:
+          type: object
+          properties:
+            code:
+              type: string
+              enum:
+              - parameter_invalid
+              - parameter_missing
+              - resource_not_found
+              - not_found
+              - forbidden
+              - invalid_ip
+              - invalid_key
+              - header_invalid
+              - expired_key
+              - conflict
+              - too_many_requests
+            message:
+              type: string
+            parameter:
+              type: string
+      required:
+      - errors
+    document_detail:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        object:
+          type: string
+        live_mode:
+          type: boolean
+          description: This field will be true if this object exists in the live environment or false if it exists in the test environment.
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        discarded_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        document_identifier_type:
+          type: string
+        document_identifier:
+          type: string
+      additionalProperties: false
+      minProperties: 8
+      required:
+      - id
+      - object
+      - live_mode
+      - created_at
+      - updated_at
+      - discarded_at
+      - document_identifier_type
+      - document_identifier
+    legacy_document_create_request:
+      type: object
+      properties:
         document_type:
           type: string
           description: A category given to the document, can be `null`.

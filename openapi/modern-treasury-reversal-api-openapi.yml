@@ -1,6 +1,6 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Modern Treasury AccountCapability Reversal API
+  title: Modern Treasury Reversal API
   version: v1
   contact:
     name: Modern Treasury Engineering Team
@@ -31,8 +31,9 @@ paths:
       - name: after_cursor
         in: query
         schema:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         required: false
       - name: per_page
         in: query
@@ -45,14 +46,16 @@ paths:
           headers:
             X-After-Cursor:
               schema:
-                type: string
-                nullable: true
+                type:
+                - string
+                - 'null'
               required: false
               description: The cursor for the next page. Including this in a call as `after_cursor` will return the next page.
             X-Per-Page:
               schema:
-                type: integer
-                nullable: true
+                type:
+                - integer
+                - 'null'
               description: The current `per_page`.
           content:
             application/json:
@@ -143,13 +146,200 @@ paths:
                 $ref: '#/components/schemas/error_message'
 components:
   schemas:
+    error_message:
+      type: object
+      properties:
+        errors:
+          type: object
+          properties:
+            code:
+              type: string
+              enum:
+              - parameter_invalid
+              - parameter_missing
+              - resource_not_found
+              - not_found
+              - forbidden
+              - invalid_ip
+              - invalid_key
+              - header_invalid
+              - expired_key
+              - conflict
+              - too_many_requests
+            message:
+              type: string
+            parameter:
+              type: string
+      required:
+      - errors
+    reversal:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        object:
+          type: string
+        live_mode:
+          type: boolean
+          description: This field will be true if this object exists in the live environment or false if it exists in the test environment.
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        status:
+          type: string
+          enum:
+          - cancelled
+          - completed
+          - failed
+          - pending
+          - processing
+          - returned
+          - sent
+          description: The current status of the reversal.
+        payment_order_id:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          description: The ID of the relevant Payment Order.
+        transaction_ids:
+          type: array
+          items:
+            type:
+            - string
+            - 'null'
+            format: uuid
+            description: The ID of the relevant Transaction or `null`.
+        ledger_transaction_id:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          description: The ID of the ledger transaction linked to the reversal.
+        metadata:
+          type: object
+          additionalProperties:
+            type: string
+          example:
+            key: value
+            foo: bar
+            modern: treasury
+          description: Additional data represented as key-value pairs. Both the key and value must be strings.
+        reason:
+          type: string
+          enum:
+          - duplicate
+          - incorrect_amount
+          - incorrect_receiving_account
+          - date_earlier_than_intended
+          - date_later_than_intended
+          description: The reason for the reversal.
+        internal_account_id:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          description: The ID of the relevant Internal Account.
+        reconciliation_status:
+          type: string
+          enum:
+          - unreconciled
+          - tentatively_reconciled
+          - reconciled
+          description: One of `unreconciled`, `tentatively_reconciled` or `reconciled`.
+      additionalProperties: false
+      minProperties: 13
+      required:
+      - id
+      - object
+      - live_mode
+      - created_at
+      - updated_at
+      - status
+      - payment_order_id
+      - transaction_ids
+      - ledger_transaction_id
+      - metadata
+      - reason
+      - internal_account_id
+      - reconciliation_status
+    ledger_entry_create_request:
+      type: object
+      properties:
+        amount:
+          type: integer
+          description: Value in specified currency's smallest unit. e.g. $10 would be represented as 1000. Can be any integer up to 36 digits.
+        effective_at:
+          type: string
+          format: date-time
+          description: The timestamp (ISO8601 format) at which the ledger transaction happened for reporting purposes.
+        direction:
+          type: string
+          enum:
+          - credit
+          - debit
+          description: One of `credit`, `debit`. Describes the direction money is flowing in the transaction. A `credit` moves money from your account to someone else's. A `debit` pulls money from someone else's account to your own. Note that wire, rtp, and check payments will always be `credit`.
+          _x-stainless-modelDefPath: $shared.transaction_direction
+        ledger_account_id:
+          type: string
+          format: uuid
+          description: The ledger account that this ledger entry is associated with.
+        lock_version:
+          type:
+          - integer
+          - 'null'
+          description: Lock version of the ledger account. This can be passed when creating a ledger transaction to only succeed if no ledger transactions have posted since the given version. See our post about Designing the Ledgers API with Optimistic Locking for more details.
+        pending_balance_amount:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            type: integer
+          description: Use `gt` (>), `gte` (>=), `lt` (<), `lte` (<=), or `eq` (=) to lock on the account’s pending balance. If any of these conditions would be false after the transaction is created, the entire call will fail with error code 422.
+        posted_balance_amount:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            type: integer
+          description: Use `gt` (>), `gte` (>=), `lt` (<), `lte` (<=), or `eq` (=) to lock on the account’s posted balance. If any of these conditions would be false after the transaction is created, the entire call will fail with error code 422.
+        available_balance_amount:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            type: integer
+          description: Use `gt` (>), `gte` (>=), `lt` (<), `lte` (<=), or `eq` (=) to lock on the account’s available balance. If any of these conditions would be false after the transaction is created, the entire call will fail with error code 422.
+        show_resulting_ledger_account_balances:
+          type:
+          - boolean
+          - 'null'
+          description: If true, response will include the balance of the associated ledger account for the entry.
+        metadata:
+          type: object
+          description: Additional data represented as key-value pairs. Both the key and value must be strings.
+          additionalProperties:
+            type: string
+          example:
+            key: value
+            foo: bar
+            modern: treasury
+      required:
+      - amount
+      - direction
+      - ledger_account_id
     ledger_transaction_create_request:
       type: object
       properties:
         description:
-          type: string
+          type:
+          - string
+          - 'null'
           description: An optional description for internal use.
-          nullable: true
         status:
           type: string
           enum:
@@ -197,97 +387,6 @@ components:
           description: If the ledger transaction can be reconciled to another object in Modern Treasury, the id will be populated here, otherwise null.
       required:
       - ledger_entries
-    reversal:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-        object:
-          type: string
-        live_mode:
-          type: boolean
-          description: This field will be true if this object exists in the live environment or false if it exists in the test environment.
-        created_at:
-          type: string
-          format: date-time
-        updated_at:
-          type: string
-          format: date-time
-        status:
-          type: string
-          enum:
-          - cancelled
-          - completed
-          - failed
-          - pending
-          - processing
-          - returned
-          - sent
-          description: The current status of the reversal.
-        payment_order_id:
-          type: string
-          format: uuid
-          nullable: true
-          description: The ID of the relevant Payment Order.
-        transaction_ids:
-          type: array
-          items:
-            type: string
-            format: uuid
-            nullable: true
-            description: The ID of the relevant Transaction or `null`.
-        ledger_transaction_id:
-          type: string
-          format: uuid
-          nullable: true
-          description: The ID of the ledger transaction linked to the reversal.
-        metadata:
-          type: object
-          additionalProperties:
-            type: string
-          example:
-            key: value
-            foo: bar
-            modern: treasury
-          description: Additional data represented as key-value pairs. Both the key and value must be strings.
-        reason:
-          type: string
-          enum:
-          - duplicate
-          - incorrect_amount
-          - incorrect_receiving_account
-          - date_earlier_than_intended
-          - date_later_than_intended
-          description: The reason for the reversal.
-        internal_account_id:
-          type: string
-          format: uuid
-          nullable: true
-          description: The ID of the relevant Internal Account.
-        reconciliation_status:
-          type: string
-          enum:
-          - unreconciled
-          - tentatively_reconciled
-          - reconciled
-          description: One of `unreconciled`, `tentatively_reconciled` or `reconciled`.
-      additionalProperties: false
-      minProperties: 13
-      required:
-      - id
-      - object
-      - live_mode
-      - created_at
-      - updated_at
-      - status
-      - payment_order_id
-      - transaction_ids
-      - ledger_transaction_id
-      - metadata
-      - reason
-      - internal_account_id
-      - reconciliation_status
     reversal_create_request:
       type: object
       properties:
@@ -314,92 +413,6 @@ components:
           description: Specifies a ledger transaction object that will be created with the reversal. If the ledger transaction cannot be created, then the reversal creation will fail. The resulting ledger transaction will mirror the status of the reversal.
       required:
       - reason
-    error_message:
-      type: object
-      properties:
-        errors:
-          type: object
-          properties:
-            code:
-              type: string
-              enum:
-              - parameter_invalid
-              - parameter_missing
-              - resource_not_found
-              - not_found
-              - forbidden
-              - invalid_ip
-              - invalid_key
-              - header_invalid
-              - expired_key
-              - conflict
-              - too_many_requests
-            message:
-              type: string
-            parameter:
-              type: string
-      required:
-      - errors
-    ledger_entry_create_request:
-      type: object
-      properties:
-        amount:
-          type: integer
-          description: Value in specified currency's smallest unit. e.g. $10 would be represented as 1000. Can be any integer up to 36 digits.
-        effective_at:
-          type: string
-          format: date-time
-          description: The timestamp (ISO8601 format) at which the ledger transaction happened for reporting purposes.
-        direction:
-          type: string
-          enum:
-          - credit
-          - debit
-          description: One of `credit`, `debit`. Describes the direction money is flowing in the transaction. A `credit` moves money from your account to someone else's. A `debit` pulls money from someone else's account to your own. Note that wire, rtp, and check payments will always be `credit`.
-          _x-stainless-modelDefPath: $shared.transaction_direction
-        ledger_account_id:
-          type: string
-          format: uuid
-          description: The ledger account that this ledger entry is associated with.
-        lock_version:
-          type: integer
-          description: Lock version of the ledger account. This can be passed when creating a ledger transaction to only succeed if no ledger transactions have posted since the given version. See our post about Designing the Ledgers API with Optimistic Locking for more details.
-          nullable: true
-        pending_balance_amount:
-          type: object
-          additionalProperties:
-            type: integer
-          description: Use `gt` (>), `gte` (>=), `lt` (<), `lte` (<=), or `eq` (=) to lock on the account’s pending balance. If any of these conditions would be false after the transaction is created, the entire call will fail with error code 422.
-          nullable: true
-        posted_balance_amount:
-          type: object
-          additionalProperties:
-            type: integer
-          description: Use `gt` (>), `gte` (>=), `lt` (<), `lte` (<=), or `eq` (=) to lock on the account’s posted balance. If any of these conditions would be false after the transaction is created, the entire call will fail with error code 422.
-          nullable: true
-        available_balance_amount:
-          type: object
-          additionalProperties:
-            type: integer
-          description: Use `gt` (>), `gte` (>=), `lt` (<), `lte` (<=), or `eq` (=) to lock on the account’s available balance. If any of these conditions would be false after the transaction is created, the entire call will fail with error code 422.
-          nullable: true
-        show_resulting_ledger_account_balances:
-          type: boolean
-          description: If true, response will include the balance of the associated ledger account for the entry.
-          nullable: true
-        metadata:
-          type: object
-          description: Additional data represented as key-value pairs. Both the key and value must be strings.
-          additionalProperties:
-            type: string
-          example:
-            key: value
-            foo: bar
-            modern: treasury
-      required:
-      - amount
-      - direction
-      - ledger_account_id
   securitySchemes:
     basic_auth:
       type: http

@@ -1,6 +1,6 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Modern Treasury AccountCapability LineItem API
+  title: Modern Treasury Line Item API
   version: v1
   contact:
     name: Modern Treasury Engineering Team
@@ -10,13 +10,13 @@ servers:
 - url: http://localhost:3000
 - url: https://app.moderntreasury.com
 tags:
-- name: LineItem
+- name: Line Item
 paths:
   /api/{itemizable_type}/{itemizable_id}/line_items:
     get:
       summary: list line items
       tags:
-      - LineItem
+      - Line Item
       description: Get a list of line items
       operationId: listLineItems
       security:
@@ -40,8 +40,9 @@ paths:
       - name: after_cursor
         in: query
         schema:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         required: false
       - name: per_page
         in: query
@@ -54,14 +55,16 @@ paths:
           headers:
             X-After-Cursor:
               schema:
-                type: string
-                nullable: true
+                type:
+                - string
+                - 'null'
               required: false
               description: The cursor for the next page. Including this in a call as `after_cursor` will return the next page.
             X-Per-Page:
               schema:
-                type: integer
-                nullable: true
+                type:
+                - integer
+                - 'null'
               description: The current `per_page`.
           content:
             application/json:
@@ -73,7 +76,7 @@ paths:
     get:
       summary: get line item
       tags:
-      - LineItem
+      - Line Item
       description: Get a single line item
       operationId: getLineItem
       security:
@@ -110,7 +113,7 @@ paths:
     patch:
       summary: update line item
       tags:
-      - LineItem
+      - Line Item
       operationId: updateLineItem
       security:
       - basic_auth: []
@@ -161,15 +164,17 @@ components:
       deprecated: true
       properties:
         account_id:
-          type: string
+          type:
+          - string
+          - 'null'
           format: uuid
-          nullable: true
           deprecated: true
           description: The ID of one of your accounting categories. Note that these will only be accessible if your accounting system has been connected.
         class_id:
-          type: string
+          type:
+          - string
+          - 'null'
           format: uuid
-          nullable: true
           deprecated: true
           description: The ID of one of the class objects in your accounting system. Class objects track segments of your business independent of client or project. Note that these will only be accessible if your accounting system has been connected.
     line_item_update_request:
@@ -184,32 +189,6 @@ components:
             key: value
             foo: bar
             modern: treasury
-    error_message:
-      type: object
-      properties:
-        errors:
-          type: object
-          properties:
-            code:
-              type: string
-              enum:
-              - parameter_invalid
-              - parameter_missing
-              - resource_not_found
-              - not_found
-              - forbidden
-              - invalid_ip
-              - invalid_key
-              - header_invalid
-              - expired_key
-              - conflict
-              - too_many_requests
-            message:
-              type: string
-            parameter:
-              type: string
-      required:
-      - errors
     line_item:
       type: object
       properties:
@@ -241,9 +220,10 @@ components:
           type: integer
           description: Value in specified currency's smallest unit. e.g. $10 would be represented as 1000.
         description:
-          type: string
+          type:
+          - string
+          - 'null'
           description: A free-form description of the line item.
-          nullable: true
         metadata:
           type: object
           description: Additional data represented as key-value pairs. Both the key and value must be strings.
@@ -256,17 +236,19 @@ components:
         accounting:
           $ref: '#/components/schemas/accounting'
         accounting_category_id:
-          type: string
+          type:
+          - string
+          - 'null'
           format: uuid
           deprecated: true
           description: The ID of one of your accounting categories. Note that these will only be accessible if your accounting system has been connected.
-          nullable: true
         accounting_ledger_class_id:
-          type: string
+          type:
+          - string
+          - 'null'
           format: uuid
           deprecated: true
           description: The ID of one of the class objects in your accounting system. Class objects track segments of your business independent of client or project. Note that these will only be accessible if your accounting system has been connected.
-          nullable: true
       additionalProperties: false
       minProperties: 13
       required:
@@ -283,6 +265,32 @@ components:
       - accounting
       - accounting_category_id
       - accounting_ledger_class_id
+    error_message:
+      type: object
+      properties:
+        errors:
+          type: object
+          properties:
+            code:
+              type: string
+              enum:
+              - parameter_invalid
+              - parameter_missing
+              - resource_not_found
+              - not_found
+              - forbidden
+              - invalid_ip
+              - invalid_key
+              - header_invalid
+              - expired_key
+              - conflict
+              - too_many_requests
+            message:
+              type: string
+            parameter:
+              type: string
+      required:
+      - errors
   securitySchemes:
     basic_auth:
       type: http

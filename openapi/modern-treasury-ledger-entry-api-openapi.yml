@@ -1,6 +1,6 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Modern Treasury AccountCapability LedgerEntry API
+  title: Modern Treasury Ledger Entry API
   version: v1
   contact:
     name: Modern Treasury Engineering Team
@@ -10,13 +10,13 @@ servers:
 - url: http://localhost:3000
 - url: https://app.moderntreasury.com
 tags:
-- name: LedgerEntry
+- name: Ledger Entry
 paths:
   /api/ledger_entries:
     get:
       summary: list ledger_entries
       tags:
-      - LedgerEntry
+      - Ledger Entry
       operationId: listLedgerEntries
       description: Get a list of all ledger entries.
       security:
@@ -25,8 +25,9 @@ paths:
       - name: after_cursor
         in: query
         schema:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         required: false
       - name: per_page
         in: query
@@ -206,14 +207,16 @@ paths:
           headers:
             X-After-Cursor:
               schema:
-                type: string
-                nullable: true
+                type:
+                - string
+                - 'null'
               required: false
               description: The cursor for the next page. Including this in a call as `after_cursor` will return the next page.
             X-Per-Page:
               schema:
-                type: integer
-                nullable: true
+                type:
+                - integer
+                - 'null'
               description: The current `per_page`.
           content:
             application/json:
@@ -244,7 +247,7 @@ paths:
     patch:
       summary: update ledger_entry
       tags:
-      - LedgerEntry
+      - Ledger Entry
       operationId: updateLedgerEntry
       description: Update the details of a ledger entry.
       security:
@@ -265,7 +268,7 @@ paths:
     get:
       summary: get ledger_entry
       tags:
-      - LedgerEntry
+      - Ledger Entry
       operationId: getLedgerEntry
       description: Get details on a single ledger entry.
       security:
@@ -291,30 +294,6 @@ paths:
               schema:
                 $ref: '#/components/schemas/error_message'
 components:
-  parameters:
-    bulk_id:
-      name: id[]
-      in: query
-      style: form
-      explode: true
-      allowReserved: true
-      schema:
-        type: array
-        items:
-          type: string
-      required: false
-      description: If you have specific IDs to retrieve in bulk, you can pass them as query parameters delimited with `id[]=`, for example `?id[]=123&id[]=abc`.
-    metadata_query:
-      name: metadata
-      in: query
-      schema:
-        type: object
-        additionalProperties:
-          type: string
-      style: deepObject
-      explode: true
-      required: false
-      description: For example, if you want to query for records with metadata key `Type` and value `Loan`, the query would be `metadata%5BType%5D=Loan`. This encodes the query parameters.
   schemas:
     ledger_entry_update_request:
       type: object
@@ -377,6 +356,24 @@ components:
       - amount
       - currency
       - currency_exponent
+    ledger_balances:
+      type: object
+      properties:
+        pending_balance:
+          $ref: '#/components/schemas/ledger_balance'
+          description: The pending_balance is the sum of all pending and posted entries.
+        posted_balance:
+          $ref: '#/components/schemas/ledger_balance'
+          description: The posted_balance is the sum of all posted entries.
+        available_balance:
+          $ref: '#/components/schemas/ledger_balance'
+          description: The available_balance is the sum of all posted inbound entries and pending outbound entries. For credit normal, available_amount = posted_credits - pending_debits; for debit normal, available_amount = posted_debits - pending_credits.
+      additionalProperties: false
+      minProperties: 3
+      required:
+      - pending_balance
+      - posted_balance
+      - available_balance
     ledger_entry:
       type: object
       properties:
@@ -395,9 +392,10 @@ components:
           type: string
           format: date-time
         discarded_at:
-          type: string
+          type:
+          - string
+          - 'null'
           format: date-time
-          nullable: true
         amount:
           type: integer
           description: Value in specified currency's smallest unit. e.g. $10 would be represented as 1000. Can be any integer up to 36 digits.
@@ -424,9 +422,10 @@ components:
           format: uuid
           description: The ledger account that this ledger entry is associated with.
         ledger_account_lock_version:
-          type: integer
+          type:
+          - integer
+          - 'null'
           description: Lock version of the ledger account. This can be passed when creating a ledger transaction to only succeed if no ledger transactions have posted since the given version. See our post about Designing the Ledgers API with Optimistic Locking for more details.
-          nullable: true
         ledger_account_currency:
           type: string
           description: The currency of the ledger account.
@@ -439,7 +438,6 @@ components:
         resulting_ledger_account_balances:
           $ref: '#/components/schemas/ledger_balances'
           description: The pending, posted, and available balances for this ledger entry's ledger account. The posted balance is the sum of all posted entries on the account. The pending balance is the sum of all pending and posted entries on the account. The available balance is the posted incoming entries minus the sum of the pending and posted outgoing amounts. Please see https://docs.moderntreasury.com/docs/transaction-status-and-balances for more details.
-          nullable: true
         metadata:
           type: object
           description: Additional data represented as key-value pairs. Both the key and value must be strings.
@@ -469,24 +467,30 @@ components:
       - ledger_transaction_id
       - resulting_ledger_account_balances
       - metadata
-    ledger_balances:
-      type: object
-      properties:
-        pending_balance:
-          $ref: '#/components/schemas/ledger_balance'
-          description: The pending_balance is the sum of all pending and posted entries.
-        posted_balance:
-          $ref: '#/components/schemas/ledger_balance'
-          description: The posted_balance is the sum of all posted entries.
-        available_balance:
-          $ref: '#/components/schemas/ledger_balance'
-          description: The available_balance is the sum of all posted inbound entries and pending outbound entries. For credit normal, available_amount = posted_credits - pending_debits; for debit normal, available_amount = posted_debits - pending_credits.
-      additionalProperties: false
-      minProperties: 3
-      required:
-      - pending_balance
-      - posted_balance
-      - available_balance
+  parameters:
+    metadata_query:
+      name: metadata
+      in: query
+      schema:
+        type: object
+        additionalProperties:
+          type: string
+      style: deepObject
+      explode: true
+      required: false
+      description: For example, if you want to query for records with metadata key `Type` and value `Loan`, the query would be `metadata%5BType%5D=Loan`. This encodes the query parameters.
+    bulk_id:
+      name: id[]
+      in: query
+      style: form
+      explode: true
+      allowReserved: true
+      schema:
+        type: array
+        items:
+          type: string
+      required: false
+      description: If you have specific IDs to retrieve in bulk, you can pass them as query parameters delimited with `id[]=`, for example `?id[]=123&id[]=abc`.
   securitySchemes:
     basic_auth:
       type: http

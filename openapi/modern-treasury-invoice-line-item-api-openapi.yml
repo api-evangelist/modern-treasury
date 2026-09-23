@@ -1,6 +1,6 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Modern Treasury AccountCapability InvoiceLineItem API
+  title: Modern Treasury Invoice Line Item API
   version: v1
   contact:
     name: Modern Treasury Engineering Team
@@ -10,7 +10,7 @@ servers:
 - url: http://localhost:3000
 - url: https://app.moderntreasury.com
 tags:
-- name: InvoiceLineItem
+- name: Invoice Line Item
 paths:
   /api/invoices/{invoice_id}/invoice_line_items:
     parameters:
@@ -23,7 +23,7 @@ paths:
     get:
       summary: list invoice_line_items
       tags:
-      - InvoiceLineItem
+      - Invoice Line Item
       operationId: listInvoiceLineItems
       security:
       - basic_auth: []
@@ -31,8 +31,9 @@ paths:
       - name: after_cursor
         in: query
         schema:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         required: false
       - name: per_page
         in: query
@@ -45,14 +46,16 @@ paths:
           headers:
             X-After-Cursor:
               schema:
-                type: string
-                nullable: true
+                type:
+                - string
+                - 'null'
               required: false
               description: The cursor for the next page. Including this in a call as `after_cursor` will return the next page.
             X-Per-Page:
               schema:
-                type: integer
-                nullable: true
+                type:
+                - integer
+                - 'null'
               description: The current `per_page`.
           content:
             application/json:
@@ -63,7 +66,7 @@ paths:
     post:
       summary: create invoice_line_item
       tags:
-      - InvoiceLineItem
+      - Invoice Line Item
       operationId: createInvoiceLineItem
       security:
       - basic_auth: []
@@ -103,7 +106,7 @@ paths:
     get:
       summary: get invoice_line_item
       tags:
-      - InvoiceLineItem
+      - Invoice Line Item
       operationId: getInvoiceLineItem
       security:
       - basic_auth: []
@@ -117,7 +120,7 @@ paths:
     patch:
       summary: update invoice_line_item
       tags:
-      - InvoiceLineItem
+      - Invoice Line Item
       operationId: updateInvoiceLineItem
       security:
       - basic_auth: []
@@ -137,7 +140,7 @@ paths:
     delete:
       summary: delete invoice_line_item
       tags:
-      - InvoiceLineItem
+      - Invoice Line Item
       operationId: deleteInvoiceLineItem
       security:
       - basic_auth: []
@@ -150,69 +153,6 @@ paths:
                 $ref: '#/components/schemas/invoice_line_item'
 components:
   schemas:
-    invoice_line_item_update_request:
-      type: object
-      properties:
-        name:
-          type: string
-          description: The name of the line item, typically a product or SKU name.
-        description:
-          type: string
-          description: An optional free-form description of the line item.
-        quantity:
-          type: integer
-          description: The number of units of a product or service that this line item is for.           Must be a whole number. Defaults to 1 if not provided.
-        unit_amount:
-          type: integer
-          description: The cost per unit of the product or service that this line item is for,           specified in the invoice currency's smallest unit.
-        unit_amount_decimal:
-          type: string
-          description: The cost per unit of the product or service that this line item is for,           specified in the invoice currency's smallest unit. Accepts decimal strings with up to 12 decimals
-        direction:
-          type: string
-          description: Either `debit` or `credit`. `debit` indicates that a client owes the business money           and increases the invoice's `total_amount` due. `credit` has the opposite intention and effect.
-        metadata:
-          type: object
-          additionalProperties:
-            type: string
-          example:
-            key: value
-            foo: bar
-            modern: treasury
-          description: Additional data represented as key-value pairs. Both the key and value must be strings.
-    invoice_line_item_create_request:
-      type: object
-      properties:
-        name:
-          type: string
-          description: The name of the line item, typically a product or SKU name.
-        description:
-          type: string
-          description: An optional free-form description of the line item.
-        quantity:
-          type: integer
-          description: The number of units of a product or service that this line item is for.           Must be a whole number. Defaults to 1 if not provided.
-        unit_amount:
-          type: integer
-          description: The cost per unit of the product or service that this line item is for,           specified in the invoice currency's smallest unit.
-        unit_amount_decimal:
-          type: string
-          description: The cost per unit of the product or service that this line item is for,           specified in the invoice currency's smallest unit. Accepts decimal strings with up to 12 decimals
-        direction:
-          type: string
-          description: Either `debit` or `credit`. `debit` indicates that a client owes the business money           and increases the invoice's `total_amount` due. `credit` has the opposite intention and effect.
-        metadata:
-          type: object
-          additionalProperties:
-            type: string
-          example:
-            key: value
-            foo: bar
-            modern: treasury
-          description: Additional data represented as key-value pairs. Both the key and value must be strings.
-      required:
-      - name
-      - unit_amount
     invoice_line_item:
       type: object
       properties:
@@ -280,6 +220,69 @@ components:
       - metadata
       - amount
       - invoice_id
+    invoice_line_item_create_request:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The name of the line item, typically a product or SKU name.
+        description:
+          type: string
+          description: An optional free-form description of the line item.
+        quantity:
+          type: integer
+          description: The number of units of a product or service that this line item is for.           Must be a whole number. Defaults to 1 if not provided.
+        unit_amount:
+          type: integer
+          description: The cost per unit of the product or service that this line item is for,           specified in the invoice currency's smallest unit.
+        unit_amount_decimal:
+          type: string
+          description: The cost per unit of the product or service that this line item is for,           specified in the invoice currency's smallest unit. Accepts decimal strings with up to 12 decimals
+        direction:
+          type: string
+          description: Either `debit` or `credit`. `debit` indicates that a client owes the business money           and increases the invoice's `total_amount` due. `credit` has the opposite intention and effect.
+        metadata:
+          type: object
+          additionalProperties:
+            type: string
+          example:
+            key: value
+            foo: bar
+            modern: treasury
+          description: Additional data represented as key-value pairs. Both the key and value must be strings.
+      required:
+      - name
+      - unit_amount
+    invoice_line_item_update_request:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The name of the line item, typically a product or SKU name.
+        description:
+          type: string
+          description: An optional free-form description of the line item.
+        quantity:
+          type: integer
+          description: The number of units of a product or service that this line item is for.           Must be a whole number. Defaults to 1 if not provided.
+        unit_amount:
+          type: integer
+          description: The cost per unit of the product or service that this line item is for,           specified in the invoice currency's smallest unit.
+        unit_amount_decimal:
+          type: string
+          description: The cost per unit of the product or service that this line item is for,           specified in the invoice currency's smallest unit. Accepts decimal strings with up to 12 decimals
+        direction:
+          type: string
+          description: Either `debit` or `credit`. `debit` indicates that a client owes the business money           and increases the invoice's `total_amount` due. `credit` has the opposite intention and effect.
+        metadata:
+          type: object
+          additionalProperties:
+            type: string
+          example:
+            key: value
+            foo: bar
+            modern: treasury
+          description: Additional data represented as key-value pairs. Both the key and value must be strings.
   securitySchemes:
     basic_auth:
       type: http

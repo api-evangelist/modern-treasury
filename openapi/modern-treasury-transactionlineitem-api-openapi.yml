@@ -1,6 +1,6 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Modern Treasury AccountCapability TransactionLineItem API
+  title: Modern Treasury Transaction Line Item API
   version: v1
   contact:
     name: Modern Treasury Engineering Team
@@ -23,17 +23,19 @@ paths:
     - name: after_cursor
       in: query
       schema:
-        type: string
-        nullable: true
+        type:
+        - string
+        - 'null'
       required: false
     - name: type
       in: query
       schema:
-        type: string
+        type:
+        - string
+        - 'null'
         enum:
         - originating
         - receiving
-        nullable: true
       required: false
     - name: per_page
       in: query
@@ -55,14 +57,16 @@ paths:
           headers:
             X-After-Cursor:
               schema:
-                type: string
-                nullable: true
+                type:
+                - string
+                - 'null'
               required: false
               description: The cursor for the next page. Including this in a call as `after_cursor` will return the next page.
             X-Per-Page:
               schema:
-                type: integer
-                nullable: true
+                type:
+                - integer
+                - 'null'
               description: The current `per_page`.
           content:
             application/json:
@@ -80,8 +84,9 @@ paths:
       - name: after_cursor
         in: query
         schema:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         required: false
       - name: id
         in: query
@@ -95,11 +100,12 @@ paths:
       - name: type
         in: query
         schema:
-          type: string
+          type:
+          - string
+          - 'null'
           enum:
           - originating
           - receiving
-          nullable: true
         required: false
       - name: per_page
         in: query
@@ -119,14 +125,16 @@ paths:
           headers:
             X-After-Cursor:
               schema:
-                type: string
-                nullable: true
+                type:
+                - string
+                - 'null'
               required: false
               description: The cursor for the next page. Including this in a call as `after_cursor` will return the next page.
             X-Per-Page:
               schema:
-                type: integer
-                nullable: true
+                type:
+                - integer
+                - 'null'
               description: The current `per_page`.
           content:
             application/json:
@@ -206,90 +214,24 @@ paths:
                 $ref: '#/components/schemas/error_message'
 components:
   schemas:
-    transaction_line_item:
+    transaction_line_item_create_request:
       type: object
       properties:
-        id:
-          type: string
-          format: uuid
-        object:
-          type: string
-        live_mode:
-          type: boolean
-          description: This field will be true if this object exists in the live environment, or false if it exists in the test environment.
-        created_at:
-          type: string
-          format: date-time
-        updated_at:
-          type: string
-          format: date-time
-        discarded_at:
-          type: string
-          format: date-time
-          nullable: true
-        type:
-          type: string
-          enum:
-          - originating
-          - receiving
-          description: Indicates whether the line item is `originating` or `receiving` (see https://www.moderntreasury.com/journal/beginners-guide-to-ach for more).
-        transactable_type:
-          type: string
-          enum:
-          - incoming_payment_detail
-          - payment_order
-          - payment_order_attempt
-          - return
-          - reversal
-          nullable: true
-          description: If a matching object exists in Modern Treasury, the type will be populated here, otherwise `null`.
-        transactable_id:
-          type: string
-          nullable: true
-          description: If a matching object exists in Modern Treasury, the ID will be populated here, otherwise `null`.
         amount:
           type: integer
           description: If a matching object exists in Modern Treasury, `amount` will be populated. Value in specified currency's smallest unit (taken from parent Transaction).
-        description:
-          type: string
-          description: If no matching object is found, `description` will be a free-form text field describing the line item. This field may contain personally identifiable information (PII) and is not included in API responses by default. Learn more about changing your settings at https://docs.moderntreasury.com/reference/personally-identifiable-information.
-        counterparty_id:
-          type: string
-          nullable: true
-          description: The ID for the counterparty for this transaction line item.
         expected_payment_id:
           type: string
-          nullable: true
+          format: uuid
           description: The ID of the reconciled Expected Payment, otherwise `null`.
         transaction_id:
           type: string
+          format: uuid
           description: The ID of the parent transaction.
-        reconciliation_group_id:
-          type: string
-          nullable: true
-          description: The ID of the reconciliation group this line item belongs to, otherwise `null`.
-        reconcilable:
-          type: boolean
-          description: Describes whether this line item should be counted towards the corresponding transaction’s reconciliation.
-      additionalProperties: false
-      minProperties: 16
       required:
-      - id
-      - object
-      - live_mode
-      - created_at
-      - updated_at
-      - discarded_at
-      - type
-      - transactable_type
-      - transactable_id
       - amount
-      - description
-      - counterparty_id
-      - expected_payment_id
       - transaction_id
-      - reconciliation_group_id
-      - reconcilable
+      - expected_payment_id
     error_message:
       type: object
       properties:
@@ -316,24 +258,96 @@ components:
               type: string
       required:
       - errors
-    transaction_line_item_create_request:
+    transaction_line_item:
       type: object
       properties:
+        id:
+          type: string
+          format: uuid
+        object:
+          type: string
+        live_mode:
+          type: boolean
+          description: This field will be true if this object exists in the live environment, or false if it exists in the test environment.
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        discarded_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        type:
+          type: string
+          enum:
+          - originating
+          - receiving
+          description: Indicates whether the line item is `originating` or `receiving` (see https://www.moderntreasury.com/journal/beginners-guide-to-ach for more).
+        transactable_type:
+          type:
+          - string
+          - 'null'
+          enum:
+          - incoming_payment_detail
+          - payment_order
+          - payment_order_attempt
+          - return
+          - reversal
+          description: If a matching object exists in Modern Treasury, the type will be populated here, otherwise `null`.
+        transactable_id:
+          type:
+          - string
+          - 'null'
+          description: If a matching object exists in Modern Treasury, the ID will be populated here, otherwise `null`.
         amount:
           type: integer
           description: If a matching object exists in Modern Treasury, `amount` will be populated. Value in specified currency's smallest unit (taken from parent Transaction).
-        expected_payment_id:
+        description:
           type: string
-          format: uuid
+          description: If no matching object is found, `description` will be a free-form text field describing the line item. This field may contain personally identifiable information (PII) and is not included in API responses by default. Learn more about changing your settings at https://docs.moderntreasury.com/reference/personally-identifiable-information.
+        counterparty_id:
+          type:
+          - string
+          - 'null'
+          description: The ID for the counterparty for this transaction line item.
+        expected_payment_id:
+          type:
+          - string
+          - 'null'
           description: The ID of the reconciled Expected Payment, otherwise `null`.
         transaction_id:
           type: string
-          format: uuid
           description: The ID of the parent transaction.
+        reconciliation_group_id:
+          type:
+          - string
+          - 'null'
+          description: The ID of the reconciliation group this line item belongs to, otherwise `null`.
+        reconcilable:
+          type: boolean
+          description: Describes whether this line item should be counted towards the corresponding transaction’s reconciliation.
+      additionalProperties: false
+      minProperties: 16
       required:
+      - id
+      - object
+      - live_mode
+      - created_at
+      - updated_at
+      - discarded_at
+      - type
+      - transactable_type
+      - transactable_id
       - amount
-      - transaction_id
+      - description
+      - counterparty_id
       - expected_payment_id
+      - transaction_id
+      - reconciliation_group_id
+      - reconcilable
   securitySchemes:
     basic_auth:
       type: http

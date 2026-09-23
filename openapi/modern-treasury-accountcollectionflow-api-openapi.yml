@@ -1,6 +1,6 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Modern Treasury AccountCapability AccountCollectionFlow API
+  title: Modern Treasury Account Collection Flow API
   version: v1
   contact:
     name: Modern Treasury Engineering Team
@@ -24,8 +24,9 @@ paths:
       - name: after_cursor
         in: query
         schema:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         required: false
       - name: per_page
         in: query
@@ -58,14 +59,16 @@ paths:
           headers:
             X-After-Cursor:
               schema:
-                type: string
-                nullable: true
+                type:
+                - string
+                - 'null'
               required: false
               description: The cursor for the next page. Including this in a call as `after_cursor` will return the next page.
             X-Per-Page:
               schema:
-                type: integer
-                nullable: true
+                type:
+                - integer
+                - 'null'
               description: The current `per_page`.
           content:
             application/json:
@@ -239,16 +242,6 @@ components:
       required:
       - payment_types
       - counterparty_id
-    account_collection_flow_update_request:
-      type: object
-      properties:
-        status:
-          type: string
-          enum:
-          - cancelled
-          description: Required. The updated status of the account collection flow. Can only be used to mark a flow as `cancelled`.
-      required:
-      - status
     account_collection_flow:
       type: object
       properties:
@@ -282,9 +275,10 @@ components:
           format: uuid
           description: The ID of a counterparty. An external account created with this flow will be associated with this counterparty.
         external_account_id:
-          type: string
+          type:
+          - string
+          - 'null'
           format: uuid
-          nullable: true
           description: If present, the ID of the external account created using this flow.
         payment_types:
           type: array
@@ -323,6 +317,16 @@ components:
       required:
       - payment_types
       - counterparty_id
+    account_collection_flow_update_request:
+      type: object
+      properties:
+        status:
+          type: string
+          enum:
+          - cancelled
+          description: Required. The updated status of the account collection flow. Can only be used to mark a flow as `cancelled`.
+      required:
+      - status
   securitySchemes:
     basic_auth:
       type: http

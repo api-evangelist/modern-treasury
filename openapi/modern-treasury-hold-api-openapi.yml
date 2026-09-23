@@ -1,6 +1,6 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Modern Treasury AccountCapability Hold API
+  title: Modern Treasury Hold API
   version: v1
   contact:
     name: Modern Treasury Engineering Team
@@ -25,8 +25,9 @@ paths:
       - name: after_cursor
         in: query
         schema:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         required: false
       - name: per_page
         in: query
@@ -36,27 +37,30 @@ paths:
       - name: target_id
         in: query
         schema:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         required: false
         description: 'Translation missing: en.openapi.descriptions.payment_order.query_params.target_id'
       - name: target_type
         in: query
         schema:
-          type: string
+          type:
+          - string
+          - 'null'
           enum:
           - payment_order
-          nullable: true
         required: false
         description: 'Translation missing: en.openapi.descriptions.payment_order.query_params.target_type'
       - name: status
         in: query
         schema:
-          type: string
+          type:
+          - string
+          - 'null'
           enum:
           - active
           - resolved
-          nullable: true
         required: false
         description: 'Translation missing: en.openapi.descriptions.payment_order.query_params.status'
       - $ref: '#/components/parameters/metadata_query'
@@ -66,14 +70,16 @@ paths:
           headers:
             X-After-Cursor:
               schema:
-                type: string
-                nullable: true
+                type:
+                - string
+                - 'null'
               required: false
               description: The cursor for the next page. Including this in a call as `after_cursor` will return the next page.
             X-Per-Page:
               schema:
-                type: integer
-                nullable: true
+                type:
+                - integer
+                - 'null'
               description: The current `per_page`.
           content:
             application/json:
@@ -143,8 +149,9 @@ paths:
                   format: uuid
                   description: The ID of the target to hold
                 reason:
-                  type: string
-                  nullable: true
+                  type:
+                  - string
+                  - 'null'
                   description: The reason for the hold
                 status:
                   type: string
@@ -152,10 +159,11 @@ paths:
                   - active
                   description: The status of the hold
                 metadata:
-                  type: object
+                  type:
+                  - object
+                  - 'null'
                   additionalProperties:
                     type: string
-                  nullable: true
                   description: Additional metadata for the hold
               required:
               - target_type
@@ -236,39 +244,26 @@ paths:
                   - resolved
                   description: The new status of the hold
                 resolution:
-                  type: string
-                  nullable: true
+                  type:
+                  - string
+                  - 'null'
                   description: The resolution of the hold
               required:
               - status
 components:
+  parameters:
+    metadata_query:
+      name: metadata
+      in: query
+      schema:
+        type: object
+        additionalProperties:
+          type: string
+      style: deepObject
+      explode: true
+      required: false
+      description: For example, if you want to query for records with metadata key `Type` and value `Loan`, the query would be `metadata%5BType%5D=Loan`. This encodes the query parameters.
   schemas:
-    error_message:
-      type: object
-      properties:
-        errors:
-          type: object
-          properties:
-            code:
-              type: string
-              enum:
-              - parameter_invalid
-              - parameter_missing
-              - resource_not_found
-              - not_found
-              - forbidden
-              - invalid_ip
-              - invalid_key
-              - header_invalid
-              - expired_key
-              - conflict
-              - too_many_requests
-            message:
-              type: string
-            parameter:
-              type: string
-      required:
-      - errors
     hold:
       type: object
       properties:
@@ -305,24 +300,28 @@ components:
           format: uuid
           description: The ID of the target being held
         reason:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           description: The reason for the hold
         resolution:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           description: The resolution of the hold
         resolved_at:
-          type: string
+          type:
+          - string
+          - 'null'
           format: date-time
-          nullable: true
           description: When the hold was resolved
         metadata:
-          type: object
+          type:
+          - object
+          - 'null'
           additionalProperties:
             type: string
           description: Additional metadata for the hold
-          nullable: true
       required:
       - id
       - object
@@ -332,18 +331,32 @@ components:
       - created_at
       - updated_at
       additionalProperties: false
-  parameters:
-    metadata_query:
-      name: metadata
-      in: query
-      schema:
-        type: object
-        additionalProperties:
-          type: string
-      style: deepObject
-      explode: true
-      required: false
-      description: For example, if you want to query for records with metadata key `Type` and value `Loan`, the query would be `metadata%5BType%5D=Loan`. This encodes the query parameters.
+    error_message:
+      type: object
+      properties:
+        errors:
+          type: object
+          properties:
+            code:
+              type: string
+              enum:
+              - parameter_invalid
+              - parameter_missing
+              - resource_not_found
+              - not_found
+              - forbidden
+              - invalid_ip
+              - invalid_key
+              - header_invalid
+              - expired_key
+              - conflict
+              - too_many_requests
+            message:
+              type: string
+            parameter:
+              type: string
+      required:
+      - errors
   securitySchemes:
     basic_auth:
       type: http

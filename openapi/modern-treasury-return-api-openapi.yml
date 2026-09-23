@@ -1,6 +1,6 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Modern Treasury AccountCapability Return API
+  title: Modern Treasury Return API
   version: v1
   contact:
     name: Modern Treasury Engineering Team
@@ -25,8 +25,9 @@ paths:
       - name: after_cursor
         in: query
         schema:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         required: false
       - name: per_page
         in: query
@@ -68,14 +69,16 @@ paths:
           headers:
             X-After-Cursor:
               schema:
-                type: string
-                nullable: true
+                type:
+                - string
+                - 'null'
               required: false
               description: The cursor for the next page. Including this in a call as `after_cursor` will return the next page.
             X-Per-Page:
               schema:
-                type: integer
-                nullable: true
+                type:
+                - integer
+                - 'null'
               description: The current `per_page`.
           content:
             application/json:
@@ -159,13 +162,505 @@ paths:
                 $ref: '#/components/schemas/error_message'
 components:
   schemas:
+    return:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        object:
+          type: string
+        live_mode:
+          type: boolean
+          description: This field will be true if this object exists in the live environment or false if it exists in the test environment.
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        discarded_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        returnable_id:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          description: The ID of the object being returned or `null`.
+        returnable_type:
+          type:
+          - string
+          - 'null'
+          enum:
+          - incoming_payment_detail
+          - payment_order
+          - return
+          - reversal
+          description: The type of object being returned or `null`.
+        code:
+          type:
+          - string
+          - 'null'
+          enum:
+          - '901'
+          - '902'
+          - '903'
+          - '904'
+          - '905'
+          - '907'
+          - '908'
+          - '909'
+          - '910'
+          - '911'
+          - '912'
+          - '914'
+          - C01
+          - C02
+          - C03
+          - C05
+          - C06
+          - C07
+          - C08
+          - C09
+          - C13
+          - C14
+          - R01
+          - R02
+          - R03
+          - R04
+          - R05
+          - R06
+          - R07
+          - R08
+          - R09
+          - R10
+          - R11
+          - R12
+          - R13
+          - R14
+          - R15
+          - R16
+          - R17
+          - R18
+          - R19
+          - R20
+          - R21
+          - R22
+          - R23
+          - R24
+          - R25
+          - R26
+          - R27
+          - R28
+          - R29
+          - R30
+          - R31
+          - R32
+          - R33
+          - R34
+          - R35
+          - R36
+          - R37
+          - R38
+          - R39
+          - R40
+          - R41
+          - R42
+          - R43
+          - R44
+          - R45
+          - R46
+          - R47
+          - R50
+          - R51
+          - R52
+          - R53
+          - R61
+          - R62
+          - R67
+          - R68
+          - R69
+          - R70
+          - R71
+          - R72
+          - R73
+          - R74
+          - R75
+          - R76
+          - R77
+          - R80
+          - R81
+          - R82
+          - R83
+          - R84
+          - R85
+          - currencycloud
+          description: The return code. For ACH returns, this is the required ACH return code.
+        reason:
+          type:
+          - string
+          - 'null'
+          description: Often the bank will provide an explanation for the return, which is a short human readable string.
+        date_of_death:
+          type:
+          - string
+          - 'null'
+          format: date
+          description: If the return code is `R14` or `R15` this is the date the deceased counterparty passed away.
+        additional_information:
+          type:
+          - string
+          - 'null'
+          description: Some returns may include additional information from the bank. In these cases, this string will be present.
+        data:
+          type:
+          - object
+          - 'null'
+          description: The raw data from the return file that we get from the bank.
+        corrections:
+          type:
+          - object
+          - 'null'
+          properties:
+            account_number:
+              type:
+              - string
+              - 'null'
+              description: The updated account number that should replace the one originally used on the outgoing payment.
+            company_id:
+              type:
+              - string
+              - 'null'
+              description: The updated company ID that should replace the one originally used on the outgoing payment.
+            company_name:
+              type:
+              - string
+              - 'null'
+              description: The updated company name that should replace the one originally used on the outgoing payment.
+            individual_identification_number:
+              type:
+              - string
+              - 'null'
+              description: The updated individual identification number that should replace the one originally used on the outgoing payment.
+            routing_number:
+              type:
+              - string
+              - 'null'
+              description: The updated routing number that should replace the one originally used on the outgoing payment.
+            transaction_code:
+              type:
+              - string
+              - 'null'
+              description: The updated account type code that should replace the one originally used on the outgoing payment.
+          description: Only relevant for ACH NOC returns. This is an object containing all of the new and corrected information provided by the bank that was previously incorrect on the original outgoing payment.
+        reconciliation_status:
+          type: string
+          enum:
+          - unreconciled
+          - tentatively_reconciled
+          - reconciled
+          description: One of `unreconciled`, `tentatively_reconciled` or `reconciled`.
+        status:
+          type: string
+          enum:
+          - cancelled
+          - completed
+          - failed
+          - pending
+          - processing
+          - returned
+          - sent
+          description: The current status of the return.
+        transaction_line_item_id:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          description: The ID of the relevant Transaction Line Item or `null`.
+        transaction_id:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          description: The ID of the relevant Transaction or `null`.
+        internal_account_id:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          description: The ID of the relevant Internal Account.
+        type:
+          type: string
+          enum:
+          - ach
+          - ach_noc
+          - au_becs
+          - bacs
+          - book
+          - check
+          - cross_border
+          - eft
+          - gb_fps
+          - interac
+          - manual
+          - sepa
+          - wire
+          - zengin
+          description: 'The type of return. Can be one of: `ach`, `ach_noc`, `au_becs`, `bacs`, `eft`, `interac`, `manual`, `paper_item`, `wire`.'
+        amount:
+          type: integer
+          description: Value in specified currency's smallest unit. e.g. $10 would be represented as 1000.
+        currency:
+          $ref: '#/components/schemas/currency'
+          description: Currency that this transaction is denominated in.
+        failure_reason:
+          type:
+          - string
+          - 'null'
+          description: If an originating return failed to be processed by the bank, a description of the failure reason will be available.
+        role:
+          type: string
+          enum:
+          - originating
+          - receiving
+          description: The role of the return, can be `originating` or `receiving`.
+        current_return:
+          $ref: '#/components/schemas/return'
+          description: If the return's status is `returned`, this will include the return object's data that is returning this return.
+          example: null
+        reference_numbers:
+          type: array
+          description: An array of Payment Reference objects.
+          items:
+            $ref: '#/components/schemas/payment_reference'
+        ledger_transaction_id:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          description: The ID of the ledger transaction linked to the return.
+      additionalProperties: false
+      minProperties: 25
+      required:
+      - id
+      - object
+      - live_mode
+      - created_at
+      - updated_at
+      - discarded_at
+      - returnable_id
+      - returnable_type
+      - code
+      - reason
+      - date_of_death
+      - corrections
+      - reconciliation_status
+      - status
+      - transaction_line_item_id
+      - transaction_id
+      - internal_account_id
+      - type
+      - amount
+      - currency
+      - failure_reason
+      - role
+      - current_return
+      - reference_numbers
+      - ledger_transaction_id
+    return_create_request:
+      type: object
+      properties:
+        returnable_id:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          description: The ID of the object being returned or `null`.
+        code:
+          type:
+          - string
+          - 'null'
+          enum:
+          - '901'
+          - '902'
+          - '903'
+          - '904'
+          - '905'
+          - '907'
+          - '908'
+          - '909'
+          - '910'
+          - '911'
+          - '912'
+          - '914'
+          - C01
+          - C02
+          - C03
+          - C05
+          - C06
+          - C07
+          - C08
+          - C09
+          - C13
+          - C14
+          - R01
+          - R02
+          - R03
+          - R04
+          - R05
+          - R06
+          - R07
+          - R08
+          - R09
+          - R10
+          - R11
+          - R12
+          - R13
+          - R14
+          - R15
+          - R16
+          - R17
+          - R18
+          - R19
+          - R20
+          - R21
+          - R22
+          - R23
+          - R24
+          - R25
+          - R26
+          - R27
+          - R28
+          - R29
+          - R30
+          - R31
+          - R32
+          - R33
+          - R34
+          - R35
+          - R36
+          - R37
+          - R38
+          - R39
+          - R40
+          - R41
+          - R42
+          - R43
+          - R44
+          - R45
+          - R46
+          - R47
+          - R50
+          - R51
+          - R52
+          - R53
+          - R61
+          - R62
+          - R67
+          - R68
+          - R69
+          - R70
+          - R71
+          - R72
+          - R73
+          - R74
+          - R75
+          - R76
+          - R77
+          - R80
+          - R81
+          - R82
+          - R83
+          - R84
+          - R85
+          - currencycloud
+          description: The return code. For ACH returns, this is the required ACH return code.
+        reason:
+          type:
+          - string
+          - 'null'
+          description: An optional description of the reason for the return. This is for internal usage and will not be transmitted to the bank.”
+        date_of_death:
+          type:
+          - string
+          - 'null'
+          format: date
+          description: If the return code is `R14` or `R15` this is the date the deceased counterparty passed away.
+        additional_information:
+          type:
+          - string
+          - 'null'
+          description: Some returns may include additional information from the bank. In these cases, this string will be present.
+        data:
+          type:
+          - object
+          - 'null'
+          description: The raw data from the return file that we get from the bank.
+        corrections:
+          type:
+          - object
+          - 'null'
+          properties:
+            account_number:
+              type:
+              - string
+              - 'null'
+              description: The updated account number that should replace the one originally used on the outgoing payment.
+            company_id:
+              type:
+              - string
+              - 'null'
+              description: The updated company ID that should replace the one originally used on the outgoing payment.
+            company_name:
+              type:
+              - string
+              - 'null'
+              description: The updated company name that should replace the one originally used on the outgoing payment.
+            individual_identification_number:
+              type:
+              - string
+              - 'null'
+              description: The updated individual identification number that should replace the one originally used on the outgoing payment.
+            routing_number:
+              type:
+              - string
+              - 'null'
+              description: The updated routing number that should replace the one originally used on the outgoing payment.
+            transaction_code:
+              type:
+              - string
+              - 'null'
+              description: The updated account type code that should replace the one originally used on the outgoing payment.
+          description: Only relevant for ACH NOC returns. This is an object containing all of the new and corrected information provided by the bank that was previously incorrect on the original outgoing payment.
+        reconciliation_status:
+          type: string
+          enum:
+          - unreconciled
+          - tentatively_reconciled
+          - reconciled
+          description: One of `unreconciled`, `tentatively_reconciled` or `reconciled`.
+        returnable_type:
+          type: string
+          enum:
+          - incoming_payment_detail
+          description: The type of object being returned. Currently, this may only be incoming_payment_detail.
+        ledger_transaction:
+          $ref: '#/components/schemas/ledger_transaction_create_request'
+          description: Specifies a ledger transaction object that will be created with the return. If the ledger transaction cannot be created, then the return creation will fail. The resulting ledger transaction will mirror the status of the return.
+      required:
+      - returnable_id
+      - returnable_type
     ledger_transaction_create_request:
       type: object
       properties:
         description:
-          type: string
+          type:
+          - string
+          - 'null'
           description: An optional description for internal use.
-          nullable: true
         status:
           type: string
           enum:
@@ -213,6 +708,97 @@ components:
           description: If the ledger transaction can be reconciled to another object in Modern Treasury, the id will be populated here, otherwise null.
       required:
       - ledger_entries
+    error_message:
+      type: object
+      properties:
+        errors:
+          type: object
+          properties:
+            code:
+              type: string
+              enum:
+              - parameter_invalid
+              - parameter_missing
+              - resource_not_found
+              - not_found
+              - forbidden
+              - invalid_ip
+              - invalid_key
+              - header_invalid
+              - expired_key
+              - conflict
+              - too_many_requests
+            message:
+              type: string
+            parameter:
+              type: string
+      required:
+      - errors
+    ledger_entry_create_request:
+      type: object
+      properties:
+        amount:
+          type: integer
+          description: Value in specified currency's smallest unit. e.g. $10 would be represented as 1000. Can be any integer up to 36 digits.
+        effective_at:
+          type: string
+          format: date-time
+          description: The timestamp (ISO8601 format) at which the ledger transaction happened for reporting purposes.
+        direction:
+          type: string
+          enum:
+          - credit
+          - debit
+          description: One of `credit`, `debit`. Describes the direction money is flowing in the transaction. A `credit` moves money from your account to someone else's. A `debit` pulls money from someone else's account to your own. Note that wire, rtp, and check payments will always be `credit`.
+          _x-stainless-modelDefPath: $shared.transaction_direction
+        ledger_account_id:
+          type: string
+          format: uuid
+          description: The ledger account that this ledger entry is associated with.
+        lock_version:
+          type:
+          - integer
+          - 'null'
+          description: Lock version of the ledger account. This can be passed when creating a ledger transaction to only succeed if no ledger transactions have posted since the given version. See our post about Designing the Ledgers API with Optimistic Locking for more details.
+        pending_balance_amount:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            type: integer
+          description: Use `gt` (>), `gte` (>=), `lt` (<), `lte` (<=), or `eq` (=) to lock on the account’s pending balance. If any of these conditions would be false after the transaction is created, the entire call will fail with error code 422.
+        posted_balance_amount:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            type: integer
+          description: Use `gt` (>), `gte` (>=), `lt` (<), `lte` (<=), or `eq` (=) to lock on the account’s posted balance. If any of these conditions would be false after the transaction is created, the entire call will fail with error code 422.
+        available_balance_amount:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            type: integer
+          description: Use `gt` (>), `gte` (>=), `lt` (<), `lte` (<=), or `eq` (=) to lock on the account’s available balance. If any of these conditions would be false after the transaction is created, the entire call will fail with error code 422.
+        show_resulting_ledger_account_balances:
+          type:
+          - boolean
+          - 'null'
+          description: If true, response will include the balance of the associated ledger account for the entry.
+        metadata:
+          type: object
+          description: Additional data represented as key-value pairs. Both the key and value must be strings.
+          additionalProperties:
+            type: string
+          example:
+            key: value
+            foo: bar
+            modern: treasury
+      required:
+      - amount
+      - direction
+      - ledger_account_id
     payment_reference:
       type: object
       properties:
@@ -338,491 +924,6 @@ components:
       - updated_at
       - reference_number
       - reference_number_type
-    return:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-        object:
-          type: string
-        live_mode:
-          type: boolean
-          description: This field will be true if this object exists in the live environment or false if it exists in the test environment.
-        created_at:
-          type: string
-          format: date-time
-        updated_at:
-          type: string
-          format: date-time
-        discarded_at:
-          type: string
-          format: date-time
-          nullable: true
-        returnable_id:
-          type: string
-          format: uuid
-          description: The ID of the object being returned or `null`.
-          nullable: true
-        returnable_type:
-          type: string
-          enum:
-          - incoming_payment_detail
-          - payment_order
-          - return
-          - reversal
-          description: The type of object being returned or `null`.
-          nullable: true
-        code:
-          type: string
-          enum:
-          - '901'
-          - '902'
-          - '903'
-          - '904'
-          - '905'
-          - '907'
-          - '908'
-          - '909'
-          - '910'
-          - '911'
-          - '912'
-          - '914'
-          - C01
-          - C02
-          - C03
-          - C05
-          - C06
-          - C07
-          - C08
-          - C09
-          - C13
-          - C14
-          - R01
-          - R02
-          - R03
-          - R04
-          - R05
-          - R06
-          - R07
-          - R08
-          - R09
-          - R10
-          - R11
-          - R12
-          - R13
-          - R14
-          - R15
-          - R16
-          - R17
-          - R18
-          - R19
-          - R20
-          - R21
-          - R22
-          - R23
-          - R24
-          - R25
-          - R26
-          - R27
-          - R28
-          - R29
-          - R30
-          - R31
-          - R32
-          - R33
-          - R34
-          - R35
-          - R36
-          - R37
-          - R38
-          - R39
-          - R40
-          - R41
-          - R42
-          - R43
-          - R44
-          - R45
-          - R46
-          - R47
-          - R50
-          - R51
-          - R52
-          - R53
-          - R61
-          - R62
-          - R67
-          - R68
-          - R69
-          - R70
-          - R71
-          - R72
-          - R73
-          - R74
-          - R75
-          - R76
-          - R77
-          - R80
-          - R81
-          - R82
-          - R83
-          - R84
-          - R85
-          - currencycloud
-          nullable: true
-          description: The return code. For ACH returns, this is the required ACH return code.
-        reason:
-          type: string
-          nullable: true
-          description: Often the bank will provide an explanation for the return, which is a short human readable string.
-        date_of_death:
-          type: string
-          nullable: true
-          format: date
-          description: If the return code is `R14` or `R15` this is the date the deceased counterparty passed away.
-        additional_information:
-          type: string
-          nullable: true
-          description: Some returns may include additional information from the bank. In these cases, this string will be present.
-        data:
-          type: object
-          nullable: true
-          description: The raw data from the return file that we get from the bank.
-        corrections:
-          type: object
-          nullable: true
-          properties:
-            account_number:
-              type: string
-              nullable: true
-              description: The updated account number that should replace the one originally used on the outgoing payment.
-            company_id:
-              type: string
-              nullable: true
-              description: The updated company ID that should replace the one originally used on the outgoing payment.
-            company_name:
-              type: string
-              nullable: true
-              description: The updated company name that should replace the one originally used on the outgoing payment.
-            individual_identification_number:
-              type: string
-              nullable: true
-              description: The updated individual identification number that should replace the one originally used on the outgoing payment.
-            routing_number:
-              type: string
-              nullable: true
-              description: The updated routing number that should replace the one originally used on the outgoing payment.
-            transaction_code:
-              type: string
-              nullable: true
-              description: The updated account type code that should replace the one originally used on the outgoing payment.
-          description: Only relevant for ACH NOC returns. This is an object containing all of the new and corrected information provided by the bank that was previously incorrect on the original outgoing payment.
-        reconciliation_status:
-          type: string
-          enum:
-          - unreconciled
-          - tentatively_reconciled
-          - reconciled
-          description: One of `unreconciled`, `tentatively_reconciled` or `reconciled`.
-        status:
-          type: string
-          enum:
-          - cancelled
-          - completed
-          - failed
-          - pending
-          - processing
-          - returned
-          - sent
-          description: The current status of the return.
-        transaction_line_item_id:
-          type: string
-          format: uuid
-          nullable: true
-          description: The ID of the relevant Transaction Line Item or `null`.
-        transaction_id:
-          type: string
-          format: uuid
-          nullable: true
-          description: The ID of the relevant Transaction or `null`.
-        internal_account_id:
-          type: string
-          format: uuid
-          nullable: true
-          description: The ID of the relevant Internal Account.
-        type:
-          type: string
-          enum:
-          - ach
-          - ach_noc
-          - au_becs
-          - bacs
-          - book
-          - check
-          - cross_border
-          - eft
-          - gb_fps
-          - interac
-          - manual
-          - sepa
-          - wire
-          - zengin
-          description: 'The type of return. Can be one of: `ach`, `ach_noc`, `au_becs`, `bacs`, `eft`, `interac`, `manual`, `paper_item`, `wire`.'
-        amount:
-          type: integer
-          description: Value in specified currency's smallest unit. e.g. $10 would be represented as 1000.
-        currency:
-          $ref: '#/components/schemas/currency'
-          description: Currency that this transaction is denominated in.
-        failure_reason:
-          type: string
-          nullable: true
-          description: If an originating return failed to be processed by the bank, a description of the failure reason will be available.
-        role:
-          type: string
-          enum:
-          - originating
-          - receiving
-          description: The role of the return, can be `originating` or `receiving`.
-        current_return:
-          $ref: '#/components/schemas/return'
-          nullable: true
-          description: If the return's status is `returned`, this will include the return object's data that is returning this return.
-          example: null
-        reference_numbers:
-          type: array
-          description: An array of Payment Reference objects.
-          items:
-            $ref: '#/components/schemas/payment_reference'
-        ledger_transaction_id:
-          type: string
-          format: uuid
-          nullable: true
-          description: The ID of the ledger transaction linked to the return.
-      additionalProperties: false
-      minProperties: 25
-      required:
-      - id
-      - object
-      - live_mode
-      - created_at
-      - updated_at
-      - discarded_at
-      - returnable_id
-      - returnable_type
-      - code
-      - reason
-      - date_of_death
-      - corrections
-      - reconciliation_status
-      - status
-      - transaction_line_item_id
-      - transaction_id
-      - internal_account_id
-      - type
-      - amount
-      - currency
-      - failure_reason
-      - role
-      - current_return
-      - reference_numbers
-      - ledger_transaction_id
-    error_message:
-      type: object
-      properties:
-        errors:
-          type: object
-          properties:
-            code:
-              type: string
-              enum:
-              - parameter_invalid
-              - parameter_missing
-              - resource_not_found
-              - not_found
-              - forbidden
-              - invalid_ip
-              - invalid_key
-              - header_invalid
-              - expired_key
-              - conflict
-              - too_many_requests
-            message:
-              type: string
-            parameter:
-              type: string
-      required:
-      - errors
-    return_create_request:
-      type: object
-      properties:
-        returnable_id:
-          type: string
-          format: uuid
-          description: The ID of the object being returned or `null`.
-          nullable: true
-        code:
-          type: string
-          enum:
-          - '901'
-          - '902'
-          - '903'
-          - '904'
-          - '905'
-          - '907'
-          - '908'
-          - '909'
-          - '910'
-          - '911'
-          - '912'
-          - '914'
-          - C01
-          - C02
-          - C03
-          - C05
-          - C06
-          - C07
-          - C08
-          - C09
-          - C13
-          - C14
-          - R01
-          - R02
-          - R03
-          - R04
-          - R05
-          - R06
-          - R07
-          - R08
-          - R09
-          - R10
-          - R11
-          - R12
-          - R13
-          - R14
-          - R15
-          - R16
-          - R17
-          - R18
-          - R19
-          - R20
-          - R21
-          - R22
-          - R23
-          - R24
-          - R25
-          - R26
-          - R27
-          - R28
-          - R29
-          - R30
-          - R31
-          - R32
-          - R33
-          - R34
-          - R35
-          - R36
-          - R37
-          - R38
-          - R39
-          - R40
-          - R41
-          - R42
-          - R43
-          - R44
-          - R45
-          - R46
-          - R47
-          - R50
-          - R51
-          - R52
-          - R53
-          - R61
-          - R62
-          - R67
-          - R68
-          - R69
-          - R70
-          - R71
-          - R72
-          - R73
-          - R74
-          - R75
-          - R76
-          - R77
-          - R80
-          - R81
-          - R82
-          - R83
-          - R84
-          - R85
-          - currencycloud
-          nullable: true
-          description: The return code. For ACH returns, this is the required ACH return code.
-        reason:
-          type: string
-          nullable: true
-          description: An optional description of the reason for the return. This is for internal usage and will not be transmitted to the bank.”
-        date_of_death:
-          type: string
-          nullable: true
-          format: date
-          description: If the return code is `R14` or `R15` this is the date the deceased counterparty passed away.
-        additional_information:
-          type: string
-          nullable: true
-          description: Some returns may include additional information from the bank. In these cases, this string will be present.
-        data:
-          type: object
-          nullable: true
-          description: The raw data from the return file that we get from the bank.
-        corrections:
-          type: object
-          nullable: true
-          properties:
-            account_number:
-              type: string
-              nullable: true
-              description: The updated account number that should replace the one originally used on the outgoing payment.
-            company_id:
-              type: string
-              nullable: true
-              description: The updated company ID that should replace the one originally used on the outgoing payment.
-            company_name:
-              type: string
-              nullable: true
-              description: The updated company name that should replace the one originally used on the outgoing payment.
-            individual_identification_number:
-              type: string
-              nullable: true
-              description: The updated individual identification number that should replace the one originally used on the outgoing payment.
-            routing_number:
-              type: string
-              nullable: true
-              description: The updated routing number that should replace the one originally used on the outgoing payment.
-            transaction_code:
-              type: string
-              nullable: true
-              description: The updated account type code that should replace the one originally used on the outgoing payment.
-          description: Only relevant for ACH NOC returns. This is an object containing all of the new and corrected information provided by the bank that was previously incorrect on the original outgoing payment.
-        reconciliation_status:
-          type: string
-          enum:
-          - unreconciled
-          - tentatively_reconciled
-          - reconciled
-          description: One of `unreconciled`, `tentatively_reconciled` or `reconciled`.
-        returnable_type:
-          type: string
-          enum:
-          - incoming_payment_detail
-          description: The type of object being returned. Currently, this may only be incoming_payment_detail.
-        ledger_transaction:
-          $ref: '#/components/schemas/ledger_transaction_create_request'
-          description: Specifies a ledger transaction object that will be created with the return. If the ledger transaction cannot be created, then the return creation will fail. The resulting ledger transaction will mirror the status of the return.
-      required:
-      - returnable_id
-      - returnable_type
     currency:
       type: string
       enum:
@@ -1029,66 +1130,6 @@ components:
       - ZWN
       - ZWR
       description: Three-letter ISO currency code.
-    ledger_entry_create_request:
-      type: object
-      properties:
-        amount:
-          type: integer
-          description: Value in specified currency's smallest unit. e.g. $10 would be represented as 1000. Can be any integer up to 36 digits.
-        effective_at:
-          type: string
-          format: date-time
-          description: The timestamp (ISO8601 format) at which the ledger transaction happened for reporting purposes.
-        direction:
-          type: string
-          enum:
-          - credit
-          - debit
-          description: One of `credit`, `debit`. Describes the direction money is flowing in the transaction. A `credit` moves money from your account to someone else's. A `debit` pulls money from someone else's account to your own. Note that wire, rtp, and check payments will always be `credit`.
-          _x-stainless-modelDefPath: $shared.transaction_direction
-        ledger_account_id:
-          type: string
-          format: uuid
-          description: The ledger account that this ledger entry is associated with.
-        lock_version:
-          type: integer
-          description: Lock version of the ledger account. This can be passed when creating a ledger transaction to only succeed if no ledger transactions have posted since the given version. See our post about Designing the Ledgers API with Optimistic Locking for more details.
-          nullable: true
-        pending_balance_amount:
-          type: object
-          additionalProperties:
-            type: integer
-          description: Use `gt` (>), `gte` (>=), `lt` (<), `lte` (<=), or `eq` (=) to lock on the account’s pending balance. If any of these conditions would be false after the transaction is created, the entire call will fail with error code 422.
-          nullable: true
-        posted_balance_amount:
-          type: object
-          additionalProperties:
-            type: integer
-          description: Use `gt` (>), `gte` (>=), `lt` (<), `lte` (<=), or `eq` (=) to lock on the account’s posted balance. If any of these conditions would be false after the transaction is created, the entire call will fail with error code 422.
-          nullable: true
-        available_balance_amount:
-          type: object
-          additionalProperties:
-            type: integer
-          description: Use `gt` (>), `gte` (>=), `lt` (<), `lte` (<=), or `eq` (=) to lock on the account’s available balance. If any of these conditions would be false after the transaction is created, the entire call will fail with error code 422.
-          nullable: true
-        show_resulting_ledger_account_balances:
-          type: boolean
-          description: If true, response will include the balance of the associated ledger account for the entry.
-          nullable: true
-        metadata:
-          type: object
-          description: Additional data represented as key-value pairs. Both the key and value must be strings.
-          additionalProperties:
-            type: string
-          example:
-            key: value
-            foo: bar
-            modern: treasury
-      required:
-      - amount
-      - direction
-      - ledger_account_id
   securitySchemes:
     basic_auth:
       type: http

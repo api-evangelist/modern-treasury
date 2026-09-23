@@ -1,6 +1,6 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Modern Treasury AccountCapability Validation API
+  title: Modern Treasury Validation API
   version: v1
   contact:
     name: Modern Treasury Engineering Team
@@ -211,27 +211,33 @@ components:
       type: object
       properties:
         line1:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         line2:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         locality:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           description: Locality or City.
         region:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           description: Region or State.
         postal_code:
-          type: string
+          type:
+          - string
+          - 'null'
           description: The postal code of the address.
-          nullable: true
         country:
-          type: string
+          type:
+          - string
+          - 'null'
           description: Country code conforms to [ISO 3166-1 alpha-2]
-          nullable: true
   securitySchemes:
     basic_auth:
       type: http

@@ -1,6 +1,6 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Modern Treasury AccountCapability LedgerAccountSettlement API
+  title: Modern Treasury Ledger Account Settlement API
   version: v1
   contact:
     name: Modern Treasury Engineering Team
@@ -134,8 +134,9 @@ paths:
       - name: after_cursor
         in: query
         schema:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         required: false
       - name: per_page
         in: query
@@ -192,14 +193,16 @@ paths:
           headers:
             X-After-Cursor:
               schema:
-                type: string
-                nullable: true
+                type:
+                - string
+                - 'null'
               required: false
               description: The cursor for the next page. Including this in a call as `after_cursor` will return the next page.
             X-Per-Page:
               schema:
-                type: integer
-                nullable: true
+                type:
+                - integer
+                - 'null'
               description: The current `per_page`.
           content:
             application/json:
@@ -276,38 +279,15 @@ paths:
             schema:
               $ref: '#/components/schemas/ledger_account_settlement_update_request'
 components:
-  parameters:
-    bulk_id:
-      name: id[]
-      in: query
-      style: form
-      explode: true
-      allowReserved: true
-      schema:
-        type: array
-        items:
-          type: string
-      required: false
-      description: If you have specific IDs to retrieve in bulk, you can pass them as query parameters delimited with `id[]=`, for example `?id[]=123&id[]=abc`.
-    metadata_query:
-      name: metadata
-      in: query
-      schema:
-        type: object
-        additionalProperties:
-          type: string
-      style: deepObject
-      explode: true
-      required: false
-      description: For example, if you want to query for records with metadata key `Type` and value `Loan`, the query would be `metadata%5BType%5D=Loan`. This encodes the query parameters.
   schemas:
     ledger_account_settlement_update_request:
       type: object
       properties:
         description:
-          type: string
+          type:
+          - string
+          - 'null'
           description: The description of the ledger account settlement.
-          nullable: true
         status:
           type: string
           enum:
@@ -324,57 +304,10 @@ components:
             foo: bar
             modern: treasury
         skip_settlement_ledger_transaction:
-          type: boolean
+          type:
+          - boolean
+          - 'null'
           description: It is set to `false` by default. It should be set to `true` when migrating existing settlements.
-          nullable: true
-    ledger_account_settlement_create_request:
-      type: object
-      properties:
-        description:
-          type: string
-          description: The description of the ledger account settlement.
-          nullable: true
-        status:
-          type: string
-          enum:
-          - pending
-          - posted
-          - drafting
-          description: The status of the ledger account settlement. It is set to `pending` by default. To post a ledger account settlement at creation, use `posted`.
-          nullable: true
-        settled_ledger_account_id:
-          type: string
-          format: uuid
-          description: The id of the settled ledger account whose ledger entries are queried against, and its balance is reduced as a result.
-        contra_ledger_account_id:
-          type: string
-          format: uuid
-          description: The id of the contra ledger account that sends to or receives funds from the settled ledger account.
-        allow_either_direction:
-          type: boolean
-          description: If true, the settlement amount and settlement_entry_direction will bring the settlement ledger account's balance closer to zero, even if the balance is negative.
-          nullable: true
-        effective_at_upper_bound:
-          type: string
-          format: date-time
-          description: The exclusive upper bound of the effective_at timestamp of the ledger entries to be included in the ledger account settlement. The default value is the created_at timestamp of the ledger account settlement.
-          nullable: true
-        metadata:
-          type: object
-          description: Additional data represented as key-value pairs. Both the key and value must be strings.
-          additionalProperties:
-            type: string
-          example:
-            key: value
-            foo: bar
-            modern: treasury
-        skip_settlement_ledger_transaction:
-          type: boolean
-          description: It is set to `false` by default. It should be set to `true` when migrating existing settlements.
-          nullable: true
-      required:
-      - settled_ledger_account_id
-      - contra_ledger_account_id
     ledger_account_settlement:
       type: object
       properties:
@@ -397,9 +330,10 @@ components:
           format: uuid
           description: The id of the ledger that this ledger account settlement belongs to.
         description:
-          type: string
+          type:
+          - string
+          - 'null'
           description: The description of the ledger account settlement.
-          nullable: true
         status:
           type: string
           enum:
@@ -419,30 +353,35 @@ components:
           format: uuid
           description: The id of the contra ledger account that sends to or receives funds from the settled ledger account.
         effective_at_upper_bound:
-          type: string
+          type:
+          - string
+          - 'null'
           format: date-time
           description: The exclusive upper bound of the effective_at timestamp of the ledger entries to be included in the ledger account settlement. The default value is the created_at timestamp of the ledger account settlement.
-          nullable: true
         ledger_transaction_id:
-          type: string
+          type:
+          - string
+          - 'null'
           format: uuid
           description: The id of the ledger transaction that this settlement is associated with.
-          nullable: true
         amount:
-          type: integer
+          type:
+          - integer
+          - 'null'
           description: The amount of the ledger account settlement.
-          nullable: true
         settlement_entry_direction:
-          type: string
+          type:
+          - string
+          - 'null'
           description: The direction of the ledger entry with the settlement_ledger_account.
-          nullable: true
         currency:
           type: string
           description: The currency of the ledger account settlement.
         currency_exponent:
-          type: integer
+          type:
+          - integer
+          - 'null'
           description: The currency exponent of the ledger account settlement.
-          nullable: true
         metadata:
           type: object
           description: Additional data represented as key-value pairs. Both the key and value must be strings.
@@ -472,6 +411,19 @@ components:
       - currency
       - currency_exponent
       - metadata
+    ledger_account_settlement_entries_delete_request:
+      type: object
+      properties:
+        ledger_entry_ids:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+            format: uuid
+          description: The ids of the ledger entries that are to be added or removed from the ledger account settlement.
+      required:
+      - ledger_entry_ids
     error_message:
       type: object
       properties:
@@ -498,30 +450,96 @@ components:
               type: string
       required:
       - errors
+    ledger_account_settlement_create_request:
+      type: object
+      properties:
+        description:
+          type:
+          - string
+          - 'null'
+          description: The description of the ledger account settlement.
+        status:
+          type:
+          - string
+          - 'null'
+          enum:
+          - pending
+          - posted
+          - drafting
+          description: The status of the ledger account settlement. It is set to `pending` by default. To post a ledger account settlement at creation, use `posted`.
+        settled_ledger_account_id:
+          type: string
+          format: uuid
+          description: The id of the settled ledger account whose ledger entries are queried against, and its balance is reduced as a result.
+        contra_ledger_account_id:
+          type: string
+          format: uuid
+          description: The id of the contra ledger account that sends to or receives funds from the settled ledger account.
+        allow_either_direction:
+          type:
+          - boolean
+          - 'null'
+          description: If true, the settlement amount and settlement_entry_direction will bring the settlement ledger account's balance closer to zero, even if the balance is negative.
+        effective_at_upper_bound:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          description: The exclusive upper bound of the effective_at timestamp of the ledger entries to be included in the ledger account settlement. The default value is the created_at timestamp of the ledger account settlement.
+        metadata:
+          type: object
+          description: Additional data represented as key-value pairs. Both the key and value must be strings.
+          additionalProperties:
+            type: string
+          example:
+            key: value
+            foo: bar
+            modern: treasury
+        skip_settlement_ledger_transaction:
+          type:
+          - boolean
+          - 'null'
+          description: It is set to `false` by default. It should be set to `true` when migrating existing settlements.
+      required:
+      - settled_ledger_account_id
+      - contra_ledger_account_id
     ledger_account_settlement_entries_patch_request:
       type: object
       properties:
         ledger_entry_ids:
-          type: array
+          type:
+          - array
+          - 'null'
           items:
             type: string
             format: uuid
           description: The ids of the ledger entries that are to be added or removed from the ledger account settlement.
-          nullable: true
       required:
       - ledger_entry_ids
-    ledger_account_settlement_entries_delete_request:
-      type: object
-      properties:
-        ledger_entry_ids:
-          type: array
-          items:
-            type: string
-            format: uuid
-          description: The ids of the ledger entries that are to be added or removed from the ledger account settlement.
-          nullable: true
-      required:
-      - ledger_entry_ids
+  parameters:
+    metadata_query:
+      name: metadata
+      in: query
+      schema:
+        type: object
+        additionalProperties:
+          type: string
+      style: deepObject
+      explode: true
+      required: false
+      description: For example, if you want to query for records with metadata key `Type` and value `Loan`, the query would be `metadata%5BType%5D=Loan`. This encodes the query parameters.
+    bulk_id:
+      name: id[]
+      in: query
+      style: form
+      explode: true
+      allowReserved: true
+      schema:
+        type: array
+        items:
+          type: string
+      required: false
+      description: If you have specific IDs to retrieve in bulk, you can pass them as query parameters delimited with `id[]=`, for example `?id[]=123&id[]=abc`.
   securitySchemes:
     basic_auth:
       type: http

@@ -1,6 +1,6 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Modern Treasury AccountCapability Ping API
+  title: Modern Treasury Ping API
   version: v1
   contact:
     name: Modern Treasury Engineering Team

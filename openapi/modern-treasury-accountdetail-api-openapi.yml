@@ -1,6 +1,6 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Modern Treasury AccountCapability AccountDetail API
+  title: Modern Treasury Account Detail API
   version: v1
   contact:
     name: Modern Treasury Engineering Team
@@ -36,8 +36,9 @@ paths:
       - name: after_cursor
         in: query
         schema:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         required: false
       - name: per_page
         in: query
@@ -50,14 +51,16 @@ paths:
           headers:
             X-After-Cursor:
               schema:
-                type: string
-                nullable: true
+                type:
+                - string
+                - 'null'
               required: false
               description: The cursor for the next page. Including this in a call as `after_cursor` will return the next page.
             X-Per-Page:
               schema:
-                type: integer
-                nullable: true
+                type:
+                - integer
+                - 'null'
               description: The current `per_page`.
           content:
             application/json:
@@ -190,6 +193,37 @@ paths:
           description: successful
 components:
   schemas:
+    error_message:
+      type: object
+      properties:
+        errors:
+          type: object
+          properties:
+            code:
+              type: string
+              enum:
+              - parameter_invalid
+              - parameter_missing
+              - resource_not_found
+              - not_found
+              - forbidden
+              - invalid_ip
+              - invalid_key
+              - header_invalid
+              - expired_key
+              - conflict
+              - too_many_requests
+            message:
+              type: string
+            parameter:
+              type: string
+      required:
+      - errors
+    accounts_type:
+      type: string
+      enum:
+      - external_accounts
+      - internal_accounts
     account_detail:
       type: object
       properties:
@@ -208,9 +242,10 @@ components:
           type: string
           format: date-time
         discarded_at:
-          type: string
+          type:
+          - string
+          - 'null'
           format: date-time
-          nullable: true
         account_number:
           type: string
           description: The account number for the bank account.
@@ -248,37 +283,6 @@ components:
       - discarded_at
       - account_number_type
       - account_number_safe
-    error_message:
-      type: object
-      properties:
-        errors:
-          type: object
-          properties:
-            code:
-              type: string
-              enum:
-              - parameter_invalid
-              - parameter_missing
-              - resource_not_found
-              - not_found
-              - forbidden
-              - invalid_ip
-              - invalid_key
-              - header_invalid
-              - expired_key
-              - conflict
-              - too_many_requests
-            message:
-              type: string
-            parameter:
-              type: string
-      required:
-      - errors
-    accounts_type:
-      type: string
-      enum:
-      - external_accounts
-      - internal_accounts
     account_detail_create_request:
       type: object
       properties:

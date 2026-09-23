@@ -1,6 +1,6 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Modern Treasury AccountCapability LedgerAccountStatement API
+  title: Modern Treasury Ledger Account Statement API
   version: v1
   contact:
     name: Modern Treasury Engineering Team
@@ -83,6 +83,39 @@ paths:
                 $ref: '#/components/schemas/error_message'
 components:
   schemas:
+    ledger_account_statement_create_request:
+      type: object
+      properties:
+        description:
+          type:
+          - string
+          - 'null'
+          description: The description of the ledger account statement.
+        ledger_account_id:
+          type: string
+          format: uuid
+          description: The id of the ledger account whose ledger entries are queried against, and its balances are computed as a result.
+        effective_at_lower_bound:
+          type: string
+          format: date-time
+          description: The inclusive lower bound of the effective_at timestamp of the ledger entries to be included in the ledger account statement.
+        effective_at_upper_bound:
+          type: string
+          format: date-time
+          description: The exclusive upper bound of the effective_at timestamp of the ledger entries to be included in the ledger account statement.
+        metadata:
+          type: object
+          description: Additional data represented as key-value pairs. Both the key and value must be strings.
+          additionalProperties:
+            type: string
+          example:
+            key: value
+            foo: bar
+            modern: treasury
+      required:
+      - ledger_account_id
+      - effective_at_lower_bound
+      - effective_at_upper_bound
     ledger_account_statement:
       type: object
       properties:
@@ -105,9 +138,10 @@ components:
           format: uuid
           description: The id of the ledger that this ledger account statement belongs to.
         description:
-          type: string
+          type:
+          - string
+          - 'null'
           description: The description of the ledger account statement.
-          nullable: true
         ledger_account_id:
           type: string
           format: uuid
@@ -212,38 +246,6 @@ components:
       - amount
       - currency
       - currency_exponent
-    ledger_account_statement_create_request:
-      type: object
-      properties:
-        description:
-          type: string
-          description: The description of the ledger account statement.
-          nullable: true
-        ledger_account_id:
-          type: string
-          format: uuid
-          description: The id of the ledger account whose ledger entries are queried against, and its balances are computed as a result.
-        effective_at_lower_bound:
-          type: string
-          format: date-time
-          description: The inclusive lower bound of the effective_at timestamp of the ledger entries to be included in the ledger account statement.
-        effective_at_upper_bound:
-          type: string
-          format: date-time
-          description: The exclusive upper bound of the effective_at timestamp of the ledger entries to be included in the ledger account statement.
-        metadata:
-          type: object
-          description: Additional data represented as key-value pairs. Both the key and value must be strings.
-          additionalProperties:
-            type: string
-          example:
-            key: value
-            foo: bar
-            modern: treasury
-      required:
-      - ledger_account_id
-      - effective_at_lower_bound
-      - effective_at_upper_bound
     ledger_balances:
       type: object
       properties:
