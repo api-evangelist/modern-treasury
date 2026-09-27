@@ -265,42 +265,6 @@ paths:
           description: successful
 components:
   schemas:
-    external_account_type:
-      type: string
-      enum:
-      - base_wallet
-      - cash
-      - checking
-      - crypto_wallet
-      - ethereum_wallet
-      - general_ledger
-      - loan
-      - non_resident
-      - other
-      - overdraft
-      - polygon_wallet
-      - savings
-      - solana_wallet
-      description: Can be `checking`, `savings` or `other`.
-    counterparty_collect_account_response:
-      type: object
-      properties:
-        id:
-          type: string
-          description: The id of the existing counterparty.
-        is_resend:
-          type: boolean
-          description: This field will be `true` if an email requesting account details has already been sent to this counterparty.
-        form_link:
-          type: string
-          format: uri
-          description: This is the link to the secure Modern Treasury form. By default, Modern Treasury will send an email to your counterparty that includes a link to this form. However, if `send_email` is passed as `false` in the body then Modern Treasury will not send the email and you can send it to the counterparty directly.
-      additionalProperties: false
-      minProperties: 3
-      required:
-      - id
-      - is_resend
-      - form_link
     legal_entity_bank_setting:
       type: object
       properties:
@@ -356,67 +320,37 @@ components:
       - backup_withholding_percentage
       - privacy_opt_out
       - regulation_o
-    legal_entity_address_create_request:
+    legal_entity_association_inline_create_request:
       type: object
       properties:
-        address_types:
+        relationship_types:
           type: array
           items:
             type: string
             enum:
-            - business
-            - business_registered
-            - mailing
-            - other
-            - po_box
-            - residential
-          description: The types of this address.
-        line1:
+            - authorized_signer
+            - beneficial_owner
+            - control_person
+            description: A list of relationship types for how the child entity relates to parent entity.
+        title:
           type:
           - string
           - 'null'
-        line2:
+          description: The job title of the child entity at the parent entity.
+        ownership_percentage:
           type:
-          - string
+          - integer
           - 'null'
-        locality:
-          type:
-          - string
-          - 'null'
-          description: Locality or City.
-        region:
-          type:
-          - string
-          - 'null'
-          description: Region or State.
-        postal_code:
-          type:
-          - string
-          - 'null'
-          description: The postal code of the address.
-        country:
-          type:
-          - string
-          - 'null'
-          description: Country code conforms to [ISO 3166-1 alpha-2]
+          description: The child entity's ownership percentage iff they are a beneficial owner.
+        child_legal_entity:
+          $ref: '#/components/schemas/child_legal_entity_create'
+          description: The child legal entity.
+        child_legal_entity_id:
+          type: string
+          description: The ID of the child legal entity.
       required:
-      - line1
-      - locality
-      - region
-      - postal_code
-      - country
-    contact_detail_create_request:
-      type: object
-      properties:
-        contact_identifier:
-          type: string
-        contact_identifier_type:
-          type: string
-          enum:
-          - email
-          - phone_number
-          - website
-    legal_entity_industry_classification:
+      - relationship_types
+    contact_detail:
       type: object
       properties:
         id:
@@ -438,30 +372,14 @@ components:
           - string
           - 'null'
           format: date-time
-        classification_type:
+        contact_identifier:
+          type: string
+        contact_identifier_type:
           type: string
           enum:
-          - anzsic
-          - bics
-          - gics
-          - hsics
-          - icb
-          - isic
-          - mgecs
-          - nace
-          - naics
-          - rbics
-          - sic
-          - sni
-          - trbc
-          - uksic
-          - unspsc
-          description: The classification system of the classification codes.
-        classification_codes:
-          type: array
-          items:
-            type: string
-          description: The industry classification codes for the legal entity.
+          - email
+          - phone_number
+          - website
       additionalProperties: false
       minProperties: 8
       required:
@@ -471,223 +389,8 @@ components:
       - created_at
       - updated_at
       - discarded_at
-      - classification_type
-      - classification_codes
-    counterparty_create_request:
-      type: object
-      properties:
-        name:
-          type:
-          - string
-          - 'null'
-          description: A human friendly name for this counterparty.
-        accounts:
-          type: array
-          items:
-            type: object
-            properties:
-              account_type:
-                $ref: '#/components/schemas/external_account_type'
-              party_type:
-                type:
-                - string
-                - 'null'
-                enum:
-                - business
-                - individual
-                description: Either `individual` or `business`.
-              party_address:
-                $ref: '#/components/schemas/address_request'
-                description: Required if receiving wire payments.
-              name:
-                type:
-                - string
-                - 'null'
-                description: A nickname for the external account. This is only for internal usage and won't affect any payments
-              account_details:
-                type: array
-                items:
-                  type: object
-                  properties:
-                    account_number:
-                      type: string
-                    account_number_type:
-                      type: string
-                      enum:
-                      - au_number
-                      - base_address
-                      - card_token
-                      - clabe
-                      - ethereum_address
-                      - hk_number
-                      - iban
-                      - id_number
-                      - nz_number
-                      - other
-                      - pan
-                      - polygon_address
-                      - sg_number
-                      - solana_address
-                      - wallet_address
-                  required:
-                  - account_number
-              routing_details:
-                type: array
-                items:
-                  type: object
-                  properties:
-                    routing_number:
-                      type: string
-                    routing_number_type:
-                      type: string
-                      enum:
-                      - aba
-                      - au_bsb
-                      - br_codigo
-                      - ca_cpa
-                      - chips
-                      - cnaps
-                      - dk_interbank_clearing_code
-                      - gb_sort_code
-                      - hk_interbank_clearing_code
-                      - hu_interbank_clearing_code
-                      - id_sknbi_code
-                      - il_bank_code
-                      - in_ifsc
-                      - jp_zengin_code
-                      - my_branch_code
-                      - mx_bank_identifier
-                      - nz_national_clearing_code
-                      - pl_national_clearing_code
-                      - se_bankgiro_clearing_code
-                      - sg_interbank_clearing_code
-                      - swift
-                      - za_national_clearing_code
-                    payment_type:
-                      type: string
-                      enum:
-                      - ach
-                      - au_becs
-                      - bacs
-                      - book
-                      - card
-                      - chats
-                      - check
-                      - cross_border
-                      - dk_nets
-                      - eft
-                      - gb_fps
-                      - hu_ics
-                      - interac
-                      - masav
-                      - mx_ccen
-                      - neft
-                      - nics
-                      - nz_becs
-                      - pl_elixir
-                      - provxchange
-                      - ro_sent
-                      - rtp
-                      - se_bankgirot
-                      - sen
-                      - sepa
-                      - sg_giro
-                      - sic
-                      - signet
-                      - sknbi
-                      - stablecoin
-                      - wire
-                      - zengin
-                  required:
-                  - routing_number
-                  - routing_number_type
-              external_id:
-                type:
-                - string
-                - 'null'
-                description: An optional user-defined 180 character unique identifier.
-              metadata:
-                type: object
-                additionalProperties:
-                  type: string
-                example:
-                  key: value
-                  foo: bar
-                  modern: treasury
-                description: Additional data represented as key-value pairs. Both the key and value must be strings.
-              party_name:
-                type: string
-                description: If this value isn't provided, it will be inherited from the counterparty's name.
-              party_identifier:
-                type: string
-              ledger_account:
-                $ref: '#/components/schemas/ledger_account_create_request'
-                description: Specifies a ledger account object that will be created with the external account. The resulting ledger account is linked to the external account for auto-ledgering Payment objects. See https://docs.moderntreasury.com/docs/linking-to-other-modern-treasury-objects for more details.
-              plaid_processor_token:
-                type: string
-                description: If you've enabled the Modern Treasury + Plaid integration in your Plaid account, you can pass the processor token in this field.
-              contact_details:
-                type: array
-                items:
-                  $ref: '#/components/schemas/contact_detail_create_request'
-          description: The accounts for this counterparty.
-        email:
-          type:
-          - string
-          - 'null'
-          format: email
-          description: The counterparty's email.
-        legal_entity_id:
-          type:
-          - string
-          - 'null'
-          format: uuid
-          description: The id of the legal entity.
-        metadata:
-          type: object
-          additionalProperties:
-            type: string
-          example:
-            key: value
-            foo: bar
-            modern: treasury
-          description: Additional data represented as key-value pairs. Both the key and value must be strings.
-        external_id:
-          type:
-          - string
-          - 'null'
-          description: An optional user-defined 180 character unique identifier.
-        send_remittance_advice:
-          type: boolean
-          description: Send an email to the counterparty whenever an associated payment order is sent to the bank.
-        verification_status:
-          type: string
-          deprecated: true
-          description: The verification status of the counterparty.
-        accounting:
-          type: object
-          deprecated: true
-          properties:
-            type:
-              type: string
-              enum:
-              - customer
-              - vendor
-              description: An optional type to auto-sync the counterparty to your ledger. Either `customer` or `vendor`.
-        ledger_type:
-          type: string
-          enum:
-          - customer
-          - vendor
-          description: An optional type to auto-sync the counterparty to your ledger. Either `customer` or `vendor`.
-          deprecated: true
-        taxpayer_identifier:
-          type: string
-          description: Either a valid SSN or EIN.
-        legal_entity:
-          $ref: '#/components/schemas/legal_entity_create_request'
-      required:
-      - name
+      - contact_identifier
+      - contact_identifier_type
     child_legal_entity_create:
       type: object
       properties:
@@ -939,778 +642,6 @@ components:
           description: The connection ID for the connection the legal entity is associated with. Defaults to the id of the connection designated with an is_default value of true or the id of an existing operational connection if only one is available. Pass in a value of null to prevent the connection from being associated with the legal entity.
       additionalProperties: false
       minProperties: 41
-    routing_detail:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-        object:
-          type: string
-        live_mode:
-          type: boolean
-          description: This field will be true if this object exists in the live environment or false if it exists in the test environment.
-        created_at:
-          type: string
-          format: date-time
-        updated_at:
-          type: string
-          format: date-time
-        discarded_at:
-          type:
-          - string
-          - 'null'
-          format: date-time
-        routing_number:
-          type: string
-          description: The routing number of the bank.
-        routing_number_type:
-          type: string
-          enum:
-          - aba
-          - au_bsb
-          - br_codigo
-          - ca_cpa
-          - chips
-          - cnaps
-          - dk_interbank_clearing_code
-          - gb_sort_code
-          - hk_interbank_clearing_code
-          - hu_interbank_clearing_code
-          - id_sknbi_code
-          - il_bank_code
-          - in_ifsc
-          - jp_zengin_code
-          - mx_bank_identifier
-          - my_branch_code
-          - nz_national_clearing_code
-          - pl_national_clearing_code
-          - se_bankgiro_clearing_code
-          - sg_interbank_clearing_code
-          - swift
-          - za_national_clearing_code
-          description: The type of routing number. See https://docs.moderntreasury.com/platform/reference/routing-detail-object for more details.
-        payment_type:
-          type:
-          - string
-          - 'null'
-          enum:
-          - ach
-          - au_becs
-          - bacs
-          - book
-          - card
-          - chats
-          - check
-          - cross_border
-          - dk_nets
-          - eft
-          - gb_fps
-          - hu_ics
-          - interac
-          - masav
-          - mx_ccen
-          - neft
-          - nics
-          - nz_becs
-          - pl_elixir
-          - provxchange
-          - ro_sent
-          - rtp
-          - se_bankgirot
-          - sen
-          - sepa
-          - sg_giro
-          - sic
-          - signet
-          - sknbi
-          - stablecoin
-          - wire
-          - zengin
-          description: If the routing detail is to be used for a specific payment type this field will be populated, otherwise null.
-        bank_name:
-          type: string
-          description: The name of the bank.
-        bank_address:
-          $ref: '#/components/schemas/address'
-      additionalProperties: false
-      minProperties: 11
-      required:
-      - id
-      - object
-      - live_mode
-      - created_at
-      - updated_at
-      - discarded_at
-      - routing_number
-      - routing_number_type
-      - payment_type
-      - bank_name
-      - bank_address
-    legal_entity_regulator:
-      type: object
-      properties:
-        name:
-          type: string
-          description: Full name of the regulatory body.
-        jurisdiction:
-          type: string
-          description: The country code where the regulator operates in the ISO 3166-1 alpha-2 format (e.g., "US", "CA", "GB").
-        registration_number:
-          type: string
-          description: Registration or identification number with the regulator.
-      required:
-      - name
-      - jurisdiction
-      - registration_number
-      additionalProperties: false
-    identification_create_request:
-      type: object
-      properties:
-        id_number:
-          type: string
-          description: The ID number of identification document.
-        documents:
-          type: array
-          description: A list of documents to attach to the identification.
-          items:
-            type: object
-            properties:
-              document_type:
-                type: string
-                enum:
-                - articles_of_incorporation
-                - certificate_of_good_standing
-                - ein_letter
-                - generic
-                - identification_back
-                - identification_front
-                - proof_of_address
-                description: A category given to the document, can be `null`.
-              file_data:
-                type: string
-                description: Base64-encoded file content for the document.
-              filename:
-                type: string
-                description: The original filename of the document.
-            required:
-            - document_type
-            - file_data
-        id_type:
-          type: string
-          enum:
-          - ar_cuil
-          - ar_cuit
-          - br_cnpj
-          - br_cpf
-          - ca_sin
-          - cl_run
-          - cl_rut
-          - co_cedulas
-          - co_nit
-          - drivers_license
-          - hn_id
-          - hn_rtn
-          - ie_pps
-          - in_lei
-          - kr_brn
-          - kr_crn
-          - kr_rrn
-          - passport
-          - sa_tin
-          - sa_vat
-          - us_ein
-          - us_itin
-          - us_ssn
-          - vn_tin
-          description: The type of ID number.
-        expiration_date:
-          type:
-          - string
-          - 'null'
-          format: date
-          description: The date when the Identification is no longer considered valid by the issuing authority.
-        issuing_country:
-          type:
-          - string
-          - 'null'
-          description: The ISO 3166-1 alpha-2 country code of the country that issued the identification
-        issuing_region:
-          type:
-          - string
-          - 'null'
-          description: The region in which the identifcation was issued.
-      required:
-      - id_number
-      - id_type
-    ledger_account_create_request:
-      type: object
-      properties:
-        name:
-          type: string
-          description: The name of the ledger account.
-        description:
-          type:
-          - string
-          - 'null'
-          description: The description of the ledger account.
-        normal_balance:
-          type: string
-          enum:
-          - credit
-          - debit
-          description: The normal balance of the ledger account.
-          _x-stainless-modelDefPath: $shared.transaction_direction
-        ledger_id:
-          type: string
-          format: uuid
-          description: The id of the ledger that this account belongs to.
-        currency:
-          type: string
-          description: The currency of the ledger account.
-        currency_exponent:
-          type:
-          - integer
-          - 'null'
-          description: The currency exponent of the ledger account.
-        ledger_account_category_ids:
-          type: array
-          items:
-            type: string
-            format: uuid
-          description: The array of ledger account category ids that this ledger account should be a child of.
-        ledgerable_id:
-          type: string
-          format: uuid
-          description: If the ledger account links to another object in Modern Treasury, the id will be populated here, otherwise null.
-        ledgerable_type:
-          type: string
-          enum:
-          - counterparty
-          - external_account
-          - internal_account
-          - virtual_account
-          description: If the ledger account links to another object in Modern Treasury, the type will be populated here, otherwise null. The value is one of internal_account or external_account.
-        metadata:
-          type: object
-          description: Additional data represented as key-value pairs. Both the key and value must be strings.
-          additionalProperties:
-            type: string
-          example:
-            key: value
-            foo: bar
-            modern: treasury
-        external_id:
-          type:
-          - string
-          - 'null'
-          description: An optional user-defined 180 character unique identifier.
-      required:
-      - name
-      - normal_balance
-      - ledger_id
-      - currency
-    counterparty:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-        object:
-          type: string
-        live_mode:
-          type: boolean
-          description: This field will be true if this object exists in the live environment or false if it exists in the test environment.
-        created_at:
-          type: string
-          format: date-time
-        updated_at:
-          type: string
-          format: date-time
-        discarded_at:
-          type:
-          - string
-          - 'null'
-          format: date-time
-        name:
-          type:
-          - string
-          - 'null'
-          description: A human friendly name for this counterparty.
-        accounts:
-          type: array
-          items:
-            type: object
-            properties:
-              id:
-                type: string
-                format: uuid
-              object:
-                type: string
-              live_mode:
-                type: boolean
-                description: This field will be true if this object exists in the live environment or false if it exists in the test environment.
-              created_at:
-                type: string
-                format: date-time
-              updated_at:
-                type: string
-                format: date-time
-              discarded_at:
-                type:
-                - string
-                - 'null'
-                format: date-time
-              account_type:
-                $ref: '#/components/schemas/external_account_type'
-              party_type:
-                type:
-                - string
-                - 'null'
-                enum:
-                - business
-                - individual
-                description: Either `individual` or `business`.
-              party_address:
-                $ref: '#/components/schemas/address'
-                description: The address associated with the owner or `null`.
-              name:
-                type:
-                - string
-                - 'null'
-                description: A nickname for the external account. This is only for internal usage and won't affect any payments
-              account_details:
-                type: array
-                items:
-                  $ref: '#/components/schemas/account_detail'
-              routing_details:
-                type: array
-                items:
-                  $ref: '#/components/schemas/routing_detail'
-              external_id:
-                type:
-                - string
-                - 'null'
-                description: An optional user-defined 180 character unique identifier.
-              metadata:
-                type: object
-                additionalProperties:
-                  type: string
-                example:
-                  key: value
-                  foo: bar
-                  modern: treasury
-                description: Additional data represented as key-value pairs. Both the key and value must be strings.
-              party_name:
-                type: string
-                description: The legal name of the entity which owns the account.
-              contact_details:
-                type: array
-                items:
-                  $ref: '#/components/schemas/contact_detail'
-              ledger_account_id:
-                type:
-                - string
-                - 'null'
-                format: uuid
-                description: If the external account links to a ledger account in Modern Treasury, the id of the ledger account will be populated here.
-              verification_status:
-                type: string
-                enum:
-                - pending_verification
-                - unverified
-                - verified
-              verification_source:
-                type:
-                - string
-                - 'null'
-                enum:
-                - ach_prenote
-                - microdeposits
-                - plaid
-            additionalProperties: false
-            minProperties: 19
-          description: The accounts for this counterparty.
-        email:
-          type:
-          - string
-          - 'null'
-          format: email
-          description: The counterparty's email.
-        legal_entity_id:
-          type:
-          - string
-          - 'null'
-          format: uuid
-          description: The id of the legal entity.
-        metadata:
-          type: object
-          additionalProperties:
-            type: string
-          example:
-            key: value
-            foo: bar
-            modern: treasury
-          description: Additional data represented as key-value pairs. Both the key and value must be strings.
-        external_id:
-          type:
-          - string
-          - 'null'
-          description: An optional user-defined 180 character unique identifier.
-        send_remittance_advice:
-          type: boolean
-          description: Send an email to the counterparty whenever an associated payment order is sent to the bank.
-        verification_status:
-          type: string
-          deprecated: true
-          description: The verification status of the counterparty.
-      additionalProperties: false
-      minProperties: 14
-      required:
-      - id
-      - object
-      - live_mode
-      - created_at
-      - updated_at
-      - discarded_at
-      - name
-      - accounts
-      - email
-      - legal_entity_id
-      - metadata
-      - external_id
-      - send_remittance_advice
-      - verification_status
-    address:
-      type:
-      - object
-      - 'null'
-      properties:
-        id:
-          type: string
-          format: uuid
-        object:
-          type: string
-        live_mode:
-          type: boolean
-          description: This field will be true if this object exists in the live environment or false if it exists in the test environment.
-        created_at:
-          type: string
-          format: date-time
-        updated_at:
-          type: string
-          format: date-time
-        line1:
-          type:
-          - string
-          - 'null'
-        line2:
-          type:
-          - string
-          - 'null'
-        locality:
-          type:
-          - string
-          - 'null'
-          description: Locality or City.
-        region:
-          type:
-          - string
-          - 'null'
-          description: Region or State.
-        postal_code:
-          type:
-          - string
-          - 'null'
-          description: The postal code of the address.
-        country:
-          type:
-          - string
-          - 'null'
-          description: Country code conforms to [ISO 3166-1 alpha-2]
-      additionalProperties: false
-      minProperties: 11
-      required:
-      - id
-      - object
-      - live_mode
-      - created_at
-      - updated_at
-      - line1
-      - line2
-      - locality
-      - region
-      - postal_code
-      - country
-    address_request:
-      type: object
-      properties:
-        line1:
-          type:
-          - string
-          - 'null'
-        line2:
-          type:
-          - string
-          - 'null'
-        locality:
-          type:
-          - string
-          - 'null'
-          description: Locality or City.
-        region:
-          type:
-          - string
-          - 'null'
-          description: Region or State.
-        postal_code:
-          type:
-          - string
-          - 'null'
-          description: The postal code of the address.
-        country:
-          type:
-          - string
-          - 'null'
-          description: Country code conforms to [ISO 3166-1 alpha-2]
-    account_detail:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-        object:
-          type: string
-        live_mode:
-          type: boolean
-          description: This field will be true if this object exists in the live environment or false if it exists in the test environment.
-        created_at:
-          type: string
-          format: date-time
-        updated_at:
-          type: string
-          format: date-time
-        discarded_at:
-          type:
-          - string
-          - 'null'
-          format: date-time
-        account_number:
-          type: string
-          description: The account number for the bank account.
-        account_number_type:
-          type: string
-          enum:
-          - au_number
-          - base_address
-          - card_token
-          - clabe
-          - ethereum_address
-          - hk_number
-          - iban
-          - id_number
-          - nz_number
-          - other
-          - pan
-          - polygon_address
-          - sg_number
-          - solana_address
-          - wallet_address
-          description: One of `iban`, `clabe`, `wallet_address`, or `other`. Use `other` if the bank account number is in a generic format.
-        account_number_safe:
-          type: string
-          description: The last 4 digits of the account_number.
-      additionalProperties: false
-      minProperties: 8
-      maxProperties: 9
-      required:
-      - id
-      - object
-      - live_mode
-      - created_at
-      - updated_at
-      - discarded_at
-      - account_number_type
-      - account_number_safe
-    counterparty_update_request:
-      type: object
-      properties:
-        name:
-          type: string
-          description: A new name for the counterparty. Will only update if passed.
-        email:
-          type: string
-          format: email
-          description: A new email for the counterparty.
-        metadata:
-          type: object
-          additionalProperties:
-            type: string
-          description: Additional data in the form of key-value pairs. Pairs can be removed by passing an empty string or `null` as the value.
-        send_remittance_advice:
-          type: boolean
-          description: If this is `true`, Modern Treasury will send an email to the counterparty whenever an associated payment order is sent to the bank.
-        legal_entity_id:
-          type:
-          - string
-          - 'null'
-          format: uuid
-          description: The id of the legal entity.
-        taxpayer_identifier:
-          type: string
-          description: Either a valid SSN or EIN.
-        external_id:
-          type:
-          - string
-          - 'null'
-          description: An optional user-defined 180 character unique identifier.
-    third_party_verification:
-      type: object
-      properties:
-        vendor_verification_id:
-          type: string
-          description: The identification of the third party verification in `vendor`'s system.
-        vendor:
-          type: string
-          enum:
-          - persona
-          - middesk
-          - alloy
-          - sumsub
-          - veriff
-          description: The vendor that performed the verification, e.g. `persona`.
-        verification_category:
-          type: string
-          enum:
-          - legal_name
-          - date_of_birth
-          - address
-          - government_id_number
-          - adverse_media
-          description: The category of verification performed.
-        verification_method:
-          type: string
-          description: The method used to perform the verification.
-        comment:
-          type:
-          - string
-          - 'null'
-          description: An optional comment about the verification.
-        outcome:
-          type: string
-          enum:
-          - passed
-          - failed
-          description: The outcome of the verification. One of `passed` or `failed`.
-        verification_time:
-          type: string
-          format: date-time
-          description: The timestamp when the verification was performed.
-      required:
-      - vendor_verification_id
-      - vendor
-      - verification_category
-      - verification_method
-      - outcome
-      - verification_time
-      additionalProperties: false
-    legal_entity_association_inline_create_request:
-      type: object
-      properties:
-        relationship_types:
-          type: array
-          items:
-            type: string
-            enum:
-            - authorized_signer
-            - beneficial_owner
-            - control_person
-            description: A list of relationship types for how the child entity relates to parent entity.
-        title:
-          type:
-          - string
-          - 'null'
-          description: The job title of the child entity at the parent entity.
-        ownership_percentage:
-          type:
-          - integer
-          - 'null'
-          description: The child entity's ownership percentage iff they are a beneficial owner.
-        child_legal_entity:
-          $ref: '#/components/schemas/child_legal_entity_create'
-          description: The child legal entity.
-        child_legal_entity_id:
-          type: string
-          description: The ID of the child legal entity.
-      required:
-      - relationship_types
-    contact_detail:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-        object:
-          type: string
-        live_mode:
-          type: boolean
-          description: This field will be true if this object exists in the live environment or false if it exists in the test environment.
-        created_at:
-          type: string
-          format: date-time
-        updated_at:
-          type: string
-          format: date-time
-        discarded_at:
-          type:
-          - string
-          - 'null'
-          format: date-time
-        contact_identifier:
-          type: string
-        contact_identifier_type:
-          type: string
-          enum:
-          - email
-          - phone_number
-          - website
-      additionalProperties: false
-      minProperties: 8
-      required:
-      - id
-      - object
-      - live_mode
-      - created_at
-      - updated_at
-      - discarded_at
-      - contact_identifier
-      - contact_identifier_type
-    error_message:
-      type: object
-      properties:
-        errors:
-          type: object
-          properties:
-            code:
-              type: string
-              enum:
-              - parameter_invalid
-              - parameter_missing
-              - resource_not_found
-              - not_found
-              - forbidden
-              - invalid_ip
-              - invalid_key
-              - header_invalid
-              - expired_key
-              - conflict
-              - too_many_requests
-            message:
-              type: string
-            parameter:
-              type: string
-      required:
-      - errors
     legal_entity_create_request:
       type: object
       properties:
@@ -1962,6 +893,590 @@ components:
           description: The connection ID for the connection the legal entity is associated with. Defaults to the id of the connection designated with an is_default value of true or the id of an existing operational connection if only one is available. Pass in a value of null to prevent the connection from being associated with the legal entity.
       required:
       - legal_entity_type
+    legal_entity_regulator:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Full name of the regulatory body.
+        jurisdiction:
+          type: string
+          description: The country code where the regulator operates in the ISO 3166-1 alpha-2 format (e.g., "US", "CA", "GB").
+        registration_number:
+          type: string
+          description: Registration or identification number with the regulator.
+      required:
+      - name
+      - jurisdiction
+      - registration_number
+      additionalProperties: false
+    counterparty:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        object:
+          type: string
+        live_mode:
+          type: boolean
+          description: This field will be true if this object exists in the live environment or false if it exists in the test environment.
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        discarded_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        name:
+          type:
+          - string
+          - 'null'
+          description: A human friendly name for this counterparty.
+        accounts:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+                format: uuid
+              object:
+                type: string
+              live_mode:
+                type: boolean
+                description: This field will be true if this object exists in the live environment or false if it exists in the test environment.
+              created_at:
+                type: string
+                format: date-time
+              updated_at:
+                type: string
+                format: date-time
+              discarded_at:
+                type:
+                - string
+                - 'null'
+                format: date-time
+              account_type:
+                $ref: '#/components/schemas/external_account_type'
+              party_type:
+                type:
+                - string
+                - 'null'
+                enum:
+                - business
+                - individual
+                description: Either `individual` or `business`.
+              party_address:
+                $ref: '#/components/schemas/address'
+                description: The address associated with the owner or `null`.
+              name:
+                type:
+                - string
+                - 'null'
+                description: A nickname for the external account. This is only for internal usage and won't affect any payments
+              account_details:
+                type: array
+                items:
+                  $ref: '#/components/schemas/account_detail'
+              routing_details:
+                type: array
+                items:
+                  $ref: '#/components/schemas/routing_detail'
+              external_id:
+                type:
+                - string
+                - 'null'
+                description: An optional user-defined 180 character unique identifier.
+              metadata:
+                type: object
+                additionalProperties:
+                  type: string
+                example:
+                  key: value
+                  foo: bar
+                  modern: treasury
+                description: Additional data represented as key-value pairs. Both the key and value must be strings.
+              party_name:
+                type: string
+                description: The legal name of the entity which owns the account.
+              contact_details:
+                type: array
+                items:
+                  $ref: '#/components/schemas/contact_detail'
+              ledger_account_id:
+                type:
+                - string
+                - 'null'
+                format: uuid
+                description: If the external account links to a ledger account in Modern Treasury, the id of the ledger account will be populated here.
+              verification_status:
+                type: string
+                enum:
+                - pending_verification
+                - unverified
+                - verified
+              verification_source:
+                type:
+                - string
+                - 'null'
+                enum:
+                - ach_prenote
+                - microdeposits
+                - plaid
+            additionalProperties: false
+            minProperties: 19
+          description: The accounts for this counterparty.
+        email:
+          type:
+          - string
+          - 'null'
+          format: email
+          description: The counterparty's email.
+        legal_entity_id:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          description: The id of the legal entity.
+        metadata:
+          type: object
+          additionalProperties:
+            type: string
+          example:
+            key: value
+            foo: bar
+            modern: treasury
+          description: Additional data represented as key-value pairs. Both the key and value must be strings.
+        external_id:
+          type:
+          - string
+          - 'null'
+          description: An optional user-defined 180 character unique identifier.
+        send_remittance_advice:
+          type: boolean
+          description: Send an email to the counterparty whenever an associated payment order is sent to the bank.
+        verification_status:
+          type: string
+          deprecated: true
+          description: The verification status of the counterparty.
+      additionalProperties: false
+      minProperties: 14
+      required:
+      - id
+      - object
+      - live_mode
+      - created_at
+      - updated_at
+      - discarded_at
+      - name
+      - accounts
+      - email
+      - legal_entity_id
+      - metadata
+      - external_id
+      - send_remittance_advice
+      - verification_status
+    legal_entity_industry_classification:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        object:
+          type: string
+        live_mode:
+          type: boolean
+          description: This field will be true if this object exists in the live environment or false if it exists in the test environment.
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        discarded_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        classification_type:
+          type: string
+          enum:
+          - anzsic
+          - bics
+          - gics
+          - hsics
+          - icb
+          - isic
+          - mgecs
+          - nace
+          - naics
+          - rbics
+          - sic
+          - sni
+          - trbc
+          - uksic
+          - unspsc
+          description: The classification system of the classification codes.
+        classification_codes:
+          type: array
+          items:
+            type: string
+          description: The industry classification codes for the legal entity.
+      additionalProperties: false
+      minProperties: 8
+      required:
+      - id
+      - object
+      - live_mode
+      - created_at
+      - updated_at
+      - discarded_at
+      - classification_type
+      - classification_codes
+    account_detail:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        object:
+          type: string
+        live_mode:
+          type: boolean
+          description: This field will be true if this object exists in the live environment or false if it exists in the test environment.
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        discarded_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        account_number:
+          type: string
+          description: The account number for the bank account.
+        account_number_type:
+          type: string
+          enum:
+          - au_number
+          - base_address
+          - card_token
+          - clabe
+          - ethereum_address
+          - hk_number
+          - iban
+          - id_number
+          - nz_number
+          - other
+          - pan
+          - polygon_address
+          - sg_number
+          - solana_address
+          - wallet_address
+          description: One of `iban`, `clabe`, `wallet_address`, or `other`. Use `other` if the bank account number is in a generic format.
+        account_number_safe:
+          type: string
+          description: The last 4 digits of the account_number.
+      additionalProperties: false
+      minProperties: 8
+      maxProperties: 9
+      required:
+      - id
+      - object
+      - live_mode
+      - created_at
+      - updated_at
+      - discarded_at
+      - account_number_type
+      - account_number_safe
+    address_request:
+      type: object
+      properties:
+        line1:
+          type:
+          - string
+          - 'null'
+        line2:
+          type:
+          - string
+          - 'null'
+        locality:
+          type:
+          - string
+          - 'null'
+          description: Locality or City.
+        region:
+          type:
+          - string
+          - 'null'
+          description: Region or State.
+        postal_code:
+          type:
+          - string
+          - 'null'
+          description: The postal code of the address.
+        country:
+          type:
+          - string
+          - 'null'
+          description: Country code conforms to [ISO 3166-1 alpha-2]
+    counterparty_collect_account_request:
+      type: object
+      properties:
+        direction:
+          type: string
+          enum:
+          - credit
+          - debit
+          description: One of `credit` or `debit`. Use `credit` when you want to pay a counterparty. Use `debit` when you need to charge a counterparty. This field helps us send a more tailored email to your counterparties."
+          _x-stainless-modelDefPath: $shared.transaction_direction
+        send_email:
+          type: boolean
+          description: By default, Modern Treasury will send an email to your counterparty that includes a link to the form they must fill out. However, if you would like to send the counterparty the link, you can set this parameter to `false`. The JSON body will include the link to the secure Modern Treasury form.
+        fields:
+          type: array
+          items:
+            type: string
+            enum:
+            - name
+            - nameOnAccount
+            - taxpayerIdentifier
+            - accountType
+            - accountNumber
+            - ibanNumber
+            - clabeNumber
+            - walletAddress
+            - panNumber
+            - routingNumber
+            - abaWireRoutingNumber
+            - swiftCode
+            - auBsb
+            - caCpa
+            - cnaps
+            - gbSortCode
+            - inIfsc
+            - myBranchCode
+            - brCodigo
+            - routingNumberType
+            - address
+            - jpZenginCode
+            - seBankgiroClearingCode
+            - nzNationalClearingCode
+            - hkInterbankClearingCode
+            - huInterbankClearingCode
+            - dkInterbankClearingCode
+            - idSknbiCode
+            - zaNationalClearingCode
+          description: The list of fields you want on the form. This field is optional and if it is not set, will default to [\"nameOnAccount\", \"accountType\", \"accountNumber\", \"routingNumber\", \"address\"]. The full list of options is [\"name\", \"nameOnAccount\", \"taxpayerIdentifier\", \"accountType\", \"accountNumber\", \"routingNumber\", \"address\", \"ibanNumber\", \"swiftCode\"].
+        custom_redirect:
+          type: string
+          format: uri
+          description: The URL you want your customer to visit upon filling out the form. By default, they will be sent to a Modern Treasury landing page. This must be a valid HTTPS URL if set.
+      required:
+      - direction
+    error_message:
+      type: object
+      properties:
+        errors:
+          type: object
+          properties:
+            code:
+              type: string
+              enum:
+              - parameter_invalid
+              - parameter_missing
+              - resource_not_found
+              - not_found
+              - forbidden
+              - invalid_ip
+              - invalid_key
+              - header_invalid
+              - expired_key
+              - conflict
+              - too_many_requests
+            message:
+              type: string
+            parameter:
+              type: string
+      required:
+      - errors
+    routing_detail:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        object:
+          type: string
+        live_mode:
+          type: boolean
+          description: This field will be true if this object exists in the live environment or false if it exists in the test environment.
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        discarded_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        routing_number:
+          type: string
+          description: The routing number of the bank.
+        routing_number_type:
+          type: string
+          enum:
+          - aba
+          - au_bsb
+          - br_codigo
+          - ca_cpa
+          - chips
+          - cnaps
+          - dk_interbank_clearing_code
+          - gb_sort_code
+          - hk_interbank_clearing_code
+          - hu_interbank_clearing_code
+          - id_sknbi_code
+          - il_bank_code
+          - in_ifsc
+          - jp_zengin_code
+          - mx_bank_identifier
+          - my_branch_code
+          - nz_national_clearing_code
+          - pl_national_clearing_code
+          - se_bankgiro_clearing_code
+          - sg_interbank_clearing_code
+          - swift
+          - za_national_clearing_code
+          description: The type of routing number. See https://docs.moderntreasury.com/platform/reference/routing-detail-object for more details.
+        payment_type:
+          type:
+          - string
+          - 'null'
+          enum:
+          - ach
+          - au_becs
+          - bacs
+          - book
+          - card
+          - chats
+          - check
+          - cross_border
+          - dk_nets
+          - eft
+          - gb_fps
+          - hu_ics
+          - interac
+          - masav
+          - mx_ccen
+          - neft
+          - nics
+          - nz_becs
+          - pl_elixir
+          - provxchange
+          - ro_sent
+          - rtp
+          - se_bankgirot
+          - sen
+          - sepa
+          - sg_giro
+          - sic
+          - signet
+          - sknbi
+          - stablecoin
+          - wire
+          - zengin
+          description: If the routing detail is to be used for a specific payment type this field will be populated, otherwise null.
+        bank_name:
+          type: string
+          description: The name of the bank.
+        bank_address:
+          $ref: '#/components/schemas/address'
+      additionalProperties: false
+      minProperties: 11
+      required:
+      - id
+      - object
+      - live_mode
+      - created_at
+      - updated_at
+      - discarded_at
+      - routing_number
+      - routing_number_type
+      - payment_type
+      - bank_name
+      - bank_address
+    address:
+      type:
+      - object
+      - 'null'
+      properties:
+        id:
+          type: string
+          format: uuid
+        object:
+          type: string
+        live_mode:
+          type: boolean
+          description: This field will be true if this object exists in the live environment or false if it exists in the test environment.
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        line1:
+          type:
+          - string
+          - 'null'
+        line2:
+          type:
+          - string
+          - 'null'
+        locality:
+          type:
+          - string
+          - 'null'
+          description: Locality or City.
+        region:
+          type:
+          - string
+          - 'null'
+          description: Region or State.
+        postal_code:
+          type:
+          - string
+          - 'null'
+          description: The postal code of the address.
+        country:
+          type:
+          - string
+          - 'null'
+          description: Country code conforms to [ISO 3166-1 alpha-2]
+      additionalProperties: false
+      minProperties: 11
+      required:
+      - id
+      - object
+      - live_mode
+      - created_at
+      - updated_at
+      - line1
+      - line2
+      - locality
+      - region
+      - postal_code
+      - country
     legal_entity_wealth_employment_detail:
       type: object
       properties:
@@ -2163,60 +1678,545 @@ components:
       - source_of_funds
       - wealth_source
       - annual_income
-    counterparty_collect_account_request:
+    ledger_account_create_request:
       type: object
       properties:
-        direction:
+        name:
+          type: string
+          description: The name of the ledger account.
+        description:
+          type:
+          - string
+          - 'null'
+          description: The description of the ledger account.
+        normal_balance:
           type: string
           enum:
           - credit
           - debit
-          description: One of `credit` or `debit`. Use `credit` when you want to pay a counterparty. Use `debit` when you need to charge a counterparty. This field helps us send a more tailored email to your counterparties."
+          description: The normal balance of the ledger account.
           _x-stainless-modelDefPath: $shared.transaction_direction
-        send_email:
+        ledger_id:
+          type: string
+          format: uuid
+          description: The id of the ledger that this account belongs to.
+        currency:
+          type: string
+          description: The currency of the ledger account.
+        currency_exponent:
+          type:
+          - integer
+          - 'null'
+          description: The currency exponent of the ledger account.
+        ledger_account_category_ids:
+          type: array
+          items:
+            type: string
+            format: uuid
+          description: The array of ledger account category ids that this ledger account should be a child of.
+        ledgerable_id:
+          type: string
+          format: uuid
+          description: If the ledger account links to another object in Modern Treasury, the id will be populated here, otherwise null.
+        ledgerable_type:
+          type: string
+          enum:
+          - counterparty
+          - external_account
+          - internal_account
+          - virtual_account
+          description: If the ledger account links to another object in Modern Treasury, the type will be populated here, otherwise null. The value is one of internal_account or external_account.
+        metadata:
+          type: object
+          description: Additional data represented as key-value pairs. Both the key and value must be strings.
+          additionalProperties:
+            type: string
+          example:
+            key: value
+            foo: bar
+            modern: treasury
+        external_id:
+          type:
+          - string
+          - 'null'
+          description: An optional user-defined 180 character unique identifier.
+      required:
+      - name
+      - normal_balance
+      - ledger_id
+      - currency
+    identification_create_request:
+      type: object
+      properties:
+        id_number:
+          type: string
+          description: The ID number of identification document.
+        documents:
+          type: array
+          description: A list of documents to attach to the identification.
+          items:
+            type: object
+            properties:
+              document_type:
+                type: string
+                enum:
+                - articles_of_incorporation
+                - certificate_of_good_standing
+                - ein_letter
+                - generic
+                - identification_back
+                - identification_front
+                - proof_of_address
+                description: A category given to the document, can be `null`.
+              file_data:
+                type: string
+                description: Base64-encoded file content for the document.
+              filename:
+                type: string
+                description: The original filename of the document.
+            required:
+            - document_type
+            - file_data
+        id_type:
+          type: string
+          enum:
+          - ar_cuil
+          - ar_cuit
+          - br_cnpj
+          - br_cpf
+          - ca_sin
+          - cl_run
+          - cl_rut
+          - co_cedulas
+          - co_nit
+          - drivers_license
+          - hn_id
+          - hn_rtn
+          - ie_pps
+          - in_lei
+          - kr_brn
+          - kr_crn
+          - kr_rrn
+          - passport
+          - sa_tin
+          - sa_vat
+          - us_ein
+          - us_itin
+          - us_ssn
+          - vn_tin
+          description: The type of ID number.
+        expiration_date:
+          type:
+          - string
+          - 'null'
+          format: date
+          description: The date when the Identification is no longer considered valid by the issuing authority.
+        issuing_country:
+          type:
+          - string
+          - 'null'
+          description: The ISO 3166-1 alpha-2 country code of the country that issued the identification
+        issuing_region:
+          type:
+          - string
+          - 'null'
+          description: The region in which the identifcation was issued.
+      required:
+      - id_number
+      - id_type
+    contact_detail_create_request:
+      type: object
+      properties:
+        contact_identifier:
+          type: string
+        contact_identifier_type:
+          type: string
+          enum:
+          - email
+          - phone_number
+          - website
+    counterparty_update_request:
+      type: object
+      properties:
+        name:
+          type: string
+          description: A new name for the counterparty. Will only update if passed.
+        email:
+          type: string
+          format: email
+          description: A new email for the counterparty.
+        metadata:
+          type: object
+          additionalProperties:
+            type: string
+          description: Additional data in the form of key-value pairs. Pairs can be removed by passing an empty string or `null` as the value.
+        send_remittance_advice:
           type: boolean
-          description: By default, Modern Treasury will send an email to your counterparty that includes a link to the form they must fill out. However, if you would like to send the counterparty the link, you can set this parameter to `false`. The JSON body will include the link to the secure Modern Treasury form.
-        fields:
+          description: If this is `true`, Modern Treasury will send an email to the counterparty whenever an associated payment order is sent to the bank.
+        legal_entity_id:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          description: The id of the legal entity.
+        taxpayer_identifier:
+          type: string
+          description: Either a valid SSN or EIN.
+        external_id:
+          type:
+          - string
+          - 'null'
+          description: An optional user-defined 180 character unique identifier.
+    third_party_verification:
+      type: object
+      properties:
+        vendor_verification_id:
+          type: string
+          description: The identification of the third party verification in `vendor`'s system.
+        vendor:
+          type: string
+          enum:
+          - persona
+          - middesk
+          - alloy
+          - sumsub
+          - veriff
+          description: The vendor that performed the verification, e.g. `persona`.
+        verification_category:
+          type: string
+          enum:
+          - legal_name
+          - date_of_birth
+          - address
+          - government_id_number
+          - adverse_media
+          description: The category of verification performed.
+        verification_method:
+          type: string
+          description: The method used to perform the verification.
+        comment:
+          type:
+          - string
+          - 'null'
+          description: An optional comment about the verification.
+        outcome:
+          type: string
+          enum:
+          - passed
+          - failed
+          description: The outcome of the verification. One of `passed` or `failed`.
+        verification_time:
+          type: string
+          format: date-time
+          description: The timestamp when the verification was performed.
+      required:
+      - vendor_verification_id
+      - vendor
+      - verification_category
+      - verification_method
+      - outcome
+      - verification_time
+      additionalProperties: false
+    counterparty_collect_account_response:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The id of the existing counterparty.
+        is_resend:
+          type: boolean
+          description: This field will be `true` if an email requesting account details has already been sent to this counterparty.
+        form_link:
+          type: string
+          format: uri
+          description: This is the link to the secure Modern Treasury form. By default, Modern Treasury will send an email to your counterparty that includes a link to this form. However, if `send_email` is passed as `false` in the body then Modern Treasury will not send the email and you can send it to the counterparty directly.
+      additionalProperties: false
+      minProperties: 3
+      required:
+      - id
+      - is_resend
+      - form_link
+    legal_entity_address_create_request:
+      type: object
+      properties:
+        address_types:
           type: array
           items:
             type: string
             enum:
-            - name
-            - nameOnAccount
-            - taxpayerIdentifier
-            - accountType
-            - accountNumber
-            - ibanNumber
-            - clabeNumber
-            - walletAddress
-            - panNumber
-            - routingNumber
-            - abaWireRoutingNumber
-            - swiftCode
-            - auBsb
-            - caCpa
-            - cnaps
-            - gbSortCode
-            - inIfsc
-            - myBranchCode
-            - brCodigo
-            - routingNumberType
-            - address
-            - jpZenginCode
-            - seBankgiroClearingCode
-            - nzNationalClearingCode
-            - hkInterbankClearingCode
-            - huInterbankClearingCode
-            - dkInterbankClearingCode
-            - idSknbiCode
-            - zaNationalClearingCode
-          description: The list of fields you want on the form. This field is optional and if it is not set, will default to [\"nameOnAccount\", \"accountType\", \"accountNumber\", \"routingNumber\", \"address\"]. The full list of options is [\"name\", \"nameOnAccount\", \"taxpayerIdentifier\", \"accountType\", \"accountNumber\", \"routingNumber\", \"address\", \"ibanNumber\", \"swiftCode\"].
-        custom_redirect:
-          type: string
-          format: uri
-          description: The URL you want your customer to visit upon filling out the form. By default, they will be sent to a Modern Treasury landing page. This must be a valid HTTPS URL if set.
+            - business
+            - business_registered
+            - mailing
+            - other
+            - po_box
+            - residential
+          description: The types of this address.
+        line1:
+          type:
+          - string
+          - 'null'
+        line2:
+          type:
+          - string
+          - 'null'
+        locality:
+          type:
+          - string
+          - 'null'
+          description: Locality or City.
+        region:
+          type:
+          - string
+          - 'null'
+          description: Region or State.
+        postal_code:
+          type:
+          - string
+          - 'null'
+          description: The postal code of the address.
+        country:
+          type:
+          - string
+          - 'null'
+          description: Country code conforms to [ISO 3166-1 alpha-2]
       required:
-      - direction
+      - line1
+      - locality
+      - region
+      - postal_code
+      - country
+    counterparty_create_request:
+      type: object
+      properties:
+        name:
+          type:
+          - string
+          - 'null'
+          description: A human friendly name for this counterparty.
+        accounts:
+          type: array
+          items:
+            type: object
+            properties:
+              account_type:
+                $ref: '#/components/schemas/external_account_type'
+              party_type:
+                type:
+                - string
+                - 'null'
+                enum:
+                - business
+                - individual
+                description: Either `individual` or `business`.
+              party_address:
+                $ref: '#/components/schemas/address_request'
+                description: Required if receiving wire payments.
+              name:
+                type:
+                - string
+                - 'null'
+                description: A nickname for the external account. This is only for internal usage and won't affect any payments
+              account_details:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    account_number:
+                      type: string
+                    account_number_type:
+                      type: string
+                      enum:
+                      - au_number
+                      - base_address
+                      - card_token
+                      - clabe
+                      - ethereum_address
+                      - hk_number
+                      - iban
+                      - id_number
+                      - nz_number
+                      - other
+                      - pan
+                      - polygon_address
+                      - sg_number
+                      - solana_address
+                      - wallet_address
+                  required:
+                  - account_number
+              routing_details:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    routing_number:
+                      type: string
+                    routing_number_type:
+                      type: string
+                      enum:
+                      - aba
+                      - au_bsb
+                      - br_codigo
+                      - ca_cpa
+                      - chips
+                      - cnaps
+                      - dk_interbank_clearing_code
+                      - gb_sort_code
+                      - hk_interbank_clearing_code
+                      - hu_interbank_clearing_code
+                      - id_sknbi_code
+                      - il_bank_code
+                      - in_ifsc
+                      - jp_zengin_code
+                      - my_branch_code
+                      - mx_bank_identifier
+                      - nz_national_clearing_code
+                      - pl_national_clearing_code
+                      - se_bankgiro_clearing_code
+                      - sg_interbank_clearing_code
+                      - swift
+                      - za_national_clearing_code
+                    payment_type:
+                      type: string
+                      enum:
+                      - ach
+                      - au_becs
+                      - bacs
+                      - book
+                      - card
+                      - chats
+                      - check
+                      - cross_border
+                      - dk_nets
+                      - eft
+                      - gb_fps
+                      - hu_ics
+                      - interac
+                      - masav
+                      - mx_ccen
+                      - neft
+                      - nics
+                      - nz_becs
+                      - pl_elixir
+                      - provxchange
+                      - ro_sent
+                      - rtp
+                      - se_bankgirot
+                      - sen
+                      - sepa
+                      - sg_giro
+                      - sic
+                      - signet
+                      - sknbi
+                      - stablecoin
+                      - wire
+                      - zengin
+                  required:
+                  - routing_number
+                  - routing_number_type
+              external_id:
+                type:
+                - string
+                - 'null'
+                description: An optional user-defined 180 character unique identifier.
+              metadata:
+                type: object
+                additionalProperties:
+                  type: string
+                example:
+                  key: value
+                  foo: bar
+                  modern: treasury
+                description: Additional data represented as key-value pairs. Both the key and value must be strings.
+              party_name:
+                type: string
+                description: If this value isn't provided, it will be inherited from the counterparty's name.
+              party_identifier:
+                type: string
+              ledger_account:
+                $ref: '#/components/schemas/ledger_account_create_request'
+                description: Specifies a ledger account object that will be created with the external account. The resulting ledger account is linked to the external account for auto-ledgering Payment objects. See https://docs.moderntreasury.com/docs/linking-to-other-modern-treasury-objects for more details.
+              plaid_processor_token:
+                type: string
+                description: If you've enabled the Modern Treasury + Plaid integration in your Plaid account, you can pass the processor token in this field.
+              contact_details:
+                type: array
+                items:
+                  $ref: '#/components/schemas/contact_detail_create_request'
+          description: The accounts for this counterparty.
+        email:
+          type:
+          - string
+          - 'null'
+          format: email
+          description: The counterparty's email.
+        legal_entity_id:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          description: The id of the legal entity.
+        metadata:
+          type: object
+          additionalProperties:
+            type: string
+          example:
+            key: value
+            foo: bar
+            modern: treasury
+          description: Additional data represented as key-value pairs. Both the key and value must be strings.
+        external_id:
+          type:
+          - string
+          - 'null'
+          description: An optional user-defined 180 character unique identifier.
+        send_remittance_advice:
+          type: boolean
+          description: Send an email to the counterparty whenever an associated payment order is sent to the bank.
+        verification_status:
+          type: string
+          deprecated: true
+          description: The verification status of the counterparty.
+        accounting:
+          type: object
+          deprecated: true
+          properties:
+            type:
+              type: string
+              enum:
+              - customer
+              - vendor
+              description: An optional type to auto-sync the counterparty to your ledger. Either `customer` or `vendor`.
+        ledger_type:
+          type: string
+          enum:
+          - customer
+          - vendor
+          description: An optional type to auto-sync the counterparty to your ledger. Either `customer` or `vendor`.
+          deprecated: true
+        taxpayer_identifier:
+          type: string
+          description: Either a valid SSN or EIN.
+        legal_entity:
+          $ref: '#/components/schemas/legal_entity_create_request'
+      required:
+      - name
+    external_account_type:
+      type: string
+      enum:
+      - base_wallet
+      - cash
+      - checking
+      - crypto_wallet
+      - ethereum_wallet
+      - general_ledger
+      - loan
+      - non_resident
+      - other
+      - overdraft
+      - polygon_wallet
+      - savings
+      - solana_wallet
+      description: Can be `checking`, `savings` or `other`.
   parameters:
     metadata_query:
       name: metadata

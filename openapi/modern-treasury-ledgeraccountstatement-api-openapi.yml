@@ -83,6 +83,24 @@ paths:
                 $ref: '#/components/schemas/error_message'
 components:
   schemas:
+    ledger_balances:
+      type: object
+      properties:
+        pending_balance:
+          $ref: '#/components/schemas/ledger_balance'
+          description: The pending_balance is the sum of all pending and posted entries.
+        posted_balance:
+          $ref: '#/components/schemas/ledger_balance'
+          description: The posted_balance is the sum of all posted entries.
+        available_balance:
+          $ref: '#/components/schemas/ledger_balance'
+          description: The available_balance is the sum of all posted inbound entries and pending outbound entries. For credit normal, available_amount = posted_credits - pending_debits; for debit normal, available_amount = posted_debits - pending_credits.
+      additionalProperties: false
+      minProperties: 3
+      required:
+      - pending_balance
+      - posted_balance
+      - available_balance
     ledger_account_statement_create_request:
       type: object
       properties:
@@ -116,6 +134,55 @@ components:
       - ledger_account_id
       - effective_at_lower_bound
       - effective_at_upper_bound
+    ledger_balance:
+      type: object
+      properties:
+        credits:
+          type: integer
+        debits:
+          type: integer
+        amount:
+          type: integer
+        currency:
+          type: string
+          description: The currency of the ledger account.
+        currency_exponent:
+          type: integer
+          description: The currency exponent of the ledger account.
+      additionalProperties: false
+      minProperties: 5
+      required:
+      - credits
+      - debits
+      - amount
+      - currency
+      - currency_exponent
+    error_message:
+      type: object
+      properties:
+        errors:
+          type: object
+          properties:
+            code:
+              type: string
+              enum:
+              - parameter_invalid
+              - parameter_missing
+              - resource_not_found
+              - not_found
+              - forbidden
+              - invalid_ip
+              - invalid_key
+              - header_invalid
+              - expired_key
+              - conflict
+              - too_many_requests
+            message:
+              type: string
+            parameter:
+              type: string
+      required:
+      - errors
     ledger_account_statement:
       type: object
       properties:
@@ -197,73 +264,6 @@ components:
       - starting_balance
       - ending_balance
       - metadata
-    error_message:
-      type: object
-      properties:
-        errors:
-          type: object
-          properties:
-            code:
-              type: string
-              enum:
-              - parameter_invalid
-              - parameter_missing
-              - resource_not_found
-              - not_found
-              - forbidden
-              - invalid_ip
-              - invalid_key
-              - header_invalid
-              - expired_key
-              - conflict
-              - too_many_requests
-            message:
-              type: string
-            parameter:
-              type: string
-      required:
-      - errors
-    ledger_balance:
-      type: object
-      properties:
-        credits:
-          type: integer
-        debits:
-          type: integer
-        amount:
-          type: integer
-        currency:
-          type: string
-          description: The currency of the ledger account.
-        currency_exponent:
-          type: integer
-          description: The currency exponent of the ledger account.
-      additionalProperties: false
-      minProperties: 5
-      required:
-      - credits
-      - debits
-      - amount
-      - currency
-      - currency_exponent
-    ledger_balances:
-      type: object
-      properties:
-        pending_balance:
-          $ref: '#/components/schemas/ledger_balance'
-          description: The pending_balance is the sum of all pending and posted entries.
-        posted_balance:
-          $ref: '#/components/schemas/ledger_balance'
-          description: The posted_balance is the sum of all posted entries.
-        available_balance:
-          $ref: '#/components/schemas/ledger_balance'
-          description: The available_balance is the sum of all posted inbound entries and pending outbound entries. For credit normal, available_amount = posted_credits - pending_debits; for debit normal, available_amount = posted_debits - pending_credits.
-      additionalProperties: false
-      minProperties: 3
-      required:
-      - pending_balance
-      - posted_balance
-      - available_balance
   securitySchemes:
     basic_auth:
       type: http

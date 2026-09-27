@@ -434,6 +434,71 @@ paths:
                 $ref: '#/components/schemas/error_message'
 components:
   schemas:
+    document_create_request:
+      type: object
+      properties:
+        documentable_id:
+          type: string
+          description: The unique identifier for the associated object.
+        documentable_type:
+          type: string
+          enum:
+          - connections
+          - counterparties
+          - expected_payments
+          - external_accounts
+          - identifications
+          - incoming_payment_details
+          - internal_accounts
+          - legal_entities
+          - organizations
+          - payment_orders
+          - transactions
+        document_type:
+          type: string
+          description: A category given to the document, can be `null`.
+        file:
+          type: string
+          format: binary
+      required:
+      - file
+    document_detail:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        object:
+          type: string
+        live_mode:
+          type: boolean
+          description: This field will be true if this object exists in the live environment or false if it exists in the test environment.
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        discarded_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        document_identifier_type:
+          type: string
+        document_identifier:
+          type: string
+      additionalProperties: false
+      minProperties: 8
+      required:
+      - id
+      - object
+      - live_mode
+      - created_at
+      - updated_at
+      - discarded_at
+      - document_identifier_type
+      - document_identifier
     document:
       type: object
       properties:
@@ -520,34 +585,6 @@ components:
       - documentable_type
       - document_details
       - file
-    document_create_request:
-      type: object
-      properties:
-        documentable_id:
-          type: string
-          description: The unique identifier for the associated object.
-        documentable_type:
-          type: string
-          enum:
-          - connections
-          - counterparties
-          - expected_payments
-          - external_accounts
-          - identifications
-          - incoming_payment_details
-          - internal_accounts
-          - legal_entities
-          - organizations
-          - payment_orders
-          - transactions
-        document_type:
-          type: string
-          description: A category given to the document, can be `null`.
-        file:
-          type: string
-          format: binary
-      required:
-      - file
     error_message:
       type: object
       properties:
@@ -574,43 +611,6 @@ components:
               type: string
       required:
       - errors
-    document_detail:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-        object:
-          type: string
-        live_mode:
-          type: boolean
-          description: This field will be true if this object exists in the live environment or false if it exists in the test environment.
-        created_at:
-          type: string
-          format: date-time
-        updated_at:
-          type: string
-          format: date-time
-        discarded_at:
-          type:
-          - string
-          - 'null'
-          format: date-time
-        document_identifier_type:
-          type: string
-        document_identifier:
-          type: string
-      additionalProperties: false
-      minProperties: 8
-      required:
-      - id
-      - object
-      - live_mode
-      - created_at
-      - updated_at
-      - discarded_at
-      - document_identifier_type
-      - document_identifier
     legacy_document_create_request:
       type: object
       properties:

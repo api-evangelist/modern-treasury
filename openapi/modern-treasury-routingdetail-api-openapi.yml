@@ -193,6 +193,37 @@ paths:
           description: successful
 components:
   schemas:
+    accounts_type:
+      type: string
+      enum:
+      - external_accounts
+      - internal_accounts
+    error_message:
+      type: object
+      properties:
+        errors:
+          type: object
+          properties:
+            code:
+              type: string
+              enum:
+              - parameter_invalid
+              - parameter_missing
+              - resource_not_found
+              - not_found
+              - forbidden
+              - invalid_ip
+              - invalid_key
+              - header_invalid
+              - expired_key
+              - conflict
+              - too_many_requests
+            message:
+              type: string
+            parameter:
+              type: string
+      required:
+      - errors
     routing_detail:
       type: object
       properties:
@@ -301,37 +332,6 @@ components:
       - payment_type
       - bank_name
       - bank_address
-    error_message:
-      type: object
-      properties:
-        errors:
-          type: object
-          properties:
-            code:
-              type: string
-              enum:
-              - parameter_invalid
-              - parameter_missing
-              - resource_not_found
-              - not_found
-              - forbidden
-              - invalid_ip
-              - invalid_key
-              - header_invalid
-              - expired_key
-              - conflict
-              - too_many_requests
-            message:
-              type: string
-            parameter:
-              type: string
-      required:
-      - errors
-    accounts_type:
-      type: string
-      enum:
-      - external_accounts
-      - internal_accounts
     address:
       type:
       - object

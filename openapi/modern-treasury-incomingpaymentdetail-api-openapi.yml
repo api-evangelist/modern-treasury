@@ -242,6 +242,308 @@ paths:
               $ref: '#/components/schemas/incoming_payment_detail_create_request'
 components:
   schemas:
+    virtual_account:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        object:
+          type: string
+        live_mode:
+          type: boolean
+          description: This field will be true if this object exists in the live environment or false if it exists in the test environment.
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        discarded_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        name:
+          type: string
+          description: The name of the virtual account.
+        description:
+          type:
+          - string
+          - 'null'
+          description: An optional free-form description for internal use.
+        counterparty_id:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          description: The ID of a counterparty that the virtual account belongs to. Optional.
+        internal_account_id:
+          type: string
+          format: uuid
+          description: The ID of the internal account that the virtual account is in.
+        account_details:
+          type: array
+          description: An array of account detail objects.
+          items:
+            $ref: '#/components/schemas/account_detail'
+        routing_details:
+          type: array
+          description: An array of routing detail objects. These will be the routing details of the internal account.
+          items:
+            $ref: '#/components/schemas/routing_detail'
+        debit_ledger_account_id:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          description: The ID of a debit normal ledger account. When money enters the virtual account, this ledger account will be debited. Must be accompanied by a credit_ledger_account_id if present.
+        credit_ledger_account_id:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          description: The ID of a credit normal ledger account. When money enters the virtual account, this ledger account will be credited. Must be accompanied by a debit_ledger_account_id if present.
+        ledger_account_id:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          description: If the virtual account links to a ledger account in Modern Treasury, the id of the ledger account will be populated here.
+        metadata:
+          type: object
+          description: Additional data represented as key-value pairs. Both the key and value must be strings.
+          additionalProperties:
+            type: string
+          example:
+            key: value
+            foo: bar
+            modern: treasury
+      additionalProperties: false
+      minProperties: 16
+      required:
+      - id
+      - object
+      - live_mode
+      - created_at
+      - updated_at
+      - discarded_at
+      - name
+      - description
+      - counterparty_id
+      - internal_account_id
+      - account_details
+      - routing_details
+      - debit_ledger_account_id
+      - credit_ledger_account_id
+      - ledger_account_id
+      - metadata
+    currency:
+      type: string
+      enum:
+      - AED
+      - AFN
+      - ALL
+      - AMD
+      - ANG
+      - AOA
+      - ARS
+      - AUD
+      - AWG
+      - AZN
+      - BAM
+      - BBD
+      - BCH
+      - BDT
+      - BGN
+      - BHD
+      - BIF
+      - BMD
+      - BND
+      - BOB
+      - BRL
+      - BSD
+      - BTC
+      - BTN
+      - BWP
+      - BYN
+      - BYR
+      - BZD
+      - CAD
+      - CDF
+      - CHF
+      - CLF
+      - CLP
+      - CNH
+      - CNY
+      - COP
+      - CRC
+      - CUC
+      - CUP
+      - CVE
+      - CZK
+      - DJF
+      - DKK
+      - DOP
+      - DZD
+      - EEK
+      - EGP
+      - ERN
+      - ETB
+      - ETH
+      - EUR
+      - EURC
+      - FJD
+      - FKP
+      - GBP
+      - GBX
+      - GEL
+      - GGP
+      - GHS
+      - GIP
+      - GMD
+      - GNF
+      - GTQ
+      - GYD
+      - HKD
+      - HNL
+      - HRK
+      - HTG
+      - HUF
+      - IDR
+      - ILS
+      - IMP
+      - INR
+      - IQD
+      - IRR
+      - ISK
+      - JEP
+      - JMD
+      - JOD
+      - JPY
+      - KES
+      - KGS
+      - KHR
+      - KMF
+      - KPW
+      - KRW
+      - KWD
+      - KYD
+      - KZT
+      - LAK
+      - LBP
+      - LKR
+      - LRD
+      - LSL
+      - LTL
+      - LVL
+      - LYD
+      - MAD
+      - MDL
+      - MGA
+      - MKD
+      - MMK
+      - MNT
+      - MOP
+      - MRO
+      - MRU
+      - MTL
+      - MUR
+      - MVR
+      - MWK
+      - MXN
+      - MYR
+      - MZN
+      - NAD
+      - NGN
+      - NIO
+      - NOK
+      - NPR
+      - NZD
+      - OMR
+      - OP
+      - PAB
+      - PEN
+      - PGK
+      - PHP
+      - PKR
+      - PLN
+      - PYG
+      - PYUSD
+      - QAR
+      - RON
+      - RSD
+      - RUB
+      - RWF
+      - SAR
+      - SBD
+      - SCR
+      - SDG
+      - SEK
+      - SGD
+      - SHP
+      - SKK
+      - SLE
+      - SLL
+      - SOS
+      - SRD
+      - SSP
+      - STD
+      - STN
+      - SVC
+      - SYP
+      - SZL
+      - THB
+      - TJS
+      - TMM
+      - TMT
+      - TND
+      - TOP
+      - TRY
+      - TTD
+      - TWD
+      - TZS
+      - UAH
+      - UGX
+      - USD
+      - USDB
+      - USDC
+      - USDG
+      - USDP
+      - USDT
+      - UYU
+      - UZS
+      - VEF
+      - VES
+      - VND
+      - VUV
+      - WST
+      - XAF
+      - XAG
+      - XAU
+      - XBA
+      - XBB
+      - XBC
+      - XBD
+      - XCD
+      - XCG
+      - XDR
+      - XFU
+      - XOF
+      - XPD
+      - XPF
+      - XPT
+      - XTS
+      - YER
+      - ZAR
+      - ZMK
+      - ZMW
+      - ZWD
+      - ZWG
+      - ZWL
+      - ZWN
+      - ZWR
+      description: Three-letter ISO currency code.
     account_detail:
       type: object
       properties:
@@ -309,71 +611,6 @@ components:
           additionalProperties:
             type: string
           description: Additional data in the form of key-value pairs. Pairs can be removed by passing an empty string or `null` as the value.
-    incoming_payment_detail_create_request:
-      type: object
-      properties:
-        type:
-          type: string
-          enum:
-          - ach
-          - au_becs
-          - bacs
-          - book
-          - check
-          - eft
-          - interac
-          - neft
-          - nz_becs
-          - rtp
-          - sepa
-          - signet
-          - stablecoin
-          - wire
-          - zengin
-          description: One of `ach`, `wire`, `check`.
-        direction:
-          type: string
-          enum:
-          - credit
-          - debit
-          description: One of `credit`, `debit`.
-        amount:
-          type: integer
-          description: Value in specified currency's smallest unit. e.g. $10 would be represented as 1000.
-        currency:
-          $ref: '#/components/schemas/currency'
-          description: Defaults to the currency of the originating account.
-        internal_account_id:
-          type: string
-          format: uuid
-          description: The ID of one of your internal accounts.
-        virtual_account_id:
-          type:
-          - string
-          - 'null'
-          format: uuid
-          description: An optional parameter to associate the incoming payment detail to a virtual account.
-        as_of_date:
-          type:
-          - string
-          - 'null'
-          format: date
-          description: Defaults to today.
-        description:
-          type:
-          - string
-          - 'null'
-          description: Defaults to a random description.
-        subtype:
-          type:
-          - string
-          - 'null'
-          description: An additional layer of classification for the type of incoming payment detail, e.g. `ethereum` for a `stablecoin` type.
-        data:
-          type:
-          - object
-          - 'null'
-          description: An object passed through to the simulated IPD that could reflect what a vendor would pass.
     routing_detail:
       type: object
       properties:
@@ -508,6 +745,132 @@ components:
               type: string
       required:
       - errors
+    incoming_payment_detail_create_request:
+      type: object
+      properties:
+        type:
+          type: string
+          enum:
+          - ach
+          - au_becs
+          - bacs
+          - book
+          - check
+          - eft
+          - interac
+          - neft
+          - nz_becs
+          - rtp
+          - sepa
+          - signet
+          - stablecoin
+          - wire
+          - zengin
+          description: One of `ach`, `wire`, `check`.
+        direction:
+          type: string
+          enum:
+          - credit
+          - debit
+          description: One of `credit`, `debit`.
+        amount:
+          type: integer
+          description: Value in specified currency's smallest unit. e.g. $10 would be represented as 1000.
+        currency:
+          $ref: '#/components/schemas/currency'
+          description: Defaults to the currency of the originating account.
+        internal_account_id:
+          type: string
+          format: uuid
+          description: The ID of one of your internal accounts.
+        virtual_account_id:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          description: An optional parameter to associate the incoming payment detail to a virtual account.
+        as_of_date:
+          type:
+          - string
+          - 'null'
+          format: date
+          description: Defaults to today.
+        description:
+          type:
+          - string
+          - 'null'
+          description: Defaults to a random description.
+        subtype:
+          type:
+          - string
+          - 'null'
+          description: An additional layer of classification for the type of incoming payment detail, e.g. `ethereum` for a `stablecoin` type.
+        data:
+          type:
+          - object
+          - 'null'
+          description: An object passed through to the simulated IPD that could reflect what a vendor would pass.
+    address:
+      type:
+      - object
+      - 'null'
+      properties:
+        id:
+          type: string
+          format: uuid
+        object:
+          type: string
+        live_mode:
+          type: boolean
+          description: This field will be true if this object exists in the live environment or false if it exists in the test environment.
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        line1:
+          type:
+          - string
+          - 'null'
+        line2:
+          type:
+          - string
+          - 'null'
+        locality:
+          type:
+          - string
+          - 'null'
+          description: Locality or City.
+        region:
+          type:
+          - string
+          - 'null'
+          description: Region or State.
+        postal_code:
+          type:
+          - string
+          - 'null'
+          description: The postal code of the address.
+        country:
+          type:
+          - string
+          - 'null'
+          description: Country code conforms to [ISO 3166-1 alpha-2]
+      additionalProperties: false
+      minProperties: 11
+      required:
+      - id
+      - object
+      - live_mode
+      - created_at
+      - updated_at
+      - line1
+      - line2
+      - locality
+      - region
+      - postal_code
+      - country
     incoming_payment_detail:
       type: object
       properties:
@@ -746,369 +1109,6 @@ components:
       - originating_account_number_type
       - subtype
       - reconciliation_status
-    address:
-      type:
-      - object
-      - 'null'
-      properties:
-        id:
-          type: string
-          format: uuid
-        object:
-          type: string
-        live_mode:
-          type: boolean
-          description: This field will be true if this object exists in the live environment or false if it exists in the test environment.
-        created_at:
-          type: string
-          format: date-time
-        updated_at:
-          type: string
-          format: date-time
-        line1:
-          type:
-          - string
-          - 'null'
-        line2:
-          type:
-          - string
-          - 'null'
-        locality:
-          type:
-          - string
-          - 'null'
-          description: Locality or City.
-        region:
-          type:
-          - string
-          - 'null'
-          description: Region or State.
-        postal_code:
-          type:
-          - string
-          - 'null'
-          description: The postal code of the address.
-        country:
-          type:
-          - string
-          - 'null'
-          description: Country code conforms to [ISO 3166-1 alpha-2]
-      additionalProperties: false
-      minProperties: 11
-      required:
-      - id
-      - object
-      - live_mode
-      - created_at
-      - updated_at
-      - line1
-      - line2
-      - locality
-      - region
-      - postal_code
-      - country
-    currency:
-      type: string
-      enum:
-      - AED
-      - AFN
-      - ALL
-      - AMD
-      - ANG
-      - AOA
-      - ARS
-      - AUD
-      - AWG
-      - AZN
-      - BAM
-      - BBD
-      - BCH
-      - BDT
-      - BGN
-      - BHD
-      - BIF
-      - BMD
-      - BND
-      - BOB
-      - BRL
-      - BSD
-      - BTC
-      - BTN
-      - BWP
-      - BYN
-      - BYR
-      - BZD
-      - CAD
-      - CDF
-      - CHF
-      - CLF
-      - CLP
-      - CNH
-      - CNY
-      - COP
-      - CRC
-      - CUC
-      - CUP
-      - CVE
-      - CZK
-      - DJF
-      - DKK
-      - DOP
-      - DZD
-      - EEK
-      - EGP
-      - ERN
-      - ETB
-      - ETH
-      - EUR
-      - EURC
-      - FJD
-      - FKP
-      - GBP
-      - GBX
-      - GEL
-      - GGP
-      - GHS
-      - GIP
-      - GMD
-      - GNF
-      - GTQ
-      - GYD
-      - HKD
-      - HNL
-      - HRK
-      - HTG
-      - HUF
-      - IDR
-      - ILS
-      - IMP
-      - INR
-      - IQD
-      - IRR
-      - ISK
-      - JEP
-      - JMD
-      - JOD
-      - JPY
-      - KES
-      - KGS
-      - KHR
-      - KMF
-      - KPW
-      - KRW
-      - KWD
-      - KYD
-      - KZT
-      - LAK
-      - LBP
-      - LKR
-      - LRD
-      - LSL
-      - LTL
-      - LVL
-      - LYD
-      - MAD
-      - MDL
-      - MGA
-      - MKD
-      - MMK
-      - MNT
-      - MOP
-      - MRO
-      - MRU
-      - MTL
-      - MUR
-      - MVR
-      - MWK
-      - MXN
-      - MYR
-      - MZN
-      - NAD
-      - NGN
-      - NIO
-      - NOK
-      - NPR
-      - NZD
-      - OMR
-      - OP
-      - PAB
-      - PEN
-      - PGK
-      - PHP
-      - PKR
-      - PLN
-      - PYG
-      - PYUSD
-      - QAR
-      - RON
-      - RSD
-      - RUB
-      - RWF
-      - SAR
-      - SBD
-      - SCR
-      - SDG
-      - SEK
-      - SGD
-      - SHP
-      - SKK
-      - SLE
-      - SLL
-      - SOS
-      - SRD
-      - SSP
-      - STD
-      - STN
-      - SVC
-      - SYP
-      - SZL
-      - THB
-      - TJS
-      - TMM
-      - TMT
-      - TND
-      - TOP
-      - TRY
-      - TTD
-      - TWD
-      - TZS
-      - UAH
-      - UGX
-      - USD
-      - USDB
-      - USDC
-      - USDG
-      - USDP
-      - USDT
-      - UYU
-      - UZS
-      - VEF
-      - VES
-      - VND
-      - VUV
-      - WST
-      - XAF
-      - XAG
-      - XAU
-      - XBA
-      - XBB
-      - XBC
-      - XBD
-      - XCD
-      - XCG
-      - XDR
-      - XFU
-      - XOF
-      - XPD
-      - XPF
-      - XPT
-      - XTS
-      - YER
-      - ZAR
-      - ZMK
-      - ZMW
-      - ZWD
-      - ZWG
-      - ZWL
-      - ZWN
-      - ZWR
-      description: Three-letter ISO currency code.
-    virtual_account:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-        object:
-          type: string
-        live_mode:
-          type: boolean
-          description: This field will be true if this object exists in the live environment or false if it exists in the test environment.
-        created_at:
-          type: string
-          format: date-time
-        updated_at:
-          type: string
-          format: date-time
-        discarded_at:
-          type:
-          - string
-          - 'null'
-          format: date-time
-        name:
-          type: string
-          description: The name of the virtual account.
-        description:
-          type:
-          - string
-          - 'null'
-          description: An optional free-form description for internal use.
-        counterparty_id:
-          type:
-          - string
-          - 'null'
-          format: uuid
-          description: The ID of a counterparty that the virtual account belongs to. Optional.
-        internal_account_id:
-          type: string
-          format: uuid
-          description: The ID of the internal account that the virtual account is in.
-        account_details:
-          type: array
-          description: An array of account detail objects.
-          items:
-            $ref: '#/components/schemas/account_detail'
-        routing_details:
-          type: array
-          description: An array of routing detail objects. These will be the routing details of the internal account.
-          items:
-            $ref: '#/components/schemas/routing_detail'
-        debit_ledger_account_id:
-          type:
-          - string
-          - 'null'
-          format: uuid
-          description: The ID of a debit normal ledger account. When money enters the virtual account, this ledger account will be debited. Must be accompanied by a credit_ledger_account_id if present.
-        credit_ledger_account_id:
-          type:
-          - string
-          - 'null'
-          format: uuid
-          description: The ID of a credit normal ledger account. When money enters the virtual account, this ledger account will be credited. Must be accompanied by a debit_ledger_account_id if present.
-        ledger_account_id:
-          type:
-          - string
-          - 'null'
-          format: uuid
-          description: If the virtual account links to a ledger account in Modern Treasury, the id of the ledger account will be populated here.
-        metadata:
-          type: object
-          description: Additional data represented as key-value pairs. Both the key and value must be strings.
-          additionalProperties:
-            type: string
-          example:
-            key: value
-            foo: bar
-            modern: treasury
-      additionalProperties: false
-      minProperties: 16
-      required:
-      - id
-      - object
-      - live_mode
-      - created_at
-      - updated_at
-      - discarded_at
-      - name
-      - description
-      - counterparty_id
-      - internal_account_id
-      - account_details
-      - routing_details
-      - debit_ledger_account_id
-      - credit_ledger_account_id
-      - ledger_account_id
-      - metadata
   parameters:
     metadata_query:
       name: metadata

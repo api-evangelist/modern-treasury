@@ -251,18 +251,6 @@ paths:
               required:
               - status
 components:
-  parameters:
-    metadata_query:
-      name: metadata
-      in: query
-      schema:
-        type: object
-        additionalProperties:
-          type: string
-      style: deepObject
-      explode: true
-      required: false
-      description: For example, if you want to query for records with metadata key `Type` and value `Loan`, the query would be `metadata%5BType%5D=Loan`. This encodes the query parameters.
   schemas:
     hold:
       type: object
@@ -357,6 +345,18 @@ components:
               type: string
       required:
       - errors
+  parameters:
+    metadata_query:
+      name: metadata
+      in: query
+      schema:
+        type: object
+        additionalProperties:
+          type: string
+      style: deepObject
+      explode: true
+      required: false
+      description: For example, if you want to query for records with metadata key `Type` and value `Loan`, the query would be `metadata%5BType%5D=Loan`. This encodes the query parameters.
   securitySchemes:
     basic_auth:
       type: http

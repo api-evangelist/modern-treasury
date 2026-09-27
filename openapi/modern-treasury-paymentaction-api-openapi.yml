@@ -220,22 +220,28 @@ paths:
               $ref: '#/components/schemas/payment_action_update_request'
 components:
   schemas:
-    payment_action_update_request:
+    payment_action_create_request:
       type: object
       properties:
-        status:
+        type:
           type: string
-          enum:
-          - pending
-          - processable
-          - processing
-          - sent
-          - acknowledged
-          - failed
-          - cancelled
-          description: Optional. Set the status of the payment action to `cancelled` to cancel the payment action. This will only work if the payment action is in a `pending` state.
+          description: Required. The type of the payment action. Determines the action to be taken.
+        actionable_id:
+          type: string
+          format: uuid
+          description: Optional. The ID of the associated actionable object.
+        actionable_type:
+          type: string
+          description: Optional. The type of the associated actionable object. One of `payment_order`, `expected_payment`. Required if `actionable_id` is passed.
+        internal_account_id:
+          type: string
+          format: uuid
+          description: Optional. The ID of one of your organization's internal accounts. Required if `actionable_id` is not passed.
+        details:
+          type: object
+          description: Optional. The specifc details of the payment action based on type.
       required:
-      - status
+      - type
     payment_action:
       type: object
       properties:
@@ -317,28 +323,22 @@ components:
               type: string
       required:
       - errors
-    payment_action_create_request:
+    payment_action_update_request:
       type: object
       properties:
-        type:
+        status:
           type: string
-          description: Required. The type of the payment action. Determines the action to be taken.
-        actionable_id:
-          type: string
-          format: uuid
-          description: Optional. The ID of the associated actionable object.
-        actionable_type:
-          type: string
-          description: Optional. The type of the associated actionable object. One of `payment_order`, `expected_payment`. Required if `actionable_id` is passed.
-        internal_account_id:
-          type: string
-          format: uuid
-          description: Optional. The ID of one of your organization's internal accounts. Required if `actionable_id` is not passed.
-        details:
-          type: object
-          description: Optional. The specifc details of the payment action based on type.
+          enum:
+          - pending
+          - processable
+          - processing
+          - sent
+          - acknowledged
+          - failed
+          - cancelled
+          description: Optional. Set the status of the payment action to `cancelled` to cancel the payment action. This will only work if the payment action is in a `pending` state.
       required:
-      - type
+      - status
   parameters:
     metadata_query:
       name: metadata

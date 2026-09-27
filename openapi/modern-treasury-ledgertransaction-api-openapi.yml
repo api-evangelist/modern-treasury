@@ -617,190 +617,27 @@ paths:
                 $ref: '#/components/schemas/error_message'
 components:
   schemas:
-    ledger_transaction_reversal_create_request:
+    ledger_balances:
       type: object
       properties:
-        description:
-          type: string
-          description: An optional free-form description for the reversal ledger transaction. Maximum of 1000 characters allowed.
-        status:
-          type: string
-          enum:
-          - archived
-          - pending
-          - posted
-          description: Status of the reversal ledger transaction. It defaults to `posted` if not provided.
-        metadata:
-          type: object
-          description: Additional data to be added to the reversal ledger transaction as key-value pairs. Both the key and value must be strings.
-          additionalProperties:
-            type: string
-          example:
-            key: value
-            foo: bar
-            modern: treasury
-        effective_at:
-          type:
-          - string
-          - 'null'
-          format: date-time
-          description: The timestamp (ISO8601 format) at which the reversal ledger transaction happened for reporting purposes. It defaults to the `effective_at` of the original ledger transaction if not provided.
-        external_id:
-          type: string
-          description: Must be unique within the ledger.
-        ledgerable_type:
-          type: string
-          enum:
-          - expected_payment
-          - incoming_payment_detail
-          - payment_order
-          - return
-          - reversal
-          description: Specify this if you'd like to link the reversal ledger transaction to a Payment object like Return or Reversal.
-        ledgerable_id:
-          type: string
-          format: uuid
-          description: Specify this if you'd like to link the reversal ledger transaction to a Payment object like Return or Reversal.
-    ledger_transaction:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-        object:
-          type: string
-        live_mode:
-          type: boolean
-          description: This field will be true if this object exists in the live environment or false if it exists in the test environment.
-        created_at:
-          type: string
-          format: date-time
-        updated_at:
-          type: string
-          format: date-time
-        description:
-          type:
-          - string
-          - 'null'
-          description: An optional description for internal use.
-        status:
-          type: string
-          enum:
-          - archived
-          - pending
-          - posted
-          description: To post a ledger transaction at creation, use `posted`.
-        metadata:
-          type: object
-          description: Additional data represented as key-value pairs. Both the key and value must be strings.
-          additionalProperties:
-            type: string
-          example:
-            key: value
-            foo: bar
-            modern: treasury
-        effective_at:
-          type: string
-          format: date-time
-          description: The timestamp (ISO8601 format) at which the ledger transaction happened for reporting purposes.
-        effective_date:
-          type: string
-          format: date
-          description: The date (YYYY-MM-DD) on which the ledger transaction happened for reporting purposes.
-        ledger_entries:
-          type: array
-          items:
-            $ref: '#/components/schemas/ledger_entry'
-          description: An array of ledger entry objects.
-        posted_at:
-          type:
-          - string
-          - 'null'
-          format: date-time
-          description: The time on which the ledger transaction posted. This is null if the ledger transaction is pending.
-        ledger_id:
-          type: string
-          format: uuid
-          description: The ID of the ledger this ledger transaction belongs to.
-        ledgerable_type:
-          type:
-          - string
-          - 'null'
-          enum:
-          - expected_payment
-          - incoming_payment_detail
-          - payment_order
-          - return
-          - reversal
-          description: If the ledger transaction can be reconciled to another object in Modern Treasury, the type will be populated here, otherwise null. This can be one of payment_order, incoming_payment_detail, expected_payment, return, or reversal.
-        ledgerable_id:
-          type:
-          - string
-          - 'null'
-          format: uuid
-          description: If the ledger transaction can be reconciled to another object in Modern Treasury, the id will be populated here, otherwise null.
-        external_id:
-          type:
-          - string
-          - 'null'
-          description: A unique string to represent the ledger transaction. Only one pending or posted ledger transaction may have this ID in the ledger.
-        reverses_ledger_transaction_id:
-          type:
-          - string
-          - 'null'
-          description: The ID of the original ledger transaction that this ledger transaction reverses.
-        reversed_by_ledger_transaction_id:
-          type:
-          - string
-          - 'null'
-          description: The ID of the ledger transaction that reversed this ledger transaction.
-        partially_posts_ledger_transaction_id:
-          type:
-          - string
-          - 'null'
-          description: The ID of the ledger transaction that this ledger transaction partially posts.
-        archived_reason:
-          type:
-          - string
-          - 'null'
-          description: System-set reason why the ledger transaction was archived; currently only 'balance_lock_failure' for transactions that violated balance constraints. Only populated when archive_on_balance_lock_failure is true and a balance lock violation occurs, otherwise null.
+        pending_balance:
+          $ref: '#/components/schemas/ledger_balance'
+          description: The pending_balance is the sum of all pending and posted entries.
+        posted_balance:
+          $ref: '#/components/schemas/ledger_balance'
+          description: The posted_balance is the sum of all posted entries.
+        available_balance:
+          $ref: '#/components/schemas/ledger_balance'
+          description: The available_balance is the sum of all posted inbound entries and pending outbound entries. For credit normal, available_amount = posted_credits - pending_debits; for debit normal, available_amount = posted_debits - pending_credits.
       additionalProperties: false
-      minProperties: 20
+      minProperties: 3
       required:
-      - id
-      - object
-      - live_mode
-      - created_at
-      - updated_at
-      - description
-      - status
-      - metadata
-      - effective_at
-      - effective_date
-      - ledger_entries
-      - posted_at
-      - ledger_id
-      - ledgerable_type
-      - ledgerable_id
-      - external_id
-      - reverses_ledger_transaction_id
-      - reversed_by_ledger_transaction_id
-      - partially_posts_ledger_transaction_id
-      - archived_reason
-    ledger_entry_of_transaction_version:
+      - pending_balance
+      - posted_balance
+      - available_balance
+    ledger_entry_create_request:
       type: object
       properties:
-        id:
-          type: string
-          format: uuid
-        object:
-          type: string
-        live_mode:
-          type: boolean
-          description: This field will be true if this object exists in the live environment or false if it exists in the test environment.
-        created_at:
-          type: string
-          format: date-time
         amount:
           type: integer
           description: Value in specified currency's smallest unit. e.g. $10 would be represented as 1000. Can be any integer up to 36 digits.
@@ -815,31 +652,41 @@ components:
           - debit
           description: One of `credit`, `debit`. Describes the direction money is flowing in the transaction. A `credit` moves money from your account to someone else's. A `debit` pulls money from someone else's account to your own. Note that wire, rtp, and check payments will always be `credit`.
           _x-stainless-modelDefPath: $shared.transaction_direction
-        status:
-          type: string
-          enum:
-          - archived
-          - pending
-          - posted
-          description: Equal to the state of the ledger transaction when the ledger entry was created. One of `pending`, `posted`, or `archived`.
         ledger_account_id:
           type: string
           format: uuid
           description: The ledger account that this ledger entry is associated with.
-        ledger_account_lock_version:
+        lock_version:
           type:
           - integer
           - 'null'
           description: Lock version of the ledger account. This can be passed when creating a ledger transaction to only succeed if no ledger transactions have posted since the given version. See our post about Designing the Ledgers API with Optimistic Locking for more details.
-        ledger_account_currency:
-          type: string
-          description: The currency of the ledger account.
-        ledger_account_currency_exponent:
-          type: integer
-          description: The currency exponent of the ledger account.
-        ledger_transaction_id:
-          type: string
-          description: The ledger transaction that this ledger entry is associated with.
+        pending_balance_amount:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            type: integer
+          description: Use `gt` (>), `gte` (>=), `lt` (<), `lte` (<=), or `eq` (=) to lock on the account’s pending balance. If any of these conditions would be false after the transaction is created, the entire call will fail with error code 422.
+        posted_balance_amount:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            type: integer
+          description: Use `gt` (>), `gte` (>=), `lt` (<), `lte` (<=), or `eq` (=) to lock on the account’s posted balance. If any of these conditions would be false after the transaction is created, the entire call will fail with error code 422.
+        available_balance_amount:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            type: integer
+          description: Use `gt` (>), `gte` (>=), `lt` (<), `lte` (<=), or `eq` (=) to lock on the account’s available balance. If any of these conditions would be false after the transaction is created, the entire call will fail with error code 422.
+        show_resulting_ledger_account_balances:
+          type:
+          - boolean
+          - 'null'
+          description: If true, response will include the balance of the associated ledger account for the entry.
         metadata:
           type: object
           description: Additional data represented as key-value pairs. Both the key and value must be strings.
@@ -849,42 +696,26 @@ components:
             key: value
             foo: bar
             modern: treasury
-        resulting_ledger_account_balances:
-          $ref: '#/components/schemas/ledger_balances'
-          description: The pending, posted, and available balances for this ledger entry's ledger account. The posted balance is the sum of all posted entries on the account. The pending balance is the sum of all pending and posted entries on the account. The available balance is the posted incoming entries minus the sum of the pending and posted outgoing amounts. Please see https://docs.moderntreasury.com/docs/transaction-status-and-balances for more details.
-      additionalProperties: false
-      minProperties: 15
       required:
-      - id
-      - object
-      - live_mode
-      - created_at
       - amount
-      - effective_at
       - direction
-      - status
       - ledger_account_id
-      - ledger_account_lock_version
-      - ledger_account_currency
-      - ledger_account_currency_exponent
-      - ledger_transaction_id
-      - metadata
-      - resulting_ledger_account_balances
-    ledger_transaction_update_request:
+    ledger_entry_partial_post_create_request:
       type: object
       properties:
-        description:
-          type:
-          - string
-          - 'null'
-          description: An optional description for internal use.
-        status:
+        amount:
+          type: integer
+          description: Value in specified currency's smallest unit. e.g. $10 would be represented as 1000. Can be any integer up to 36 digits.
+        direction:
           type: string
           enum:
-          - archived
-          - pending
-          - posted
-          description: To post a ledger transaction at creation, use `posted`.
+          - credit
+          - debit
+          description: One of `credit`, `debit`. Describes the direction money is flowing in the transaction. A `credit` moves money from your account to someone else's. A `debit` pulls money from someone else's account to your own. Note that wire, rtp, and check payments will always be `credit`.
+        ledger_account_id:
+          type: string
+          format: uuid
+          description: The ledger account that this ledger entry is associated with.
         metadata:
           type: object
           description: Additional data represented as key-value pairs. Both the key and value must be strings.
@@ -894,33 +725,10 @@ components:
             key: value
             foo: bar
             modern: treasury
-        effective_at:
-          type: string
-          format: date-time
-          description: The timestamp (ISO8601 format) at which the ledger transaction happened for reporting purposes.
-        ledger_entries:
-          type: array
-          items:
-            $ref: '#/components/schemas/ledger_entry_create_request'
-          description: An array of ledger entry objects.
-        ledgerable_type:
-          type: string
-          enum:
-          - expected_payment
-          - incoming_payment_detail
-          - payment_order
-          - return
-          - reversal
-          description: If the ledger transaction can be reconciled to another object in Modern Treasury, the type will be populated here, otherwise null. This can be one of payment_order, incoming_payment_detail, expected_payment, return, or reversal.
-        ledgerable_id:
-          type: string
-          format: uuid
-          description: If the ledger transaction can be reconciled to another object in Modern Treasury, the id will be populated here, otherwise null.
-        external_id:
-          type:
-          - string
-          - 'null'
-          description: A unique string to represent the ledger transaction. Only one pending or posted ledger transaction may have this ID in the ledger.
+      required:
+      - amount
+      - direction
+      - ledger_account_id
     ledger_transaction_version:
       type: object
       properties:
@@ -1052,84 +860,6 @@ components:
       - reversed_by_ledger_transaction_id
       - partially_posts_ledger_transaction_id
       - archived_reason
-    error_message:
-      type: object
-      properties:
-        errors:
-          type: object
-          properties:
-            code:
-              type: string
-              enum:
-              - parameter_invalid
-              - parameter_missing
-              - resource_not_found
-              - not_found
-              - forbidden
-              - invalid_ip
-              - invalid_key
-              - header_invalid
-              - expired_key
-              - conflict
-              - too_many_requests
-            message:
-              type: string
-            parameter:
-              type: string
-      required:
-      - errors
-    ledger_balance:
-      type: object
-      properties:
-        credits:
-          type: integer
-        debits:
-          type: integer
-        amount:
-          type: integer
-        currency:
-          type: string
-          description: The currency of the ledger account.
-        currency_exponent:
-          type: integer
-          description: The currency exponent of the ledger account.
-      additionalProperties: false
-      minProperties: 5
-      required:
-      - credits
-      - debits
-      - amount
-      - currency
-      - currency_exponent
-    ledger_entry_partial_post_create_request:
-      type: object
-      properties:
-        amount:
-          type: integer
-          description: Value in specified currency's smallest unit. e.g. $10 would be represented as 1000. Can be any integer up to 36 digits.
-        direction:
-          type: string
-          enum:
-          - credit
-          - debit
-          description: One of `credit`, `debit`. Describes the direction money is flowing in the transaction. A `credit` moves money from your account to someone else's. A `debit` pulls money from someone else's account to your own. Note that wire, rtp, and check payments will always be `credit`.
-        ledger_account_id:
-          type: string
-          format: uuid
-          description: The ledger account that this ledger entry is associated with.
-        metadata:
-          type: object
-          description: Additional data represented as key-value pairs. Both the key and value must be strings.
-          additionalProperties:
-            type: string
-          example:
-            key: value
-            foo: bar
-            modern: treasury
-      required:
-      - amount
-      - direction
-      - ledger_account_id
     ledger_transaction_partial_post_create_request:
       type: object
       properties:
@@ -1156,144 +886,6 @@ components:
             modern: treasury
       required:
       - posted_ledger_entries
-    ledger_entry_create_request:
-      type: object
-      properties:
-        amount:
-          type: integer
-          description: Value in specified currency's smallest unit. e.g. $10 would be represented as 1000. Can be any integer up to 36 digits.
-        effective_at:
-          type: string
-          format: date-time
-          description: The timestamp (ISO8601 format) at which the ledger transaction happened for reporting purposes.
-        direction:
-          type: string
-          enum:
-          - credit
-          - debit
-          description: One of `credit`, `debit`. Describes the direction money is flowing in the transaction. A `credit` moves money from your account to someone else's. A `debit` pulls money from someone else's account to your own. Note that wire, rtp, and check payments will always be `credit`.
-          _x-stainless-modelDefPath: $shared.transaction_direction
-        ledger_account_id:
-          type: string
-          format: uuid
-          description: The ledger account that this ledger entry is associated with.
-        lock_version:
-          type:
-          - integer
-          - 'null'
-          description: Lock version of the ledger account. This can be passed when creating a ledger transaction to only succeed if no ledger transactions have posted since the given version. See our post about Designing the Ledgers API with Optimistic Locking for more details.
-        pending_balance_amount:
-          type:
-          - object
-          - 'null'
-          additionalProperties:
-            type: integer
-          description: Use `gt` (>), `gte` (>=), `lt` (<), `lte` (<=), or `eq` (=) to lock on the account’s pending balance. If any of these conditions would be false after the transaction is created, the entire call will fail with error code 422.
-        posted_balance_amount:
-          type:
-          - object
-          - 'null'
-          additionalProperties:
-            type: integer
-          description: Use `gt` (>), `gte` (>=), `lt` (<), `lte` (<=), or `eq` (=) to lock on the account’s posted balance. If any of these conditions would be false after the transaction is created, the entire call will fail with error code 422.
-        available_balance_amount:
-          type:
-          - object
-          - 'null'
-          additionalProperties:
-            type: integer
-          description: Use `gt` (>), `gte` (>=), `lt` (<), `lte` (<=), or `eq` (=) to lock on the account’s available balance. If any of these conditions would be false after the transaction is created, the entire call will fail with error code 422.
-        show_resulting_ledger_account_balances:
-          type:
-          - boolean
-          - 'null'
-          description: If true, response will include the balance of the associated ledger account for the entry.
-        metadata:
-          type: object
-          description: Additional data represented as key-value pairs. Both the key and value must be strings.
-          additionalProperties:
-            type: string
-          example:
-            key: value
-            foo: bar
-            modern: treasury
-      required:
-      - amount
-      - direction
-      - ledger_account_id
-    ledger_balances:
-      type: object
-      properties:
-        pending_balance:
-          $ref: '#/components/schemas/ledger_balance'
-          description: The pending_balance is the sum of all pending and posted entries.
-        posted_balance:
-          $ref: '#/components/schemas/ledger_balance'
-          description: The posted_balance is the sum of all posted entries.
-        available_balance:
-          $ref: '#/components/schemas/ledger_balance'
-          description: The available_balance is the sum of all posted inbound entries and pending outbound entries. For credit normal, available_amount = posted_credits - pending_debits; for debit normal, available_amount = posted_debits - pending_credits.
-      additionalProperties: false
-      minProperties: 3
-      required:
-      - pending_balance
-      - posted_balance
-      - available_balance
-    ledger_transaction_create_request:
-      type: object
-      properties:
-        description:
-          type:
-          - string
-          - 'null'
-          description: An optional description for internal use.
-        status:
-          type: string
-          enum:
-          - archived
-          - pending
-          - posted
-          description: To post a ledger transaction at creation, use `posted`.
-        metadata:
-          type: object
-          description: Additional data represented as key-value pairs. Both the key and value must be strings.
-          additionalProperties:
-            type: string
-          example:
-            key: value
-            foo: bar
-            modern: treasury
-        effective_at:
-          type: string
-          format: date-time
-          description: The timestamp (ISO8601 format) at which the ledger transaction happened for reporting purposes.
-        effective_date:
-          type: string
-          format: date
-          description: The date (YYYY-MM-DD) on which the ledger transaction happened for reporting purposes.
-        ledger_entries:
-          type: array
-          items:
-            $ref: '#/components/schemas/ledger_entry_create_request'
-          description: An array of ledger entry objects.
-        external_id:
-          type: string
-          description: A unique string to represent the ledger transaction. Only one pending or posted ledger transaction may have this ID in the ledger.
-        ledgerable_type:
-          type: string
-          enum:
-          - expected_payment
-          - incoming_payment_detail
-          - payment_order
-          - return
-          - reversal
-          description: If the ledger transaction can be reconciled to another object in Modern Treasury, the type will be populated here, otherwise null. This can be one of payment_order, incoming_payment_detail, expected_payment, return, or reversal.
-        ledgerable_id:
-          type: string
-          format: uuid
-          description: If the ledger transaction can be reconciled to another object in Modern Treasury, the id will be populated here, otherwise null.
-      required:
-      - ledger_entries
     ledger_entry:
       type: object
       properties:
@@ -1387,18 +979,415 @@ components:
       - ledger_transaction_id
       - resulting_ledger_account_balances
       - metadata
-  parameters:
-    metadata_query:
-      name: metadata
-      in: query
-      schema:
-        type: object
-        additionalProperties:
+    ledger_entry_of_transaction_version:
+      type: object
+      properties:
+        id:
           type: string
-      style: deepObject
-      explode: true
-      required: false
-      description: For example, if you want to query for records with metadata key `Type` and value `Loan`, the query would be `metadata%5BType%5D=Loan`. This encodes the query parameters.
+          format: uuid
+        object:
+          type: string
+        live_mode:
+          type: boolean
+          description: This field will be true if this object exists in the live environment or false if it exists in the test environment.
+        created_at:
+          type: string
+          format: date-time
+        amount:
+          type: integer
+          description: Value in specified currency's smallest unit. e.g. $10 would be represented as 1000. Can be any integer up to 36 digits.
+        effective_at:
+          type: string
+          format: date-time
+          description: The timestamp (ISO8601 format) at which the ledger transaction happened for reporting purposes.
+        direction:
+          type: string
+          enum:
+          - credit
+          - debit
+          description: One of `credit`, `debit`. Describes the direction money is flowing in the transaction. A `credit` moves money from your account to someone else's. A `debit` pulls money from someone else's account to your own. Note that wire, rtp, and check payments will always be `credit`.
+          _x-stainless-modelDefPath: $shared.transaction_direction
+        status:
+          type: string
+          enum:
+          - archived
+          - pending
+          - posted
+          description: Equal to the state of the ledger transaction when the ledger entry was created. One of `pending`, `posted`, or `archived`.
+        ledger_account_id:
+          type: string
+          format: uuid
+          description: The ledger account that this ledger entry is associated with.
+        ledger_account_lock_version:
+          type:
+          - integer
+          - 'null'
+          description: Lock version of the ledger account. This can be passed when creating a ledger transaction to only succeed if no ledger transactions have posted since the given version. See our post about Designing the Ledgers API with Optimistic Locking for more details.
+        ledger_account_currency:
+          type: string
+          description: The currency of the ledger account.
+        ledger_account_currency_exponent:
+          type: integer
+          description: The currency exponent of the ledger account.
+        ledger_transaction_id:
+          type: string
+          description: The ledger transaction that this ledger entry is associated with.
+        metadata:
+          type: object
+          description: Additional data represented as key-value pairs. Both the key and value must be strings.
+          additionalProperties:
+            type: string
+          example:
+            key: value
+            foo: bar
+            modern: treasury
+        resulting_ledger_account_balances:
+          $ref: '#/components/schemas/ledger_balances'
+          description: The pending, posted, and available balances for this ledger entry's ledger account. The posted balance is the sum of all posted entries on the account. The pending balance is the sum of all pending and posted entries on the account. The available balance is the posted incoming entries minus the sum of the pending and posted outgoing amounts. Please see https://docs.moderntreasury.com/docs/transaction-status-and-balances for more details.
+      additionalProperties: false
+      minProperties: 15
+      required:
+      - id
+      - object
+      - live_mode
+      - created_at
+      - amount
+      - effective_at
+      - direction
+      - status
+      - ledger_account_id
+      - ledger_account_lock_version
+      - ledger_account_currency
+      - ledger_account_currency_exponent
+      - ledger_transaction_id
+      - metadata
+      - resulting_ledger_account_balances
+    ledger_transaction:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        object:
+          type: string
+        live_mode:
+          type: boolean
+          description: This field will be true if this object exists in the live environment or false if it exists in the test environment.
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        description:
+          type:
+          - string
+          - 'null'
+          description: An optional description for internal use.
+        status:
+          type: string
+          enum:
+          - archived
+          - pending
+          - posted
+          description: To post a ledger transaction at creation, use `posted`.
+        metadata:
+          type: object
+          description: Additional data represented as key-value pairs. Both the key and value must be strings.
+          additionalProperties:
+            type: string
+          example:
+            key: value
+            foo: bar
+            modern: treasury
+        effective_at:
+          type: string
+          format: date-time
+          description: The timestamp (ISO8601 format) at which the ledger transaction happened for reporting purposes.
+        effective_date:
+          type: string
+          format: date
+          description: The date (YYYY-MM-DD) on which the ledger transaction happened for reporting purposes.
+        ledger_entries:
+          type: array
+          items:
+            $ref: '#/components/schemas/ledger_entry'
+          description: An array of ledger entry objects.
+        posted_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          description: The time on which the ledger transaction posted. This is null if the ledger transaction is pending.
+        ledger_id:
+          type: string
+          format: uuid
+          description: The ID of the ledger this ledger transaction belongs to.
+        ledgerable_type:
+          type:
+          - string
+          - 'null'
+          enum:
+          - expected_payment
+          - incoming_payment_detail
+          - payment_order
+          - return
+          - reversal
+          description: If the ledger transaction can be reconciled to another object in Modern Treasury, the type will be populated here, otherwise null. This can be one of payment_order, incoming_payment_detail, expected_payment, return, or reversal.
+        ledgerable_id:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          description: If the ledger transaction can be reconciled to another object in Modern Treasury, the id will be populated here, otherwise null.
+        external_id:
+          type:
+          - string
+          - 'null'
+          description: A unique string to represent the ledger transaction. Only one pending or posted ledger transaction may have this ID in the ledger.
+        reverses_ledger_transaction_id:
+          type:
+          - string
+          - 'null'
+          description: The ID of the original ledger transaction that this ledger transaction reverses.
+        reversed_by_ledger_transaction_id:
+          type:
+          - string
+          - 'null'
+          description: The ID of the ledger transaction that reversed this ledger transaction.
+        partially_posts_ledger_transaction_id:
+          type:
+          - string
+          - 'null'
+          description: The ID of the ledger transaction that this ledger transaction partially posts.
+        archived_reason:
+          type:
+          - string
+          - 'null'
+          description: System-set reason why the ledger transaction was archived; currently only 'balance_lock_failure' for transactions that violated balance constraints. Only populated when archive_on_balance_lock_failure is true and a balance lock violation occurs, otherwise null.
+      additionalProperties: false
+      minProperties: 20
+      required:
+      - id
+      - object
+      - live_mode
+      - created_at
+      - updated_at
+      - description
+      - status
+      - metadata
+      - effective_at
+      - effective_date
+      - ledger_entries
+      - posted_at
+      - ledger_id
+      - ledgerable_type
+      - ledgerable_id
+      - external_id
+      - reverses_ledger_transaction_id
+      - reversed_by_ledger_transaction_id
+      - partially_posts_ledger_transaction_id
+      - archived_reason
+    ledger_transaction_reversal_create_request:
+      type: object
+      properties:
+        description:
+          type: string
+          description: An optional free-form description for the reversal ledger transaction. Maximum of 1000 characters allowed.
+        status:
+          type: string
+          enum:
+          - archived
+          - pending
+          - posted
+          description: Status of the reversal ledger transaction. It defaults to `posted` if not provided.
+        metadata:
+          type: object
+          description: Additional data to be added to the reversal ledger transaction as key-value pairs. Both the key and value must be strings.
+          additionalProperties:
+            type: string
+          example:
+            key: value
+            foo: bar
+            modern: treasury
+        effective_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          description: The timestamp (ISO8601 format) at which the reversal ledger transaction happened for reporting purposes. It defaults to the `effective_at` of the original ledger transaction if not provided.
+        external_id:
+          type: string
+          description: Must be unique within the ledger.
+        ledgerable_type:
+          type: string
+          enum:
+          - expected_payment
+          - incoming_payment_detail
+          - payment_order
+          - return
+          - reversal
+          description: Specify this if you'd like to link the reversal ledger transaction to a Payment object like Return or Reversal.
+        ledgerable_id:
+          type: string
+          format: uuid
+          description: Specify this if you'd like to link the reversal ledger transaction to a Payment object like Return or Reversal.
+    ledger_balance:
+      type: object
+      properties:
+        credits:
+          type: integer
+        debits:
+          type: integer
+        amount:
+          type: integer
+        currency:
+          type: string
+          description: The currency of the ledger account.
+        currency_exponent:
+          type: integer
+          description: The currency exponent of the ledger account.
+      additionalProperties: false
+      minProperties: 5
+      required:
+      - credits
+      - debits
+      - amount
+      - currency
+      - currency_exponent
+    error_message:
+      type: object
+      properties:
+        errors:
+          type: object
+          properties:
+            code:
+              type: string
+              enum:
+              - parameter_invalid
+              - parameter_missing
+              - resource_not_found
+              - not_found
+              - forbidden
+              - invalid_ip
+              - invalid_key
+              - header_invalid
+              - expired_key
+              - conflict
+              - too_many_requests
+            message:
+              type: string
+            parameter:
+              type: string
+      required:
+      - errors
+    ledger_transaction_create_request:
+      type: object
+      properties:
+        description:
+          type:
+          - string
+          - 'null'
+          description: An optional description for internal use.
+        status:
+          type: string
+          enum:
+          - archived
+          - pending
+          - posted
+          description: To post a ledger transaction at creation, use `posted`.
+        metadata:
+          type: object
+          description: Additional data represented as key-value pairs. Both the key and value must be strings.
+          additionalProperties:
+            type: string
+          example:
+            key: value
+            foo: bar
+            modern: treasury
+        effective_at:
+          type: string
+          format: date-time
+          description: The timestamp (ISO8601 format) at which the ledger transaction happened for reporting purposes.
+        effective_date:
+          type: string
+          format: date
+          description: The date (YYYY-MM-DD) on which the ledger transaction happened for reporting purposes.
+        ledger_entries:
+          type: array
+          items:
+            $ref: '#/components/schemas/ledger_entry_create_request'
+          description: An array of ledger entry objects.
+        external_id:
+          type: string
+          description: A unique string to represent the ledger transaction. Only one pending or posted ledger transaction may have this ID in the ledger.
+        ledgerable_type:
+          type: string
+          enum:
+          - expected_payment
+          - incoming_payment_detail
+          - payment_order
+          - return
+          - reversal
+          description: If the ledger transaction can be reconciled to another object in Modern Treasury, the type will be populated here, otherwise null. This can be one of payment_order, incoming_payment_detail, expected_payment, return, or reversal.
+        ledgerable_id:
+          type: string
+          format: uuid
+          description: If the ledger transaction can be reconciled to another object in Modern Treasury, the id will be populated here, otherwise null.
+      required:
+      - ledger_entries
+    ledger_transaction_update_request:
+      type: object
+      properties:
+        description:
+          type:
+          - string
+          - 'null'
+          description: An optional description for internal use.
+        status:
+          type: string
+          enum:
+          - archived
+          - pending
+          - posted
+          description: To post a ledger transaction at creation, use `posted`.
+        metadata:
+          type: object
+          description: Additional data represented as key-value pairs. Both the key and value must be strings.
+          additionalProperties:
+            type: string
+          example:
+            key: value
+            foo: bar
+            modern: treasury
+        effective_at:
+          type: string
+          format: date-time
+          description: The timestamp (ISO8601 format) at which the ledger transaction happened for reporting purposes.
+        ledger_entries:
+          type: array
+          items:
+            $ref: '#/components/schemas/ledger_entry_create_request'
+          description: An array of ledger entry objects.
+        ledgerable_type:
+          type: string
+          enum:
+          - expected_payment
+          - incoming_payment_detail
+          - payment_order
+          - return
+          - reversal
+          description: If the ledger transaction can be reconciled to another object in Modern Treasury, the type will be populated here, otherwise null. This can be one of payment_order, incoming_payment_detail, expected_payment, return, or reversal.
+        ledgerable_id:
+          type: string
+          format: uuid
+          description: If the ledger transaction can be reconciled to another object in Modern Treasury, the id will be populated here, otherwise null.
+        external_id:
+          type:
+          - string
+          - 'null'
+          description: A unique string to represent the ledger transaction. Only one pending or posted ledger transaction may have this ID in the ledger.
+  parameters:
     bulk_id:
       name: id[]
       in: query
@@ -1411,6 +1400,17 @@ components:
           type: string
       required: false
       description: If you have specific IDs to retrieve in bulk, you can pass them as query parameters delimited with `id[]=`, for example `?id[]=123&id[]=abc`.
+    metadata_query:
+      name: metadata
+      in: query
+      schema:
+        type: object
+        additionalProperties:
+          type: string
+      style: deepObject
+      explode: true
+      required: false
+      description: For example, if you want to query for records with metadata key `Type` and value `Loan`, the query would be `metadata%5BType%5D=Loan`. This encodes the query parameters.
   securitySchemes:
     basic_auth:
       type: http
