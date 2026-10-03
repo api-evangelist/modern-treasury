@@ -187,6 +187,39 @@ paths:
               $ref: '#/components/schemas/payment_flow_update_request'
 components:
   schemas:
+    payment_flow_create_request:
+      type: object
+      properties:
+        amount:
+          type: integer
+          description: Required. Value in specified currency's smallest unit. e.g. $10 would be represented as 1000. Can be any integer up to 36 digits.
+        currency:
+          type: string
+          description: Required. The currency of the payment.
+        direction:
+          type: string
+          enum:
+          - credit
+          - debit
+          description: Required. Describes the direction money is flowing in the transaction. Can only be `debit`. A `debit` pulls money from someone else's account to your own.
+        counterparty_id:
+          type: string
+          format: uuid
+          description: Required. The ID of a counterparty associated with the payment. As part of the payment workflow an external account will be associated with this model.
+        originating_account_id:
+          type: string
+          format: uuid
+          description: Required. The ID of one of your organization's internal accounts.
+        due_date:
+          type: string
+          format: date
+          description: Optional. Can only be passed in when `effective_date_selection_enabled` is `true`. When set, the due date is shown to your end-user in the pre-built UI as they are selecting a payment `effective_date`.
+      required:
+      - amount
+      - currency
+      - direction
+      - counterparty_id
+      - originating_account_id
     payment_flow:
       type: object
       properties:
@@ -282,49 +315,6 @@ components:
       additionalProperties: false
       minProperties: 17
       maxProperties: 19
-    payment_flow_update_request:
-      type: object
-      properties:
-        status:
-          type: string
-          enum:
-          - cancelled
-          description: Required. The updated status of the payment flow. Can only be used to mark a flow as `cancelled`.
-      required:
-      - status
-    payment_flow_create_request:
-      type: object
-      properties:
-        amount:
-          type: integer
-          description: Required. Value in specified currency's smallest unit. e.g. $10 would be represented as 1000. Can be any integer up to 36 digits.
-        currency:
-          type: string
-          description: Required. The currency of the payment.
-        direction:
-          type: string
-          enum:
-          - credit
-          - debit
-          description: Required. Describes the direction money is flowing in the transaction. Can only be `debit`. A `debit` pulls money from someone else's account to your own.
-        counterparty_id:
-          type: string
-          format: uuid
-          description: Required. The ID of a counterparty associated with the payment. As part of the payment workflow an external account will be associated with this model.
-        originating_account_id:
-          type: string
-          format: uuid
-          description: Required. The ID of one of your organization's internal accounts.
-        due_date:
-          type: string
-          format: date
-          description: Optional. Can only be passed in when `effective_date_selection_enabled` is `true`. When set, the due date is shown to your end-user in the pre-built UI as they are selecting a payment `effective_date`.
-      required:
-      - amount
-      - currency
-      - direction
-      - counterparty_id
-      - originating_account_id
     error_message:
       type: object
       properties:
@@ -351,6 +341,16 @@ components:
               type: string
       required:
       - errors
+    payment_flow_update_request:
+      type: object
+      properties:
+        status:
+          type: string
+          enum:
+          - cancelled
+          description: Required. The updated status of the payment flow. Can only be used to mark a flow as `cancelled`.
+      required:
+      - status
   securitySchemes:
     basic_auth:
       type: http

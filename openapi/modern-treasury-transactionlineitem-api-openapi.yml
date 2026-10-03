@@ -214,24 +214,6 @@ paths:
                 $ref: '#/components/schemas/error_message'
 components:
   schemas:
-    transaction_line_item_create_request:
-      type: object
-      properties:
-        amount:
-          type: integer
-          description: If a matching object exists in Modern Treasury, `amount` will be populated. Value in specified currency's smallest unit (taken from parent Transaction).
-        expected_payment_id:
-          type: string
-          format: uuid
-          description: The ID of the reconciled Expected Payment, otherwise `null`.
-        transaction_id:
-          type: string
-          format: uuid
-          description: The ID of the parent transaction.
-      required:
-      - amount
-      - transaction_id
-      - expected_payment_id
     transaction_line_item:
       type: object
       properties:
@@ -322,6 +304,24 @@ components:
       - transaction_id
       - reconciliation_group_id
       - reconcilable
+    transaction_line_item_create_request:
+      type: object
+      properties:
+        amount:
+          type: integer
+          description: If a matching object exists in Modern Treasury, `amount` will be populated. Value in specified currency's smallest unit (taken from parent Transaction).
+        expected_payment_id:
+          type: string
+          format: uuid
+          description: The ID of the reconciled Expected Payment, otherwise `null`.
+        transaction_id:
+          type: string
+          format: uuid
+          description: The ID of the parent transaction.
+      required:
+      - amount
+      - transaction_id
+      - expected_payment_id
     error_message:
       type: object
       properties:

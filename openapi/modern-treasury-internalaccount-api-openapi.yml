@@ -278,350 +278,6 @@ paths:
                 $ref: '#/components/schemas/error_message'
 components:
   schemas:
-    internal_account_update_request:
-      type: object
-      properties:
-        name:
-          type: string
-          description: The nickname for the internal account.
-        metadata:
-          type: object
-          additionalProperties:
-            type: string
-          description: Additional data in the form of key-value pairs. Pairs can be removed by passing an empty string or `null` as the value.
-        parent_account_id:
-          type: string
-          description: The parent internal account for this account.
-        counterparty_id:
-          type: string
-          description: The Counterparty associated to this account.
-        ledger_account_id:
-          type: string
-          description: The Ledger Account associated to this account.
-        contra_ledger_account_id:
-          type: string
-          description: The Contra Ledger Account associated to this account.
-        external_id:
-          type:
-          - string
-          - 'null'
-          description: An optional user-defined 180 character unique identifier.
-    internal_account_create_request:
-      type: object
-      properties:
-        connection_id:
-          type: string
-          description: The identifier of the financial institution the account belongs to.
-        name:
-          type: string
-          description: The nickname of the account.
-        party_name:
-          type: string
-          description: The legal name of the entity which owns the account.
-        party_address:
-          type: object
-          description: The address associated with the owner or null.
-          properties:
-            line1:
-              type: string
-            line2:
-              type: string
-            locality:
-              type: string
-              description: Locality or City.
-            region:
-              type: string
-              description: Region or State.
-            postal_code:
-              type: string
-              description: The postal code of the address.
-            country:
-              type: string
-              description: Country code conforms to [ISO 3166-1 alpha-2]
-          required:
-          - line1
-          - locality
-          - region
-          - postal_code
-          - country
-        currency:
-          type: string
-          enum:
-          - USD
-          - CAD
-          - USDC
-          - USDG
-          - PYUSD
-          example: USD
-          description: The currency of the internal account. Supports "USD" and "CAD" for fiat, and "USDC", "USDG", and "PYUSD" for stablecoin accounts.
-        account_type:
-          type: string
-          enum:
-          - base_wallet
-          - cash
-          - checking
-          - crypto_wallet
-          - ethereum_wallet
-          - general_ledger
-          - loan
-          - non_resident
-          - other
-          - overdraft
-          - polygon_wallet
-          - savings
-          - solana_wallet
-          example: checking
-          description: The account type, used to provision the appropriate account at the financial institution.
-        account_capabilities:
-          type: array
-          description: An array of AccountCapability objects that list the originating abilities of the internal account and any relevant information for them.
-          items:
-            $ref: '#/components/schemas/account_capability'
-        vendor_attributes:
-          type: object
-          additionalProperties:
-            type: string
-          example:
-            key: value
-            foo: bar
-            modern: treasury
-          description: A hash of vendor specific attributes that will be used when creating the account at the vendor specified by the given connection.
-        parent_account_id:
-          type: string
-          description: The parent internal account of this new account.
-        counterparty_id:
-          type: string
-          description: The Counterparty associated to this account.
-        legal_entity_id:
-          type: string
-          description: The LegalEntity associated to this account.
-        metadata:
-          type: object
-          additionalProperties:
-            type: string
-          description: Additional data represented as key-value pairs. Both the key and value must be strings.
-        external_id:
-          type:
-          - string
-          - 'null'
-          description: An optional user-defined 180 character unique identifier.
-      required:
-      - connection_id
-      - name
-      - party_name
-      - currency
-    connection:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-        object:
-          type: string
-        live_mode:
-          type: boolean
-          description: This field will be true if this object exists in the live environment or false if it exists in the test environment.
-        created_at:
-          type: string
-          format: date-time
-        updated_at:
-          type: string
-          format: date-time
-        discarded_at:
-          type:
-          - string
-          - 'null'
-          format: date-time
-        vendor_id:
-          type: string
-          format: uuid
-          description: Unique identifier for the bank or vendor.
-        vendor_customer_id:
-          type:
-          - string
-          - 'null'
-          format: uuid
-          description: An identifier given to this connection by the bank.
-        vendor_name:
-          type: string
-          description: A human-friendly name for the bank or vendor.
-      additionalProperties: false
-      minProperties: 9
-      required:
-      - id
-      - object
-      - live_mode
-      - created_at
-      - updated_at
-      - discarded_at
-      - vendor_id
-      - vendor_customer_id
-      - vendor_name
-    internal_account:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-        object:
-          type: string
-        live_mode:
-          type: boolean
-          description: This field will be true if this object exists in the live environment or false if it exists in the test environment.
-        created_at:
-          type: string
-          format: date-time
-        updated_at:
-          type: string
-          format: date-time
-        account_type:
-          type:
-          - string
-          - 'null'
-          enum:
-          - base_wallet
-          - cash
-          - checking
-          - crypto_wallet
-          - ethereum_wallet
-          - general_ledger
-          - loan
-          - non_resident
-          - other
-          - overdraft
-          - polygon_wallet
-          - savings
-          - solana_wallet
-          description: Can be checking, savings or other.
-        party_name:
-          type: string
-          description: The legal name of the entity which owns the account.
-        party_type:
-          type:
-          - string
-          - 'null'
-          enum:
-          - business
-          - individual
-          description: Either individual or business.
-        party_address:
-          $ref: '#/components/schemas/address'
-          description: The address associated with the owner or null.
-        name:
-          type:
-          - string
-          - 'null'
-          description: A nickname for the account.
-        account_details:
-          type: array
-          items:
-            $ref: '#/components/schemas/account_detail'
-          description: An array of account detail objects.
-        account_capabilities:
-          type: array
-          description: An array of AccountCapability objects that list the originating abilities of the internal account and any relevant information for them.
-          items:
-            $ref: '#/components/schemas/account_capability'
-        routing_details:
-          type: array
-          items:
-            $ref: '#/components/schemas/routing_detail'
-          description: An array of routing detail objects.
-        connection:
-          $ref: '#/components/schemas/connection'
-          description: Specifies which financial institution the accounts belong to.
-        currency:
-          $ref: '#/components/schemas/currency'
-          description: The currency of the account.
-        metadata:
-          type: object
-          additionalProperties:
-            type: string
-          example:
-            key: value
-            foo: bar
-            modern: treasury
-          description: Additional data represented as key-value pairs. Both the key and value must be strings.
-        parent_account_id:
-          type:
-          - string
-          - 'null'
-          format: uuid
-          description: The parent InternalAccount of this account.
-        counterparty_id:
-          type:
-          - string
-          - 'null'
-          format: uuid
-          description: The Counterparty associated to this account.
-        vendor_id:
-          type:
-          - string
-          - 'null'
-          format: string
-          description: The vendor ID associated with this account.
-        legal_entity_id:
-          type:
-          - string
-          - 'null'
-          format: uuid
-          description: The Legal Entity associated to this account.
-        status:
-          type:
-          - string
-          - 'null'
-          format: string
-          enum:
-          - active
-          - closed
-          - pending_activation
-          - pending_closure
-          - suspended
-          description: The internal account status.
-        ledger_account_id:
-          type:
-          - string
-          - 'null'
-          format: uuid
-          description: If the internal account links to a ledger account in Modern Treasury, the id of the ledger account will be populated here.
-        contra_ledger_account_id:
-          type:
-          - string
-          - 'null'
-          format: uuid
-          description: If the internal account links to a contra ledger account in Modern Treasury, the id of the contra ledger account will be populated here.
-        external_id:
-          type:
-          - string
-          - 'null'
-          description: An optional user-defined 180 character unique identifier.
-      additionalProperties: false
-      minProperties: 24
-      required:
-      - id
-      - object
-      - live_mode
-      - created_at
-      - updated_at
-      - account_type
-      - party_name
-      - party_type
-      - party_address
-      - name
-      - account_details
-      - account_capabilities
-      - routing_details
-      - connection
-      - currency
-      - metadata
-      - parent_account_id
-      - counterparty_id
-      - vendor_id
-      - legal_entity_id
-      - status
-      - ledger_account_id
-      - contra_ledger_account_id
-      - external_id
     currency:
       type: string
       enum:
@@ -828,7 +484,111 @@ components:
       - ZWN
       - ZWR
       description: Three-letter ISO currency code.
-    account_detail:
+    internal_account_create_request:
+      type: object
+      properties:
+        connection_id:
+          type: string
+          description: The identifier of the financial institution the account belongs to.
+        name:
+          type: string
+          description: The nickname of the account.
+        party_name:
+          type: string
+          description: The legal name of the entity which owns the account.
+        party_address:
+          type: object
+          description: The address associated with the owner or null.
+          properties:
+            line1:
+              type: string
+            line2:
+              type: string
+            locality:
+              type: string
+              description: Locality or City.
+            region:
+              type: string
+              description: Region or State.
+            postal_code:
+              type: string
+              description: The postal code of the address.
+            country:
+              type: string
+              description: Country code conforms to [ISO 3166-1 alpha-2]
+          required:
+          - line1
+          - locality
+          - region
+          - postal_code
+          - country
+        currency:
+          type: string
+          enum:
+          - USD
+          - CAD
+          - USDC
+          - USDG
+          - PYUSD
+          example: USD
+          description: The currency of the internal account. Supports "USD" and "CAD" for fiat, and "USDC", "USDG", and "PYUSD" for stablecoin accounts.
+        account_type:
+          type: string
+          enum:
+          - base_wallet
+          - cash
+          - checking
+          - crypto_wallet
+          - ethereum_wallet
+          - general_ledger
+          - loan
+          - non_resident
+          - other
+          - overdraft
+          - polygon_wallet
+          - savings
+          - solana_wallet
+          example: checking
+          description: The account type, used to provision the appropriate account at the financial institution.
+        account_capabilities:
+          type: array
+          description: An array of AccountCapability objects that list the originating abilities of the internal account and any relevant information for them.
+          items:
+            $ref: '#/components/schemas/account_capability'
+        vendor_attributes:
+          type: object
+          additionalProperties:
+            type: string
+          example:
+            key: value
+            foo: bar
+            modern: treasury
+          description: A hash of vendor specific attributes that will be used when creating the account at the vendor specified by the given connection.
+        parent_account_id:
+          type: string
+          description: The parent internal account of this new account.
+        counterparty_id:
+          type: string
+          description: The Counterparty associated to this account.
+        legal_entity_id:
+          type: string
+          description: The LegalEntity associated to this account.
+        metadata:
+          type: object
+          additionalProperties:
+            type: string
+          description: Additional data represented as key-value pairs. Both the key and value must be strings.
+        external_id:
+          type:
+          - string
+          - 'null'
+          description: An optional user-defined 180 character unique identifier.
+      required:
+      - connection_id
+      - name
+      - party_name
+      - currency
+    internal_account:
       type: object
       properties:
         id:
@@ -845,48 +605,154 @@ components:
         updated_at:
           type: string
           format: date-time
-        discarded_at:
+        account_type:
           type:
           - string
           - 'null'
-          format: date-time
-        account_number:
-          type: string
-          description: The account number for the bank account.
-        account_number_type:
-          type: string
           enum:
-          - au_number
-          - base_address
-          - card_token
-          - clabe
-          - ethereum_address
-          - hk_number
-          - iban
-          - id_number
-          - nz_number
+          - base_wallet
+          - cash
+          - checking
+          - crypto_wallet
+          - ethereum_wallet
+          - general_ledger
+          - loan
+          - non_resident
           - other
-          - pan
-          - polygon_address
-          - sg_number
-          - solana_address
-          - wallet_address
-          description: One of `iban`, `clabe`, `wallet_address`, or `other`. Use `other` if the bank account number is in a generic format.
-        account_number_safe:
+          - overdraft
+          - polygon_wallet
+          - savings
+          - solana_wallet
+          description: Can be checking, savings or other.
+        party_name:
           type: string
-          description: The last 4 digits of the account_number.
+          description: The legal name of the entity which owns the account.
+        party_type:
+          type:
+          - string
+          - 'null'
+          enum:
+          - business
+          - individual
+          description: Either individual or business.
+        party_address:
+          $ref: '#/components/schemas/address'
+          description: The address associated with the owner or null.
+        name:
+          type:
+          - string
+          - 'null'
+          description: A nickname for the account.
+        account_details:
+          type: array
+          items:
+            $ref: '#/components/schemas/account_detail'
+          description: An array of account detail objects.
+        account_capabilities:
+          type: array
+          description: An array of AccountCapability objects that list the originating abilities of the internal account and any relevant information for them.
+          items:
+            $ref: '#/components/schemas/account_capability'
+        routing_details:
+          type: array
+          items:
+            $ref: '#/components/schemas/routing_detail'
+          description: An array of routing detail objects.
+        connection:
+          $ref: '#/components/schemas/connection'
+          description: Specifies which financial institution the accounts belong to.
+        currency:
+          $ref: '#/components/schemas/currency'
+          description: The currency of the account.
+        metadata:
+          type: object
+          additionalProperties:
+            type: string
+          example:
+            key: value
+            foo: bar
+            modern: treasury
+          description: Additional data represented as key-value pairs. Both the key and value must be strings.
+        parent_account_id:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          description: The parent InternalAccount of this account.
+        counterparty_id:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          description: The Counterparty associated to this account.
+        vendor_id:
+          type:
+          - string
+          - 'null'
+          format: string
+          description: The vendor ID associated with this account.
+        legal_entity_id:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          description: The Legal Entity associated to this account.
+        status:
+          type:
+          - string
+          - 'null'
+          format: string
+          enum:
+          - active
+          - closed
+          - pending_activation
+          - pending_closure
+          - suspended
+          description: The internal account status.
+        ledger_account_id:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          description: If the internal account links to a ledger account in Modern Treasury, the id of the ledger account will be populated here.
+        contra_ledger_account_id:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          description: If the internal account links to a contra ledger account in Modern Treasury, the id of the contra ledger account will be populated here.
+        external_id:
+          type:
+          - string
+          - 'null'
+          description: An optional user-defined 180 character unique identifier.
       additionalProperties: false
-      minProperties: 8
-      maxProperties: 9
+      minProperties: 24
       required:
       - id
       - object
       - live_mode
       - created_at
       - updated_at
-      - discarded_at
-      - account_number_type
-      - account_number_safe
+      - account_type
+      - party_name
+      - party_type
+      - party_address
+      - name
+      - account_details
+      - account_capabilities
+      - routing_details
+      - connection
+      - currency
+      - metadata
+      - parent_account_id
+      - counterparty_id
+      - vendor_id
+      - legal_entity_id
+      - status
+      - ledger_account_id
+      - contra_ledger_account_id
+      - external_id
     account_capability:
       type: object
       properties:
@@ -970,32 +836,53 @@ components:
       - direction
       - identifier
       - payment_type
-    error_message:
+    connection:
       type: object
       properties:
-        errors:
-          type: object
-          properties:
-            code:
-              type: string
-              enum:
-              - parameter_invalid
-              - parameter_missing
-              - resource_not_found
-              - not_found
-              - forbidden
-              - invalid_ip
-              - invalid_key
-              - header_invalid
-              - expired_key
-              - conflict
-              - too_many_requests
-            message:
-              type: string
-            parameter:
-              type: string
+        id:
+          type: string
+          format: uuid
+        object:
+          type: string
+        live_mode:
+          type: boolean
+          description: This field will be true if this object exists in the live environment or false if it exists in the test environment.
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        discarded_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        vendor_id:
+          type: string
+          format: uuid
+          description: Unique identifier for the bank or vendor.
+        vendor_customer_id:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          description: An identifier given to this connection by the bank.
+        vendor_name:
+          type: string
+          description: A human-friendly name for the bank or vendor.
+      additionalProperties: false
+      minProperties: 9
       required:
-      - errors
+      - id
+      - object
+      - live_mode
+      - created_at
+      - updated_at
+      - discarded_at
+      - vendor_id
+      - vendor_customer_id
+      - vendor_name
     routing_detail:
       type: object
       properties:
@@ -1104,6 +991,34 @@ components:
       - payment_type
       - bank_name
       - bank_address
+    internal_account_update_request:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The nickname for the internal account.
+        metadata:
+          type: object
+          additionalProperties:
+            type: string
+          description: Additional data in the form of key-value pairs. Pairs can be removed by passing an empty string or `null` as the value.
+        parent_account_id:
+          type: string
+          description: The parent internal account for this account.
+        counterparty_id:
+          type: string
+          description: The Counterparty associated to this account.
+        ledger_account_id:
+          type: string
+          description: The Ledger Account associated to this account.
+        contra_ledger_account_id:
+          type: string
+          description: The Contra Ledger Account associated to this account.
+        external_id:
+          type:
+          - string
+          - 'null'
+          description: An optional user-defined 180 character unique identifier.
     address:
       type:
       - object
@@ -1165,6 +1080,91 @@ components:
       - region
       - postal_code
       - country
+    account_detail:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        object:
+          type: string
+        live_mode:
+          type: boolean
+          description: This field will be true if this object exists in the live environment or false if it exists in the test environment.
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        discarded_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        account_number:
+          type: string
+          description: The account number for the bank account.
+        account_number_type:
+          type: string
+          enum:
+          - au_number
+          - base_address
+          - card_token
+          - clabe
+          - ethereum_address
+          - hk_number
+          - iban
+          - id_number
+          - nz_number
+          - other
+          - pan
+          - polygon_address
+          - sg_number
+          - solana_address
+          - wallet_address
+          description: One of `iban`, `clabe`, `wallet_address`, or `other`. Use `other` if the bank account number is in a generic format.
+        account_number_safe:
+          type: string
+          description: The last 4 digits of the account_number.
+      additionalProperties: false
+      minProperties: 8
+      maxProperties: 9
+      required:
+      - id
+      - object
+      - live_mode
+      - created_at
+      - updated_at
+      - discarded_at
+      - account_number_type
+      - account_number_safe
+    error_message:
+      type: object
+      properties:
+        errors:
+          type: object
+          properties:
+            code:
+              type: string
+              enum:
+              - parameter_invalid
+              - parameter_missing
+              - resource_not_found
+              - not_found
+              - forbidden
+              - invalid_ip
+              - invalid_key
+              - header_invalid
+              - expired_key
+              - conflict
+              - too_many_requests
+            message:
+              type: string
+            parameter:
+              type: string
+      required:
+      - errors
   parameters:
     metadata_query:
       name: metadata

@@ -236,6 +236,26 @@ components:
       required: false
       description: For example, if you want to query for records with metadata key `Type` and value `Loan`, the query would be `metadata%5BType%5D=Loan`. This encodes the query parameters.
   schemas:
+    ledger_update_request:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The name of the ledger.
+        description:
+          type:
+          - string
+          - 'null'
+          description: An optional free-form description for internal use.
+        metadata:
+          type: object
+          description: Additional data represented as key-value pairs. Both the key and value must be strings.
+          additionalProperties:
+            type: string
+          example:
+            key: value
+            foo: bar
+            modern: treasury
     ledger_create_request:
       type: object
       properties:
@@ -258,52 +278,6 @@ components:
             modern: treasury
       required:
       - name
-    error_message:
-      type: object
-      properties:
-        errors:
-          type: object
-          properties:
-            code:
-              type: string
-              enum:
-              - parameter_invalid
-              - parameter_missing
-              - resource_not_found
-              - not_found
-              - forbidden
-              - invalid_ip
-              - invalid_key
-              - header_invalid
-              - expired_key
-              - conflict
-              - too_many_requests
-            message:
-              type: string
-            parameter:
-              type: string
-      required:
-      - errors
-    ledger_update_request:
-      type: object
-      properties:
-        name:
-          type: string
-          description: The name of the ledger.
-        description:
-          type:
-          - string
-          - 'null'
-          description: An optional free-form description for internal use.
-        metadata:
-          type: object
-          description: Additional data represented as key-value pairs. Both the key and value must be strings.
-          additionalProperties:
-            type: string
-          example:
-            key: value
-            foo: bar
-            modern: treasury
     ledger:
       type: object
       properties:
@@ -356,6 +330,32 @@ components:
       - name
       - description
       - metadata
+    error_message:
+      type: object
+      properties:
+        errors:
+          type: object
+          properties:
+            code:
+              type: string
+              enum:
+              - parameter_invalid
+              - parameter_missing
+              - resource_not_found
+              - not_found
+              - forbidden
+              - invalid_ip
+              - invalid_key
+              - header_invalid
+              - expired_key
+              - conflict
+              - too_many_requests
+            message:
+              type: string
+            parameter:
+              type: string
+      required:
+      - errors
   securitySchemes:
     basic_auth:
       type: http

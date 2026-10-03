@@ -182,124 +182,27 @@ paths:
                 $ref: '#/components/schemas/virtual_account'
 components:
   schemas:
-    virtual_account:
+    virtual_account_update_request:
       type: object
       properties:
-        id:
-          type: string
-          format: uuid
-        object:
-          type: string
-        live_mode:
-          type: boolean
-          description: This field will be true if this object exists in the live environment or false if it exists in the test environment.
-        created_at:
-          type: string
-          format: date-time
-        updated_at:
-          type: string
-          format: date-time
-        discarded_at:
-          type:
-          - string
-          - 'null'
-          format: date-time
         name:
-          type: string
-          description: The name of the virtual account.
-        description:
           type:
           - string
           - 'null'
-          description: An optional free-form description for internal use.
         counterparty_id:
-          type:
-          - string
-          - 'null'
-          format: uuid
-          description: The ID of a counterparty that the virtual account belongs to. Optional.
-        internal_account_id:
           type: string
           format: uuid
-          description: The ID of the internal account that the virtual account is in.
-        account_details:
-          type: array
-          description: An array of account detail objects.
-          items:
-            $ref: '#/components/schemas/account_detail'
-        routing_details:
-          type: array
-          description: An array of routing detail objects. These will be the routing details of the internal account.
-          items:
-            $ref: '#/components/schemas/routing_detail'
-        debit_ledger_account_id:
-          type:
-          - string
-          - 'null'
-          format: uuid
-          description: The ID of a debit normal ledger account. When money enters the virtual account, this ledger account will be debited. Must be accompanied by a credit_ledger_account_id if present.
-        credit_ledger_account_id:
-          type:
-          - string
-          - 'null'
-          format: uuid
-          description: The ID of a credit normal ledger account. When money enters the virtual account, this ledger account will be credited. Must be accompanied by a debit_ledger_account_id if present.
         ledger_account_id:
-          type:
-          - string
-          - 'null'
+          type: string
           format: uuid
-          description: If the virtual account links to a ledger account in Modern Treasury, the id of the ledger account will be populated here.
+          description: The ledger account that you'd like to link to the virtual account.
         metadata:
           type: object
-          description: Additional data represented as key-value pairs. Both the key and value must be strings.
           additionalProperties:
             type: string
-          example:
-            key: value
-            foo: bar
-            modern: treasury
-      additionalProperties: false
-      minProperties: 16
-      required:
-      - id
-      - object
-      - live_mode
-      - created_at
-      - updated_at
-      - discarded_at
-      - name
-      - description
-      - counterparty_id
-      - internal_account_id
-      - account_details
-      - routing_details
-      - debit_ledger_account_id
-      - credit_ledger_account_id
-      - ledger_account_id
-      - metadata
-    account_detail:
+    account_detail_create_request:
       type: object
       properties:
-        id:
-          type: string
-          format: uuid
-        object:
-          type: string
-        live_mode:
-          type: boolean
-          description: This field will be true if this object exists in the live environment or false if it exists in the test environment.
-        created_at:
-          type: string
-          format: date-time
-        updated_at:
-          type: string
-          format: date-time
-        discarded_at:
-          type:
-          - string
-          - 'null'
-          format: date-time
         account_number:
           type: string
           description: The account number for the bank account.
@@ -322,39 +225,54 @@ components:
           - solana_address
           - wallet_address
           description: One of `iban`, `clabe`, `wallet_address`, or `other`. Use `other` if the bank account number is in a generic format.
-        account_number_safe:
-          type: string
-          description: The last 4 digits of the account_number.
-      additionalProperties: false
-      minProperties: 8
-      maxProperties: 9
       required:
-      - id
-      - object
-      - live_mode
-      - created_at
-      - updated_at
-      - discarded_at
-      - account_number_type
-      - account_number_safe
-    virtual_account_update_request:
+      - account_number
+    virtual_account_create_request:
       type: object
       properties:
         name:
-          type:
-          - string
-          - 'null'
+          type: string
+          description: The name of the virtual account.
+        description:
+          type: string
+          description: An optional description for internal use.
         counterparty_id:
           type: string
           format: uuid
-        ledger_account_id:
+          description: The ID of the counterparty that the virtual account belongs to.
+        internal_account_id:
           type: string
           format: uuid
-          description: The ledger account that you'd like to link to the virtual account.
+          description: The ID of the internal account that this virtual account is associated with.
+        account_details:
+          type: array
+          items:
+            $ref: '#/components/schemas/account_detail_create_request'
+          description: An array of account detail objects.
+        routing_details:
+          type: array
+          items:
+            $ref: '#/components/schemas/routing_detail_create_request'
+          description: An array of routing detail objects.
+        debit_ledger_account_id:
+          type: string
+          format: uuid
+          description: The ID of a debit normal ledger account. When money enters the virtual account, this ledger account will be debited. Must be accompanied by a credit_ledger_account_id if present.
+        credit_ledger_account_id:
+          type: string
+          format: uuid
+          description: The ID of a credit normal ledger account. When money leaves the virtual account, this ledger account will be credited. Must be accompanied by a debit_ledger_account_id if present.
+        ledger_account:
+          $ref: '#/components/schemas/ledger_account_create_request'
+          description: Specifies a ledger account object that will be created with the virtual account. The resulting ledger account is linked to the virtual account for auto-ledgering IPDs.
         metadata:
           type: object
+          description: Additional data represented as key-value pairs. Both the key and value must be strings.
           additionalProperties:
             type: string
+      required:
+      - name
+      - internal_account_id
     routing_detail:
       type: object
       properties:
@@ -463,52 +381,65 @@ components:
       - payment_type
       - bank_name
       - bank_address
-    virtual_account_create_request:
+    account_detail:
       type: object
       properties:
-        name:
-          type: string
-          description: The name of the virtual account.
-        description:
-          type: string
-          description: An optional description for internal use.
-        counterparty_id:
+        id:
           type: string
           format: uuid
-          description: The ID of the counterparty that the virtual account belongs to.
-        internal_account_id:
+        object:
           type: string
-          format: uuid
-          description: The ID of the internal account that this virtual account is associated with.
-        account_details:
-          type: array
-          items:
-            $ref: '#/components/schemas/account_detail_create_request'
-          description: An array of account detail objects.
-        routing_details:
-          type: array
-          items:
-            $ref: '#/components/schemas/routing_detail_create_request'
-          description: An array of routing detail objects.
-        debit_ledger_account_id:
+        live_mode:
+          type: boolean
+          description: This field will be true if this object exists in the live environment or false if it exists in the test environment.
+        created_at:
           type: string
-          format: uuid
-          description: The ID of a debit normal ledger account. When money enters the virtual account, this ledger account will be debited. Must be accompanied by a credit_ledger_account_id if present.
-        credit_ledger_account_id:
+          format: date-time
+        updated_at:
           type: string
-          format: uuid
-          description: The ID of a credit normal ledger account. When money leaves the virtual account, this ledger account will be credited. Must be accompanied by a debit_ledger_account_id if present.
-        ledger_account:
-          $ref: '#/components/schemas/ledger_account_create_request'
-          description: Specifies a ledger account object that will be created with the virtual account. The resulting ledger account is linked to the virtual account for auto-ledgering IPDs.
-        metadata:
-          type: object
-          description: Additional data represented as key-value pairs. Both the key and value must be strings.
-          additionalProperties:
-            type: string
+          format: date-time
+        discarded_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        account_number:
+          type: string
+          description: The account number for the bank account.
+        account_number_type:
+          type: string
+          enum:
+          - au_number
+          - base_address
+          - card_token
+          - clabe
+          - ethereum_address
+          - hk_number
+          - iban
+          - id_number
+          - nz_number
+          - other
+          - pan
+          - polygon_address
+          - sg_number
+          - solana_address
+          - wallet_address
+          description: One of `iban`, `clabe`, `wallet_address`, or `other`. Use `other` if the bank account number is in a generic format.
+        account_number_safe:
+          type: string
+          description: The last 4 digits of the account_number.
+      additionalProperties: false
+      minProperties: 8
+      maxProperties: 9
       required:
-      - name
-      - internal_account_id
+      - id
+      - object
+      - live_mode
+      - created_at
+      - updated_at
+      - discarded_at
+      - account_number_type
+      - account_number_safe
     address:
       type:
       - object
@@ -570,59 +501,73 @@ components:
       - region
       - postal_code
       - country
-    error_message:
+    ledger_account_create_request:
       type: object
       properties:
-        errors:
-          type: object
-          properties:
-            code:
-              type: string
-              enum:
-              - parameter_invalid
-              - parameter_missing
-              - resource_not_found
-              - not_found
-              - forbidden
-              - invalid_ip
-              - invalid_key
-              - header_invalid
-              - expired_key
-              - conflict
-              - too_many_requests
-            message:
-              type: string
-            parameter:
-              type: string
-      required:
-      - errors
-    account_detail_create_request:
-      type: object
-      properties:
-        account_number:
+        name:
           type: string
-          description: The account number for the bank account.
-        account_number_type:
+          description: The name of the ledger account.
+        description:
+          type:
+          - string
+          - 'null'
+          description: The description of the ledger account.
+        normal_balance:
           type: string
           enum:
-          - au_number
-          - base_address
-          - card_token
-          - clabe
-          - ethereum_address
-          - hk_number
-          - iban
-          - id_number
-          - nz_number
-          - other
-          - pan
-          - polygon_address
-          - sg_number
-          - solana_address
-          - wallet_address
-          description: One of `iban`, `clabe`, `wallet_address`, or `other`. Use `other` if the bank account number is in a generic format.
+          - credit
+          - debit
+          description: The normal balance of the ledger account.
+          _x-stainless-modelDefPath: $shared.transaction_direction
+        ledger_id:
+          type: string
+          format: uuid
+          description: The id of the ledger that this account belongs to.
+        currency:
+          type: string
+          description: The currency of the ledger account.
+        currency_exponent:
+          type:
+          - integer
+          - 'null'
+          description: The currency exponent of the ledger account.
+        ledger_account_category_ids:
+          type: array
+          items:
+            type: string
+            format: uuid
+          description: The array of ledger account category ids that this ledger account should be a child of.
+        ledgerable_id:
+          type: string
+          format: uuid
+          description: If the ledger account links to another object in Modern Treasury, the id will be populated here, otherwise null.
+        ledgerable_type:
+          type: string
+          enum:
+          - counterparty
+          - external_account
+          - internal_account
+          - virtual_account
+          description: If the ledger account links to another object in Modern Treasury, the type will be populated here, otherwise null. The value is one of internal_account or external_account.
+        metadata:
+          type: object
+          description: Additional data represented as key-value pairs. Both the key and value must be strings.
+          additionalProperties:
+            type: string
+          example:
+            key: value
+            foo: bar
+            modern: treasury
+        external_id:
+          type:
+          - string
+          - 'null'
+          description: An optional user-defined 180 character unique identifier.
       required:
-      - account_number
+      - name
+      - normal_balance
+      - ledger_id
+      - currency
     routing_detail_create_request:
       type: object
       properties:
@@ -696,54 +641,74 @@ components:
       required:
       - routing_number
       - routing_number_type
-    ledger_account_create_request:
+    virtual_account:
       type: object
       properties:
+        id:
+          type: string
+          format: uuid
+        object:
+          type: string
+        live_mode:
+          type: boolean
+          description: This field will be true if this object exists in the live environment or false if it exists in the test environment.
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        discarded_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
         name:
           type: string
-          description: The name of the ledger account.
+          description: The name of the virtual account.
         description:
           type:
           - string
           - 'null'
-          description: The description of the ledger account.
-        normal_balance:
-          type: string
-          enum:
-          - credit
-          - debit
-          description: The normal balance of the ledger account.
-          _x-stainless-modelDefPath: $shared.transaction_direction
-        ledger_id:
-          type: string
-          format: uuid
-          description: The id of the ledger that this account belongs to.
-        currency:
-          type: string
-          description: The currency of the ledger account.
-        currency_exponent:
+          description: An optional free-form description for internal use.
+        counterparty_id:
           type:
-          - integer
+          - string
           - 'null'
-          description: The currency exponent of the ledger account.
-        ledger_account_category_ids:
-          type: array
-          items:
-            type: string
-            format: uuid
-          description: The array of ledger account category ids that this ledger account should be a child of.
-        ledgerable_id:
+          format: uuid
+          description: The ID of a counterparty that the virtual account belongs to. Optional.
+        internal_account_id:
           type: string
           format: uuid
-          description: If the ledger account links to another object in Modern Treasury, the id will be populated here, otherwise null.
-        ledgerable_type:
-          type: string
-          enum:
-          - counterparty
-          - external_account
-          - internal_account
-          - virtual_account
-          description: If the ledger account links to another object in Modern Treasury, the type will be populated here, otherwise null. The value is one of internal_account or external_account.
+          description: The ID of the internal account that the virtual account is in.
+        account_details:
+          type: array
+          description: An array of account detail objects.
+          items:
+            $ref: '#/components/schemas/account_detail'
+        routing_details:
+          type: array
+          description: An array of routing detail objects. These will be the routing details of the internal account.
+          items:
+            $ref: '#/components/schemas/routing_detail'
+        debit_ledger_account_id:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          description: The ID of a debit normal ledger account. When money enters the virtual account, this ledger account will be debited. Must be accompanied by a credit_ledger_account_id if present.
+        credit_ledger_account_id:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          description: The ID of a credit normal ledger account. When money enters the virtual account, this ledger account will be credited. Must be accompanied by a debit_ledger_account_id if present.
+        ledger_account_id:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          description: If the virtual account links to a ledger account in Modern Treasury, the id of the ledger account will be populated here.
         metadata:
           type: object
           description: Additional data represented as key-value pairs. Both the key and value must be strings.
@@ -753,16 +718,51 @@ components:
             key: value
             foo: bar
             modern: treasury
-        external_id:
-          type:
-          - string
-          - 'null'
-          description: An optional user-defined 180 character unique identifier.
+      additionalProperties: false
+      minProperties: 16
       required:
+      - id
+      - object
+      - live_mode
+      - created_at
+      - updated_at
+      - discarded_at
       - name
-      - normal_balance
-      - ledger_id
-      - currency
+      - description
+      - counterparty_id
+      - internal_account_id
+      - account_details
+      - routing_details
+      - debit_ledger_account_id
+      - credit_ledger_account_id
+      - ledger_account_id
+      - metadata
+    error_message:
+      type: object
+      properties:
+        errors:
+          type: object
+          properties:
+            code:
+              type: string
+              enum:
+              - parameter_invalid
+              - parameter_missing
+              - resource_not_found
+              - not_found
+              - forbidden
+              - invalid_ip
+              - invalid_key
+              - header_invalid
+              - expired_key
+              - conflict
+              - too_many_requests
+            message:
+              type: string
+            parameter:
+              type: string
+      required:
+      - errors
   parameters:
     metadata_query:
       name: metadata

@@ -201,24 +201,39 @@ paths:
                 $ref: '#/components/schemas/error_message'
 components:
   schemas:
-    ledger_balances:
+    ledger_account_balance_monitor_update_request:
       type: object
       properties:
-        pending_balance:
-          $ref: '#/components/schemas/ledger_balance'
-          description: The pending_balance is the sum of all pending and posted entries.
-        posted_balance:
-          $ref: '#/components/schemas/ledger_balance'
-          description: The posted_balance is the sum of all posted entries.
-        available_balance:
-          $ref: '#/components/schemas/ledger_balance'
-          description: The available_balance is the sum of all posted inbound entries and pending outbound entries. For credit normal, available_amount = posted_credits - pending_debits; for debit normal, available_amount = posted_debits - pending_credits.
+        description:
+          type: string
+          description: An optional, free-form description for internal use.
+        metadata:
+          type: object
+          description: Additional data represented as key-value pairs. Both the key and value must be strings.
+          additionalProperties:
+            type: string
+          example:
+            key: value
+            foo: bar
+            modern: treasury
+    alert_condition:
+      type: object
+      properties:
+        field:
+          type: string
+          description: One of `available_balance_amount`, `pending_balance_amount`, `posted_balance_amount`, `ledger_account_lock_version`.
+        operator:
+          type: string
+          description: A logical operator to compare the `field` against the `value`. One of `less_than`, `less_than_or_equals`, `equals`, `greater_than_or_equals`, `greater_than`.
+        value:
+          type: integer
+          description: The monitor's `current_ledger_account_balance_state.triggered` will be `true` when comparing the `field` to this integer value using the `operator` is logically true.
       additionalProperties: false
       minProperties: 3
       required:
-      - pending_balance
-      - posted_balance
-      - available_balance
+      - field
+      - operator
+      - value
     ledger_account_balance_monitor:
       type: object
       properties:
@@ -295,24 +310,30 @@ components:
       - balances
       - ledger_account_lock_version
       - triggered
-    alert_condition:
+    ledger_account_balance_monitor_create_request:
       type: object
       properties:
-        field:
+        ledger_account_id:
           type: string
-          description: One of `available_balance_amount`, `pending_balance_amount`, `posted_balance_amount`, `ledger_account_lock_version`.
-        operator:
+          description: The ledger account associated with this balance monitor.
+        description:
           type: string
-          description: A logical operator to compare the `field` against the `value`. One of `less_than`, `less_than_or_equals`, `equals`, `greater_than_or_equals`, `greater_than`.
-        value:
-          type: integer
-          description: The monitor's `current_ledger_account_balance_state.triggered` will be `true` when comparing the `field` to this integer value using the `operator` is logically true.
-      additionalProperties: false
-      minProperties: 3
+          description: An optional, free-form description for internal use.
+        alert_condition:
+          $ref: '#/components/schemas/alert_condition_create_request'
+          description: Describes the condition that must be satisfied for the monitor to be triggered.
+        metadata:
+          type: object
+          description: Additional data represented as key-value pairs. Both the key and value must be strings.
+          additionalProperties:
+            type: string
+          example:
+            key: value
+            foo: bar
+            modern: treasury
       required:
-      - field
-      - operator
-      - value
+      - ledger_account_id
+      - alert_condition
     alert_condition_create_request:
       type: object
       properties:
@@ -329,6 +350,24 @@ components:
       - field
       - operator
       - value
+    ledger_balances:
+      type: object
+      properties:
+        pending_balance:
+          $ref: '#/components/schemas/ledger_balance'
+          description: The pending_balance is the sum of all pending and posted entries.
+        posted_balance:
+          $ref: '#/components/schemas/ledger_balance'
+          description: The posted_balance is the sum of all posted entries.
+        available_balance:
+          $ref: '#/components/schemas/ledger_balance'
+          description: The available_balance is the sum of all posted inbound entries and pending outbound entries. For credit normal, available_amount = posted_credits - pending_debits; for debit normal, available_amount = posted_debits - pending_credits.
+      additionalProperties: false
+      minProperties: 3
+      required:
+      - pending_balance
+      - posted_balance
+      - available_balance
     ledger_balance:
       type: object
       properties:
@@ -352,21 +391,6 @@ components:
       - amount
       - currency
       - currency_exponent
-    ledger_account_balance_monitor_update_request:
-      type: object
-      properties:
-        description:
-          type: string
-          description: An optional, free-form description for internal use.
-        metadata:
-          type: object
-          description: Additional data represented as key-value pairs. Both the key and value must be strings.
-          additionalProperties:
-            type: string
-          example:
-            key: value
-            foo: bar
-            modern: treasury
     error_message:
       type: object
       properties:
@@ -393,30 +417,6 @@ components:
               type: string
       required:
       - errors
-    ledger_account_balance_monitor_create_request:
-      type: object
-      properties:
-        ledger_account_id:
-          type: string
-          description: The ledger account associated with this balance monitor.
-        description:
-          type: string
-          description: An optional, free-form description for internal use.
-        alert_condition:
-          $ref: '#/components/schemas/alert_condition_create_request'
-          description: Describes the condition that must be satisfied for the monitor to be triggered.
-        metadata:
-          type: object
-          description: Additional data represented as key-value pairs. Both the key and value must be strings.
-          additionalProperties:
-            type: string
-          example:
-            key: value
-            foo: bar
-            modern: treasury
-      required:
-      - ledger_account_id
-      - alert_condition
   parameters:
     bulk_id:
       name: id[]

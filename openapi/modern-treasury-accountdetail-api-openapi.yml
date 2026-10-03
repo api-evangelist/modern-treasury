@@ -193,38 +193,6 @@ paths:
           description: successful
 components:
   schemas:
-    account_detail_create_request:
-      type: object
-      properties:
-        account_number:
-          type: string
-          description: The account number for the bank account.
-        account_number_type:
-          type: string
-          enum:
-          - au_number
-          - base_address
-          - card_token
-          - clabe
-          - ethereum_address
-          - hk_number
-          - iban
-          - id_number
-          - nz_number
-          - other
-          - pan
-          - polygon_address
-          - sg_number
-          - solana_address
-          - wallet_address
-          description: One of `iban`, `clabe`, `wallet_address`, or `other`. Use `other` if the bank account number is in a generic format.
-      required:
-      - account_number
-    accounts_type:
-      type: string
-      enum:
-      - external_accounts
-      - internal_accounts
     account_detail:
       type: object
       properties:
@@ -284,6 +252,38 @@ components:
       - discarded_at
       - account_number_type
       - account_number_safe
+    account_detail_create_request:
+      type: object
+      properties:
+        account_number:
+          type: string
+          description: The account number for the bank account.
+        account_number_type:
+          type: string
+          enum:
+          - au_number
+          - base_address
+          - card_token
+          - clabe
+          - ethereum_address
+          - hk_number
+          - iban
+          - id_number
+          - nz_number
+          - other
+          - pan
+          - polygon_address
+          - sg_number
+          - solana_address
+          - wallet_address
+          description: One of `iban`, `clabe`, `wallet_address`, or `other`. Use `other` if the bank account number is in a generic format.
+      required:
+      - account_number
+    accounts_type:
+      type: string
+      enum:
+      - external_accounts
+      - internal_accounts
     error_message:
       type: object
       properties:

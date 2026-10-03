@@ -78,6 +78,37 @@ paths:
                 $ref: '#/components/schemas/error_message'
 components:
   schemas:
+    address_request:
+      type: object
+      properties:
+        line1:
+          type:
+          - string
+          - 'null'
+        line2:
+          type:
+          - string
+          - 'null'
+        locality:
+          type:
+          - string
+          - 'null'
+          description: Locality or City.
+        region:
+          type:
+          - string
+          - 'null'
+          description: Region or State.
+        postal_code:
+          type:
+          - string
+          - 'null'
+          description: The postal code of the address.
+        country:
+          type:
+          - string
+          - 'null'
+          description: Country code conforms to [ISO 3166-1 alpha-2]
     routing_number_lookup_request:
       type: object
       properties:
@@ -207,37 +238,6 @@ components:
               type: string
       required:
       - errors
-    address_request:
-      type: object
-      properties:
-        line1:
-          type:
-          - string
-          - 'null'
-        line2:
-          type:
-          - string
-          - 'null'
-        locality:
-          type:
-          - string
-          - 'null'
-          description: Locality or City.
-        region:
-          type:
-          - string
-          - 'null'
-          description: Region or State.
-        postal_code:
-          type:
-          - string
-          - 'null'
-          description: The postal code of the address.
-        country:
-          type:
-          - string
-          - 'null'
-          description: Country code conforms to [ISO 3166-1 alpha-2]
   securitySchemes:
     basic_auth:
       type: http

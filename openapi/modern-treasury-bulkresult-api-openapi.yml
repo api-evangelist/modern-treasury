@@ -155,42 +155,6 @@ paths:
                 $ref: '#/components/schemas/error_message'
 components:
   schemas:
-    ledger_balances:
-      type: object
-      properties:
-        pending_balance:
-          $ref: '#/components/schemas/ledger_balance'
-          description: The pending_balance is the sum of all pending and posted entries.
-        posted_balance:
-          $ref: '#/components/schemas/ledger_balance'
-          description: The posted_balance is the sum of all posted entries.
-        available_balance:
-          $ref: '#/components/schemas/ledger_balance'
-          description: The available_balance is the sum of all posted inbound entries and pending outbound entries. For credit normal, available_amount = posted_credits - pending_debits; for debit normal, available_amount = posted_debits - pending_credits.
-      additionalProperties: false
-      minProperties: 3
-      required:
-      - pending_balance
-      - posted_balance
-      - available_balance
-    accounting:
-      type: object
-      deprecated: true
-      properties:
-        account_id:
-          type:
-          - string
-          - 'null'
-          format: uuid
-          deprecated: true
-          description: The ID of one of your accounting categories. Note that these will only be accessible if your accounting system has been connected.
-        class_id:
-          type:
-          - string
-          - 'null'
-          format: uuid
-          deprecated: true
-          description: The ID of one of the class objects in your accounting system. Class objects track segments of your business independent of client or project. Note that these will only be accessible if your accounting system has been connected.
     return:
       type: object
       properties:
@@ -499,6 +463,210 @@ components:
       - current_return
       - reference_numbers
       - ledger_transaction_id
+    expected_payment:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        object:
+          type: string
+        live_mode:
+          type: boolean
+          description: This field will be true if this object exists in the live environment or false if it exists in the test environment.
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        external_id:
+          type:
+          - string
+          - 'null'
+          description: An optional user-defined 180 character unique identifier.
+        amount_upper_bound:
+          type:
+          - integer
+          - 'null'
+          description: The highest amount this expected payment may be equal to. Value in specified currency's smallest unit. e.g. $10 would be represented as 1000.
+        amount_lower_bound:
+          type:
+          - integer
+          - 'null'
+          description: The lowest amount this expected payment may be equal to. Value in specified currency's smallest unit. e.g. $10 would be represented as 1000.
+        direction:
+          type:
+          - string
+          - 'null'
+          enum:
+          - credit
+          - debit
+          description: One of credit or debit. When you are receiving money, use credit. When you are being charged, use debit.
+        internal_account_id:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          description: The ID of the Internal Account for the expected payment.
+        type:
+          $ref: '#/components/schemas/expected_payment_type'
+        currency:
+          $ref: '#/components/schemas/currency'
+          description: Must conform to ISO 4217. Defaults to the currency of the internal account.
+        date_upper_bound:
+          type:
+          - string
+          - 'null'
+          format: date
+          description: 'The latest date the payment may come in. Format: yyyy-mm-dd'
+        date_lower_bound:
+          type:
+          - string
+          - 'null'
+          format: date
+          description: 'The earliest date the payment may come in. Format: yyyy-mm-dd'
+        description:
+          type:
+          - string
+          - 'null'
+          description: An optional description for internal use.
+        statement_descriptor:
+          type:
+          - string
+          - 'null'
+          description: The statement description you expect to see on the transaction. For ACH payments, this will be the full line item passed from the bank. For wire payments, this will be the OBI field on the wire. For check payments, this will be the memo field.
+        metadata:
+          type: object
+          description: Additional data represented as key-value pairs. Both the key and value must be strings.
+          additionalProperties:
+            type: string
+          example:
+            key: value
+            foo: bar
+            modern: treasury
+        counterparty_id:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          description: The ID of the counterparty you expect for this payment.
+        remittance_information:
+          type:
+          - string
+          - 'null'
+          description: For `ach`, this field will be passed through on an addenda record. For `wire` payments the field will be passed through as the "Originator to Beneficiary Information", also known as OBI or Fedwire tag 6000.
+        reconciliation_groups:
+          type:
+          - object
+          - 'null'
+          description: The reconciliation groups you have for this payment.
+        reconciliation_filters:
+          type:
+          - object
+          - 'null'
+          description: The reconciliation filters you have for this payment.
+        reconciliation_rule_variables:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/reconciliation_rule_variable'
+          description: An array of reconciliation rule variables for this payment.
+        amount_reconciled:
+          type:
+          - integer
+          - 'null'
+          description: The amount reconciled for this expected payment. Value in specified currency's smallest unit. e.g. $10 would be represented as 1000.
+        amount_reconciled_direction:
+          type:
+          - string
+          - 'null'
+          enum:
+          - credit
+          - debit
+          description: One of credit or debit. Indicates whether amount_reconciled is a credit or debit amount.
+        amount_unreconciled:
+          type:
+          - integer
+          - 'null'
+          description: The amount that remains unreconciled for this expected payment. Value in specified currency's smallest unit. e.g. $10 would be represented as 1000.
+        amount_unreconciled_direction:
+          type:
+          - string
+          - 'null'
+          enum:
+          - credit
+          - debit
+          description: One of credit or debit. Indicates whether amount_unreconciled is a credit or debit amount.
+        transaction_id:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          description: The ID of the Transaction this expected payment object has been matched to.
+        transaction_line_item_id:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          description: The ID of the Transaction Line Item this expected payment has been matched to.
+        status:
+          type: string
+          enum:
+          - archived
+          - partially_reconciled
+          - reconciled
+          - unreconciled
+          description: One of unreconciled, partially_reconciled, reconciled, or archived.
+        reconciliation_method:
+          type:
+          - string
+          - 'null'
+          enum:
+          - automatic
+          - manual
+          description: One of manual if this expected payment was manually reconciled in the dashboard, automatic if it was automatically reconciled by Modern Treasury, or null if it is unreconciled.
+        ledger_transaction_id:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          description: The ID of the ledger transaction linked to the expected payment.
+      additionalProperties: false
+      minProperties: 31
+      required:
+      - id
+      - object
+      - live_mode
+      - created_at
+      - updated_at
+      - external_id
+      - amount_upper_bound
+      - amount_lower_bound
+      - direction
+      - internal_account_id
+      - type
+      - currency
+      - date_upper_bound
+      - date_lower_bound
+      - description
+      - statement_descriptor
+      - metadata
+      - counterparty_id
+      - remittance_information
+      - reconciliation_groups
+      - reconciliation_filters
+      - reconciliation_rule_variables
+      - amount_reconciled
+      - amount_reconciled_direction
+      - amount_unreconciled
+      - amount_unreconciled_direction
+      - transaction_id
+      - transaction_line_item_id
+      - status
+      - reconciliation_method
+      - ledger_transaction_id
     ledger_balances_with_effective_at:
       type: object
       properties:
@@ -531,42 +699,732 @@ components:
       - pending_balance
       - posted_balance
       - available_balance
-    payment_order_type:
+    routing_detail:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        object:
+          type: string
+        live_mode:
+          type: boolean
+          description: This field will be true if this object exists in the live environment or false if it exists in the test environment.
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        discarded_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        routing_number:
+          type: string
+          description: The routing number of the bank.
+        routing_number_type:
+          type: string
+          enum:
+          - aba
+          - au_bsb
+          - br_codigo
+          - ca_cpa
+          - chips
+          - cnaps
+          - dk_interbank_clearing_code
+          - gb_sort_code
+          - hk_interbank_clearing_code
+          - hu_interbank_clearing_code
+          - id_sknbi_code
+          - il_bank_code
+          - in_ifsc
+          - jp_zengin_code
+          - mx_bank_identifier
+          - my_branch_code
+          - nz_national_clearing_code
+          - pl_national_clearing_code
+          - se_bankgiro_clearing_code
+          - sg_interbank_clearing_code
+          - swift
+          - za_national_clearing_code
+          description: The type of routing number. See https://docs.moderntreasury.com/platform/reference/routing-detail-object for more details.
+        payment_type:
+          type:
+          - string
+          - 'null'
+          enum:
+          - ach
+          - au_becs
+          - bacs
+          - book
+          - card
+          - chats
+          - check
+          - cross_border
+          - dk_nets
+          - eft
+          - gb_fps
+          - hu_ics
+          - interac
+          - masav
+          - mx_ccen
+          - neft
+          - nics
+          - nz_becs
+          - pl_elixir
+          - provxchange
+          - ro_sent
+          - rtp
+          - se_bankgirot
+          - sen
+          - sepa
+          - sg_giro
+          - sic
+          - signet
+          - sknbi
+          - stablecoin
+          - wire
+          - zengin
+          description: If the routing detail is to be used for a specific payment type this field will be populated, otherwise null.
+        bank_name:
+          type: string
+          description: The name of the bank.
+        bank_address:
+          $ref: '#/components/schemas/address'
+      additionalProperties: false
+      minProperties: 11
+      required:
+      - id
+      - object
+      - live_mode
+      - created_at
+      - updated_at
+      - discarded_at
+      - routing_number
+      - routing_number_type
+      - payment_type
+      - bank_name
+      - bank_address
+    ledger_balances:
+      type: object
+      properties:
+        pending_balance:
+          $ref: '#/components/schemas/ledger_balance'
+          description: The pending_balance is the sum of all pending and posted entries.
+        posted_balance:
+          $ref: '#/components/schemas/ledger_balance'
+          description: The posted_balance is the sum of all posted entries.
+        available_balance:
+          $ref: '#/components/schemas/ledger_balance'
+          description: The available_balance is the sum of all posted inbound entries and pending outbound entries. For credit normal, available_amount = posted_credits - pending_debits; for debit normal, available_amount = posted_debits - pending_credits.
+      additionalProperties: false
+      minProperties: 3
+      required:
+      - pending_balance
+      - posted_balance
+      - available_balance
+    transaction:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        object:
+          type: string
+        live_mode:
+          type: boolean
+          description: This field will be true if this object exists in the live environment or false if it exists in the test environment.
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        discarded_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        amount:
+          type: integer
+          description: Value in specified currency's smallest unit. e.g. $10 would be represented as 1000.
+        currency:
+          $ref: '#/components/schemas/currency'
+          description: Currency that this transaction is denominated in.
+        direction:
+          type: string
+          description: Either `credit` or `debit`.
+        vendor_description:
+          type:
+          - string
+          - 'null'
+          description: The transaction detail text that often appears in on your bank statement and in your banking portal.
+        vendor_code:
+          type:
+          - string
+          - 'null'
+          description: When applicable, the bank-given code that determines the transaction's category. For most banks this is the BAI2/BTRS transaction code.
+        vendor_code_type:
+          type:
+          - string
+          - 'null'
+          enum:
+          - bai2
+          - banking_circle
+          - bankprov
+          - bnk_dev
+          - cleartouch
+          - coinbase_prime
+          - column
+          - cross_river
+          - currencycloud
+          - dc_bank
+          - dwolla
+          - evolve
+          - fake_vendor
+          - goldman_sachs
+          - iso20022
+          - jpmc
+          - modern_treasury
+          - mx
+          - paxos
+          - paypal
+          - pnc
+          - signet
+          - silvergate
+          - swift
+          - us_bank
+          - user
+          - western_alliance
+          description: The type of `vendor_code` being reported. Can be one of `bai2`, `bankprov`, `bnk_dev`, `cleartouch`, `currencycloud`, `cross_river`, `dc_bank`, `dwolla`, `evolve`, `goldman_sachs`, `iso20022`, `jpmc`, `mx`, `signet`, `silvergate`, `swift`, `us_bank`, or others.
+        vendor_id:
+          type:
+          - string
+          - 'null'
+          description: An identifier given to this transaction by the bank.
+        as_of_date:
+          type:
+          - string
+          - 'null'
+          format: date
+          description: The date on which the transaction occurred.
+        as_of_time:
+          type:
+          - string
+          - 'null'
+          format: time
+          description: The time on which the transaction occurred. Depending on the granularity of the timestamp information received from the bank, it may be `null`.
+        as_of_timezone:
+          type:
+          - string
+          - 'null'
+          description: The timezone in which the `as_of_time` is represented. Can be `null` if the bank does not provide timezone info.
+        internal_account_id:
+          type: string
+          format: uuid
+          description: The ID of the relevant Internal Account.
+        metadata:
+          type: object
+          description: Additional data represented as key-value pairs. Both the key and value must be strings.
+          additionalProperties:
+            type: string
+          example:
+            key: value
+            foo: bar
+            modern: treasury
+        posted:
+          type: boolean
+          description: This field will be `true` if the transaction has posted to the account.
+        vendor_customer_id:
+          type:
+          - string
+          - 'null'
+          description: An identifier given to this transaction by the bank, often `null`.
+        reconciled:
+          type: boolean
+          description: This field will be `true` if a transaction is reconciled by the Modern Treasury system. This means that it has transaction line items that sum up to the transaction's amount.
+        details:
+          type: object
+          additionalProperties:
+            type: string
+          description: 'This field contains additional information that the bank provided about the transaction. This is structured data. Some of the data in here might overlap with what is in the `vendor_description`. For example, the OBI could be a part of the vendor description, and it would also be included in here. The attributes that are passed through the details field will vary based on your banking partner. Currently, the following keys may be in the details object: `originator_name`, `originator_to_beneficiary_information`.'
+        type:
+          type: string
+          enum:
+          - ach
+          - au_becs
+          - bacs
+          - book
+          - card
+          - chats
+          - check
+          - cross_border
+          - dk_nets
+          - eft
+          - gb_fps
+          - hu_ics
+          - interac
+          - masav
+          - mx_ccen
+          - neft
+          - nics
+          - nz_becs
+          - pl_elixir
+          - provxchange
+          - ro_sent
+          - rtp
+          - se_bankgirot
+          - sen
+          - sepa
+          - sg_giro
+          - sic
+          - signet
+          - sknbi
+          - stablecoin
+          - wire
+          - zengin
+          - other
+          description: The type of the transaction. Examples could be `card, `ach`, `wire`, `check`, `rtp`, `book`, or `sen`.
+        foreign_exchange_rate:
+          $ref: '#/components/schemas/foreign_exchange_rate'
+          description: Associated serialized foreign exchange rate information.
+        custom_identifiers:
+          type: object
+          description: An object containing key-value pairs, each with a custom identifier as the key and a string value.
+          additionalProperties:
+            type: string
+          example:
+            key: value
+            foo: bar
+            modern: treasury
+      additionalProperties: false
+      minProperties: 23
+      required:
+      - id
+      - object
+      - live_mode
+      - created_at
+      - updated_at
+      - discarded_at
+      - amount
+      - currency
+      - direction
+      - vendor_code
+      - vendor_code_type
+      - vendor_id
+      - as_of_date
+      - as_of_time
+      - as_of_timezone
+      - internal_account_id
+      - metadata
+      - posted
+      - vendor_customer_id
+      - reconciled
+      - type
+      - foreign_exchange_rate
+      - custom_identifiers
+    currency:
       type: string
       enum:
-      - ach
-      - au_becs
-      - bacs
-      - book
-      - card
-      - chats
-      - check
-      - cross_border
-      - dk_nets
-      - eft
-      - gb_fps
-      - hu_ics
-      - interac
-      - masav
-      - mx_ccen
-      - neft
-      - nics
-      - nz_becs
-      - pl_elixir
-      - provxchange
-      - ro_sent
-      - rtp
-      - se_bankgirot
-      - sen
-      - sepa
-      - sg_giro
-      - sic
-      - signet
-      - sknbi
-      - stablecoin
-      - wire
-      - zengin
-      description: One of `ach`, `se_bankgirot`, `eft`, `wire`, `check`, `sen`, `book`, `rtp`, `sepa`, `bacs`, `au_becs`, `interac`, `neft`, `nics`, `nz_national_clearing_code`, `sic`, `signet`, `provexchange`, `zengin`.
+      - AED
+      - AFN
+      - ALL
+      - AMD
+      - ANG
+      - AOA
+      - ARS
+      - AUD
+      - AWG
+      - AZN
+      - BAM
+      - BBD
+      - BCH
+      - BDT
+      - BGN
+      - BHD
+      - BIF
+      - BMD
+      - BND
+      - BOB
+      - BRL
+      - BSD
+      - BTC
+      - BTN
+      - BWP
+      - BYN
+      - BYR
+      - BZD
+      - CAD
+      - CDF
+      - CHF
+      - CLF
+      - CLP
+      - CNH
+      - CNY
+      - COP
+      - CRC
+      - CUC
+      - CUP
+      - CVE
+      - CZK
+      - DJF
+      - DKK
+      - DOP
+      - DZD
+      - EEK
+      - EGP
+      - ERN
+      - ETB
+      - ETH
+      - EUR
+      - EURC
+      - FJD
+      - FKP
+      - GBP
+      - GBX
+      - GEL
+      - GGP
+      - GHS
+      - GIP
+      - GMD
+      - GNF
+      - GTQ
+      - GYD
+      - HKD
+      - HNL
+      - HRK
+      - HTG
+      - HUF
+      - IDR
+      - ILS
+      - IMP
+      - INR
+      - IQD
+      - IRR
+      - ISK
+      - JEP
+      - JMD
+      - JOD
+      - JPY
+      - KES
+      - KGS
+      - KHR
+      - KMF
+      - KPW
+      - KRW
+      - KWD
+      - KYD
+      - KZT
+      - LAK
+      - LBP
+      - LKR
+      - LRD
+      - LSL
+      - LTL
+      - LVL
+      - LYD
+      - MAD
+      - MDL
+      - MGA
+      - MKD
+      - MMK
+      - MNT
+      - MOP
+      - MRO
+      - MRU
+      - MTL
+      - MUR
+      - MVR
+      - MWK
+      - MXN
+      - MYR
+      - MZN
+      - NAD
+      - NGN
+      - NIO
+      - NOK
+      - NPR
+      - NZD
+      - OMR
+      - OP
+      - PAB
+      - PEN
+      - PGK
+      - PHP
+      - PKR
+      - PLN
+      - PYG
+      - PYUSD
+      - QAR
+      - RON
+      - RSD
+      - RUB
+      - RWF
+      - SAR
+      - SBD
+      - SCR
+      - SDG
+      - SEK
+      - SGD
+      - SHP
+      - SKK
+      - SLE
+      - SLL
+      - SOS
+      - SRD
+      - SSP
+      - STD
+      - STN
+      - SVC
+      - SYP
+      - SZL
+      - THB
+      - TJS
+      - TMM
+      - TMT
+      - TND
+      - TOP
+      - TRY
+      - TTD
+      - TWD
+      - TZS
+      - UAH
+      - UGX
+      - USD
+      - USDB
+      - USDC
+      - USDG
+      - USDP
+      - USDT
+      - UYU
+      - UZS
+      - VEF
+      - VES
+      - VND
+      - VUV
+      - WST
+      - XAF
+      - XAG
+      - XAU
+      - XBA
+      - XBB
+      - XBC
+      - XBD
+      - XCD
+      - XCG
+      - XDR
+      - XFU
+      - XOF
+      - XPD
+      - XPF
+      - XPT
+      - XTS
+      - YER
+      - ZAR
+      - ZMK
+      - ZMW
+      - ZWD
+      - ZWG
+      - ZWL
+      - ZWN
+      - ZWR
+      description: Three-letter ISO currency code.
+    ledger_account:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        object:
+          type: string
+        live_mode:
+          type: boolean
+          description: This field will be true if this object exists in the live environment or false if it exists in the test environment.
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        discarded_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        name:
+          type: string
+          description: The name of the ledger account.
+        description:
+          type:
+          - string
+          - 'null'
+          description: The description of the ledger account.
+        normal_balance:
+          type: string
+          enum:
+          - credit
+          - debit
+          description: The normal balance of the ledger account.
+          _x-stainless-modelDefPath: $shared.transaction_direction
+        balances:
+          $ref: '#/components/schemas/ledger_balances_with_effective_at'
+          description: The pending, posted, and available balances for this ledger account. The posted balance is the sum of all posted entries on the account. The pending balance is the sum of all pending and posted entries on the account. The available balance is the posted incoming entries minus the sum of the pending and posted outgoing amounts.
+        lock_version:
+          type: integer
+          description: Lock version of the ledger account.
+        ledger_id:
+          type: string
+          format: uuid
+          description: The id of the ledger that this account belongs to.
+        ledgerable_id:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          description: If the ledger account links to another object in Modern Treasury, the id will be populated here, otherwise null.
+        external_id:
+          type:
+          - string
+          - 'null'
+          description: An optional user-defined 180 character unique identifier.
+        ledgerable_type:
+          type:
+          - string
+          - 'null'
+          enum:
+          - counterparty
+          - external_account
+          - internal_account
+          - virtual_account
+          description: If the ledger account links to another object in Modern Treasury, the type will be populated here, otherwise null. The value is one of internal_account or external_account.
+        metadata:
+          type: object
+          description: Additional data represented as key-value pairs. Both the key and value must be strings.
+          additionalProperties:
+            type: string
+          example:
+            key: value
+            foo: bar
+            modern: treasury
+      additionalProperties: false
+      minProperties: 16
+      required:
+      - id
+      - object
+      - live_mode
+      - created_at
+      - updated_at
+      - discarded_at
+      - name
+      - description
+      - normal_balance
+      - balances
+      - lock_version
+      - ledger_id
+      - ledgerable_id
+      - external_id
+      - ledgerable_type
+      - metadata
+    bulk_result:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        object:
+          type: string
+        live_mode:
+          type: boolean
+          description: This field will be true if this object exists in the live environment or false if it exists in the test environment.
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        request_id:
+          type: string
+          format: uuid
+          description: Unique identifier for the request that created this bulk result. This is the ID of the bulk request when `request_type` is bulk_request
+        request_type:
+          type: string
+          enum:
+          - bulk_request
+          description: The type of the request that created this result. bulk_request is the only supported `request_type`
+        status:
+          type: string
+          enum:
+          - pending
+          - successful
+          - failed
+          description: One of successful or failed.
+        request_params:
+          type:
+          - object
+          - 'null'
+          description: An optional object that contains the provided input params for the request that created this result. This is an item in the `resources` array for the bulk_request
+          additionalProperties:
+            type: string
+        entity_id:
+          type: string
+          format: uuid
+          description: Unique identifier for the result entity object.
+        entity_type:
+          type: string
+          enum:
+          - payment_order
+          - ledger_account
+          - ledger_transaction
+          - expected_payment
+          - transaction
+          - entity_link
+          - transaction_line_item
+          - bulk_error
+          description: The type of the result entity object. For a successful bulk result, this is the same as the `resource_type` of the bulk request. For a failed bulk result, this is always bulk_error
+        entity:
+          description: An object with type as indicated by `entity_type`. This is the result object that is generated by performing the requested action on the provided input `request_params`.
+          anyOf:
+          - $ref: '#/components/schemas/payment_order'
+          - $ref: '#/components/schemas/expected_payment'
+          - $ref: '#/components/schemas/ledger_transaction'
+          - $ref: '#/components/schemas/ledger_account'
+          - $ref: '#/components/schemas/transaction'
+          - $ref: '#/components/schemas/bulk_error'
+      additionalProperties: false
+      minProperties: 12
+      required:
+      - id
+      - object
+      - live_mode
+      - created_at
+      - updated_at
+      - request_id
+      - request_type
+      - status
+      - request_params
+      - entity_id
+      - entity_type
+      - entity
+    accounting:
+      type: object
+      deprecated: true
+      properties:
+        account_id:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          deprecated: true
+          description: The ID of one of your accounting categories. Note that these will only be accessible if your accounting system has been connected.
+        class_id:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          deprecated: true
+          description: The ID of one of the class objects in your accounting system. Class objects track segments of your business independent of client or project. Note that these will only be accessible if your accounting system has been connected.
     foreign_exchange_rate:
       type: object
       properties:
@@ -600,50 +1458,99 @@ components:
       - target_amount
       - target_currency
       - value
-    payment_order_subtype:
-      type:
-      - string
-      - 'null'
-      enum:
-      - 0C
-      - 0N
-      - 0S
-      - CCD
-      - CIE
-      - CTX
-      - IAT
-      - PPD
-      - TEL
-      - WEB
-      - au_becs
-      - bacs
-      - base
-      - chats
-      - dk_nets
-      - eft
-      - ethereum
-      - hu_ics
-      - masav
-      - mx_ccen
-      - neft
-      - nics
-      - nz_becs
-      - pl_elixir
-      - polygon
-      - ro_sent
-      - se_bankgirot
-      - sepa
-      - sg_giro
-      - sic
-      - sknbi
-      - solana
-      - zengin
-      description: An additional layer of classification for the type of payment order you are doing. This field is only used for `ach` payment orders currently. For `ach`  payment orders, the `subtype`  represents the SEC code. We currently support `CCD`, `PPD`, `IAT`, `CTX`, `WEB`, `CIE`, and `TEL`.
-      x-stainless-renameMap:
-        bacs_new_instruction: 0C
-        bacs_cancellation_instruction: 0N
-        bacs_conversion_instruction: 0S
-    payment_reference:
+    reconciliation_rule_variable:
+      type: object
+      properties:
+        amount_upper_bound:
+          type: integer
+          description: The highest amount this expected payment may be equal to. Value in specified currency's smallest unit. e.g. $10 would be represented as 1000.
+        amount_lower_bound:
+          type: integer
+          description: The lowest amount this expected payment may be equal to. Value in specified currency's smallest unit. e.g. $10 would be represented as 1000.
+        direction:
+          type: string
+          enum:
+          - credit
+          - debit
+          description: One of credit or debit. When you are receiving money, use credit. When you are being charged, use debit.
+        internal_account_id:
+          type: string
+          format: uuid
+          description: The ID of the Internal Account for the expected payment
+        type:
+          type:
+          - string
+          - 'null'
+          enum:
+          - ach
+          - au_becs
+          - bacs
+          - book
+          - card
+          - chats
+          - check
+          - cross_border
+          - dk_nets
+          - eft
+          - gb_fps
+          - hu_ics
+          - interac
+          - masav
+          - mx_ccen
+          - neft
+          - nics
+          - nz_becs
+          - pl_elixir
+          - provxchange
+          - ro_sent
+          - rtp
+          - se_bankgirot
+          - sen
+          - sepa
+          - sg_giro
+          - sic
+          - signet
+          - sknbi
+          - stablecoin
+          - wire
+          - zengin
+          description: One of ach, au_becs, bacs, book, check, eft, interac, provxchange, rtp, sen, sepa, signet wire
+        currency:
+          $ref: '#/components/schemas/currency'
+          description: Must conform to ISO 4217. Defaults to the currency of the internal account
+        date_upper_bound:
+          type:
+          - string
+          - 'null'
+          format: date
+          description: The latest date the payment may come in. Format is yyyy-mm-dd
+        date_lower_bound:
+          type:
+          - string
+          - 'null'
+          format: date
+          description: The earliest date the payment may come in. Format is yyyy-mm-dd
+        counterparty_id:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          description: The ID of the counterparty you expect for this payment
+        custom_identifiers:
+          type:
+          - object
+          - 'null'
+          description: A hash of custom identifiers for this payment
+          additionalProperties:
+            type: string
+      additionalProperties: false
+      minProperties: 10
+      required:
+      - amount_upper_bound
+      - amount_lower_bound
+      - direction
+      - internal_account_id
+    ledger_transaction:
       type: object
       properties:
         id:
@@ -660,114 +1567,208 @@ components:
         updated_at:
           type: string
           format: date-time
-        reference_number:
-          type: string
-          description: The vendor reference number.
-        reference_number_type:
+        description:
+          type:
+          - string
+          - 'null'
+          description: An optional description for internal use.
+        status:
           type: string
           enum:
-          - ach_original_trace_number
-          - ach_trace_number
-          - bankprov_payment_activity_date
-          - bankprov_payment_id
-          - blockchain_transaction_hash
-          - blockchain_transaction_index
-          - bnk_dev_prenotification_id
-          - bnk_dev_transfer_id
-          - bny_mellon_transaction_reference_number
-          - bofa_end_to_end_id
-          - bofa_neft_clearing_reference_number
-          - bofa_transaction_id
-          - check_number
-          - chips_uid
-          - citibank_reference_number
-          - citibank_worldlink_clearing_system_reference_number
-          - column_fx_quote_id
-          - column_reversal_pair_transfer_id
-          - column_transfer_id
-          - cross_river_card_trace_number
-          - cross_river_core_transaction_id
-          - cross_river_fed_batch_id
-          - cross_river_payment_id
-          - cross_river_retrieval_reference_id
-          - cross_river_service_message
-          - cross_river_transaction_id
-          - currencycloud_conversion_id
-          - currencycloud_payment_id
-          - dc_bank_transaction_id
-          - eft_trace_number
-          - evolve_core_batch
-          - evolve_core_file_key
-          - evolve_core_seq
-          - evolve_transaction_id
-          - fake_vendor_payment_id
-          - fedwire_imad
-          - fedwire_omad
-          - first_republic_internal_id
-          - goldman_sachs_collection_request_id
-          - goldman_sachs_end_to_end_id
-          - goldman_sachs_payment_request_id
-          - goldman_sachs_request_id
-          - goldman_sachs_unique_payment_id
-          - interac_message_id
-          - jpmc_ccn
-          - jpmc_clearing_system_reference
-          - jpmc_customer_reference_id
-          - jpmc_end_to_end_id
-          - jpmc_firm_root_id
-          - jpmc_fx_trn_id
-          - jpmc_p3_id
-          - jpmc_payment_batch_id
-          - jpmc_payment_information_id
-          - jpmc_payment_returned_datetime
-          - jpmc_transaction_reference_number
-          - lob_check_id
-          - other
-          - partial_swift_mir
-          - paxos_crypto_withdrawal_id
-          - paxos_fiat_withdrawal_id
-          - paxos_group_id
-          - paxos_orchestration_id
-          - paxos_transfer_id
-          - pnc_clearing_reference
-          - pnc_instruction_id
-          - pnc_multipayment_id
-          - pnc_payment_trace_id
-          - pnc_request_for_payment_id
-          - pnc_transaction_reference_number
-          - rbc_wire_reference_id
-          - rtp_instruction_id
-          - signet_api_reference_id
-          - signet_confirmation_id
-          - signet_request_id
-          - silvergate_payment_id
-          - svb_end_to_end_id
-          - svb_payment_id
-          - swift_mir
-          - swift_uetr
-          - umb_product_partner_account_number
-          - usbank_payment_application_reference_id
-          - usbank_payment_id
-          - usbank_pending_rtp_payment_id
-          - usbank_posted_rtp_payment_id
-          - wells_fargo_end_to_end_id
-          - wells_fargo_payment_id
-          - wells_fargo_trace_number
-          - wells_fargo_uetr
-          - western_alliance_payment_id
-          - western_alliance_transaction_id
-          - western_alliance_wire_confirmation_number
-          description: The type of the reference number. Referring to the vendor payment id.
+          - archived
+          - pending
+          - posted
+          description: To post a ledger transaction at creation, use `posted`.
+        metadata:
+          type: object
+          description: Additional data represented as key-value pairs. Both the key and value must be strings.
+          additionalProperties:
+            type: string
+          example:
+            key: value
+            foo: bar
+            modern: treasury
+        effective_at:
+          type: string
+          format: date-time
+          description: The timestamp (ISO8601 format) at which the ledger transaction happened for reporting purposes.
+        effective_date:
+          type: string
+          format: date
+          description: The date (YYYY-MM-DD) on which the ledger transaction happened for reporting purposes.
+        ledger_entries:
+          type: array
+          items:
+            $ref: '#/components/schemas/ledger_entry'
+          description: An array of ledger entry objects.
+        posted_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          description: The time on which the ledger transaction posted. This is null if the ledger transaction is pending.
+        ledger_id:
+          type: string
+          format: uuid
+          description: The ID of the ledger this ledger transaction belongs to.
+        ledgerable_type:
+          type:
+          - string
+          - 'null'
+          enum:
+          - expected_payment
+          - incoming_payment_detail
+          - payment_order
+          - return
+          - reversal
+          description: If the ledger transaction can be reconciled to another object in Modern Treasury, the type will be populated here, otherwise null. This can be one of payment_order, incoming_payment_detail, expected_payment, return, or reversal.
+        ledgerable_id:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          description: If the ledger transaction can be reconciled to another object in Modern Treasury, the id will be populated here, otherwise null.
+        external_id:
+          type:
+          - string
+          - 'null'
+          description: A unique string to represent the ledger transaction. Only one pending or posted ledger transaction may have this ID in the ledger.
+        reverses_ledger_transaction_id:
+          type:
+          - string
+          - 'null'
+          description: The ID of the original ledger transaction that this ledger transaction reverses.
+        reversed_by_ledger_transaction_id:
+          type:
+          - string
+          - 'null'
+          description: The ID of the ledger transaction that reversed this ledger transaction.
+        partially_posts_ledger_transaction_id:
+          type:
+          - string
+          - 'null'
+          description: The ID of the ledger transaction that this ledger transaction partially posts.
+        archived_reason:
+          type:
+          - string
+          - 'null'
+          description: System-set reason why the ledger transaction was archived; currently only 'balance_lock_failure' for transactions that violated balance constraints. Only populated when archive_on_balance_lock_failure is true and a balance lock violation occurs, otherwise null.
       additionalProperties: false
-      minProperties: 7
+      minProperties: 20
       required:
       - id
       - object
       - live_mode
       - created_at
       - updated_at
-      - reference_number
-      - reference_number_type
+      - description
+      - status
+      - metadata
+      - effective_at
+      - effective_date
+      - ledger_entries
+      - posted_at
+      - ledger_id
+      - ledgerable_type
+      - ledgerable_id
+      - external_id
+      - reverses_ledger_transaction_id
+      - reversed_by_ledger_transaction_id
+      - partially_posts_ledger_transaction_id
+      - archived_reason
+    ledger_entry:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        object:
+          type: string
+        live_mode:
+          type: boolean
+          description: This field will be true if this object exists in the live environment or false if it exists in the test environment.
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        discarded_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        amount:
+          type: integer
+          description: Value in specified currency's smallest unit. e.g. $10 would be represented as 1000. Can be any integer up to 36 digits.
+        effective_at:
+          type: string
+          format: date-time
+          description: The timestamp (ISO8601 format) at which the ledger transaction happened for reporting purposes.
+        direction:
+          type: string
+          enum:
+          - credit
+          - debit
+          description: One of `credit`, `debit`. Describes the direction money is flowing in the transaction. A `credit` moves money from your account to someone else's. A `debit` pulls money from someone else's account to your own. Note that wire, rtp, and check payments will always be `credit`.
+          _x-stainless-modelDefPath: $shared.transaction_direction
+        status:
+          type: string
+          enum:
+          - archived
+          - pending
+          - posted
+          description: Equal to the state of the ledger transaction when the ledger entry was created. One of `pending`, `posted`, or `archived`.
+        ledger_account_id:
+          type: string
+          format: uuid
+          description: The ledger account that this ledger entry is associated with.
+        ledger_account_lock_version:
+          type:
+          - integer
+          - 'null'
+          description: Lock version of the ledger account. This can be passed when creating a ledger transaction to only succeed if no ledger transactions have posted since the given version. See our post about Designing the Ledgers API with Optimistic Locking for more details.
+        ledger_account_currency:
+          type: string
+          description: The currency of the ledger account.
+        ledger_account_currency_exponent:
+          type: integer
+          description: The currency exponent of the ledger account.
+        ledger_transaction_id:
+          type: string
+          description: The ledger transaction that this ledger entry is associated with.
+        resulting_ledger_account_balances:
+          $ref: '#/components/schemas/ledger_balances'
+          description: The pending, posted, and available balances for this ledger entry's ledger account. The posted balance is the sum of all posted entries on the account. The pending balance is the sum of all pending and posted entries on the account. The available balance is the posted incoming entries minus the sum of the pending and posted outgoing amounts. Please see https://docs.moderntreasury.com/docs/transaction-status-and-balances for more details.
+        metadata:
+          type: object
+          description: Additional data represented as key-value pairs. Both the key and value must be strings.
+          additionalProperties:
+            type: string
+          example:
+            key: value
+            foo: bar
+            modern: treasury
+      additionalProperties: false
+      minProperties: 17
+      required:
+      - id
+      - object
+      - live_mode
+      - created_at
+      - updated_at
+      - discarded_at
+      - amount
+      - effective_at
+      - direction
+      - status
+      - ledger_account_id
+      - ledger_account_lock_version
+      - ledger_account_currency
+      - ledger_account_currency_exponent
+      - ledger_transaction_id
+      - resulting_ledger_account_balances
+      - metadata
     internal_account:
       type: object
       properties:
@@ -933,293 +1934,50 @@ components:
       - ledger_account_id
       - contra_ledger_account_id
       - external_id
-    ledger_account:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-        object:
-          type: string
-        live_mode:
-          type: boolean
-          description: This field will be true if this object exists in the live environment or false if it exists in the test environment.
-        created_at:
-          type: string
-          format: date-time
-        updated_at:
-          type: string
-          format: date-time
-        discarded_at:
-          type:
-          - string
-          - 'null'
-          format: date-time
-        name:
-          type: string
-          description: The name of the ledger account.
-        description:
-          type:
-          - string
-          - 'null'
-          description: The description of the ledger account.
-        normal_balance:
-          type: string
-          enum:
-          - credit
-          - debit
-          description: The normal balance of the ledger account.
-          _x-stainless-modelDefPath: $shared.transaction_direction
-        balances:
-          $ref: '#/components/schemas/ledger_balances_with_effective_at'
-          description: The pending, posted, and available balances for this ledger account. The posted balance is the sum of all posted entries on the account. The pending balance is the sum of all pending and posted entries on the account. The available balance is the posted incoming entries minus the sum of the pending and posted outgoing amounts.
-        lock_version:
-          type: integer
-          description: Lock version of the ledger account.
-        ledger_id:
-          type: string
-          format: uuid
-          description: The id of the ledger that this account belongs to.
-        ledgerable_id:
-          type:
-          - string
-          - 'null'
-          format: uuid
-          description: If the ledger account links to another object in Modern Treasury, the id will be populated here, otherwise null.
-        external_id:
-          type:
-          - string
-          - 'null'
-          description: An optional user-defined 180 character unique identifier.
-        ledgerable_type:
-          type:
-          - string
-          - 'null'
-          enum:
-          - counterparty
-          - external_account
-          - internal_account
-          - virtual_account
-          description: If the ledger account links to another object in Modern Treasury, the type will be populated here, otherwise null. The value is one of internal_account or external_account.
-        metadata:
-          type: object
-          description: Additional data represented as key-value pairs. Both the key and value must be strings.
-          additionalProperties:
-            type: string
-          example:
-            key: value
-            foo: bar
-            modern: treasury
-      additionalProperties: false
-      minProperties: 16
-      required:
-      - id
-      - object
-      - live_mode
-      - created_at
-      - updated_at
-      - discarded_at
-      - name
-      - description
-      - normal_balance
-      - balances
-      - lock_version
-      - ledger_id
-      - ledgerable_id
-      - external_id
-      - ledgerable_type
-      - metadata
-    account_detail:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-        object:
-          type: string
-        live_mode:
-          type: boolean
-          description: This field will be true if this object exists in the live environment or false if it exists in the test environment.
-        created_at:
-          type: string
-          format: date-time
-        updated_at:
-          type: string
-          format: date-time
-        discarded_at:
-          type:
-          - string
-          - 'null'
-          format: date-time
-        account_number:
-          type: string
-          description: The account number for the bank account.
-        account_number_type:
-          type: string
-          enum:
-          - au_number
-          - base_address
-          - card_token
-          - clabe
-          - ethereum_address
-          - hk_number
-          - iban
-          - id_number
-          - nz_number
-          - other
-          - pan
-          - polygon_address
-          - sg_number
-          - solana_address
-          - wallet_address
-          description: One of `iban`, `clabe`, `wallet_address`, or `other`. Use `other` if the bank account number is in a generic format.
-        account_number_safe:
-          type: string
-          description: The last 4 digits of the account_number.
-      additionalProperties: false
-      minProperties: 8
-      maxProperties: 9
-      required:
-      - id
-      - object
-      - live_mode
-      - created_at
-      - updated_at
-      - discarded_at
-      - account_number_type
-      - account_number_safe
-    expected_payment_type:
+    payment_order_subtype:
       type:
       - string
       - 'null'
       enum:
-      - ach
+      - 0C
+      - 0N
+      - 0S
+      - CCD
+      - CIE
+      - CTX
+      - IAT
+      - PPD
+      - TEL
+      - WEB
       - au_becs
       - bacs
-      - book
-      - card
+      - base
       - chats
-      - check
-      - cross_border
       - dk_nets
       - eft
-      - gb_fps
+      - ethereum
       - hu_ics
-      - interac
       - masav
       - mx_ccen
       - neft
       - nics
       - nz_becs
       - pl_elixir
-      - provxchange
+      - polygon
       - ro_sent
-      - rtp
       - se_bankgirot
-      - sen
       - sepa
       - sg_giro
       - sic
-      - signet
       - sknbi
-      - stablecoin
-      - wire
+      - solana
       - zengin
-      description: 'One of: ach, au_becs, bacs, book, check, eft, interac, provxchange, rtp, sen, sepa, signet, wire.'
-    hold:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-        object:
-          type: string
-          enum:
-          - hold
-          description: The type of object
-        live_mode:
-          type: boolean
-          description: This field will be true if this object exists in the live environment or false if it exists in the test environment.
-        created_at:
-          type: string
-          format: date-time
-        updated_at:
-          type: string
-          format: date-time
-        status:
-          type: string
-          enum:
-          - active
-          - resolved
-          description: The status of the hold
-        target_type:
-          type: string
-          enum:
-          - payment_order
-          description: The type of target being held
-        target_id:
-          type: string
-          format: uuid
-          description: The ID of the target being held
-        reason:
-          type:
-          - string
-          - 'null'
-          description: The reason for the hold
-        resolution:
-          type:
-          - string
-          - 'null'
-          description: The resolution of the hold
-        resolved_at:
-          type:
-          - string
-          - 'null'
-          format: date-time
-          description: When the hold was resolved
-        metadata:
-          type:
-          - object
-          - 'null'
-          additionalProperties:
-            type: string
-          description: Additional metadata for the hold
-      required:
-      - id
-      - object
-      - status
-      - target_type
-      - target_id
-      - created_at
-      - updated_at
-      additionalProperties: false
-    error_message:
-      type: object
-      properties:
-        errors:
-          type: object
-          properties:
-            code:
-              type: string
-              enum:
-              - parameter_invalid
-              - parameter_missing
-              - resource_not_found
-              - not_found
-              - forbidden
-              - invalid_ip
-              - invalid_key
-              - header_invalid
-              - expired_key
-              - conflict
-              - too_many_requests
-            message:
-              type: string
-            parameter:
-              type: string
-      required:
-      - errors
-    routing_detail:
+      description: An additional layer of classification for the type of payment order you are doing. This field is only used for `ach` payment orders currently. For `ach`  payment orders, the `subtype`  represents the SEC code. We currently support `CCD`, `PPD`, `IAT`, `CTX`, `WEB`, `CIE`, and `TEL`.
+      x-stainless-renameMap:
+        bacs_new_instruction: 0C
+        bacs_cancellation_instruction: 0N
+        bacs_conversion_instruction: 0S
+    bulk_error:
       type: object
       properties:
         id:
@@ -1236,334 +1994,26 @@ components:
         updated_at:
           type: string
           format: date-time
-        discarded_at:
-          type:
-          - string
-          - 'null'
-          format: date-time
-        routing_number:
-          type: string
-          description: The routing number of the bank.
-        routing_number_type:
-          type: string
-          enum:
-          - aba
-          - au_bsb
-          - br_codigo
-          - ca_cpa
-          - chips
-          - cnaps
-          - dk_interbank_clearing_code
-          - gb_sort_code
-          - hk_interbank_clearing_code
-          - hu_interbank_clearing_code
-          - id_sknbi_code
-          - il_bank_code
-          - in_ifsc
-          - jp_zengin_code
-          - mx_bank_identifier
-          - my_branch_code
-          - nz_national_clearing_code
-          - pl_national_clearing_code
-          - se_bankgiro_clearing_code
-          - sg_interbank_clearing_code
-          - swift
-          - za_national_clearing_code
-          description: The type of routing number. See https://docs.moderntreasury.com/platform/reference/routing-detail-object for more details.
-        payment_type:
-          type:
-          - string
-          - 'null'
-          enum:
-          - ach
-          - au_becs
-          - bacs
-          - book
-          - card
-          - chats
-          - check
-          - cross_border
-          - dk_nets
-          - eft
-          - gb_fps
-          - hu_ics
-          - interac
-          - masav
-          - mx_ccen
-          - neft
-          - nics
-          - nz_becs
-          - pl_elixir
-          - provxchange
-          - ro_sent
-          - rtp
-          - se_bankgirot
-          - sen
-          - sepa
-          - sg_giro
-          - sic
-          - signet
-          - sknbi
-          - stablecoin
-          - wire
-          - zengin
-          description: If the routing detail is to be used for a specific payment type this field will be populated, otherwise null.
-        bank_name:
-          type: string
-          description: The name of the bank.
-        bank_address:
-          $ref: '#/components/schemas/address'
-      additionalProperties: false
-      minProperties: 11
-      required:
-      - id
-      - object
-      - live_mode
-      - created_at
-      - updated_at
-      - discarded_at
-      - routing_number
-      - routing_number_type
-      - payment_type
-      - bank_name
-      - bank_address
-    bulk_result:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-        object:
-          type: string
-        live_mode:
-          type: boolean
-          description: This field will be true if this object exists in the live environment or false if it exists in the test environment.
-        created_at:
-          type: string
-          format: date-time
-        updated_at:
-          type: string
-          format: date-time
-        request_id:
-          type: string
-          format: uuid
-          description: Unique identifier for the request that created this bulk result. This is the ID of the bulk request when `request_type` is bulk_request
-        request_type:
-          type: string
-          enum:
-          - bulk_request
-          description: The type of the request that created this result. bulk_request is the only supported `request_type`
-        status:
-          type: string
-          enum:
-          - pending
-          - successful
-          - failed
-          description: One of successful or failed.
-        request_params:
-          type:
-          - object
-          - 'null'
-          description: An optional object that contains the provided input params for the request that created this result. This is an item in the `resources` array for the bulk_request
-          additionalProperties:
-            type: string
-        entity_id:
-          type: string
-          format: uuid
-          description: Unique identifier for the result entity object.
-        entity_type:
-          type: string
-          enum:
-          - payment_order
-          - ledger_account
-          - ledger_transaction
-          - expected_payment
-          - transaction
-          - entity_link
-          - transaction_line_item
-          - bulk_error
-          description: The type of the result entity object. For a successful bulk result, this is the same as the `resource_type` of the bulk request. For a failed bulk result, this is always bulk_error
-        entity:
-          description: An object with type as indicated by `entity_type`. This is the result object that is generated by performing the requested action on the provided input `request_params`.
-          anyOf:
-          - $ref: '#/components/schemas/payment_order'
-          - $ref: '#/components/schemas/expected_payment'
-          - $ref: '#/components/schemas/ledger_transaction'
-          - $ref: '#/components/schemas/ledger_account'
-          - $ref: '#/components/schemas/transaction'
-          - $ref: '#/components/schemas/bulk_error'
-      additionalProperties: false
-      minProperties: 12
-      required:
-      - id
-      - object
-      - live_mode
-      - created_at
-      - updated_at
-      - request_id
-      - request_type
-      - status
-      - request_params
-      - entity_id
-      - entity_type
-      - entity
-    address:
-      type:
-      - object
-      - 'null'
-      properties:
-        id:
-          type: string
-          format: uuid
-        object:
-          type: string
-        live_mode:
-          type: boolean
-          description: This field will be true if this object exists in the live environment or false if it exists in the test environment.
-        created_at:
-          type: string
-          format: date-time
-        updated_at:
-          type: string
-          format: date-time
-        line1:
-          type:
-          - string
-          - 'null'
-        line2:
-          type:
-          - string
-          - 'null'
-        locality:
-          type:
-          - string
-          - 'null'
-          description: Locality or City.
-        region:
-          type:
-          - string
-          - 'null'
-          description: Region or State.
-        postal_code:
-          type:
-          - string
-          - 'null'
-          description: The postal code of the address.
-        country:
-          type:
-          - string
-          - 'null'
-          description: Country code conforms to [ISO 3166-1 alpha-2]
-      additionalProperties: false
-      minProperties: 11
-      required:
-      - id
-      - object
-      - live_mode
-      - created_at
-      - updated_at
-      - line1
-      - line2
-      - locality
-      - region
-      - postal_code
-      - country
-    virtual_account:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-        object:
-          type: string
-        live_mode:
-          type: boolean
-          description: This field will be true if this object exists in the live environment or false if it exists in the test environment.
-        created_at:
-          type: string
-          format: date-time
-        updated_at:
-          type: string
-          format: date-time
-        discarded_at:
-          type:
-          - string
-          - 'null'
-          format: date-time
-        name:
-          type: string
-          description: The name of the virtual account.
-        description:
-          type:
-          - string
-          - 'null'
-          description: An optional free-form description for internal use.
-        counterparty_id:
-          type:
-          - string
-          - 'null'
-          format: uuid
-          description: The ID of a counterparty that the virtual account belongs to. Optional.
-        internal_account_id:
-          type: string
-          format: uuid
-          description: The ID of the internal account that the virtual account is in.
-        account_details:
+        request_errors:
           type: array
-          description: An array of account detail objects.
           items:
-            $ref: '#/components/schemas/account_detail'
-        routing_details:
-          type: array
-          description: An array of routing detail objects. These will be the routing details of the internal account.
-          items:
-            $ref: '#/components/schemas/routing_detail'
-        debit_ledger_account_id:
-          type:
-          - string
-          - 'null'
-          format: uuid
-          description: The ID of a debit normal ledger account. When money enters the virtual account, this ledger account will be debited. Must be accompanied by a credit_ledger_account_id if present.
-        credit_ledger_account_id:
-          type:
-          - string
-          - 'null'
-          format: uuid
-          description: The ID of a credit normal ledger account. When money enters the virtual account, this ledger account will be credited. Must be accompanied by a debit_ledger_account_id if present.
-        ledger_account_id:
-          type:
-          - string
-          - 'null'
-          format: uuid
-          description: If the virtual account links to a ledger account in Modern Treasury, the id of the ledger account will be populated here.
-        metadata:
-          type: object
-          description: Additional data represented as key-value pairs. Both the key and value must be strings.
-          additionalProperties:
-            type: string
-          example:
-            key: value
-            foo: bar
-            modern: treasury
+            type: object
+            properties:
+              code:
+                type: string
+              message:
+                type: string
+              parameter:
+                type: string
       additionalProperties: false
-      minProperties: 16
+      minProperties: 6
       required:
       - id
       - object
       - live_mode
       - created_at
       - updated_at
-      - discarded_at
-      - name
-      - description
-      - counterparty_id
-      - internal_account_id
-      - account_details
-      - routing_details
-      - debit_ledger_account_id
-      - credit_ledger_account_id
-      - ledger_account_id
-      - metadata
+      - request_errors
     payment_order:
       type: object
       properties:
@@ -1881,207 +2331,56 @@ components:
       - foreign_exchange_rate
       - vendor_attributes
       - batch_id
-    transaction:
+    ledger_balance:
       type: object
       properties:
-        id:
-          type: string
-          format: uuid
-        object:
-          type: string
-        live_mode:
-          type: boolean
-          description: This field will be true if this object exists in the live environment or false if it exists in the test environment.
-        created_at:
-          type: string
-          format: date-time
-        updated_at:
-          type: string
-          format: date-time
-        discarded_at:
-          type:
-          - string
-          - 'null'
-          format: date-time
+        credits:
+          type: integer
+        debits:
+          type: integer
         amount:
           type: integer
-          description: Value in specified currency's smallest unit. e.g. $10 would be represented as 1000.
         currency:
-          $ref: '#/components/schemas/currency'
-          description: Currency that this transaction is denominated in.
-        direction:
           type: string
-          description: Either `credit` or `debit`.
-        vendor_description:
-          type:
-          - string
-          - 'null'
-          description: The transaction detail text that often appears in on your bank statement and in your banking portal.
-        vendor_code:
-          type:
-          - string
-          - 'null'
-          description: When applicable, the bank-given code that determines the transaction's category. For most banks this is the BAI2/BTRS transaction code.
-        vendor_code_type:
-          type:
-          - string
-          - 'null'
-          enum:
-          - bai2
-          - banking_circle
-          - bankprov
-          - bnk_dev
-          - cleartouch
-          - coinbase_prime
-          - column
-          - cross_river
-          - currencycloud
-          - dc_bank
-          - dwolla
-          - evolve
-          - fake_vendor
-          - goldman_sachs
-          - iso20022
-          - jpmc
-          - modern_treasury
-          - mx
-          - paxos
-          - paypal
-          - pnc
-          - signet
-          - silvergate
-          - swift
-          - us_bank
-          - user
-          - western_alliance
-          description: The type of `vendor_code` being reported. Can be one of `bai2`, `bankprov`, `bnk_dev`, `cleartouch`, `currencycloud`, `cross_river`, `dc_bank`, `dwolla`, `evolve`, `goldman_sachs`, `iso20022`, `jpmc`, `mx`, `signet`, `silvergate`, `swift`, `us_bank`, or others.
-        vendor_id:
-          type:
-          - string
-          - 'null'
-          description: An identifier given to this transaction by the bank.
-        as_of_date:
-          type:
-          - string
-          - 'null'
-          format: date
-          description: The date on which the transaction occurred.
-        as_of_time:
-          type:
-          - string
-          - 'null'
-          format: time
-          description: The time on which the transaction occurred. Depending on the granularity of the timestamp information received from the bank, it may be `null`.
-        as_of_timezone:
-          type:
-          - string
-          - 'null'
-          description: The timezone in which the `as_of_time` is represented. Can be `null` if the bank does not provide timezone info.
-        internal_account_id:
-          type: string
-          format: uuid
-          description: The ID of the relevant Internal Account.
-        metadata:
-          type: object
-          description: Additional data represented as key-value pairs. Both the key and value must be strings.
-          additionalProperties:
-            type: string
-          example:
-            key: value
-            foo: bar
-            modern: treasury
-        posted:
-          type: boolean
-          description: This field will be `true` if the transaction has posted to the account.
-        vendor_customer_id:
-          type:
-          - string
-          - 'null'
-          description: An identifier given to this transaction by the bank, often `null`.
-        reconciled:
-          type: boolean
-          description: This field will be `true` if a transaction is reconciled by the Modern Treasury system. This means that it has transaction line items that sum up to the transaction's amount.
-        details:
-          type: object
-          additionalProperties:
-            type: string
-          description: 'This field contains additional information that the bank provided about the transaction. This is structured data. Some of the data in here might overlap with what is in the `vendor_description`. For example, the OBI could be a part of the vendor description, and it would also be included in here. The attributes that are passed through the details field will vary based on your banking partner. Currently, the following keys may be in the details object: `originator_name`, `originator_to_beneficiary_information`.'
-        type:
-          type: string
-          enum:
-          - ach
-          - au_becs
-          - bacs
-          - book
-          - card
-          - chats
-          - check
-          - cross_border
-          - dk_nets
-          - eft
-          - gb_fps
-          - hu_ics
-          - interac
-          - masav
-          - mx_ccen
-          - neft
-          - nics
-          - nz_becs
-          - pl_elixir
-          - provxchange
-          - ro_sent
-          - rtp
-          - se_bankgirot
-          - sen
-          - sepa
-          - sg_giro
-          - sic
-          - signet
-          - sknbi
-          - stablecoin
-          - wire
-          - zengin
-          - other
-          description: The type of the transaction. Examples could be `card, `ach`, `wire`, `check`, `rtp`, `book`, or `sen`.
-        foreign_exchange_rate:
-          $ref: '#/components/schemas/foreign_exchange_rate'
-          description: Associated serialized foreign exchange rate information.
-        custom_identifiers:
-          type: object
-          description: An object containing key-value pairs, each with a custom identifier as the key and a string value.
-          additionalProperties:
-            type: string
-          example:
-            key: value
-            foo: bar
-            modern: treasury
+          description: The currency of the ledger account.
+        currency_exponent:
+          type: integer
+          description: The currency exponent of the ledger account.
       additionalProperties: false
-      minProperties: 23
+      minProperties: 5
       required:
-      - id
-      - object
-      - live_mode
-      - created_at
-      - updated_at
-      - discarded_at
+      - credits
+      - debits
       - amount
       - currency
-      - direction
-      - vendor_code
-      - vendor_code_type
-      - vendor_id
-      - as_of_date
-      - as_of_time
-      - as_of_timezone
-      - internal_account_id
-      - metadata
-      - posted
-      - vendor_customer_id
-      - reconciled
-      - type
-      - foreign_exchange_rate
-      - custom_identifiers
-    connection:
+      - currency_exponent
+    error_message:
+      type: object
+      properties:
+        errors:
+          type: object
+          properties:
+            code:
+              type: string
+              enum:
+              - parameter_invalid
+              - parameter_missing
+              - resource_not_found
+              - not_found
+              - forbidden
+              - invalid_ip
+              - invalid_key
+              - header_invalid
+              - expired_key
+              - conflict
+              - too_many_requests
+            message:
+              type: string
+            parameter:
+              type: string
+      required:
+      - errors
+    payment_reference:
       type: object
       properties:
         id:
@@ -2098,590 +2397,217 @@ components:
         updated_at:
           type: string
           format: date-time
-        discarded_at:
-          type:
-          - string
-          - 'null'
-          format: date-time
-        vendor_id:
+        reference_number:
           type: string
-          format: uuid
-          description: Unique identifier for the bank or vendor.
-        vendor_customer_id:
-          type:
-          - string
-          - 'null'
-          format: uuid
-          description: An identifier given to this connection by the bank.
-        vendor_name:
+          description: The vendor reference number.
+        reference_number_type:
           type: string
-          description: A human-friendly name for the bank or vendor.
+          enum:
+          - ach_original_trace_number
+          - ach_trace_number
+          - bankprov_payment_activity_date
+          - bankprov_payment_id
+          - blockchain_transaction_hash
+          - blockchain_transaction_index
+          - bnk_dev_prenotification_id
+          - bnk_dev_transfer_id
+          - bny_mellon_transaction_reference_number
+          - bofa_end_to_end_id
+          - bofa_neft_clearing_reference_number
+          - bofa_transaction_id
+          - check_number
+          - chips_uid
+          - citibank_reference_number
+          - citibank_worldlink_clearing_system_reference_number
+          - column_fx_quote_id
+          - column_reversal_pair_transfer_id
+          - column_transfer_id
+          - cross_river_card_trace_number
+          - cross_river_core_transaction_id
+          - cross_river_fed_batch_id
+          - cross_river_payment_id
+          - cross_river_retrieval_reference_id
+          - cross_river_service_message
+          - cross_river_transaction_id
+          - currencycloud_conversion_id
+          - currencycloud_payment_id
+          - dc_bank_transaction_id
+          - eft_trace_number
+          - evolve_core_batch
+          - evolve_core_file_key
+          - evolve_core_seq
+          - evolve_transaction_id
+          - fake_vendor_payment_id
+          - fedwire_imad
+          - fedwire_omad
+          - first_republic_internal_id
+          - goldman_sachs_collection_request_id
+          - goldman_sachs_end_to_end_id
+          - goldman_sachs_payment_request_id
+          - goldman_sachs_request_id
+          - goldman_sachs_unique_payment_id
+          - interac_message_id
+          - jpmc_ccn
+          - jpmc_clearing_system_reference
+          - jpmc_customer_reference_id
+          - jpmc_end_to_end_id
+          - jpmc_firm_root_id
+          - jpmc_fx_trn_id
+          - jpmc_p3_id
+          - jpmc_payment_batch_id
+          - jpmc_payment_information_id
+          - jpmc_payment_returned_datetime
+          - jpmc_transaction_reference_number
+          - lob_check_id
+          - other
+          - partial_swift_mir
+          - paxos_crypto_withdrawal_id
+          - paxos_fiat_withdrawal_id
+          - paxos_group_id
+          - paxos_orchestration_id
+          - paxos_transfer_id
+          - pnc_clearing_reference
+          - pnc_instruction_id
+          - pnc_multipayment_id
+          - pnc_payment_trace_id
+          - pnc_request_for_payment_id
+          - pnc_transaction_reference_number
+          - rbc_wire_reference_id
+          - rtp_instruction_id
+          - signet_api_reference_id
+          - signet_confirmation_id
+          - signet_request_id
+          - silvergate_payment_id
+          - svb_end_to_end_id
+          - svb_payment_id
+          - swift_mir
+          - swift_uetr
+          - umb_product_partner_account_number
+          - usbank_payment_application_reference_id
+          - usbank_payment_id
+          - usbank_pending_rtp_payment_id
+          - usbank_posted_rtp_payment_id
+          - wells_fargo_end_to_end_id
+          - wells_fargo_payment_id
+          - wells_fargo_trace_number
+          - wells_fargo_uetr
+          - western_alliance_payment_id
+          - western_alliance_transaction_id
+          - western_alliance_wire_confirmation_number
+          description: The type of the reference number. Referring to the vendor payment id.
       additionalProperties: false
-      minProperties: 9
+      minProperties: 7
       required:
       - id
       - object
       - live_mode
       - created_at
       - updated_at
-      - discarded_at
-      - vendor_id
-      - vendor_customer_id
-      - vendor_name
-    reconciliation_rule_variable:
+      - reference_number
+      - reference_number_type
+    hold:
       type: object
       properties:
-        amount_upper_bound:
-          type: integer
-          description: The highest amount this expected payment may be equal to. Value in specified currency's smallest unit. e.g. $10 would be represented as 1000.
-        amount_lower_bound:
-          type: integer
-          description: The lowest amount this expected payment may be equal to. Value in specified currency's smallest unit. e.g. $10 would be represented as 1000.
-        direction:
-          type: string
-          enum:
-          - credit
-          - debit
-          description: One of credit or debit. When you are receiving money, use credit. When you are being charged, use debit.
-        internal_account_id:
+        id:
           type: string
           format: uuid
-          description: The ID of the Internal Account for the expected payment
-        type:
-          type:
-          - string
-          - 'null'
+        object:
+          type: string
           enum:
-          - ach
-          - au_becs
-          - bacs
-          - book
-          - card
-          - chats
-          - check
-          - cross_border
-          - dk_nets
-          - eft
-          - gb_fps
-          - hu_ics
-          - interac
-          - masav
-          - mx_ccen
-          - neft
-          - nics
-          - nz_becs
-          - pl_elixir
-          - provxchange
-          - ro_sent
-          - rtp
-          - se_bankgirot
-          - sen
-          - sepa
-          - sg_giro
-          - sic
-          - signet
-          - sknbi
-          - stablecoin
-          - wire
-          - zengin
-          description: One of ach, au_becs, bacs, book, check, eft, interac, provxchange, rtp, sen, sepa, signet wire
-        currency:
-          $ref: '#/components/schemas/currency'
-          description: Must conform to ISO 4217. Defaults to the currency of the internal account
-        date_upper_bound:
-          type:
-          - string
-          - 'null'
-          format: date
-          description: The latest date the payment may come in. Format is yyyy-mm-dd
-        date_lower_bound:
-          type:
-          - string
-          - 'null'
-          format: date
-          description: The earliest date the payment may come in. Format is yyyy-mm-dd
-        counterparty_id:
-          type:
-          - string
-          - 'null'
+          - hold
+          description: The type of object
+        live_mode:
+          type: boolean
+          description: This field will be true if this object exists in the live environment or false if it exists in the test environment.
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        status:
+          type: string
+          enum:
+          - active
+          - resolved
+          description: The status of the hold
+        target_type:
+          type: string
+          enum:
+          - payment_order
+          description: The type of target being held
+        target_id:
+          type: string
           format: uuid
-          description: The ID of the counterparty you expect for this payment
-        custom_identifiers:
+          description: The ID of the target being held
+        reason:
+          type:
+          - string
+          - 'null'
+          description: The reason for the hold
+        resolution:
+          type:
+          - string
+          - 'null'
+          description: The resolution of the hold
+        resolved_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          description: When the hold was resolved
+        metadata:
           type:
           - object
           - 'null'
-          description: A hash of custom identifiers for this payment
           additionalProperties:
             type: string
-      additionalProperties: false
-      minProperties: 10
+          description: Additional metadata for the hold
       required:
-      - amount_upper_bound
-      - amount_lower_bound
-      - direction
-      - internal_account_id
-    currency:
+      - id
+      - object
+      - status
+      - target_type
+      - target_id
+      - created_at
+      - updated_at
+      additionalProperties: false
+    payment_order_type:
       type: string
       enum:
-      - AED
-      - AFN
-      - ALL
-      - AMD
-      - ANG
-      - AOA
-      - ARS
-      - AUD
-      - AWG
-      - AZN
-      - BAM
-      - BBD
-      - BCH
-      - BDT
-      - BGN
-      - BHD
-      - BIF
-      - BMD
-      - BND
-      - BOB
-      - BRL
-      - BSD
-      - BTC
-      - BTN
-      - BWP
-      - BYN
-      - BYR
-      - BZD
-      - CAD
-      - CDF
-      - CHF
-      - CLF
-      - CLP
-      - CNH
-      - CNY
-      - COP
-      - CRC
-      - CUC
-      - CUP
-      - CVE
-      - CZK
-      - DJF
-      - DKK
-      - DOP
-      - DZD
-      - EEK
-      - EGP
-      - ERN
-      - ETB
-      - ETH
-      - EUR
-      - EURC
-      - FJD
-      - FKP
-      - GBP
-      - GBX
-      - GEL
-      - GGP
-      - GHS
-      - GIP
-      - GMD
-      - GNF
-      - GTQ
-      - GYD
-      - HKD
-      - HNL
-      - HRK
-      - HTG
-      - HUF
-      - IDR
-      - ILS
-      - IMP
-      - INR
-      - IQD
-      - IRR
-      - ISK
-      - JEP
-      - JMD
-      - JOD
-      - JPY
-      - KES
-      - KGS
-      - KHR
-      - KMF
-      - KPW
-      - KRW
-      - KWD
-      - KYD
-      - KZT
-      - LAK
-      - LBP
-      - LKR
-      - LRD
-      - LSL
-      - LTL
-      - LVL
-      - LYD
-      - MAD
-      - MDL
-      - MGA
-      - MKD
-      - MMK
-      - MNT
-      - MOP
-      - MRO
-      - MRU
-      - MTL
-      - MUR
-      - MVR
-      - MWK
-      - MXN
-      - MYR
-      - MZN
-      - NAD
-      - NGN
-      - NIO
-      - NOK
-      - NPR
-      - NZD
-      - OMR
-      - OP
-      - PAB
-      - PEN
-      - PGK
-      - PHP
-      - PKR
-      - PLN
-      - PYG
-      - PYUSD
-      - QAR
-      - RON
-      - RSD
-      - RUB
-      - RWF
-      - SAR
-      - SBD
-      - SCR
-      - SDG
-      - SEK
-      - SGD
-      - SHP
-      - SKK
-      - SLE
-      - SLL
-      - SOS
-      - SRD
-      - SSP
-      - STD
-      - STN
-      - SVC
-      - SYP
-      - SZL
-      - THB
-      - TJS
-      - TMM
-      - TMT
-      - TND
-      - TOP
-      - TRY
-      - TTD
-      - TWD
-      - TZS
-      - UAH
-      - UGX
-      - USD
-      - USDB
-      - USDC
-      - USDG
-      - USDP
-      - USDT
-      - UYU
-      - UZS
-      - VEF
-      - VES
-      - VND
-      - VUV
-      - WST
-      - XAF
-      - XAG
-      - XAU
-      - XBA
-      - XBB
-      - XBC
-      - XBD
-      - XCD
-      - XCG
-      - XDR
-      - XFU
-      - XOF
-      - XPD
-      - XPF
-      - XPT
-      - XTS
-      - YER
-      - ZAR
-      - ZMK
-      - ZMW
-      - ZWD
-      - ZWG
-      - ZWL
-      - ZWN
-      - ZWR
-      description: Three-letter ISO currency code.
-    ledger_entry:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-        object:
-          type: string
-        live_mode:
-          type: boolean
-          description: This field will be true if this object exists in the live environment or false if it exists in the test environment.
-        created_at:
-          type: string
-          format: date-time
-        updated_at:
-          type: string
-          format: date-time
-        discarded_at:
-          type:
-          - string
-          - 'null'
-          format: date-time
-        amount:
-          type: integer
-          description: Value in specified currency's smallest unit. e.g. $10 would be represented as 1000. Can be any integer up to 36 digits.
-        effective_at:
-          type: string
-          format: date-time
-          description: The timestamp (ISO8601 format) at which the ledger transaction happened for reporting purposes.
-        direction:
-          type: string
-          enum:
-          - credit
-          - debit
-          description: One of `credit`, `debit`. Describes the direction money is flowing in the transaction. A `credit` moves money from your account to someone else's. A `debit` pulls money from someone else's account to your own. Note that wire, rtp, and check payments will always be `credit`.
-          _x-stainless-modelDefPath: $shared.transaction_direction
-        status:
-          type: string
-          enum:
-          - archived
-          - pending
-          - posted
-          description: Equal to the state of the ledger transaction when the ledger entry was created. One of `pending`, `posted`, or `archived`.
-        ledger_account_id:
-          type: string
-          format: uuid
-          description: The ledger account that this ledger entry is associated with.
-        ledger_account_lock_version:
-          type:
-          - integer
-          - 'null'
-          description: Lock version of the ledger account. This can be passed when creating a ledger transaction to only succeed if no ledger transactions have posted since the given version. See our post about Designing the Ledgers API with Optimistic Locking for more details.
-        ledger_account_currency:
-          type: string
-          description: The currency of the ledger account.
-        ledger_account_currency_exponent:
-          type: integer
-          description: The currency exponent of the ledger account.
-        ledger_transaction_id:
-          type: string
-          description: The ledger transaction that this ledger entry is associated with.
-        resulting_ledger_account_balances:
-          $ref: '#/components/schemas/ledger_balances'
-          description: The pending, posted, and available balances for this ledger entry's ledger account. The posted balance is the sum of all posted entries on the account. The pending balance is the sum of all pending and posted entries on the account. The available balance is the posted incoming entries minus the sum of the pending and posted outgoing amounts. Please see https://docs.moderntreasury.com/docs/transaction-status-and-balances for more details.
-        metadata:
-          type: object
-          description: Additional data represented as key-value pairs. Both the key and value must be strings.
-          additionalProperties:
-            type: string
-          example:
-            key: value
-            foo: bar
-            modern: treasury
-      additionalProperties: false
-      minProperties: 17
-      required:
-      - id
-      - object
-      - live_mode
-      - created_at
-      - updated_at
-      - discarded_at
-      - amount
-      - effective_at
-      - direction
-      - status
-      - ledger_account_id
-      - ledger_account_lock_version
-      - ledger_account_currency
-      - ledger_account_currency_exponent
-      - ledger_transaction_id
-      - resulting_ledger_account_balances
-      - metadata
-    bulk_error:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-        object:
-          type: string
-        live_mode:
-          type: boolean
-          description: This field will be true if this object exists in the live environment or false if it exists in the test environment.
-        created_at:
-          type: string
-          format: date-time
-        updated_at:
-          type: string
-          format: date-time
-        request_errors:
-          type: array
-          items:
-            type: object
-            properties:
-              code:
-                type: string
-              message:
-                type: string
-              parameter:
-                type: string
-      additionalProperties: false
-      minProperties: 6
-      required:
-      - id
-      - object
-      - live_mode
-      - created_at
-      - updated_at
-      - request_errors
-    ledger_transaction:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-        object:
-          type: string
-        live_mode:
-          type: boolean
-          description: This field will be true if this object exists in the live environment or false if it exists in the test environment.
-        created_at:
-          type: string
-          format: date-time
-        updated_at:
-          type: string
-          format: date-time
-        description:
-          type:
-          - string
-          - 'null'
-          description: An optional description for internal use.
-        status:
-          type: string
-          enum:
-          - archived
-          - pending
-          - posted
-          description: To post a ledger transaction at creation, use `posted`.
-        metadata:
-          type: object
-          description: Additional data represented as key-value pairs. Both the key and value must be strings.
-          additionalProperties:
-            type: string
-          example:
-            key: value
-            foo: bar
-            modern: treasury
-        effective_at:
-          type: string
-          format: date-time
-          description: The timestamp (ISO8601 format) at which the ledger transaction happened for reporting purposes.
-        effective_date:
-          type: string
-          format: date
-          description: The date (YYYY-MM-DD) on which the ledger transaction happened for reporting purposes.
-        ledger_entries:
-          type: array
-          items:
-            $ref: '#/components/schemas/ledger_entry'
-          description: An array of ledger entry objects.
-        posted_at:
-          type:
-          - string
-          - 'null'
-          format: date-time
-          description: The time on which the ledger transaction posted. This is null if the ledger transaction is pending.
-        ledger_id:
-          type: string
-          format: uuid
-          description: The ID of the ledger this ledger transaction belongs to.
-        ledgerable_type:
-          type:
-          - string
-          - 'null'
-          enum:
-          - expected_payment
-          - incoming_payment_detail
-          - payment_order
-          - return
-          - reversal
-          description: If the ledger transaction can be reconciled to another object in Modern Treasury, the type will be populated here, otherwise null. This can be one of payment_order, incoming_payment_detail, expected_payment, return, or reversal.
-        ledgerable_id:
-          type:
-          - string
-          - 'null'
-          format: uuid
-          description: If the ledger transaction can be reconciled to another object in Modern Treasury, the id will be populated here, otherwise null.
-        external_id:
-          type:
-          - string
-          - 'null'
-          description: A unique string to represent the ledger transaction. Only one pending or posted ledger transaction may have this ID in the ledger.
-        reverses_ledger_transaction_id:
-          type:
-          - string
-          - 'null'
-          description: The ID of the original ledger transaction that this ledger transaction reverses.
-        reversed_by_ledger_transaction_id:
-          type:
-          - string
-          - 'null'
-          description: The ID of the ledger transaction that reversed this ledger transaction.
-        partially_posts_ledger_transaction_id:
-          type:
-          - string
-          - 'null'
-          description: The ID of the ledger transaction that this ledger transaction partially posts.
-        archived_reason:
-          type:
-          - string
-          - 'null'
-          description: System-set reason why the ledger transaction was archived; currently only 'balance_lock_failure' for transactions that violated balance constraints. Only populated when archive_on_balance_lock_failure is true and a balance lock violation occurs, otherwise null.
-      additionalProperties: false
-      minProperties: 20
-      required:
-      - id
-      - object
-      - live_mode
-      - created_at
-      - updated_at
-      - description
-      - status
-      - metadata
-      - effective_at
-      - effective_date
-      - ledger_entries
-      - posted_at
-      - ledger_id
-      - ledgerable_type
-      - ledgerable_id
-      - external_id
-      - reverses_ledger_transaction_id
-      - reversed_by_ledger_transaction_id
-      - partially_posts_ledger_transaction_id
-      - archived_reason
+      - ach
+      - au_becs
+      - bacs
+      - book
+      - card
+      - chats
+      - check
+      - cross_border
+      - dk_nets
+      - eft
+      - gb_fps
+      - hu_ics
+      - interac
+      - masav
+      - mx_ccen
+      - neft
+      - nics
+      - nz_becs
+      - pl_elixir
+      - provxchange
+      - ro_sent
+      - rtp
+      - se_bankgirot
+      - sen
+      - sepa
+      - sg_giro
+      - sic
+      - signet
+      - sknbi
+      - stablecoin
+      - wire
+      - zengin
+      description: One of `ach`, `se_bankgirot`, `eft`, `wire`, `check`, `sen`, `book`, `rtp`, `sepa`, `bacs`, `au_becs`, `interac`, `neft`, `nics`, `nz_national_clearing_code`, `sic`, `signet`, `provexchange`, `zengin`.
     account_capability:
       type: object
       properties:
@@ -2765,30 +2691,7 @@ components:
       - direction
       - identifier
       - payment_type
-    ledger_balance:
-      type: object
-      properties:
-        credits:
-          type: integer
-        debits:
-          type: integer
-        amount:
-          type: integer
-        currency:
-          type: string
-          description: The currency of the ledger account.
-        currency_exponent:
-          type: integer
-          description: The currency exponent of the ledger account.
-      additionalProperties: false
-      minProperties: 5
-      required:
-      - credits
-      - debits
-      - amount
-      - currency
-      - currency_exponent
-    expected_payment:
+    connection:
       type: object
       properties:
         id:
@@ -2805,62 +2708,262 @@ components:
         updated_at:
           type: string
           format: date-time
-        external_id:
+        discarded_at:
           type:
           - string
           - 'null'
-          description: An optional user-defined 180 character unique identifier.
-        amount_upper_bound:
-          type:
-          - integer
-          - 'null'
-          description: The highest amount this expected payment may be equal to. Value in specified currency's smallest unit. e.g. $10 would be represented as 1000.
-        amount_lower_bound:
-          type:
-          - integer
-          - 'null'
-          description: The lowest amount this expected payment may be equal to. Value in specified currency's smallest unit. e.g. $10 would be represented as 1000.
-        direction:
-          type:
-          - string
-          - 'null'
-          enum:
-          - credit
-          - debit
-          description: One of credit or debit. When you are receiving money, use credit. When you are being charged, use debit.
-        internal_account_id:
+          format: date-time
+        vendor_id:
+          type: string
+          format: uuid
+          description: Unique identifier for the bank or vendor.
+        vendor_customer_id:
           type:
           - string
           - 'null'
           format: uuid
-          description: The ID of the Internal Account for the expected payment.
-        type:
-          $ref: '#/components/schemas/expected_payment_type'
-        currency:
-          $ref: '#/components/schemas/currency'
-          description: Must conform to ISO 4217. Defaults to the currency of the internal account.
-        date_upper_bound:
+          description: An identifier given to this connection by the bank.
+        vendor_name:
+          type: string
+          description: A human-friendly name for the bank or vendor.
+      additionalProperties: false
+      minProperties: 9
+      required:
+      - id
+      - object
+      - live_mode
+      - created_at
+      - updated_at
+      - discarded_at
+      - vendor_id
+      - vendor_customer_id
+      - vendor_name
+    address:
+      type:
+      - object
+      - 'null'
+      properties:
+        id:
+          type: string
+          format: uuid
+        object:
+          type: string
+        live_mode:
+          type: boolean
+          description: This field will be true if this object exists in the live environment or false if it exists in the test environment.
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        line1:
           type:
           - string
           - 'null'
-          format: date
-          description: 'The latest date the payment may come in. Format: yyyy-mm-dd'
-        date_lower_bound:
+        line2:
           type:
           - string
           - 'null'
-          format: date
-          description: 'The earliest date the payment may come in. Format: yyyy-mm-dd'
+        locality:
+          type:
+          - string
+          - 'null'
+          description: Locality or City.
+        region:
+          type:
+          - string
+          - 'null'
+          description: Region or State.
+        postal_code:
+          type:
+          - string
+          - 'null'
+          description: The postal code of the address.
+        country:
+          type:
+          - string
+          - 'null'
+          description: Country code conforms to [ISO 3166-1 alpha-2]
+      additionalProperties: false
+      minProperties: 11
+      required:
+      - id
+      - object
+      - live_mode
+      - created_at
+      - updated_at
+      - line1
+      - line2
+      - locality
+      - region
+      - postal_code
+      - country
+    account_detail:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        object:
+          type: string
+        live_mode:
+          type: boolean
+          description: This field will be true if this object exists in the live environment or false if it exists in the test environment.
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        discarded_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        account_number:
+          type: string
+          description: The account number for the bank account.
+        account_number_type:
+          type: string
+          enum:
+          - au_number
+          - base_address
+          - card_token
+          - clabe
+          - ethereum_address
+          - hk_number
+          - iban
+          - id_number
+          - nz_number
+          - other
+          - pan
+          - polygon_address
+          - sg_number
+          - solana_address
+          - wallet_address
+          description: One of `iban`, `clabe`, `wallet_address`, or `other`. Use `other` if the bank account number is in a generic format.
+        account_number_safe:
+          type: string
+          description: The last 4 digits of the account_number.
+      additionalProperties: false
+      minProperties: 8
+      maxProperties: 9
+      required:
+      - id
+      - object
+      - live_mode
+      - created_at
+      - updated_at
+      - discarded_at
+      - account_number_type
+      - account_number_safe
+    expected_payment_type:
+      type:
+      - string
+      - 'null'
+      enum:
+      - ach
+      - au_becs
+      - bacs
+      - book
+      - card
+      - chats
+      - check
+      - cross_border
+      - dk_nets
+      - eft
+      - gb_fps
+      - hu_ics
+      - interac
+      - masav
+      - mx_ccen
+      - neft
+      - nics
+      - nz_becs
+      - pl_elixir
+      - provxchange
+      - ro_sent
+      - rtp
+      - se_bankgirot
+      - sen
+      - sepa
+      - sg_giro
+      - sic
+      - signet
+      - sknbi
+      - stablecoin
+      - wire
+      - zengin
+      description: 'One of: ach, au_becs, bacs, book, check, eft, interac, provxchange, rtp, sen, sepa, signet, wire.'
+    virtual_account:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        object:
+          type: string
+        live_mode:
+          type: boolean
+          description: This field will be true if this object exists in the live environment or false if it exists in the test environment.
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        discarded_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        name:
+          type: string
+          description: The name of the virtual account.
         description:
           type:
           - string
           - 'null'
-          description: An optional description for internal use.
-        statement_descriptor:
+          description: An optional free-form description for internal use.
+        counterparty_id:
           type:
           - string
           - 'null'
-          description: The statement description you expect to see on the transaction. For ACH payments, this will be the full line item passed from the bank. For wire payments, this will be the OBI field on the wire. For check payments, this will be the memo field.
+          format: uuid
+          description: The ID of a counterparty that the virtual account belongs to. Optional.
+        internal_account_id:
+          type: string
+          format: uuid
+          description: The ID of the internal account that the virtual account is in.
+        account_details:
+          type: array
+          description: An array of account detail objects.
+          items:
+            $ref: '#/components/schemas/account_detail'
+        routing_details:
+          type: array
+          description: An array of routing detail objects. These will be the routing details of the internal account.
+          items:
+            $ref: '#/components/schemas/routing_detail'
+        debit_ledger_account_id:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          description: The ID of a debit normal ledger account. When money enters the virtual account, this ledger account will be debited. Must be accompanied by a credit_ledger_account_id if present.
+        credit_ledger_account_id:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          description: The ID of a credit normal ledger account. When money enters the virtual account, this ledger account will be credited. Must be accompanied by a debit_ledger_account_id if present.
+        ledger_account_id:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          description: If the virtual account links to a ledger account in Modern Treasury, the id of the ledger account will be populated here.
         metadata:
           type: object
           description: Additional data represented as key-value pairs. Both the key and value must be strings.
@@ -2870,128 +2973,25 @@ components:
             key: value
             foo: bar
             modern: treasury
-        counterparty_id:
-          type:
-          - string
-          - 'null'
-          format: uuid
-          description: The ID of the counterparty you expect for this payment.
-        remittance_information:
-          type:
-          - string
-          - 'null'
-          description: For `ach`, this field will be passed through on an addenda record. For `wire` payments the field will be passed through as the "Originator to Beneficiary Information", also known as OBI or Fedwire tag 6000.
-        reconciliation_groups:
-          type:
-          - object
-          - 'null'
-          description: The reconciliation groups you have for this payment.
-        reconciliation_filters:
-          type:
-          - object
-          - 'null'
-          description: The reconciliation filters you have for this payment.
-        reconciliation_rule_variables:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/reconciliation_rule_variable'
-          description: An array of reconciliation rule variables for this payment.
-        amount_reconciled:
-          type:
-          - integer
-          - 'null'
-          description: The amount reconciled for this expected payment. Value in specified currency's smallest unit. e.g. $10 would be represented as 1000.
-        amount_reconciled_direction:
-          type:
-          - string
-          - 'null'
-          enum:
-          - credit
-          - debit
-          description: One of credit or debit. Indicates whether amount_reconciled is a credit or debit amount.
-        amount_unreconciled:
-          type:
-          - integer
-          - 'null'
-          description: The amount that remains unreconciled for this expected payment. Value in specified currency's smallest unit. e.g. $10 would be represented as 1000.
-        amount_unreconciled_direction:
-          type:
-          - string
-          - 'null'
-          enum:
-          - credit
-          - debit
-          description: One of credit or debit. Indicates whether amount_unreconciled is a credit or debit amount.
-        transaction_id:
-          type:
-          - string
-          - 'null'
-          format: uuid
-          description: The ID of the Transaction this expected payment object has been matched to.
-        transaction_line_item_id:
-          type:
-          - string
-          - 'null'
-          format: uuid
-          description: The ID of the Transaction Line Item this expected payment has been matched to.
-        status:
-          type: string
-          enum:
-          - archived
-          - partially_reconciled
-          - reconciled
-          - unreconciled
-          description: One of unreconciled, partially_reconciled, reconciled, or archived.
-        reconciliation_method:
-          type:
-          - string
-          - 'null'
-          enum:
-          - automatic
-          - manual
-          description: One of manual if this expected payment was manually reconciled in the dashboard, automatic if it was automatically reconciled by Modern Treasury, or null if it is unreconciled.
-        ledger_transaction_id:
-          type:
-          - string
-          - 'null'
-          format: uuid
-          description: The ID of the ledger transaction linked to the expected payment.
       additionalProperties: false
-      minProperties: 31
+      minProperties: 16
       required:
       - id
       - object
       - live_mode
       - created_at
       - updated_at
-      - external_id
-      - amount_upper_bound
-      - amount_lower_bound
-      - direction
-      - internal_account_id
-      - type
-      - currency
-      - date_upper_bound
-      - date_lower_bound
+      - discarded_at
+      - name
       - description
-      - statement_descriptor
-      - metadata
       - counterparty_id
-      - remittance_information
-      - reconciliation_groups
-      - reconciliation_filters
-      - reconciliation_rule_variables
-      - amount_reconciled
-      - amount_reconciled_direction
-      - amount_unreconciled
-      - amount_unreconciled_direction
-      - transaction_id
-      - transaction_line_item_id
-      - status
-      - reconciliation_method
-      - ledger_transaction_id
+      - internal_account_id
+      - account_details
+      - routing_details
+      - debit_ledger_account_id
+      - credit_ledger_account_id
+      - ledger_account_id
+      - metadata
   securitySchemes:
     basic_auth:
       type: http
