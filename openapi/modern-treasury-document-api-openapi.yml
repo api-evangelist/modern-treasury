@@ -434,54 +434,6 @@ paths:
                 $ref: '#/components/schemas/error_message'
 components:
   schemas:
-    document_detail:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-        object:
-          type: string
-        live_mode:
-          type: boolean
-          description: This field will be true if this object exists in the live environment or false if it exists in the test environment.
-        created_at:
-          type: string
-          format: date-time
-        updated_at:
-          type: string
-          format: date-time
-        discarded_at:
-          type:
-          - string
-          - 'null'
-          format: date-time
-        document_identifier_type:
-          type: string
-        document_identifier:
-          type: string
-      additionalProperties: false
-      minProperties: 8
-      required:
-      - id
-      - object
-      - live_mode
-      - created_at
-      - updated_at
-      - discarded_at
-      - document_identifier_type
-      - document_identifier
-    legacy_document_create_request:
-      type: object
-      properties:
-        document_type:
-          type: string
-          description: A category given to the document, can be `null`.
-        file:
-          type: string
-          format: binary
-      required:
-      - file
     document:
       type: object
       properties:
@@ -568,6 +520,80 @@ components:
       - documentable_type
       - document_details
       - file
+    document_detail:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        object:
+          type: string
+        live_mode:
+          type: boolean
+          description: This field will be true if this object exists in the live environment or false if it exists in the test environment.
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        discarded_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        document_identifier_type:
+          type: string
+        document_identifier:
+          type: string
+      additionalProperties: false
+      minProperties: 8
+      required:
+      - id
+      - object
+      - live_mode
+      - created_at
+      - updated_at
+      - discarded_at
+      - document_identifier_type
+      - document_identifier
+    error_message:
+      type: object
+      properties:
+        errors:
+          type: object
+          properties:
+            code:
+              type: string
+              enum:
+              - parameter_invalid
+              - parameter_missing
+              - resource_not_found
+              - not_found
+              - forbidden
+              - invalid_ip
+              - invalid_key
+              - header_invalid
+              - expired_key
+              - conflict
+              - too_many_requests
+            message:
+              type: string
+            parameter:
+              type: string
+      required:
+      - errors
+    legacy_document_create_request:
+      type: object
+      properties:
+        document_type:
+          type: string
+          description: A category given to the document, can be `null`.
+        file:
+          type: string
+          format: binary
+      required:
+      - file
     document_create_request:
       type: object
       properties:
@@ -596,32 +622,6 @@ components:
           format: binary
       required:
       - file
-    error_message:
-      type: object
-      properties:
-        errors:
-          type: object
-          properties:
-            code:
-              type: string
-              enum:
-              - parameter_invalid
-              - parameter_missing
-              - resource_not_found
-              - not_found
-              - forbidden
-              - invalid_ip
-              - invalid_key
-              - header_invalid
-              - expired_key
-              - conflict
-              - too_many_requests
-            message:
-              type: string
-            parameter:
-              type: string
-      required:
-      - errors
   securitySchemes:
     basic_auth:
       type: http

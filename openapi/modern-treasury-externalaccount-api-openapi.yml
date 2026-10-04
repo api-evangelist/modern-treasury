@@ -270,66 +270,165 @@ paths:
           description: successful
 components:
   schemas:
-    external_account_verify_request:
+    address_request:
       type: object
       properties:
-        originating_account_id:
+        line1:
+          type:
+          - string
+          - 'null'
+        line2:
+          type:
+          - string
+          - 'null'
+        locality:
+          type:
+          - string
+          - 'null'
+          description: Locality or City.
+        region:
+          type:
+          - string
+          - 'null'
+          description: Region or State.
+        postal_code:
+          type:
+          - string
+          - 'null'
+          description: The postal code of the address.
+        country:
+          type:
+          - string
+          - 'null'
+          description: Country code conforms to [ISO 3166-1 alpha-2]
+    external_account:
+      type: object
+      properties:
+        id:
           type: string
           format: uuid
-          description: The ID of the internal account where the micro-deposits originate from. Both credit and debit capabilities must be enabled.
-        payment_type:
+        object:
+          type: string
+        live_mode:
+          type: boolean
+          description: This field will be true if this object exists in the live environment or false if it exists in the test environment.
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        discarded_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        account_type:
+          $ref: '#/components/schemas/external_account_type'
+        party_type:
+          type:
+          - string
+          - 'null'
+          enum:
+          - business
+          - individual
+          description: Either `individual` or `business`.
+        party_address:
+          $ref: '#/components/schemas/address'
+          description: The address associated with the owner or `null`.
+        name:
+          type:
+          - string
+          - 'null'
+          description: A nickname for the external account. This is only for internal usage and won't affect any payments
+        counterparty_id:
+          type:
+          - string
+          - 'null'
+          format: uuid
+        account_details:
+          type: array
+          items:
+            $ref: '#/components/schemas/account_detail'
+        routing_details:
+          type: array
+          items:
+            $ref: '#/components/schemas/routing_detail'
+        external_id:
+          type:
+          - string
+          - 'null'
+          description: An optional user-defined 180 character unique identifier.
+        metadata:
+          type: object
+          additionalProperties:
+            type: string
+          example:
+            key: value
+            foo: bar
+            modern: treasury
+          description: Additional data represented as key-value pairs. Both the key and value must be strings.
+        party_name:
+          type: string
+          description: The legal name of the entity which owns the account.
+        contact_details:
+          type: array
+          items:
+            $ref: '#/components/schemas/contact_detail'
+        ledger_account_id:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          description: If the external account links to a ledger account in Modern Treasury, the id of the ledger account will be populated here.
+        verification_status:
           type: string
           enum:
-          - ach
-          - au_becs
-          - bacs
-          - book
-          - card
-          - chats
-          - check
-          - cross_border
-          - dk_nets
-          - eft
-          - gb_fps
-          - hu_ics
-          - interac
-          - masav
-          - mx_ccen
-          - neft
-          - nics
-          - nz_becs
-          - pl_elixir
-          - provxchange
-          - ro_sent
-          - rtp
-          - se_bankgirot
-          - sen
-          - sepa
-          - sg_giro
-          - sic
-          - signet
-          - sknbi
-          - stablecoin
-          - wire
-          - zengin
-          description: Can be `ach`, `eft`, or `rtp`.
-        currency:
-          $ref: '#/components/schemas/currency'
-          description: Defaults to the currency of the originating account.
-        fallback_type:
-          type: string
+          - pending_verification
+          - unverified
+          - verified
+        verification_source:
+          type:
+          - string
+          - 'null'
           enum:
-          - ach
-          description: A payment type to fallback to if the original type is not valid for the receiving account. Currently, this only supports falling back from RTP to ACH (payment_type=rtp and fallback_type=ach)
-        priority:
-          type: string
-          enum:
-          - high
-          - normal
-          description: Either `normal` or `high`. For ACH payments, `high` represents a same-day ACH transfer. This will apply to both `payment_type` and `fallback_type`.
+          - ach_prenote
+          - microdeposits
+          - plaid
+      additionalProperties: false
+      minProperties: 20
       required:
-      - originating_account_id
-      - payment_type
+      - id
+      - object
+      - live_mode
+      - created_at
+      - updated_at
+      - discarded_at
+      - account_type
+      - party_type
+      - party_address
+      - name
+      - counterparty_id
+      - account_details
+      - routing_details
+      - external_id
+      - metadata
+      - party_name
+      - contact_details
+      - ledger_account_id
+      - verification_status
+      - verification_source
+    contact_detail_create_request:
+      type: object
+      properties:
+        contact_identifier:
+          type: string
+        contact_identifier_type:
+          type: string
+          enum:
+          - email
+          - phone_number
+          - website
     currency:
       type: string
       enum:
@@ -536,9 +635,25 @@ components:
       - ZWN
       - ZWR
       description: Three-letter ISO currency code.
-    address_request:
-      type: object
+    address:
+      type:
+      - object
+      - 'null'
       properties:
+        id:
+          type: string
+          format: uuid
+        object:
+          type: string
+        live_mode:
+          type: boolean
+          description: This field will be true if this object exists in the live environment or false if it exists in the test environment.
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
         line1:
           type:
           - string
@@ -567,6 +682,392 @@ components:
           - string
           - 'null'
           description: Country code conforms to [ISO 3166-1 alpha-2]
+      additionalProperties: false
+      minProperties: 11
+      required:
+      - id
+      - object
+      - live_mode
+      - created_at
+      - updated_at
+      - line1
+      - line2
+      - locality
+      - region
+      - postal_code
+      - country
+    ledger_account_create_request:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The name of the ledger account.
+        description:
+          type:
+          - string
+          - 'null'
+          description: The description of the ledger account.
+        normal_balance:
+          type: string
+          enum:
+          - credit
+          - debit
+          description: The normal balance of the ledger account.
+          _x-stainless-modelDefPath: $shared.transaction_direction
+        ledger_id:
+          type: string
+          format: uuid
+          description: The id of the ledger that this account belongs to.
+        currency:
+          type: string
+          description: The currency of the ledger account.
+        currency_exponent:
+          type:
+          - integer
+          - 'null'
+          description: The currency exponent of the ledger account.
+        ledger_account_category_ids:
+          type: array
+          items:
+            type: string
+            format: uuid
+          description: The array of ledger account category ids that this ledger account should be a child of.
+        ledgerable_id:
+          type: string
+          format: uuid
+          description: If the ledger account links to another object in Modern Treasury, the id will be populated here, otherwise null.
+        ledgerable_type:
+          type: string
+          enum:
+          - counterparty
+          - external_account
+          - internal_account
+          - virtual_account
+          description: If the ledger account links to another object in Modern Treasury, the type will be populated here, otherwise null. The value is one of internal_account or external_account.
+        metadata:
+          type: object
+          description: Additional data represented as key-value pairs. Both the key and value must be strings.
+          additionalProperties:
+            type: string
+          example:
+            key: value
+            foo: bar
+            modern: treasury
+        external_id:
+          type:
+          - string
+          - 'null'
+          description: An optional user-defined 180 character unique identifier.
+      required:
+      - name
+      - normal_balance
+      - ledger_id
+      - currency
+    account_detail:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        object:
+          type: string
+        live_mode:
+          type: boolean
+          description: This field will be true if this object exists in the live environment or false if it exists in the test environment.
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        discarded_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        account_number:
+          type: string
+          description: The account number for the bank account.
+        account_number_type:
+          type: string
+          enum:
+          - au_number
+          - base_address
+          - card_token
+          - clabe
+          - ethereum_address
+          - hk_number
+          - iban
+          - id_number
+          - nz_number
+          - other
+          - pan
+          - polygon_address
+          - sg_number
+          - solana_address
+          - wallet_address
+          description: One of `iban`, `clabe`, `wallet_address`, or `other`. Use `other` if the bank account number is in a generic format.
+        account_number_safe:
+          type: string
+          description: The last 4 digits of the account_number.
+      additionalProperties: false
+      minProperties: 8
+      maxProperties: 9
+      required:
+      - id
+      - object
+      - live_mode
+      - created_at
+      - updated_at
+      - discarded_at
+      - account_number_type
+      - account_number_safe
+    external_account_complete_verification_request:
+      type: object
+      properties:
+        amounts:
+          type: array
+          items:
+            type: integer
+          maxItems: 2
+          example:
+          - 2
+          - 4
+    external_account_verify_request:
+      type: object
+      properties:
+        originating_account_id:
+          type: string
+          format: uuid
+          description: The ID of the internal account where the micro-deposits originate from. Both credit and debit capabilities must be enabled.
+        payment_type:
+          type: string
+          enum:
+          - ach
+          - au_becs
+          - bacs
+          - book
+          - card
+          - chats
+          - check
+          - cross_border
+          - dk_nets
+          - eft
+          - gb_fps
+          - hu_ics
+          - interac
+          - masav
+          - mx_ccen
+          - neft
+          - nics
+          - nz_becs
+          - pl_elixir
+          - provxchange
+          - ro_sent
+          - rtp
+          - se_bankgirot
+          - sen
+          - sepa
+          - sg_giro
+          - sic
+          - signet
+          - sknbi
+          - stablecoin
+          - wire
+          - zengin
+          description: Can be `ach`, `eft`, or `rtp`.
+        currency:
+          $ref: '#/components/schemas/currency'
+          description: Defaults to the currency of the originating account.
+        fallback_type:
+          type: string
+          enum:
+          - ach
+          description: A payment type to fallback to if the original type is not valid for the receiving account. Currently, this only supports falling back from RTP to ACH (payment_type=rtp and fallback_type=ach)
+        priority:
+          type: string
+          enum:
+          - high
+          - normal
+          description: Either `normal` or `high`. For ACH payments, `high` represents a same-day ACH transfer. This will apply to both `payment_type` and `fallback_type`.
+      required:
+      - originating_account_id
+      - payment_type
+    error_message:
+      type: object
+      properties:
+        errors:
+          type: object
+          properties:
+            code:
+              type: string
+              enum:
+              - parameter_invalid
+              - parameter_missing
+              - resource_not_found
+              - not_found
+              - forbidden
+              - invalid_ip
+              - invalid_key
+              - header_invalid
+              - expired_key
+              - conflict
+              - too_many_requests
+            message:
+              type: string
+            parameter:
+              type: string
+      required:
+      - errors
+    routing_detail:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        object:
+          type: string
+        live_mode:
+          type: boolean
+          description: This field will be true if this object exists in the live environment or false if it exists in the test environment.
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        discarded_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        routing_number:
+          type: string
+          description: The routing number of the bank.
+        routing_number_type:
+          type: string
+          enum:
+          - aba
+          - au_bsb
+          - br_codigo
+          - ca_cpa
+          - chips
+          - cnaps
+          - dk_interbank_clearing_code
+          - gb_sort_code
+          - hk_interbank_clearing_code
+          - hu_interbank_clearing_code
+          - id_sknbi_code
+          - il_bank_code
+          - in_ifsc
+          - jp_zengin_code
+          - mx_bank_identifier
+          - my_branch_code
+          - nz_national_clearing_code
+          - pl_national_clearing_code
+          - se_bankgiro_clearing_code
+          - sg_interbank_clearing_code
+          - swift
+          - za_national_clearing_code
+          description: The type of routing number. See https://docs.moderntreasury.com/platform/reference/routing-detail-object for more details.
+        payment_type:
+          type:
+          - string
+          - 'null'
+          enum:
+          - ach
+          - au_becs
+          - bacs
+          - book
+          - card
+          - chats
+          - check
+          - cross_border
+          - dk_nets
+          - eft
+          - gb_fps
+          - hu_ics
+          - interac
+          - masav
+          - mx_ccen
+          - neft
+          - nics
+          - nz_becs
+          - pl_elixir
+          - provxchange
+          - ro_sent
+          - rtp
+          - se_bankgirot
+          - sen
+          - sepa
+          - sg_giro
+          - sic
+          - signet
+          - sknbi
+          - stablecoin
+          - wire
+          - zengin
+          description: If the routing detail is to be used for a specific payment type this field will be populated, otherwise null.
+        bank_name:
+          type: string
+          description: The name of the bank.
+        bank_address:
+          $ref: '#/components/schemas/address'
+      additionalProperties: false
+      minProperties: 11
+      required:
+      - id
+      - object
+      - live_mode
+      - created_at
+      - updated_at
+      - discarded_at
+      - routing_number
+      - routing_number_type
+      - payment_type
+      - bank_name
+      - bank_address
+    contact_detail:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        object:
+          type: string
+        live_mode:
+          type: boolean
+          description: This field will be true if this object exists in the live environment or false if it exists in the test environment.
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        discarded_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        contact_identifier:
+          type: string
+        contact_identifier_type:
+          type: string
+          enum:
+          - email
+          - phone_number
+          - website
+      additionalProperties: false
+      minProperties: 8
+      required:
+      - id
+      - object
+      - live_mode
+      - created_at
+      - updated_at
+      - discarded_at
+      - contact_identifier
+      - contact_identifier_type
     external_account_create_request:
       type: object
       properties:
@@ -721,47 +1222,56 @@ components:
             $ref: '#/components/schemas/contact_detail_create_request'
       required:
       - counterparty_id
-    contact_detail:
+    external_account_update_request:
       type: object
       properties:
-        id:
-          type: string
-          format: uuid
-        object:
-          type: string
-        live_mode:
-          type: boolean
-          description: This field will be true if this object exists in the live environment or false if it exists in the test environment.
-        created_at:
-          type: string
-          format: date-time
-        updated_at:
-          type: string
-          format: date-time
-        discarded_at:
+        party_type:
           type:
           - string
           - 'null'
-          format: date-time
-        contact_identifier:
-          type: string
-        contact_identifier_type:
-          type: string
           enum:
-          - email
-          - phone_number
-          - website
-      additionalProperties: false
-      minProperties: 8
-      required:
-      - id
-      - object
-      - live_mode
-      - created_at
-      - updated_at
-      - discarded_at
-      - contact_identifier
-      - contact_identifier_type
+          - business
+          - individual
+          description: Either `individual` or `business`.
+        account_type:
+          $ref: '#/components/schemas/external_account_type'
+        counterparty_id:
+          type:
+          - string
+          - 'null'
+          format: uuid
+        name:
+          type:
+          - string
+          - 'null'
+          description: A nickname for the external account. This is only for internal usage and won't affect any payments
+        party_name:
+          type: string
+          description: If this value isn't provided, it will be inherited from the counterparty's name.
+        party_address:
+          $ref: '#/components/schemas/address_request'
+        metadata:
+          type: object
+          additionalProperties:
+            type: string
+          description: Additional data in the form of key-value pairs. Pairs can be removed by passing an empty string or `null` as the value.
+    external_account_type:
+      type: string
+      enum:
+      - base_wallet
+      - cash
+      - checking
+      - crypto_wallet
+      - ethereum_wallet
+      - general_ledger
+      - loan
+      - non_resident
+      - other
+      - overdraft
+      - polygon_wallet
+      - savings
+      - solana_wallet
+      description: Can be `checking`, `savings` or `other`.
     external_account_verification_attempt:
       type: object
       properties:
@@ -852,516 +1362,6 @@ components:
       - payment_type
       - priority
       - status
-    external_account_update_request:
-      type: object
-      properties:
-        party_type:
-          type:
-          - string
-          - 'null'
-          enum:
-          - business
-          - individual
-          description: Either `individual` or `business`.
-        account_type:
-          $ref: '#/components/schemas/external_account_type'
-        counterparty_id:
-          type:
-          - string
-          - 'null'
-          format: uuid
-        name:
-          type:
-          - string
-          - 'null'
-          description: A nickname for the external account. This is only for internal usage and won't affect any payments
-        party_name:
-          type: string
-          description: If this value isn't provided, it will be inherited from the counterparty's name.
-        party_address:
-          $ref: '#/components/schemas/address_request'
-        metadata:
-          type: object
-          additionalProperties:
-            type: string
-          description: Additional data in the form of key-value pairs. Pairs can be removed by passing an empty string or `null` as the value.
-    external_account_type:
-      type: string
-      enum:
-      - base_wallet
-      - cash
-      - checking
-      - crypto_wallet
-      - ethereum_wallet
-      - general_ledger
-      - loan
-      - non_resident
-      - other
-      - overdraft
-      - polygon_wallet
-      - savings
-      - solana_wallet
-      description: Can be `checking`, `savings` or `other`.
-    routing_detail:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-        object:
-          type: string
-        live_mode:
-          type: boolean
-          description: This field will be true if this object exists in the live environment or false if it exists in the test environment.
-        created_at:
-          type: string
-          format: date-time
-        updated_at:
-          type: string
-          format: date-time
-        discarded_at:
-          type:
-          - string
-          - 'null'
-          format: date-time
-        routing_number:
-          type: string
-          description: The routing number of the bank.
-        routing_number_type:
-          type: string
-          enum:
-          - aba
-          - au_bsb
-          - br_codigo
-          - ca_cpa
-          - chips
-          - cnaps
-          - dk_interbank_clearing_code
-          - gb_sort_code
-          - hk_interbank_clearing_code
-          - hu_interbank_clearing_code
-          - id_sknbi_code
-          - il_bank_code
-          - in_ifsc
-          - jp_zengin_code
-          - mx_bank_identifier
-          - my_branch_code
-          - nz_national_clearing_code
-          - pl_national_clearing_code
-          - se_bankgiro_clearing_code
-          - sg_interbank_clearing_code
-          - swift
-          - za_national_clearing_code
-          description: The type of routing number. See https://docs.moderntreasury.com/platform/reference/routing-detail-object for more details.
-        payment_type:
-          type:
-          - string
-          - 'null'
-          enum:
-          - ach
-          - au_becs
-          - bacs
-          - book
-          - card
-          - chats
-          - check
-          - cross_border
-          - dk_nets
-          - eft
-          - gb_fps
-          - hu_ics
-          - interac
-          - masav
-          - mx_ccen
-          - neft
-          - nics
-          - nz_becs
-          - pl_elixir
-          - provxchange
-          - ro_sent
-          - rtp
-          - se_bankgirot
-          - sen
-          - sepa
-          - sg_giro
-          - sic
-          - signet
-          - sknbi
-          - stablecoin
-          - wire
-          - zengin
-          description: If the routing detail is to be used for a specific payment type this field will be populated, otherwise null.
-        bank_name:
-          type: string
-          description: The name of the bank.
-        bank_address:
-          $ref: '#/components/schemas/address'
-      additionalProperties: false
-      minProperties: 11
-      required:
-      - id
-      - object
-      - live_mode
-      - created_at
-      - updated_at
-      - discarded_at
-      - routing_number
-      - routing_number_type
-      - payment_type
-      - bank_name
-      - bank_address
-    address:
-      type:
-      - object
-      - 'null'
-      properties:
-        id:
-          type: string
-          format: uuid
-        object:
-          type: string
-        live_mode:
-          type: boolean
-          description: This field will be true if this object exists in the live environment or false if it exists in the test environment.
-        created_at:
-          type: string
-          format: date-time
-        updated_at:
-          type: string
-          format: date-time
-        line1:
-          type:
-          - string
-          - 'null'
-        line2:
-          type:
-          - string
-          - 'null'
-        locality:
-          type:
-          - string
-          - 'null'
-          description: Locality or City.
-        region:
-          type:
-          - string
-          - 'null'
-          description: Region or State.
-        postal_code:
-          type:
-          - string
-          - 'null'
-          description: The postal code of the address.
-        country:
-          type:
-          - string
-          - 'null'
-          description: Country code conforms to [ISO 3166-1 alpha-2]
-      additionalProperties: false
-      minProperties: 11
-      required:
-      - id
-      - object
-      - live_mode
-      - created_at
-      - updated_at
-      - line1
-      - line2
-      - locality
-      - region
-      - postal_code
-      - country
-    account_detail:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-        object:
-          type: string
-        live_mode:
-          type: boolean
-          description: This field will be true if this object exists in the live environment or false if it exists in the test environment.
-        created_at:
-          type: string
-          format: date-time
-        updated_at:
-          type: string
-          format: date-time
-        discarded_at:
-          type:
-          - string
-          - 'null'
-          format: date-time
-        account_number:
-          type: string
-          description: The account number for the bank account.
-        account_number_type:
-          type: string
-          enum:
-          - au_number
-          - base_address
-          - card_token
-          - clabe
-          - ethereum_address
-          - hk_number
-          - iban
-          - id_number
-          - nz_number
-          - other
-          - pan
-          - polygon_address
-          - sg_number
-          - solana_address
-          - wallet_address
-          description: One of `iban`, `clabe`, `wallet_address`, or `other`. Use `other` if the bank account number is in a generic format.
-        account_number_safe:
-          type: string
-          description: The last 4 digits of the account_number.
-      additionalProperties: false
-      minProperties: 8
-      maxProperties: 9
-      required:
-      - id
-      - object
-      - live_mode
-      - created_at
-      - updated_at
-      - discarded_at
-      - account_number_type
-      - account_number_safe
-    ledger_account_create_request:
-      type: object
-      properties:
-        name:
-          type: string
-          description: The name of the ledger account.
-        description:
-          type:
-          - string
-          - 'null'
-          description: The description of the ledger account.
-        normal_balance:
-          type: string
-          enum:
-          - credit
-          - debit
-          description: The normal balance of the ledger account.
-          _x-stainless-modelDefPath: $shared.transaction_direction
-        ledger_id:
-          type: string
-          format: uuid
-          description: The id of the ledger that this account belongs to.
-        currency:
-          type: string
-          description: The currency of the ledger account.
-        currency_exponent:
-          type:
-          - integer
-          - 'null'
-          description: The currency exponent of the ledger account.
-        ledger_account_category_ids:
-          type: array
-          items:
-            type: string
-            format: uuid
-          description: The array of ledger account category ids that this ledger account should be a child of.
-        ledgerable_id:
-          type: string
-          format: uuid
-          description: If the ledger account links to another object in Modern Treasury, the id will be populated here, otherwise null.
-        ledgerable_type:
-          type: string
-          enum:
-          - counterparty
-          - external_account
-          - internal_account
-          - virtual_account
-          description: If the ledger account links to another object in Modern Treasury, the type will be populated here, otherwise null. The value is one of internal_account or external_account.
-        metadata:
-          type: object
-          description: Additional data represented as key-value pairs. Both the key and value must be strings.
-          additionalProperties:
-            type: string
-          example:
-            key: value
-            foo: bar
-            modern: treasury
-        external_id:
-          type:
-          - string
-          - 'null'
-          description: An optional user-defined 180 character unique identifier.
-      required:
-      - name
-      - normal_balance
-      - ledger_id
-      - currency
-    contact_detail_create_request:
-      type: object
-      properties:
-        contact_identifier:
-          type: string
-        contact_identifier_type:
-          type: string
-          enum:
-          - email
-          - phone_number
-          - website
-    external_account_complete_verification_request:
-      type: object
-      properties:
-        amounts:
-          type: array
-          items:
-            type: integer
-          maxItems: 2
-          example:
-          - 2
-          - 4
-    external_account:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-        object:
-          type: string
-        live_mode:
-          type: boolean
-          description: This field will be true if this object exists in the live environment or false if it exists in the test environment.
-        created_at:
-          type: string
-          format: date-time
-        updated_at:
-          type: string
-          format: date-time
-        discarded_at:
-          type:
-          - string
-          - 'null'
-          format: date-time
-        account_type:
-          $ref: '#/components/schemas/external_account_type'
-        party_type:
-          type:
-          - string
-          - 'null'
-          enum:
-          - business
-          - individual
-          description: Either `individual` or `business`.
-        party_address:
-          $ref: '#/components/schemas/address'
-          description: The address associated with the owner or `null`.
-        name:
-          type:
-          - string
-          - 'null'
-          description: A nickname for the external account. This is only for internal usage and won't affect any payments
-        counterparty_id:
-          type:
-          - string
-          - 'null'
-          format: uuid
-        account_details:
-          type: array
-          items:
-            $ref: '#/components/schemas/account_detail'
-        routing_details:
-          type: array
-          items:
-            $ref: '#/components/schemas/routing_detail'
-        external_id:
-          type:
-          - string
-          - 'null'
-          description: An optional user-defined 180 character unique identifier.
-        metadata:
-          type: object
-          additionalProperties:
-            type: string
-          example:
-            key: value
-            foo: bar
-            modern: treasury
-          description: Additional data represented as key-value pairs. Both the key and value must be strings.
-        party_name:
-          type: string
-          description: The legal name of the entity which owns the account.
-        contact_details:
-          type: array
-          items:
-            $ref: '#/components/schemas/contact_detail'
-        ledger_account_id:
-          type:
-          - string
-          - 'null'
-          format: uuid
-          description: If the external account links to a ledger account in Modern Treasury, the id of the ledger account will be populated here.
-        verification_status:
-          type: string
-          enum:
-          - pending_verification
-          - unverified
-          - verified
-        verification_source:
-          type:
-          - string
-          - 'null'
-          enum:
-          - ach_prenote
-          - microdeposits
-          - plaid
-      additionalProperties: false
-      minProperties: 20
-      required:
-      - id
-      - object
-      - live_mode
-      - created_at
-      - updated_at
-      - discarded_at
-      - account_type
-      - party_type
-      - party_address
-      - name
-      - counterparty_id
-      - account_details
-      - routing_details
-      - external_id
-      - metadata
-      - party_name
-      - contact_details
-      - ledger_account_id
-      - verification_status
-      - verification_source
-    error_message:
-      type: object
-      properties:
-        errors:
-          type: object
-          properties:
-            code:
-              type: string
-              enum:
-              - parameter_invalid
-              - parameter_missing
-              - resource_not_found
-              - not_found
-              - forbidden
-              - invalid_ip
-              - invalid_key
-              - header_invalid
-              - expired_key
-              - conflict
-              - too_many_requests
-            message:
-              type: string
-            parameter:
-              type: string
-      required:
-      - errors
   parameters:
     metadata_query:
       name: metadata

@@ -492,8 +492,6 @@ apis:
   humanURL: https://docs.moderntreasury.com/reference
   baseURL: https://app.moderntreasury.com/api
   tags:
-  - InvoiceLineItem
-  tags_raw:
   - Invoice Line Item
   properties:
   - type: OpenAPI
@@ -578,8 +576,6 @@ apis:
   humanURL: https://docs.moderntreasury.com/reference
   baseURL: https://app.moderntreasury.com/api
   tags:
-  - Virtual Accounts
-  tags_raw:
   - Virtual Account
   properties:
   - type: OpenAPI

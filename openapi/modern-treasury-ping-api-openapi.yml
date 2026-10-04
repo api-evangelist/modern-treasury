@@ -40,16 +40,6 @@ paths:
           description: internal server error
 components:
   schemas:
-    ping_response:
-      type: object
-      properties:
-        ping:
-          type: string
-          example: pong
-      additionalProperties: false
-      minProperties: 1
-      required:
-      - ping
     error_message:
       type: object
       properties:
@@ -76,6 +66,16 @@ components:
               type: string
       required:
       - errors
+    ping_response:
+      type: object
+      properties:
+        ping:
+          type: string
+          example: pong
+      additionalProperties: false
+      minProperties: 1
+      required:
+      - ping
   securitySchemes:
     basic_auth:
       type: http

@@ -182,51 +182,6 @@ paths:
                 $ref: '#/components/schemas/virtual_account'
 components:
   schemas:
-    virtual_account_update_request:
-      type: object
-      properties:
-        name:
-          type:
-          - string
-          - 'null'
-        counterparty_id:
-          type: string
-          format: uuid
-        ledger_account_id:
-          type: string
-          format: uuid
-          description: The ledger account that you'd like to link to the virtual account.
-        metadata:
-          type: object
-          additionalProperties:
-            type: string
-    account_detail_create_request:
-      type: object
-      properties:
-        account_number:
-          type: string
-          description: The account number for the bank account.
-        account_number_type:
-          type: string
-          enum:
-          - au_number
-          - base_address
-          - card_token
-          - clabe
-          - ethereum_address
-          - hk_number
-          - iban
-          - id_number
-          - nz_number
-          - other
-          - pan
-          - polygon_address
-          - sg_number
-          - solana_address
-          - wallet_address
-          description: One of `iban`, `clabe`, `wallet_address`, or `other`. Use `other` if the bank account number is in a generic format.
-      required:
-      - account_number
     virtual_account_create_request:
       type: object
       properties:
@@ -273,136 +228,9 @@ components:
       required:
       - name
       - internal_account_id
-    routing_detail:
+    account_detail_create_request:
       type: object
       properties:
-        id:
-          type: string
-          format: uuid
-        object:
-          type: string
-        live_mode:
-          type: boolean
-          description: This field will be true if this object exists in the live environment or false if it exists in the test environment.
-        created_at:
-          type: string
-          format: date-time
-        updated_at:
-          type: string
-          format: date-time
-        discarded_at:
-          type:
-          - string
-          - 'null'
-          format: date-time
-        routing_number:
-          type: string
-          description: The routing number of the bank.
-        routing_number_type:
-          type: string
-          enum:
-          - aba
-          - au_bsb
-          - br_codigo
-          - ca_cpa
-          - chips
-          - cnaps
-          - dk_interbank_clearing_code
-          - gb_sort_code
-          - hk_interbank_clearing_code
-          - hu_interbank_clearing_code
-          - id_sknbi_code
-          - il_bank_code
-          - in_ifsc
-          - jp_zengin_code
-          - mx_bank_identifier
-          - my_branch_code
-          - nz_national_clearing_code
-          - pl_national_clearing_code
-          - se_bankgiro_clearing_code
-          - sg_interbank_clearing_code
-          - swift
-          - za_national_clearing_code
-          description: The type of routing number. See https://docs.moderntreasury.com/platform/reference/routing-detail-object for more details.
-        payment_type:
-          type:
-          - string
-          - 'null'
-          enum:
-          - ach
-          - au_becs
-          - bacs
-          - book
-          - card
-          - chats
-          - check
-          - cross_border
-          - dk_nets
-          - eft
-          - gb_fps
-          - hu_ics
-          - interac
-          - masav
-          - mx_ccen
-          - neft
-          - nics
-          - nz_becs
-          - pl_elixir
-          - provxchange
-          - ro_sent
-          - rtp
-          - se_bankgirot
-          - sen
-          - sepa
-          - sg_giro
-          - sic
-          - signet
-          - sknbi
-          - stablecoin
-          - wire
-          - zengin
-          description: If the routing detail is to be used for a specific payment type this field will be populated, otherwise null.
-        bank_name:
-          type: string
-          description: The name of the bank.
-        bank_address:
-          $ref: '#/components/schemas/address'
-      additionalProperties: false
-      minProperties: 11
-      required:
-      - id
-      - object
-      - live_mode
-      - created_at
-      - updated_at
-      - discarded_at
-      - routing_number
-      - routing_number_type
-      - payment_type
-      - bank_name
-      - bank_address
-    account_detail:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-        object:
-          type: string
-        live_mode:
-          type: boolean
-          description: This field will be true if this object exists in the live environment or false if it exists in the test environment.
-        created_at:
-          type: string
-          format: date-time
-        updated_at:
-          type: string
-          format: date-time
-        discarded_at:
-          type:
-          - string
-          - 'null'
-          format: date-time
         account_number:
           type: string
           description: The account number for the bank account.
@@ -425,21 +253,8 @@ components:
           - solana_address
           - wallet_address
           description: One of `iban`, `clabe`, `wallet_address`, or `other`. Use `other` if the bank account number is in a generic format.
-        account_number_safe:
-          type: string
-          description: The last 4 digits of the account_number.
-      additionalProperties: false
-      minProperties: 8
-      maxProperties: 9
       required:
-      - id
-      - object
-      - live_mode
-      - created_at
-      - updated_at
-      - discarded_at
-      - account_number_type
-      - account_number_safe
+      - account_number
     address:
       type:
       - object
@@ -568,6 +383,24 @@ components:
       - normal_balance
       - ledger_id
       - currency
+    virtual_account_update_request:
+      type: object
+      properties:
+        name:
+          type:
+          - string
+          - 'null'
+        counterparty_id:
+          type: string
+          format: uuid
+        ledger_account_id:
+          type: string
+          format: uuid
+          description: The ledger account that you'd like to link to the virtual account.
+        metadata:
+          type: object
+          additionalProperties:
+            type: string
     routing_detail_create_request:
       type: object
       properties:
@@ -641,6 +474,199 @@ components:
       required:
       - routing_number
       - routing_number_type
+    routing_detail:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        object:
+          type: string
+        live_mode:
+          type: boolean
+          description: This field will be true if this object exists in the live environment or false if it exists in the test environment.
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        discarded_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        routing_number:
+          type: string
+          description: The routing number of the bank.
+        routing_number_type:
+          type: string
+          enum:
+          - aba
+          - au_bsb
+          - br_codigo
+          - ca_cpa
+          - chips
+          - cnaps
+          - dk_interbank_clearing_code
+          - gb_sort_code
+          - hk_interbank_clearing_code
+          - hu_interbank_clearing_code
+          - id_sknbi_code
+          - il_bank_code
+          - in_ifsc
+          - jp_zengin_code
+          - mx_bank_identifier
+          - my_branch_code
+          - nz_national_clearing_code
+          - pl_national_clearing_code
+          - se_bankgiro_clearing_code
+          - sg_interbank_clearing_code
+          - swift
+          - za_national_clearing_code
+          description: The type of routing number. See https://docs.moderntreasury.com/platform/reference/routing-detail-object for more details.
+        payment_type:
+          type:
+          - string
+          - 'null'
+          enum:
+          - ach
+          - au_becs
+          - bacs
+          - book
+          - card
+          - chats
+          - check
+          - cross_border
+          - dk_nets
+          - eft
+          - gb_fps
+          - hu_ics
+          - interac
+          - masav
+          - mx_ccen
+          - neft
+          - nics
+          - nz_becs
+          - pl_elixir
+          - provxchange
+          - ro_sent
+          - rtp
+          - se_bankgirot
+          - sen
+          - sepa
+          - sg_giro
+          - sic
+          - signet
+          - sknbi
+          - stablecoin
+          - wire
+          - zengin
+          description: If the routing detail is to be used for a specific payment type this field will be populated, otherwise null.
+        bank_name:
+          type: string
+          description: The name of the bank.
+        bank_address:
+          $ref: '#/components/schemas/address'
+      additionalProperties: false
+      minProperties: 11
+      required:
+      - id
+      - object
+      - live_mode
+      - created_at
+      - updated_at
+      - discarded_at
+      - routing_number
+      - routing_number_type
+      - payment_type
+      - bank_name
+      - bank_address
+    error_message:
+      type: object
+      properties:
+        errors:
+          type: object
+          properties:
+            code:
+              type: string
+              enum:
+              - parameter_invalid
+              - parameter_missing
+              - resource_not_found
+              - not_found
+              - forbidden
+              - invalid_ip
+              - invalid_key
+              - header_invalid
+              - expired_key
+              - conflict
+              - too_many_requests
+            message:
+              type: string
+            parameter:
+              type: string
+      required:
+      - errors
+    account_detail:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        object:
+          type: string
+        live_mode:
+          type: boolean
+          description: This field will be true if this object exists in the live environment or false if it exists in the test environment.
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        discarded_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        account_number:
+          type: string
+          description: The account number for the bank account.
+        account_number_type:
+          type: string
+          enum:
+          - au_number
+          - base_address
+          - card_token
+          - clabe
+          - ethereum_address
+          - hk_number
+          - iban
+          - id_number
+          - nz_number
+          - other
+          - pan
+          - polygon_address
+          - sg_number
+          - solana_address
+          - wallet_address
+          description: One of `iban`, `clabe`, `wallet_address`, or `other`. Use `other` if the bank account number is in a generic format.
+        account_number_safe:
+          type: string
+          description: The last 4 digits of the account_number.
+      additionalProperties: false
+      minProperties: 8
+      maxProperties: 9
+      required:
+      - id
+      - object
+      - live_mode
+      - created_at
+      - updated_at
+      - discarded_at
+      - account_number_type
+      - account_number_safe
     virtual_account:
       type: object
       properties:
@@ -737,32 +763,6 @@ components:
       - credit_ledger_account_id
       - ledger_account_id
       - metadata
-    error_message:
-      type: object
-      properties:
-        errors:
-          type: object
-          properties:
-            code:
-              type: string
-              enum:
-              - parameter_invalid
-              - parameter_missing
-              - resource_not_found
-              - not_found
-              - forbidden
-              - invalid_ip
-              - invalid_key
-              - header_invalid
-              - expired_key
-              - conflict
-              - too_many_requests
-            message:
-              type: string
-            parameter:
-              type: string
-      required:
-      - errors
   parameters:
     metadata_query:
       name: metadata
