@@ -38,7 +38,7 @@ tags:
   - Wires
   - Treasury
 created: '2026-05-08'
-modified: '2026-05-08'
+modified: '2026-10-06'
 specificationVersion: '0.23'
 apis:
 - aid: modern-treasury:modern-treasury-accountcapability-api
@@ -583,6 +583,8 @@ apis:
   - type: Documentation
     url: https://docs.moderntreasury.com/reference
 common:
+  - url: https://www.moderntreasury.com/newsroom
+    type: Blog
   - type: CapabilityMap
     url: capabilities/modern-treasury-capability-edges.yml
     name: Modern Treasury Business Capability Map
