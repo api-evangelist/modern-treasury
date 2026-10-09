@@ -121,17 +121,17 @@ artifacts:
     method: derived
     evidence: openapi/modern-treasury-invoice-api
   collections/modern-treasury-invoicelineitem-api.opencollection.json:
-    method: derived
-    evidence: openapi/modern-treasury-invoicelineitem-api
+    method: unknown
+    evidence: no authorship recorded
   collections/modern-treasury-invoicelineitem-api.postman_collection.json:
-    method: derived
-    evidence: openapi/modern-treasury-invoicelineitem-api
+    method: unknown
+    evidence: no authorship recorded
   collections/modern-treasury-journalentry-api.opencollection.json:
-    method: derived
-    evidence: openapi/modern-treasury-journalentry-api
+    method: unknown
+    evidence: no authorship recorded
   collections/modern-treasury-journalentry-api.postman_collection.json:
-    method: derived
-    evidence: openapi/modern-treasury-journalentry-api
+    method: unknown
+    evidence: no authorship recorded
   collections/modern-treasury-journalreport-api.opencollection.json:
     method: derived
     evidence: openapi/modern-treasury-journalreport-api
@@ -151,11 +151,11 @@ artifacts:
     method: derived
     evidence: openapi/modern-treasury-ledger-api
   collections/modern-treasury-ledgeraccount-api.opencollection.json:
-    method: derived
-    evidence: openapi/modern-treasury-ledgeraccount-api
+    method: unknown
+    evidence: no authorship recorded
   collections/modern-treasury-ledgeraccount-api.postman_collection.json:
-    method: derived
-    evidence: openapi/modern-treasury-ledgeraccount-api
+    method: unknown
+    evidence: no authorship recorded
   collections/modern-treasury-ledgeraccountbalancemonitor-api.opencollection.json:
     method: derived
     evidence: openapi/modern-treasury-ledgeraccountbalancemonitor-api
@@ -181,11 +181,11 @@ artifacts:
     method: derived
     evidence: openapi/modern-treasury-ledgeraccountstatement-api
   collections/modern-treasury-ledgerentry-api.opencollection.json:
-    method: derived
-    evidence: openapi/modern-treasury-ledgerentry-api
+    method: unknown
+    evidence: no authorship recorded
   collections/modern-treasury-ledgerentry-api.postman_collection.json:
-    method: derived
-    evidence: openapi/modern-treasury-ledgerentry-api
+    method: unknown
+    evidence: no authorship recorded
   collections/modern-treasury-ledgertransaction-api.opencollection.json:
     method: derived
     evidence: openapi/modern-treasury-ledgertransaction-api
@@ -193,17 +193,17 @@ artifacts:
     method: derived
     evidence: openapi/modern-treasury-ledgertransaction-api
   collections/modern-treasury-legalentity-api.opencollection.json:
-    method: derived
-    evidence: openapi/modern-treasury-legalentity-api
+    method: unknown
+    evidence: no authorship recorded
   collections/modern-treasury-legalentity-api.postman_collection.json:
-    method: derived
-    evidence: openapi/modern-treasury-legalentity-api
+    method: unknown
+    evidence: no authorship recorded
   collections/modern-treasury-lineitem-api.opencollection.json:
-    method: derived
-    evidence: openapi/modern-treasury-lineitem-api
+    method: unknown
+    evidence: no authorship recorded
   collections/modern-treasury-lineitem-api.postman_collection.json:
-    method: derived
-    evidence: openapi/modern-treasury-lineitem-api
+    method: unknown
+    evidence: no authorship recorded
   collections/modern-treasury-paymentaction-api.opencollection.json:
     method: derived
     evidence: openapi/modern-treasury-paymentaction-api
@@ -211,11 +211,11 @@ artifacts:
     method: derived
     evidence: openapi/modern-treasury-paymentaction-api
   collections/modern-treasury-paymentflow-api.opencollection.json:
-    method: derived
-    evidence: openapi/modern-treasury-paymentflow-api
+    method: unknown
+    evidence: no authorship recorded
   collections/modern-treasury-paymentflow-api.postman_collection.json:
-    method: derived
-    evidence: openapi/modern-treasury-paymentflow-api
+    method: unknown
+    evidence: no authorship recorded
   collections/modern-treasury-paymentorder-api.opencollection.json:
     method: derived
     evidence: openapi/modern-treasury-paymentorder-api
@@ -271,11 +271,11 @@ artifacts:
     method: derived
     evidence: openapi/modern-treasury-validation-api
   collections/modern-treasury-virtualaccount-api.opencollection.json:
-    method: derived
-    evidence: openapi/modern-treasury-virtualaccount-api
+    method: unknown
+    evidence: no authorship recorded
   collections/modern-treasury-virtualaccount-api.postman_collection.json:
-    method: derived
-    evidence: openapi/modern-treasury-virtualaccount-api
+    method: unknown
+    evidence: no authorship recorded
   collections/modern-treasury.opencollection.json:
     method: derived
     evidence: openapi/modern-treasury
@@ -285,6 +285,9 @@ artifacts:
   finops/modern-treasury-finops.yml:
     method: generated
     evidence: declared in the artifact
+  front-door-ai/2026-09-17.yml:
+    method: unknown
+    evidence: no authorship recorded
   json-schema/modern-treasury-account-capability-schema.json:
     method: unknown
     evidence: no authorship recorded
@@ -750,55 +753,7 @@ artifacts:
   json-structure/modern-treasury-structure.json:
     method: unknown
     evidence: no authorship recorded
-  kin/checks-2026-09-05T072335.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-06T210741.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-07T135032.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-10T093022.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-10T111628.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-11T211707.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-12T193225.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-17T064519.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-19T080027.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-19T082702.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-19T114122.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-20T165047.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-20T191845.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-20T205517.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-21T110057.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-24T064859.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-24T171257.yml:
+  kin/checks-2026-09-24T161608.yml:
     method: generated
     evidence: Kin Score snapshot written by score.rb
   kin/score-2026-08-25T125852.yml:
@@ -885,12 +840,130 @@ artifacts:
   kin/score-2026-09-05T072335.yml:
     method: generated
     evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-05T144739.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-05T195450.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-05T211839.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-06T011047.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-06T211804.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-06T224210.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-07T200636.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-07T213054.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-08T214843.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-08T232836.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-10T204815.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-10T222408.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-12T062655.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-12T080032.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-12T204651.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-12T221936.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-13T214537.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-14T064754.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-14T210656.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-14T225847.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-15T211329.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-15T230249.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-16T210549.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-16T225339.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-17T211151.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-17T233623.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-18T205255.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-18T231945.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-19T165737.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-19T193153.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-20T205903.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-20T232958.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-21T211425.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-21T233935.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-22T213221.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-23T000603.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-24T064009.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-24T090406.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-24T161608.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
   llms/modern-treasury-llms-probe.yml:
     method: searched
     evidence: 'derive-llms-provenance.py: harvested'
   openapi/_original/modern-treasury-openapi.yml:
     method: harvested
-    evidence: fetched from the provider as-is; byte-identical to the source
+    evidence: found in openapi/_original/; the fetch URL and bytes were not recorded, so byte-identity
+      to the provider's source is unverified
   openapi/modern-treasury-accountcapability-api-openapi.yml:
     method: derived
     evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
@@ -945,10 +1018,10 @@ artifacts:
   openapi/modern-treasury-invoice-api-openapi.yml:
     method: derived
     evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
-  openapi/modern-treasury-invoicelineitem-api-openapi.yml:
+  openapi/modern-treasury-invoice-line-item-api-openapi.yml:
     method: derived
     evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
-  openapi/modern-treasury-journalentry-api-openapi.yml:
+  openapi/modern-treasury-journal-entry-api-openapi.yml:
     method: derived
     evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
   openapi/modern-treasury-journalreport-api-openapi.yml:
@@ -957,10 +1030,13 @@ artifacts:
   openapi/modern-treasury-journalsource-api-openapi.yml:
     method: derived
     evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
+  openapi/modern-treasury-ledger-account-api-openapi.yml:
+    method: derived
+    evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
   openapi/modern-treasury-ledger-api-openapi.yml:
     method: derived
     evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
-  openapi/modern-treasury-ledgeraccount-api-openapi.yml:
+  openapi/modern-treasury-ledger-entry-api-openapi.yml:
     method: derived
     evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
   openapi/modern-treasury-ledgeraccountbalancemonitor-api-openapi.yml:
@@ -975,22 +1051,19 @@ artifacts:
   openapi/modern-treasury-ledgeraccountstatement-api-openapi.yml:
     method: derived
     evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
-  openapi/modern-treasury-ledgerentry-api-openapi.yml:
-    method: derived
-    evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
   openapi/modern-treasury-ledgertransaction-api-openapi.yml:
     method: derived
     evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
-  openapi/modern-treasury-legalentity-api-openapi.yml:
+  openapi/modern-treasury-legal-entity-api-openapi.yml:
     method: derived
     evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
-  openapi/modern-treasury-lineitem-api-openapi.yml:
+  openapi/modern-treasury-line-item-api-openapi.yml:
+    method: derived
+    evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
+  openapi/modern-treasury-payment-flow-api-openapi.yml:
     method: derived
     evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
   openapi/modern-treasury-paymentaction-api-openapi.yml:
-    method: derived
-    evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
-  openapi/modern-treasury-paymentflow-api-openapi.yml:
     method: derived
     evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
   openapi/modern-treasury-paymentorder-api-openapi.yml:
@@ -1020,11 +1093,11 @@ artifacts:
   openapi/modern-treasury-validation-api-openapi.yml:
     method: derived
     evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
-  openapi/modern-treasury-virtualaccount-api-openapi.yml:
+  openapi/modern-treasury-virtual-account-api-openapi.yml:
     method: derived
     evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
   plans/modern-treasury-plans-pricing.yml:
-    method: generated
+    method: searched
     evidence: declared in the artifact
   rate-limits/modern-treasury-rate-limits.yml:
     method: generated
