@@ -1,0 +1,16 @@
+generated: '2026-10-12'
+method: none
+source:
+- https://zapier.com/apps/modern-treasury/integrations
+- https://n8n.io/integrations/modern-treasury/
+- https://composio.dev/toolkits/modern-treasury
+- https://monid.ai/tools/modern-treasury
+checked:
+- https://composio.dev/toolkits/modern-treasury
+- https://monid.ai/tools/modern-treasury
+- https://n8n.io/integrations/modern-treasury/
+- https://zapier.com/apps/modern-treasury/integrations
+summary: null
+marketplace_apps: []
+edges: []
+templates: []
