@@ -203,6 +203,45 @@ components:
               type: string
       required:
       - errors
+    account_collection_flow_create_request:
+      type: object
+      properties:
+        counterparty_id:
+          type: string
+          format: uuid
+          description: Required.
+        payment_types:
+          type: array
+          items:
+            type: string
+            description: Required. At least one of `ach`, `wire` or `check`.
+        receiving_countries:
+          type: array
+          items:
+            type: string
+            enum:
+            - USA
+            - AUS
+            - BEL
+            - CAN
+            - CHL
+            - CHN
+            - COL
+            - FRA
+            - DEU
+            - HKG
+            - IND
+            - IRL
+            - ITA
+            - MEX
+            - NLD
+            - PER
+            - ESP
+            - GBR
+            description: Optional. Array of 3-digit ISO country codes.
+      required:
+      - payment_types
+      - counterparty_id
     account_collection_flow:
       type: object
       properties:
@@ -275,45 +314,6 @@ components:
             description: An account created with this flow will support wires from the US to these countries.
       additionalProperties: false
       minProperties: 10
-      required:
-      - payment_types
-      - counterparty_id
-    account_collection_flow_create_request:
-      type: object
-      properties:
-        counterparty_id:
-          type: string
-          format: uuid
-          description: Required.
-        payment_types:
-          type: array
-          items:
-            type: string
-            description: Required. At least one of `ach`, `wire` or `check`.
-        receiving_countries:
-          type: array
-          items:
-            type: string
-            enum:
-            - USA
-            - AUS
-            - BEL
-            - CAN
-            - CHL
-            - CHN
-            - COL
-            - FRA
-            - DEU
-            - HKG
-            - IND
-            - IRL
-            - ITA
-            - MEX
-            - NLD
-            - PER
-            - ESP
-            - GBR
-            description: Optional. Array of 3-digit ISO country codes.
       required:
       - payment_types
       - counterparty_id

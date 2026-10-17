@@ -212,28 +212,32 @@ paths:
                 $ref: '#/components/schemas/error_message'
 components:
   schemas:
-    ledger_create_request:
+    error_message:
       type: object
       properties:
-        name:
-          type: string
-          description: The name of the ledger.
-        description:
-          type:
-          - string
-          - 'null'
-          description: An optional free-form description for internal use.
-        metadata:
+        errors:
           type: object
-          description: Additional data represented as key-value pairs. Both the key and value must be strings.
-          additionalProperties:
-            type: string
-          example:
-            key: value
-            foo: bar
-            modern: treasury
+          properties:
+            code:
+              type: string
+              enum:
+              - parameter_invalid
+              - parameter_missing
+              - resource_not_found
+              - not_found
+              - forbidden
+              - invalid_ip
+              - invalid_key
+              - header_invalid
+              - expired_key
+              - conflict
+              - too_many_requests
+            message:
+              type: string
+            parameter:
+              type: string
       required:
-      - name
+      - errors
     ledger:
       type: object
       properties:
@@ -286,32 +290,28 @@ components:
       - name
       - description
       - metadata
-    error_message:
+    ledger_create_request:
       type: object
       properties:
-        errors:
+        name:
+          type: string
+          description: The name of the ledger.
+        description:
+          type:
+          - string
+          - 'null'
+          description: An optional free-form description for internal use.
+        metadata:
           type: object
-          properties:
-            code:
-              type: string
-              enum:
-              - parameter_invalid
-              - parameter_missing
-              - resource_not_found
-              - not_found
-              - forbidden
-              - invalid_ip
-              - invalid_key
-              - header_invalid
-              - expired_key
-              - conflict
-              - too_many_requests
-            message:
-              type: string
-            parameter:
-              type: string
+          description: Additional data represented as key-value pairs. Both the key and value must be strings.
+          additionalProperties:
+            type: string
+          example:
+            key: value
+            foo: bar
+            modern: treasury
       required:
-      - errors
+      - name
     ledger_update_request:
       type: object
       properties:

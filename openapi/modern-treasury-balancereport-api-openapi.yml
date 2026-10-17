@@ -204,6 +204,94 @@ paths:
                 $ref: '#/components/schemas/error_message'
 components:
   schemas:
+    error_message:
+      type: object
+      properties:
+        errors:
+          type: object
+          properties:
+            code:
+              type: string
+              enum:
+              - parameter_invalid
+              - parameter_missing
+              - resource_not_found
+              - not_found
+              - forbidden
+              - invalid_ip
+              - invalid_key
+              - header_invalid
+              - expired_key
+              - conflict
+              - too_many_requests
+            message:
+              type: string
+            parameter:
+              type: string
+      required:
+      - errors
+    balance_create_request:
+      type: object
+      properties:
+        amount:
+          type: integer
+          description: The balance amount.
+        balance_type:
+          type: string
+          enum:
+          - closing_available
+          - closing_ledger
+          - current_available
+          - current_ledger
+          - opening_available
+          - opening_available_next_business_day
+          - opening_ledger
+          - other
+          - previously_closed_book
+          description: The specific type of balance reported. One of `opening_ledger`, `closing_ledger`, `current_ledger`, `opening_available`, `opening_available_next_business_day`, `closing_available`, `current_available`, 'previously_closed_book', or `other`.
+        vendor_code:
+          type: string
+          description: The code used by the bank when reporting this specific balance.
+        vendor_code_type:
+          type:
+          - string
+          - 'null'
+          description: The type of `vendor_code` being reported. Can be one of `bai2`, `bankprov`, `bnk_dev`, `cleartouch`, `currencycloud`, `cross_river`, `dc_bank`, `dwolla`, `evolve`, `goldman_sachs`, `iso20022`, `jpmc`, `mx`, `signet`, `silvergate`, `swift`, or `us_bank`.
+      additionalProperties: false
+      minProperties: 4
+      required:
+      - amount
+      - balance_type
+      - vendor_code
+      - vendor_code_type
+    balance_report_create_request:
+      type: object
+      properties:
+        as_of_date:
+          type: string
+          format: date
+          description: The date of the balance report in local time.
+        as_of_time:
+          type: string
+          description: The time (24-hour clock) of the balance report in local time.
+        balance_report_type:
+          type: string
+          enum:
+          - intraday
+          - other
+          - previous_day
+          - real_time
+          description: The specific type of balance report. One of `intraday`, `previous_day`, `real_time`, or `other`.
+        balances:
+          type: array
+          items:
+            $ref: '#/components/schemas/balance_create_request'
+          description: An array of `Balance` objects.
+      required:
+      - as_of_date
+      - as_of_time
+      - balance_report_type
+      - balances
     currency:
       type: string
       enum:
@@ -410,34 +498,6 @@ components:
       - ZWN
       - ZWR
       description: Three-letter ISO currency code.
-    balance_report_create_request:
-      type: object
-      properties:
-        as_of_date:
-          type: string
-          format: date
-          description: The date of the balance report in local time.
-        as_of_time:
-          type: string
-          description: The time (24-hour clock) of the balance report in local time.
-        balance_report_type:
-          type: string
-          enum:
-          - intraday
-          - other
-          - previous_day
-          - real_time
-          description: The specific type of balance report. One of `intraday`, `previous_day`, `real_time`, or `other`.
-        balances:
-          type: array
-          items:
-            $ref: '#/components/schemas/balance_create_request'
-          description: An array of `Balance` objects.
-      required:
-      - as_of_date
-      - as_of_time
-      - balance_report_type
-      - balances
     balance_report:
       type: object
       properties:
@@ -495,32 +555,6 @@ components:
       - as_of_time
       - balances
       - internal_account_id
-    error_message:
-      type: object
-      properties:
-        errors:
-          type: object
-          properties:
-            code:
-              type: string
-              enum:
-              - parameter_invalid
-              - parameter_missing
-              - resource_not_found
-              - not_found
-              - forbidden
-              - invalid_ip
-              - invalid_key
-              - header_invalid
-              - expired_key
-              - conflict
-              - too_many_requests
-            message:
-              type: string
-            parameter:
-              type: string
-      required:
-      - errors
     balance:
       type: object
       properties:
@@ -599,40 +633,6 @@ components:
       - as_of_date
       - as_of_time
       - value_date
-    balance_create_request:
-      type: object
-      properties:
-        amount:
-          type: integer
-          description: The balance amount.
-        balance_type:
-          type: string
-          enum:
-          - closing_available
-          - closing_ledger
-          - current_available
-          - current_ledger
-          - opening_available
-          - opening_available_next_business_day
-          - opening_ledger
-          - other
-          - previously_closed_book
-          description: The specific type of balance reported. One of `opening_ledger`, `closing_ledger`, `current_ledger`, `opening_available`, `opening_available_next_business_day`, `closing_available`, `current_available`, 'previously_closed_book', or `other`.
-        vendor_code:
-          type: string
-          description: The code used by the bank when reporting this specific balance.
-        vendor_code_type:
-          type:
-          - string
-          - 'null'
-          description: The type of `vendor_code` being reported. Can be one of `bai2`, `bankprov`, `bnk_dev`, `cleartouch`, `currencycloud`, `cross_river`, `dc_bank`, `dwolla`, `evolve`, `goldman_sachs`, `iso20022`, `jpmc`, `mx`, `signet`, `silvergate`, `swift`, or `us_bank`.
-      additionalProperties: false
-      minProperties: 4
-      required:
-      - amount
-      - balance_type
-      - vendor_code
-      - vendor_code_type
   securitySchemes:
     basic_auth:
       type: http

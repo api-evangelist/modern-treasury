@@ -242,7 +242,41 @@ paths:
               $ref: '#/components/schemas/incoming_payment_detail_create_request'
 components:
   schemas:
-    incoming_payment_detail:
+    error_message:
+      type: object
+      properties:
+        errors:
+          type: object
+          properties:
+            code:
+              type: string
+              enum:
+              - parameter_invalid
+              - parameter_missing
+              - resource_not_found
+              - not_found
+              - forbidden
+              - invalid_ip
+              - invalid_key
+              - header_invalid
+              - expired_key
+              - conflict
+              - too_many_requests
+            message:
+              type: string
+            parameter:
+              type: string
+      required:
+      - errors
+    incoming_payment_detail_update_request:
+      type: object
+      properties:
+        metadata:
+          type: object
+          additionalProperties:
+            type: string
+          description: Additional data in the form of key-value pairs. Pairs can be removed by passing an empty string or `null` as the value.
+    routing_detail:
       type: object
       properties:
         id:
@@ -259,108 +293,16 @@ components:
         updated_at:
           type: string
           format: date-time
-        internal_account_id:
+        discarded_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        routing_number:
           type: string
-          format: uuid
-          description: The ID of the Internal Account for the incoming payment detail. This is always present.
-        virtual_account_id:
-          type:
-          - string
-          - 'null'
-          format: uuid
-          description: If the incoming payment detail is in a virtual account, the ID of the Virtual Account.
-        virtual_account:
-          $ref: '#/components/schemas/virtual_account'
-          description: If the incoming payment detail is in a virtual account, the serialized virtual account object.
-        transaction_line_item_id:
-          type:
-          - string
-          - 'null'
-          format: uuid
-          description: The ID of the reconciled Transaction Line Item or `null`.
-        transaction_id:
-          type:
-          - string
-          - 'null'
-          format: uuid
-          description: The ID of the reconciled Transaction or `null`.
-        ledger_transaction_id:
-          type:
-          - string
-          - 'null'
-          format: uuid
-          description: The ID of the ledger transaction linked to the incoming payment detail or `null`.
-        type:
+          description: The routing number of the bank.
+        routing_number_type:
           type: string
-          enum:
-          - ach
-          - au_becs
-          - bacs
-          - book
-          - check
-          - eft
-          - interac
-          - neft
-          - nz_becs
-          - rtp
-          - sepa
-          - signet
-          - stablecoin
-          - wire
-          - zengin
-          description: 'One of: `ach`, `book`, `check`, `eft`, `interac`, `rtp`, `sepa`, `signet`, or `wire`.'
-        data:
-          type: object
-          description: The raw data from the payment pre-notification file that we get from the bank.
-          additionalProperties: true
-        amount:
-          type: integer
-          description: Value in specified currency's smallest unit. e.g. $10 would be represented as 1000.
-        currency:
-          $ref: '#/components/schemas/currency'
-          description: The currency of the incoming payment detail.
-        direction:
-          type: string
-          enum:
-          - credit
-          - debit
-          description: One of `credit` or `debit`.
-          _x-stainless-modelDefPath: $shared.transaction_direction
-        status:
-          type: string
-          enum:
-          - completed
-          - pending
-          - returned
-          description: The current status of the incoming payment order. One of `pending`, `completed`, or `returned`.
-        metadata:
-          type: object
-          description: Additional data represented as key-value pairs. Both the key and value must be strings.
-          additionalProperties:
-            type: string
-          example:
-            key: value
-            foo: bar
-            modern: treasury
-        as_of_date:
-          type: string
-          format: date
-          description: The date on which the corresponding transaction will occur.
-        vendor_id:
-          type:
-          - string
-          - 'null'
-          format: uuid
-          description: The identifier of the vendor bank.
-        originating_routing_number:
-          type:
-          - string
-          - 'null'
-          description: The routing number of the originating account for the incoming payment detail.
-        originating_routing_number_type:
-          type:
-          - string
-          - 'null'
           enum:
           - aba
           - au_bsb
@@ -384,102 +326,225 @@ components:
           - sg_interbank_clearing_code
           - swift
           - za_national_clearing_code
-          description: The type of the originating routing number for the incoming payment detail.
-        originating_account_number:
-          type:
-          - string
-          - 'null'
-          description: The account number of the originating account for the incoming payment detail.
-        originating_account_number_safe:
-          type:
-          - string
-          - 'null'
-          description: The last 4 digits of the originating account_number for the incoming payment detail.
-        originating_account_number_type:
+          description: The type of routing number. See https://docs.moderntreasury.com/platform/reference/routing-detail-object for more details.
+        payment_type:
           type:
           - string
           - 'null'
           enum:
-          - au_number
-          - base_address
-          - card_token
-          - clabe
-          - ethereum_address
-          - hk_number
-          - iban
-          - id_number
-          - nz_number
-          - other
-          - pan
-          - polygon_address
-          - sg_number
-          - solana_address
-          - wallet_address
-          description: The type of the originating account number for the incoming payment detail.
-        originating_party_name:
-          type:
-          - string
-          - 'null'
-          description: The name of the originating party for the incoming payment detail.
-        originating_party_address:
-          $ref: '#/components/schemas/address'
-          description: The address of the originating party for the incoming payment detail, or `null`.
-        originating_party_vendor_identifier:
-          type:
-          - string
-          - 'null'
-          description: The vendor-assigned identifier for the originating party of the incoming payment detail, or `null`.
-        receiving_account_number:
-          type:
-          - string
-          - 'null'
-          description: The account number of the receiving account for the incoming payment detail, or `null`.
-        receiving_account_number_safe:
-          type:
-          - string
-          - 'null'
-          description: The last 4 digits of the receiving account number for the incoming payment detail, or `null`.
-        subtype:
-          type:
-          - string
-          - 'null'
-          description: An additional layer of classification for the type of incoming payment detail. For example, a `type` of `stablecoin` may have a `subtype` of `ethereum` or `solana`.
-        reconciliation_status:
+          - ach
+          - au_becs
+          - bacs
+          - book
+          - card
+          - chats
+          - check
+          - cross_border
+          - dk_nets
+          - eft
+          - gb_fps
+          - hu_ics
+          - interac
+          - masav
+          - mx_ccen
+          - neft
+          - nics
+          - nz_becs
+          - pl_elixir
+          - provxchange
+          - ro_sent
+          - rtp
+          - se_bankgirot
+          - sen
+          - sepa
+          - sg_giro
+          - sic
+          - signet
+          - sknbi
+          - stablecoin
+          - wire
+          - zengin
+          description: If the routing detail is to be used for a specific payment type this field will be populated, otherwise null.
+        bank_name:
           type: string
-          enum:
-          - unreconciled
-          - tentatively_reconciled
-          - reconciled
-          description: One of `unreconciled`, `tentatively_reconciled` or `reconciled`.
+          description: The name of the bank.
+        bank_address:
+          $ref: '#/components/schemas/address'
       additionalProperties: false
-      minProperties: 26
+      minProperties: 11
       required:
       - id
       - object
       - live_mode
       - created_at
       - updated_at
+      - discarded_at
+      - routing_number
+      - routing_number_type
+      - payment_type
+      - bank_name
+      - bank_address
+    virtual_account:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        object:
+          type: string
+        live_mode:
+          type: boolean
+          description: This field will be true if this object exists in the live environment or false if it exists in the test environment.
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        discarded_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        name:
+          type: string
+          description: The name of the virtual account.
+        description:
+          type:
+          - string
+          - 'null'
+          description: An optional free-form description for internal use.
+        counterparty_id:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          description: The ID of a counterparty that the virtual account belongs to. Optional.
+        internal_account_id:
+          type: string
+          format: uuid
+          description: The ID of the internal account that the virtual account is in.
+        account_details:
+          type: array
+          description: An array of account detail objects.
+          items:
+            $ref: '#/components/schemas/account_detail'
+        routing_details:
+          type: array
+          description: An array of routing detail objects. These will be the routing details of the internal account.
+          items:
+            $ref: '#/components/schemas/routing_detail'
+        debit_ledger_account_id:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          description: The ID of a debit normal ledger account. When money enters the virtual account, this ledger account will be debited. Must be accompanied by a credit_ledger_account_id if present.
+        credit_ledger_account_id:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          description: The ID of a credit normal ledger account. When money enters the virtual account, this ledger account will be credited. Must be accompanied by a debit_ledger_account_id if present.
+        ledger_account_id:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          description: If the virtual account links to a ledger account in Modern Treasury, the id of the ledger account will be populated here.
+        metadata:
+          type: object
+          description: Additional data represented as key-value pairs. Both the key and value must be strings.
+          additionalProperties:
+            type: string
+          example:
+            key: value
+            foo: bar
+            modern: treasury
+      additionalProperties: false
+      minProperties: 16
+      required:
+      - id
+      - object
+      - live_mode
+      - created_at
+      - updated_at
+      - discarded_at
+      - name
+      - description
+      - counterparty_id
       - internal_account_id
-      - virtual_account_id
-      - virtual_account
-      - transaction_line_item_id
-      - transaction_id
-      - ledger_transaction_id
-      - type
-      - data
-      - amount
-      - currency
-      - direction
-      - status
+      - account_details
+      - routing_details
+      - debit_ledger_account_id
+      - credit_ledger_account_id
+      - ledger_account_id
       - metadata
-      - as_of_date
-      - vendor_id
-      - originating_routing_number
-      - originating_routing_number_type
-      - originating_account_number_safe
-      - originating_account_number_type
-      - subtype
-      - reconciliation_status
+    incoming_payment_detail_create_request:
+      type: object
+      properties:
+        type:
+          type: string
+          enum:
+          - ach
+          - au_becs
+          - bacs
+          - book
+          - check
+          - eft
+          - interac
+          - neft
+          - nz_becs
+          - rtp
+          - sepa
+          - signet
+          - stablecoin
+          - wire
+          - zengin
+          description: One of `ach`, `wire`, `check`.
+        direction:
+          type: string
+          enum:
+          - credit
+          - debit
+          description: One of `credit`, `debit`.
+        amount:
+          type: integer
+          description: Value in specified currency's smallest unit. e.g. $10 would be represented as 1000.
+        currency:
+          $ref: '#/components/schemas/currency'
+          description: Defaults to the currency of the originating account.
+        internal_account_id:
+          type: string
+          format: uuid
+          description: The ID of one of your internal accounts.
+        virtual_account_id:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          description: An optional parameter to associate the incoming payment detail to a virtual account.
+        as_of_date:
+          type:
+          - string
+          - 'null'
+          format: date
+          description: Defaults to today.
+        description:
+          type:
+          - string
+          - 'null'
+          description: Defaults to a random description.
+        subtype:
+          type:
+          - string
+          - 'null'
+          description: An additional layer of classification for the type of incoming payment detail, e.g. `ethereum` for a `stablecoin` type.
+        data:
+          type:
+          - object
+          - 'null'
+          description: An object passed through to the simulated IPD that could reflect what a vendor would pass.
     address:
       type:
       - object
@@ -747,7 +812,7 @@ components:
       - ZWN
       - ZWR
       description: Three-letter ISO currency code.
-    routing_detail:
+    incoming_payment_detail:
       type: object
       properties:
         id:
@@ -764,16 +829,108 @@ components:
         updated_at:
           type: string
           format: date-time
-        discarded_at:
+        internal_account_id:
+          type: string
+          format: uuid
+          description: The ID of the Internal Account for the incoming payment detail. This is always present.
+        virtual_account_id:
           type:
           - string
           - 'null'
-          format: date-time
-        routing_number:
+          format: uuid
+          description: If the incoming payment detail is in a virtual account, the ID of the Virtual Account.
+        virtual_account:
+          $ref: '#/components/schemas/virtual_account'
+          description: If the incoming payment detail is in a virtual account, the serialized virtual account object.
+        transaction_line_item_id:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          description: The ID of the reconciled Transaction Line Item or `null`.
+        transaction_id:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          description: The ID of the reconciled Transaction or `null`.
+        ledger_transaction_id:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          description: The ID of the ledger transaction linked to the incoming payment detail or `null`.
+        type:
           type: string
-          description: The routing number of the bank.
-        routing_number_type:
+          enum:
+          - ach
+          - au_becs
+          - bacs
+          - book
+          - check
+          - eft
+          - interac
+          - neft
+          - nz_becs
+          - rtp
+          - sepa
+          - signet
+          - stablecoin
+          - wire
+          - zengin
+          description: 'One of: `ach`, `book`, `check`, `eft`, `interac`, `rtp`, `sepa`, `signet`, or `wire`.'
+        data:
+          type: object
+          description: The raw data from the payment pre-notification file that we get from the bank.
+          additionalProperties: true
+        amount:
+          type: integer
+          description: Value in specified currency's smallest unit. e.g. $10 would be represented as 1000.
+        currency:
+          $ref: '#/components/schemas/currency'
+          description: The currency of the incoming payment detail.
+        direction:
           type: string
+          enum:
+          - credit
+          - debit
+          description: One of `credit` or `debit`.
+          _x-stainless-modelDefPath: $shared.transaction_direction
+        status:
+          type: string
+          enum:
+          - completed
+          - pending
+          - returned
+          description: The current status of the incoming payment order. One of `pending`, `completed`, or `returned`.
+        metadata:
+          type: object
+          description: Additional data represented as key-value pairs. Both the key and value must be strings.
+          additionalProperties:
+            type: string
+          example:
+            key: value
+            foo: bar
+            modern: treasury
+        as_of_date:
+          type: string
+          format: date
+          description: The date on which the corresponding transaction will occur.
+        vendor_id:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          description: The identifier of the vendor bank.
+        originating_routing_number:
+          type:
+          - string
+          - 'null'
+          description: The routing number of the originating account for the incoming payment detail.
+        originating_routing_number_type:
+          type:
+          - string
+          - 'null'
           enum:
           - aba
           - au_bsb
@@ -797,155 +954,102 @@ components:
           - sg_interbank_clearing_code
           - swift
           - za_national_clearing_code
-          description: The type of routing number. See https://docs.moderntreasury.com/platform/reference/routing-detail-object for more details.
-        payment_type:
+          description: The type of the originating routing number for the incoming payment detail.
+        originating_account_number:
+          type:
+          - string
+          - 'null'
+          description: The account number of the originating account for the incoming payment detail.
+        originating_account_number_safe:
+          type:
+          - string
+          - 'null'
+          description: The last 4 digits of the originating account_number for the incoming payment detail.
+        originating_account_number_type:
           type:
           - string
           - 'null'
           enum:
-          - ach
-          - au_becs
-          - bacs
-          - book
-          - card
-          - chats
-          - check
-          - cross_border
-          - dk_nets
-          - eft
-          - gb_fps
-          - hu_ics
-          - interac
-          - masav
-          - mx_ccen
-          - neft
-          - nics
-          - nz_becs
-          - pl_elixir
-          - provxchange
-          - ro_sent
-          - rtp
-          - se_bankgirot
-          - sen
-          - sepa
-          - sg_giro
-          - sic
-          - signet
-          - sknbi
-          - stablecoin
-          - wire
-          - zengin
-          description: If the routing detail is to be used for a specific payment type this field will be populated, otherwise null.
-        bank_name:
-          type: string
-          description: The name of the bank.
-        bank_address:
+          - au_number
+          - base_address
+          - card_token
+          - clabe
+          - ethereum_address
+          - hk_number
+          - iban
+          - id_number
+          - nz_number
+          - other
+          - pan
+          - polygon_address
+          - sg_number
+          - solana_address
+          - wallet_address
+          description: The type of the originating account number for the incoming payment detail.
+        originating_party_name:
+          type:
+          - string
+          - 'null'
+          description: The name of the originating party for the incoming payment detail.
+        originating_party_address:
           $ref: '#/components/schemas/address'
+          description: The address of the originating party for the incoming payment detail, or `null`.
+        originating_party_vendor_identifier:
+          type:
+          - string
+          - 'null'
+          description: The vendor-assigned identifier for the originating party of the incoming payment detail, or `null`.
+        receiving_account_number:
+          type:
+          - string
+          - 'null'
+          description: The account number of the receiving account for the incoming payment detail, or `null`.
+        receiving_account_number_safe:
+          type:
+          - string
+          - 'null'
+          description: The last 4 digits of the receiving account number for the incoming payment detail, or `null`.
+        subtype:
+          type:
+          - string
+          - 'null'
+          description: An additional layer of classification for the type of incoming payment detail. For example, a `type` of `stablecoin` may have a `subtype` of `ethereum` or `solana`.
+        reconciliation_status:
+          type: string
+          enum:
+          - unreconciled
+          - tentatively_reconciled
+          - reconciled
+          description: One of `unreconciled`, `tentatively_reconciled` or `reconciled`.
       additionalProperties: false
-      minProperties: 11
+      minProperties: 26
       required:
       - id
       - object
       - live_mode
       - created_at
       - updated_at
-      - discarded_at
-      - routing_number
-      - routing_number_type
-      - payment_type
-      - bank_name
-      - bank_address
-    error_message:
-      type: object
-      properties:
-        errors:
-          type: object
-          properties:
-            code:
-              type: string
-              enum:
-              - parameter_invalid
-              - parameter_missing
-              - resource_not_found
-              - not_found
-              - forbidden
-              - invalid_ip
-              - invalid_key
-              - header_invalid
-              - expired_key
-              - conflict
-              - too_many_requests
-            message:
-              type: string
-            parameter:
-              type: string
-      required:
-      - errors
-    incoming_payment_detail_create_request:
-      type: object
-      properties:
-        type:
-          type: string
-          enum:
-          - ach
-          - au_becs
-          - bacs
-          - book
-          - check
-          - eft
-          - interac
-          - neft
-          - nz_becs
-          - rtp
-          - sepa
-          - signet
-          - stablecoin
-          - wire
-          - zengin
-          description: One of `ach`, `wire`, `check`.
-        direction:
-          type: string
-          enum:
-          - credit
-          - debit
-          description: One of `credit`, `debit`.
-        amount:
-          type: integer
-          description: Value in specified currency's smallest unit. e.g. $10 would be represented as 1000.
-        currency:
-          $ref: '#/components/schemas/currency'
-          description: Defaults to the currency of the originating account.
-        internal_account_id:
-          type: string
-          format: uuid
-          description: The ID of one of your internal accounts.
-        virtual_account_id:
-          type:
-          - string
-          - 'null'
-          format: uuid
-          description: An optional parameter to associate the incoming payment detail to a virtual account.
-        as_of_date:
-          type:
-          - string
-          - 'null'
-          format: date
-          description: Defaults to today.
-        description:
-          type:
-          - string
-          - 'null'
-          description: Defaults to a random description.
-        subtype:
-          type:
-          - string
-          - 'null'
-          description: An additional layer of classification for the type of incoming payment detail, e.g. `ethereum` for a `stablecoin` type.
-        data:
-          type:
-          - object
-          - 'null'
-          description: An object passed through to the simulated IPD that could reflect what a vendor would pass.
+      - internal_account_id
+      - virtual_account_id
+      - virtual_account
+      - transaction_line_item_id
+      - transaction_id
+      - ledger_transaction_id
+      - type
+      - data
+      - amount
+      - currency
+      - direction
+      - status
+      - metadata
+      - as_of_date
+      - vendor_id
+      - originating_routing_number
+      - originating_routing_number_type
+      - originating_account_number_safe
+      - originating_account_number_type
+      - subtype
+      - reconciliation_status
     account_detail:
       type: object
       properties:
@@ -1005,110 +1109,6 @@ components:
       - discarded_at
       - account_number_type
       - account_number_safe
-    incoming_payment_detail_update_request:
-      type: object
-      properties:
-        metadata:
-          type: object
-          additionalProperties:
-            type: string
-          description: Additional data in the form of key-value pairs. Pairs can be removed by passing an empty string or `null` as the value.
-    virtual_account:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-        object:
-          type: string
-        live_mode:
-          type: boolean
-          description: This field will be true if this object exists in the live environment or false if it exists in the test environment.
-        created_at:
-          type: string
-          format: date-time
-        updated_at:
-          type: string
-          format: date-time
-        discarded_at:
-          type:
-          - string
-          - 'null'
-          format: date-time
-        name:
-          type: string
-          description: The name of the virtual account.
-        description:
-          type:
-          - string
-          - 'null'
-          description: An optional free-form description for internal use.
-        counterparty_id:
-          type:
-          - string
-          - 'null'
-          format: uuid
-          description: The ID of a counterparty that the virtual account belongs to. Optional.
-        internal_account_id:
-          type: string
-          format: uuid
-          description: The ID of the internal account that the virtual account is in.
-        account_details:
-          type: array
-          description: An array of account detail objects.
-          items:
-            $ref: '#/components/schemas/account_detail'
-        routing_details:
-          type: array
-          description: An array of routing detail objects. These will be the routing details of the internal account.
-          items:
-            $ref: '#/components/schemas/routing_detail'
-        debit_ledger_account_id:
-          type:
-          - string
-          - 'null'
-          format: uuid
-          description: The ID of a debit normal ledger account. When money enters the virtual account, this ledger account will be debited. Must be accompanied by a credit_ledger_account_id if present.
-        credit_ledger_account_id:
-          type:
-          - string
-          - 'null'
-          format: uuid
-          description: The ID of a credit normal ledger account. When money enters the virtual account, this ledger account will be credited. Must be accompanied by a debit_ledger_account_id if present.
-        ledger_account_id:
-          type:
-          - string
-          - 'null'
-          format: uuid
-          description: If the virtual account links to a ledger account in Modern Treasury, the id of the ledger account will be populated here.
-        metadata:
-          type: object
-          description: Additional data represented as key-value pairs. Both the key and value must be strings.
-          additionalProperties:
-            type: string
-          example:
-            key: value
-            foo: bar
-            modern: treasury
-      additionalProperties: false
-      minProperties: 16
-      required:
-      - id
-      - object
-      - live_mode
-      - created_at
-      - updated_at
-      - discarded_at
-      - name
-      - description
-      - counterparty_id
-      - internal_account_id
-      - account_details
-      - routing_details
-      - debit_ledger_account_id
-      - credit_ledger_account_id
-      - ledger_account_id
-      - metadata
   parameters:
     metadata_query:
       name: metadata
