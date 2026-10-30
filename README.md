@@ -1,4 +1,4 @@
-# Modern Treasury (modern-treasury)
+# Modern Treasury
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -66,112 +66,235 @@
 
 Modern Treasury is a money movement platform unifying ACH, wires, RTP, checks, FX, and reconciliation across multiple bank partners. Operates as the financial operations system of record.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/modern-treasury/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/modern-treasury/refs/heads/main/apis.yml)
+**Areas:** Fintech · Payments · ACH · Wires · Treasury
 
-## Tags
+## Modern Treasury on APIs.io
 
-- Fintech
-- Payments
-- ACH
-- Wires
-- Treasury
+Everything profiled for Modern Treasury is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/modern-treasury/](https://apis.io/providers/modern-treasury/)** — or go straight to one of the APIs or properties below.
 
-## Timestamps
+### APIs (44)
 
-- **Created:** 2026-05-08
-- **Modified:** 2026-05-08
+- [Modern Treasury AccountCapability API](https://apis.io/apis/modern-treasury/modern-treasury-accountcapability-api/) — The AccountCapability API from Modern Treasury — 1 operation(s) for accountcapability.
+- [Modern Treasury AccountCollectionFlow API](https://apis.io/apis/modern-treasury/modern-treasury-accountcollectionflow-api/) — The AccountCollectionFlow API from Modern Treasury — 2 operation(s) for accountcollectionflow.
+- [Modern Treasury AccountDetail API](https://apis.io/apis/modern-treasury/modern-treasury-accountdetail-api/) — The AccountDetail API from Modern Treasury — 2 operation(s) for accountdetail.
+- [Modern Treasury BalanceReport API](https://apis.io/apis/modern-treasury/modern-treasury-balancereport-api/) — The BalanceReport API from Modern Treasury — 2 operation(s) for balancereport.
+- [Modern Treasury BulkRequest API](https://apis.io/apis/modern-treasury/modern-treasury-bulkrequest-api/) — The BulkRequest API from Modern Treasury — 2 operation(s) for bulkrequest.
+- [Modern Treasury BulkResult API](https://apis.io/apis/modern-treasury/modern-treasury-bulkresult-api/) — The BulkResult API from Modern Treasury — 2 operation(s) for bulkresult.
+- [Modern Treasury Connection API](https://apis.io/apis/modern-treasury/modern-treasury-connection-api/) — The Connection API from Modern Treasury — 1 operation(s) for connection.
+- [Modern Treasury ConnectionLegalEntity API](https://apis.io/apis/modern-treasury/modern-treasury-connectionlegalentity-api/) — The ConnectionLegalEntity API from Modern Treasury — 2 operation(s) for connectionlegalentity.
+- [Modern Treasury Counterparty API](https://apis.io/apis/modern-treasury/modern-treasury-counterparty-api/) — The Counterparty API from Modern Treasury — 3 operation(s) for counterparty.
+- [Modern Treasury Document API](https://apis.io/apis/modern-treasury/modern-treasury-document-api/) — The Document API from Modern Treasury — 6 operation(s) for document.
+- [Modern Treasury Event API](https://apis.io/apis/modern-treasury/modern-treasury-event-api/) — The Event API from Modern Treasury — 2 operation(s) for event.
+- [Modern Treasury ExpectedPayment API](https://apis.io/apis/modern-treasury/modern-treasury-expectedpayment-api/) — The ExpectedPayment API from Modern Treasury — 2 operation(s) for expectedpayment.
+- [Modern Treasury ExternalAccount API](https://apis.io/apis/modern-treasury/modern-treasury-externalaccount-api/) — The ExternalAccount API from Modern Treasury — 4 operation(s) for externalaccount.
+- [Modern Treasury ForeignExchangeQuote API](https://apis.io/apis/modern-treasury/modern-treasury-foreignexchangequote-api/) — The ForeignExchangeQuote API from Modern Treasury — 2 operation(s) for foreignexchangequote.
+- [Modern Treasury Hold API](https://apis.io/apis/modern-treasury/modern-treasury-hold-api/) — The Hold API from Modern Treasury — 2 operation(s) for hold.
+- [Modern Treasury IncomingPaymentDetail API](https://apis.io/apis/modern-treasury/modern-treasury-incomingpaymentdetail-api/) — The IncomingPaymentDetail API from Modern Treasury — 3 operation(s) for incomingpaymentdetail.
+- [Modern Treasury InternalAccount API](https://apis.io/apis/modern-treasury/modern-treasury-internalaccount-api/) — The InternalAccount API from Modern Treasury — 3 operation(s) for internalaccount.
+- [Modern Treasury Invoice API](https://apis.io/apis/modern-treasury/modern-treasury-invoice-api/) — The Invoice API from Modern Treasury — 2 operation(s) for invoice.
+- [Modern Treasury JournalReport API](https://apis.io/apis/modern-treasury/modern-treasury-journalreport-api/) — The JournalReport API from Modern Treasury — 2 operation(s) for journalreport.
+- [Modern Treasury JournalSource API](https://apis.io/apis/modern-treasury/modern-treasury-journalsource-api/) — The JournalSource API from Modern Treasury — 2 operation(s) for journalsource.
+- [Modern Treasury Ledger API](https://apis.io/apis/modern-treasury/modern-treasury-ledger-api/) — The Ledger API from Modern Treasury — 2 operation(s) for ledger.
+- [Modern Treasury LedgerAccountBalanceMonitor API](https://apis.io/apis/modern-treasury/modern-treasury-ledgeraccountbalancemonitor-api/) — The LedgerAccountBalanceMonitor API from Modern Treasury — 2 operation(s) for ledgeraccountbalancemonitor.
+- [Modern Treasury LedgerAccountCategory API](https://apis.io/apis/modern-treasury/modern-treasury-ledgeraccountcategory-api/) — The LedgerAccountCategory API from Modern Treasury — 4 operation(s) for ledgeraccountcategory.
+- [Modern Treasury LedgerAccountSettlement API](https://apis.io/apis/modern-treasury/modern-treasury-ledgeraccountsettlement-api/) — The LedgerAccountSettlement API from Modern Treasury — 3 operation(s) for ledgeraccountsettlement.
+- [Modern Treasury LedgerAccountStatement API](https://apis.io/apis/modern-treasury/modern-treasury-ledgeraccountstatement-api/) — The LedgerAccountStatement API from Modern Treasury — 2 operation(s) for ledgeraccountstatement.
+- [Modern Treasury LedgerTransaction API](https://apis.io/apis/modern-treasury/modern-treasury-ledgertransaction-api/) — The LedgerTransaction API from Modern Treasury — 6 operation(s) for ledgertransaction.
+- [Modern Treasury PaymentAction API](https://apis.io/apis/modern-treasury/modern-treasury-paymentaction-api/) — The PaymentAction API from Modern Treasury — 2 operation(s) for paymentaction.
+- [Modern Treasury PaymentOrder API](https://apis.io/apis/modern-treasury/modern-treasury-paymentorder-api/) — The PaymentOrder API from Modern Treasury — 4 operation(s) for paymentorder.
+- [Modern Treasury PaymentReference API](https://apis.io/apis/modern-treasury/modern-treasury-paymentreference-api/) — The PaymentReference API from Modern Treasury — 2 operation(s) for paymentreference.
+- [Modern Treasury Ping API](https://apis.io/apis/modern-treasury/modern-treasury-ping-api/) — The Ping API from Modern Treasury — 1 operation(s) for ping.
+- [Modern Treasury Return API](https://apis.io/apis/modern-treasury/modern-treasury-return-api/) — The Return API from Modern Treasury — 2 operation(s) for return.
+- [Modern Treasury Reversal API](https://apis.io/apis/modern-treasury/modern-treasury-reversal-api/) — The Reversal API from Modern Treasury — 2 operation(s) for reversal.
+- [Modern Treasury RoutingDetail API](https://apis.io/apis/modern-treasury/modern-treasury-routingdetail-api/) — The RoutingDetail API from Modern Treasury — 2 operation(s) for routingdetail.
+- [Modern Treasury Transaction API](https://apis.io/apis/modern-treasury/modern-treasury-transaction-api/) — The Transaction API from Modern Treasury — 2 operation(s) for transaction.
+- [Modern Treasury TransactionLineItem API](https://apis.io/apis/modern-treasury/modern-treasury-transactionlineitem-api/) — The TransactionLineItem API from Modern Treasury — 3 operation(s) for transactionlineitem.
+- [Modern Treasury Validation API](https://apis.io/apis/modern-treasury/modern-treasury-validation-api/) — The Validation API from Modern Treasury — 1 operation(s) for validation.
+- [Modern Treasury Invoice Line Item API](https://apis.io/apis/modern-treasury/modern-treasury-invoice-line-item-api/) — The Invoice Line Item API from Modern Treasury — 2 operation(s) for invoice line item.
+- [Modern Treasury Journal Entry API](https://apis.io/apis/modern-treasury/modern-treasury-journal-entry-api/) — The Journal Entry API from Modern Treasury — 2 operation(s) for journal entry.
+- [Modern Treasury Ledger Account API](https://apis.io/apis/modern-treasury/modern-treasury-ledger-account-api/) — The Ledger Account API from Modern Treasury — 2 operation(s) for ledger account.
+- [Modern Treasury Ledger Entry API](https://apis.io/apis/modern-treasury/modern-treasury-ledger-entry-api/) — The Ledger Entry API from Modern Treasury — 2 operation(s) for ledger entry.
+- [Modern Treasury Legal Entity API](https://apis.io/apis/modern-treasury/modern-treasury-legal-entity-api/) — The Legal Entity API from Modern Treasury — 3 operation(s) for legal entity.
+- [Modern Treasury Line Item API](https://apis.io/apis/modern-treasury/modern-treasury-line-item-api/) — The Line Item API from Modern Treasury — 2 operation(s) for line item.
+- [Modern Treasury Payment Flow API](https://apis.io/apis/modern-treasury/modern-treasury-payment-flow-api/) — The Payment Flow API from Modern Treasury — 2 operation(s) for payment flow.
+- [Modern Treasury Virtual Account API](https://apis.io/apis/modern-treasury/modern-treasury-virtual-account-api/) — The Virtual Account API from Modern Treasury — 2 operation(s) for virtual account.
 
-## APIs
+### Published properties
 
-### Modern Treasury Payments API
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-Initiate and track ACH, wire, RTP, FedNow, check, and book transfers with state-machine status tracking.
+#### Agentic access (1)
 
-- **Human URL:** [https://docs.moderntreasury.com/reference](https://docs.moderntreasury.com/reference)
-- **Base URL:** `https://app.moderntreasury.com/api`
+Which operations an agent can call, which act, and which need a human in the loop.
 
-#### Tags
+- [Modern Treasury Agentic Access](https://apis.io/agentic-access/modern-treasury/modern-treasury-agentic-access/)
 
-- Payments
-- ACH
-- Wires
-- RTP
+#### JSON Schema (154)
 
-#### Properties
+The data models the API reads and writes.
 
-- [Documentation](https://docs.moderntreasury.com/reference)
-- [OpenAPI](openapi/modern-treasury-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/modern-treasury.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/modern-treasury.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+- [account_capability](https://apis.io/schemas/modern-treasury/modern-treasury-account-capability/)
+- [account_capability_update_request](https://apis.io/schemas/modern-treasury/modern-treasury-account-capability-update-request/)
+- [account_collection_flow](https://apis.io/schemas/modern-treasury/modern-treasury-account-collection-flow/)
+- [account_collection_flow_create_request](https://apis.io/schemas/modern-treasury/modern-treasury-account-collection-flow-create-request/)
+- [account_collection_flow_update_request](https://apis.io/schemas/modern-treasury/modern-treasury-account-collection-flow-update-request/)
+- [account_detail](https://apis.io/schemas/modern-treasury/modern-treasury-account-detail/)
+- [account_detail_create_request](https://apis.io/schemas/modern-treasury/modern-treasury-account-detail-create-request/)
+- [accounting](https://apis.io/schemas/modern-treasury/modern-treasury-accounting/)
+- [accounts_type](https://apis.io/schemas/modern-treasury/modern-treasury-accounts-type/)
+- [address](https://apis.io/schemas/modern-treasury/modern-treasury-address/)
+- [address_request](https://apis.io/schemas/modern-treasury/modern-treasury-address-request/)
+- [alert_condition](https://apis.io/schemas/modern-treasury/modern-treasury-alert-condition/)
+- [alert_condition_create_request](https://apis.io/schemas/modern-treasury/modern-treasury-alert-condition-create-request/)
+- [async_response](https://apis.io/schemas/modern-treasury/modern-treasury-async-response/)
+- [balance](https://apis.io/schemas/modern-treasury/modern-treasury-balance/)
+- [balance_create_request](https://apis.io/schemas/modern-treasury/modern-treasury-balance-create-request/)
+- [balance_report](https://apis.io/schemas/modern-treasury/modern-treasury-balance-report/)
+- [balance_report_create_request](https://apis.io/schemas/modern-treasury/modern-treasury-balance-report-create-request/)
+- [bulk_error](https://apis.io/schemas/modern-treasury/modern-treasury-bulk-error/)
+- [bulk_request](https://apis.io/schemas/modern-treasury/modern-treasury-bulk-request/)
+- [bulk_request_create_request](https://apis.io/schemas/modern-treasury/modern-treasury-bulk-request-create-request/)
+- [bulk_result](https://apis.io/schemas/modern-treasury/modern-treasury-bulk-result/)
+- [child_legal_entity](https://apis.io/schemas/modern-treasury/modern-treasury-child-legal-entity/)
+- [child_legal_entity_create](https://apis.io/schemas/modern-treasury/modern-treasury-child-legal-entity-create/)
+- [connection](https://apis.io/schemas/modern-treasury/modern-treasury-connection/)
+- …and 129 more published on APIs.io
 
-### Modern Treasury Ledgers API
+#### JSON Structure (1)
 
-Double-entry ledger for accounts, ledger transactions, balances, and reconciliations.
+Data models expressed in JSON Structure.
 
-- **Human URL:** [https://docs.moderntreasury.com/reference](https://docs.moderntreasury.com/reference)
-- **Base URL:** `https://app.moderntreasury.com/api`
+- [Modern Treasury Structure](https://apis.io/json-structure/modern-treasury/modern-treasury-structure/)
 
-#### Tags
+#### Collections (45)
 
-- Ledgers
-- Accounting
+Postman and Open Collection request collections.
 
-#### Properties
+- [Modern Treasury](https://apis.io/collections/modern-treasury/open-modern-treasury/)
+- [Modern Treasury AccountCapability API](https://apis.io/collections/modern-treasury/open-modern-treasury-accountcapability-api/)
+- [Modern Treasury AccountCapability AccountCollectionFlow API](https://apis.io/collections/modern-treasury/open-modern-treasury-accountcollectionflow-api/)
+- [Modern Treasury AccountCapability AccountDetail API](https://apis.io/collections/modern-treasury/open-modern-treasury-accountdetail-api/)
+- [Modern Treasury AccountCapability BalanceReport API](https://apis.io/collections/modern-treasury/open-modern-treasury-balancereport-api/)
+- [Modern Treasury AccountCapability BulkRequest API](https://apis.io/collections/modern-treasury/open-modern-treasury-bulkrequest-api/)
+- [Modern Treasury AccountCapability BulkResult API](https://apis.io/collections/modern-treasury/open-modern-treasury-bulkresult-api/)
+- [Modern Treasury AccountCapability Connection API](https://apis.io/collections/modern-treasury/open-modern-treasury-connection-api/)
+- [Modern Treasury AccountCapability ConnectionLegalEntity API](https://apis.io/collections/modern-treasury/open-modern-treasury-connectionlegalentity-api/)
+- [Modern Treasury AccountCapability Counterparty API](https://apis.io/collections/modern-treasury/open-modern-treasury-counterparty-api/)
+- [Modern Treasury AccountCapability Document API](https://apis.io/collections/modern-treasury/open-modern-treasury-document-api/)
+- [Modern Treasury AccountCapability Event API](https://apis.io/collections/modern-treasury/open-modern-treasury-event-api/)
+- [Modern Treasury AccountCapability ExpectedPayment API](https://apis.io/collections/modern-treasury/open-modern-treasury-expectedpayment-api/)
+- [Modern Treasury AccountCapability ExternalAccount API](https://apis.io/collections/modern-treasury/open-modern-treasury-externalaccount-api/)
+- [Modern Treasury AccountCapability ForeignExchangeQuote API](https://apis.io/collections/modern-treasury/open-modern-treasury-foreignexchangequote-api/)
+- [Modern Treasury AccountCapability Hold API](https://apis.io/collections/modern-treasury/open-modern-treasury-hold-api/)
+- [Modern Treasury AccountCapability IncomingPaymentDetail API](https://apis.io/collections/modern-treasury/open-modern-treasury-incomingpaymentdetail-api/)
+- [Modern Treasury AccountCapability InternalAccount API](https://apis.io/collections/modern-treasury/open-modern-treasury-internalaccount-api/)
+- [Modern Treasury AccountCapability Invoice API](https://apis.io/collections/modern-treasury/open-modern-treasury-invoice-api/)
+- [Modern Treasury AccountCapability InvoiceLineItem API](https://apis.io/collections/modern-treasury/open-modern-treasury-invoicelineitem-api/)
+- [Modern Treasury AccountCapability JournalEntry API](https://apis.io/collections/modern-treasury/open-modern-treasury-journalentry-api/)
+- [Modern Treasury AccountCapability JournalReport API](https://apis.io/collections/modern-treasury/open-modern-treasury-journalreport-api/)
+- [Modern Treasury AccountCapability JournalSource API](https://apis.io/collections/modern-treasury/open-modern-treasury-journalsource-api/)
+- [Modern Treasury AccountCapability Ledger API](https://apis.io/collections/modern-treasury/open-modern-treasury-ledger-api/)
+- [Modern Treasury AccountCapability LedgerAccount API](https://apis.io/collections/modern-treasury/open-modern-treasury-ledgeraccount-api/)
+- …and 20 more published on APIs.io
 
-- [Documentation](https://docs.moderntreasury.com/reference)
-- [OpenAPI](openapi/modern-treasury-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/modern-treasury.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/modern-treasury.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+#### Governance rules (1)
 
-### Modern Treasury Counterparties API
+Spectral rulesets for the provider's contracts.
 
-Manage counterparties, external accounts, and routing details.
+- [Modern Treasury — jsonschema rules](https://apis.io/rules/modern-treasury/modern-treasury-jsonschema-spectral-rules/)
 
-- **Human URL:** [https://docs.moderntreasury.com/reference](https://docs.moderntreasury.com/reference)
-- **Base URL:** `https://app.moderntreasury.com/api`
+#### Security (4)
 
-#### Tags
+Authentication, trust centre, and vulnerability disclosure.
 
-- Counterparties
+- [Modern Treasury Authentication](https://apis.io/security/modern-treasury/modern-treasury-authentication/)
+- [Modern Treasury Domain Security](https://apis.io/security/modern-treasury/modern-treasury-domain-security/)
+- [Modern Treasury Trust Center](https://apis.io/security/modern-treasury/modern-treasury-trust-center/)
+- [Modern Treasury Vulnerability Disclosure](https://apis.io/security/modern-treasury/modern-treasury-vulnerability-disclosure/)
 
-#### Properties
+#### Plans and pricing (1)
 
-- [Documentation](https://docs.moderntreasury.com/reference)
-- [OpenAPI](openapi/modern-treasury-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/modern-treasury.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/modern-treasury.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+Published plans, tiers and prices.
 
-### Modern Treasury Connections & Webhooks API
+- [Modern Treasury Plans Pricing](https://apis.io/plans/modern-treasury/modern-treasury-plans-pricing/)
 
-Manage bank connections, events, and webhook subscriptions.
+#### Rate limits (1)
 
-- **Human URL:** [https://docs.moderntreasury.com/reference](https://docs.moderntreasury.com/reference)
-- **Base URL:** `https://app.moderntreasury.com/api`
+Published request limits.
 
-#### Tags
+- [Modern Treasury Rate Limits](https://apis.io/rate-limits/modern-treasury/modern-treasury-rate-limits/)
 
-- Webhooks
-- Events
+#### FinOps (1)
 
-#### Properties
+What the API costs to run, by operation.
 
-- [Documentation](https://docs.moderntreasury.com/reference)
-- [OpenAPI](openapi/modern-treasury-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/modern-treasury.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/modern-treasury.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+- [Modern Treasury Finops](https://apis.io/finops/modern-treasury/modern-treasury-finops/)
 
-## Common Properties
+## Where to find this API
 
-- [GitHub Organization](https://github.com/Modern-Treasury)
-- [LinkedIn](https://www.linkedin.com/company/modern-treasury)
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
 - [Website](https://www.moderntreasury.com/)
-- [Plans](plans/modern-treasury-plans-pricing.yml)
-- [Rate Limits](rate-limits/modern-treasury-rate-limits.yml)
-- [Fin Ops](finops/modern-treasury-finops.yml)
-- [Integrations](https://www.moderntreasury.com/integrations)
-- [L L Ms Txt](https://docs.moderntreasury.com/llms.txt)
+- [Getting started](https://docs.moderntreasury.com/platform/reference/getting-started)
+- [Pricing](https://www.moderntreasury.com/pricing)
+- [Changelog](https://docs.moderntreasury.com/platform/changelog)
+- [Blog](https://www.moderntreasury.com/newsroom)
+- [Security](https://www.moderntreasury.com/security)
+- [Terms of service](https://www.moderntreasury.com/legal/terms-of-use)
+- [Privacy policy](https://www.moderntreasury.com/privacy)
+- [GitHub](https://github.com/Modern-Treasury)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
-**Email:** kin@apievangelist.com
+**Kin Score 40.9** — developing · rubric 0.25.0 · scored 2026-10-23
+
+| Facet | Score |
+|---|---|
+| Discoverability | 64.3 |
+| Contract quality | 51.0 |
+| Contract governance | 9.8 |
+| Operational transparency | 26.3 |
+| Developer ergonomics | 29.8 |
+| Access clarity | 39.5 |
+
+**Agent readiness 32.9** — agent-ready
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | verified |
+| Error Semantics | verified |
+| OpenAPI Examples | — |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+| Pagination Ratio | paginated |
+| Operation Distinctiveness | mostly |
+
+**Regulatory alignment 27.7** — Payments
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/modern-treasury/](https://apis.io/providers/modern-treasury/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Modern Treasury: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/modern-treasury/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
